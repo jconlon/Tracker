@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.emf.validation.constraintProviders">
+      <category
+            name="%category.name"
+            id="com.verticon.tracker.validation.catagory.ocl">
+         <category
+               id="core"
+               name="%mycategory.name">
+         </category>
+      </category>
+      <constraintProvider
+            cache="true">
+         <package namespaceUri="http://www.verticon.com/tracker/0.4.2/premises"/>
+         <description>
+            Core Tracker Constraints
+         </description>
+         <constraints categories="com.verticon.tracker.validation.catagory.ocl/core">
+           
+           <!-- This constraint applies to the GenericEvent EventAttribute values-->
+            <constraint
+                  lang="Java"
+                  class="com.verticon.tracker.validation.core.constraints.EventAttributeConstraint"
+                  severity="ERROR"
+                  mode="Live"
+                  name="EventAttribute Type Constraint (Live Mode)"
+                  id="eventAttributeType"
+                  statusCode="100">
+               <description>The Generic Event attribute values must conform to the attribute definitions described in the referenced Metatype OCD element.</description>
+      		   <message>Core Constraint: {0} for GenericEvent {1}; attribute {2}. {3}" </message>
+      		   <target class="StringToStringMap">
+         			<event name="Set">
+            			<feature name="value"/>
+       				</event>
+       				<event name="Unset">
+            			<feature name="value"/>
+       				</event>
+      			</target>
+            </constraint>
+            
+           <!-- These constraints applies to Tag Id value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Live"
+         		name="Tag ID Strict AIN Constraint (Live Mode)"
+         		id="tagIDAIN"
+         		statusCode="102">
+      		<description>The Tag ID can only have a value that is a valid AIN number.</description>
+      		<message>"Core Constraint: {0}" ID value must be a valid USAIN. </message>
+      		<target class="Tag">
+         		<event name="Set">
+            		<feature name="id"/>
+       			</event>
+       			<event name="Unset">
+            		<feature name="id"/>
+       			</event>
+      		</target>self.usainNumberUsed
+      		</constraint>
+   
+            <constraint
+                  lang="Java"
+                  class="com.verticon.tracker.validation.core.constraints.NonNumberIdConstraint"
+                  severity="ERROR"
+                  mode="Live"
+                  name="Tag ID Numbers Only Constraint (Live Mode)"
+                  id="tagIDNumbersOnly"
+                  statusCode="100">
+               <description>The Tag ID can only have a value that is a number.</description>
+      		   <message>"Core Constraint: {0}" ID value must be a number. </message>
+      		   <target class="Tag">
+         			<event name="Set">
+            			<feature name="id"/>
+       				</event>
+       				<event name="Unset">
+            			<feature name="id"/>
+       				</event>
+      			</target>
+            </constraint>
+            
+            <constraint
+                  lang="Java"
+                  class="com.verticon.tracker.validation.core.constraints.IDValidSegmentConstraint"
+                  severity="ERROR"
+                  mode="Live"
+                  name="Tag ID Valid URI Segment Constraint (Live Mode)"
+                  id="tagIDValidSegmentOnly"
+                  statusCode="100">
+               <description>Tag id must be a value that can be added to an URI segment.</description>
+      		   <message>"Core Constraint: {0}" ID value must be a value that can be appended to a URI segment. Remove the following characters: / ? #</message>
+      		   <target class="Tag">
+         			<event name="Set">
+            			<feature name="uri"/>
+       				</event>
+       				<event name="Unset">
+            			<feature name="uri"/>
+       				</event>
+      			</target>
+            </constraint>
+            
+            <!-- This constraint applies to Premises URI value-->
+            <constraint
+                  lang="Java"
+                  class="com.verticon.tracker.validation.core.constraints.IDValidSegmentConstraint"
+                  severity="ERROR"
+                  mode="Live"
+                  name="Premises URI Valid URI Segment Constraint (Live Mode)"
+                  id="premisesURIValidSegmentOnly"
+                  statusCode="100">
+               <description>The Premises URI must be a value that can be added to a URI segment.</description>
+      		   <message>"Core Constraint: {0}" URI value must be a value that can be appended to a URI segment. Remove the following characters: / ? # </message>
+      		   <target class="Premises">
+         			<event name="Set">
+            			<feature name="uri"/>
+       				</event>
+       				<event name="Unset">
+            			<feature name="uri"/>
+       				</event>
+      			</target>
+            </constraint>
+            
+            <!-- This constraint applies to MovedOut URI value-->
+            <constraint
+                  lang="Java"
+                  class="com.verticon.tracker.validation.core.constraints.IDValidSegmentConstraint"
+                  severity="ERROR"
+                  mode="Live"
+                  name="MovedOut URI Valid URI Segment Constraint (Live Mode)"
+                  id="movedOutURIValidSegmentOnly"
+                  statusCode="100">
+               <description>The MovedOut URI must be a value that can be added to a URI segment.</description>
+      		   <message>"Core Constraint: {0}" URI value must be a value that can be appended to a URI segment. Remove the following characters: / ? # </message>
+      		   <target class="MovedOut">
+         			<event name="Set">
+            			<feature name="uri"/>
+       				</event>
+       				<event name="Unset">
+            			<feature name="uri"/>
+       				</event>
+      			</target>
+            </constraint>
+         
+           <!-- This constraint applies to MovedIn URI value-->
+            <constraint
+                  lang="Java"
+                  class="com.verticon.tracker.validation.core.constraints.IDValidSegmentConstraint"
+                  severity="ERROR"
+                  mode="Live"
+                  name="MovedIn URI Valid URI Segment Constraint (Live Mode)"
+                  id="movedInURIValidSegmentOnly"
+                  statusCode="100">
+               <description>The MovedIn URI must be a value that can be added to a URI segment.</description>
+      		   <message>"Core Constraint: {0}" URI value must be a value that can be appended to a URI segment. Remove the following characters: / ? # </message>
+      		   <target class="MovedIn">
+         			<event name="Set">
+            			<feature name="uri"/>
+       				</event>
+       				<event name="Unset">
+            			<feature name="uri"/>
+       				</event>
+      			</target>
+            </constraint>
+           
+         
+            <!-- Animal can not be Slaughtered Twice Constraint (Batch Mode) -->
+            <constraint
+                  lang="OCL"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="%slaughteredAnimal.name"
+                  id="slaughteredAnimal"
+                  statusCode="101">
+               <description>%slaughteredAnimal.desc</description>
+               <message>%slaughteredAnimal.msg</message>
+               <target class="Animal"/>
+               <![CDATA[
+                  Event.allInstances()->select(e : Event | e.oclIsTypeOf(Slaughtered) and e.id=self.id)->size()<2
+               ]]>
+            </constraint>
+            
+            <!-- This constraint applies to Premises premisesId value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Batch"
+         		name="%premisesId.name"
+         		id="premisesId"
+         		statusCode="102">
+      		<description>%premisesId.desc</description>
+      		<message>%premisesId.msg</message>
+      		<target class="Premises"/>
+      		<![CDATA[
+         		self.premisesId.oclIsUndefined() = false 
+         	]]>
+      		</constraint>
+      		
+      		 <!-- This constraint applies to MovedIn sourcePin value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Batch"
+         		name="%movedInSourcePin.name"
+         		id="movedInSourcePin"
+         		statusCode="102">
+      		<description>%movedInSourcePin.desc</description>
+      		<message>%movedInSourcePin.msg</message>
+      		<target class="MovedIn"/>
+      		<![CDATA[
+         		self.sourcePin.oclIsUndefined() = false 
+         	]]>
+      		</constraint>
+      		
+      		 <!-- This constraint applies to MovedIn uri value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Batch"
+         		name="%movedInUri.name"
+         		id="movedInUri"
+         		statusCode="102">
+      		<description>%movedInUri.desc</description>
+      		<message>%movedInUri.msg</message>
+      		<target class="MovedIn"/>
+      		<![CDATA[
+         		self.uri.oclIsUndefined() = false 
+         	]]>
+      		</constraint>
+      		
+      		 <!-- This constraint applies to MovedOut destinationPin value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Batch"
+         		name="%movedOutDestinationPin.name"
+         		id="movedOutDestinationPin"
+         		statusCode="102">
+      		<description>%movedOutDestinationPin.desc</description>
+      		<message>%movedOutDestinationPin.msg</message>
+      		<target class="MovedOut"/>
+      		<![CDATA[
+         		self.destinationPin.oclIsUndefined() = false 
+         	]]>
+      		</constraint>
+      		
+      		 <!-- This constraint applies to MovedOut uri value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Batch"
+         		name="%movedOutUri.name"
+         		id="movedOutUri"
+         		statusCode="102">
+      		<description>%movedOutUri.desc</description>
+      		<message>%movedOutUri.msg</message>
+      		<target class="MovedOut"/>
+      		<![CDATA[
+         		self.uri.oclIsUndefined() = false 
+         	]]>
+      		</constraint>
+      		
+            <!-- Slaughtered Duplicate Event Constraint (Batch Mode) -->
+               <constraint
+                  lang="OCL"
+                  severity="WARNING"
+                  mode="Batch"
+                  name="%slaughteredEvent.name"
+                  id="slaughteredEvent"
+                  statusCode="101">
+                  	<description>%slaughteredEvent.desc</description>
+               		<message>%slaughteredEvent.msg</message>
+               		<target class="Slaughtered"/>
+               <![CDATA[
+                 Event.allInstances() ->select(e : Event | e <> self and e.eventCode = self.eventCode and e.id = self.id) ->isEmpty()
+               ]]>
+               </constraint>
+            
+            
+            <!-- An animal must have no more than one tagApplied Event -->
+            <!-- Animal Duplicate TagApplied Event Constraint (Batch Mode) -->
+            <constraint
+                  id="tagAppliedAnimal"
+                  lang="OCL"
+                  mode="Batch"
+                  name="%tagAppliedAnimal.name"
+                  severity="ERROR"
+                  statusCode="101">
+               	<description>%tagAppliedAnimal.desc</description>
+               	<message>%tagAppliedAnimal.msg</message>
+               	<target class="Animal"/>
+               <![CDATA[
+                 Event.allInstances()->select(e : Event | e.oclIsTypeOf(TagApplied) and e.id=self.id)->size()< 2
+               ]]>
+            </constraint>
+            <!-- TagApplied Duplicate Event Constraint (Batch Mode) -->
+            <constraint
+                  lang="OCL"
+                  severity="WARNING"
+                  mode="Batch"
+                  name="%tagAppliedEvent.name"
+                  id="tagAppliedEvent"
+                  statusCode="101">
+                <description>%tagAppliedEvent.desc</description>
+               	<message>%tagAppliedEvent.msg</message>
+               		<target class="TagApplied"/>
+               <![CDATA[
+                 tag.events ->select(e : Event | e.oclIsTypeOf(TagApplied)) ->size()<2
+               ]]>
+               	<!--
+               	<target class="TagApplied"/>
+               <![CDATA[
+                 Event.allInstances() ->select(e : Event | e <> self and e.eventCode = self.eventCode and e.id = self.id) ->isEmpty()
+               ]]>
+               -->
+            </constraint>   
+            
+            <!-- Tag applied to an Animal must have at least one Event (Batch Mode)  -->
+            <constraint
+                  id="tagOnAnimalLeast"
+                  lang="OCL"
+                  mode="Batch"
+                  name="Tag Minimal Event Constraint (Batch Mode)"
+                  severity="ERROR"
+                  statusCode="101">
+               	<description>Tags applied to Animals must have at least one TagApplied, MovedIn, or ReplacedTag event.</description>
+               	<message>Core Constraint: "{0}" must have at least one TagApplied, MovedIn, or ReplacedTag event.</message>
+               	<target class="Tag"/>
+               <![CDATA[
+                 if Animal.allInstances().tags -> select(t : Tag | t.id=self.id) -> isEmpty() then
+					true
+				else 
+					events -> select(e: Event | e.oclIsTypeOf(TagApplied) or e.oclIsTypeOf(ReplacedTag) or e.oclIsTypeOf(MovedIn) ) ->size() >0
+				endif
+               ]]>
+            </constraint>
+            
+            <!-- Tags applied to Animals must NOT have both a TagApplied and a ReplacedTag event.  -->
+            <!-- This constraint applies to Tag -->
+            <constraint
+                  id="tagOnAnimalMost"
+                  lang="OCL"
+                  mode="Batch"
+                  name="Tag Exclusive Events Constraint (Batch Mode)"
+                  severity="ERROR"
+                  statusCode="101">
+               	<description>Tags can only be Applied or Replaced.</description>
+               	<message>Core Constraint: "{0}" must only have a single TagApplied event or a single ReplacedTag event.</message>
+               	<target class="Tag"/>
+               <![CDATA[
+					events -> select(e: Event | e.oclIsTypeOf(TagApplied) or e.oclIsTypeOf(ReplacedTag) ) ->size() <2
+               ]]>
+            </constraint>
+            
+            <!-- This constraint applies to MoveIn -->
+            <constraint
+                  lang="OCL"
+                  severity="WARNING"
+                  mode="Batch"
+                  name="MovedIn SourcePin Constraint (Batch Mode)"
+                  id="movedInEvent"
+                  statusCode="101">
+                <description>The MovedIn sourcePin can not be the same as the local premisesId.</description>
+               	<message>Core Constraint: "{0}" sourcePin can not be the same as the local premisesId.</message>
+               	<target class="MovedIn"/>
+               <![CDATA[
+                 Premises.allInstances() -> select(premisesId=self.sourcePin) -> isEmpty()
+               ]]>
+            </constraint> 
+            
+            <!-- This constraint applies to MilkTest -->
+            <constraint
+                  lang="OCL"
+                  severity="WARNING"
+                  mode="Batch"
+                  name="MilkTest Dairy Animals Constraint (Batch Mode)"
+                  id="milkTestEvent"
+                  statusCode="101">
+                <description>Milk test is only valid for dairy animals - BovineDairy, Ovine, and Caprine.</description>
+               	<message>Core Constraint: "{0}" Event is only valid for dairy animals - BovineDairy, Ovine, and Caprine.</message>
+               	<target class="MilkTest"/>
+               <![CDATA[
+               Animal.allInstances() -> select(a : Animal | (not a.oclIsTypeOf(BovineDairy) ) and a.speciesCode<>'OVI' and a.speciesCode<>'CAP' ).eventHistory() ->select(e : Event | e = self ) ->isEmpty()
+               ]]>
+            </constraint> 
+            
+            <!-- This constraint applies to MilkTest otherSolids value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Live"
+         		name="MilkTest OtherSolids Constraint (Live Mode)"
+         		id="milkTestEventOtherSolids"
+         		statusCode="102">
+      		<description>The Other Solids attribute of a MilkTest Event can only have a value from 0 to 99.99.</description>
+      		<message>"Core Constraint: {0}" Other Solids value must be between 0 and 99.99. </message>
+      		<target class="MilkTest">
+         		<event name="Set">
+            		<feature name="otherSolids"/>
+       			</event>
+       			<event name="Unset">
+            		<feature name="otherSolids"/>
+       			</event>
+      		</target>
+      		   otherSolids &gt; -1 and otherSolids &lt; 100
+   			</constraint>
+   			
+   			<!-- This constraint applies to MilkTest PoundsProduced value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Live"
+         		name="MilkTest PoundsProduced Constraint (Live Mode)"
+         		id="milkTestEventPoundsProduced"
+         		statusCode="102">
+      		<description>The Pounds Produced attribute of a MilkTest Event can only have a value from 0 to 99.99.</description>
+      		<message>"Core Constraint: {0}" Pounds Produced value must be between 0 and 99.99. </message>
+      		<target class="MilkTest">
+         		<event name="Set">
+            		<feature name="poundsProduced"/>
+       			</event>
+       			<event name="Unset">
+            		<feature name="poundsProduced"/>
+       			</event>
+      		</target>
+      		   poundsProduced &gt; -1 and poundsProduced &lt; 100
+   			</constraint>
+   			
+   			<!-- This constraint applies to MilkTest PercentButterFat value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Live"
+         		name="MilkTest PercentButterFat Constraint (Live Mode)"
+         		id="milkTestEventPercentButterFat"
+         		statusCode="102">
+      		<description>The Percent Butter Fat attribute of a MilkTest Event can only have a value from 0 to 9.99.</description>
+      		<message>"Core Constraint: {0}" Percent Butter Fat value must be between 0 and 9.99. </message>
+      		<target class="MilkTest">
+         		<event name="Set">
+            		<feature name="percentButterFat"/>
+       			</event>
+       			<event name="Unset">
+            		<feature name="percentButterFat"/>
+       			</event>
+      		</target>
+      		   percentButterFat &gt; -1 and percentButterFat &lt; 10
+   			</constraint>
+   			
+   			<!-- This constraint applies to MilkTest PercentProtein value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Live"
+         		name="MilkTest PercentProtein Constraint (Live Mode)"
+         		id="milkTestEventPercentProtein"
+         		statusCode="102">
+      		<description>The Percent Protein attribute of a MilkTest Event can only have a value from 0 to 9.99.</description>
+      		<message>"Core Constraint: {0}" Percent Protein value must be between 0 and 9.99. </message>
+      		<target class="MilkTest">
+         		<event name="Set">
+            		<feature name="percentProtein"/>
+       			</event>
+       			<event name="Unset">
+            		<feature name="percentProtein"/>
+       			</event>
+      		</target>
+      		   percentProtein &gt; -1 and percentProtein &lt; 10
+   			</constraint>
+   			
+   			
+   			<!-- This constraint applies to MilkTest SomaticCellCounts value-->
+            <constraint
+         		lang="OCL"
+         		severity="ERROR"
+         		mode="Live"
+         		name="MilkTest SomaticCellCounts Constraint (Live Mode)"
+         		id="milkTestEventSomaticCellCounts"
+         		statusCode="102">
+      		<description>The Somatic Cell Counts attribute of a MilkTest Event can only have a value from 0 to 9,999.99.</description>
+      		<message>"Core Constraint: {0}" Somatic Cell Counts value must be between 0 and 9,999.99. </message>
+      		<target class="MilkTest">
+         		<event name="Set">
+            		<feature name="somaticCellCounts"/>
+       			</event>
+       			<event name="Unset">
+            		<feature name="somaticCellCounts"/>
+       			</event>
+      		</target>
+      		   somaticCellCounts &gt; -1 and somaticCellCounts &lt; 10000
+   			</constraint>
+   			
+   			<!-- ReplacedTag Old Tag Not Parent Constraint (Batch Mode) -->
+            <constraint
+                  lang="OCL"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="ReplacedTag Old Tag Not Parent Constraint (Batch Mode)"
+                  id="replacedTagOldTagNotParentEvent"
+                  statusCode="101">
+                <description>The ReplacedTag OldTag can not be the same as the parent Tag of this Event.</description>
+               	<message>Core Constraint: "{0}" OldTag reference can not be the same as the "{0}" parent Tag.</message>
+               	<target class="ReplacedTag"/>
+               <![CDATA[
+                 not (self.oldTag=self.tag)
+               ]]>
+            </constraint> 
+            
+            <!-- ReplacedTag Old Tag Not in Same Animal Constraint (Batch Mode) -->
+            
+            <constraint
+                  lang="OCL"
+                  severity="ERROR"
+                  mode="Batch"
+                  name="ReplacedTag Old Tag Not in Same Animal Constraint (Batch Mode)"
+                  id="replacedTagOldTagNotInAnimal"
+                  statusCode="101">
+                <description>The ReplacedTag OldTag must be associated with the same animal as this ReplacedTag Event.</description>
+               	<message>Core Constraint: "{0}" OldTag reference must be contained with the same animal as "{0}".</message>
+               	<target class="ReplacedTag"/>
+               <![CDATA[
+                 Animal.allInstances() -> select(a : Animal | (a.tags ->includes(self.tag))).tags -> includes(self.oldTag)
+               ]]>
+            </constraint> 
+   
+         </constraints>
+      </constraintProvider>
+   </extension>
+
+<!-- Specify the context using the PropertyTester registered by
+       the com.verticon.tracker.validation.adapter plugin -->
+   <extension point="org.eclipse.emf.validation.constraintBindings">
+      <clientContext id="com.verticon.tracker.validation.adapter">
+         <enablement>
+            <and>
+               <instanceof value="org.eclipse.emf.ecore.EObject"/>
+               <test
+                  property="com.verticon.tracker.validation.adapter.ePackage"
+                  value="http://www.verticon.com/tracker/0.4.2/premises"/>
+            </and>
+         </enablement>
+      </clientContext>
+      <!-- Bind the above context with the contraints catagory -->
+      <binding
+         context="com.verticon.tracker.validation.adapter"
+         category="com.verticon.tracker.validation.catagory.ocl"/>
+   </extension>
+
+   <!-- Add the UI Validation Listener to the context-->
+   <extension
+         point="org.eclipse.emf.validation.ui.UIRegisteredClientContext">
+      <clientContext id="com.verticon.tracker.validation.adapter"/>
+   </extension>
+   
+</plugin>

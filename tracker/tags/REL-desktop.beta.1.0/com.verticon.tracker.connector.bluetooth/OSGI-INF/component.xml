@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="false" name="com.verticon.tracker.connector.bluetooth">
+   <implementation class="com.verticon.tracker.connector.bluetooth.ConnectionFactoryImpl"/>
+   <service>
+      <provide interface="org.osgi.service.io.ConnectionFactory"/>
+   </service>
+   <property name="io.scheme" type="String" value="btspp"/>
+</scr:component>

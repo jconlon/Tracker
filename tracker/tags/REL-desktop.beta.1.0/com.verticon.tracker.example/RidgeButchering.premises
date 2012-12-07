@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<premises:Premises xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:premises="http://www.verticon.com/tracker/0.4.2/premises" premisesId="005F59W" uri="urn:pin:005F59W" name="Ridge Butchering Service" description="Livestock processing">
+  <location name="Ridge Butchering" description="Livestock Processing" phoneNumber="713-444-3322" street="5554 Ridge Rd." city="Viroqua" state="WI" postalCode="54665" longitude="-91.094913" latitude="43.544069" altitude="0.1"/>
+</premises:Premises>

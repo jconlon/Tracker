@@ -1,0 +1,247 @@
+<project name="Create Mirrors" default="create-mirror-juno-ocl" basedir=".">
+
+	<property name="mirrors.dir" value="/opt/Eclipse/mirrors/"/>
+
+	<!-- Currently not used -->
+	<target name="create-mirror-3_8">
+		<p2.mirror source="http://download.eclipse.org/eclipse/updates/3.8" destination="${mirrors.dir}eclipsePlatform-3.8">
+			<iu id="org.eclipse.platform.sdk" />
+			<iu id="org.eclipse.pde.junit.runtime.addon.feature.group" />
+		</p2.mirror>
+	</target>
+	
+    <target name="create-mirror-rxtx">
+   	    
+		<p2.mirror source="http://rxtx.qbang.org/eclipse" destination="${mirrors.dir}rxtx">
+			<iu id="gnu.io.rxtx.sdk.feature.group"/>
+			<iu id="gnu.io.rxtx.feature.group" />
+		</p2.mirror>
+	</target>
+	
+	<target name="create-mirror-gef">
+	   	    
+			<p2.mirror source="http://download.eclipse.org/tools/gef/updates/releases" destination="${mirrors.dir}gef">
+				<iu id="org.eclipse.draw2d.feature.group" />
+				<iu id="org.eclipse.draw2d.sdk.feature.group" />
+				<iu id="org.eclipse.draw2d.source.feature.group" />
+				<iu id="org.eclipse.gef.feature.group" />
+				<iu id="org.eclipse.gef.all.feature.group" />
+				<iu id="org.eclipse.gef.examples.feature.group" />
+				<iu id="org.eclipse.gef.examples.source.feature.group" />
+				<iu id="org.eclipse.gef.sdk.feature.group" />
+				<iu id="org.eclipse.gef.source.feature.group" />
+				<iu id="org.eclipse.zest.feature.group" />
+				<iu id="org.eclipse.zest.sdk.feature.group" />
+				<iu id="org.eclipse.zest.source.feature.group" />
+				
+			</p2.mirror>
+	</target>
+	
+	<target name="create-mirror-tmf">
+			   	    
+					<p2.mirror source="http://download.eclipse.org/modeling/tmf/updates" destination="${mirrors.dir}tmf">
+						<iu id="org.eclipse.xtext.xtend2.m2e.feature.group" />
+						<iu id="org.eclipse.xtext.xtend2.sdk.feature.group" />
+						<iu id="org.eclipse.xtext.xbase.feature.group" />
+						<iu id="org.eclipse.xtext.docs.feature.group" />
+						<iu id="org.eclipse.xtext.examples.feature.group" />
+						<iu id="org.eclipse.xtext.runtime.feature.group" />
+						<iu id="org.eclipse.xtext.sdk.feature.group" />
+						<iu id="org.eclipse.xtext.ui.feature.group" />
+					</p2.mirror>
+	</target>
+	
+	<target name="create-mirror-datatools">
+	   	    
+			<p2.mirror source="http://download.eclipse.org/datatools/updates" destination="${mirrors.dir}datatools">
+				<iu id="org.eclipse.datatools.sdk.feature.feature.group"/>
+			</p2.mirror>
+	</target>
+	
+	<target name="create-mirror-birt">
+				<p2.mirror source="http://download.eclipse.org/birt/update-site/4.2" destination="${mirrors.dir}birt">
+					<iu id="org.eclipse.birt.chart.doc.isv.feature.group" />
+					<iu id="org.eclipse.birt.chart.source.feature.group" />
+					<iu id="org.eclipse.birt.chart.feature.group" />
+					<iu id="org.eclipse.birt.chart.cshelp.feature.group" />
+					<iu id="org.eclipse.birt.osgi.runtime.sdk.feature.group" />
+					<iu id="org.eclipse.birt.chart.osgi.runtime.sdk.feature.group" />
+					<iu id="org.eclipse.birt.doc.feature.group" />
+					<iu id="org.eclipse.birt.cshelp.feature.group" />
+					<iu id="org.eclipse.birt.example.feature.group" />
+					<iu id="org.eclipse.birt.source.feature.group" />
+					<iu id="org.eclipse.birt.feature.group" />
+					<iu id="org.eclipse.birt.doc.isv.feature.group" />
+					<iu id="org.eclipse.birt.chart.integration.wtp.feature.group" />
+					<iu id="org.eclipse.birt.chart.integration.wtp.source.feature.group" />
+					<iu id="org.eclipse.birt.integration.wtp.source.feature.group" />
+					<iu id="org.eclipse.birt.integration.wtp.feature.group" />
+					
+				</p2.mirror>
+	</target>
+	
+	<target name="create-mirror-birt-3.7">
+					<p2.mirror source="http://download.eclipse.org/birt/update-site/3.7" destination="${mirrors.dir}birt-3.7">
+						<iu id="org.eclipse.birt.chart.doc.isv.feature.group" />
+						<iu id="org.eclipse.birt.chart.source.feature.group" />
+						<iu id="org.eclipse.birt.chart.feature.group" />
+						<iu id="org.eclipse.birt.chart.cshelp.feature.group" />
+						<iu id="org.eclipse.birt.osgi.runtime.sdk.feature.group" />
+						<iu id="org.eclipse.birt.chart.osgi.runtime.sdk.feature.group" />
+						<iu id="org.eclipse.birt.doc.feature.group" />
+						<iu id="org.eclipse.birt.cshelp.feature.group" />
+						<iu id="org.eclipse.birt.example.feature.group" />
+						<iu id="org.eclipse.birt.source.feature.group" />
+						<iu id="org.eclipse.birt.feature.group" />
+						<iu id="org.eclipse.birt.doc.isv.feature.group" />
+						<iu id="org.eclipse.birt.chart.integration.wtp.feature.group" />
+						<iu id="org.eclipse.birt.chart.integration.wtp.source.feature.group" />
+						<iu id="org.eclipse.birt.integration.wtp.source.feature.group" />
+						<iu id="org.eclipse.birt.integration.wtp.feature.group" />
+					</p2.mirror>
+		</target>
+	
+	<!-- Currently not used. Suspect this is broken with gz content, as discussed by Nick Bolt. -->
+	<target name="create-mirror-juno-emf-xsd">
+				<p2.mirror source="http://download.eclipse.org/releases/juno" destination="${mirrors.dir}juno-emf-xsd">
+					<iu id="org.eclipse.emf.ecore.feature.group"/>
+					<iu id="org.eclipse.emf.feature.group"/>
+					<iu id="org.eclipse.emf.sdk.feature.group"/>
+					<iu id="org.eclipse.emf.codegen.feature.group" />
+					<iu id="org.eclipse.emf.codegen.ui.feature.group" />
+					<iu id="org.eclipse.emf.common.feature.group" />
+					<iu id="org.eclipse.emf.common.ui.feature.group" />
+					<iu id="org.eclipse.emf.databinding.feature.group" />
+					<iu id="org.eclipse.emf.doc.feature.group" />
+					<iu id="org.eclipse.emf.codegen.ecore.feature.group" />
+					<iu id="org.eclipse.emf.codegen.ecore.ui.feature.group" />
+					<iu id="org.eclipse.emf.ecore.edit.feature.group" />
+					<iu id="org.eclipse.emf.gwt.ecore.edit.feature.group" />
+					<iu id="org.eclipse.emf.mapping.ecore.feature.group" />
+					<iu id="org.eclipse.emf.mapping.ecore.editor.feature.group" />
+					<iu id="org.eclipse.emf.edit.feature.group" />
+					<iu id="org.eclipse.emf.databinding.edit.feature.group" />
+					<iu id="org.eclipse.emf.gwt.edit.feature.group" />
+					<iu id="org.eclipse.emf.edit.ui.feature.group" />
+					<iu id="org.eclipse.emf.gwt.edit.ui.feature.group" />
+					<iu id="org.eclipse.emf.examples.feature.group" />
+					<iu id="org.eclipse.emf.gwt.ecore.feature.group" />
+					<iu id="org.eclipse.emf.gwt.common.feature.group" />
+					<iu id="org.eclipse.emf.gwt.feature.group" />
+					<iu id="org.eclipse.emf.gwt.sdk.feature.group" />
+					<iu id="org.eclipse.emf.mapping.feature.group" />
+					<iu id="org.eclipse.emf.mapping.ui.feature.group" />
+					<iu id="org.eclipse.emf.converter.feature.group" />
+					<iu id="org.eclipse.emf.oda.feature.group" />
+					<iu id="org.eclipse.emf.oda.sdk.feature.group" />
+					<iu id="org.eclipse.emf.oda.ecore.feature.group" />
+					<iu id="org.eclipse.emf.oda.ecore.ui.feature.group" />
+					<iu id="org.eclipse.emf.ecore.editor.feature.group" />
+					<iu id="org.eclipse.emf.all.feature.group" />
+					<iu id="org.eclipse.xsd.feature.group" />
+					<iu id="org.eclipse.xsd.sdk.feature.group" />
+					<iu id="org.eclipse.xsd.doc.feature.group" />
+					<iu id="org.eclipse.xsd.ecore.converter.feature.group" />
+					<iu id="org.eclipse.xsd.edit.feature.group" />
+					<iu id="org.eclipse.xsd.mapping.feature.group" />
+					<iu id="org.eclipse.xsd.mapping.editor.feature.group" />
+					<iu id="org.eclipse.xsd.editor.feature.group" />
+				</p2.mirror>
+	</target>
+	
+	<target name="create-mirror-juno-equinox">  	    
+			<p2.mirror source="http://download.eclipse.org/releases/juno" destination="${mirrors.dir}juno-equinox">
+				<iu id="org.eclipse.equinox.sdk.feature.group" />
+			</p2.mirror>
+	</target>
+	
+	<target name="create-mirror-juno-mwe">
+   	    
+		<p2.mirror source="http://download.eclipse.org/releases/juno" destination="${mirrors.dir}juno-mwe">
+			<iu id="org.eclipse.emf.mwe2.language.sdk.feature.group" />
+			<iu id="org.eclipse.emf.mwe2.runtime.sdk.feature.group"/>
+			<iu id="org.eclipse.emf.mwe.sdk.feature.group" />
+		</p2.mirror>
+	</target>
+	
+	<target name="create-mirror-juno-expand">
+   	    
+		<p2.mirror source="http://download.eclipse.org/releases/juno" destination="${mirrors.dir}juno-expand">	
+			<iu id="org.eclipse.xpand.sdk.feature.group"/>
+		</p2.mirror>
+	</target>
+	
+	<target name="create-mirror-juno-datatools">
+	   	    
+			<p2.mirror source="http://download.eclipse.org/releases/juno" destination="${mirrors.dir}juno-datatools">	
+				<iu id="org.eclipse.datatools.enablement.sdk.feature.feature.group"/>
+				<iu id="org.eclipse.datatools.sdk.feature.feature.group"/>
+			</p2.mirror>
+		</target>
+	
+	<!-- Currently not used -->
+	<target name="create-mirror-juno-uml2">
+   	    
+		<p2.mirror source="http://download.eclipse.org/releases/juno" destination="${mirrors.dir}juno-uml2">
+			<iu id="org.eclipse.uml2.sdk.feature.group"/>
+		</p2.mirror>
+	</target>
+	
+	<!-- Default but Currently not used -->
+	<target name="create-mirror-juno-ocl">
+   	    
+		<p2.mirror source="http://download.eclipse.org/releases/juno" destination="${mirrors.dir}juno-ocl">
+			<iu id="org.eclipse.ocl.all.sdk.feature.group" />
+			<iu id="org.eclipse.ocl.examples.feature.group" />
+		</p2.mirror>
+	</target>
+	
+	<!-- Currently not used -->
+	<target name="create-mirror-juno-acceleo">
+			<p2.mirror source="http://download.eclipse.org/releases/juno" destination="${mirrors.dir}juno-acceleo">
+				<iu id="org.eclipse.acceleo.sdk.feature.group"/>
+			</p2.mirror>
+	</target>
+	
+	<!-- Currently not used -->
+	<target name="create-mirror-juno-gmf">
+   	    
+		<p2.mirror source="http://download.eclipse.org/releases/juno" destination="${mirrors.dir}juno-gmf">
+			<iu id="org.eclipse.gmf.runtime.sdk.feature.group"/>
+			<iu id="org.eclipse.gmf.sdk.feature.group"/>
+		</p2.mirror>
+	</target>
+	
+	<!-- Currently not used -->
+	<target name="create-mirror-juno-other">
+			<p2.mirror source="http://download.eclipse.org/releases/juno" destination="${mirrors.dir}juno-other">
+				<iu id="org.eclipse.wst.xml_ui.feature.feature.group" />
+				<iu id="org.eclipse.wst.server_adapters.feature.feature.group" />
+				<iu id="org.eclipse.jst.ws.jaxws.feature.feature.group" />
+				<!--
+				<iu id="org.eclipse.platform.sdk" />
+				<iu id="org.eclipse.pde.junit.runtime.addon.feature.group" />
+		 		-->
+			</p2.mirror>
+	</target>
+	
+	<!-- Currently not used. Suspect this is broken with gz content, as discussed by Nick Bolt. -->
+	<target name="create-mirror-juno-emf-other">
+			   	    
+					<p2.mirror source="http://download.eclipse.org/releases/juno" destination="${mirrors.dir}juno-emf-other">
+						<iu id="org.eclipse.emf.compare.feature.group" />
+						<iu id="org.eclipse.emf.compare.sdk.feature.group" />
+						<iu id="org.eclipse.emf.query.sdk.feature.group" />
+						<iu id="org.eclipse.emf.transaction.sdk.feature.group" />
+						<iu id="org.eclipse.emf.validation.sdk.feature.group" />
+					</p2.mirror>
+	</target>
+	
+	<!-- This is broken because the one jar is gz compressed so it fails. Dont use this anyway -->
+	<target name="create-mirror-pde-visualization">
+		   	    
+				<p2.mirror source="http://download.eclipse.org/eclipse/pde/visualization/updates" destination="${mirrors.dir}pde-visualization">
+					<iu id="org.eclipse.pde.visualization.feature.feature.group"/>	
+				</p2.mirror>
+    </target>
+</project>

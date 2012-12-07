@@ -1,0 +1,11 @@
+Changed
+
+genmodel:
+	Root extends org.eclipse.emf.edore.impl.MinimalEObjectImpl$Container
+	
+AuthorlinkResourceImpl
+	save to UTF-8
+	
+AuthorlinkResourceFactoryImpl
+	UTF-8 encoding
+	

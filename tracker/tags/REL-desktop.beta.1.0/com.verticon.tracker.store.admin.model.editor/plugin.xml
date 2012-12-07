@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ Copyright 2012 Verticon, Inc. All rights reserved.
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="com.verticon.tracker.store.admin.presentation.AdminModelWizardID"
+            name="%_UI_AdminModelWizard_label"
+            class="com.verticon.tracker.store.admin.presentation.AdminModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/AdminModelFile.gif">
+         <description>%_UI_AdminModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <editor
+            id="com.verticon.tracker.store.admin.presentation.AdminEditorID"
+            name="%_UI_AdminEditor_label"
+            icon="icons/full/obj16/AdminModelFile.gif"
+            extensions="admin"
+            class="com.verticon.tracker.store.admin.presentation.AdminEditor"
+            contributorClass="com.verticon.tracker.store.admin.presentation.AdminActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

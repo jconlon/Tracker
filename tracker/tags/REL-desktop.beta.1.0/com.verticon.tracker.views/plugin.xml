@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+<extension
+         point="org.eclipse.ui.views">
+         <category
+            name="Tracker"
+            id="com.verticon.tracker.views">
+      </category>
+      <view
+            name="Animals"
+            icon="icons/BovineBeef.gif"
+            category="com.verticon.tracker.views"
+            class="com.verticon.tracker.views.AnimalsView"
+            id="com.verticon.tracker.views.AnimalsView">
+      </view>
+      <view
+            name="Events"
+            icon="icons/waiting.gif"
+            category="com.verticon.tracker.views"
+            class="com.verticon.tracker.views.EventsView"
+            id="com.verticon.tracker.views.EventsView">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="com.verticon.tracker.product.desktop.perspective">
+         <view
+               visible="true"
+               relative="org.eclipse.ui.views.PropertySheet"
+               relationship="stack"
+               id="com.verticon.tracker.views.AnimalsView">
+         </view>
+         <viewShortcut id="com.verticon.tracker.views.AnimalsView"/>
+         
+         <view
+               visible="true"
+               relative="org.eclipse.ui.views.PropertySheet"
+               relationship="stack"
+               id="com.verticon.tracker.views.EventsView">
+         </view>
+         <viewShortcut id="com.verticon.tracker.views.EventsView"/>
+      </perspectiveExtension>
+   </extension>
+   
+    <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            class="com.verticon.tracker.views.propertyTester.TrackerViewTester"
+            id="com.verticon.tracker.views.propertyTester.TrackerViewTester"
+            namespace="com.verticon.tracker.views"
+            properties="isMovedIn,isMovedOut"
+            type="java.lang.Object">
+      </propertyTester>
+      
+      
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+       
+       <!--Popups commands on EventsView -->
+       <menuContribution
+             allPopups="false"
+            locationURI="popup:com.verticon.tracker.views.EventsView?after=additions">
+            <!-- Select the EObject elements in the Outline View -->
+            <command
+                     commandId="com.verticon.tracker.editor.commands.generic.select.command"
+                     style="push">
+                  <visibleWhen>
+                     
+                    <with variable="activePartId">
+                     <equals
+                           value="com.verticon.tracker.views.EventsView">
+                     </equals>
+                    </with>
+                    
+                  </visibleWhen>
+            </command>
+            
+            <!-- Events-->
+            <!--Set ForiegnPremisesURI on MovedIn and MovedOut-->
+            <command
+                  commandId="com.verticon.tracker.editor.commands.setForeignPremisesURICommand"
+                   style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <and>
+                  <with variable="activePartId">
+                     <equals
+                           value="com.verticon.tracker.views.EventsView">
+                     </equals>
+                  </with>
+                  <or>
+                  <test
+                   		 property="com.verticon.tracker.views.isMovedIn">
+              	 </test>  
+              	 <test
+                   		 property="com.verticon.tracker.views.isMovedOut">
+              	 </test>  
+              	 </or>           			 
+    		   </and>
+               </visibleWhen>
+            </command>
+            
+             <!-- Modify Selected Events 
+               works with simple and transaction based editors-->
+                <command
+                      commandId="com.verticon.tracker.editor.commands.event.modify.command"
+                      style="push">
+               	<visibleWhen> 
+               		<with variable="activePartId">
+               	     <equals
+                           value="com.verticon.tracker.views.EventsView">
+                     </equals>
+                     </with>
+	            </visibleWhen>
+           	</command>
+           	
+           
+              
+           
+      </menuContribution>
+      
+       <!--Popups commands on AnimalsView -->
+       <menuContribution
+             allPopups="false"
+            locationURI="popup:com.verticon.tracker.views.AnimalsView?after=additions">
+            <!-- Select the EObject elements in the Outline View -->
+            <command
+                     commandId="com.verticon.tracker.editor.commands.generic.select.command"
+                     style="push">
+                  <visibleWhen>
+                    
+                    <with variable="activePartId">
+                     <equals
+                           value="com.verticon.tracker.views.AnimalsView">
+                     </equals>
+                    </with>
+         			
+                  </visibleWhen>
+            </command>
+            
+            <!-- 
+               Change Animal(s) Type;
+               works on a Animal Element;
+               works with simple and transaction based editors (after fix in Ticket #373);
+			   needs a Premises in the Editor so it No longer is visible from Animal Templates
+		    -->
+            <command
+                      commandId="com.verticon.tracker.editor.commands.animal.changeType.command"
+                      style="push">
+               	<visibleWhen>
+               	    <with variable="activePartId">
+                     <equals
+                           value="com.verticon.tracker.views.AnimalsView">
+                     </equals>
+                    </with>
+	            </visibleWhen>
+            </command> 
+            
+            <!-- 
+               	Add template event to selected anmimal(s) 
+               	works with simple and transaction based editors (after fix in Ticket #373);
+			   	needs a Premises in the Editor so it No longer is visible from Animal Templates			 
+             -->
+            <command
+                 commandId="com.verticon.tracker.editor.commands.animal.addTemplateEvent.command"
+                 style="push">
+               	    <visibleWhen>
+               	    <with variable="activePartId">
+                     <equals
+                           value="com.verticon.tracker.views.AnimalsView">
+                     </equals>
+                    </with>
+	            </visibleWhen>
+           </command>
+           
+           <!--Resolve Names on Animal-->
+           <command
+                  commandId="com.verticon.tracker.editor.commands.resolveNamesOnAnimalCommand"
+                   style="push">
+                 
+               <visibleWhen>
+                    <and>
+                         <with variable="activePartId">
+                     		<equals
+                          	 value="com.verticon.tracker.views.AnimalsView">
+                     		</equals>
+                    	</with>
+              			 
+    					 <!-- 
+    			        	Restricted to show only if there is a Location Service.
+              			 -->
+              			 <test
+                       		 forcePluginActivation="true"
+                        	property="com.verticon.tracker.editor.hasLocationService">
+              			</test>
+    			     </and>
+               </visibleWhen>
+            </command>
+            
+      </menuContribution>
+   </extension>
+
+
+</plugin>

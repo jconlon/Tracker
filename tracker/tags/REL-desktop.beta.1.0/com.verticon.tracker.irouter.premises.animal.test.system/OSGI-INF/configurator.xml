@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
+    name="com.verticon.tracker.irouter.premises.animal.test.system.configurator">
+   <implementation 
+    class="com.verticon.tracker.irouter.premises.animal.test.system.internal.Configuator"/>
+   <reference bind="setConfigurationAdmin" cardinality="1..1" interface="org.osgi.service.cm.ConfigurationAdmin" name="ConfigurationAdmin" policy="static"/>
+   
+   
+</scr:component>

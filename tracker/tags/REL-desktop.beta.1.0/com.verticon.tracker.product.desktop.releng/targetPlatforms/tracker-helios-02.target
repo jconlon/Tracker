@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.6"?>
+
+<target name="Tracker Helios 2">
+<locations>
+<location path="/opt/ApacheWebConsole" type="Directory"/>
+<location path="/opt/logback-0.9.19" type="Directory"/>
+<location path="/opt/Eclipse/monitoradmin" type="Directory"/>
+<location path="/opt/orbit-org.slf4j-1.5.11" type="Directory"/>
+<location path="/opt/Eclipse/eclipse-3.6-delta-pack/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/eclipse-modeling-helios-SRI-incubation-target-20101118/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/apache/eclipse" type="Directory"/>
+<location path="/opt/ekkesCornerLogging/eclipse-target" type="Directory"/>
+<location path="/opt/Eclipse/swtbot/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/dtp-sdk_1.8.0/eclipse" type="Directory"/>
+<location path="/opt/easymock" type="Directory"/>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="gnu.io.rxtx.sdk.feature.group" version="2.1.7.4_v20071016-417C7DP1Bh_eEaQJBrHBHg"/>
+<unit id="gnu.io.rxtx.feature.group" version="2.1.7.4_v20071016-7B57e7UAXMAAqGAGf"/>
+<repository location="http://rxtx.qbang.org/eclipse"/>
+</location>
+<location path="/opt/Eclipse/GEF-zest-sdk-3.6.1/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/birt-report-framework-2.6.1/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/equinox-SDK-3.6-target_platform" type="Directory"/>
+</locations>
+</target>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<toc label="Tracker iRouter User Guide" link_to="../com.verticon.tracker.doc/toc.xml#tracker_irouter" topic="help/irouter.html">
+	<topic href="help/irouter.html" label="Overview">
+		<topic href="help/irouter.html#WhatistheTrackeriRouter" label="What is the Tracker iRouter?"></topic>
+		<topic href="help/irouter.html#Howdoesitwork" label="How does it work?">
+			<topic href="help/irouter.html#iRouterishighlyconfigurable" label="iRouter is highly configurable"></topic>
+		</topic>
+	</topic>
+	<topic href="help/Specifications.html" label="Specifications">
+		<topic href="help/Specifications.html#OSGi" label="OSGi"></topic>
+		<topic href="help/Specifications.html#WireAdminService" label="Wire Admin Service"></topic>
+		<topic href="help/Specifications.html#ConfigurationAdminService" label="Configuration Admin Service"></topic>
+		<topic href="help/Specifications.html#MetatypeService" label="Metatype Service"></topic>
+		<topic href="help/Specifications.html#P2ProvisioningService" label="P2 Provisioning Service"></topic>
+		<topic href="help/Specifications.html#JustinTimeFunctionality" label="Just in Time Functionality"></topic>
+	</topic>
+</toc>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" 
+ "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter>
+  	<?dbhtml filename="features/features.html" ?>
+	<title>Provisioned Features</title>
+	<para>Tracker Livestock Business Intelligence Toolkit Instances may be provisioned 
+	with one or more task specific tools or utilities to complement data model specific
+    Editors.</para>
+    
+    <para>The Tracker Business Intelligence Toolkit and Features
+	consists of the following types of task specific utilities and tools:
+	<itemizedlist mark='bullet'>
+				<listitem>
+					<para>Data Importing Utilities;
+				  </para>
+				</listitem>
+				<listitem>
+					<para>Data Exporting Utilities;
+					</para>
+				</listitem>
+				<listitem>
+					<para>Tools for Querying Operational Data;</para>
+				</listitem>
+				<listitem>
+					<para>Utilities for interfacing with Tag Id Readers, including support for 
+					serial and Bluetooth connections;
+					</para>
+				</listitem>
+				<listitem>
+					<para>Utilities for interfacing with network attached sensors;
+					</para>
+				</listitem>
+				<listitem>
+					<para>Utilities for interfacing with industry standard Geography Information Systems <acronym>GIS</acronym> and geobrowsers;
+					</para>
+				</listitem>
+				<listitem>
+					<para>Eclipse Business Intelligence Reporting Tools <acronym>BIRT</acronym>.
+					</para>
+				</listitem>
+			</itemizedlist>
+ 		</para>
+</chapter>
+	

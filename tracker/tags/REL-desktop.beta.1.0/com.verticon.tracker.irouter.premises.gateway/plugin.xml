@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            description="Commands affecting tracker models"
+            id="com.verticon.tracker.editor.commands.Tracker.category"
+            name="_UI_commands_Tracker_category_name">
+      </category>
+      
+     
+      <!-- Import log command Ticket#532 -->
+       <command
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            defaultHandler="com.verticon.tracker.irouter.gateway.internal.ImportLogHandler"
+            description="Imports log file as animal event data."
+            id="com.verticon.tracker.editor.commands.importLog.asEventData.command"
+            name="Import Log File as Animal Event Data">
+      </command>
+      
+      
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               commandId="com.verticon.tracker.editor.menus.popupany"
+               label="&amp;Tracker Actions">
+         </menu>
+      </menuContribution>  
+      <menuContribution
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+                  		
+        
+               <!-- Import log command Ticket#532 
+               Import log file as standard event data;
+               works on a *.log File;
+               works with simple and transaction based editors;
+               uses edit command redo and undo framework;
+               needs a Premises in the Editor.
+               -->
+               <command
+                      commandId="com.verticon.tracker.editor.commands.importLog.asEventData.command"
+                      icon="icons/full/obj16/import_wiz.gif"
+                      style="push">
+                  <visibleWhen>
+                       <and>
+		               <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+		                      <adapt type="org.eclipse.core.resources.IResource">
+		          					<test property="org.eclipse.core.resources.name" 
+		               				 value="*.log"/>
+		      				 </adapt>
+		                  </iterate>
+		               </with>
+		               
+              			 <test
+                   			 property="com.verticon.tracker.editor.isPremisesEditor">
+              			</test>
+    			     </and>
+	            </visibleWhen>
+               </command>
+              
+      </menuContribution>
+   </extension>
+  
+
+</plugin>

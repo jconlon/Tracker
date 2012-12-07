@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright 2012 Verticon, Inc. All rights reserved."
+    modelDirectory="/com.verticon.location.core.model/src" modelPluginID="com.verticon.location.core.model"
+    modelName="Location" editPluginClass="com.verticon.location.provider.LocationEditPlugin"
+    editorPluginClass="com.verticon.location.presentation.LocationEditorPlugin" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    testSuiteClass="com.verticon.location.tests.LocationAllTests" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="6.0" copyrightFields="false">
+  <foreignModel>location.ecore</foreignModel>
+  <genPackages prefix="Location" basePackage="com.verticon" resource="XMI" disposableProviderFactory="true"
+      ecorePackage="location.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="location.ecore#//AltitudeMode">
+      <genEnumLiterals ecoreEnumLiteral="location.ecore#//AltitudeMode/absolute"/>
+      <genEnumLiterals ecoreEnumLiteral="location.ecore#//AltitudeMode/clampToGround"/>
+      <genEnumLiterals ecoreEnumLiteral="location.ecore#//AltitudeMode/relativeToGround"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="location.ecore#//PointFormatException"/>
+    <genDataTypes ecoreDataType="location.ecore#//Polygon"/>
+    <genClasses ecoreClass="location.ecore#//Location">
+      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="Name of the location.  An area with the same name is considered this locations boundry."
+          ecoreFeature="ecore:EAttribute location.ecore#//Location/name"/>
+      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription=""
+          ecoreFeature="ecore:EAttribute location.ecore#//Location/description"/>
+      <genFeatures createChild="false" propertyCategory="Contacts" ecoreFeature="ecore:EAttribute location.ecore#//Location/phoneNumber"/>
+      <genFeatures createChild="false" propertyCategory="Address" ecoreFeature="ecore:EAttribute location.ecore#//Location/street"/>
+      <genFeatures createChild="false" propertyCategory="Address" ecoreFeature="ecore:EAttribute location.ecore#//Location/city"/>
+      <genFeatures createChild="false" propertyCategory="Address" ecoreFeature="ecore:EAttribute location.ecore#//Location/state"/>
+      <genFeatures createChild="false" propertyCategory="Address" ecoreFeature="ecore:EAttribute location.ecore#//Location/postalCode"/>
+      <genFeatures createChild="false" propertyCategory="Address" ecoreFeature="ecore:EAttribute location.ecore#//Location/country"/>
+      <genFeatures createChild="false" propertyCategory="Coordinates" ecoreFeature="ecore:EAttribute location.ecore#//Location/longitude"/>
+      <genFeatures createChild="false" propertyCategory="Coordinates" ecoreFeature="ecore:EAttribute location.ecore#//Location/latitude"/>
+      <genFeatures createChild="false" propertyCategory="Coordinates" ecoreFeature="ecore:EAttribute location.ecore#//Location/altitude"/>
+      <genFeatures createChild="false" propertyCategory="Coordinates" ecoreFeature="ecore:EAttribute location.ecore#//Location/altitudeMode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute location.ecore#//Location/comments"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference location.ecore#//Location/areas"/>
+      <genOperations ecoreOperation="location.ecore#//Location/getCoordinates"/>
+      <genOperations ecoreOperation="location.ecore#//Location/getAddress"/>
+      <genOperations ecoreOperation="location.ecore#//Location/containsPoint">
+        <genParameters ecoreParameter="location.ecore#//Location/containsPoint/point"/>
+      </genOperations>
+      <genOperations ecoreOperation="location.ecore#//Location/locate">
+        <genParameters ecoreParameter="location.ecore#//Location/locate/point"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="location.ecore#//Area">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute location.ecore#//Area/name"/>
+      <genFeatures createChild="false" propertyDescription="List of 3 or more coordinates that specify a polygon bounding the area.  Values for each coordinate are comma seperated and the order is long,lat,alt with a space seperating each set of coordinate values."
+          ecoreFeature="ecore:EAttribute location.ecore#//Area/boundary"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute location.ecore#//Area/comments"/>
+      <genOperations ecoreOperation="location.ecore#//Area/getAreaMeasurement"/>
+      <genOperations ecoreOperation="location.ecore#//Area/containsPoint">
+        <genParameters ecoreParameter="location.ecore#//Area/containsPoint/point"/>
+      </genOperations>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

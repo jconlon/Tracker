@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="com.verticon.tracker.reader.readerWizards">
+      <wizard
+            class="com.verticon.tracker.reader.event.bluetooth.BluetoothReaderWizard"
+            factory="com.verticon.tracker.reader.event.bluetooth.BluetoothReaderFactory"
+            id="com.verticon.tracker.reader.bluetooth.wizard2"
+            name="BluetoothReader">
+         <description>
+            publishes tagId events received from Bluetooth RFID readers.
+         </description>
+      </wizard>
+   </extension>
+   <extension
+         point="com.verticon.tracker.irouter.gps.ui.gpsWizards">
+      <wizard
+            class="com.verticon.tracker.reader.event.bluetooth.BluetoothURIWizard"
+            id="com.verticon.tracker.reader.bluetooth.wizard2"
+            name="Bluetooth GPS">
+         <description>
+            creates a bluetooth gps device.
+         </description>
+      </wizard>
+   </extension>
+
+</plugin>

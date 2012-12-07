@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml:kml xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
+  <kml:Document>
+    <kml:name>Fair</kml:name>
+    <kml:Style id="sh_ylw-pushpin">
+      <kml:IconStyle>
+        <kml:scale>1.3</kml:scale>
+        <kml:Icon>
+          <kml:href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</kml:href>
+        </kml:Icon>
+        <kml:hotSpot x="20.0" xunits="pixels" y="2.0" yunits="pixels"/>
+      </kml:IconStyle>
+    </kml:Style>
+    <kml:StyleMap id="msn_ylw-pushpin">
+      <kml:Pair>
+        <kml:key>normal</kml:key>
+        <kml:styleUrl>#sn_ylw-pushpin</kml:styleUrl>
+      </kml:Pair>
+      <kml:Pair>
+        <kml:key>highlight</kml:key>
+        <kml:styleUrl>#sh_ylw-pushpin</kml:styleUrl>
+      </kml:Pair>
+    </kml:StyleMap>
+    <kml:Style id="sn_ylw-pushpin">
+      <kml:IconStyle>
+        <kml:scale>1.1</kml:scale>
+        <kml:Icon>
+          <kml:href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</kml:href>
+        </kml:Icon>
+        <kml:hotSpot x="20.0" xunits="pixels" y="2.0" yunits="pixels"/>
+      </kml:IconStyle>
+    </kml:Style>
+    <kml:Placemark>
+      <kml:name>Livestock Area</kml:name>
+      <kml:styleUrl>#msn_ylw-pushpin</kml:styleUrl>
+      <kml:Polygon>
+        <kml:tessellate>true</kml:tessellate>
+        <kml:outerBoundaryIs>
+          <kml:LinearRing>
+            <kml:coordinates>       -90.88547661951773,43.56544596126487,0 -90.8854820636714,43.56519829346478,0 -90.88443954608185,43.56520117817358,0 -90.88449653431093,43.5655808347027,0 -90.88520765214076,43.5655916582738,0 -90.88521170076496,43.56544587359478,0 -90.88547661951773,43.56544596126487,0</kml:coordinates>
+          </kml:LinearRing>
+        </kml:outerBoundaryIs>
+      </kml:Polygon>
+    </kml:Placemark>
+    <kml:Placemark id="urn.pin.003ALKM">
+      <kml:name>Fair</kml:name>
+      <kml:address>Fairgrounds Road, Viroqua, WI 54665</kml:address>
+      <xal:AddressDetails>
+        <xal:Country>
+          <xal:CountryName>United States</xal:CountryName>
+        </xal:Country>
+        <xal:Locality>
+          <xal:LocalityName>Wisconsin</xal:LocalityName>
+          <xal:DependentLocality>
+            <xal:DependentLocalityName>Viroqua</xal:DependentLocalityName>
+          </xal:DependentLocality>
+          <xal:PostalCode>
+            <xal:PostalCodeNumber>54665</xal:PostalCodeNumber>
+          </xal:PostalCode>
+        </xal:Locality>
+        <xal:Thoroughfare>
+          <xal:ThoroughfareName>E6055 Cina Rd.</xal:ThoroughfareName>
+        </xal:Thoroughfare>
+      </xal:AddressDetails>
+      <kml:phoneNumber>606-1292</kml:phoneNumber>
+      <kml:description>A fictitional fair for testing purposes</kml:description>
+      <kml:Point>
+        <kml:altitudeMode>absolute</kml:altitudeMode>
+        <kml:coordinates>-90.887591,43.565265,0</kml:coordinates>
+      </kml:Point>
+    </kml:Placemark>
+  </kml:Document>
+</kml:kml>

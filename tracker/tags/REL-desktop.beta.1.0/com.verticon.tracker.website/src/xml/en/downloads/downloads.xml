@@ -1,0 +1,234 @@
+<?xml version='1.0'?>
+
+<webpage id="downloads">
+	<config param="rcsdate" value="$Date$" />
+	<head>
+		<title>Downloads</title>
+		<summary>Software Distribution and Update Sites</summary>
+		<keywords>Tracker, Livestock, Open Source, Verticon, Inc., Software</keywords>
+	</head>
+
+<!-- 
+   trackerVersion=0.3.5.v200908211437 (from ...desktop.releng/product.version
+release.version
+release.title=Revision 0.3.5, Released on: August 20, 2009
+release.win.size=50.5M
+release.lin.size=50.2M
+ -->
+	<section>
+		<title>Tracker BI Toolkit</title>
+		<table xml:id="ex.calstable" frame='all'>
+			<title>@release.title@</title>
+			<tgroup cols='3' align='left' colsep='1' rowsep='1'>
+				<colspec colname='c1' />
+				<colspec colname='c2' />
+				<colspec colname='c3' />
+				<thead>
+					<row>
+						<entry>Download File</entry>
+						<entry>Size</entry>
+						<entry>OS</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>
+							<ulink 
+								url="http://tracker.verticon.com/Tracker/downloads/Tracker-win32.win32.x86-@release.version@.zip">
+								Tracker-win32.win32.x86-@release.version@.zip
+							</ulink>
+						</entry>
+						<entry>@release.win.size@</entry>
+						<entry>WIN</entry>
+					</row>
+					<row>
+						<entry>
+							<ulink
+								url="http://tracker.verticon.com/Tracker/downloads/Tracker-linux.gtk.x86-@release.version@.tar">
+								Tracker-linux.gtk.x86-@release.version@.tar
+							</ulink>
+						</entry>
+						<entry>@release.lin.size@</entry>
+						<entry>Linux</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+		<para>Tracker BI Toolkit is a extensible open desktop. Once installed, the end user can easily add:</para>
+		<itemizedlist mark='opencircle'>
+			<listitem>
+				<para>Tracker Livestock Information Management Features</para>
+			</listitem>
+			<listitem >
+				<para>Tracker iRouter Sensor and Actuator Data Management Features</para>
+			</listitem>
+			<listitem>
+				<para>Generic Eclipse Features from Eclipse or Third Party Repositories.</para>
+			</listitem>
+		</itemizedlist>
+		<para>To install:</para>
+		<itemizedlist mark='opencircle'>
+			<listitem>
+				<para>Down load and extract compressed file to a
+			desirable directory.</para>
+			</listitem>
+			<listitem >
+				<para>The top level directory is called tracker.</para>
+			</listitem>
+			<listitem>
+				<para>Invoke the tracker executive inside the top level tracker director.</para>
+			</listitem>
+		</itemizedlist>
+		<para>To Provision the Toolkit with Tools:</para>
+		<itemizedlist mark='opencircle'>
+			<listitem>
+				<para>From the Welcome Screen, which is the first screen presented to the user on a new install, select <emphasis>First Steps</emphasis></para>
+			</listitem>
+			<listitem >
+				<para>From the First Steps Screen, select <emphasis>Learn How to Provision Tracker BI Toolkit</emphasis> and follow the guided cheat sheet.</para>
+			</listitem>
+		</itemizedlist>
+	</section>
+
+	<section>
+		<title>Tracker Update Repositories</title>
+		<table xml:id="ex.calstable" frame='all'>
+			<title>Note: These urls are just for reference. They will be
+				configured in
+				your down loaded product.</title>
+			<tgroup cols='2' align='left' colsep='1' rowsep='1'>
+				<colspec colname='c1' />
+				<colspec colname='c2' />
+				<thead>
+					<row>
+						<entry>Name</entry>
+						<entry>URL</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>Tracker Updates</entry>
+						<entry>
+							<ulink url="http://tracker.verticon.com/Tracker/updates/" />
+						</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+	
+	<section>
+		<title>Tracker Example Projects</title>
+		<table xml:id="ex.calstable" frame='all'>
+			<title>Example Tracker Projects</title>
+			<tgroup cols='3' align='left' colsep='1' rowsep='1'>
+				<colspec colname='c1' />
+				<colspec colname='c2' />
+				<thead>
+					<row>
+						<entry>Download File</entry>
+						<entry>Size</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>
+							<ulink 
+								url="http://tracker.verticon.com/Tracker/downloads/Premises-Example.zip">
+								Premises-Example.zip
+							</ulink>
+						</entry>
+						<entry>10.7 KB</entry>
+						
+					</row>
+					
+				</tbody>
+			</tgroup>
+		</table>
+		<para>To install:</para>
+		<itemizedlist mark='opencircle'>
+			<listitem>
+				<para>Down load file to a
+			desirable directory.</para>
+			</listitem>
+			<listitem >
+				<para>From the File menu select Import...</para>
+			</listitem>
+			<listitem>
+				<para>Then select General | Existing Projects into Workspace.</para>
+			</listitem>
+		</itemizedlist>
+
+	</section>
+
+	<section>
+		<title>Tracker Device Simulator</title>
+		<table xml:id="ex.calstable" frame='all'>
+			<title>Tool for simulating physical sensor and actuator devices</title>
+			<tgroup cols='3' align='left' colsep='1' rowsep='1'>
+				<colspec colname='c1' />
+				<colspec colname='c2' />
+				<colspec colname='c3' />
+				<thead>
+					<row>
+						<entry>Download File</entry>
+						<entry>Size</entry>
+						<entry>OS</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>
+							<ulink 
+								url="http://tracker.verticon.com/Tracker/downloads/Simulator.win32.win32.x86.zip">
+								Simulator.win32.win32.x86.zip
+							</ulink>
+						</entry>
+						<entry>3.0 MB</entry>
+						<entry>WIN</entry>
+					</row>
+					<row>
+						<entry>
+							<ulink
+								url="http://tracker.verticon.com/Tracker/downloads/Simulator.linux.gtk.x86.zip">
+								Simulator.linux.gtk.x86.zip
+							</ulink>
+						</entry>
+						<entry>3.4 MB</entry>
+						<entry>Linux</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+		<para>To install:</para>
+		<itemizedlist mark='opencircle'>
+			<listitem>
+				<para>Down load and extract compressed file to a
+			desirable directory.</para>
+			</listitem>
+			<listitem >
+				<para>The top level directory is called simulator.</para>
+			</listitem>
+			<listitem>
+				<para>Invoke the simulator executive inside the top level tracker director.</para>
+			</listitem>
+		</itemizedlist>
+
+	</section>
+	<sidebar id="prerequisites">
+		<variablelist>
+			<title>Prerequisites</title>
+			<varlistentry>
+				<term>Java SE JRE 6</term>
+				<listitem>
+					<para>
+						Prior to installing Tracker BI Toolkit, you must first install
+						<ulink url="http://java.sun.com/javase/downloads/index.jsp">
+							Java SE Runtime Environment (JRE 6 or higher)
+						</ulink>.
+					</para>
+				</listitem>
+			</varlistentry>
+		</variablelist>
+	</sidebar>
+</webpage>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.verticon.com/ns/tracker/0.1.0" 
+       class = "com.verticon.tracker.TrackerPackage"
+       genModel = "model/tracker.genmodel" /> 
+  </extension>
+  
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.verticon.com/tracker/0.4.2/premises" 
+       class = "com.verticon.tracker.TrackerPackage"
+       genModel = "model/tracker.genmodel" /> 
+  </extension>
+
+  <extension point="org.eclipse.emf.ecore.extension_parser">
+    <parser 
+       type="premises" 
+       class="com.verticon.tracker.util.TrackerResourceFactoryImpl" />
+    <parser
+          class="com.verticon.tracker.util.TrackerResourceFactoryImpl"
+          type="animal">
+    </parser>
+  </extension>
+
+</plugin>
+

@@ -1,0 +1,3 @@
+Warning the metaModels in this directory have been modified
+from the original versions in order to transform non-standard
+datatypes.

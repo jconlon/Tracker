@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Toast Device Simulator Framework
+Bundle-SymbolicName: org.equinoxosgi.toast.devsim
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Version: 1.0.0.qualifier
+Export-Package: org.equinoxosgi.toast.devsim;version="1.0.0",
+ org.equinoxosgi.toast.devsim.fw;version="1.0.0"
+Service-Component: OSGI-INF/component.xml
+Import-Package: javax.servlet;version="2.4.0",
+ javax.servlet.http;version="2.4.0",
+ org.eclipse.core.runtime.jobs,
+ org.equinoxosgi.util,
+ org.osgi.service.http;version="[1.2.0,2.0.0)",
+ org.slf4j;version="1.5.11"
+Require-Bundle: org.eclipse.equinox.common;bundle-version="3.5.0"

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+  <OCD description="Deworming drug and dosage" id="abbott.deworming" name="Deworming">
+    <AD default="" description="Deworming drug" id="abbott.deworming.drug" name="Drug">
+      <Option label="Eperinex" value="Eperinex"/>
+      <Option label="Fenbendazole" value="Fenbendazole"/>
+      <Option label="Ivermectin" value="Ivermectin"/>
+      <Option label="Ivomec" value="Ivomec"/>
+      <Option label="Safe-Guard" value="Safe-Guard"/>
+    </AD>
+    <AD default="" description="Worming dosage in ml" id="abbott.deworming.dosage" max="50" min="0" name="Dosage" required="false" type="Double"/>
+  </OCD>
+</metatype:MetaData>

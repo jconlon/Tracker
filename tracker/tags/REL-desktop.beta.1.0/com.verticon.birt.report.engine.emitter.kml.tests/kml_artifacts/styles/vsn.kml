@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>VSN Styles</name>
+    
+     <!-- Voyageur placemark icons are green circles and labels are not visible until shown-->
+    <Style id="voyageur_highlight_canoe">
+      <IconStyle>
+        <scale>1</scale>
+        <Icon>
+          <href>../images/canoe_icon.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <color>ff00ff00</color>
+	<scale>1.2</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ff95eaff</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="voyageur_normal_canoe">
+      <IconStyle>
+        <scale>1</scale>
+        <Icon>
+          <href>../images/canoe_icon.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ff95eaff</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <StyleMap id="Voyageur">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#voyageur_normal_canoe</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#voyageur_highlight_canoe</styleUrl>
+      </Pair>
+    </StyleMap>
+    
+     <!-- VSN placemark icons are green circles and labels are not visible until shown-->
+    <Style id="vsn_highlight_circle">
+      <IconStyle>
+        <color>ff0cff0c</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <color>ff0cff0c</color>
+	<scale>1.2</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ff95eaff</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="vsn_normal_circle">
+      <IconStyle>
+	<color>ff0cff0c</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ff95eaff</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <StyleMap id="VSN">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#vsn_normal_circle</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#vsn_highlight_circle</styleUrl>
+      </Pair>
+    </StyleMap>
+    
+    <!-- WAV placemark icons are cornflower blue circles and labels are not visible until shown-->
+    <Style id="wav_highlight_circle">
+      <IconStyle>
+        <color>ffed9564</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <color>ffed9564</color>
+	<scale>1.2</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ff95eaff</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="wav_normal_circle">
+      <IconStyle>
+	<color>ffed9564</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ff95eaff</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <StyleMap id="WAV">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#wav_normal_circle</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#wav_highlight_circle</styleUrl>
+      </Pair>
+    </StyleMap>
+    
+    <!-- SWIMS placemark icons are Deep Pink circles and labels are not visible until shown-->
+    <Style id="swims_highlight_circle">
+      <IconStyle>
+        <color>ff9314ff</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <color>ff9314ff</color>
+	<scale>1.2</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ff95eaff</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="swims_normal_circle">
+      <IconStyle>
+	<color>ff9314ff</color>
+        <scale>1</scale>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ff95eaff</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <StyleMap id="SWIMS">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#swims_normal_circle</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#swims_highlight_circle</styleUrl>
+      </Pair>
+    </StyleMap>
+    
+    <!-- NODATA placemark icons are uncolored circles and labels are not visible until shown-->
+    <Style id="nodata_highlight_circle">
+      <IconStyle>
+       <scale>1</scale>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+	<scale>1.2</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ff95eaff</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="nodata_normal_circle">
+      <IconStyle>
+	    <scale>1</scale>
+        <Icon>
+          <href>http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png</href>
+        </Icon>
+      </IconStyle>
+      <LabelStyle>
+        <scale>0</scale>
+      </LabelStyle>
+      <LineStyle>
+        <color>ff95eaff</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <StyleMap id="NODATA">
+      <Pair>
+        <key>normal</key>
+        <styleUrl>#nodata_normal_circle</styleUrl>
+      </Pair>
+      <Pair>
+        <key>highlight</key>
+        <styleUrl>#nodata_highlight_circle</styleUrl>
+      </Pair>
+    </StyleMap>
+    
+    
+    <!-- Style for folders -->
+     <Style id="default_list">
+      <ListStyle> 
+      	<listItemType>check</listItemType><!-- This is a default but here so it can be changed -->
+      </ListStyle>
+    </Style>
+  </Document>
+</kml>

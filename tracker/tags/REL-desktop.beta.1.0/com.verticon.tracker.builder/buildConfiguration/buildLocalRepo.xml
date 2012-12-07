@@ -1,0 +1,75 @@
+<project name="provisioning build" >
+
+<!-- This will have to move for Ticket # 315 -->
+	<!-- ================================= 
+	          target: deploy.product.repo  
+				
+	     =================================   -->
+	<target name="deploy.product.repo" depends="clean.product.repo"
+		description="Copies all repos to a common folder for synchronization with a remote site">
+		
+		<copy todir="${sp:action.output}">
+			<fileset dir="${repo.product}"/>
+		</copy>
+		
+	
+		<echo>Copied ${repo.product} to ${sp:action.output} </echo>
+	</target>
+
+	
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: clean.product.repo                      
+         - - - - - - - - - - - - - - - - - -->
+		<target name="clean.product.repo" >
+			<delete dir="${sp:action.output}" />
+			<echo>Deleted ${sp:action.output}</echo>
+		</target>
+
+	
+	<!-- =================================
+          target: deploy.product.downloads              
+         ================================= -->
+    <target name="deploy.product.downloads" description="Copies the products to the local downloads directory">
+    	<copy todir="${sp:action.output}">
+    		<fileset dir="${result}"/>
+    	</copy>
+    </target>
+
+	<!-- ================================= 
+          target: deploy.product.test              
+         ================================= -->
+    <target name="deploy.product.test" description="Untars the product to /tmp">
+    	
+    	<delete dir="${sp:action.output}" />
+    	<echo>Deleted ${sp:action.output}</echo>
+    	
+    	<!-- loosing permissions -->
+    	<untar dest="${sp:action.output}../">
+    	    <fileset dir="${result}">
+    	        <include name="**/*.tar"/>
+    	        <exclude name="**/*.zip"/>
+    	    </fileset>
+    	</untar>
+    	
+    	<chmod file="${sp:action.output}/tracker" perm="700"/>
+    </target>
+
+	<!-- ================================= 
+          target: s3cmd.sync             
+          	s3cmd sync - -acl-public - -guess-mime-type - -bucket-location=EU Tracker s3://public.resources.verticon.com/ 
+         ================================= -->
+    <target name="s3cmd.sync"  description="Syncs a directory with S3">
+			<exec executable="${s3cmd.exec}" failonerror="false" timeout="9000000">
+				<arg line="sync" />
+				<arg line="-v" />
+				<arg line="--acl-public" />
+				<arg line="--guess-mime-type" />
+				<arg line="--bucket-location=${s3.bucket.location}" />
+				<arg line="--delete-removed" />
+				<arg line="${local.dir.to.sync}" />
+				<arg line="${s3.bucket}" />
+				
+			</exec>
+    </target>
+
+</project>

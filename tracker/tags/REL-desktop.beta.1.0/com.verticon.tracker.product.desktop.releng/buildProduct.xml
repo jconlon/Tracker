@@ -1,0 +1,181 @@
+<project name="Tracker Desktop Product Builder" default="main">
+
+	<loadproperties srcFile="buildProduct.properties"/>
+
+	<property name="repo" location="${basedir}/repository"/>
+	<property name="base" location="${repo}/product-desktop.beta.10"/>
+	<property name="child" location="${repo}/features-desktop.beta.10"/>
+	<property name="categories" location="${repo}/categories"/>
+	
+	<target name="main">
+
+		<!-- Check for base target platform co-located with eclipse -->
+		<property name="baseLocation" location="${base}/eclipse"/>
+		<available property="haveBase" file="${baseLocation}"/>
+		<fail unless="haveBase" message="The base of the target platform is required to build this product.  Please edit buildProduct.xml or set the &quot;base&quot; property or check ${base}" />
+		<echoproperties/>
+		<!-- Check for deltapack co-located with eclipse -->
+		<available property="haveDeltaPack" file="${deltapack}"/>
+		<fail unless="haveDeltaPack" message="The deltapack is required to build this product.  Please edit buildProduct.xml or set the &quot;deltapack&quot; property." />
+
+		<!-- Check that we have a miscTargetPlatform -->
+		<available property="haveMiscTargetPlatform" file="${miscTargetPlatform}"/>
+		<fail unless="haveMiscTargetPlatform" message="The misc target platform is required to build this product.  Please edit buildProduct.xml or set the &quot;miscTargetPlatform&quot; property." />
+
+		<property name="builder" value="${basedir}" />
+		<property name="buildDirectory" value="${basedir}/buildDirectory"/>
+
+		<!--property name="pluginPath" value="${basedir}/..${path.separator}${deltapack}${path.separator}${miscTargetPlatform}" /-->
+		<property name="pluginPath" value="${basedir}/.." />
+
+		<property name="buildTempFolder" value="${buildDirectory}" />
+
+		<ant antfile="${eclipse.pdebuild.scripts}/productBuild/productBuild.xml" />
+
+
+		<!-- refresh the workspace -->
+		<eclipse.convertPath fileSystemPath="${basedir}" property="resourcePath"/>
+		<eclipse.refreshLocal resource="${resourcePath}" depth="infinite"/>
+	</target>
+
+
+	<!-- ================================= 
+          target: s3cmd.sync 
+            parms            
+          	s3cmd.exec 
+          	s3.bucket.location
+          	local.dir.to.sync
+          	s3.bucket
+          ================================= -->
+	<target name="s3cmd.sync"  description="Syncs a directory with S3">
+		<!-- copy products to syncing dir -->
+		<!-- Check that we have a downloads.dir.for.syncing -->
+		<available property="haveSyncDir" file="${downloads.dir.for.syncing}"/>
+		<fail unless="haveSyncDir" message="The synchronizing directory location is required to build this product.  Please edit buildProduct.xml or set the &quot;downloads.dir.for.syncing&quot; property or check ${downloads.dir.for.syncing}." />
+		<property name="product.dir" location="${basedir}/products"/>
+		<copy todir="${downloads.dir.for.syncing}" overwrite="false">
+			<fileset dir="${product.dir}">
+				<include name="*.zip"/>
+				<include name="*.tar"/>
+			</fileset>
+		</copy>
+		
+		
+		<!-- Since beta.0.1 milestone the repository is a composite repository so 
+		products and features can be installed in one repo. The directory name of 
+		the repository has been changed to the more conventional name of Tracker/updates.
+		
+		new var for the combined directory
+				repo.dir.for.syncing
+				
+		old var
+		product.repo.dir.for.syncing
+		-->
+		<!-- sync product repo to syncing dir location -->
+		<property name="product.repo.dir" location="${basedir}/repository"/>
+		<sync todir="${repo.dir.for.syncing}">
+		  <fileset dir="${product.repo.dir}"/>
+		</sync>
+
+
+		<!-- Deprecated 
+		sync features repo to syncing dir location 
+		<property name="updatesite.project" value="com.verticon.tracker.updatesite"/>
+
+		<property name="features.repo.dir" location="${basedir}/../${updatesite.project}"/>			
+		<available property="haveFeaturesSyncDir" file="${features.repo.dir}"/>
+		<fail unless="haveFeaturesSyncDir" message="The Features Repository directory location is required to build this product.  Please edit buildProduct.xml or set the &quot;features.repo.dir&quot; property or check ${features.repo.dir}." />
+
+		<sync todir="${features.repo.dir.for.syncing}">
+				  <fileset dir="${features.repo.dir}">
+				  	<exclude name=".project"/>
+				  </fileset>
+		</sync>
+		-->
+		
+		
+		<exec executable="${s3cmd.exec}" failonerror="false" timeout="9000000">
+			<arg line="sync" />
+			<arg line="-v" />
+			<arg line="--acl-public" />
+			<arg line="--guess-mime-type" />
+			<arg line="--bucket-location=${s3.bucket.location}" />
+			<arg line="--delete-removed" />
+			<arg line="${local.dir.to.sync}" />
+			<arg line="${s3.bucket}" />
+		</exec>
+		
+	</target>
+	
+	
+	
+	
+	<!-- ================================= 
+          target: add.composite.repositories              
+         
+    <target name="add.composite.repositories" description="Add childeren to the repository">
+    	<available property="haveRepoDir" file="${repo}"/>
+    	<fail unless="haveRepoDir" message="The synchronizing directory location is required to build this product.  Please edit buildProduct.xml or set the &quot;downloads.dir.for.syncing&quot; property or check ${downloads.dir.for.syncing}." />
+    	
+    	<p2.composite.repository >
+    	  <repository compressed="false" location="file:${repo}" name="Tracker Repository" />
+    	  <add>
+    	    <repository location="file:${base}"  />
+    	  	<repository location="file:${child}"  />
+    	  	<repository location="file:${categories}"  />
+    	  </add>
+    	</p2.composite.repository>
+    </target>
+    	================================= -->
+    
+	<!-- ================================= 
+          target: findEquinox   - Not used at this time             
+         ================================= -->
+    <target name="findEquinox" description="description">
+    	 <!-- set path to eclipse folder. If local folder, use '.'; otherwise, use c:\path\to\eclipse or /path/to/eclipse/ -->
+    	 <property name="eclipse.home" value="."/>
+
+    	 <!-- store path to newest launcher JAR in path id 'newest.equinox.launcher.path.id' -->
+    	 <path id="newest.equinox.launcher.path.id">
+    	   <first count="1">
+    	     <sort>
+    	       <fileset dir="${eclipse.home}/plugins" includes="**/org.eclipse.equinox.launcher_*.jar"/>
+
+    	       <!-- Seems the default order is oldest > newest so we must reverse it.
+    	            The 'reverse' and 'date' comparators are in the internal antlib
+    	            org.apache.tools.ant.types.resources.comparators.
+    	         -->
+    	       <reverse xmlns="antlib:org.apache.tools.ant.types.resources.comparators">
+    	         <!-- 'date' inherits 'reverse's namespace -->
+    	         <date/>
+    	       </reverse>
+    	     </sort>
+    	   </first>
+    	 </path>
+
+    	 <!-- turn the path into a property -->
+    	 <property name="equinox.launcher.jar.location" refid="newest.equinox.launcher.path.id" />
+
+    	 <!-- you can now reference the jar through the property ${equinox.launcher.jar.location} -->
+    	 <echo message="Using equinox launcher jar: ${equinox.launcher.jar.location}" />
+
+    </target>
+
+
+	<!-- ================================= 
+	NOT USED AT THIS TIME BUT this if the format for running a equinox.launcher.jar based application
+          target: catagoriesPublisher              
+         
+    <target name="catagoriesPublisher" depends="findEquinox" description="description">
+    	
+    	 <java fork="true" jar="${equinox.launcher.jar.location}">
+    	
+    	<arg line="-console -consolelog -application org.eclipse.equinox.p2.publisher.CategoryPublisher"/>
+    	<arg line="-metadataRepository file:${categories}"/>
+		<arg line="-categoryDefinition file:${basedir}/category.xml"/>
+    	<arg line="-categoryQualifier -compress"/>
+    	</java>
+
+    </target>
+	================================= -->
+</project>

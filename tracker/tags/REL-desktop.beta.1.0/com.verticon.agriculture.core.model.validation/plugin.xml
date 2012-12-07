@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+  <extension
+         point="org.eclipse.emf.validation.constraintProviders">
+      <category
+            name="%categoryName"
+            id="com.verticon.tracker.validation.catagory.ocl">
+         <category
+               id="agri"
+               name="%agriCategoryName">
+         </category>
+         
+      </category>
+
+	  <constraintProvider
+         cache="true">
+         <package namespaceUri="http://www.verticon.com/agriculture/1.0/ag"/>
+         <description>%constraintProvider.description</description>
+         <constraints categories="com.verticon.tracker.validation.catagory.ocl/agri">
+            
+            <!-- This constraint applies to Location id value-->
+            <constraint
+                  lang="Java"
+                  class="com.verticon.agriculture.core.model.validation.constraints.IDValidSegmentConstraint"
+                  severity="ERROR"
+                  mode="Live"
+                  name="%constraint.name"
+                  id="locationIdValidSegmentOnly"
+                  statusCode="100">
+               <description>%constraint.description</description>
+      		   <message>%constraint.message</message>
+      		   <target class="Location">
+         			<event name="Set">
+            			<feature name="id"/>
+       				</event>
+       				<event name="Unset">
+            			<feature name="id"/>
+       				</event>
+      			</target>
+            </constraint>
+            
+         </constraints>
+      </constraintProvider>
+      
+   </extension>
+   
+   
+   <extension point="org.eclipse.emf.validation.constraintBindings">
+      <!-- Specify the context using the PropertyTester registered by
+       the com.verticon.tracker.validation.adapter plugin -->
+      <clientContext id="com.verticon.agriculture.context">
+         <enablement>
+            <and>
+               <instanceof value="org.eclipse.emf.ecore.EObject"/>
+               <test
+                  property="com.verticon.tracker.validation.adapter.ePackage"
+                  value="http://www.verticon.com/agriculture/1.0/ag"/>
+            </and>
+         </enablement> 
+      </clientContext>
+      
+       <!-- Bind the above context with the contraints catagory -->
+      <binding
+         context="com.verticon.agriculture.context"
+         category="com.verticon.tracker.validation.catagory.ocl/agri"/>
+   </extension>
+   
+   <!-- Add the UI Validation Listener to the context-->
+   <extension
+         point="org.eclipse.emf.validation.ui.UIRegisteredClientContext">
+      <clientContext id="com.verticon.agriculture.context"/>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="com.verticon.agriculture.core.model.validation.Startup"></startup>
+   </extension>
+</plugin>

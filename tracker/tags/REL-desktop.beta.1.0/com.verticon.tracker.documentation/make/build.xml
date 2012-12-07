@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<project default="create-doc" basedir=".">
+
+	<property name="docbookproject" location="${ant.file}/../.."/>
+
+	<!-- Name of the Xinclude ant task -->
+	<property name="xincludeclassname" value="com.verticon.ant.utilities.xsl.XIncludeTask"/>
+	<!-- Directory of the jar for the ant tasks. Used to define the class.
+	
+	-->
+	<property name="xinclude.path.dir" 
+		location="${docbookproject}/../com.verticon.tracker.ant.utilities/bin/jars"/>
+
+	<property name="htmldir" value="${sp:action.output}" />
+	<property name="docbookdir" value="${docbookproject}/docbook-xsl-1.72.0/eclipse" />
+	<property name="docbooksource" value="${sp:docbooksource}" />
+	<property name="xalan" value="org.apache.xalan.processor.TransformerFactoryImpl" />
+	<property name="xalan.lib.dir" value="${docbookproject}/lib/xalan-j_2_7_0" />
+	<!-- XSLT Chunking Properties -->
+	<property name="base.dir" value="${htmldir}" />
+	
+	
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: html.clean                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="html.clean">
+		<delete dir="${htmldir}" />
+	</target>
+
+	<!-- This merge task should be moved to individual doc projects along with
+	dependencies on the com.verticon.tracker.ant.utilities component. -->
+	<target name="merge" depends="html.clean">
+		<path id="xinclude.path">
+			<fileset dir="${xinclude.path.dir}" includes="*.jar" />
+		</path>
+
+		<typedef name="xsl.include" classname="${xincludeclassname}" 
+			classpathref="xinclude.path" />
+		
+		<!--typedef name="xsl.include" 
+			classname="org.eclipse.wst.xsl.core.internal.ant.XIncludeTask"/-->
+		
+		<xsl.include in="${docbooksource}/trackerhelp.dbk" out="${docbooksource}/trackerhelpcombined.dbk" />
+	</target>
+
+	<!-- Deprecated. Use create-eclipse-help instead. -->
+	<target name="create-doc" depends="merge">	
+		<xslt force="true" style="${docbookdir}/eclipse33.xsl" in="${docbooksource}/trackerhelpcombined.dbk" out="test.xml">
+			<factory name="${xalan}" />
+			<param name="manifest" expression="0" />
+			<param name="base.dir" expression="${htmldir}/" />
+			<param name="create.plugin.xml" expression="0" />
+			<param name="chunker.output.indent" expression="yes" />
+			<param name="navig.showtitles" expression="1" />
+			<param name="suppress.navigation" expression="0" />
+			<param name="draft.mode" expression="yes" />
+			<param name="generate.toc" expression="book      toc,title
+chapter   toc,title
+section   title" />
+			<param name="chapter.autolabel" expression="0" />
+			<param name="section.autolabel" expression="0" />
+			<param name="html.stylesheet" expression="book.css ../book.css" />
+			<param name="chunk.section.depth" expression="3" />
+			<param name="toc.section.depth" expression="5" />
+			<param name="toc.list.type" expression="ul" />
+		</xslt>
+		<!-- Are there images? images-available-->
+		<available property="images-available" file="${docbooksource}/images" type="dir" />
+		<antcall target="copyImagesDir" />
+
+		<replace file="${buckminster.home}toc.xml" token="${buckminster.home}" value="" />
+		<property name="modtoc" location="${buckminster.home}make/modtoc.xsl" />
+		<property name="modtocleaf" location="${docbookdir}/modtocleaf.xsl" />
+
+		<!-- This target is called by the root plugin which has its own transformation
+		script referenced in the modtoc property or a leaf plugin that defines a topic.link_to
+		and a topic.label property that uses a common script.
+		
+		The following will test these conditions and call the one or the other target to 
+		do the transform. -->
+		<available property="modtoc-available" file="${modtoc}" type="file" />
+		<condition property="modtocleaf-available">
+			<and>
+				<isset property="topic.link_to" />
+				<isset property="topic.label" />
+			</and>
+		</condition>
+		
+		<antcall target="modifyleaf.toc">
+		</antcall>
+		<antcall target="modify.custom.toc">
+		</antcall>
+	</target>
+
+	<!-- ================================= 
+          target: echoProp              
+         ================================= -->
+	<target name="echoProp" description="description">
+		<echoproperties>
+		</echoproperties>
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: modifyleaf.toc              
+         - - - - - - - - - - - - - - - - - -->
+	<target name="modifyleaf.toc" if="modtocleaf-available">
+		<echo>Modifying the leaf toc with topic.link_to=${topic.link_to} and topic.label=${topic.label} </echo>
+
+		<xslt force="true" style="${modtocleaf}" in="${buckminster.home}toc.xml" out="${buckminster.temp}/toc.xml">
+			<param name="topic.link_to" expression="${topic.link_to}" />
+			<param name="topic.label" expression="${topic.label}" />
+
+		</xslt>
+		<copy overwrite="true" file="${buckminster.temp}/toc.xml" tofile="${buckminster.home}toc.xml" />
+	</target>
+
+
+	<!-- - - - - - - - - - - - - - - - - - 
+	          target: modify.custom.toc   Modifies the toc with a 
+	          custom style sheet.             
+	         - - - - - - - - - - - - - - - - - -->
+	<target name="modify.custom.toc" if="modtoc-available">
+		<echo>Modifying the root toc</echo>
+
+		<xslt force="true" style="${modtoc}" in="${buckminster.home}toc.xml" out="${buckminster.temp}/toc.xml">
+		</xslt>
+		<copy overwrite="true" file="${buckminster.temp}/toc.xml" tofile="${buckminster.home}toc.xml" />
+	</target>
+
+	<!-- - - - - - - - - - - - - - - - - - 
+          target: copyImagesDir                      
+         - - - - - - - - - - - - - - - - - -->
+	<target name="copyImagesDir" if="images-available">
+		<mkdir dir="${htmldir}/images" />
+		<copy todir="${htmldir}/images">
+			<fileset dir="${docbooksource}/images" />
+		</copy>
+	</target>
+
+	<!-- ================================= 
+          target: create-eclipse-help              
+         ================================= -->
+    <target name="create-eclipse-help" description="Create Eclipse Help Document">
+		<xslt force="true" style="${docbookdir}/eclipse33.xsl" in="${docbooksource}/trackerhelpcombined.dbk" out="test.xml">
+			<factory name="${xalan}" />
+			<param name="manifest" expression="0" />
+			<param name="base.dir" expression="${htmldir}/" />
+			<param name="create.plugin.xml" expression="0" />
+			<param name="chunker.output.indent" expression="yes" />
+			<param name="navig.showtitles" expression="1" />
+			<param name="suppress.navigation" expression="0" />
+			<param name="draft.mode" expression="yes" />
+			<param name="generate.toc" expression="book      toc,title
+chapter   toc,title
+section   title" />
+			<param name="chapter.autolabel" expression="0" />
+			<param name="section.autolabel" expression="0" />
+			<param name="html.stylesheet" expression="book.css ../book.css" />
+			<param name="chunk.section.depth" expression="3" />
+			<param name="toc.section.depth" expression="5" />
+			<param name="toc.list.type" expression="ul" />
+		</xslt>
+		<!-- Are there images? images-available-->
+		<available property="images-available" file="${docbooksource}/images" type="dir" />
+		<antcall target="copyImagesDir" />
+
+		<replace file="${buckminster.home}toc.xml" token="${buckminster.home}" value="" />
+		<property name="modtoc" location="${buckminster.home}make/modtoc.xsl" />
+		<property name="modtocleaf" location="${docbookdir}/modtocleaf.xsl" />
+
+		<!-- This target is called by the root plugin which has its own transformation
+		script referenced in the modtoc property or a leaf plugin that defines a topic.link_to
+		and a topic.label property that uses a common script.
+		
+		The following will test these conditions and call the one or the other target to 
+		do the transform. -->
+		<available property="modtoc-available" file="${modtoc}" type="file" />
+		<condition property="modtocleaf-available">
+			<and>
+				<isset property="topic.link_to" />
+				<isset property="topic.label" />
+			</and>
+		</condition>
+		
+		<antcall target="modifyleaf.toc">
+		</antcall>
+		<antcall target="modify.custom.toc">
+		</antcall>
+	</target>
+</project>

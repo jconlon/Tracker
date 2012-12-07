@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_eaV3cGb2EeCt5apRznBq0w" name="model">
+  <packagedElement xmi:type="uml:Actor" xmi:id="_gl_2sGb2EeCt5apRznBq0w" name="Operator"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_h0Tc4Gb2EeCt5apRznBq0w" name="Agriculture Editor Overview"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_kNC14Gb2EeCt5apRznBq0w" name="Agriculture Editor" useCase="_xQZ-gGb2EeCt5apRznBq0w _2QLrMGb2EeCt5apRznBq0w _9N98sGb2EeCt5apRznBq0w _A-u4kGb3EeCt5apRznBq0w _S0v34Gb3EeCt5apRznBq0w _7w8TIGb4EeCt5apRznBq0w _9zDU0Gb4EeCt5apRznBq0w">
+    <ownedUseCase xmi:id="_xQZ-gGb2EeCt5apRznBq0w" name="Create Documents" subject="_kNC14Gb2EeCt5apRznBq0w">
+      <include xmi:id="_KLnM8Gb5EeCt5apRznBq0w" addition="_2QLrMGb2EeCt5apRznBq0w"/>
+      <include xmi:id="_K9eHsGb5EeCt5apRznBq0w" addition="_9N98sGb2EeCt5apRznBq0w"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_2QLrMGb2EeCt5apRznBq0w" name="Establish Geographic Region" subject="_kNC14Gb2EeCt5apRznBq0w"/>
+    <ownedUseCase xmi:id="_9N98sGb2EeCt5apRznBq0w" name="Create Locations" subject="_kNC14Gb2EeCt5apRznBq0w">
+      <include xmi:id="_Mt0rAGb5EeCt5apRznBq0w" addition="_A-u4kGb3EeCt5apRznBq0w"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_A-u4kGb3EeCt5apRznBq0w" name="Referrence Geographic Container in *.kml Document" subject="_kNC14Gb2EeCt5apRznBq0w"/>
+    <ownedUseCase xmi:id="_S0v34Gb3EeCt5apRznBq0w" name="Reference Livestock Premises in *.premises document" subject="_kNC14Gb2EeCt5apRznBq0w"/>
+    <ownedUseCase xmi:id="_7w8TIGb4EeCt5apRznBq0w" name="Compare Documents" subject="_kNC14Gb2EeCt5apRznBq0w"/>
+    <ownedUseCase xmi:id="_9zDU0Gb4EeCt5apRznBq0w" name="Validate Documents" subject="_kNC14Gb2EeCt5apRznBq0w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_B8LGUGb5EeCt5apRznBq0w" name="An operator creates documents" memberEnd="_B8LGUWb5EeCt5apRznBq0w _B8LGVGb5EeCt5apRznBq0w">
+    <ownedEnd xmi:id="_B8LGUWb5EeCt5apRznBq0w" name="operator" type="_gl_2sGb2EeCt5apRznBq0w" association="_B8LGUGb5EeCt5apRznBq0w">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_B8LGUmb5EeCt5apRznBq0w" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_B8LGU2b5EeCt5apRznBq0w" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_B8LGVGb5EeCt5apRznBq0w" name="create documents" type="_xQZ-gGb2EeCt5apRznBq0w" association="_B8LGUGb5EeCt5apRznBq0w">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_B8LGVWb5EeCt5apRznBq0w" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_B8LGVmb5EeCt5apRznBq0w" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_DJ-WMGb5EeCt5apRznBq0w" name="An operator compares documents" memberEnd="_DJ-WMWb5EeCt5apRznBq0w _DJ-WNGb5EeCt5apRznBq0w">
+    <ownedEnd xmi:id="_DJ-WMWb5EeCt5apRznBq0w" name="operator" type="_gl_2sGb2EeCt5apRznBq0w" association="_DJ-WMGb5EeCt5apRznBq0w">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_DJ-WMmb5EeCt5apRznBq0w" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_DJ-WM2b5EeCt5apRznBq0w" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_DJ-WNGb5EeCt5apRznBq0w" name="compare documents" type="_7w8TIGb4EeCt5apRznBq0w" association="_DJ-WMGb5EeCt5apRznBq0w">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_DJ-WNWb5EeCt5apRznBq0w" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_DJ-WNmb5EeCt5apRznBq0w" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_HdA4sGb5EeCt5apRznBq0w" name="An operator validates documents" memberEnd="_HdA4sWb5EeCt5apRznBq0w _HdA4tGb5EeCt5apRznBq0w">
+    <ownedEnd xmi:id="_HdA4sWb5EeCt5apRznBq0w" name="operator" type="_gl_2sGb2EeCt5apRznBq0w" association="_HdA4sGb5EeCt5apRznBq0w">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_HdA4smb5EeCt5apRznBq0w" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_HdA4s2b5EeCt5apRznBq0w" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_HdA4tGb5EeCt5apRznBq0w" name="validate documents" type="_9zDU0Gb4EeCt5apRznBq0w" association="_HdA4sGb5EeCt5apRznBq0w">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_HdA4tWb5EeCt5apRznBq0w" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_HdA4tmb5EeCt5apRznBq0w" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>

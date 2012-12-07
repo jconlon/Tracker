@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+    
+  <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+    <factory
+          class="com.verticon.tracker.edit.provider.TrackerItemProviderAdapterFactory"
+          supportedTypes="org.eclipse.emf.edit.provider.IEditingDomainItemProvider  org.eclipse.emf.edit.provider.IStructuredItemContentProvider org.eclipse.emf.edit.provider.ITreeItemContentProvider org.eclipse.emf.edit.provider.IItemLabelProvider org.eclipse.emf.edit.provider.IItemPropertySource org.eclipse.emf.edit.provider.ITableItemLabelProvider"
+          uri="http://www.verticon.com/tracker/0.4.2/premises"/>
+  </extension>
+
+</plugin>
+

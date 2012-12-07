@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<webpage id="faqs">
+	<config param="rcsdate" value="$Date$" />
+	<head>
+		<title>Frequently Asked Questions</title>
+		<summary>Tracker FAQs
+		</summary>
+		<keywords>livestock, open source, NAIS, XML, Eclipse, RFID,
+			herd management faq
+		</keywords>
+	</head>
+
+		<qandaset >
+		   <qandadiv><title>Project Status</title>
+			<qandaentry>
+				<question>
+					<para>Q: What is the status of the Project?</para>
+				</question>
+				<answer>
+				    <para>A: The project is in beta testing stage (milestone 0.5.0) at this time.</para>
+				</answer>
+			</qandaentry>
+			<qandaentry>
+				<question>
+					<para>Q: Is the project accepting new beta testers at this time?</para>
+				</question>
+				<answer>
+					<para>A: Yes.  Please send us an email  
+					<userinput><email>support@verticon.com</email>
+					with the subject
+					<command>[Tracker] Beta Testing</command> </userinput> </para>
+				</answer>
+			</qandaentry>
+		</qandadiv>
+		
+	<qandadiv><title>Installation</title>
+		
+			<qandaentry>
+				<question>
+					<para>Q: What OS platforms are supported?</para>
+				</question>
+				<answer>
+					<para>A: Currently versions for Windows and Linux are supported.</para>
+				</answer>
+			</qandaentry>
+			
+			<qandaentry>
+				<question>
+					<para>Q: Is an Apple version of the software planned?</para>
+				</question>
+				<answer>
+					<para>A: Yes, but it is not deployed to the download sites at this time.</para>
+				</answer>
+			</qandaentry>
+	</qandadiv>
+	
+	<qandadiv><title>Getting Started</title>
+			<qandaentry>
+				<question>
+					<para>Q: I have installed the software what do I do next?</para>
+				</question>
+				<answer>
+					<para>A: It is always best to read the documentation first. Did you already do this? 
+					If not start with the <ulink uri="http://help.eclipse.org/helios/nav/0">Eclipse Workbench User Guide</ulink> and
+					then read the <olink targetdoc="docs" targetptr="userGuide">Tracker User Guide</olink>.</para>
+					<para>Note that <emphasis>both of these documents are available from within the Tracker.</emphasis>
+					 Go to the <userinput> <command>Help</command> > <command>Help Contents</command> </userinput>
+					 to show the built in Help Documentation.</para> 
+				</answer>
+			</qandaentry>
+			<qandaentry>
+				<question>
+					<para>Q: When I first start the Tracker I get a Welcome Screen. What should I do?</para>
+				</question>
+				<answer>
+					<para>A: Click into the various icons to view the contents of the Welcome information. 
+					Then go to first steps page and provision the tool.</para>
+				</answer>
+			</qandaentry>
+			
+			<qandaentry>
+				<question>
+					<para>Q: Why do I have to provision the software after install?</para>
+				</question>
+				<answer>
+					<para>A: Tracker BI Toolkit is a component container that is customizable by the end user.
+					You can select and provision the Tracker Toolkit only with the features to meet your needs.</para>
+				</answer>
+			</qandaentry>
+		
+	</qandadiv>
+	
+	<qandadiv><title>iRouter</title>
+			<qandaentry>
+				<question>
+					<para>Q: What is the relationship between the Tracker BI Toolkit and the iRouter?</para>
+				</question>
+				
+				<answer>
+					<para>A: Tracker BI Toolkit is a container for tool features.  When it is first installed it is empty.
+					For the Tracker BI Toolkit to be useful the user must select and install the tool features they require. 
+					The iRouter is one of the many Tracker tool features that can be installed. The end user can select and 
+					install iRouter features by itself or with a combination of any of the other 
+					Tracker livestock information management tool features.
+					</para>
+				</answer>
+			</qandaentry>
+		
+	</qandadiv>
+	<qandadiv><title>Custom Use Cases</title>
+			<qandaentry>
+				<question>
+					<para>Q: I am not in the US can I still use Tracker?</para>
+				</question>
+				<answer>
+					<para>A: Yes, although the Tracker Professional Services and Component Development Teams will 
+					have to craft a data model and editor feature for your use case.</para>
+				</answer>
+			</qandaentry>
+			<qandaentry>
+				<question>
+					<para>Q: Is Tracker Internationalized?</para>
+				</question>
+				<answer>
+					<para>A: Tracker is not internationalized in milestone3 but will be as part of the beta program.</para>
+				</answer>
+			</qandaentry>
+		</qandadiv>
+	</qandaset>
+</webpage>

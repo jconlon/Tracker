@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" configuration-policy="require" 
+  immediate="true" name="com.verticon.tracker.irouter.gps">
+   <implementation class="com.verticon.tracker.irouter.gps.internal.GPSProducer"/>
+   <service>
+      <provide interface="org.osgi.service.monitor.Monitorable"/>
+      <provide interface="org.osgi.service.wireadmin.Producer"/>
+   </service>
+    <reference bind="setMonitorListener" cardinality="0..1" interface="org.osgi.service.monitor.MonitorListener" name="MonitorListener" policy="dynamic" unbind="unsetMonitorListener"/>
+	<reference bind="setConnectorService" cardinality="1..1" interface="org.osgi.service.io.ConnectorService" name="ConnectorService" policy="static" unbind="unsetConnectorService"/>
+</scr:component>

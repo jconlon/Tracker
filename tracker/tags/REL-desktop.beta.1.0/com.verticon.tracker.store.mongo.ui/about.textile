@@ -1,0 +1,94 @@
+h1=. Tracker Mongo Store UI
+
+com.verticon.tracker.store.ui Version 0.1.0
+
+{toc:style=disc|minLevel=2|maxLevel=3}
+
+
+h2. Introduction
+
+Tracker Mongo Store UI provides a ui tools for administrating users, registering premises, and recording animals to the Tracker Mongo Store.
+
+
+h2. Property Tester Support Utilities
+
+h3. CanLoadAdminPropertyTester
+
+* From an Admin document gets the name attribute value of the admin and tests to see if it is the same as the current user
+* Tests if there is a TrackerStoreAdmin service registered that can be used by the user.
+ 
+h3. CanPublishAnimalsPropertyTester
+
+* Obtains the uri from a Premises and tests to see if there is a registered ITrackerLoader service associated with it.
+
+h3. CanRegisterLocationsPropertyTester
+
+* Tests to see if there is a ITrackerStore and a ITrackerStoreAdmin available to the user.
+
+h3. HasAllPremisesColumnsPropertyTester
+
+* Tests a csv file for a header that contains all the necessary Premises attributes.
+
+h2. Administration
+
+h3. Loading Admin documents to specify publishing access rules
+
+To administer Tracker Premises publishers on a MongoDB, an instance of the **http://www.verticon.com/admin/1.0/ad Admin** model (from component **com.verticon.tracker.store.admin**) must be loaded on MongoDB.  
+
+The facility to load the _Admin_ is provided as a _Tracker Actions_ menu on the root _Admin_ element.  This menu is enabled only when the _CanLoadAdminPropertyTester_ tests positive.  Once the user will be validated to have the proper permission to load the _Admin_ document and one or more TrackerStoreAdmin services are found to have been configured a list dialog will present the user with a list dialog to choose which service to load the _Admin_ document. 
+
+h3. Premises Registration
+
+Pull down menu for Premises Registration is enabled on a Premises element when the _CanRegisterLocationsPropertyTester_ tests positive.
+
+h3. Registering multiple Premises from a CSV file
+
+Pull down menu for Premises Registration is enabled on a csv file  when the _HasAllPremisesColumnsPropertyTester_ tests positive.
+
+h2. Saving Premises Animal Life Data and Event History
+
+* RecordPremisesHandler
+
+h2. Import Wizards
+
+h3. Import Animal Wizard
+
+h3. Import Premises Wizard
+
+h2. Resolve All GeoLocation Names
+
+Pull down menu to resolve GeoLocation Names enabled for animal and premises when the _CanPublishAnimalsPropertyTester_ tests positive. 
+
+For the Animal the utility will return the current Animal location.  
+
+For the Premises all Animals in the Premises will have their geolocations resolved.
+
+This utility resolves foreign locations for the locations attributes on:
+
+* Animal.location
+* Event.publisherName
+* MovedIn.sourceName
+* MovedOut.destinationName
+* Position.locationName
+
+
+
+h2. Powered by Eclipse Technology
+
+Verticon's Mongo Store offering is powered by Eclipse technology and includes Eclipse plug-ins that
+can be installed and used with other Eclipse-based offerings.
+	
+h2. License
+
+Verticon, Inc. makes available all content in this plug-in (&quot;Content&quot;).  Unless otherwise 
+indicated below, the Content is provided to you under the terms and conditions of the
+Eclipse Public License version 1.0 (&quot;EPL 1&quot;).  A copy of the EPL 1 is available 
+at <a href="http://www.eclipse.org/legal/epl-v10.html">http://www.eclipse.org/legal/epl-v10.html</a>.
+For purposes of the EPL, &quot;Program&quot; will mean the Content.
+
+If you did not receive this Content directly from the Verticon,Inc., the Content is 
+being redistributed by another party (&quot;Redistributor&quot;) and different terms and conditions may
+apply to your use of any object code in the Content.  Check the Redistributor's license that was 
+provided with the Content.  If no such license exists, contact the Redistributor.  Unless otherwise
+indicated below, the terms and conditions of the EPL 1 still apply to any source code in the Content
+and such source code may be obtained at <a href="http://tracker.verticon.com/index.html">http://tracker.verticon.com/index.html</a>.</p>

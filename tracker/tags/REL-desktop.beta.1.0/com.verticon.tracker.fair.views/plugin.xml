@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+         <category
+            name="Tracker"
+            id="com.verticon.tracker.views">
+      </category>
+      <view
+            name="People"
+            icon="icons/Person.gif"
+            category="com.verticon.tracker.views"
+            class="com.verticon.tracker.fair.views.PeopleView"
+            id="com.verticon.tracker.fair.views.PeopleView">
+      </view>
+      <view
+            name="Exhibits"
+            icon="icons/Exhibit.gif"
+            category="com.verticon.tracker.views"
+            class="com.verticon.tracker.fair.views.ExhibitsView"
+            id="com.verticon.tracker.fair.views.ExhibitsView">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="com.verticon.tracker.product.desktop.perspective">
+         <view
+               visible="true"
+               relative="org.eclipse.ui.views.PropertySheet"
+               relationship="stack"
+               id="com.verticon.tracker.fair.views.PeopleView">
+         </view>
+         <viewShortcut id="com.verticon.tracker.fair.views.PeopleView"/>
+         
+         <view
+               visible="true"
+               relative="org.eclipse.ui.views.PropertySheet"
+               relationship="stack"
+               id="com.verticon.tracker.fair.views.ExhibitsView">
+         </view>
+         <viewShortcut id="com.verticon.tracker.fair.views.ExhibitsView"/>
+         <newWizardShortcut
+               id="com.verticon.tracker.fair.editor.presentation.FairModelWizardID">
+         </newWizardShortcut>
+      </perspectiveExtension>
+   </extension>
+
+<extension
+         point="org.eclipse.ui.menus">
+
+		<!-- Exhibits View -->
+      <menuContribution
+            locationURI="popup:com.verticon.tracker.fair.views.ExhibitsView?after=additions">
+            
+            <!-- Select the EObject elements in the Outline View -->
+            <command
+                     commandId="com.verticon.tracker.editor.commands.generic.select.command"
+                     style="push">
+                  <visibleWhen>
+                    
+                    <with variable="activePartId">
+                     <equals
+                           value="com.verticon.tracker.fair.views.ExhibitsView">
+                     </equals>
+                    </with>
+         			
+                  </visibleWhen>
+            </command>
+      </menuContribution>
+            
+      <!-- People View -->
+      <menuContribution
+            locationURI="popup:com.verticon.tracker.fair.views.PeopleView?after=additions">
+            
+            <!-- Select the EObject elements in the Outline View -->
+            <command
+                     commandId="com.verticon.tracker.editor.commands.generic.select.command"
+                     style="push">
+                  <visibleWhen>
+                    
+                    <with variable="activePartId">
+                     <equals
+                           value="com.verticon.tracker.fair.views.PeopleView">
+                     </equals>
+                    </with>
+         			
+                  </visibleWhen>
+            </command>
+               
+               
+            <!-- 4 good
+               	Update Pins on all Exhibited Animal Move Events visible from Person selections.
+               	Works on a collection of Person Elements;
+               	works with simple and transaction based editors ;
+			   	needs a Person to be Registed, so it No longer is visible from just any Person	
+			   	
+			   	Also availible on Person
+               -->
+               <command
+                    commandId="com.verticon.tracker.fair.editor.commands.person.changeMovedEventPins.command"
+               		style="push">
+               		<visibleWhen>
+               		    
+    			     	<test
+                   			forcePluginActivation="true"
+                   			property="com.verticon.tracker.fair.editor.isPersonRegistered">
+              		 	</test>
+	    			     
+	            	</visibleWhen>
+               	</command>
+               	
+               	
+               <!-- 5 good
+               Creates a new person based on the selected Person
+               Also availible on People Views
+               -->
+               <command
+                     commandId="com.verticon.tracker.fair.editor.commands.copyPerson"
+                     label="Copy this person"
+               		 style="push"
+                     tooltip="Copies attributes of this person to a new person.">
+                  <visibleWhen>
+                    <with variable="activePartId">
+                     <equals
+                           value="com.verticon.tracker.fair.views.PeopleView">
+                     </equals>
+                    </with>
+                  </visibleWhen>
+               </command>
+      </menuContribution>
+      
+      <!-- Events View -->
+       <!-- 3
+               	Register an Exhibit visible from an Events Selection in the Events View.
+               	Works on a Events Elements when there is not an active FairRegistrationSelection. This
+               	command will show in the Events View, but will not show (alongside the same command made visible
+               	from the above declaration) in a FairEditor.
+               -->
+       <menuContribution
+            locationURI="popup:com.verticon.tracker.views.EventsView?after=additions">
+            <command
+                    commandId="com.verticon.tracker.fair.editor.commands.movedIn.fairRegister.command"
+               		style="push">
+	               	<visibleWhen>
+
+	               	    	 <and>
+		    			     	<test
+                   					forcePluginActivation="true"
+                   					property="com.verticon.tracker.fair.editor.isFairEditor">
+              		 			</test>
+              		 			<test
+		                   			forcePluginActivation="true"
+		                   			property="com.verticon.tracker.fair.editor.notFairRegistionSelection">
+		              		 	</test>
+		    			     </and>	
+		            </visibleWhen>
+               </command>
+            	
+      </menuContribution>
+      
+       <!-- Animal View -->
+       <menuContribution
+            locationURI="popup:com.verticon.tracker.views.AnimalsView?after=additions">
+            
+             <!-- 2
+               	Register an Exhibit visible from an Animals Selection in the Animals View.
+               	Works on a Animal Elements when there is not an active FairRegistrationSelection. This
+               	command will show in the Animals View, but will not show (alongside the same command made visible
+               	from the above declaration) in a FairEditor.
+               -->
+                <command
+                    commandId="com.verticon.tracker.fair.editor.commands.movedIn.fairRegister.command"
+               		
+               		style="push">
+	               	<visibleWhen>
+	               	    	 <and>
+			               	   
+		    			     	<test
+                   					forcePluginActivation="true"
+                   					property="com.verticon.tracker.fair.editor.isFairEditor">
+              		 			</test>
+              		 			<test
+		                   			forcePluginActivation="true"
+		                   			property="com.verticon.tracker.fair.editor.notFairRegistionSelection">
+		              		 	</test>
+		    			     </and>	
+		            </visibleWhen>
+               </command>            	
+      </menuContribution>
+   </extension>
+
+</plugin>
