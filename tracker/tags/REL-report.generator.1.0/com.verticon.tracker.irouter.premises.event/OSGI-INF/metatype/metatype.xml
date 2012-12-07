@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="Premises Event Producer" id="com.verticon.tracker.irouter.premises.event"
+  		description="Consumes measurements, positions,  animal eids and optional trigger states to produce measurements and positions that are identified with animal eids.">
+    
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" 
+    	required="true" 
+    	type="String" 
+    	default="one"
+        description="Name of the group of components that will be wired together."/>
+       
+ 
+ 	<AD name="Consumable scopes" id="wireadmin.consumer.scope" 
+ 		type="String"
+ 		required="true" 
+ 		default="raw.animal.weight,animal.eid,transaction.state"
+		cardinality="7" 
+		description="Comma delimited list of the scopes that contain the raw measurements, positions, animal tag eids and trigger states. If the positions and/or measurements are identified with a Animal eid, then only one measurement or one postion  and one trigger state must be specified. A scope for animal tag id is optional and used for information that has not previously been associated with an identification. (Use full scope names)." />
+ 
+    <AD name="Producer scope" id="wireadmin.producer.scope" 
+    	type="String"
+    	required="true" 
+    	default="animal.weight"
+		cardinality="5" 
+		description="The product output scope names for the identified measurement and position products. The output scopes will use the same names as the consumer scopes minus the starting 'raw.' prefix. (Use full scope names)" />
+ 
+    <AD name="Trigger on EID" id="triggeron.eid" 
+    	type="Boolean"
+    	required="true" 
+		default="false" 
+    	description="If true sends all cached measurements or positions when an eid is received and any consumed state products are ignored. When false use the state information for forwarding identified measurements and positions."/>
+    
+     <AD name="Send only the last value" id="onlysend.last.envelope" 
+    	type="Boolean"
+    	required="true" 
+		default="false" 
+    	description="If True sends only the last cached measurement or position recieved. When false all cached positions and measurements are sent."/>
+    
+    <AD name="Name of the Triggering State" id="consumer.transaction.state" 
+    	type="String"
+    	required="true" 
+		default="transaction.state" 
+    	description="The name of the state indicating that measurement and the animal id should be forwarded as an animal history event."/>
+    	
+    <AD name="Value of the Triggering State" id="consumer.transaction.state.value" 
+    	type="Integer"
+    	required="true" 
+		default="1" 
+    	description="The value of the state indicating that measurement and the animal id should be forwarded (produced) as an identified measurement or position event."/>
+    
+    <AD name="Monitor node label" id="tracker.monitor.label" 
+    	type="String"
+    	required="false" 
+        description="Name to label the node in the iRouter Monitor View graphics."
+        default="Premises Event"/> 
+ 
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.premises.event" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.premises.event"/>
+  </Designate>
+  
+  
+</metatype:MetaData>

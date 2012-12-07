@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" activate="startup" deactivate="shutdown" name="com.verticon.tracker.irouter.mettler.dev.sim">
+   <implementation class="com.verticon.tracker.irouter.mettler.dev.sim.internal.SimulatedBalanceServer"/>
+   <reference bind="setDevSim" cardinality="1..1" interface="org.equinoxosgi.toast.devsim.IDeviceSimulator" name="devSim" policy="static"/>
+   <service>
+      <provide interface="com.verticon.tracker.irouter.dev.IDeviceListener"/>
+   </service>
+</scr:component>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" enabled="true" immediate="false" name="com.verticon.tracker.store.location">
+   <implementation class="com.verticon.tracker.store.location.internal.Component"/>
+   <service>
+      <provide interface="com.verticon.location.service.ILocationServiceProvider"/>
+   </service>
+   <reference bind="setTrackerStore" cardinality="1..n" interface="com.verticon.tracker.store.ITrackerStore" name="ITrackerStore" policy="dynamic" unbind="unsetTrackerStore"/>
+</scr:component>

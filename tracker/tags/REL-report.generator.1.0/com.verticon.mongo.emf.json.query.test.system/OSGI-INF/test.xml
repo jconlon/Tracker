@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
+    activate="startup" name="com.verticon.mongo.emf.json.query.test.system">
+   <implementation 
+    class="com.verticon.mongo.emf.json.query.test.system.Test_Query"/>
+   <reference bind="setQueryEngine" cardinality="1..1" interface="org.eclipselabs.mongo.emf.IQueryEngine" name="IQueryEngine" policy="static" target="(type=json)"/>
+</scr:component>

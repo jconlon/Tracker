@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" activate="startup" name="com.verticon.tracker.irouter.measurement.comparator.test.system">
+   <implementation class="com.verticon.tracker.irouter.measurement.comparator.test.system.internal.MeasurementComparatorSystemTest"/>
+   <reference bind = "setProducerOne" 
+   		cardinality="1..1" 
+   		interface="org.osgi.service.wireadmin.Producer" 
+   		name="ProducerOne" 
+   		policy="static" 
+   		target="(service.pid=measurement.comparator.mockProducerOne)"/>
+   <reference bind = "setProducerTwo" 
+   		cardinality="1..1" interface="org.osgi.service.wireadmin.Producer" 
+   		name="ProducerTwo" 
+   		policy="static" 
+   		target="(service.pid=measurement.comparator.mockProducerTwo)"/>
+   <reference bind="setConfigAdmin" 
+   				cardinality="1..1" 
+   				interface="org.osgi.service.cm.ConfigurationAdmin" 
+   				name="ConfigurationAdmin" policy="static"/>
+   <reference bind="setConsumer" cardinality="1..1" 
+    interface="org.osgi.service.wireadmin.Consumer" name="Consumer" policy="static" 
+        target="(service.pid=measurement.comparator.mockConsumer)"/>
+</scr:component>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ Copyright 2007 Verticon, Inc. All Rights Reserved.
+
+ $Id$
+-->
+
+<plugin>
+
+
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "com.verticon.tracker.fair.transaction.editor.presentation.FairEditorID"
+        name = "%_UI_FairEditor_label"
+        icon = "icons/full/obj16/FairModelFile.gif"
+        extensions = "fair"
+        class = "com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionEditor" 
+        contributorClass="com.verticon.tracker.fair.transaction.editor.presentation.FairTransactionActionBarContributor" >
+    </editor>
+  </extension>
+
+  
+  
+  
+</plugin>

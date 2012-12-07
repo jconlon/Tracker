@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE preface PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" 
+ "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<preface>
+		<?dbhtml filename="preface/preface.html" ?>
+		<title>The Need for Livestock Information Management</title>
+		<para>
+			Either for hunting or husbandry, human beings have always
+			observed and remembered animal movements. Today, with larger
+			herds and more interaction between producers, infrastructure providers, and process
+			auditors more animal movements mean more information for the producer, the provider, 
+			and the auditor to manage.
+		</para>
+		
+		<para>
+		Markets reach peak efficiency when buyers and sellers have an equal 
+		<emphasis>or symmetric</emphasis> view of product information.
+		<footnote><para>In 2001, the Nobel Prize in Economics was awarded to 
+		George Akerlof, Michael Spence, and Joseph E. Stiglitz "for their 
+		analysis of markets constrained by asymmetric information."</para>
+		</footnote> 
+		How can animal agriculture markets, which are today constrained by an 
+		<emphasis>asymmetric information</emphasis> exchange between buyers and sellers 
+		be tuned to meet peak potential?
+		
+		</para>
+		
+		<para>
+			Tracker is a suite of Business Intelligence
+			<footnote><para>the process of gathering information about a 
+			business or industry matter; a broad range of applications and technologies 
+			for gathering, storing, analyzing, and providing access to data to 
+			help make business decisions; abbr. BI</para></footnote>
+			solutions 
+			for the
+			<itemizedlist mark='bullet'>
+				<listitem>
+					<para>Documentation;</para>
+				</listitem>
+				<listitem>
+					<para>Management;</para>
+				</listitem>
+				<listitem>
+					<para>Analysis;</para>
+				</listitem>
+				<listitem>
+					<para>Reporting;</para>
+				</listitem>
+				<listitem>
+					<para>and Market Transaction Exchange;</para>
+				</listitem>
+			</itemizedlist>
+			of Animal Livestock <emphasis>Information</emphasis>.
+		</para>
+		
+		
+</preface>
+

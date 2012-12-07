@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" deactivate="deactivate" immediate="true" name="com.verticon.tracker.irouter.wireadmin">
+   <implementation class="com.verticon.tracker.irouter.wireadmin.internal.Component"/>
+   <reference bind="setWireAdmin" cardinality="0..1" interface="org.osgi.service.wireadmin.WireAdmin" name="WireAdmin" policy="dynamic" unbind="unsetWireAdmin"/>
+   <reference bind="setProducer" cardinality="0..n" interface="org.osgi.service.wireadmin.Producer" name="Producer" policy="dynamic" target="(tracker.wiring.group.name=*)"/>
+   <reference bind="setConsumer" cardinality="0..n" interface="org.osgi.service.wireadmin.Consumer" name="Consumer" policy="dynamic" target="(tracker.wiring.group.name=*)"/>
+   <service>
+      <provide interface="org.osgi.service.wireadmin.WireAdminListener"/>
+   </service>
+   <property name="wireadmin.events" type="Integer" value="103"/>
+</scr:component>

@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %Plugin.name
+Bundle-SymbolicName: com.verticon.tracker.editor.ocl.enablement;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: %Plugin.providerName
+Bundle-Localization: plugin
+Require-Bundle: com.verticon.tracker.ocl.query;bundle-version="[0.1.5,2.0.0)",
+ com.verticon.tracker.ocl.query.viewer;bundle-version="[0.2.0,2.0.0)",
+ org.eclipse.ui;bundle-version="3.8.0"
+Import-Package: org.eclipse.emf.ecore
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

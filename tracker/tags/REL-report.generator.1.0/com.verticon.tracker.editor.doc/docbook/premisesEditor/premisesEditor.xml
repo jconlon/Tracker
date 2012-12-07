@@ -1,0 +1,1879 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" 
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter>
+	<?dbhtml filename="premisesEditor/premisesEditor.html" ?>
+	<title>Premises Editor</title>
+	
+    <section id="overview">
+  	<?dbhtml filename="overview/premisesEditorOverview.html" ?>
+	<title>Overview</title>
+
+	<section id="overviewWhatIs">
+		<title>What is the Premises Editor?</title>
+		<para>
+		The Premises Editor is a comprehensive open desktop solution for documenting and managing 
+        livestock premises, animal life data, and animal event history information.</para>
+	</section>
+
+    <section id="overviewGoals">
+        <?dbhtml filename="overview/premisesEditorOverview_goals.html" ?>
+		<title>Project Goals</title>
+		<para>
+			The Premises Editor project was undertaken to provide;
+			<orderedlist numeration="loweralpha">
+				<listitem>
+					<para>
+						A simple to use editor for creating premises, animal and event history 
+						documentation for livestock producers and infrastructure providers;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						A low cost, yet extensible documentation solution to meet the needs of both large and
+						small scale livestock operations;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						An industry standard document format for livestock premises information,
+						animal life data and animal event history inter-exchange.
+					</para>
+				</listitem>
+
+			</orderedlist>
+		</para>
+	</section>
+	
+	<section id="overviewFunctionaldesc">
+	     <?dbhtml filename="overview/premisesEditorOverview_functionalDescription.html" ?>
+		<title>Functional Overview</title>
+		<para>
+			The Premises Editor is a tool to create and edit Tracker Premises document. Premises documents
+			specify Premises details, animal life data and animal event histories.
+		</para>
+		
+		<para>
+			Premises details are manually added to premises documents by the user, but Animal life data
+			 and Event histories can be added to Tracker Premises Documents;
+			<orderedlist numeration="loweralpha">
+				<listitem>
+					<para>
+						As individual animals by the user of the Premise Editor, using either the form based
+						Premises Views or with the generic Properties Viewer;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						In bulk, by importing lists of animals, through Tracker's Bulk Event Processing Utilities;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						In real time, from tag ID readers, through the Tracker Readers Feature.
+					</para>
+					<para>
+					    See the following section <link linkend="editingPremisesDocuments">Editing Premises Documents</link> for details on
+					    Tracker Readers Feature and Premises document editing.
+					</para>
+				</listitem>
+
+			</orderedlist>
+		</para>
+		<note><para>The Premises Editor comes with a set of predefined event types 
+		that are suitable for documenting most livestock histories. For recording unique premises specific 
+		events, the Premises Editor also provides a facility to define custom event types. Once defined, these
+		custom event types can be used along with the predefined event types to record animal histories. 
+		</para></note>
+		</section>
+	</section>
+
+	<section id="premisesDocuments">
+		<?dbhtml filename="model/premisesEditorModel_premisesDocuments.html" ?>
+		<title>Premises Documents</title>
+		<para>Whether it is word processing documents, spreadsheet documents, or presentation 
+			documents, today's computer users are most familiar with software applications that 
+			create and manipulate documents that describe specific instances of information.</para>
+		<para>The Premises Editor enables users to create, transform and edit Livestock 
+			Premises documents that represent Animal Premises. The attributes of the premises, 
+			the animals in the premises and the events associated with these animals are specified in 
+			Premises documents.</para>
+		<para>Premises document files utilize a .premises file extension to distinguish them 
+		from other types of files.</para>
+	</section>
+	
+    <section id="creatingPremisesDocuments">
+    	<?dbhtml filename="creatingPremisesDocuments/creatingPremisesDocuments.html" ?>
+		<title>Creating Premises Documents</title>
+		<para>
+			This section will walk you through a few simple steps for the creation of an example Premises document. 
+		</para>
+		<para>
+			If you haven't done so, create a project first. From the 'File' menu select 'New'
+			and 'Project' and give it the name 'test'.
+		</para>
+
+			<figure id="fig_newProject">
+				<title>Create a new Project</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center"
+							fileref="../images/gettingStarted/chooseProject.png" />
+						</imageobject>
+						</mediaobject>
+			</figure>
+
+		<para>
+			Creation of new project artifacts like files and documents follow the same pattern as the creation of 
+			the project. From the 'File' menu select 'New' then select 'Premises Document'.  Take the default 
+			name for the document and place it under the project folder named 'test'.
+			<xref linkend="fig_newPremisesDocument" /> shows the screens for creating a Premises document.
+		</para>
+
+		<figure id="fig_newPremisesDocument">
+				<title>Create a new Premises Document</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center"
+							fileref="../images/gettingStarted/createPremises.png" />
+						</imageobject>
+						</mediaobject>
+		</figure>
+		<para>
+			Your workspace should now look something like 
+			<xref linkend="fig_createdPremisesDocument" />.  If you don't see the Properties View in lower
+			part of the desktop, select the Premises element, right click, and from the popup menu select
+			the last entry 'Show Properties View'.
+		</para>
+
+		<figure id="fig_createdPremisesDocument">
+				<title>A new Premises Document</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center"
+							fileref="../images/gettingStarted/createdPremises.png" />
+						</imageobject>
+						</mediaobject>
+		</figure>
+		
+		<para>
+			The 'Properties View' is a generic editor for all document elements<footnote><para>
+			Any Tracker document element once selected, can be edited with the 'Properties View'.</para></footnote>.  
+			You can use it to add, delete or replace element attributes.  To edit an elements properties in 
+			the 'Properties View', select it first in an editors 'Selection' window.
+		</para>
+		
+		<para>
+			In addition to the main 'Selection' editor, the Premises editor offers three form editors
+		    to edit Premises, Policy, Location, and Area elements and their attributes. 
+		    <xref linkend="fig_GettingStartedEditingPremisesElement" /> shows the 'Premises' form editor in 
+		    contrast with the generic 'Properties View'<footnote><para>Either the form editors or the 'Properties View'
+		    may be used for editing.</para></footnote>.
+		</para>
+		<figure id="fig_GettingStartedEditingPremisesElement">
+				<title>Premises Form Editor</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center"
+							fileref="../images/gettingStarted/editingPremises.png" />
+						</imageobject>
+						</mediaobject>
+		</figure>
+	   
+	</section>
+	
+	<section id="editingPremisesDocuments">
+    	<?dbhtml filename="editingPremisesDocuments/editingPremisesDocuments.html" ?>
+		<title>Editing Premises Documents</title>
+		<section id="editingPremisesDocuments_choosingPremieseEditor">
+			<title>Two Types of Editor</title>
+			<para>
+			Two types of editors are used to manipulate Premises and Animal
+			Documents<footnote><para>Premises and Animal documents
+			created or edited in one editor type can later be opened and edited with 
+			the other.</para></footnote>, Premises Editor and Premises Transaction Editor as shown in
+			<xref linkend="fig_choosePremisesEditor" />.   
+			</para>
+
+		<figure id="fig_choosePremisesEditor">
+			<title>Choosing a Premises Editor type to Open a Premises Document</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/navigation/openDocumentWith.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		
+		<para>
+			<orderedlist numeration="loweralpha">
+				<listitem>
+					<para>The Premises Editor is the default editor.  It is the editor
+						that is opened when a document is created.  The Premises Editor
+						is used for creating, manipulating, navigating and interpreting 
+						Premises and Animal Documents when there is no requirement for 
+						interfacing with external devices.<footnote>
+						<para>The Premises Editor also provides user friendly forms based 
+						editors for editing Premises, Policy, Location,
+						and Area elements and attributes.  These form based editors are not
+						supported in the Premises Transaction Editor. So with the Premises 
+						Transaction Editor the Properties View will have to be used to edit these
+						elements and their attributes.</para></footnote></para>
+				</listitem>
+				<listitem>
+					<para>The Premises Transaction Editor can be used in a similar way to 
+					the Premises Editor, but it has additional functionality to support 
+				    the interfacing with external devices like RFID tag readers.
+					<note><title>Reader Feature</title>
+					<para>The Readers Feature is an optional Feature that may be installed 
+					(called <glossterm>provisioned</glossterm>) by the user. The Readers Feature
+					allows the Tracker <acronym>BI</acronym> Toolkit User to control and configure connections to one or more 
+				    Tag ID Event Readers enabling them to independently add Event Transactions to 
+					Premises Documents.</para>
+					</note>
+					</para>
+				</listitem>
+			</orderedlist>
+		</para>
+
+		<note>
+			<para>
+				Both the Premises Editor and the Premises Transaction Editor can be used for bulk event
+				processing. For more information on bulk even processing see
+				<xref linkend="chBulkEventProcessing" />.
+			</para>
+		</note>
+		</section>
+	
+	    <section id="editingPremisesDocuments_complementaryViews">
+	    <?dbhtml filename="editingPremisesDocuments/editingPremisesDocuments_complementaryViews.html" ?>
+	    	<title>Complementary Views</title>
+	    	<para>
+			The Premises Editor is complemented by several Eclipse and Premises Editor Feature 
+			Specific views, each giving the user a unique way to <emphasis>view and edit</emphasis> 
+			the information in a Premises Document. Selecting information in the Premises Editor 
+			will synchronize selections in complementary views
+			as shown in <xref linkend="fig_editorAndOutline"/>.
+		</para>
+		<figure id="fig_editorAndOutline">
+                <title>Premises Editor Synchronized with Views
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/navigation/editorAndOutline.png"/>
+                    </imageobject>
+                </mediaobject>
+            </figure>
+		<para>The <ulink url="PLUGINS_ROOT/org.eclipse.platform.doc.user/reference/ref-30.htm">
+			<citetitle>Outline View</citetitle></ulink> is synchronized with selections in the
+			Premises Editor and the 
+			<ulink url="PLUGINS_ROOT/org.eclipse.platform.doc.user/reference/ref-29.htm">
+			<citetitle>Properties View</citetitle></ulink>. By selecting an element
+			in the Outline View, that Element is also selected in Premises Editor
+		    and it's attributes are visualized in the Properties View.
+		</para>
+		
+		<para>Premises Editor selections are also synchronized with the Premises
+		 specific Animals view and Events views. These two views provide a <emphasis>
+		 master-detail view of information in Premises documents.</emphasis>
+		</para>
+		<para>
+				For more information on master details views see
+				<xref linkend="masterDetailViews" />.
+		</para>
+		
+		<note>
+			<para>
+				The Tracker Model Editor also supports an advanced element selection
+				and query functionality, for details see <emphasis>Tracker OCL Query Feature</emphasis>.
+			</para>
+
+		</note>
+	    </section>
+		
+		
+		<section id="editingPremisesDocuments_enteringDateTime">
+			<?dbhtml filename="editingPremisesDocuments/editingPremisesDocuments_enteringDateTime.html" ?>
+			<title>Entering Date and Time</title>
+			
+			<para>
+			When using the forms based editors to change date times, clicking on the text entry field of an attribute
+			that is a DateTime should bring up a 'Date Time Picker' dialog.  <xref linkend="fig_dateTimePickerDialog" /> 
+			shows the Date Picker Dialog that was visualized after the user clicked on the Animal Birth Date text 
+			field in the details pane<footnote><para>The next section discusses Master Details Views.</para></footnote> 
+			of the Animals View.
+		</para>
+
+		<figure id="fig_dateTimePickerDialog">
+				<title>Date and Time Picker Dialog</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center"
+							fileref="../images/masterDetail/animalBirthDate.png" />
+					</imageobject>
+				</mediaobject>
+		</figure>
+			<para>When manually entering Dates<footnote >
+				<para>The Animal BirthDate value is the only Date value that can be set to null by entering the text <userinput>0-0-0</userinput> 
+				in the Properties view or the Animals view. </para>
+				</footnote>  
+				and DateTime attribute values in Premises documents the following formating patterns are determinative:<table frame='all'>
+				<title>Format Patterns for Text Entry</title>
+				<tgroup cols='2' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<thead>
+						<row>
+							<entry>Format Pattern</entry>
+							<entry>Example</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>yyyy-MM-dd'T'HH:mm:ss'.'SSSZ</entry>
+							<entry>2007-11-12T00:00:00.000-0600</entry>
+						</row>
+						
+						<row>
+							<entry>yyy-MM-dd'T'HH:mm:ss'.'SSS</entry>
+							<entry>2007-11-12T00:00:00.000</entry>
+						</row>
+						
+						<row>
+							<entry>yyyy-MM-dd'T'HH:mm:ss</entry>
+							<entry>2007-11-12T00:00:00</entry>
+						</row>
+						
+						<row>
+							<entry>yyyy-MM-dd'T'HH:mm</entry>
+							<entry>2007-11-12T00:00</entry>
+						</row>
+
+					</tbody>
+				</tgroup>
+			</table>
+			</para>
+		</section>
+
+	</section>
+
+    <section id="masterDetailViews">
+      <?dbhtml filename="masterDetailViews/masterDetailViews.html" ?>
+		<title>Master Detail Views</title>
+		<para>A master detail view is one where a master element
+	    and its related detail attributes are shown on the same view.</para>
+	    <para>
+	    The master element is depicted as a row in a table of other master elements 
+	    derived from the document.  Columns can be rearranged by dragging the column headers 
+	    to the desired location and
+	    master elements in the table can be sorted by clicking on the column header to use as
+	    a sort key.  Clicking a  second time will sort in the opposite direction. 
+	    </para>
+	    
+	    <para>
+	    The Detail attributes are depicted within a form. The detail attributes in form may 
+	    consist of read-write and read-only attributes. The detail attributes are displayed 
+	    based on the current element row selection in the master table.</para>
+	    
+	    <para>A master detail view can be displayed with a horizontal layout as shown in <xref 
+		linkend="fig_animalsView-horizontal"/> or with a vertical layout as shown in <xref 
+		linkend="fig_animalsView-vertical"/>. 
+	    </para>
+	    
+	    <figure id="fig_animalsView-horizontal">
+                <title>Animals View Horizontal Layout
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/masterDetail/animalsView-horizontal.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+        
+        <figure id="fig_animalsView-vertical">
+                <title>Animals View Vertical Layout
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/masterDetail/animalsView.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+		
+		<para>Elements displayed in the master table can be filtered by entering characters in the text 
+		field and the attribute selection control.  <xref linkend="fig_animalsView-filtered"/> shows the 
+		list of Animals filtered to display only Male animals. 
+	    </para>
+	    
+	    <figure id="fig_animalsView-filtered">
+                <title>Animals View Filtered Master Elements
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/masterDetail/animalsView-filtered_sex.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+        
+		<para>Using the fourth button in the view menu, attributes displayed in the detailed form can be 
+		filtered to show only basic attributes. <xref linkend="fig_animalsView-basicProperties"/> shows the
+		effect of deselecting the 'Show Advanced Properties' button. 
+	    </para>
+	    
+	    <figure id="fig_animalsView-basicProperties">
+                <title>Animals View Filtered Detail Attributes
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/masterDetail/animalsView-basicProperties.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+        
+		<section id="masterDetailViews_animals">
+		<?dbhtml filename="masterDetailViews/masterDetailViews_animals.html" ?>
+		<title>Animals View</title>
+		<para><xref 
+		linkend="fig_animalsView"/> is a master detail view of the Animals Elements in the Premise 
+		document being edited in the Premises Editor.
+		Selections in the Premises Editor will synchronize downward to selections in the master table
+		of the the Animals view.  Selections in the master table of the Animals View will synchronize 
+		upward to the Premises Editor and the Outline View.</para>
+		
+		<figure id="fig_animalsView">
+                <title>Animals View
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/masterDetail/animalsView.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+		
+		</section>
+		
+		<section id="masterDetailViews_events">
+		<?dbhtml filename="masterDetailViews/masterDetailViews_events.html" ?>
+		<title>Events View</title>
+		<para><xref 
+		linkend="fig_eventsView"/> is a master detail view of the Events Elements in the Premise 
+		document being edited in the Premises Editor.
+		Selections in the Premises Editor will synchronize downward to selections in the master table
+		of the the Events view.  Selections in the master table of the Events View will synchronize 
+		upward to the Premises Editor and the Outline View.</para>
+		<figure id="fig_eventsView">
+                <title>Events View
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/masterDetail/eventsView.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+		</section>
+	</section>
+			
+	<section id="premisesEditorServices">
+      <?dbhtml filename="services/services.html" ?>
+		<title>Services</title>
+			<para>
+      	 	Tracker Premises Editor utilizes a Service Oriented 
+      	 	Architecture <acronym>SOA</acronym> to provide the operator with set of dynamic services 
+      	 	to help manage, analyize, store and retrieve Premises information. 
+      	 	
+      	 	</para>
+      	 	<para>Currently the Tracker Premises Editor provides the user with the following two types of dynamic services:
+      	 		<itemizedlist>
+      	 			<listitem><para>Location Services - a suite of geolocation services for resolving locations;</para></listitem>
+      	 			<listitem><para>TrackerStore Services - a suite of storage services for storing and retrieving premises information.</para></listitem>
+      	 		</itemizedlist>
+      	 		
+      	 	Each type of service delivers a specfic functionality, but that functionality may be provided by one or more dynamically 
+      	 	provisioned and/or configured service implementations. For example there may be two types of Location services provisioned 
+      	 	and configured that resolve a specific object location in one way and another object in an alternative way<footnote><para>
+      	 	When multiple location services are present the algorithm for resolving geolocations will request resolution from each location
+      	 	service implementation until the location is resolved.
+      	 	</para></footnote>. 
+      	 	</para>
+	
+		<section id="premisesEditorLocationServices">
+      	<?dbhtml filename="services/locationServices.html" ?>
+		<title>Location Services</title>
+      		<para>The Tracker Location Service is a global Tracker geolocation service for resolving the real-world
+			 geographic locations for Premises and Animals.</para>
+			
+			<para> 
+			Together Premises Editor and the Tracker Location Service provide:
+      	 <itemizedlist mark="bullet">
+      		<listitem><para>Animal traceback for naming the foriegn Premises where animals have resided before being moved into the current 
+      		Premises<footnote>
+      				<para>Fundementally Location Services is a geolocation name resolution service. Animal traceback and traceforward 
+      				requires an animal to contain a complete event history so that location identifiers can be resolved as names.  To 
+      				insure that animals moved into a premises retain a complete event history see the <link linkend='trackerStore'> TrackerStore 
+      				Services.</link> </para></footnote>;</para></listitem>
+      	 	<listitem><para>Animal traceforward for naming the foriegn Premises where animals have been moved to after they were movedOut of 
+      	 	the Premises;</para></listitem>
+      	 	<listitem><para>Animal resident locator for identifying the location of animals within the current Premises;</para></listitem>
+      	 	<listitem><para>Dynamic listing of location names within the current Premises;</para></listitem>
+      	 </itemizedlist>
+      	 </para>
+      	 <para>The Animal Location attribute is the last known location of the animal.  It is derived from the last (most recent) geolocation 
+      	 	event recorded for the Animal.
+      	 The Premises Editor provides pulldown menus on an Animal or Premises
+      	 		<footnote><para>See section on Premises Editor Actions for details.</para>
+      	 		</footnote> for invoking the resolution of Geolocation names by the Location Service. The following names are resolved:
+      	  <itemizedlist mark="bullet">
+      		 <listitem><para>Source Name on all MovedIn events;</para></listitem>
+      	 	<listitem><para>Destination Name on all MovedOut events;</para></listitem>
+      	 	<listitem><para>Location<footnote>
+      	 			<para>This is the current location of the animal.</para>
+      	 		</footnote> on Animal;</para></listitem>
+      	 	<listitem><para>Location Name on all Position events
+      	 		<footnote>
+      	 			<para>Position Events with coordinates residing in the local premise
+      	 	 			have the Location attribute resolved directly by the Premises Editor.</para>
+      	 		</footnote>;
+      	 		</para></listitem>
+      	 </itemizedlist>
+      	 <figure id="fig_premiseslocation_before">
+                <title>Animals View before Geolocation Resolution
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/location/before.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+        
+        <figure id="fig_premiseslocation_after">
+                <title>Animals View after Geolocation Resolution
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/location/after.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+      	 </para>
+      	 <para>
+      	 	There are four Animal event types that record Animal (geo)location information. 
+      	 	<itemizedlist mark="bullet">
+      	 		<listitem><para>MovedIn Animal events record the date, time and URI of the foreign Premises Animals have 
+      	 		come from before arriving on Premises.</para></listitem>
+				<listitem><para>MovedOut Animal events record the date, time, and URI of the foreign Premises Animals have been shipped to 
+				from the current Premises.</para></listitem>
+      	 		<listitem><para>Position Animal events record the date, time and Geographic coordinates of an Animal.</para></listitem>
+      	  		<listitem><para>Sighting events record the date, time and the name of a location within the current Premises.</para></listitem>
+      	 	</itemizedlist>
+      	 	In addition to these event types, all events contain a 'pid' attribute for documenting the URI of the Premises that recorded
+      	 	the event.  This 'pid' attribute is essential when combining Events from an Animal that was recorded by another premises.  
+      	 	</para>
+		</section>
+		
+		<section id="trackerStore">
+		<?dbhtml filename="services/trackerStore.html" ?>
+		<title>TrackerStore Services</title>
+		<para>TrackerStore service is a storage and query solution for livestock market exchanges, livestock producers, livestock infrastructure providers 
+		and government animal health regulators who need to:
+		<itemizedlist mark="bullet">
+          <listitem><para>record animal life and history event information;</para></listitem>
+          <listitem><para>register Livestock Premises geolocation details;</para></listitem>
+          <listitem><para>retrieve complete animal movement histories to trace-back and trace-forward animal movements within and between livestock premises;</para></listitem>
+          <listitem><para>access premises and animal information with state of the art business intelligence analysis and reporting tools;</para></listitem>
+          <listitem><para>share information between collaborating business partners;</para></listitem>
+          <listitem><para>view animal life data and event histories as animals are <code>moved in</code> to a Premises.</para></listitem>
+        </itemizedlist>
+	      </para>
+	      <para>The user interacts with TrackerStore Services through Premises Action Commands<footnote>
+	      	<para>Tracker Store Premises Action Commands will only be presented to a user when a TrackerStore Service is configured and 
+	      	accessible by the user.</para></footnote>
+	      that are presented as pulldown menues on the Premises Element of Premises documents and on resource folders in a workspace project.
+	      The Action commands:
+	      <itemizedlist>
+	      	<listitem><para>on the Premises element is a single action command that will record all the Animal Histories in the Premises document to the Tracker
+	      	Store<footnote><para>See 
+	      	<link linkend='record_animal_history_to_trackerstore'>Record Animal History to TrackerStore</link> Premises Action Command.
+	      	</para></footnote></para></listitem>
+	      	<listitem><para>on resource folders there are two action commands, the first for importing documents containing a single animal<footnote>
+	      		<para>To retrieve a single animal the action prompts for an animal id, then creates a document with the animal and all its 
+	      		recorded event histories. The premises in the document will be the last recorded premises that animal 
+	      		resided in.</para>
+									</footnote>
+	      	the second for importing the group of animals that were resident in the premises within a date range<footnote>
+	      		<para>To retrieve a group of animals, the action prompts for a date range and premises uri. The retrieval request will 
+	      		then import from the TrackerStore a premises document containing animals that were resident during the given date range. 
+	      		If no date range is given, just the premises information will be created in the document.</para>
+					</footnote> 
+			from the TrackerStore into in the selected folder<footnote>
+	      		<para>See <link linkend='import_animal_from_trackerstore'>Import Animal from TrackerStore</link> and
+	      		<link linkend='import_premises_from_trackerstore'>Import Premises from TrackerStore</link> Premises Action Commands.
+	      		</para>
+	      		</footnote>
+	      	.</para></listitem>
+	      	</itemizedlist>      
+	      </para>
+	      <para>TrackerStore Service also provides functionality for dynamically importing a new Animal with its lifedata and 
+	      event history from a TrackerStore into an active premises document when its RFID tag is read by a Reader.<footnote>
+	      <para>This requires that the document is being edited in a <emphasis>Premises Transaction Editor</emphasis> and that
+	      the Animal does not already exist in the document.</para></footnote>  </para>
+	      </section>
+	</section>
+	
+	<section id="chBulkEventProcessing">
+	 <?dbhtml filename="bulkProcessing/premisesBulkEventProcessing.html" ?>
+	<title>Bulk Event Processing</title>
+	
+	<section id ="chbulkEventProcessing_newEventsAndAnimals">
+	  <?dbhtml filename="bulkProcessing/premisesBulkEventProcessing_newEventsAndAnimals.html" ?>
+		<title>Bulk Loading New Events and Animals</title>
+		<para>Although Premises Editors make it easy to add individual animals and 
+		events to Premises Documents, individually adding dozens of animals, or hundreds of events 
+		to a Premises is not practical. For bulk loading of animals and events, Premises Editors
+	    use Animal Document Templates, Tag IdNumber files and event manipulation wizards to simplify 
+	    the process.</para>
+		<para>Like Premises Documents, Animal Document Templates are document files created by 
+		Premises Editor Document Creation Wizards. Think of Animal Documents as containing some but not 
+		all the information that is in a Premises Document. Specifically a Animal Document is a Premises 
+		Document that only contains a single animal. Like an animal in the Premises Document, an Animal 
+		Document Template can contain a tag with an associated set of events. Animal Document Templates 
+		serve as a way to represent an event or a set of events that can then be applied to one or more 
+		specified animals in a Premises Document.</para>
+		<para>Within a Premises Document you can specify which animals to apply the events contained 
+		in the Animal Document Template by:<orderedlist numeration="arabic">
+				<listitem>
+					<para>Directly selecting the animal or a set of animals in the Premises Document 
+					with mouse	selections.<tip>
+							<para>
+								One or more animals in the Premises
+								Document can also be selected with
+								<acronym>OCL</acronym>
+								Query operations. See <emphasis>OCL Query Feature</emphasis> for details.
+							</para>
+						</tip>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+					Indirectly selecting an animal or set of animals in the Premises Document from 
+					lists of Tag/@idNumbers contained in Tag IdNumber files. 
+					See<xref linkend="chBulkEventProcessing_IdNumberFiles" />
+					</para>
+				</listitem>
+			</orderedlist>
+		</para>
+	</section>
+	
+	<section id="chbulkEventProcessing_animalTemplates">
+	    <?dbhtml filename="bulkProcessing/premisesBulkEventProcessing_animalTemplates.html" ?>
+		<title>Animal Document Templates</title>
+		<para>
+			Animal Document Templates are files that representative a single animal and a set of 
+			associated events.  Tracker event modification wizards<footnote>
+						<para>Event modification wizards are accessible through popup menus on specific 
+						Tracker document elements and File Resources.</para>
+						</footnote>
+			and Animal Document Templates allow the Tracker user
+			to add various combinations of animals and/or events to Premises Documents.
+		</para>
+		<para>
+			Animal Document Templates have the following characteristics;
+			<orderedlist numeration="loweralpha">
+			    <listitem>
+					<para>
+						Animal Document Templates are persisted as file resources with a 
+						*.animal extension;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Animal Document Templates contain a default Animal, a Tag and a set of 
+						representative events;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						If a Tag is included as a child element of the Animal Element, the Tag/@idNumber 
+						is not considered significant and is ignored;
+					</para>
+				</listitem>
+				
+				<listitem>
+					<para>
+						Representative Events in Animal Document Templates are significant and will 
+						be copied to specified Animal or set Animals in the Premises Document;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Date Time attributes of Animal Document Templates Events are considered 
+						significant dates, if the Date Time value is a date after the year 2000. These 
+						attributes are copied to the Event Elements that are added to the 
+						Premises Document. 
+					 </para>
+					 <para>
+						When using 
+			            <link linkend="chBulkEventProcessing_IdNumberFiles">tagIdNumber Files</link>
+			            with date encoded names, 
+						Date Time attributes of Animal Document Templates Events are considered 
+						reference dates if the Date Time value of the Templated Event is a date 
+						before the year 2000. These attributes are changed to the date encoded in the 
+						name of the tagIdNumber file before being copied to the Event Elements that 
+						are added to the Premises Document. 
+					 </para>
+					 
+					 <note>
+							<para>
+								When Events are added to Premises 
+								Documents using Tracker Readers feature, the 
+								Date Time attributes of the Events 
+							    added to the Premises Document will always have the 
+								Date Time attributes set to the current time.
+							</para>
+					</note>
+				</listitem>
+			</orderedlist>
+		</para>
+	</section>
+
+	<section id="chBulkEventProcessing_IdNumberFiles">
+		<?dbhtml filename="bulkProcessing/premisesBulkEventProcessing_tagIdNumberFiles.html" ?>
+		<title>Tag IdNumber Files</title>
+		<para>
+			Commercial tag readers typically transmit animal id numbers to computers as
+			<acronym>ASCII</acronym>
+			encoded characters (For more information on ASCII, see the Wikipedia entry for
+			<ulink url="http://en.wikipedia.org/wiki/ASCII">
+				<citetitle>ASCII</citetitle>
+			</ulink>
+			). Tag Readers send this data to computers over serial communication ports or 
+			Bluetooth network connections. 
+			<note>
+				<para>
+					In the Premises Data Model, the Tag id Numbers are represented as  
+					<code>Tag/@idNumber</code> attributes.
+				</para>
+			</note>
+			A generic way to handle serial and/or Bluetooth tag id number transmissions 
+			is to setup the receiving computer's communication facility to capture this data 
+			as text files.  Capture files containing <acronym>ASCII</acronym> numbers that 
+			are saved with a *.tags extension are identified as
+			<emphasis>Tag IdNumber Files.</emphasis>
+		</para>
+		<para>
+			To indicate to Premises Editor that the read time of the tags in a Tag IdNumber 
+			file is significant, the name of the tag file may be formated to reflect that time. 
+			To timestamp a Tag IdNumber file use the formating of
+			<code>yyMMddHHmmss</code>
+			, where
+			<simplelist type='horiz' columns='1'>
+				<member>yy is the last two digits of the year,</member>
+				<member>MM is the month,</member>
+				<member>dd is the day of the month,</member>
+				<member>
+					HH is the hour of the day in 24 hour clock,
+				</member>
+				<member>mm is the minute of the hour,</member>
+				<member>ss is the second</member>
+			</simplelist>
+			<example>
+				<title>A Time Stamped Tag IdNumber File Name</title>
+				<formalpara>
+					<title>060409131111.tags</title>
+					<para>
+						Specifies the date of all
+						<code>Tag/@idNumber</code>
+						reads to have occurred at 2006-04-09T13:11:11.
+					</para>
+				</formalpara>
+			</example>
+			<note>
+			  <para>
+				  To use the Time Stamped Tag IdNumber File Names the dates of  
+				  the events in an Animal Document Template must be set 
+				  to date times earlier than the 2000 AD reference. 
+			  </para>
+			</note>
+		</para>
+		<tip>
+			<para>
+				Tag IdNumber Files can also be utilized by the Reader Feature.
+			</para>
+		</tip>
+	</section>
+	
+	<section id="chBulkEventProcessing_usageAndOperations">
+		<?dbhtml filename="bulkProcessing/premisesBulkEventProcessing_usageAndOperations.html" ?>
+		<title>Usage and Operations</title>
+		
+		<section id="chBulkEventProcessing_usageAndOperations_addEventsToAnimals">
+			<title>Adding Events to Manually Selecting Animals</title>
+			<para>
+				To add a series of events to an animal or set of animals in a Premises 
+				Document select the animal or animals and invoke a popup menu item;
+				<orderedlist numeration="loweralpha">
+					<listitem>
+						<para>
+							Right click on the Animal to get the top level popup menu;
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Select the 'Tracker' menu item to get the Tracker popup menu;
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Select 'Add Template Events to Selected Animals' to bring up a 
+							selection window to select a Template;
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Choose an Animal Document Template containing the set of events 
+							you wish to add the animal.
+						</para>
+					</listitem>
+				</orderedlist>
+			</para>
+		</section>
+		
+		<section id="chBulkEventProcessing_usageAndOperations_addEventsAnimalsToListofTagIds">
+			<?dbhtml filename="bulkProcessing/premisesBulkEventProcessing_addEventsOrAnimals.html" ?>
+			<title>
+				Add Events and/or Animals to a List of Animals Specified in a File
+			</title>
+			<para>
+				To add a series of events and/or animals to the Premises as a whole, you 
+				will still need to specify which animals to add event to.  This can be 
+				done indirectly with a Tag IdNumber file. Select a Tag IdNumber file and 
+				invoke a popup menu item it.
+				<orderedlist numeration="loweralpha">
+					<listitem>
+						<para>
+							Right click on the Animal Document Template that contains the 
+							list of animal ids which specify the set of animals in the 
+							Premises Document that you wish to add events to.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							From the popup menu Select 'Tracker' to get the Tracker specific menu.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Select 'Add Template Events to Premises' to bring up a selection 
+							window that will allow you to select a Animal Document Template.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Choose an Animal Document Template containing the set of template 
+							events and the default animal type you wish to add the file 
+							specified animals in the premises.
+						</para>
+					</listitem>
+				</orderedlist>
+			</para>
+		</section>
+	</section>
+	</section>
+  
+    <section id="premisesSelectionTargeting">
+		<?dbhtml filename="premisesSelection/premisesSelection.html" ?>
+		<title>Selecting and Targeting Elements</title>
+		<para>When working with Premises documents that contain large numbers of animals and events it is often necessary
+		to focus on a subset of the Animals and Events contained within the Premises.</para>
+		
+		<para>The Target Selection Tool can be used 
+		to restrict the contents of the Premises Editor Selection tree, the Animals View, and the Events View and show only
+	    Animals and Events that are of interest. 
+
+		<orderedlist numeration="loweralpha">
+				<listitem><para>Select one or more animals or events. See <xref linkend="fig_premises_selection_selection" />.</para></listitem>
+				<listitem><para>Press the <emphasis>Target Selection</emphasis> button to restrict 
+				the views and editor to the selected animals and events. See <xref linkend="fig_premises_selection_target" />. </para></listitem>
+				<listitem><para>Press the <emphasis>Target Selection</emphasis> to return to an 
+				unrestricted viewing of all the animals and events.</para></listitem>
+		  </orderedlist>
+		</para>
+		<figure id="fig_premises_selection_selection">
+                <title>Selecting Animal Events 
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/selection/selection.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+        
+        <figure id="fig_premises_selection_target">
+                <title>After Invoking Target Selection 
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/selection/targeted.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+        
+	</section>
+	
+    <section id="premisesActions">
+		<?dbhtml filename="premisesActions/premisesActions.html" ?>
+		<title>Premises Action Commands</title>
+		<para>For key workspace resources and elements within the Premises document, the Premises Editor provides 
+		action commands that the user can invoke to effect changes on the resource or document element.
+		</para>
+		
+		<para>Tracker Actions can be invoked on specific types of workspace resources. 
+		These actions are accessible when viewing resources with the Project Explorer View. <footnote><para>In the 
+		Project Explorer View right click on the resource and the popup main menu will be shown. From there the sub menu 
+		'Tracker Actions' will contain the appropriate acton command.
+		</para></footnote>  
+		
+		
+		<figure id="fig_premises_actions_resources">
+                <title>Invoking Resource Actions from Project Explorer 
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/actions/resources.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+       
+			<table id='PremisesEditorFileResourceActionCommands' frame='all'>
+				<title>File Resource Action Commands</title>
+				<tgroup cols='5' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<colspec colname='c3' />
+					<colspec colname='c4' />
+					<colspec colname='c5' />
+					<thead>
+						<row>
+							<entry>Resource</entry>
+							<entry>Type and Format</entry>
+							<entry>Command Name</entry>
+							<entry>Description</entry>
+							<entry>Comment</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>*.tags</entry>
+							<entry>
+								Text files with extenstion 'tags', that contain a list of tag ID numbers. 
+								<footnote><para>
+								Each number is on its own line and lines are terminated with a carriage return. These text
+								files can be simply created in a text editor by hand or exported from other applications 
+								and data sources. Most data management applications have text file export utilities.
+								</para></footnote>
+							</entry>
+							<entry>Import TagIds as Template Events</entry>
+							<entry>Adds events from the template to animals.<footnote><para>Prompts for an Animal template. 
+							Each tagId number is mapped to the Animal and the Events in the template. The Events in the template 
+							will be given the current time and added to the Animal that corresponds with the TagId.  If no Animal 
+							exists with the tagId, a new Animal will be created with the type and attributes of the template Animal.</para></footnote></entry>
+							
+							<entry>Adds multiple events to existing animals or adds new animals with a common life data.</entry>
+						</row>
+						<row>
+							<entry>*.tags</entry>
+							<entry>
+								Text files with extenstion 'tags', that contain a list of tag ID numbers.
+							</entry>
+							<entry>Import TagIds Specifying Animal and Event Types</entry>
+							<entry>Adds the selected event to animals in the document.<footnote><para>Prompts for Animal and Event types. 
+							Event will be given the current time and added to the Animal that corresponds with the TagId.  
+							If no Animal with the tagId exists, a new Animal will be created.</para></footnote></entry>
+							<entry>Adds single events to multiple existing animals or adds new animals with a common life data.</entry>
+						</row>
+						<row>
+							<entry>*.txt</entry>
+							<entry>Comma separated value <acronym>CSV</acronym> text files with extenstion 'txt',  contain Animal 
+							life data for a set of animals. 
+								<footnote><para>
+								Values are separated with commas and rows are on lines terminated with 
+								a carriage return. These files can be created in text editors or spreadsheet 
+								application and exported as as csv file.
+								</para></footnote></entry>
+							<entry>Import Text File as Animal Life Data</entry>
+							<entry>Adds animals with life data to the document.<footnote><para>Prompts to map column values to Animal feature names. Two essential Animal feature
+						    must be mapped, Animal.id and Animal.species. Next page will map the values
+							in the selected species columns to Premises Animal species names.</para></footnote></entry>
+							<entry>Use to import new animals with unique life data.</entry>
+						</row>
+						<row>
+							<entry>*.log</entry>
+							<entry>Comma separated value <acronym>CSV</acronym> text files with extenstion 'log',  contain Animal 
+							event data for a set of animals in <emphasis>Name Value</emphasis> pairs.
+								<footnote><para>
+								Name value pairs are separated with a comma and each row is on lines terminated with 
+								a carriage return.  Example:
+								<code>type='measurement',dateTime='2010-02-22 10:23:46',id='900014000554891',scope='animal.weight',value='81.0',error='0.0100',unit='kg'</code>
+								</para></footnote></entry>
+							<entry>Import Log File as Animal Event Data<footnote><para>Only availible when the iRouter Premises Gateway feature is provisioned.</para></footnote></entry>
+							<entry>This is one of the formats for logging output by the iRouter logger feature.</entry>
+							<entry>Log files use an easy to read format.<footnote>
+							<para>While these files are useful for adding event data, other programs may not be able to easily output such a format.</para></footnote> </entry>
+						</row>
+						<row>
+							<entry>*.csv</entry>
+							<entry>
+								 Register premises information from a csv file to TrackerStore.
+								<footnote><para>
+								Each value is quote enclosed and seperated with a comma. Each line is terminated with a carriage return. These text
+								files can be simply created in a text editor by hand or exported from other applications 
+								and data sources. Most data management applications have text file export utilities.
+								</para>
+								<para>This command will not be visible if there are no TrackerStore Services configured.</para>
+								</footnote>
+							</entry>
+							<entry>Register Premises</entry>
+							<entry>Required columns<footnote><para>Column values used for mapping:
+ 				 				<code>Pin, Name, Phone, Email, Street, City, State, zipCode, latitude, longitude</code></para></footnote></entry>
+							<entry>Use to register multiple premises when data can be exported from an existing datasource.</entry>
+						</row>
+						
+					</tbody>
+				</tgroup>
+			</table>
+			
+			<table id='PremisesEditorFolderActionCommands' frame='all'>
+				<title>Folder Resource Action Commands</title>
+				<tgroup cols='5' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<colspec colname='c3' />
+					<colspec colname='c4' />
+					<colspec colname='c5' />
+					<thead>
+						<row>
+							<entry>Resource</entry>
+							<entry>Type and Format</entry>
+							<entry>Command Name</entry>
+							<entry>Description</entry>
+							<entry>Comment</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row id="import_animal_from_trackerstore">
+							<entry>folder</entry>
+							<entry>
+								A file directory<footnote><para>Also known as a file folder</para></footnote>
+							</entry>
+							<entry>Import Animal from Tracker Store<footnote>
+								<para>This command is also available as an Import Wizard: <emphasis>Import an Animal from the TrackerStore into the workspace</emphasis>.</para>
+								<para>This command will not be visible if there are no TrackerStore Services configured.</para>
+								</footnote>
+							</entry>
+							<entry>User will first be prompted to select which Tracker Store Server to use to retrieve
+							the Animal, then for an Animal id.  </entry>
+                 			<entry>Imports into the selected directory a premises document containing the animal and any 
+                 			metatypes associated with the animal.</entry>
+						</row>
+						<row id="import_premises_from_trackerstore">
+							<entry>folder</entry>
+							<entry>
+								A file directory<footnote><para>Also known as a file folder</para></footnote>
+							</entry>
+							<entry>Import Premises from Tracker Store<footnote>
+								<para>This command is also available as an Import Wizard: <emphasis>Import Premises from the TrackerStore into the workspace</emphasis>.</para>
+								<para>This command will not be visible if there are no TrackerStore Services configured.</para>
+								</footnote></entry>
+							<entry>User will first be prompted to select which Tracker Store Server to use to retrieve
+							the Premises, then for a Premises id and for a range of dates.</entry>
+                 			<entry>Imports into the selected directory a premises document containing all the animals that resided 
+                 			in the premises within the date range and any metatypes associated with the animals. If no dates are
+                 			given than the premises without any animals is imported.</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table>
+		</para>
+		
+		<para>Tracker Actions can be invoked on Premises document elements. These actions may be accessed as popup menus on the document elements when viewing documents 
+		from the Selection page of the Premises Editor, document tree in the Outline View tree, the master table in the Animals View
+	    or the master table in the Events View. 
+	    	<footnote><para> 
+		Right click on the
+		element and the popup main menu will be shown. From there the sub menu 'Tracker Actions' will contain the 
+		appropriate action command.
+			</para></footnote>
+		
+			<figure id="fig_premises_actions_selection">
+                <title>Invoking Element Actions from Premises Editor Selection Page
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/actions/selection.png"/>
+                    </imageobject>
+                </mediaobject>
+        	</figure>
+        	
+        	<figure id="fig_premises_actions_animals">
+                <title>Invoking Element Actions from Animals View Master Table
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/actions/animals.png"/>
+                    </imageobject>
+                </mediaobject>
+        	</figure>
+		
+			<table id='PremisesEditorAllElementActionCommands' frame='all'>
+				<title>Action Commands on all Elements</title>
+				<tgroup cols='7' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<colspec colname='c3' />
+					<colspec colname='c4' />
+					<colspec colname='c5' />
+					<colspec colname='c6' />
+					<colspec colname='c7' />
+					<thead>
+						<row>
+							<entry>Element</entry>
+							<entry>Command Name</entry>
+							<entry>From Selection Page<footnote><para>The Outline View like the Selection Page of the Premises Editor
+							shows the document as a tree.  All actions that can be accessed as popup menus in the Selection Page 
+							are also available from the Outline View.</para></footnote></entry>
+							<entry>From Animals View</entry>
+							<entry>From Events View</entry>
+							<entry>Description</entry>
+							<entry>Comment</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>All elements</entry>
+							<entry>Select Element(s) in Outline View</entry>
+							<entry>Yes</entry>
+							<entry>Yes</entry>
+							<entry>Yes</entry>
+							
+							<entry>
+								Selects the same element or elements in the tree of the Outline View. 
+							</entry>
+							
+							<entry>Helpful to sync from Views to the context of a tree view.</entry>
+						</row>
+						<row>
+							<entry>All elements</entry>
+							<entry>Context Free Query<footnote><para>Only availible when the OCL feature is provisioned.</para></footnote></entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Shows a dialog for entry of a query to select sub (child) elements of the selection.
+							</entry>
+							
+							<entry>From a Premises element enter a query to find animals or events.  
+							<footnote><para>See the OCL Query documentation for more details.</para></footnote></entry>
+						</row>
+						<row>
+							<entry>All elements</entry>
+							<entry>Query with Context<footnote><para>Only availible when the OCL feature is provisioned.</para></footnote></entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Shows a dialog for entry of a query to select sub (child) elements of the selection. A 
+								combo box for selection of the query context.
+							</entry>
+							
+							<entry>Select the Premises and query for animals or events.</entry>
+						</row>
+						
+					
+					</tbody>
+				</tgroup>
+			</table>
+			
+			<table id='PremisesEditorAnimalElementActionCommands' frame='all'>
+				<title>Action Commands on Animal Elements</title>
+				<tgroup cols='7' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<colspec colname='c3' />
+					<colspec colname='c4' />
+					<colspec colname='c5' />
+					<colspec colname='c6' />
+					<colspec colname='c7' />
+					<thead>
+						<row>
+							<entry>Element</entry>
+							<entry>Command Name</entry>
+							<entry>From Selection Page<footnote><para>The Outline View like the Selection Page of the Premises Editor
+							shows the document as a tree.  All actions that can be accessed as popup menus in the Selection Page 
+							are also available from the Outline View.</para></footnote></entry>
+							<entry>From Animals View</entry>
+							<entry>From Events View</entry>
+							<entry>Description</entry>
+							<entry>Comment</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>Animal(s)</entry>
+							<entry>Change Animal(s) type</entry>
+							<entry>Yes</entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Prompts to select a new animal type. 
+							</entry>
+							
+							<entry>Use this when importing animals and not all of them are the same type.<footnote><para>First import
+							them as the same type with one of the Import actions, then select the ones to change and 
+							invoke this command.</para></footnote></entry>
+						</row>
+						<row>
+							<entry>Animal(s)</entry>
+							<entry>Add Template Events to Selected Animals</entry>
+							<entry>Yes</entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Prompts the user to select a template event. 
+							</entry>
+							
+							<entry>Use this to add events from an Animal template to existing Animals.</entry>
+						</row>
+						<row>
+							<entry>Animal(s)</entry>
+							<entry>Resolve Geolocation Names</entry>
+							<entry>Yes</entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Resolves all geolocation names on the Animal(s) and the events of the Animal(s). 
+							</entry>
+							
+							<entry>Use this for traceback and traceforward of Animals.<footnote><para>Resolves the urns on Moved events 
+							to real names, geo coordinates on Position events to real names and for resolving the current 
+							location of the Animal(s) as a location name.</para></footnote></entry>
+						</row>
+					    
+					
+					</tbody>
+				</tgroup>
+			</table>
+
+			<table id='PremisesEditorEventElementActionCommands' frame='all'>
+				<title>Action Commands on Event Elements</title>
+				<tgroup cols='7' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<colspec colname='c3' />
+					<colspec colname='c4' />
+					<colspec colname='c5' />
+					<colspec colname='c6' />
+					<colspec colname='c7' />
+					<thead>
+						<row>
+							<entry>Element</entry>
+							<entry>Command Name</entry>
+							<entry>From Selection Page<footnote><para>The Outline View like the Selection Page of the Premises Editor
+							shows the document as a tree.  All actions that can be accessed as popup menus in the Selection Page 
+							are also available from the Outline View.</para></footnote></entry>
+							<entry>From Animals View</entry>
+							<entry>From Events View</entry>
+							<entry>Description</entry>
+							<entry>Comment</entry>
+						</row>
+					</thead>
+					<tbody>
+						
+					    <row>
+							<entry>Event(s)</entry>
+							<entry>Modify Selected Events</entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>Yes</entry>
+							
+							<entry>
+								Modifies one or more of the common attributes of the selected Event(s). 
+							</entry>
+							
+							<entry>Sets the comments, the correction and the electronically read flags for 
+							more than one event.</entry>
+						</row>
+						<row>
+							<entry>MovedIn or MovedOut Event</entry>
+							<entry>Set Foreign Premises URI
+								<footnote><para>This command will not be visible when Location Services are not configured.</para></footnote></entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>Yes</entry>
+							
+							<entry>
+								Use the Location Service to assist in setting MovedIn and MovedOut event URI and pin attributes. 
+							</entry>
+							
+							<entry>Work with names instead of numbers when setting MovedIn and MovedOut uri and pin attributes.<footnote>
+								<para>First configure the Location Service with business partners. 
+							Next when setting attributes on Moved events invoke this command to set the URI of the foreign Premises.
+							This command will present the user with a dialog containing the names and the URIs of all the partners 
+							from the Location Service.  Choose one to set the URI of the Moved event.  If the choosen partner has an
+							URI that is a USDA Premises ID number, the MovedIn or MovedOut pin attribute will be set as well.</para></footnote>
+							</entry>
+						</row>
+					   
+					
+					</tbody>
+				</tgroup>
+			</table>
+			
+			<table id='PremisesEditorPremisesElementActionCommands' frame='all'>
+				<title>Action Commands on Premises Elements</title>
+				<tgroup cols='7' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<colspec colname='c3' />
+					<colspec colname='c4' />
+					<colspec colname='c5' />
+					<colspec colname='c6' />
+					<colspec colname='c7' />
+					<thead>
+						<row>
+							<entry>Element</entry>
+							<entry>Command Name</entry>
+							<entry>From Selection Page<footnote><para>The Outline View like the Selection Page of the Premises Editor
+							shows the document as a tree.  All actions that can be accessed as popup menus in the Selection Page 
+							are also available from the Outline View.</para></footnote></entry>
+							<entry>From Animals View</entry>
+							<entry>From Events View</entry>
+							<entry>Description</entry>
+							<entry>Comment</entry>
+						</row>
+					</thead>
+					<tbody>
+						
+					    <row>
+							<entry>Premises</entry>
+							<entry>Resolve Geolocation Names
+								<footnote><para>Command will not be visible if there are no Location Services configured.</para></footnote></entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Resolves all geolocation names on all Animals and Events in the Premises. 
+							</entry>
+							
+							<entry>Use for traceback and traceforward of all Animals.<footnote><para>Resolves the urns on Moved events 
+							to real names, geo coordinates on Position events to real names and for resolving the current 
+							location of the Animal(s) as a location name.</para></footnote></entry>
+						</row>
+						
+						<row>
+							<entry>Premises</entry>
+							<entry>Register Premises to TrackerStore<footnote><para>This command will not be visible if there are no TrackerStore Services configured
+								and the user is not a Server Administrator.</para></footnote></entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Registers (stores) the Premises to TrackerStore 
+							</entry>
+							
+							<entry>Adminstrator command to register a premises. </entry>
+						</row>
+						
+						<row id="record_animal_history_to_trackerstore">
+							<entry>Premises</entry>
+							<entry>Record Animal History to TrackerStore<footnote><para>This command will not be visible if there are no TrackerStore Services configured
+								and the user is not a Premises Publisher.</para></footnote></entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Publishes (stores) Animal Life Data and Event Histories to TrackerStore 
+							</entry>
+							
+							<entry>The user designated as the publisher of the Premises will use this command to record 
+							Animal Life Data and Event Histories<footnote><para>When ahimal event histories are recorded,
+							the system will record a time stamp.  This time stamp is used to insure that only the latest 
+							animal history events are recorded and changes made to old events are not.</para></footnote>. 
+							</entry>
+						</row>
+					
+					    <row>
+							<entry>Premises</entry>
+							<entry>Record Animal History to TrackerStore<footnote><para>This command will not be visible if there are no TrackerStore Services configured
+								and the user is not a Premises Publisher.</para></footnote></entry>
+							<entry>Yes</entry>
+							<entry>No</entry>
+							<entry>No</entry>
+							
+							<entry>
+								Publishes (stores) Animal Life Data and Event Histories to MongoDB 
+							</entry>
+							
+							<entry>The user designated as the publisher of the Premises will use this command to record 
+							Animal Life Data and Event Histories<footnote><para>When ahimal event histories are recorded,
+							the system will record a time stamp.  This time stamp is used to insure that only the latest 
+							animal history events are recorded and changes made to old events are not.</para></footnote>. 
+							</entry>
+						</row>
+					
+					</tbody>
+				</tgroup>
+			</table>
+		</para>
+	</section>
+	 
+	<section id="premisesDataModel">
+	<?dbhtml filename="model/premisesEditorModel_dataModel.html" ?>
+	<title>Premises Data Model</title>
+	<para>
+		Because all user activity centers around the creation and manipulation
+		of
+		<emphasis>Premises Documents</emphasis>, understanding the structure 
+		(called the <glossterm>data model</glossterm>) 
+		of Premises documents is the easiest way to learn to use the information management facilities of
+		the Premises Editor.
+	</para>
+	<section id="premisesDataModel_corePremisesElements">
+	    <?dbhtml filename="model/premisesEditorModel_dataModel_core.html" ?>
+		<title>Data Model Core Elements</title>
+	<para>
+		All Premises documents structurally conform to the
+		<emphasis>Premises Data Model</emphasis>. In the Premises Data Model,
+		a single Premises contains zero or more animals. Each Animal must have at 
+		least one but may have more than one (identification) tag. Each Tag must 
+		have at least one but may have more than one associated event.
+	</para>
+	<para>
+		Core elements of the Premises Data Model are shown in
+		<xref linkend="fig_coreDataModel1" />.
+	</para>
+	<figure id="fig_coreDataModel1">
+		<title>Premises Data Model Core Elements</title>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="../images/model/coreDataModel3.png" />
+			</imageobject>
+		</mediaobject>
+	</figure>
+		
+		<para>
+			<orderedlist numeration="loweralpha">
+				<listitem>
+					<para>The core elements of the Premises Model are depicted as rectangles in the figure.</para>
+				</listitem>
+				<listitem>
+					<para>The notation within the elements are the attributes of the element.</para>
+				</listitem>
+				<listitem>
+					<para>The notation between the elements are the relationships of the elements.</para>
+				</listitem>
+			</orderedlist>
+		</para>
+		<para>The following table offers a text explanation of the primary element relationships.<table frame='all'>
+				<title>Core Elements of the Premises Model</title>
+				<tgroup cols='2' align='left' colsep='1' rowsep='1'>
+					<colspec colname='c1' />
+					<colspec colname='c2' />
+					<thead>
+						<row>
+							<entry>Element Name</entry>
+							<entry>
+								Relationship to other Elements
+							</entry>
+						</row>
+					</thead>
+					<tbody>
+						<row>
+							<entry>Premises</entry>
+							<entry>
+								There is one premises element in a Tracker document. It is consider the root of the 
+								Premises document.  All other elements are children elements of the Premises element.
+								The Premises Editor tab 'Premises' provides a form for editing the attributes of the 
+								Premise element.
+							</entry>
+						</row>
+						<row>
+							<entry>Location</entry>
+							<entry>
+								A premises can have an optional Location element to specify address and geolocation details. 
+								The Premises Editor tab 'Location' provides a form for editing the attributes of the 'Location'
+								element.
+							</entry>
+						</row>
+						<row>
+							<entry>Area</entry>
+							<entry>
+								A 'Locaton' element can have zero or more optional 'Area' elements to specify sublocation boundries.
+								Areas specify locations within the Premises. Specifying areas in a premises allow animals with
+								'Sighting' and 'Position' events to be located and traced as they move within the premises. 
+								The Premises Editor tab 'Areas' provides a form for creating and editing the attributes of 
+								one or more 'Area' elements.
+							</entry>
+						</row>
+						<row>
+							<entry>Animal</entry>
+							<entry>
+								A premises can have zero or many animals.
+							</entry>
+						</row>
+						<row>
+							<entry>Tag (assigned)</entry>
+							<entry>
+								An Animal can have one or many tags.
+							</entry>
+						</row>
+						<row>
+							<entry>Tag (unassigned)</entry>
+							<entry>A Premises can have zero or many tags that are unassigned.</entry>
+						</row>
+						<row>
+							<entry>Event</entry>
+							<entry>
+								A Tag can have one or many events.
+							</entry>
+						</row>
+						<row>
+							<entry>Policy (not shown)</entry>
+							<entry>
+								A Premises can have zero or one Policy for restricting the premises to specific animal
+								species and event types. The Premises Editor tab 'Policy' provides a form for creating
+							    and editing the attributes of the 'Policy' element. 
+							</entry>
+						</row>
+					</tbody>
+				</tgroup>
+			</table>
+
+		</para>
+	</section>
+	
+	<section id="premisesDataModel_corePremisesAnimals">
+	<?dbhtml filename="model/premisesEditorModel_dataModel_animals.html" ?>
+	<title>Data Model Animal Elements</title>
+	<para>The Premises Data Model supports multiple Animal types as shown in 
+		<xref linkend="fig_coreDataModelAnimals" />
+				
+	   </para>
+	   <figure id="fig_coreDataModelAnimals">
+		<title>Premises Data Model Animal Elements</title>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="../images/model/dataModelAnimals.png" />
+			</imageobject>
+		</mediaobject>
+	</figure>
+	</section>
+	
+	<section id="premisesDataModel_corePremisesEvents">
+	<?dbhtml filename="model/premisesEditorModel_dataModel_events.html" ?>
+	<title>Data Model Event Elements</title>
+	<para>The Premises Data Model supports multiple Event types as shown in 
+	 <xref linkend="fig_coreDataModelEvents1" /> and <xref linkend="fig_coreDataModelEvents2" />.	
+	</para>
+	 <figure id="fig_coreDataModelEvents1">
+		<title>Premises Data Model Event Elements (part 1)</title>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="../images/model/dataModelEvents1.png" />
+			</imageobject>
+		</mediaobject>
+	</figure>
+	
+	 <figure id="fig_coreDataModelEvents2">
+		<title>Premises Data Model Event Elements (part 2)</title>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="../images/model/dataModelEvents2.png" />
+			</imageobject>
+		</mediaobject>
+	 </figure>
+	</section>
+	
+	</section>
+	
+	<section id="genericEvents">
+	<?dbhtml filename="genericEvents/genericEvents.html" ?>
+		<title>Custom Events</title>
+		<para>The Premises Editor ships with predefined event types that are suitable for documenting most livestock histories. 
+		If the predifined event types are not sufficient, the Premises Editor utilizes the <emphasis>Metatype Editor Feature</emphasis>
+		and the Metatype documents it creates to define custom event types.
+		</para>
+		
+		
+	<section id="genericEvents_creatingCustomEvents"> 
+	<?dbhtml filename="genericEvents/genericEvents_creatingCustomEvents.html" ?>
+		<title>Creating Custom Events</title>
+		
+		<para>To define one or more custom events: 
+		<itemizedlist>
+		<listitem><para>
+		Create a Metatype document using the <code>New Metatype Document Wizard</code>
+		</para></listitem>
+		<listitem><para>
+		For every custom event define an <emphasis>Object Class Definition</emphasis>, <code>OCD</code>  element; 
+		and in the <emphasis>Properties view</emphasis> specify it's properties as:
+			<itemizedlist>
+				<listitem><para>
+					<code>Description</code> - an optional description of the custom event
+				</para></listitem>
+				<listitem><para>
+					<code>ID</code> - a unique string identifying the event within the document 
+				</para></listitem>
+				<listitem><para>
+					<code>Name</code> - a user recognizable name for the event
+				</para></listitem>
+				
+			</itemizedlist>
+		</para></listitem>
+		<listitem><para>
+		Within each <code>OCD</code> create one or more child <emphasis>Attribute Definition</emphasis>, <code>AD</code> 
+		elements to define the attributes of the custom event. These attributes will be displayed in the editor as properties 
+		of the event.
+		</para></listitem>
+		<listitem><para>
+		Within each <code>AD</code> child element specify the properties:
+			<itemizedlist>
+				<listitem><para>
+					<code>Cardinality</code>, an optional property that specifies the number of values contained in this attribute.
+					 The default is <code>0</code>.
+				</para></listitem>
+				<listitem>
+				    <para>
+					<code>Data Type</code>, a required property that specifies what type of property value is valid for
+					the attribute.  A pull down list will show the options: <code>String</code>, <code>Long</code>,
+					<code>Integer</code>, <code>Short</code>, <code>Char</code>, 
+					<code>Byte</code>, <code>Double</code>, <code>Float</code> and <code>Boolean</code>
+				    </para>
+				    <para>When working with custom events in premises documents only values appropriate to the specified data type
+				    will be considered valid.  For example a custom event with a data type of <code>Boolean</code> will 
+				    only accept <emphasis>true</emphasis> and <emphasis>false</emphasis> as valid values.</para>
+				</listitem>
+				<listitem><para>
+					<code>Default</code>, is the default value for this attribute. This default value(s) must be appropriate for  
+					the cardinality and data type defined above.
+				</para></listitem>
+				<listitem><para>
+					<code>Description</code>, an optional description of the attribute.  This will be shown in the message panel when
+					the user interface is focused on this attribute. 
+				</para></listitem>
+				<listitem><para>
+					<code>ID</code>, document wide identification string for this attribute.
+				</para></listitem>
+				<listitem><para>
+					<code>Max</code>, maximuim value for this attribute.
+				</para></listitem>
+				<listitem><para>
+					<code>Min</code>, minimum value for this attribute.
+				</para></listitem>
+				<listitem><para>
+					<code>Name</code>, user recognizable name for this attribute.
+				</para></listitem>
+				<listitem><para>
+					<code>Required</code>, whether this attribute must be given a value by the user for the event to be considered valid.
+				</para></listitem>
+				
+				</itemizedlist>
+			</para>
+		</listitem>
+		<listitem><para>
+		Within each <code>OCD</code> optionally create a child <code>Icon</code> 
+		element to associate an image with the event.
+		</para></listitem>
+		</itemizedlist>
+		</para>
+		
+		<para>See <xref linkend="fig_genericEvents_create"/> for an screen shot showing a Metatype document that 
+		defines two custom events.</para>
+		
+		<figure id="fig_genericEvents_create">
+			<title>Defining Custom Events</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/genericEvents/definingCustomEvents.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		
+	</section>
+		
+	<section id="usingCustomEvents">
+	<?dbhtml filename="genericEvents/genericEvents_usingCustomEvents.html" ?>
+		<title>Using Custom Events in Premises Documents</title>
+		<para>
+		To use custom events in Premises documents, the Metatype document that defines the custom events must first be loaded 
+		as a resource. <footnote><para>This only needs to be done once.  When the premises document is saved and opened again, the Metatype 
+		document with the custom event specifications will automatically be associated with the Premises document.</para></footnote>
+		To load a resource into a Premises document place the mouse cursor on the root element in the Premises document, right click, 
+		and from the pull down menu choose <code>Load Resorce...</code>
+		</para>
+		
+		<figure id="fig_loadMetatypeCustomEventsResource">
+			<title>Load Resource Dialog</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/genericEvents/loadResource.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		
+		<para>From the <xref linkend="fig_loadMetatypeCustomEventsResource"/> choose the Metatype document that defines the 
+		custom events and press <code>OK</code>.</para>
+		
+		<para>See <xref linkend="fig_loadedMetatypeCustomEventsResource"/>.</para>
+		
+		<figure id="fig_loadedMetatypeCustomEventsResource">
+			<title>Premises Document Loaded with a Metatype Resource</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/genericEvents/loadedResources.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		
+		<para>When a Premises document is loaded with a Metatype resource, all the custom events from the Metatype document 
+		are available for adding to the animal histories of the Premises Document. The Premises Editor user interfaces will also treat
+	    the Metatype documents custom events just like predifined events.</para>
+	    <para>See <xref linkend="fig_customEventsPickList"/>,
+	    <xref linkend="fig_customEventsWizard"/>, and <xref linkend="fig_customEventsView"/>.</para>
+		
+		<figure id="fig_customEventsPickList">
+			<title>Adding an Event in the Premises Editor</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/genericEvents/pickList.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+			
+		<figure id="fig_customEventsWizard">
+			<title>Adding and Event in the Event View</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/genericEvents/addingAnEventWizard.png" />
+				</imageobject>
+			</mediaobject>
+	   </figure>
+	   
+	   <figure id="fig_customEventsView">
+			<title>Modifying Attributes in the Events View</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/genericEvents/eventsView.png" />
+				</imageobject>
+			</mediaobject>
+	   </figure>
+		
+	</section>
+	</section>
+
+	<section id="useCase">
+      <?dbhtml filename="usecase/premisesEditorModel_useCase.html" ?>
+		<title>Premises Editor Use Cases</title>
+		<para>
+		To best depict what the Premises Editor can do for Tracker users the following 
+		section presents a series of <emphasis>Use-Case</emphasis> diagrams.  
+		<xref linkend="fig_CoreUseCases" /> shows core usage requirements for the Premises 
+		Editor. 
+		</para>
+		<figure id="fig_CoreUseCases">
+			<title>Premises Editor Overview</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/useCases/core.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+	
+	    <para>
+		  Once the Tracker <acronym>BI</acronym> Toolkit and the Premises Editor Feature are installed setup takes less than a minute.
+		  Administration use-cases are shown in
+		<xref linkend="fig_setUpUseCases" />. 
+		</para>
+	    
+	    <figure id="fig_setUpUseCases">
+			<title>Setting Up the Premises Editor</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/useCases/setup.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		
+		<para>
+		  Updating document use-cases are shown in
+		<xref linkend="fig_updateUseCases" />. 
+		</para>
+		<figure id="fig_updateUseCases">
+			<title>Updating Documents</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/useCases/update.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		
+		<para>
+		  Tracker Operators may need to work with large Premises documents. Providing Tracker Operators
+		  with the tools to navigate around these large documents has been a major design goal of the 
+		  Premises Editor. Navigation use-cases are shown in
+		<xref linkend="fig_navigateUseCases" />. 
+		</para>
+		<figure id="fig_navigateUseCases">
+			<title>Navigating in the Editor</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/useCases/navigate.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		
+		
+		<para>
+		  As shown in previous use-cases Premises Documents can be created and updated by human operators
+		  Premises Editor.  To improve efficiency new animals and events can also be added to Premises 
+		  Documents by using external tag ID readers connected to the Tracker via data 
+		  communications channels.  This is shown in
+		<xref linkend="fig_connectedReadersUseCases" />. 
+		</para>
+		<figure id="fig_connectedReadersUseCases">
+			<title>Working with Connected Readers</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="../images/useCases/readers.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+    </section>
+
+</chapter>
+

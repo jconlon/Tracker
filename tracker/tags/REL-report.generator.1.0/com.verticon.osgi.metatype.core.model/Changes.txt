@@ -1,0 +1,19 @@
+Changed
+
+genmodel:
+	Model Class Defaults Category Root Extends Class
+		org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container
+	
+MetatypeResourceImpl
+	save to UTF-8
+	
+MetatypeResourceFactoryImpl
+	UTF-8 encoding
+	
+plugin.xml
+	 <extension point="org.eclipse.core.contenttype.contentTypes">
+		file-extensions="metatype"
+	
+MetatypeModelWizard 
+	(Did not generate the editor, so I had to add the following. But it should be generated when the editor is generated)
+	Resource resource = resourceSet.createResource(fileURI, MetatypePackage.eCONTENT_TYPE);

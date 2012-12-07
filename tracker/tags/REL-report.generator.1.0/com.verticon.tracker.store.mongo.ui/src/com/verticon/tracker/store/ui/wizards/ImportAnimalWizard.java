@@ -1,0 +1,101 @@
+/*******************************************************************************
+ * Copyright (c) 2006 IBM Corporation and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     IBM Corporation - initial API and implementation
+ *******************************************************************************/
+package com.verticon.tracker.store.ui.wizards;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.wizard.Wizard;
+import org.eclipse.ui.IImportWizard;
+import org.eclipse.ui.IWorkbench;
+
+import com.google.common.base.Strings;
+import com.verticon.tracker.store.ITrackerStore;
+
+public class ImportAnimalWizard extends Wizard implements IImportWizard {
+
+	ImportAnimalWizardPage mainPage;
+	SelectTrackerStorePage trackerStorePage;
+
+	private ITrackerStore trackerStore = null;
+
+	public ImportAnimalWizard() {
+		super();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
+	 */
+	public boolean performFinish() {
+		URI uri = null;
+		try {
+			uri = mainPage.createImportedResource();
+
+		} catch (Exception e) {
+			mainPage.setErrorMessage("Failed to import "
+					+ mainPage.getAnimalID() + ": " + e.getMessage());
+			return false;
+		}
+		MessageDialog.openInformation(
+				getShell(),
+				"Imported Animal",
+				"Imported " + mainPage.getAnimalID() + " from "
+						+ trackerStore.uri() + " to " + uri);
+		return true;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench,
+	 * org.eclipse.jface.viewers.IStructuredSelection)
+	 */
+	public void init(IWorkbench workbench, IStructuredSelection selection) {
+		setWindowTitle("TrackerStore Animal Import Wizard"); // NON-NLS-1
+		setNeedsProgressMonitor(true);
+		trackerStorePage = new SelectTrackerStorePage();
+		mainPage = new ImportAnimalWizardPage("Import Animal", selection); // NON-NLS-1
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.wizard.IWizard#addPages()
+	 */
+	public void addPages() {
+		super.addPages();
+		addPage(trackerStorePage);
+		addPage(mainPage);
+	}
+
+	void setTrackerStore(ITrackerStore trackerStore) {
+		this.trackerStore = trackerStore;
+	}
+
+	ITrackerStore getTrackerStore() {
+		return trackerStore;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.jface.wizard.Wizard#canFinish()
+	 */
+	@Override
+	public boolean canFinish() {
+		return trackerStore != null
+				&& !Strings.isNullOrEmpty(mainPage.getAnimalID())
+				&& mainPage.getFileName() != null;
+	}
+
+}

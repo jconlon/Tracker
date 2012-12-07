@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="com.verticon.tracker.irouter"
+      label="%featureName"
+      version="0.2.2.qualifier"
+      provider-name="%providerName"
+      plugin="com.verticon.tracker.irouter">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      %license
+   </license>
+
+   <url>
+      <update label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
+      <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
+   </url>
+
+   <requires>
+      <import feature="com.verticon.osgi.metatype.core.model.editor" version="0.1.0" match="compatible"/>
+      <import plugin="org.eclipse.equinox.wireadmin"/>
+      <import plugin="com.verticon.osgi.monitor"/>
+      <import plugin="org.osgilab.bundles.monitoradmin"/>
+      <import feature="com.verticon.tracker.logging.logback" version="0.3.1" match="compatible"/>
+   </requires>
+
+   <plugin
+         id="com.verticon.tracker.irouter.measurement.logger"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.irouter.wireadmin"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.irouter.doc"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.configuration"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.configuration.editor"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.connector.socket"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.irouter.monitor.view"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.irouter"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.irouter.common"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.irouter.measurement.converter"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.irouter.measurement.comparator"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.irouter.measurement.trigger"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.irouter.flow.terminator"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.tracker.irouter.monitor.external"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>

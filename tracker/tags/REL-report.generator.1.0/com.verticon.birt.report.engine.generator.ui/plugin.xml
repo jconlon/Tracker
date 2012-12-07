@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="com.verticon.birt.report.engine.generator.ui"
+            name="Report "
+            parentCategory="org.eclipse.birt.report.designer.ui.wizard.category">
+      </category>
+      <wizard
+            name="BIRT Report Generator"
+            icon="icons/sample.gif"
+            category="org.eclipse.birt.report.designer.ui.wizard.category"
+            class="com.verticon.birt.report.engine.generator.ui.wizards.BirtGeneratorWizard"
+            id="com.verticon.birt.report.engine.generator.ui.wizards.BirtGeneratorWizard">
+      </wizard>
+   </extension>
+
+</plugin>

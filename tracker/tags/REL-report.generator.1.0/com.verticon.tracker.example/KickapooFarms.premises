@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<premises:Premises xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:premises="http://www.verticon.com/tracker/0.4.2/premises" premisesId="005FZ5T" emailContact="jcondor@newfarm.org" uri="urn:pin:005FZ5T" administrator="Jack Condor, Farm Manager" name="Kickapoo Farms" description="Multi-species educational farm" phoneNumber="608-606-1222">
+  <location name="Kickapoo Farms" description="A multi species educational farm and retreat" phoneNumber="608-606-1222" street="E333 Gardner Rd." city="Viroqua" state="WI" postalCode="54665" longitude="-90.946253" latitude="43.471538" altitude="0.1" comments="Contact farm manager"/>
+</premises:Premises>

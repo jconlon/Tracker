@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.6"?>
+
+<target name="Tracker Helios">
+<locations>
+<location path="/opt/Eclipse/eclipse-modeling-helios-incubation-target-20100629/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/monitoradmin" type="Directory"/>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.birt.feature.group" version="2.6.0.v20100617-9gF727DGKb0yl9AwWxpmbo35PwQ_"/>
+<unit id="org.eclipse.birt.chart.cshelp.feature.group" version="2.6.0.v20100427-35-7w31211635"/>
+<unit id="org.eclipse.birt.cshelp.feature.group" version="2.6.0.v20100427-35-7w31211716"/>
+<unit id="org.eclipse.birt.doc.feature.group" version="2.6.0.v20100427-35-7w31211414"/>
+<unit id="org.eclipse.birt.example.feature.group" version="2.6.0.v20100531-7F7e-DZRDKDDkQS"/>
+<unit id="org.eclipse.birt.source.feature.group" version="2.6.0.v20100617-9gF727DGKb0yl9AwWxpmbo35PwQ_"/>
+<repository location="http://download.eclipse.org/releases/helios"/>
+</location>
+<location path="/opt/orbit-org.slf4j-1.5.11" type="Directory"/>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.zest.sdk.feature.group" version="1.2.0.v20100519-2050-679-8COKLDAKOXIEU_VWSfZdM9XR"/>
+<repository location="http://download.eclipse.org/releases/helios"/>
+</location>
+<location path="/opt/Eclipse/eclipse-3.6-delta-pack/eclipse" type="Directory"/>
+<location path="/opt/ekkesCornerLogging/eclipse-target" type="Directory"/>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="gnu.io.rxtx.sdk.feature.group" version="2.1.7.4_v20071016-417C7DP1Bh_eEaQJBrHBHg"/>
+<unit id="gnu.io.rxtx.feature.group" version="2.1.7.4_v20071016-7B57e7UAXMAAqGAGf"/>
+<repository location="http://rxtx.qbang.org/eclipse"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" type="InstallableUnit">
+<unit id="org.eclipse.equinox.sdk.feature.group" version="3.6.0.v20100601-7H7R-7v8rtGVR34XkO3kfH3DUO07"/>
+<repository location="http://download.eclipse.org/releases/helios"/>
+</location>
+<location path="/opt/logback-0.9.19" type="Directory"/>
+<location path="/opt/Eclipse/dtp-sdk_1.8.0/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/swtbot/eclipse" type="Directory"/>
+<location path="/opt/ApacheWebConsole" type="Directory"/>
+<location path="/opt/Eclipse/apache/eclipse" type="Directory"/>
+<location path="/opt/easymock" type="Directory"/>
+</locations>
+</target>

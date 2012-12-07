@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" 
+  immediate="true" name="com.verticon.location.service">
+   <implementation class="com.verticon.location.service.internal.Component"/>
+   <service>
+      <provide interface="com.verticon.location.service.ILocationService"/>
+   </service>
+   <reference bind="setLocationServiceProvider" cardinality="0..n" interface="com.verticon.location.service.ILocationServiceProvider" name="ILocationServiceProvider" policy="dynamic" unbind="unsetLocationServiceProvider"/>
+</scr:component>

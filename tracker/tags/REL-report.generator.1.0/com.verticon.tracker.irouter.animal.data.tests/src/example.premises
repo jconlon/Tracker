@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ASCII"?>
+<com.verticon.tracker:Premises xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.verticon.tracker="http://www.verticon.com/ns/tracker/0.1.0" premisesId="H89234X" emailContact="jack_condor@bogus.net" uri="http://www.simplevalleyranch.net" name="Simple Valley Ranch">
+  <animals xsi:type="com.verticon.tracker:BovineBeef" birthDate="2008-05-16T17:00:01.401-0500" sex="Male" id="840456789012341" comments="Old Bully" beefBreed="DANISH JERSEY">
+    <tags id="840456789012341">
+      <events xsi:type="com.verticon.tracker:TagApplied" dateTime="2010-04-16T17:02:01.411-0500"/>
+      <events xsi:type="com.verticon.tracker:MovedIn" dateTime="2010-04-16T17:04:01.411-0500" sourcePin="HA92348"/>
+      <events xsi:type="com.verticon.tracker:Sighting" dateTime="2010-04-16T17:06:01.411-0500" location="//@locations.1"/>
+      <events xsi:type="com.verticon.tracker:WeighIn" dateTime="2010-04-16T17:08:01.411-0500" weight="229.0"/>
+      <events xsi:type="com.verticon.tracker:WeighIn" dateTime="2010-07-16T17:42:01.411-0500" weight="574.0"/>
+    </tags>
+  </animals>
+  <animals xsi:type="com.verticon.tracker:BovineBeef" birthDate="2008-04-16T17:00:01.401-0500" sex="Female" id="840456789012342" comments="Old Bessy" beefBreed="DANISH JERSEY">
+    <tags id="840456789012342">
+      <events xsi:type="com.verticon.tracker:TagApplied" dateTime="2010-04-16T17:10:01.411-0500"/>
+      <events xsi:type="com.verticon.tracker:MovedIn" dateTime="2010-04-16T17:12:01.411-0500" sourcePin="HA92348"/>
+      <events xsi:type="com.verticon.tracker:Sighting" dateTime="2010-04-16T17:14:01.411-0500" location="//@locations.1"/>
+      <events xsi:type="com.verticon.tracker:WeighIn" dateTime="2010-04-16T17:16:01.411-0500" weight="290.0"/>
+      <events xsi:type="com.verticon.tracker:WeighIn" dateTime="2010-07-16T17:44:01.411-0500" weight="536.0"/>
+    </tags>
+  </animals>
+  <animals xsi:type="com.verticon.tracker:BovineBeef" birthDate="2009-02-16T17:00:01.401-0600" sex="Male" id="840456789012343" comments="Young Billy" dam="840456789012342" sire="840456789012341" beefBreed="DANISH JERSEY">
+    <tags id="840456789012343">
+      <events xsi:type="com.verticon.tracker:TagApplied" dateTime="2010-04-16T17:18:01.411-0500"/>
+      <events xsi:type="com.verticon.tracker:MovedIn" dateTime="2010-04-16T17:20:01.411-0500" sourcePin="HA92348"/>
+      <events xsi:type="com.verticon.tracker:Sighting" dateTime="2010-04-16T17:22:01.411-0500" location="//@locations.1"/>
+      <events xsi:type="com.verticon.tracker:WeighIn" dateTime="2010-04-16T17:24:01.411-0500" weight="242.0"/>
+      <events xsi:type="com.verticon.tracker:WeighIn" dateTime="2010-07-16T17:46:01.411-0500" weight="537.0"/>
+    </tags>
+  </animals>
+  <animals xsi:type="com.verticon.tracker:BovineBeef" birthDate="2009-02-16T17:00:01.401-0600" sex="Neutered/castrated male" id="840456789012344" comments="Young Blackie" dam="840456789012342" sire="840456789012341" beefBreed="DANISH JERSEY">
+    <tags id="840456789012344">
+      <events xsi:type="com.verticon.tracker:TagApplied" dateTime="2010-04-16T17:26:01.411-0500"/>
+      <events xsi:type="com.verticon.tracker:MovedIn" dateTime="2010-04-16T17:28:01.411-0500" sourcePin="HA92348"/>
+      <events xsi:type="com.verticon.tracker:Sighting" dateTime="2010-04-16T17:30:01.411-0500" location="//@locations.1"/>
+      <events xsi:type="com.verticon.tracker:WeighIn" dateTime="2010-04-16T17:32:01.411-0500" weight="213.0"/>
+      <events xsi:type="com.verticon.tracker:WeighIn" dateTime="2010-07-16T17:48:01.411-0500" weight="592.0"/>
+    </tags>
+  </animals>
+  <animals xsi:type="com.verticon.tracker:BovineBeef" birthDate="2008-07-16T17:00:01.401-0500" sex="Neutered/castrated male" id="840456789012345" comments="Brownie" beefBreed="DANISH JERSEY">
+    <tags id="840456789012345">
+      <events xsi:type="com.verticon.tracker:TagApplied" dateTime="2010-04-16T17:34:01.411-0500"/>
+      <events xsi:type="com.verticon.tracker:MovedIn" dateTime="2010-04-16T17:36:01.411-0500" sourcePin="HA92348"/>
+      <events xsi:type="com.verticon.tracker:Sighting" dateTime="2010-04-16T17:38:01.411-0500" location="//@locations.1"/>
+      <events xsi:type="com.verticon.tracker:WeighIn" dateTime="2010-04-16T17:40:01.411-0500" weight="207.0"/>
+      <events xsi:type="com.verticon.tracker:WeighIn" dateTime="2010-07-16T17:50:01.411-0500" weight="583.0"/>
+    </tags>
+  </animals>
+  <unAppliedTags id="840456789012346">
+    <events xsi:type="com.verticon.tracker:TagAllocated" dateTime="2010-11-16T17:00:01.418-0600"/>
+  </unAppliedTags>
+  <unAppliedTags id="840456789012347">
+    <events xsi:type="com.verticon.tracker:TagAllocated" dateTime="2010-11-16T17:00:01.418-0600"/>
+  </unAppliedTags>
+  <locations name="West Forty"/>
+  <locations name="East Forty"/>
+  <locations name="North Forty"/>
+</com.verticon.tracker:Premises>

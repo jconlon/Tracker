@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_OIK3EXcpEeCzt8P0YKuJOA" name="model">
+  <packagedElement xmi:type="uml:Package" xmi:id="_Spo3IHcpEeCzt8P0YKuJOA" name="Setting Up"/>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_ehPXQHcpEeCzt8P0YKuJOA" name="Operator"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_haeOMHcpEeCzt8P0YKuJOA" name="Subsystem" useCase="_izLtkHcpEeCzt8P0YKuJOA _ucRQkHcpEeCzt8P0YKuJOA _0wlHQHcpEeCzt8P0YKuJOA __tnckHcpEeCzt8P0YKuJOA _OX6GwHcqEeCzt8P0YKuJOA _ZHvtkHcqEeCzt8P0YKuJOA _Y0CR8HcrEeCzt8P0YKuJOA">
+    <ownedComment xmi:id="_GgJD0HcrEeCzt8P0YKuJOA" annotatedElement="_0wlHQHcpEeCzt8P0YKuJOA">
+      <body>To optionally create a Metatype document to define custom events.</body>
+    </ownedComment>
+    <ownedComment xmi:id="_gLJpcHcrEeCzt8P0YKuJOA" annotatedElement="_OX6GwHcqEeCzt8P0YKuJOA">
+      <body>To group events so they can be added to animal histories as a single transaction.</body>
+    </ownedComment>
+    <ownedComment xmi:id="_wAkC8HcrEeCzt8P0YKuJOA" annotatedElement="_ZHvtkHcqEeCzt8P0YKuJOA">
+      <body>The primary document for holding data.</body>
+    </ownedComment>
+    <ownedComment xmi:id="_Nb5fkHcsEeCzt8P0YKuJOA" annotatedElement="_ucRQkHcpEeCzt8P0YKuJOA">
+      <body>Configure communication links to RFID readers and associate animal templates.</body>
+    </ownedComment>
+    <ownedComment xmi:id="_tVo4UHcsEeCzt8P0YKuJOA" annotatedElement="_izLtkHcpEeCzt8P0YKuJOA">
+      <body> Main conatiner to hold documents.</body>
+    </ownedComment>
+    <ownedUseCase xmi:id="_izLtkHcpEeCzt8P0YKuJOA" name="Create Projects" subject="_haeOMHcpEeCzt8P0YKuJOA"/>
+    <ownedUseCase xmi:id="_ucRQkHcpEeCzt8P0YKuJOA" name="Configure TagId Readers" subject="_haeOMHcpEeCzt8P0YKuJOA"/>
+    <ownedUseCase xmi:id="_0wlHQHcpEeCzt8P0YKuJOA" name="Create Custom Event Documents" subject="_haeOMHcpEeCzt8P0YKuJOA">
+      <extend xmi:id="_APQUkHcrEeCzt8P0YKuJOA" extendedCase="__tnckHcpEeCzt8P0YKuJOA" extensionLocation="_ARjaoHcrEeCzt8P0YKuJOA"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="__tnckHcpEeCzt8P0YKuJOA" name="Add Documents" subject="_haeOMHcpEeCzt8P0YKuJOA">
+      <extensionPoint xmi:id="_ARjaoHcrEeCzt8P0YKuJOA" name="point"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_OX6GwHcqEeCzt8P0YKuJOA" name="Create Animal Templates Documents" subject="_haeOMHcpEeCzt8P0YKuJOA">
+      <extend xmi:id="_BBdNkHcrEeCzt8P0YKuJOA" extendedCase="__tnckHcpEeCzt8P0YKuJOA" extensionLocation="_ARjaoHcrEeCzt8P0YKuJOA"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_ZHvtkHcqEeCzt8P0YKuJOA" name="Create Premises Documents" subject="_haeOMHcpEeCzt8P0YKuJOA">
+      <extend xmi:id="_Cx7FoHcrEeCzt8P0YKuJOA" extendedCase="__tnckHcpEeCzt8P0YKuJOA" extensionLocation="_ARjaoHcrEeCzt8P0YKuJOA"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_Y0CR8HcrEeCzt8P0YKuJOA" name="UseCase" subject="_haeOMHcpEeCzt8P0YKuJOA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_6RdOgHcsEeCzt8P0YKuJOA" name="An operator creates projects" memberEnd="_6RdOgXcsEeCzt8P0YKuJOA _6RdOhHcsEeCzt8P0YKuJOA">
+    <ownedEnd xmi:id="_6RdOgXcsEeCzt8P0YKuJOA" name="operator" type="_ehPXQHcpEeCzt8P0YKuJOA" association="_6RdOgHcsEeCzt8P0YKuJOA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6RdOgncsEeCzt8P0YKuJOA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6RdOg3csEeCzt8P0YKuJOA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_6RdOhHcsEeCzt8P0YKuJOA" name="create project" type="_izLtkHcpEeCzt8P0YKuJOA" association="_6RdOgHcsEeCzt8P0YKuJOA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6Rd1kHcsEeCzt8P0YKuJOA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6Rd1kXcsEeCzt8P0YKuJOA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_7uzWQHcsEeCzt8P0YKuJOA" name="An operator adds documents" memberEnd="_7uzWQXcsEeCzt8P0YKuJOA _7uz9UXcsEeCzt8P0YKuJOA">
+    <ownedEnd xmi:id="_7uzWQXcsEeCzt8P0YKuJOA" name="operator" type="_ehPXQHcpEeCzt8P0YKuJOA" association="_7uzWQHcsEeCzt8P0YKuJOA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7uzWQncsEeCzt8P0YKuJOA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7uz9UHcsEeCzt8P0YKuJOA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_7uz9UXcsEeCzt8P0YKuJOA" name="add documents" type="__tnckHcpEeCzt8P0YKuJOA" association="_7uzWQHcsEeCzt8P0YKuJOA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7uz9UncsEeCzt8P0YKuJOA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7uz9U3csEeCzt8P0YKuJOA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_89_GMHcsEeCzt8P0YKuJOA" name="An operator configures tagid readers" memberEnd="_89_GMXcsEeCzt8P0YKuJOA _89_tQncsEeCzt8P0YKuJOA">
+    <ownedEnd xmi:id="_89_GMXcsEeCzt8P0YKuJOA" name="operator" type="_ehPXQHcpEeCzt8P0YKuJOA" association="_89_GMHcsEeCzt8P0YKuJOA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_89_tQHcsEeCzt8P0YKuJOA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_89_tQXcsEeCzt8P0YKuJOA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_89_tQncsEeCzt8P0YKuJOA" name="configure tagid readers" type="_ucRQkHcpEeCzt8P0YKuJOA" association="_89_GMHcsEeCzt8P0YKuJOA">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_89_tQ3csEeCzt8P0YKuJOA" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_89_tRHcsEeCzt8P0YKuJOA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>

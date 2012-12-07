@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<premises:Premises xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:premises="http://www.verticon.com/tracker/0.4.2/premises" uri="urn:dn:com:cattlefeeding" administrator="Joe Morgan, General Manager" name="Poky Feeders, Inc." description="Commercial feedlot" phoneNumber="620-872-5834">
+  <location name="Poky Feeders, Inc." description="Custom finishers" phoneNumber="620-872-5834" street="600 East Road 30" city="Scott City" state="KS" postalCode="67871" longitude="-100.891424" latitude="38.313427" altitude="0.1" altitudeMode="relativeToGround" comments="Craig Hitchcock, Yard Manager"/>
+</premises:Premises>

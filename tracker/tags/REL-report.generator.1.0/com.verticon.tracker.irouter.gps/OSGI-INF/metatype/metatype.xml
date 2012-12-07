@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="GPS Proxy" id="com.verticon.tracker.irouter.gps"
+       description="Manages connections to a gps device and produces a Position for every GPS fix received." 
+       >
+   
+    <AD name="Connection uri" id="connection.uri" 
+    	type="String"
+    	required="true" 
+    	default="" 
+    	description="URI to connect to the gps device. Examples socket://192.168.0.116:2345 or btspp://001C881333D6:1;authenticate=false;encrypt=false;master=false"/> 
+    
+    <AD name="Wiring group name" id="tracker.wiring.group.name" 
+    	type="String"
+    	required="true" 
+    	default="one" 
+    	description="Name of the group of components that will be wired together."/>  
+    
+    <AD name="Connection retry interval seconds" id="connection.retry.seconds"
+    	required="true" 
+    	type="Long" 
+    	default="5"
+    	description="Seconds to wait before retrying to establish a connection to the device."/>
+    	
+    <AD name="Production output rate governer" id="product.output.rate"
+    	required="true" 
+    	type="Long" 
+    	default="1"
+    	description="Seconds to wait between Position productions."/>
+    	
+    <AD name="Latitude measurement error radians" id="latitude.error"
+    	required="true" 
+    	type="Double" 
+    	default="3"
+    	description="Latitude accuracy in radians. Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. "/>
+
+	<AD name="Longitude measurement error radians" id="longitude.error"
+    	required="true" 
+    	type="Double" 
+    	default="3"
+    	description="Longitude accuracy in radians. Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. "/>
+	
+	<AD name="Altitude measurement error meters" id="altitude.error"
+    	required="true" 
+    	type="Double" 
+    	default="3"
+    	description="Altitude accuracy in meters. Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. "/>
+	
+    <AD name="Producer scope" id="wireadmin.producer.scope" 
+		type="String"
+		required="true"
+		cardinality="1" 
+		default="gps.position"
+		description="The scope containing Position product. (Use full scope names)" />
+  
+    <AD name="Component container label"  id="tracker.monitor.label" 
+    	type="String"
+    	required="false" 
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="GPS Proxy"/> 
+    	
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.gps" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.gps"/>
+  </Designate>
+  
+  
+</metatype:MetaData>

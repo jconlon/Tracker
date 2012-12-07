@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" enabled="true" immediate="true" name="com.verticon.mongo.emf.resource">
+   <implementation class="com.verticon.mongo.emf.internal.ResourceSetFactoryImpl"/>
+   <service>
+      <provide interface="com.verticon.mongo.emf.api.IResourceSetFactory"/>
+   </service>
+   <reference bind="setInputStreamFactory" cardinality="1..1" interface="org.eclipselabs.mongo.emf.IInputStreamFactory" name="IInputStreamFactory" policy="static" unbind="unsetInputStreamFactory"/>
+   <reference bind="setOutputStreamFactory" cardinality="1..1" interface="org.eclipselabs.mongo.emf.IOutputStreamFactory" name="IOutputStreamFactory" policy="static" unbind="unsetOutputStreamFactory"/>
+</scr:component>

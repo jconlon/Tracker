@@ -1,0 +1,29 @@
+h1. iRouter Premises Features
+
+There are three iRouter features that facilitate the movement of information between iRouter network services, Premises documents and Premises Editor support tools. The following provides an overview of these features.  
+
+For details on these features see the  "Tracker Business Intelligence User Guide":http://tracker.verticon.com/Tracker/documentation/trackerUserGuide.pdf Desktop BI Toolkit Product, Provisioned Features section.
+
+h2. iRouter Premises Gateway
+
+The iRouter Premises Gateway feature is an iRouter feature that facilitates the bidirectional movement of information between _iRouter_ services and the _Tracker Premises Documents_.  
+
+The Premises Gateway feature contains three iRouter Component Factories and an Gateway EventHandler.
+* EID Reader Gateway is a component factory for creating Producer services that transform EID(Electronic ID) numbers read from RFID(Radio Frequency ID) Tag Readers into iRouter _EID number_ products. 
+* Measurement Event Gateway is a component factory for creating gateway services that transform iRouter _Measurement_ and _Position_ products into EventAdmin Measurement and Position Events. 
+* Gateway EventHandler a gateway support service that transforms Measurement and Position events coming from the iRouter into Premises animal history events.
+* Animal Life Data Gateway is a component factory for synchronizing animal life data to external devices.
+
+h2. iRouter Premises Common Producers
+
+The iRouter Premises Common Producers feature contains two iRouter Component Factories for creating composite Consumer and Producer services that produce iRouter Event and Animal products.	
+* Premises Event Producer
+** combine measurements, positions, generic events with Animal EIDs and Triggering states to produce iRouter Position and Measurement products that are identified with an animal EID;
+* PremisesAnimalProducer
+** combine Animal EIDs, Triggering states and referenced Animal template files to produce iRouter Animal products that can contain one or more of the standard Tracker Premises events.
+
+
+h2. MongoDB Tracker Store and Location Service
+
+The MongoDB Tracker Store and Location Service feature is a Component Factory that creates an iRouter Consumer service that consumes Tag, Animal and GenericEvent products and records that information to the MongoDB TrackerStore.   
+ 

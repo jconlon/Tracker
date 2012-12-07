@@ -1,0 +1,31 @@
+h1. Blood Weight iRouter Component
+
+h2. Functionality
+
+The Blood Weight iRouter component is a user configurable business domain controller. It acts as a wireAdmin controller between TruTest components and Mettler components.
+
+h2. Consumer Scopes
+
+* It consumes the following wireAdmin products from TruTest components.
+## transaction.state
+## animal.tag.number
+* It consumes the following wireAdmin products from Mettler components:
+## mettler.weight.measurement
+## animal.weight.measurement
+
+h2. Producer Scopes
+
+It produces the following wireAdmin products that are consumed by TruTest components. 
+# trutest.command.string
+
+h3. Component Diagram
+
+!{padding-left:3em}bwControlComponent.png!
+
+h3. System Diagram
+
+!bwControlSystem.png!
+
+h3. Business Logic Detailed Diagram
+
+!bwControlComponentLogic.png!

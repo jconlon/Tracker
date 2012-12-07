@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Mongo EMF Tests
+Bundle-SymbolicName: com.verticon.mongo.emf.tests
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.junit
+Import-Package: com.mongodb,
+ com.verticon.mongo.emf.api,
+ com.verticon.tracker;version="0.1.0",
+ org.eclipse.emf.common.util

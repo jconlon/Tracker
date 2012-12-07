@@ -1,0 +1,953 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/com.verticon.opengis.kml.core.model/src"
+    modelPluginID="com.verticon.opengis.kml.core.model" modelName="Ogckml22-trimmed"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.xsd.ecore.importer"
+    complianceLevel="6.0" copyrightFields="false" usedGenPackages="../../com.verticon.atom.authorlink.core.model/model/atom-author-link.genmodel#//authorlink ../../com.verticon.oasis.xal.core.model/model/xAL.genmodel#//xal">
+  <foreignModel>../../com.verticon.opengis.kml.core.schema/ogckml22-trimmed.xsd</foreignModel>
+  <genPackages prefix="Kml" basePackage="com.verticon.opengis" resource="XML" disposableProviderFactory="true"
+      loadInitialization="true" literalsInterface="false" extensibleProviderFactory="true"
+      fileExtensions="ogckml" ecorePackage="kml.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="kml.ecore#//AltitudeModeEnumType">
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//AltitudeModeEnumType/clampToGround"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//AltitudeModeEnumType/relativeToGround"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//AltitudeModeEnumType/absolute"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="kml.ecore#//ColorModeEnumType">
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//ColorModeEnumType/normal"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//ColorModeEnumType/random"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="kml.ecore#//DisplayModeEnumType">
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//DisplayModeEnumType/default"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//DisplayModeEnumType/hide"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="kml.ecore#//GridOriginEnumType">
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//GridOriginEnumType/lowerLeft"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//GridOriginEnumType/upperLeft"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="kml.ecore#//ItemIconStateEnumType">
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//ItemIconStateEnumType/open"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//ItemIconStateEnumType/closed"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//ItemIconStateEnumType/error"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//ItemIconStateEnumType/fetching0"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//ItemIconStateEnumType/fetching1"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//ItemIconStateEnumType/fetching2"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="kml.ecore#//ListItemTypeEnumType">
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//ListItemTypeEnumType/radioFolder"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//ListItemTypeEnumType/check"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//ListItemTypeEnumType/checkHideChildren"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//ListItemTypeEnumType/checkOffOnly"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="kml.ecore#//RefreshModeEnumType">
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//RefreshModeEnumType/onChange"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//RefreshModeEnumType/onInterval"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//RefreshModeEnumType/onExpire"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="kml.ecore#//ShapeEnumType">
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//ShapeEnumType/rectangle"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//ShapeEnumType/cylinder"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//ShapeEnumType/sphere"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="kml.ecore#//StyleStateEnumType">
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//StyleStateEnumType/normal"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//StyleStateEnumType/highlight"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="kml.ecore#//UnitsEnumType">
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//UnitsEnumType/fraction"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//UnitsEnumType/pixels"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//UnitsEnumType/insetPixels"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="kml.ecore#//ViewRefreshModeEnumType">
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//ViewRefreshModeEnumType/never"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//ViewRefreshModeEnumType/onRequest"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//ViewRefreshModeEnumType/onStop"/>
+      <genEnumLiterals ecoreEnumLiteral="kml.ecore#//ViewRefreshModeEnumType/onRegion"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="kml.ecore#//AltitudeModeEnumTypeObject"/>
+    <genDataTypes ecoreDataType="kml.ecore#//Angle180Type"/>
+    <genDataTypes ecoreDataType="kml.ecore#//Angle180TypeObject"/>
+    <genDataTypes ecoreDataType="kml.ecore#//Angle360Type"/>
+    <genDataTypes ecoreDataType="kml.ecore#//Angle360TypeObject"/>
+    <genDataTypes ecoreDataType="kml.ecore#//Angle90Type"/>
+    <genDataTypes ecoreDataType="kml.ecore#//Angle90TypeObject"/>
+    <genDataTypes ecoreDataType="kml.ecore#//Anglepos180Type"/>
+    <genDataTypes ecoreDataType="kml.ecore#//Anglepos180TypeObject"/>
+    <genDataTypes ecoreDataType="kml.ecore#//Anglepos90Type"/>
+    <genDataTypes ecoreDataType="kml.ecore#//Anglepos90TypeObject"/>
+    <genDataTypes ecoreDataType="kml.ecore#//ColorModeEnumTypeObject"/>
+    <genDataTypes ecoreDataType="kml.ecore#//ColorType"/>
+    <genDataTypes ecoreDataType="kml.ecore#//CoordinatesType"/>
+    <genDataTypes ecoreDataType="kml.ecore#//DateTimeType"/>
+    <genDataTypes ecoreDataType="kml.ecore#//DisplayModeEnumTypeObject"/>
+    <genDataTypes ecoreDataType="kml.ecore#//GridOriginEnumTypeObject"/>
+    <genDataTypes ecoreDataType="kml.ecore#//ItemIconStateEnumTypeObject"/>
+    <genDataTypes ecoreDataType="kml.ecore#//ItemIconStateType"/>
+    <genDataTypes ecoreDataType="kml.ecore#//ListItemTypeEnumTypeObject"/>
+    <genDataTypes ecoreDataType="kml.ecore#//RefreshModeEnumTypeObject"/>
+    <genDataTypes ecoreDataType="kml.ecore#//ShapeEnumTypeObject"/>
+    <genDataTypes ecoreDataType="kml.ecore#//StyleStateEnumTypeObject"/>
+    <genDataTypes ecoreDataType="kml.ecore#//UnitsEnumTypeObject"/>
+    <genDataTypes ecoreDataType="kml.ecore#//ViewRefreshModeEnumTypeObject"/>
+    <genClasses image="false" ecoreClass="kml.ecore#//AbstractLatLonBox">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//AbstractLatLonBox/north"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//AbstractLatLonBox/south"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//AbstractLatLonBox/east"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//AbstractLatLonBox/west"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//AbstractLatLonBox/abstractLatLonBoxSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//AbstractLatLonBox/abstractLatLonBoxSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//AbstractLatLonBox/abstractLatLonBoxObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//AbstractLatLonBox/abstractLatLonBoxObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kml.ecore#//AbstractObject">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//AbstractObject/objectSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//AbstractObject/objectSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//AbstractObject/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//AbstractObject/targetId"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kml.ecore#//AbstractView">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//AbstractView/abstractViewSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//AbstractView/abstractViewSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//AbstractView/abstractViewObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//AbstractView/abstractViewObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Alias">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Alias/targetHref"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Alias/sourceHref"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Alias/aliasSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Alias/aliasSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Alias/aliasObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Alias/aliasObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//BalloonStyle">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//BalloonStyle/color"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//BalloonStyle/bgColor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//BalloonStyle/textColor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//BalloonStyle/text"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//BalloonStyle/displayMode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//BalloonStyle/balloonStyleSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//BalloonStyle/balloonStyleSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//BalloonStyle/balloonStyleObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//BalloonStyle/balloonStyleObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//BasicLink">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//BasicLink/href"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//BasicLink/basicLinkSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//BasicLink/basicLinkSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//BasicLink/basicLinkObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//BasicLink/basicLinkObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Boundary">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Boundary/linearRing"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Boundary/boundarySimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Boundary/boundarySimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Boundary/boundaryObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Boundary/boundaryObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Camera">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Camera/longitude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Camera/latitude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Camera/altitude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Camera/heading"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Camera/tilt"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Camera/roll"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Camera/altitudeModeGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Camera/altitudeModeGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Camera/cameraSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Camera/cameraSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Camera/cameraObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Camera/cameraObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Change">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Change/abstractObjectGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Change/abstractObjectGroup"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kml.ecore#//ColorStyle">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ColorStyle/color"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ColorStyle/colorMode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//ColorStyle/abstractColorStyleSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ColorStyle/abstractColorStyleSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//ColorStyle/abstractColorStyleObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//ColorStyle/abstractColorStyleObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kml.ecore#//Container">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Container/abstractContainerSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Container/abstractContainerSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Container/abstractContainerObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Container/abstractContainerObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Create">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Create/abstractContainerGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Create/abstractContainerGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Data">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Data/displayName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Data/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Data/dataExtensionGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Data/dataExtension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Data/name"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Delete">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Delete/abstractFeatureGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Delete/abstractFeatureGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Document">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Document/schema"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Document/abstractFeatureGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Document/abstractFeatureGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Document/documentSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Document/documentSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Document/documentObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Document/documentObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//DocumentRoot">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/xMLNSPrefixMap"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/xSISchemaLocation"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractColorStyleGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractSubStyleGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractObjectGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractColorStyleObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/abstractColorStyleSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractContainerGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractFeatureGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractContainerObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/abstractContainerSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractFeatureObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/abstractFeatureSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractGeometryGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractGeometryObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/abstractGeometrySimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractLatLonBoxObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/abstractLatLonBoxSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractOverlayGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractOverlayObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/abstractOverlaySimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractStyleSelectorGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractStyleSelectorObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/abstractStyleSelectorSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractSubStyleObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/abstractSubStyleSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractTimePrimitiveGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractTimePrimitiveObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/abstractTimePrimitiveSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractViewGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/abstractViewObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/abstractViewSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/address"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/alias"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/aliasObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/aliasSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/altitude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/altitudeMode"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/altitudeModeGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/balloonStyle"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/balloonStyleObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/balloonStyleSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/basicLinkObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/basicLinkSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/begin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/bgColor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/bottomFov"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/boundaryObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/boundarySimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/camera"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/cameraObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/cameraSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/change"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/color"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/colorMode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/cookie"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/coordinates"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/create"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/data"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/dataExtension"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/delete"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/displayMode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/displayName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/document"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/documentObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/documentSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/drawOrder"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/east"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/end"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/expires"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/extendedData"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/extrude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/fill"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/flyToView"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/folder"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/folderObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/folderSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/gridOrigin"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/groundOverlay"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/groundOverlayObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/groundOverlaySimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/heading"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/hotSpot"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/href"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/httpQuery"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/icon"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/iconStyle"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/iconStyleObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/iconStyleSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/imagePyramid"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/imagePyramidObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/imagePyramidSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/innerBoundaryIs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/itemIcon"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/itemIconObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/itemIconSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/key"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/kml"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/kmlObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/kmlSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/labelStyle"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/labelStyleObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/labelStyleSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/latitude"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/latLonAltBox"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/latLonAltBoxObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/latLonAltBoxSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/latLonBox"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/latLonBoxObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/latLonBoxSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/leftFov"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/linearRing"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/linearRingObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/linearRingSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/lineString"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/lineStringObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/lineStringSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/lineStyle"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/lineStyleObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/lineStyleSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/link"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/linkDescription"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/linkName"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/linkObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/linkSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/linkSnippet"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/listItemType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/listStyle"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/listStyleObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/listStyleSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/location"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/locationObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/locationSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/lod"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/lodObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/lodSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/longitude"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/lookAt"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/lookAtObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/lookAtSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/maxAltitude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/maxFadeExtent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/maxHeight"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/maxLodPixels"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/maxSessionLength"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/maxSnippetLines"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/maxWidth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/message"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/metadata"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/minAltitude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/minFadeExtent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/minLodPixels"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/minRefreshPeriod"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/model"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/modelObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/modelSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/multiGeometry"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/multiGeometryObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/multiGeometrySimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/near"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/networkLink"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/networkLinkControl"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/networkLinkControlObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/networkLinkControlSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/networkLinkObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/networkLinkSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/north"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/objectSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/open"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/orientation"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/orientationObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/orientationSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/outerBoundaryIs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/outline"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/overlayXY"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/pair"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/pairObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/pairSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/phoneNumber"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/photoOverlay"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/photoOverlayObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/photoOverlaySimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/placemark"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/placemarkObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/placemarkSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/point"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/pointObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/pointSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/polygon"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/polygonObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/polygonSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/polyStyle"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/polyStyleObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/polyStyleSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/range"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/refreshInterval"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/refreshMode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/refreshVisibility"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/region"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/regionObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/regionSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/resourceMap"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/resourceMapObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/resourceMapSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/rightFov"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/roll"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/rotation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/rotationXY"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/scale"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/scale1"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/scaleObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/scaleSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/schema"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/schemaData"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/schemaDataExtension"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/schemaExtension"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/screenOverlay"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/screenOverlayObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/screenOverlaySimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/screenXY"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/shape"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/simpleData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/simpleField"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/simpleFieldExtension"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/size"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/snippet"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/snippet1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/sourceHref"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/south"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/state"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/style"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/styleMap"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/styleMapObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/styleMapSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/styleObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/styleSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/styleUrl"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/targetHref"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/tessellate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/text"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/textColor"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/tileSize"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/tilt"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/timeSpan"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/timeSpanObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/timeSpanSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/timeStamp"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/timeStampObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/timeStampSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/topFov"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/update"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/updateExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/updateOpExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/url"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/viewBoundScale"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/viewFormat"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/viewRefreshMode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/viewRefreshTime"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/viewVolume"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//DocumentRoot/viewVolumeObjectExtensionGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/viewVolumeSimpleExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/visibility"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/west"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/when"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/width"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/y"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//DocumentRoot/z"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//ExtendedData">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//ExtendedData/data"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//ExtendedData/schemaData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//ExtendedData/any"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kml.ecore#//Feature">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Feature/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Feature/visibility"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Feature/open"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Feature/author"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Feature/link"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Feature/address"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Feature/addressDetails"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Feature/phoneNumber"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Feature/snippet"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Feature/snippet1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Feature/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Feature/abstractViewGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Feature/abstractViewGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Feature/abstractTimePrimitiveGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Feature/abstractTimePrimitiveGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Feature/styleUrl"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Feature/abstractStyleSelectorGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Feature/abstractStyleSelectorGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Feature/region"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Feature/metadata"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Feature/extendedData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Feature/abstractFeatureSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Feature/abstractFeatureSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Feature/abstractFeatureObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Feature/abstractFeatureObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Folder">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Folder/abstractFeatureGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Folder/abstractFeatureGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Folder/folderSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Folder/folderSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Folder/folderObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Folder/folderObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kml.ecore#//Geometry">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Geometry/abstractGeometrySimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Geometry/abstractGeometrySimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Geometry/abstractGeometryObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Geometry/abstractGeometryObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//GroundOverlay">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//GroundOverlay/altitude"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//GroundOverlay/altitudeModeGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//GroundOverlay/altitudeModeGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//GroundOverlay/latLonBox"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//GroundOverlay/groundOverlaySimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//GroundOverlay/groundOverlaySimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//GroundOverlay/groundOverlayObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//GroundOverlay/groundOverlayObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//IconStyle">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//IconStyle/scale"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//IconStyle/heading"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//IconStyle/icon"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//IconStyle/hotSpot"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//IconStyle/iconStyleSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//IconStyle/iconStyleSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//IconStyle/iconStyleObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//IconStyle/iconStyleObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//ImagePyramid">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ImagePyramid/tileSize"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ImagePyramid/maxWidth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ImagePyramid/maxHeight"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ImagePyramid/gridOrigin"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//ImagePyramid/imagePyramidSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ImagePyramid/imagePyramidSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//ImagePyramid/imagePyramidObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//ImagePyramid/imagePyramidObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//ItemIcon">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ItemIcon/state"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ItemIcon/href"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//ItemIcon/itemIconSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ItemIcon/itemIconSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//ItemIcon/itemIconObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//ItemIcon/itemIconObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Kml">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Kml/networkLinkControl"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Kml/abstractFeatureGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Kml/abstractFeatureGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Kml/kmlSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Kml/kmlSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Kml/kmlObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Kml/kmlObjectExtensionGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Kml/hint"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//LabelStyle">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LabelStyle/scale"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//LabelStyle/labelStyleSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LabelStyle/labelStyleSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//LabelStyle/labelStyleObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//LabelStyle/labelStyleObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//LatLonAltBox">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LatLonAltBox/minAltitude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LatLonAltBox/maxAltitude"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//LatLonAltBox/altitudeModeGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//LatLonAltBox/altitudeModeGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//LatLonAltBox/latLonAltBoxSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LatLonAltBox/latLonAltBoxSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//LatLonAltBox/latLonAltBoxObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//LatLonAltBox/latLonAltBoxObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//LatLonBox">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LatLonBox/rotation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//LatLonBox/latLonBoxSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LatLonBox/latLonBoxSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//LatLonBox/latLonBoxObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//LatLonBox/latLonBoxObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//LinearRing">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LinearRing/extrude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LinearRing/tessellate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//LinearRing/altitudeModeGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//LinearRing/altitudeModeGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LinearRing/coordinates"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//LinearRing/linearRingSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LinearRing/linearRingSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//LinearRing/linearRingObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//LinearRing/linearRingObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//LineString">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LineString/extrude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LineString/tessellate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//LineString/altitudeModeGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//LineString/altitudeModeGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LineString/coordinates"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//LineString/lineStringSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LineString/lineStringSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//LineString/lineStringObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//LineString/lineStringObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//LineStyle">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LineStyle/width"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//LineStyle/lineStyleSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LineStyle/lineStyleSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//LineStyle/lineStyleObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//LineStyle/lineStyleObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Link">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Link/refreshMode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Link/refreshInterval"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Link/viewRefreshMode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Link/viewRefreshTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Link/viewBoundScale"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Link/viewFormat"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Link/httpQuery"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Link/linkSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Link/linkSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Link/linkObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Link/linkObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//ListStyle">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ListStyle/listItemType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ListStyle/bgColor"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//ListStyle/itemIcon"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ListStyle/maxSnippetLines"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//ListStyle/listStyleSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ListStyle/listStyleSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//ListStyle/listStyleObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//ListStyle/listStyleObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Location">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Location/longitude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Location/latitude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Location/altitude"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Location/locationSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Location/locationSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Location/locationObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Location/locationObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Lod">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Lod/minLodPixels"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Lod/maxLodPixels"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Lod/minFadeExtent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Lod/maxFadeExtent"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Lod/lodSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Lod/lodSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Lod/lodObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Lod/lodObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//LookAt">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LookAt/longitude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LookAt/latitude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LookAt/altitude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LookAt/heading"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LookAt/tilt"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LookAt/range"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//LookAt/altitudeModeGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//LookAt/altitudeModeGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//LookAt/lookAtSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//LookAt/lookAtSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//LookAt/lookAtObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//LookAt/lookAtObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Metadata">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Metadata/any"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Model/altitudeModeGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Model/altitudeModeGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Model/location"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Model/orientation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Model/scale"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Model/link"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Model/resourceMap"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Model/modelSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Model/modelSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Model/modelObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Model/modelObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//MultiGeometry">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//MultiGeometry/abstractGeometryGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//MultiGeometry/abstractGeometryGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//MultiGeometry/multiGeometrySimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//MultiGeometry/multiGeometrySimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//MultiGeometry/multiGeometryObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//MultiGeometry/multiGeometryObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//NetworkLink">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//NetworkLink/refreshVisibility"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//NetworkLink/flyToView"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//NetworkLink/url"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//NetworkLink/link1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//NetworkLink/networkLinkSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//NetworkLink/networkLinkSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//NetworkLink/networkLinkObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//NetworkLink/networkLinkObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//NetworkLinkControl">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//NetworkLinkControl/minRefreshPeriod"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//NetworkLinkControl/maxSessionLength"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//NetworkLinkControl/cookie"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//NetworkLinkControl/message"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//NetworkLinkControl/linkName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//NetworkLinkControl/linkDescription"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//NetworkLinkControl/linkSnippet"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//NetworkLinkControl/expires"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//NetworkLinkControl/update"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//NetworkLinkControl/abstractViewGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//NetworkLinkControl/abstractViewGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//NetworkLinkControl/networkLinkControlSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//NetworkLinkControl/networkLinkControlSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//NetworkLinkControl/networkLinkControlObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//NetworkLinkControl/networkLinkControlObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Orientation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Orientation/heading"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Orientation/tilt"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Orientation/roll"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Orientation/orientationSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Orientation/orientationSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Orientation/orientationObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Orientation/orientationObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kml.ecore#//Overlay">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Overlay/color"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Overlay/drawOrder"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Overlay/icon"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Overlay/abstractOverlaySimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Overlay/abstractOverlaySimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Overlay/abstractOverlayObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Overlay/abstractOverlayObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Pair">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Pair/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Pair/styleUrl"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Pair/abstractStyleSelectorGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Pair/abstractStyleSelectorGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Pair/pairSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Pair/pairSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Pair/pairObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Pair/pairObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//PhotoOverlay">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//PhotoOverlay/rotation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//PhotoOverlay/viewVolume"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//PhotoOverlay/imagePyramid"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//PhotoOverlay/point"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//PhotoOverlay/shape"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//PhotoOverlay/photoOverlaySimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//PhotoOverlay/photoOverlaySimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//PhotoOverlay/photoOverlayObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//PhotoOverlay/photoOverlayObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Placemark">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Placemark/abstractGeometryGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Placemark/abstractGeometryGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Placemark/placemarkSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Placemark/placemarkSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Placemark/placemarkObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Placemark/placemarkObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Point">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Point/extrude"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Point/altitudeModeGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Point/altitudeModeGroup"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Point/coordinates"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Point/pointSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Point/pointSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Point/pointObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Point/pointObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Polygon">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Polygon/extrude"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Polygon/tessellate"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Polygon/altitudeModeGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Polygon/altitudeModeGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Polygon/outerBoundaryIs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Polygon/innerBoundaryIs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Polygon/polygonSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Polygon/polygonSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Polygon/polygonObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Polygon/polygonObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//PolyStyle">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//PolyStyle/fill"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//PolyStyle/outline"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//PolyStyle/polyStyleSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//PolyStyle/polyStyleSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//PolyStyle/polyStyleObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//PolyStyle/polyStyleObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Region">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Region/latLonAltBox"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Region/lod"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Region/regionSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Region/regionSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Region/regionObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Region/regionObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//ResourceMap">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//ResourceMap/alias"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//ResourceMap/resourceMapSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ResourceMap/resourceMapSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//ResourceMap/resourceMapObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//ResourceMap/resourceMapObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Scale">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Scale/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Scale/y"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Scale/z"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Scale/scaleSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Scale/scaleSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Scale/scaleObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Scale/scaleObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Schema">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Schema/simpleField"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Schema/schemaExtensionGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Schema/schemaExtension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Schema/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Schema/name"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//SchemaData">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//SchemaData/simpleData"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//SchemaData/schemaDataExtensionGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//SchemaData/schemaDataExtension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//SchemaData/schemaUrl"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//ScreenOverlay">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//ScreenOverlay/overlayXY"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//ScreenOverlay/screenXY"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//ScreenOverlay/rotationXY"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//ScreenOverlay/size"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ScreenOverlay/rotation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//ScreenOverlay/screenOverlaySimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ScreenOverlay/screenOverlaySimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//ScreenOverlay/screenOverlayObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//ScreenOverlay/screenOverlayObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//SimpleData">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//SimpleData/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//SimpleData/name"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//SimpleField">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//SimpleField/displayName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//SimpleField/simpleFieldExtensionGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//SimpleField/simpleFieldExtension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//SimpleField/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//SimpleField/type"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Snippet">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Snippet/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Snippet/maxLines"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Style">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Style/iconStyle"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Style/labelStyle"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Style/lineStyle"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Style/polyStyle"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Style/balloonStyle"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//Style/listStyle"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Style/styleSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Style/styleSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Style/styleObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Style/styleObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//StyleMap">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference kml.ecore#//StyleMap/pair"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//StyleMap/styleMapSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//StyleMap/styleMapSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//StyleMap/styleMapObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//StyleMap/styleMapObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kml.ecore#//StyleSelector">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//StyleSelector/abstractStyleSelectorSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//StyleSelector/abstractStyleSelectorSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//StyleSelector/abstractStyleSelectorObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//StyleSelector/abstractStyleSelectorObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kml.ecore#//SubStyle">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//SubStyle/abstractSubStyleSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//SubStyle/abstractSubStyleSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//SubStyle/abstractSubStyleObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//SubStyle/abstractSubStyleObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="kml.ecore#//TimePrimitive">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//TimePrimitive/abstractTimePrimitiveSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//TimePrimitive/abstractTimePrimitiveSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//TimePrimitive/abstractTimePrimitiveObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//TimePrimitive/abstractTimePrimitiveObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//TimeSpan">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//TimeSpan/begin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//TimeSpan/end"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//TimeSpan/timeSpanSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//TimeSpan/timeSpanSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//TimeSpan/timeSpanObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//TimeSpan/timeSpanObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//TimeStamp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//TimeStamp/when"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//TimeStamp/timeStampSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//TimeStamp/timeStampSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//TimeStamp/timeStampObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//TimeStamp/timeStampObjectExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//Update">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Update/targetHref"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Update/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Update/create"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Update/delete"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Update/change"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//Update/updateOpExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Update/updateOpExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//Update/updateExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//Update/updateExtensionGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//vec2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//vec2/x"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//vec2/xunits"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//vec2/y"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//vec2/yunits"/>
+    </genClasses>
+    <genClasses ecoreClass="kml.ecore#//ViewVolume">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ViewVolume/leftFov"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ViewVolume/rightFov"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ViewVolume/bottomFov"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ViewVolume/topFov"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ViewVolume/near"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//ViewVolume/viewVolumeSimpleExtensionGroupGroup"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute kml.ecore#//ViewVolume/viewVolumeSimpleExtensionGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute kml.ecore#//ViewVolume/viewVolumeObjectExtensionGroupGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference kml.ecore#//ViewVolume/viewVolumeObjectExtensionGroup"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

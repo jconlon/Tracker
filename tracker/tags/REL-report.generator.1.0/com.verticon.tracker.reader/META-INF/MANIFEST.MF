@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tracker Tag Reader
+Bundle-SymbolicName: com.verticon.tracker.reader;singleton:=true
+Bundle-Version: 0.3.1.qualifier
+Bundle-Activator: com.verticon.tracker.reader.ReaderPlugin
+Bundle-Vendor: Verticon, Inc.
+Bundle-ActivationPolicy: lazy
+Import-Package: com.verticon.tracker;version="[0.1.0,2.0.0)",
+ com.verticon.tracker.editor.presentation;version="[0.1.0,2.0.0)",
+ com.verticon.tracker.editor.util;version="[0.1.0,2.0.0)",
+ org.osgi.service.event;version="1.1.0",
+ org.osgi.service.io;version="1.0.0",
+ org.slf4j;version="[1.5.5,1.6.0)"
+Export-Package: com.verticon.tracker.reader;version="1.0.0",
+ com.verticon.tracker.reader.views;version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.equinox.io;bundle-version="1.0.0",
+ org.eclipse.emf.transaction;bundle-version="1.4.0",
+ org.eclipse.ui;bundle-version="3.8.0"

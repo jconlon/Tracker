@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="build_all">
+   <import file="../com.verticon.tracker/build-macros.xml" />
+
+   <!-- ================================================= 
+        Build elements common to all versions of Eclipse
+     -->
+   <target name="build_common">
+      <init_properties />
+      <read_manifest />
+      <read_build />
+
+      <jar_lib target="common" lib="favoritessrc.zip">
+         <fileset dir=".">
+            <include name="${source.favorites.jar}" />
+         </fileset>
+      </jar_lib>
+
+   </target>
+
+   <!-- ================================================= 
+        Build elements specific to 3.0
+     -->
+   <target name="build_3.0" depends="build_common">
+
+      <compile_lib target="3.0"
+                   lib="favorites.jar"
+                   extraClasspath="
+         ../com.qualityeclipse.e30f.core.runtime/bin;
+         ../com.qualityeclipse.e30f.ui.workbench/bin;
+         ../com.qualityeclipse.e30p.core.commands/bin;
+         ../com.qualityeclipse.e30p.ui.workbench.commands/bin" />
+
+      <mkdir dir="${build.temp}/3.0/${Bundle-Proj}/out" />
+      <copy todir="${build.temp}/3.0/${Bundle-Proj}/out">
+         <fileset dir="." includes="META-INF/MANIFEST.MF" />
+      </copy>
+      <replace file="${build.temp}/3.0/${Bundle-Proj}/out/META-INF/MANIFEST.MF">
+         <replacetoken>Bundle-Localization: plugin</replacetoken>
+         <replacevalue>Bundle-Localization: plugin
+Bundle-ClassPath: favorites.jar</replacevalue>
+      </replace>
+      <replace file="${build.temp}/3.0/${Bundle-Proj}/out/META-INF/MANIFEST.MF">
+         <replacetoken> org.eclipse.ui.ide,</replacetoken>
+         <replacevalue> org.eclipse.ui.ide,
+ com.qualityeclipse.e30p.core.commands,
+ com.qualityeclipse.e30p.ui.workbench.commands,</replacevalue>
+      </replace>
+      
+      <dir_bundle target="3.0" type="plugins" />
+
+   </target>
+
+   <!-- ================================================= 
+        Build elements specific to 3.1
+     -->
+   <target name="build_3.1" depends="build_common">
+
+      <compile_dir target="3.1" />
+
+      <jar_bundle target="3.1" type="plugins">
+         <fileset dir="." includes="META-INF/MANIFEST.MF" />
+      </jar_bundle>
+
+   </target>
+
+   <!-- ================================================= 
+        Build elements for all versions
+     -->
+   <target name="build_all" depends="build_3.1, build_3.0">
+   </target>
+
+</project>

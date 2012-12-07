@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tracker Measurement Logger
+Bundle-SymbolicName: com.verticon.tracker.irouter.measurement.logger
+Bundle-Version: 0.2.1.qualifier
+Bundle-Vendor: Verticon, Inc.
+Service-Component: OSGI-INF/*.xml
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: com.verticon.tracker.irouter.common,
+ org.osgi.service.monitor;version="1.0.0",
+ org.osgi.service.wireadmin;version="1.0.0",
+ org.osgi.util.measurement;version="1.0.0",
+ org.slf4j;version="1.5.5"
+Bundle-ActivationPolicy: lazy
