@@ -52,4 +52,4 @@ refactor>copyTo
 
 2. A CopyTo dialog will show. Select the tags branch in the tree.
 
-3. In the lower part of the CopyTo dialog it will ask what name to use. Use REL-desktop.beta.0.7
+3. In the lower part of the CopyTo dialog it will ask what name to use. Use REL-desktop.beta.1.0
