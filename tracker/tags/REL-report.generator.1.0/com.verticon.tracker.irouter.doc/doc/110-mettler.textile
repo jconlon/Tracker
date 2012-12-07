@@ -1,0 +1,26 @@
+h1. Mettler Proxy Feature
+
+
+The Mettler Proxy feature is an iRouter _Proxy Component Factory_ that creates user configurable services[11] 
+that interfacing with "Mettler Toledo":http://en.wikipedia.org/wiki/Mettler_Toledo weight balance sensors[12]. 
+
+h2. Producer Scopes
+
+Mettler Proxy services produce @wireAdmin@ _Measurement_ products that are consumed by other iRouter 
+_Business Logic Component_ instances. 
+Mettler Service service _Measurement_ products contain weight values that represent the value of the item being weighed by the balance.  
+_Measurement_ products are identified[13] with a scope id of: @user-configurable-name.weight.measurement@
+where the prefix @user-configurable-name@ can be set by the administrator to distinguish the item being weighed.
+
+h2. Service Diagram
+
+!{padding-left:3em}images/mettlerComponent.png!
+
+h2. Notes
+
+fn11. Mettler Proxy services are implemented as WireAdmin Producer services.
+
+fn12. The Tracker Device Simulator product has implemented a simulator of the Mettler balance. This simulator can be used for testing and validating iRouter configurations utilizing Mettler Service Instances. 
+
+fn13. Scope names identify the information sent by a Producer service to a Consumer service. The iRouter determines connections based on scopes and wire group names.
+

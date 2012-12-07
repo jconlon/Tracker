@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Mongo EMF JSON Query Tests
+Bundle-SymbolicName: com.verticon.mongo.emf.json.query.test.system
+Bundle-Version: 0.1.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Service-Component: OSGI-INF/*.xml
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Import-Package: com.mongodb,
+ junit.framework;version="4.8.2",
+ org.eclipse.emf.common.util,
+ org.eclipselabs.mongo.emf,
+ org.hamcrest;version="1.3.0",
+ org.json,
+ org.junit;version="4.8.2",
+ org.slf4j;version="1.5.11"

@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="Tracker Livestock Business Intelligence Toolkit" uid="tracker_desktop_launch.product" id="com.verticon.tracker.product.desktop.application" application="org.eclipse.ui.ide.workbench" version="0.7.0.qualifier" useFeatures="true" includeLaunchers="true">
+
+   <aboutInfo>
+      <image path="/com.verticon.tracker.product.desktop/icons/cattle_lg.gif"/>
+      <text>
+         Tracker Livestock Business Intelligence Toolkit
+Version: {0}
+Build id: {1}
+
+(c) Copyright Verticon, Inc. 2012.  All rights reserved. 
+
+Visit http://tracker.verticon.com/index.html
+
+Tracker is powered by Eclipse technology and includes Eclipse plugins that can be installed and
+used with other Eclipse (3.8.1) based offerings.
+      </text>
+   </aboutInfo>
+
+   <configIni use="default">
+      <macosx>/com.verticon.tracker.product.desktop/config.ini</macosx>
+      <solaris>/com.verticon.tracker.product.desktop/config.ini</solaris>
+      <win32>/com.verticon.tracker.product.desktop/config.ini</win32>
+   </configIni>
+
+   <launcherArgs>
+      <vmArgs>-Dlogback.configurationFile=file:${workspace_loc}/com.verticon.tracker.tests/logback-test.xml 
+-Dlogback.application=TrackerLaunch
+-Dequinox.ds.perf=false
+-Dequinox.ds.print=false
+-Dstart.webserver=true
+-XX:MaxPermSize=512m
+-Xms1024m
+-Xmx1024m</vmArgs>
+      <vmArgsLin>-Xms256m
+-Xmx512m
+-XX:MaxPermSize=256m</vmArgsLin>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+      <vmArgsWin>-Xms256m
+-Xmx512m
+-XX:MaxPermSize=256m</vmArgsWin>
+   </launcherArgs>
+
+   <windowImages i16="/com.verticon.tracker.product.desktop/icons/cow_16.png" i32="/com.verticon.tracker.product.desktop/icons/cow_32.png" i48="/com.verticon.tracker.product.desktop/icons/cow_48.png"/>
+
+   <splash
+      location="com.verticon.tracker.product.desktop"
+      startupProgressRect="62,400,515,15"
+      startupMessageRect="7,225,441,20"
+      startupForegroundColor="ADD8E6" />
+   <launcher name="tracker">
+      <linux icon="/com.verticon.tracker.product.desktop/icons/cow.xpm"/>
+      <solaris/>
+      <win useIco="false">
+         <bmp
+            winSmallHigh="/com.verticon.tracker.product.desktop/icons/cow_16_32.bmp"
+            winMediumHigh="/com.verticon.tracker.product.desktop/icons/cow_32_32.bmp"
+            winLargeHigh="/com.verticon.tracker.product.desktop/icons/cow_48_32.bmp"/>
+      </win>
+   </launcher>
+
+   <intro introId="org.eclipse.ui.intro.universal"/>
+
+   <vm>
+   </vm>
+
+   <plugins>
+   </plugins>
+
+   <features>
+      <feature id="com.verticon.tracker.product.desktop"/>
+      <feature id="com.verticon.tracker.base.dep"/>
+      <feature id="com.verticon.tracker.product.desktop.doc"/>
+      <feature id="org.eclipse.platform"/>
+      <feature id="org.eclipse.equinox.p2.user.ui"/>
+      <feature id="org.eclipse.help"/>
+      <feature id="org.eclipse.equinox.p2.core.feature"/>
+      <feature id="org.eclipse.equinox.p2.rcp.feature"/>
+      <feature id="org.eclipse.rcp"/>
+      <feature id="org.eclipse.equinox.p2.extras.feature"/>
+      <feature id="com.verticon.agriculture.editor" version="1.0.0.qualifier"/>
+      <feature id="com.verticon.birt.report.engine.emitter.kml" version="0.1.1.qualifier"/>
+      <feature id="com.verticon.birt.report.engine.generator" version="1.0.0.qualifier"/>
+      <feature id="com.verticon.birt.report.loader" version="0.1.1.qualifier"/>
+      <feature id="com.verticon.geography.editor" version="0.1.5.qualifier"/>
+      <feature id="com.verticon.location.core.model" version="0.1.0.qualifier"/>
+      <feature id="com.verticon.location.service" version="0.2.0.qualifier"/>
+      <feature id="com.verticon.mongo.emf.json.query" version="0.1.0.qualifier"/>
+      <feature id="com.verticon.mongo.emf.oda" version="0.1.0.qualifier"/>
+      <feature id="com.verticon.mongo.emf.oda.ui" version="0.1.0.qualifier"/>
+      <feature id="com.verticon.mongo.emf.runtime" version="0.1.0.qualifier"/>
+      <feature id="com.verticon.osgi.metatype.core.model.editor" version="0.2.3.qualifier"/>
+      <feature id="com.verticon.tracker.birt" version="1.0.0.qualifier"/>
+      <feature id="com.verticon.tracker.editor" version="0.5.5.qualifier"/>
+      <feature id="com.verticon.tracker.export.wlic" version="0.3.1.qualifier"/>
+      <feature id="com.verticon.tracker.fair.editor" version="0.3.4.qualifier"/>
+      <feature id="com.verticon.tracker.fair.poi" version="0.2.1.qualifier"/>
+      <feature id="com.verticon.tracker.fair.report.pack" version="0.1.0.qualifier"/>
+      <feature id="com.verticon.tracker.irouter" version="0.2.2.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.bwcontrol" version="0.2.1.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.gps" version="1.0.0.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.gps.ui" version="1.0.0.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.mettler" version="0.1.2.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.premises.common" version="0.1.0.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.premises.gateway" version="0.1.6.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.trutest" version="1.0.0.qualifier"/>
+      <feature id="com.verticon.tracker.logging.logback" version="0.3.1.qualifier"/>
+      <feature id="com.verticon.tracker.ocl.query" version="0.4.1.qualifier"/>
+      <feature id="com.verticon.tracker.reader" version="0.4.3.qualifier"/>
+      <feature id="com.verticon.tracker.report.pack" version="0.1.1.qualifier"/>
+      <feature id="com.verticon.tracker.store" version="0.1.0.qualifier"/>
+      <feature id="com.verticon.tracker.store.mongo" version="0.1.0.qualifier"/>
+      <feature id="com.verticon.ui" version="0.1.0.qualifier"/>
+      <feature id="org.eclipse.datatools.connectivity.oda.designer.core.feature"/>
+      <feature id="org.eclipse.datatools.sqldevtools.results.feature"/>
+      <feature id="org.eclipse.datatools.enablement.feature"/>
+      <feature id="org.eclipse.datatools.doc.user"/>
+      <feature id="org.eclipse.ocl.examples"/>
+      <feature id="org.eclipse.emf.codegen.ui"/>
+      <feature id="org.eclipse.emf.ecore"/>
+      <feature id="org.eclipse.emf.oda.ecore"/>
+      <feature id="org.eclipse.datatools.enablement.oracle.feature"/>
+      <feature id="org.eclipse.draw2d"/>
+      <feature id="org.eclipse.datatools.enablement.oda.designer.feature"/>
+      <feature id="org.eclipse.datatools.enablement.jdt.feature"/>
+      <feature id="org.eclipse.wst.xml_core.feature"/>
+      <feature id="org.eclipse.emf.databinding.edit"/>
+      <feature id="org.eclipse.emf.common"/>
+      <feature id="org.eclipse.datatools.sqldevtools.ddl.feature"/>
+      <feature id="org.eclipse.emf.ecore.edit"/>
+      <feature id="org.eclipse.datatools.sqldevtools.schemaobjecteditor.feature"/>
+      <feature id="org.eclipse.wst.xml_ui.feature"/>
+      <feature id="org.eclipse.emf.ecore.editor"/>
+      <feature id="org.eclipse.datatools.enablement.ibm.feature"/>
+      <feature id="org.eclipse.emf.codegen.ecore"/>
+      <feature id="org.eclipse.emf.databinding"/>
+      <feature id="org.eclipse.datatools.enablement.jdbc.feature"/>
+      <feature id="org.eclipse.datatools.enablement.msft.feature"/>
+      <feature id="org.eclipse.datatools.sqldevtools.sqlbuilder.feature"/>
+      <feature id="org.eclipse.datatools.sqldevtools.parsers.feature"/>
+      <feature id="org.eclipse.datatools.enablement.sqlite.feature"/>
+      <feature id="org.eclipse.jdt"/>
+      <feature id="org.eclipse.emf.edit.ui"/>
+      <feature id="org.eclipse.datatools.enablement.sybase.feature"/>
+      <feature id="org.eclipse.emf.mapping"/>
+      <feature id="org.eclipse.emf.codegen.ecore.ui"/>
+      <feature id="org.eclipse.datatools.enablement.ingres.feature"/>
+      <feature id="org.eclipse.datatools.sqldevtools.ddlgen.feature"/>
+      <feature id="org.eclipse.datatools.sqldevtools.data.feature"/>
+      <feature id="org.eclipse.datatools.connectivity.oda.feature"/>
+      <feature id="org.eclipse.emf"/>
+      <feature id="org.eclipse.emf.edit"/>
+      <feature id="org.eclipse.datatools.enablement.apache.derby.feature"/>
+      <feature id="org.eclipse.wst.xml_userdoc.feature"/>
+      <feature id="org.eclipse.emf.oda.ecore.ui"/>
+      <feature id="org.eclipse.emf.converter"/>
+      <feature id="org.eclipse.ocl.uml"/>
+      <feature id="org.eclipse.datatools.enablement.hsqldb.feature"/>
+      <feature id="org.eclipse.datatools.enablement.mysql.feature"/>
+      <feature id="org.eclipse.datatools.connectivity.oda.designer.feature"/>
+      <feature id="org.eclipse.pde"/>
+      <feature id="org.eclipse.emf.common.ui"/>
+      <feature id="gnu.io.rxtx"/>
+      <feature id="org.eclipse.emf.mapping.ecore.editor"/>
+      <feature id="org.eclipse.ocl"/>
+      <feature id="org.eclipse.ocl.all"/>
+      <feature id="org.eclipse.datatools.enablement.postgresql.feature"/>
+      <feature id="org.eclipse.datatools.enablement.sap.feature"/>
+      <feature id="org.eclipse.datatools.enablement.oda.feature"/>
+      <feature id="org.eclipse.datatools.modelbase.feature"/>
+      <feature id="org.eclipse.gef"/>
+      <feature id="org.eclipse.datatools.connectivity.feature"/>
+      <feature id="org.eclipse.datatools.sqldevtools.feature"/>
+      <feature id="org.eclipse.wst.common_ui.feature"/>
+      <feature id="org.eclipse.emf.mapping.ecore"/>
+      <feature id="org.eclipse.wst.common_core.feature"/>
+      <feature id="org.eclipse.emf.mapping.ui"/>
+      <feature id="org.eclipse.emf.codegen"/>
+      <feature id="com.google.support.runtime" version="11.0.1.qualifier"/>
+      <feature id="com.mongodb" version="2.7.2.qualifier"/>
+      <feature id="org.apache.poi"/>
+      <feature id="org.eclipse.xsd.example"/>
+      <feature id="org.eclipse.emf.examples"/>
+      <feature id="org.eclipse.emf.sdk"/>
+      <feature id="org.eclipse.emf.source"/>
+      <feature id="org.eclipse.xsd.ecore.converter"/>
+      <feature id="org.eclipse.xsd.mapping.editor"/>
+      <feature id="org.eclipse.xsd.mapping"/>
+      <feature id="org.eclipse.xsd.editor"/>
+      <feature id="org.eclipse.emf.oda"/>
+      <feature id="org.eclipse.xsd.ecore.converter.source"/>
+      <feature id="org.eclipse.emf.oda.sdk"/>
+      <feature id="org.eclipse.emf.doc"/>
+      <feature id="org.eclipse.xsd"/>
+      <feature id="org.eclipse.xsd.sdk"/>
+      <feature id="org.eclipse.xsd.edit"/>
+      <feature id="org.eclipse.xsd.doc"/>
+      <feature id="org.eclipse.xsd.mapping.source"/>
+      <feature id="org.eclipse.emf.compare"/>
+      <feature id="org.eclipse.emf.compare.doc"/>
+      <feature id="org.eclipse.emf.compare.ide.ui"/>
+      <feature id="org.eclipse.emf.compare.rcp.ui"/>
+      <feature id="org.eclipse.emf.query"/>
+      <feature id="org.eclipse.emf.transaction"/>
+      <feature id="org.eclipse.emf.validation"/>
+      <feature id="org.eclipse.emf.workspace"/>
+      <feature id="org.eclipse.emf.workspace.doc"/>
+      <feature id="org.eclipse.xtext.sdk" version="2.2.1.v201112130541"/>
+      <feature id="org.eclipse.xtext.examples"/>
+      <feature id="org.eclipse.xtext.xtend2.sdk"/>
+      <feature id="org.eclipse.xtext.ui"/>
+      <feature id="org.eclipse.xtext.docs"/>
+      <feature id="org.eclipse.xtext.xbase"/>
+      <feature id="org.eclipse.xtext.xtext.ui"/>
+      <feature id="org.eclipse.xtext.runtime"/>
+      <feature id="org.eclipse.zest"/>
+      <feature id="org.eclipse.emf.query.ocl"/>
+      <feature id="org.eclipse.emf.validation.ocl"/>
+      <feature id="org.eclipse.ocl.all.sdk"/>
+      <feature id="org.eclipse.ocl.edit"/>
+      <feature id="org.eclipse.ocl.core.sdk"/>
+      <feature id="org.eclipse.ocl.ui"/>
+      <feature id="org.eclipse.ocl.doc"/>
+      <feature id="org.eclipse.ocl.source"/>
+      <feature id="org.eclipse.emf.query.sdk"/>
+      <feature id="org.eclipse.emf.query.doc"/>
+      <feature id="org.eclipse.wst.common_sdk.feature"/>
+      <feature id="org.eclipse.wst.common_ui.feature.source"/>
+      <feature id="org.eclipse.wst.jsdt_sdk.feature"/>
+      <feature id="org.eclipse.uml2.sdk"/>
+      <feature id="org.eclipse.uml2.source"/>
+      <feature id="org.eclipse.uml2.examples"/>
+      <feature id="org.eclipse.uml2.doc"/>
+      <feature id="org.eclipse.wst.jsdt.feature"/>
+      <feature id="org.eclipse.uml2"/>
+      <feature id="org.eclipse.birt"/>
+      <feature id="org.eclipse.birt.chart"/>
+      <feature id="org.eclipse.birt.chart.cshelp"/>
+      <feature id="org.eclipse.birt.chart.doc.isv"/>
+      <feature id="org.eclipse.birt.chart.osgi.runtime"/>
+      <feature id="org.eclipse.birt.cshelp"/>
+      <feature id="org.eclipse.birt.doc"/>
+      <feature id="org.eclipse.birt.doc.isv"/>
+      <feature id="org.eclipse.birt.report.designer.editor.xml.wtp"/>
+      <feature id="org.eclipse.birt.example"/>
+      <feature id="org.eclipse.emf.compare.ui.capabilities"/>
+      <feature id="org.eclipse.xpand.all"/>
+      <feature id="org.eclipse.xtend.ui"/>
+      <feature id="org.eclipse.xpand.ui"/>
+      <feature id="org.eclipse.xtend.dependencies"/>
+      <feature id="org.eclipse.xtend.backend.sdk"/>
+      <feature id="org.eclipse.xtend.middleend.xpand"/>
+      <feature id="org.eclipse.xpand.doc"/>
+      <feature id="org.eclipse.xtend.backend"/>
+      <feature id="org.eclipse.xtend.typesystem.emf"/>
+      <feature id="org.eclipse.xpand"/>
+      <feature id="org.eclipse.xpand.sdk"/>
+      <feature id="org.eclipse.xtend.backend.ui"/>
+      <feature id="org.eclipse.xtend.middleend.xtend"/>
+      <feature id="org.eclipse.xtend.typesystem.uml2"/>
+      <feature id="org.eclipse.xtend.backend.xsdtypes"/>
+      <feature id="org.eclipse.xtend.typesystem.uml2.source"/>
+      <feature id="org.eclipse.xtend.backend.uml2types"/>
+      <feature id="org.eclipse.xtend"/>
+      <feature id="org.eclipse.xtend.typesystem.emf.source"/>
+      <feature id="org.eclipse.xtend.ui.source"/>
+      <feature id="org.eclipse.xpand.support"/>
+      <feature id="org.eclipse.xtend.typesystem.xsd"/>
+      <feature id="org.eclipse.xpand.examples"/>
+      <feature id="org.eclipse.xpand.incremental"/>
+      <feature id="org.eclipse.emf.mwe2.runtime.sdk"/>
+      <feature id="org.eclipse.emf.mwe2.language.sdk"/>
+      <feature id="org.eclipse.wst.common.fproj"/>
+      <feature id="org.eclipse.wst.server_core.feature"/>
+      <feature id="org.eclipse.birt.integration.wtp"/>
+      <feature id="org.eclipse.xtext.ui.source"/>
+      <feature id="org.eclipse.emf.mwe2.language.sdk.source"/>
+      <feature id="org.eclipse.xtend.backend.ui.source"/>
+      <feature id="org.eclipse.xtend.typesystem.xsd.source"/>
+      <feature id="org.eclipse.emf.oda.ecore.ui.source"/>
+      <feature id="org.eclipse.wst.jsdt.feature.source"/>
+      <feature id="org.eclipse.emf.mapping.ecore.source"/>
+      <feature id="org.eclipse.wst.ws_wsdl15.feature"/>
+      <feature id="org.eclipse.wst.ws_core.feature"/>
+      <feature id="org.eclipse.jst.enterprise_core.feature"/>
+      <feature id="org.eclipse.xtend.dependencies.source"/>
+      <feature id="org.eclipse.wst.server_ui.feature"/>
+      <feature id="org.eclipse.xsd.editor.source"/>
+      <feature id="org.eclipse.xtext.runtime.source"/>
+      <feature id="org.eclipse.wst.web_ui.feature"/>
+      <feature id="org.eclipse.ocl.doc.source"/>
+      <feature id="org.eclipse.xpand.incremental.source"/>
+      <feature id="org.eclipse.xtext.xtext.ui.source"/>
+      <feature id="org.eclipse.emf.mapping.ecore.editor.source"/>
+      <feature id="org.eclipse.xtend.backend.xsdtypes.source"/>
+      <feature id="org.eclipse.jst.web_userdoc.feature"/>
+      <feature id="org.eclipse.wst.server_userdoc.feature"/>
+      <feature id="org.eclipse.wst.ws_userdoc.feature"/>
+      <feature id="org.eclipse.xtext.examples.source"/>
+      <feature id="org.eclipse.wst.common_core.feature.source"/>
+      <feature id="org.eclipse.xtext.xbase.source"/>
+      <feature id="org.eclipse.xtend.source"/>
+      <feature id="org.eclipse.jst.web_ui.feature"/>
+      <feature id="org.eclipse.xsd.edit.source"/>
+      <feature id="org.eclipse.jst.web_core.feature"/>
+      <feature id="org.eclipse.jst.common.fproj.enablement.jdt"/>
+      <feature id="org.eclipse.emf.mwe2.runtime.sdk.source"/>
+      <feature id="org.eclipse.jst.enterprise_userdoc.feature"/>
+      <feature id="org.eclipse.xpand.source"/>
+      <feature id="org.eclipse.emf.oda.source"/>
+      <feature id="org.eclipse.xtend.backend.source"/>
+      <feature id="org.eclipse.xtend.backend.uml2types.source"/>
+      <feature id="org.eclipse.xpand.ui.source"/>
+      <feature id="org.eclipse.xpand.examples.source"/>
+      <feature id="org.eclipse.wst.web_core.feature"/>
+      <feature id="org.eclipse.ocl.uml.source"/>
+      <feature id="org.eclipse.emf.mapping.ui.source"/>
+      <feature id="org.eclipse.wst.web_userdoc.feature"/>
+      <feature id="org.eclipse.xsd.example.source"/>
+      <feature id="org.eclipse.jst.enterprise_ui.feature"/>
+      <feature id="org.eclipse.emf.mapping.source"/>
+      <feature id="org.eclipse.ocl.ui.source"/>
+      <feature id="org.eclipse.xsd.mapping.editor.source"/>
+      <feature id="org.eclipse.emf.query.ocl.source"/>
+      <feature id="org.eclipse.xsd.source"/>
+      <feature id="org.eclipse.ocl.edit.source"/>
+      <feature id="org.eclipse.wst.ws_ui.feature"/>
+      <feature id="org.eclipse.ocl.examples.source"/>
+      <feature id="org.eclipse.emf.oda.ecore.source"/>
+      <feature id="org.eclipse.emf.query.source"/>
+      <feature id="org.eclipse.xsd.doc.source"/>
+      <feature id="org.eclipse.uml2.examples.source"/>
+      <feature id="org.eclipse.emf.compare.sdk"/>
+      <feature id="org.eclipse.birt.osgi.runtime"/>
+      <feature id="org.eclipse.core.runtime.feature"/>
+      <feature id="org.eclipse.emf.all"/>
+      <feature id="org.eclipse.equinox.core.feature"/>
+      <feature id="org.eclipse.emf.codegen.ui.source"/>
+      <feature id="org.eclipse.xtext.xtend2.sdk.source"/>
+      <feature id="org.eclipse.emf.codegen.source"/>
+      <feature id="org.eclipse.emf.ecore.edit.source"/>
+      <feature id="org.eclipse.emf.common.ui.source"/>
+      <feature id="org.eclipse.emf.ecore.editor.source"/>
+      <feature id="org.eclipse.emf.edit.source"/>
+      <feature id="org.eclipse.emf.databinding.source"/>
+      <feature id="org.eclipse.emf.codegen.ecore.source"/>
+      <feature id="org.eclipse.emf.codegen.ecore.ui.source"/>
+      <feature id="org.eclipse.emf.converter.source"/>
+      <feature id="org.eclipse.emf.examples.source"/>
+      <feature id="org.eclipse.emf.doc.source"/>
+      <feature id="org.eclipse.emf.databinding.edit.source"/>
+      <feature id="org.eclipse.emf.edit.ui.source"/>
+      <feature id="org.eclipse.emf.mwe.core" version="1.2.1.v201206110920"/>
+      <feature id="org.eclipse.emf.mwe.doc" version="1.2.1.v201206110920"/>
+      <feature id="org.eclipse.emf.mwe.ui" version="1.2.1.v201206110920"/>
+      <feature id="org.eclipselabs.mongo.emf.core.feature" version="0.7.0.201207021221"/>
+      <feature id="org.eclipse.datatools.common.doc.user"/>
+      <feature id="org.eclipse.datatools.connectivity.doc.user"/>
+      <feature id="org.eclipse.datatools.intro" version="1.10.1.v201208161415-26-7w312116392911"/>
+      <feature id="org.eclipse.birt.chart.integration.wtp"/>
+      <feature id="org.eclipse.xtend.sdk"/>
+   </features>
+
+   <configurations>
+      <plugin id="com.verticon.birt.report.loader" autoStart="true" startLevel="3" />
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.cm" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.io" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.metatype" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.wireadmin" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.update.configurator" autoStart="true" startLevel="3" />
+      <plugin id="org.osgilab.bundles.monitoradmin" autoStart="true" startLevel="0" />
+   </configurations>
+
+</product>

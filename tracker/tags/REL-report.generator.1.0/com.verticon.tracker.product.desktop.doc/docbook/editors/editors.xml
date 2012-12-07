@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" 
+ "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter>
+  	<?dbhtml filename="editors/editors.html" ?>
+	<title>Provisioned Editors</title>
+	<para>Livestock producers, processors and auditors require tools for
+	modeling, recording, editing, and reporting on livestock operational information. These tools
+	must be able to meet requirements common to each type of livestock operation but also be capable of adapting to 
+	specific use cases. For each use case the essential consideration is how to structure 
+	or <emphasis>model</emphasis> the operational data to ensure vital information can be 
+	efficiently captured, stored, analyzed, and utilized in a operationally valuable way.
+	</para>
+	
+	<para>Common operational use cases are analyzed, then modeled by Tracker business analysts resulting
+	in concise <emphasis>data model</emphasis> specifications.  From these data model specifications 
+	Tracker engineers craft use case specific editors, tools, and utilities which are then
+    delivered as Tracker features to end users.
+	</para>
+	
+	<para>Tracker Business Intelligence Features
+	consist of the following data model specific editors:
+	<itemizedlist mark='bullet'>
+				<listitem>
+				  <para>Premises Editor, is the primary Tracker Livestock editor and its associated data model 
+						is often extended by the other data model editors;
+				  </para>
+				</listitem>
+				<listitem>
+					 <para>The Geography Editor is an open source desktop solution for authoring, managing and integrating
+      					state of the art Geographic Information System <acronym>GIS</acronym> technologies based on the 
+      					<ulink url="http://www.opengeospatial.org/"> <citetitle>OpenGIS</citetitle></ulink> 
+      					Key Hole Markup Language <acronym>KML</acronym>;</para>
+				</listitem>
+				<listitem>
+					<para>Fair Editor, extends the Premises Editor to model and document people and animals at a 
+						Livestock Exhibition. The Premises Editor and the Fair Editor are the initial Tracker editors.
+					</para>
+				</listitem>
+				<listitem>
+					<para>Metatype Model Editor, is a used to create configuration documents that extend the 
+					functionality of core Tracker Features;</para>
+				</listitem>
+				<listitem>
+					<para>Agriculture Editor is a solution for documenting, managing and visualizing geographic livestock herd distributions, individual 
+      				animal locations, and animal movements within and between premises locations.</para>
+      				<para>The Agriculture Editor and Location Service is a suite of tools that integrates state of 
+      				the art Geographic Information System <acronym>GIS</acronym> technologies based on the 
+      				<ulink url="http://www.opengeospatial.org/"> <citetitle>OpenGIS</citetitle></ulink> Key Hole Markup 
+     				 Language<acronym>KML</acronym> with Tracker Premises livestock management information;</para>
+				</listitem>
+				<listitem>
+					<para>Custom Editors, are editors used to create customer specific data model documents that
+					meet unique customer use-case requirements.</para>
+				</listitem>
+			</itemizedlist>
+ 		</para>
+
+</chapter>
+	

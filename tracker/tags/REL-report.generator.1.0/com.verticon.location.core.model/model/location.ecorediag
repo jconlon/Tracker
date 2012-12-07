@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_V4V1MMSZEeGKZMulm04rlA" type="EcoreTools" name="location.ecorediag" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_V4vd0MSZEeGKZMulm04rlA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_V4wE4MSZEeGKZMulm04rlA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_V4wr8MSZEeGKZMulm04rlA" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_V4x6EMSZEeGKZMulm04rlA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="location.ecore#//Location/name"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V4x6EcSZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V4yhIMSZEeGKZMulm04rlA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="location.ecore#//Location/description"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V4yhIcSZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V4yhIsSZEeGKZMulm04rlA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="location.ecore#//Location/phoneNumber"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V4yhI8SZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V4yhJMSZEeGKZMulm04rlA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="location.ecore#//Location/street"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V4yhJcSZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V4zIMMSZEeGKZMulm04rlA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="location.ecore#//Location/city"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V4zIMcSZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V4zIMsSZEeGKZMulm04rlA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="location.ecore#//Location/state"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V4zIM8SZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V4zINMSZEeGKZMulm04rlA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="location.ecore#//Location/postalCode"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V4zINcSZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V4zvQMSZEeGKZMulm04rlA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="location.ecore#//Location/country"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V4zvQcSZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V4zvQsSZEeGKZMulm04rlA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="location.ecore#//Location/longitude"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V4zvQ8SZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V4zvRMSZEeGKZMulm04rlA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="location.ecore#//Location/latitude"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V4zvRcSZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V40WUMSZEeGKZMulm04rlA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="location.ecore#//Location/altitude"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V40WUcSZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V40WUsSZEeGKZMulm04rlA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="location.ecore#//Location/altitudeMode"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V40WU8SZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V40WVMSZEeGKZMulm04rlA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="location.ecore#//Location/comments"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V40WVcSZEeGKZMulm04rlA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_V4wr8cSZEeGKZMulm04rlA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_V4wr8sSZEeGKZMulm04rlA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_V4wr88SZEeGKZMulm04rlA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_V4xTAMSZEeGKZMulm04rlA" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_V409YMSZEeGKZMulm04rlA" type="2002">
+        <element xmi:type="ecore:EOperation" href="location.ecore#//Location/getCoordinates"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V409YcSZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V409YsSZEeGKZMulm04rlA" type="2002">
+        <element xmi:type="ecore:EOperation" href="location.ecore#//Location/getAddress"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V409Y8SZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V41kcMSZEeGKZMulm04rlA" type="2002">
+        <element xmi:type="ecore:EOperation" href="location.ecore#//Location/containsPoint"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V41kccSZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V41kcsSZEeGKZMulm04rlA" type="2002">
+        <element xmi:type="ecore:EOperation" href="location.ecore#//Location/locate"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V41kc8SZEeGKZMulm04rlA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_V4xTAcSZEeGKZMulm04rlA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_V4xTAsSZEeGKZMulm04rlA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_V4xTA8SZEeGKZMulm04rlA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_V4vd0cSZEeGKZMulm04rlA" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="location.ecore#//Location"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_V4vd0sSZEeGKZMulm04rlA" x="204" y="120" width="249" height="326"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_V42ykMSZEeGKZMulm04rlA" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_V43ZoMSZEeGKZMulm04rlA" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_V44AsMSZEeGKZMulm04rlA" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_V44nwMSZEeGKZMulm04rlA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="location.ecore#//AltitudeMode/absolute"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V44nwcSZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V44nwsSZEeGKZMulm04rlA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="location.ecore#//AltitudeMode/clampToGround"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V44nw8SZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V44nxMSZEeGKZMulm04rlA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="location.ecore#//AltitudeMode/relativeToGround"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V44nxcSZEeGKZMulm04rlA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_V44AscSZEeGKZMulm04rlA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_V44AssSZEeGKZMulm04rlA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_V44As8SZEeGKZMulm04rlA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_V42ykcSZEeGKZMulm04rlA" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="location.ecore#//AltitudeMode"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_V42yksSZEeGKZMulm04rlA" x="24" y="588"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_V45O0MSZEeGKZMulm04rlA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_V45O08SZEeGKZMulm04rlA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_V45O1MSZEeGKZMulm04rlA" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_V4515MSZEeGKZMulm04rlA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="location.ecore#//Area/name"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V4515cSZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V4515sSZEeGKZMulm04rlA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="location.ecore#//Area/boundary"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V45158SZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V46c8MSZEeGKZMulm04rlA" type="2001">
+        <element xmi:type="ecore:EAttribute" href="location.ecore#//Area/comments"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V46c8cSZEeGKZMulm04rlA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_V45O1cSZEeGKZMulm04rlA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_V45O1sSZEeGKZMulm04rlA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_V45O18SZEeGKZMulm04rlA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_V4514MSZEeGKZMulm04rlA" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_V46c8sSZEeGKZMulm04rlA" type="2002">
+        <element xmi:type="ecore:EOperation" href="location.ecore#//Area/getAreaMeasurement"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V46c88SZEeGKZMulm04rlA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_V47EAMSZEeGKZMulm04rlA" type="2002">
+        <element xmi:type="ecore:EOperation" href="location.ecore#//Area/containsPoint"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_V47EAcSZEeGKZMulm04rlA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_V4514cSZEeGKZMulm04rlA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_V4514sSZEeGKZMulm04rlA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_V45148SZEeGKZMulm04rlA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_V45O0cSZEeGKZMulm04rlA" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="location.ecore#//Area"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_V45O0sSZEeGKZMulm04rlA" x="228" y="516" width="231" height="135"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_V47rEMSZEeGKZMulm04rlA" type="1004">
+    <children xmi:type="notation:Node" xmi:id="_V485MMSZEeGKZMulm04rlA" type="4008"/>
+    <children xmi:type="notation:Node" xmi:id="_V485McSZEeGKZMulm04rlA" type="4009"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_V47rEcSZEeGKZMulm04rlA" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EDataType" href="location.ecore#//PointFormatException"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_V47rEsSZEeGKZMulm04rlA" x="672" y="228"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_dSkyIMSZEeGKZMulm04rlA" type="Text" fontName="Sans" fontHeight="36" bold="true" description="Location MetaModel">
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_dSkyIcSZEeGKZMulm04rlA" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_dSkyIsSZEeGKZMulm04rlA" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_dSkyI8SZEeGKZMulm04rlA" x="140" y="-16" width="649"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_dSkyJMSZEeGKZMulm04rlA" type="Text" fontName="Sans" fontHeight="28" description="Package URI http://www.verticon.com/location/1.0/loc  ">
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_dSkyJcSZEeGKZMulm04rlA" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_dSkyJsSZEeGKZMulm04rlA" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_dSkyJ8SZEeGKZMulm04rlA" x="20" y="56"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_pT93ke1CEeGiZ5SB6-9z2g" type="1004">
+    <children xmi:type="notation:Node" xmi:id="_pUAT0O1CEeGiZ5SB6-9z2g" type="4008"/>
+    <children xmi:type="notation:Node" xmi:id="_pUA64O1CEeGiZ5SB6-9z2g" type="4009"/>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_pT93ku1CEeGiZ5SB6-9z2g" fontColor="4210752" fontName="Sans" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EDataType" href="location.ecore#//Polygon"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_pT93k-1CEeGiZ5SB6-9z2g" x="715" y="419"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_V4V1McSZEeGKZMulm04rlA"/>
+  <element xmi:type="ecore:EPackage" href="location.ecore#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_V49gQMSZEeGKZMulm04rlA" type="3002" source="_V4vd0MSZEeGKZMulm04rlA" target="_V45O0MSZEeGKZMulm04rlA">
+    <children xmi:type="notation:Node" xmi:id="_V4-HUMSZEeGKZMulm04rlA" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_V4-HUcSZEeGKZMulm04rlA" x="-12" y="-42"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_V4-uYMSZEeGKZMulm04rlA" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_V4-uYcSZEeGKZMulm04rlA" x="-12" y="37"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_V49gQcSZEeGKZMulm04rlA" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_V49gQsSZEeGKZMulm04rlA" fontColor="4210752" fontName="Sans" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="location.ecore#//Location/areas"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_V49gQ8SZEeGKZMulm04rlA" points="[0, 0, 0, 60]$[0, -60, 0, 0]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_V6BQMMSZEeGKZMulm04rlA" id="(0.49885057471264366,0.0)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_V6B3QMSZEeGKZMulm04rlA" id="(0.49885057471264366,1.0)"/>
+  </edges>
+</notation:Diagram>

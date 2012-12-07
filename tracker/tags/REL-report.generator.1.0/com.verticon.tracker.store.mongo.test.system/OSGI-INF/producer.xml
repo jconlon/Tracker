@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
+   name="com.verticon.tracker.store.mongo.test.system.mock.producer">
+   <implementation 
+    class="com.verticon.tracker.store.mongo.test.system.internal.MockProducer"/>
+   <property name="tracker.wiring.group.name" type="String" value="test"/>
+   <property name="wireadmin.producer.scope">
+    premises.tag
+animal.weight
+gps.position
+mettler.weight
+premises.animald
+   </property>
+   <property name="service.pid" type="String" value="mongo.test.mockProducer"/>
+   <service>
+      <provide interface="org.osgi.service.wireadmin.Producer"/>
+      <provide interface="com.verticon.tracker.store.mongo.test.system.internal.IController"/>
+   </service>
+   <property name="com.verticon.tracker.mongo.test" type="String" value="testOne"/>
+</scr:component>

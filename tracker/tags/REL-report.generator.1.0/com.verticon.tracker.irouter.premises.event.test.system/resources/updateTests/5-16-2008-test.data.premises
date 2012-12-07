@@ -1,0 +1,1636 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<premises:Premises xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:premises="http://www.verticon.com/tracker/0.4.2/premises" premisesId="003ALKM" emailContact="jcondor@verticon.com" uri="urn:pin:003ALKM" administrator="Jack Condor" name="Test Premises" description="Test Data from " phoneNumber="404-971-8926">
+  <animals xmi:type="premises:BovineBeef" id="840003002956006">
+    <tags id="840003002956006">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T15:47:57.515-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T15:47:58.515-0500" electronicallyRead="true" sourcePin="003CZKO"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T15:47:59.515-0500" electronicallyRead="true" weight="992.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T15:48:00.515-0500" electronicallyRead="true" destinationPin="003CZKO"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956007">
+    <tags id="840003002956007">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T15:54:58.078-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T15:54:59.078-0500" electronicallyRead="true" sourcePin="003CZKO"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T15:55:00.078-0500" electronicallyRead="true" weight="794.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T15:55:01.078-0500" electronicallyRead="true" destinationPin="003CZKO"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956008">
+    <tags id="840003002956008">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T15:55:23.156-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T15:55:24.156-0500" electronicallyRead="true" sourcePin="003CZKO"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T15:55:25.156-0500" electronicallyRead="true" weight="722.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T15:55:26.156-0500" electronicallyRead="true" destinationPin="003CZKO"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956009" beefBreed="WELSH BLACK">
+    <tags id="840003002956009">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T15:55:57.609-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T15:55:58.609-0500" electronicallyRead="true" sourcePin="003CZKO"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T15:55:59.609-0500" electronicallyRead="true" weight="834.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T15:56:00.609-0500" electronicallyRead="true" destinationPin="003CZKO"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956010" comments="">
+    <tags id="840003002956010">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T15:56:40.875-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T15:56:41.875-0500" electronicallyRead="true" sourcePin="003CZKO"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T15:56:42.875-0500" electronicallyRead="true" weight="990.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T15:56:43.875-0500" electronicallyRead="true" destinationPin="003CZKO"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956011">
+    <tags id="840003002956011">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:05:48.859-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:05:49.859-0500" electronicallyRead="true" sourcePin="005G5I6"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:05:50.859-0500" electronicallyRead="true" weight="678.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:05:51.859-0500" electronicallyRead="true" destinationPin="005G5I6"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956012">
+    <tags id="840003002956012">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:06:01.562-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:06:02.562-0500" electronicallyRead="true" sourcePin="005G5I6"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:06:03.562-0500" electronicallyRead="true" weight="718.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:06:04.562-0500" electronicallyRead="true" destinationPin="005G5I6"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956013">
+    <tags id="840003002956013">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:06:04.078-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:06:05.078-0500" electronicallyRead="true" sourcePin="005G5I6"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:06:06.078-0500" electronicallyRead="true" weight="800.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:06:07.078-0500" electronicallyRead="true" destinationPin="005G5I6"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956014">
+    <tags id="840003002956014">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:20:06.437-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:20:07.437-0500" electronicallyRead="true" sourcePin="005KGH6"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:20:08.437-0500" electronicallyRead="true" weight="954.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:20:09.437-0500" electronicallyRead="true" destinationPin="005KGH6"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956015">
+    <tags id="840003002956015">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:19:27.500-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:19:28.500-0500" electronicallyRead="true" sourcePin="005KGH6"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:19:29.500-0500" electronicallyRead="true" weight="908.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:19:30.500-0500" electronicallyRead="true" destinationPin="005KGH6"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956016">
+    <tags id="840003002956016">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:22:30.515-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:22:31.515-0500" electronicallyRead="true" sourcePin="005KGH6"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:22:32.515-0500" electronicallyRead="true" weight="816.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:22:33.515-0500" electronicallyRead="true" destinationPin="005KGH6"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956017">
+    <tags id="840003002956017">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:22:37.734-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:22:38.734-0500" electronicallyRead="true" sourcePin="005KGH6"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:22:39.734-0500" electronicallyRead="true" weight="968.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:22:40.734-0500" electronicallyRead="true" destinationPin="005KGH6"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956018">
+    <tags id="840003002956018">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:22:40.796-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:22:41.796-0500" electronicallyRead="true" sourcePin="005KGH6"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:22:42.796-0500" electronicallyRead="true" weight="968.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:22:43.796-0500" electronicallyRead="true" destinationPin="005KGH6"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956019">
+    <tags id="840003002956019">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:26:44.781-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:26:45.781-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:26:46.781-0500" electronicallyRead="true" weight="756.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:26:47.781-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956020">
+    <tags id="840003002956020">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:26:47.406-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:26:48.406-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:26:49.406-0500" electronicallyRead="true" weight="722.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:26:50.406-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956021">
+    <tags id="840003002956021">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:33:32.171-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:33:33.171-0500" electronicallyRead="true" sourcePin="003XJ9G"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:33:34.171-0500" electronicallyRead="true" weight="770.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:33:35.171-0500" electronicallyRead="true" destinationPin="003XJ9G"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956022">
+    <tags id="840003002956022">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:33:36.328-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:33:37.328-0500" electronicallyRead="true" sourcePin="003XJ9G"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:33:38.328-0500" electronicallyRead="true" weight="570.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:33:39.328-0500" electronicallyRead="true" destinationPin="003XJ9G"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956023">
+    <tags id="840003002956023">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:40:19.703-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:40:20.703-0500" electronicallyRead="true" sourcePin="0054TBG"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:40:21.703-0500" electronicallyRead="true" weight="954.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:40:22.703-0500" electronicallyRead="true" destinationPin="0054TBG"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956024">
+    <tags id="840003002956024">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:40:48.234-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:40:49.234-0500" electronicallyRead="true" sourcePin="0054TBG"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:40:50.234-0500" electronicallyRead="true" weight="728.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:40:51.234-0500" electronicallyRead="true" destinationPin="0054TBG"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956025">
+    <tags id="840003002956025">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:40:51.734-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:40:52.734-0500" electronicallyRead="true" sourcePin="0054TBG"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:40:53.734-0500" electronicallyRead="true" weight="854.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:40:54.734-0500" electronicallyRead="true" destinationPin="0054TBG"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956026">
+    <tags id="840003002956026">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:44:40.531-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:44:41.531-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:44:42.531-0500" electronicallyRead="true" weight="954.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:44:43.531-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956027">
+    <tags id="840003002956027">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:47:03.906-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:47:04.906-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:47:05.906-0500" electronicallyRead="true" weight="870.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:47:06.906-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956028">
+    <tags id="840003002956028">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:47:07.078-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:47:08.078-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:47:09.078-0500" electronicallyRead="true" weight="832.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:47:10.078-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956029" comments="Colin Jackobson">
+    <tags id="840003002956029">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:53:28.531-0500" electronicallyRead="true" comments="Colin Jackobson"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T16:53:29.531-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T16:53:30.531-0500" electronicallyRead="true" comments="Colin Jacobson" weight="778.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T16:53:31.531-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956031">
+    <tags id="840003002956030">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T16:58:44.234-0500" electronicallyRead="true"/>
+    </tags>
+    <tags id="840003002956031">
+      <events xmi:type="premises:ReplacedTag" dateTime="2008-04-11T16:59:07.328-0500" electronicallyRead="true" oldTag="#//@animals.24/@tags.0"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:00:16.109-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:00:17.109-0500" electronicallyRead="true" comments="Chase Nottistad" weight="690.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:00:18.109-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956032">
+    <tags id="840003002956032">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:00:19.921-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:00:20.921-0500" electronicallyRead="true" sourcePin="006RI5K"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:00:21.921-0500" electronicallyRead="true" comments="Kyle Vesback" weight="940.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:00:22.921-0500" electronicallyRead="true" destinationPin="006RI5K"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956033">
+    <tags id="840003002956033">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:00:24.406-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:00:25.406-0500" electronicallyRead="true" sourcePin="006RI5K"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:00:26.406-0500" electronicallyRead="true" comments="Trent Vesbak" weight="832.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:00:27.406-0500" electronicallyRead="true" destinationPin="006RI5K"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956034">
+    <tags id="840003002956034">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:03:28.640-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:03:29.640-0500" electronicallyRead="true" sourcePin="006RI5K"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:03:30.640-0500" electronicallyRead="true" comments="Trent Vesbak" weight="892.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:03:31.640-0500" electronicallyRead="true" destinationPin="006RI5K"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956035">
+    <tags id="840003002956035">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:11:47.328-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:11:48.328-0500" electronicallyRead="true" sourcePin="005J60E"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:11:49.328-0500" electronicallyRead="true" comments="Madaline Wiltrout" weight="904.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:11:50.328-0500" electronicallyRead="true" destinationPin="005J60E"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956036">
+    <tags id="840003002956036">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:24:51.859-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:24:52.859-0500" electronicallyRead="true" sourcePin="005GK83"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:24:53.859-0500" electronicallyRead="true" comments="Laneguard" weight="830.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:24:54.859-0500" electronicallyRead="true" destinationPin="005GK83"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956037">
+    <tags id="840003002956037">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:25:04.546-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:25:05.546-0500" electronicallyRead="true" sourcePin="005GK83"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:25:06.546-0500" electronicallyRead="true" comments="Laneguard" weight="758.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:25:07.546-0500" electronicallyRead="true" destinationPin="005GK83"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956038">
+    <tags id="840003002956038">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:25:14.937-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:25:15.937-0500" electronicallyRead="true" sourcePin="005GK83"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:25:16.937-0500" electronicallyRead="true" comments="Bekkum" weight="824.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:25:17.937-0500" electronicallyRead="true" destinationPin="005GK83"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956039">
+    <tags id="840003002956039">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:30:25.562-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:30:26.562-0500" electronicallyRead="true" sourcePin="005GK83"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:30:27.562-0500" electronicallyRead="true" comments="Bekkum" weight="768.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:30:28.562-0500" electronicallyRead="true" destinationPin="005GK83"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956040">
+    <tags id="840003002956040">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:30:28.187-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:30:29.187-0500" electronicallyRead="true" sourcePin="005GK83"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:30:30.187-0500" electronicallyRead="true" comments="Bekkum" weight="754.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:30:31.187-0500" electronicallyRead="true" destinationPin="005GK83"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956041">
+    <tags id="840003002956041">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:30:35.734-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:30:36.734-0500" electronicallyRead="true" sourcePin="005GK83"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:30:37.734-0500" electronicallyRead="true" comments="Bekkum" weight="704.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:30:38.734-0500" electronicallyRead="true" destinationPin="005GK83"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956042">
+    <tags id="840003002956042">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:30:45.781-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:30:46.781-0500" electronicallyRead="true" sourcePin="005GK83"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:30:47.781-0500" electronicallyRead="true" comments="Bekkum" weight="818.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:30:48.781-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956043">
+    <tags id="840003002956043">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:30:56.062-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:30:57.062-0500" electronicallyRead="true" comments="Bekkum"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:30:58.062-0500" electronicallyRead="true" comments="Nigh" weight="708.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:30:59.062-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956044">
+    <tags id="840003002956044">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:44:09.031-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:44:10.031-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:44:11.031-0500" electronicallyRead="true" comments="Nigh" weight="746.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:44:12.031-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956045">
+    <tags id="840003002956045">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:44:11.546-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:44:12.546-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:44:13.546-0500" electronicallyRead="true" comments="Nigh" weight="972.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:44:14.546-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956046">
+    <tags id="840003002956046">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:47:04.781-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:47:05.781-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:47:06.781-0500" electronicallyRead="true" comments="Nigh" weight="1010.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:47:07.781-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956047">
+    <tags id="840003002956047">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:48:47.843-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:48:48.843-0500" electronicallyRead="true" sourcePin="006T2TM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:48:49.843-0500" electronicallyRead="true" comments="Erickson" weight="734.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:48:50.843-0500" electronicallyRead="true" destinationPin="006T2TM"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956048">
+    <tags id="840003002956048">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:48:51.671-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:48:52.671-0500" electronicallyRead="true" sourcePin="006T2TM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:48:53.671-0500" electronicallyRead="true" comments="Erickson" weight="1016.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:48:54.671-0500" electronicallyRead="true" destinationPin="006T2TM"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956049">
+    <tags id="840003002956049">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:48:58.453-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:48:59.453-0500" electronicallyRead="true" sourcePin="006T2TM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:49:00.453-0500" electronicallyRead="true" comments="Erickson" weight="726.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:49:01.453-0500" electronicallyRead="true" destinationPin="006T2TM"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956050">
+    <tags id="840003002956050">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:49:00.359-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:49:01.359-0500" electronicallyRead="true" sourcePin="006T2TM"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:49:02.359-0500" electronicallyRead="true" comments="Erickson" weight="826.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:49:03.359-0500" electronicallyRead="true" destinationPin="006T2TM"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956051">
+    <tags id="840003002956051">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T17:49:03.000-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T17:49:04.000-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T17:49:05.000-0500" electronicallyRead="true" comments="Trent Gander" weight="676.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T17:49:06.000-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956052">
+    <tags id="840003002956052">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T18:00:30.093-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T18:00:31.093-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T18:00:32.093-0500" electronicallyRead="true" comments="Trent Gander" weight="866.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T18:00:33.093-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956053">
+    <tags id="840003002956053">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T18:03:47.406-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T18:03:48.406-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T18:03:49.406-0500" electronicallyRead="true" comments="Wallesser" weight="1018.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T18:03:50.406-0500" electronicallyRead="true" destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956054">
+    <tags id="840003002956054">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T18:03:49.375-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T18:03:50.375-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T18:03:51.375-0500" electronicallyRead="true" comments="Wallesser" weight="982.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T18:03:52.375-0500" electronicallyRead="true" destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956055">
+    <tags id="840003002956055">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T18:03:52.437-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T18:03:53.437-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T18:03:54.437-0500" electronicallyRead="true" comments="Wallesser" weight="732.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T18:03:55.437-0500" electronicallyRead="true" destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956056">
+    <tags id="840003002956056">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T18:04:10.484-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T18:04:11.484-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T18:04:12.484-0500" electronicallyRead="true" comments="Wallesser" weight="1000.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T18:04:13.484-0500" electronicallyRead="true" destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956057">
+    <tags id="840003002956057">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T18:04:12.125-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T18:04:13.125-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T18:04:14.125-0500" electronicallyRead="true" comments="Wallesser" weight="738.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T18:04:15.125-0500" electronicallyRead="true" destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956058">
+    <tags id="840003002956058">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T18:04:14.640-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T18:04:15.640-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T18:04:16.640-0500" electronicallyRead="true" comments="Wallesser" weight="908.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T18:04:17.640-0500" electronicallyRead="true" destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956059">
+    <tags id="840003002956059">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T18:20:08.859-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T18:20:09.859-0500" electronicallyRead="true" sourcePin="006K206"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T18:20:10.859-0500" electronicallyRead="true" comments="Kruizenga" weight="920.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T18:20:11.859-0500" electronicallyRead="true" destinationPin="006K206"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956060">
+    <tags id="840003002956060">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T18:20:11.062-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T18:20:12.062-0500" electronicallyRead="true" sourcePin="006K206"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T18:20:13.062-0500" electronicallyRead="true" comments="Kruizenga" weight="866.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T18:20:14.062-0500" electronicallyRead="true" destinationPin="006K206"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956061">
+    <tags id="840003002956061">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T18:30:05.890-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T18:30:06.890-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T18:30:07.890-0500" electronicallyRead="true" comments="Brandon Nigh" weight="910.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T18:30:08.890-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956062">
+    <tags id="840003002956062">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T18:36:49.265-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T18:36:50.265-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T18:36:51.265-0500" electronicallyRead="true" comments="Seth Nettishime" weight="690.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T18:36:52.265-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956063">
+    <tags id="840003002956063">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T18:36:50.687-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T18:36:51.687-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T18:36:52.687-0500" electronicallyRead="true" comments="Seth Nettishime" weight="612.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T18:36:53.687-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956064">
+    <tags id="840003002956064">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T18:45:49.468-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T18:45:50.468-0500" electronicallyRead="true" sourcePin="006FN8K"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T18:45:51.468-0500" electronicallyRead="true" comments="Duhnum" weight="840.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T18:45:52.468-0500" electronicallyRead="true" destinationPin="006FN8K"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956065">
+    <tags id="840003002956065">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T18:45:51.437-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T18:45:52.437-0500" electronicallyRead="true" sourcePin="006FN8K"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T18:45:53.437-0500" electronicallyRead="true" comments="Duhnum" weight="710.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T18:45:54.437-0500" electronicallyRead="true" destinationPin="006FN8K"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956066">
+    <tags id="840003002956066">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T18:48:32.187-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T18:48:33.187-0500" electronicallyRead="true" sourcePin="006FLHA"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T18:48:34.187-0500" electronicallyRead="true" comments="Rishi-Murphy" weight="566.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T18:48:35.187-0500" electronicallyRead="true" destinationPin="006FLHA"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956067">
+    <tags id="840003002956067">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T18:48:37.546-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T18:48:38.546-0500" electronicallyRead="true" sourcePin="006FLHA"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T18:48:39.546-0500" electronicallyRead="true" comments="Rishi-Murphy" weight="640.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T18:48:40.546-0500" electronicallyRead="true" destinationPin="006FLHA"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956068">
+    <tags id="840003002956068">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T18:55:42.875-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T18:55:43.875-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T18:55:44.875-0500" electronicallyRead="true" comments="Jay Strangstalein" weight="896.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T18:55:45.875-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956069">
+    <tags id="840003002956069">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T19:20:19.421-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T19:20:20.421-0500" electronicallyRead="true" sourcePin="006TUMV"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T19:20:21.421-0500" electronicallyRead="true" comments="Johnson" weight="1052.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T19:20:22.421-0500" electronicallyRead="true" destinationPin="006TUMV"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956070">
+    <tags id="840003002956070">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T19:20:22.484-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T19:20:23.484-0500" electronicallyRead="true" sourcePin="006TUMV"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T19:20:24.484-0500" electronicallyRead="true" comments="Cole Johnson" weight="1178.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T19:20:25.484-0500" electronicallyRead="true" destinationPin="006TUMV"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956071">
+    <tags id="840003002956071">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T19:20:29.375-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T19:20:30.375-0500" electronicallyRead="true" comments="Walleser" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T19:20:31.375-0500" electronicallyRead="true" comments="Walleser" weight="1078.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T19:20:32.375-0500" electronicallyRead="true" destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956072">
+    <tags id="840003002956072">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T19:20:35.390-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T19:20:36.390-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T19:20:37.390-0500" electronicallyRead="true" comments="Walleser" weight="1032.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T19:20:38.390-0500" electronicallyRead="true" destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956073">
+    <tags id="840003002956073">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T19:45:07.171-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T19:45:08.171-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T19:45:09.171-0500" electronicallyRead="true" comments="Walleser" weight="940.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T19:45:10.171-0500" electronicallyRead="true" destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956074">
+    <tags id="840003002956074">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T19:45:10.468-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T19:45:11.468-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T19:45:12.468-0500" electronicallyRead="true" comments="Walleser" weight="784.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T19:45:13.468-0500" electronicallyRead="true" destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956075">
+    <tags id="840003002956075">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T19:45:22.718-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T19:45:23.718-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T19:45:24.718-0500" electronicallyRead="true" comments="Walleser" weight="988.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T19:45:25.718-0500" electronicallyRead="true" destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956076">
+    <tags id="840003002956076">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T19:49:05.921-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T19:49:06.921-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T19:49:07.921-0500" electronicallyRead="true" comments="Walleser" weight="882.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T19:49:08.921-0500" electronicallyRead="true" destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956077">
+    <tags id="840003002956077">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T19:49:09.750-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T19:49:10.750-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T19:49:11.750-0500" electronicallyRead="true" comments="Walleser" weight="1010.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T19:49:12.750-0500" electronicallyRead="true" destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956078">
+    <tags id="840003002956078">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-11T19:51:28.218-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-11T19:51:29.218-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-11T19:51:30.218-0500" electronicallyRead="true" comments="Walleser" weight="840.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-11T19:51:31.218-0500" electronicallyRead="true" destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956079">
+    <tags id="840003002956079">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T08:06:01.218-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T08:06:02.218-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T08:06:03.218-0500" electronicallyRead="true" comments="Sam Cummer" weight="738.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T08:06:04.218-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956080">
+    <tags id="840003002956080">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T08:10:47.562-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T08:10:48.562-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T08:10:49.562-0500" electronicallyRead="true" comments="Dweyer" weight="890.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T08:10:50.562-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956081">
+    <tags id="840003002956081">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T08:10:51.218-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T08:10:52.218-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T08:10:53.218-0500" electronicallyRead="true" comments="Dweyer" weight="690.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T08:10:54.218-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956082">
+    <tags id="840003002956082">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T09:08:36.687-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T09:08:37.687-0500" electronicallyRead="true" sourcePin="006JTFK"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T09:08:38.687-0500" electronicallyRead="true" comments="emily larson" weight="620.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T09:08:39.687-0500" electronicallyRead="true" destinationPin="006JTFK"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956083">
+    <tags id="840003002956083">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T09:08:54.718-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T09:08:55.718-0500" electronicallyRead="true" sourcePin="006JTFK"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T09:08:56.718-0500" electronicallyRead="true" comments="Andy Larson" weight="666.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T09:08:57.718-0500" electronicallyRead="true" destinationPin="006JTFK"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956084">
+    <tags id="840003002956084">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T09:09:14.406-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T09:09:15.406-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T09:09:16.406-0500" electronicallyRead="true" comments="Adam Bahr" weight="658.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T09:09:17.406-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956085">
+    <tags id="840003002956085">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T09:09:19.171-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T09:09:20.171-0500" electronicallyRead="true" sourcePin="006JTFK"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T09:09:21.171-0500" electronicallyRead="true" comments="Andy Larson" weight="644.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T09:09:22.171-0500" electronicallyRead="true" destinationPin="006JTFK"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956086">
+    <tags id="840003002956086">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T09:21:11.968-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T09:21:12.968-0500" electronicallyRead="true" sourcePin="005IUY2"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T09:21:13.968-0500" electronicallyRead="true" comments="Byrce Peters" weight="892.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T09:21:14.968-0500" electronicallyRead="true" destinationPin="005IUY2"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956087" comments="One of the first steers on missed load">
+    <tags id="840003002956087">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T09:21:16.375-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T09:21:17.375-0500" electronicallyRead="true" sourcePin="005FZ5T"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T09:21:18.375-0500" electronicallyRead="true" comments="Carly Peters" weight="780.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T09:21:19.375-0500" electronicallyRead="true" destinationPin="005FZ5T"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956088">
+    <tags id="840003002956088">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T09:21:20.765-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T09:21:21.765-0500" electronicallyRead="true" sourcePin="005FZ5T"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T09:21:22.765-0500" electronicallyRead="true" comments="Carly Peters" weight="742.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T09:21:23.765-0500" electronicallyRead="true" destinationPin="005FZ5T"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956089">
+    <tags id="840003002956089">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T09:21:24.484-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T09:21:25.484-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T09:21:26.484-0500" electronicallyRead="true" comments="Ben Hoff" weight="750.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T09:21:27.484-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956090">
+    <tags id="840003002956090">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T09:21:32.109-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T09:21:33.109-0500" electronicallyRead="true" sourcePin="005IUY2"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T09:21:34.109-0500" electronicallyRead="true" comments="Zack King" weight="906.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T09:21:35.109-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956091">
+    <tags id="840003002956091">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T09:43:56.953-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T09:43:57.953-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T09:43:58.953-0500" electronicallyRead="true" comments="Brandon Nigh" weight="964.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T09:43:59.953-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956092">
+    <tags id="840003002956092">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T09:44:00.250-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T09:44:01.250-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T09:44:02.250-0500" electronicallyRead="true" comments="Brandon Nigh" weight="992.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T09:44:03.250-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956093">
+    <tags id="840003002956093">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T09:56:57.453-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T09:56:58.453-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T09:56:59.453-0500" electronicallyRead="true" comments="Damen Mikkleson" weight="828.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T09:57:00.453-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956094">
+    <tags id="840003002956094">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T10:03:01.343-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T10:03:02.343-0500" electronicallyRead="true" sourcePin="005POCE"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T10:03:03.343-0500" electronicallyRead="true" comments="Anika Olson" weight="710.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T10:03:04.343-0500" electronicallyRead="true" destinationPin="005POCE"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956095">
+    <tags id="840003002956095">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T10:03:05.453-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T10:03:06.453-0500" electronicallyRead="true" sourcePin="005POCE"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T10:03:07.453-0500" electronicallyRead="true" comments="Thomas Olson" weight="588.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T10:03:08.453-0500" electronicallyRead="true" destinationPin="005POCE"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956096">
+    <tags id="840003002956096">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T10:03:08.156-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T10:03:09.156-0500" electronicallyRead="true" sourcePin="005POCE"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T10:03:10.156-0500" electronicallyRead="true" comments="Thomas Olson" weight="714.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T10:03:11.156-0500" electronicallyRead="true" destinationPin="005POCE"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956097" comments="Now Casey Bean">
+    <tags id="840003002956097">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T10:36:43.906-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T10:36:44.906-0500" electronicallyRead="true" sourcePin="00BDTLB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T10:36:45.906-0500" electronicallyRead="true" comments="Dillon Bean" weight="840.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T10:36:46.906-0500" electronicallyRead="true" destinationPin="00BDTLB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956098">
+    <tags id="840003002956098">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T10:36:46.375-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T10:36:47.375-0500" electronicallyRead="true" sourcePin="00BDTLB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T10:36:48.375-0500" electronicallyRead="true" comments="Casey Bean" weight="734.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T10:36:49.375-0500" electronicallyRead="true" destinationPin="00BDTLB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956099">
+    <tags id="840003002956099">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T10:36:51.640-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T10:36:52.640-0500" electronicallyRead="true" sourcePin="008KRN7"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T10:36:53.640-0500" electronicallyRead="true" comments="Logan Bjenkos" weight="672.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T10:36:54.640-0500" electronicallyRead="true" destinationPin="008KRN7"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956100">
+    <tags id="840003002956100">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T10:36:54.656-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T10:36:55.656-0500" electronicallyRead="true" sourcePin="008KRN7"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T10:36:56.656-0500" electronicallyRead="true" comments="Logan Bjekos" weight="802.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T10:36:57.656-0500" electronicallyRead="true" destinationPin="008KRN7"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956101">
+    <tags id="840003002956101">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T10:49:10.546-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T10:49:11.546-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T10:49:12.546-0500" electronicallyRead="true" comments="Justin Helgson" weight="762.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T10:49:13.546-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956102">
+    <tags id="840003002956102">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T10:49:12.921-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T10:49:13.921-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T10:49:14.921-0500" electronicallyRead="true" comments="Jacob Helgson" weight="666.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T10:49:15.921-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956103">
+    <tags id="840003002956103">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T10:57:34.734-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T10:57:35.734-0500" electronicallyRead="true" sourcePin="006TUMV"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T10:57:36.734-0500" electronicallyRead="true" comments="Chad Johnson" weight="1056.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T10:57:37.734-0500" electronicallyRead="true" destinationPin="006TUMV"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956104">
+    <tags id="840003002956104">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T10:57:38.750-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T10:57:39.750-0500" electronicallyRead="true" sourcePin="006TUMV"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T10:57:40.750-0500" electronicallyRead="true" comments="Chad Johnson" weight="966.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T10:57:41.750-0500" electronicallyRead="true" destinationPin="006TUMV"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956105">
+    <tags id="840003002956105">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T10:57:42.671-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T10:57:43.671-0500" electronicallyRead="true" sourcePin="006TUMV"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T10:57:44.671-0500" electronicallyRead="true" comments="Chad Johnson" weight="918.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T10:57:45.671-0500" electronicallyRead="true" destinationPin="006TUMV"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956106">
+    <tags id="840003002956106">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T10:57:47.890-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T10:57:48.890-0500" electronicallyRead="true" sourcePin="006TUMV"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T10:57:49.890-0500" electronicallyRead="true" comments="Chad Johnson" weight="936.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T10:57:50.890-0500" electronicallyRead="true" destinationPin="006TUMV"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956107">
+    <tags id="840003002956107">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T10:57:51.921-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T10:57:52.921-0500" electronicallyRead="true" sourcePin="003CZKO"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T10:57:53.921-0500" electronicallyRead="true" comments="Chad Johnson" weight="960.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T10:57:54.921-0500" electronicallyRead="true" destinationPin="006TUMV"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956108">
+    <tags id="840003002956108">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T11:14:31.000-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T11:14:32.000-0500" electronicallyRead="true" sourcePin="005D3RG"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T11:14:33.000-0500" electronicallyRead="true" comments="Mellisa Dach" weight="890.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T11:14:34.000-0500" electronicallyRead="true" destinationPin="005D3RG"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956110">
+    <tags id="840003002956109">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T11:14:32.937-0500" electronicallyRead="true"/>
+    </tags>
+    <tags id="840003002956110">
+      <events xmi:type="premises:ReplacedTag" dateTime="2008-04-12T11:14:34.906-0500" electronicallyRead="true" oldTag="#//@animals.102/@tags.0"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T11:14:35.906-0500" electronicallyRead="true" sourcePin="005D3RG"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T11:14:36.906-0500" electronicallyRead="true" comments="Melisa Dach" weight="954.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T11:14:37.906-0500" electronicallyRead="true" destinationPin="005D3RG"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956111">
+    <tags id="840003002956111">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T11:19:54.765-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T11:19:55.765-0500" electronicallyRead="true" sourcePin="005D3RG"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T11:19:56.765-0500" electronicallyRead="true" comments="Melisa Dach" weight="840.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T11:19:57.765-0500" electronicallyRead="true" destinationPin="005D3RG"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956112">
+    <tags id="840003002956112">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T11:21:51.312-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T11:21:52.312-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T11:21:53.312-0500" electronicallyRead="true" comments="Jenifer Parker" weight="830.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T11:21:54.312-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956113">
+    <tags id="840003002956113">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T11:36:31.281-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T11:36:32.281-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T11:36:33.281-0500" electronicallyRead="true" comments="Seth Lucey" weight="800.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T11:36:34.281-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956114">
+    <tags id="840003002956114">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T11:36:34.359-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T11:36:35.359-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T11:36:36.359-0500" electronicallyRead="true" comments="Allisa Lucey" weight="884.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T11:36:37.359-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956115">
+    <tags id="840003002956115">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T11:41:13.046-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T11:41:14.046-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T11:41:15.046-0500" electronicallyRead="true" comments="Ethan Plum" weight="776.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T11:41:16.046-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" id="840003002956116">
+    <tags id="840003002956116">
+      <events xmi:type="premises:TagApplied" dateTime="2008-04-12T11:41:15.234-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-04-12T11:41:16.234-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-04-12T11:41:17.234-0500" electronicallyRead="true" comments="Ethan Plum" weight="872.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-04-12T11:41:18.234-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956117" scrapieTag="wi2285  0063">
+    <tags id="840003002956117">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T15:52:20.468-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T15:52:21.468-0500" electronicallyRead="true" sourcePin="005G5I6"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T15:52:22.468-0500" electronicallyRead="true" comments="Peterson - Sheep" weight="74.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T15:52:23.468-0500" electronicallyRead="true" destinationPin="005G5I6"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956505" rightEarNotching="116" leftEarNotching="6">
+    <tags id="840003002956505">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T15:56:32.125-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T15:56:33.125-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T15:56:34.125-0500" electronicallyRead="true" weight="48.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T15:56:35.125-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956504" rightEarNotching="112" leftEarNotching="9">
+    <tags id="840003002956504">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T15:57:57.906-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T15:57:58.906-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T15:57:59.906-0500" electronicallyRead="true" comments="Kanis" weight="52.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T15:58:00.906-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956503" rightEarNotching="117" leftEarNotching="6">
+    <tags id="840003002956503">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:01:58.734-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:01:59.734-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:02:00.734-0500" electronicallyRead="true" comments="Kanis" weight="60.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:02:01.734-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956502">
+    <tags id="840003002956502">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:03:38.359-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:03:39.359-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:03:40.359-0500" electronicallyRead="true" comments="Kanis - Broke" weight="50.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:03:41.359-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956501" rightEarNotching="117" leftEarNotching="7">
+    <tags id="840003002956501">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:05:36.718-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:05:37.718-0500" electronicallyRead="true" comments=""/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:05:38.718-0500" electronicallyRead="true" comments="Kanis" weight="50.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:05:39.718-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956500">
+    <tags id="840003002956500">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:09:39.484-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:09:40.484-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:09:41.484-0500" electronicallyRead="true" comments="Murphy Broke" weight="54.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:09:42.484-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956499" rightEarNotching="1" leftEarNotching="1">
+    <tags id="840003002956499">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:11:48.359-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:11:49.359-0500" electronicallyRead="true" sourcePin="006FLHA"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:11:50.359-0500" electronicallyRead="true" comments="Murphy" weight="54.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:11:51.359-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956498" rightEarNotching="1" leftEarNotching="3">
+    <tags id="840003002956498">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:13:24.640-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:13:25.640-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:13:26.640-0500" electronicallyRead="true" comments="Harley Mikkelson" weight="64.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:13:27.640-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956497" rightEarNotching="1" leftEarNotching="2">
+    <tags id="840003002956497">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:14:57.671-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:14:58.671-0500" electronicallyRead="true" sourcePin="006FLHA"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:14:59.671-0500" electronicallyRead="true" comments="Sarah Morgan Murphy" weight="56.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:15:00.671-0500" electronicallyRead="true" destinationPin="006FLHA"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956496" rightEarNotching="1" leftEarNotching="4">
+    <tags id="840003002956496">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:16:17.937-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:16:18.937-0500" electronicallyRead="true" sourcePin="006FLHA"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:16:19.937-0500" electronicallyRead="true" comments="Sarah Morgan Murphy" weight="40.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:16:20.937-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956495" rightEarNotching="3" leftEarNotching="3">
+    <tags id="840003002956495">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:27:45.687-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:27:46.687-0500" electronicallyRead="true" sourcePin="006FN8K"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:27:47.687-0500" electronicallyRead="true" comments="Britney Dunnam" weight="42.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:27:48.687-0500" electronicallyRead="true" destinationPin="006FN8K"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956494" rightEarNotching="3" leftEarNotching="11">
+    <tags id="840003002956494">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:29:45.390-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:29:46.390-0500" electronicallyRead="true" sourcePin="006FN8K"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:29:47.390-0500" electronicallyRead="true" comments="Alexis Dunnum" weight="72.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:29:48.390-0500" electronicallyRead="true" destinationPin="006FN8K"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956493" rightEarNotching="13" leftEarNotching="8">
+    <tags id="840003002956493">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:36:43.250-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:36:44.250-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:36:45.250-0500" electronicallyRead="true" comments="Jacob Mikkelson" weight="34.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:36:46.250-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956492" rightEarNotching="11" leftEarNotching="5">
+    <tags id="840003002956492">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:40:42.140-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:40:43.140-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:40:44.140-0500" electronicallyRead="true" comments="Jacob Mikkelson" weight="38.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:40:45.140-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956491" rightEarNotching="27" leftEarNotching="4">
+    <tags id="840003002956491">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:41:20.890-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:41:21.890-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:41:22.890-0500" electronicallyRead="true" comments="Anne Dahl " weight="34.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:41:23.890-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956490" rightEarNotching="31" leftEarNotching="8">
+    <tags id="840003002956490">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:42:50.531-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:42:51.531-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:42:52.531-0500" electronicallyRead="true" comments="Eric Peterson" weight="28.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:42:53.531-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956489" rightEarNotching="6" leftEarNotching="11">
+    <tags id="840003002956489">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:46:42.265-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:46:43.265-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:46:44.265-0500" electronicallyRead="true" comments="Eric Peterson" weight="46.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:46:45.265-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956488" rightEarNotching="89" leftEarNotching="1">
+    <tags id="840003002956488">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:47:52.734-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:47:53.734-0500" electronicallyRead="true" sourcePin="005GK83"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:47:54.734-0500" electronicallyRead="true" comments="Torger Bekkum" weight="68.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:47:55.734-0500" electronicallyRead="true" destinationPin="005GK83"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956487" rightEarNotching="89" leftEarNotching="5">
+    <tags id="840003002956487">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:51:28.234-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:51:29.234-0500" electronicallyRead="true" sourcePin="005GK83"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:51:30.234-0500" electronicallyRead="true" comments="Kelsey Langard" weight="64.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:51:31.234-0500" electronicallyRead="true" destinationPin="005GK83"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956486" rightEarNotching="109" leftEarNotching="3">
+    <tags id="840003002956486">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:52:16.906-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:52:17.906-0500" electronicallyRead="true" comments="Eberhard"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:52:18.906-0500" electronicallyRead="true" comments="Morgan Everheart" weight="72.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:52:19.906-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956485" rightEarNotching="7" leftEarNotching="2">
+    <tags id="840003002956485">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:37:48.078-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:37:49.078-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:37:50.078-0500" electronicallyRead="true" comments="Emily Lagerman" weight="38.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:37:51.078-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956484" rightEarNotching="9" leftEarNotching="5">
+    <tags id="840003002956484">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:40:02.828-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:40:03.828-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:40:04.828-0500" electronicallyRead="true" comments="Ryan Lagerman" weight="38.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:40:05.828-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956483" rightEarNotching="15" leftEarNotching="9">
+    <tags id="840003002956483">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:40:56.140-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:40:57.140-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:40:58.140-0500" electronicallyRead="true" comments="Ryan Lagerman" weight="26.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:40:59.140-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956482" rightEarNotching="10" leftEarNotching="3">
+    <tags id="840003002956482">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:41:43.062-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:41:44.062-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:41:45.062-0500" electronicallyRead="true" comments="Emily Lagerman" weight="22.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:41:46.062-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956481" rightEarNotching="1" leftEarNotching="3">
+    <tags id="840003002956481">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:54:59.203-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:55:00.203-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:55:01.203-0500" electronicallyRead="true" comments="McClurd" weight="90.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:55:02.203-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956480" rightEarNotching="3" leftEarNotching="3">
+    <tags id="840003002956480">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:57:00.437-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:57:01.437-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:57:02.437-0500" electronicallyRead="true" comments="McClurd" weight="64.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:57:03.437-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956479" rightEarNotching="3" leftEarNotching="2">
+    <tags id="840003002956479">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:57:38.437-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:57:39.437-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:57:40.437-0500" electronicallyRead="true" comments="McClurd" weight="32.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:57:41.437-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956478" rightEarNotching="3" leftEarNotching="4">
+    <tags id="840003002956478">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:58:33.734-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:58:34.734-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:58:35.734-0500" electronicallyRead="true" comments="McClurd" weight="24.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:58:36.734-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956477" rightEarNotching="3" leftEarNotching="9">
+    <tags id="840003002956477">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:59:32.531-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:59:33.531-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:59:34.531-0500" electronicallyRead="true" comments="McClurd" weight="50.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:59:35.531-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956476" rightEarNotching="3" leftEarNotching="6">
+    <tags id="840003002956476">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:00:09.171-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:00:10.171-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:00:11.171-0500" electronicallyRead="true" comments="McClurd" weight="30.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:00:12.171-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956475" rightEarNotching="2" leftEarNotching="4">
+    <tags id="840003002956475">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:01:26.625-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:01:27.625-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:01:28.625-0500" electronicallyRead="true" comments="Mikkelson" weight="38.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:01:29.625-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956474" rightEarNotching="11" leftEarNotching="3">
+    <tags id="840003002956474">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:05:07.765-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:05:08.765-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:05:09.765-0500" electronicallyRead="true" weight="28.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:05:10.765-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956473" rightEarNotching="12" leftEarNotching="6">
+    <tags id="840003002956473">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:05:39.859-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:05:40.859-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:05:41.859-0500" electronicallyRead="true" comments="Mikkelson" weight="30.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:05:42.859-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956472" rightEarNotching="81" leftEarNotching="8">
+    <tags id="840003002956472">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:05:57.031-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:05:58.031-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:05:59.031-0500" electronicallyRead="true" comments="Mikkelson" weight="34.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:06:00.031-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956471" rightEarNotching="14" leftEarNotching="6">
+    <tags id="840003002956471">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:06:27.984-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:06:28.984-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:06:29.984-0500" electronicallyRead="true" comments="Mikkelson" weight="20.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:06:30.984-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956470" rightEarNotching="14" leftEarNotching="5">
+    <tags id="840003002956470">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:07:16.000-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:07:17.000-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:07:18.000-0500" electronicallyRead="true" comments="Mikkelson" weight="32.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:07:19.000-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956469" rightEarNotching="4" leftEarNotching="1">
+    <tags id="840003002956469">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:08:28.078-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:08:29.078-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:08:30.078-0500" electronicallyRead="true" comments="Jacob Leum" weight="40.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:08:31.078-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956468" rightEarNotching="4" leftEarNotching="2">
+    <tags id="840003002956468">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:09:26.828-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:09:27.828-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:09:28.828-0500" electronicallyRead="true" comments="Jacob Leum" weight="40.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:09:29.828-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956467" rightEarNotching="4" leftEarNotching="3">
+    <tags id="840003002956467">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:10:42.578-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:10:43.578-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:10:44.578-0500" electronicallyRead="true" comments="Jacob Leum" weight="42.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:10:45.578-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956466" rightEarNotching="4" leftEarNotching="4">
+    <tags id="840003002956466">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:11:38.640-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:11:39.640-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:11:40.640-0500" electronicallyRead="true" comments="Jacob Leum" weight="44.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:11:41.640-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956465" rightEarNotching="4" leftEarNotching="5">
+    <tags id="840003002956465">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:12:37.000-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:12:38.000-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:12:39.000-0500" electronicallyRead="true" comments="Jacob Leum" weight="48.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:12:40.000-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956464" rightEarNotching="4" leftEarNotching="6">
+    <tags id="840003002956464">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:13:44.765-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:13:45.765-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:13:46.765-0500" electronicallyRead="true" comments="Jacob Leum" weight="50.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:13:47.765-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956463" rightEarNotching="1" leftEarNotching="1">
+    <tags id="840003002956463">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:40:01.500-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:40:02.500-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:40:03.500-0500" electronicallyRead="true" comments="Kennen " weight="64.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:40:04.500-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956462">
+    <tags id="840003002956462">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:42:33.203-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:42:34.203-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:42:35.203-0500" electronicallyRead="true" comments="Kennen " weight="68.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:42:36.203-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956461" rightEarNotching="1" leftEarNotching="2">
+    <tags id="840003002956461">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:43:33.140-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:43:34.140-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:43:35.140-0500" electronicallyRead="true" comments="Kennen " weight="72.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:43:36.140-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956460" rightEarNotching="3" leftEarNotching="1">
+    <tags id="840003002956460">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:44:43.000-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:44:44.000-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:44:45.000-0500" electronicallyRead="true" comments="Brent, Trevor, Ashley Kennen " weight="74.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:44:46.000-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956459" rightEarNotching="9" leftEarNotching="1">
+    <tags id="840003002956459">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T19:25:34.484-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T19:25:35.484-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T19:25:36.484-0500" electronicallyRead="true" comments="Nickolotte" weight="24.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T19:25:37.484-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956458" rightEarNotching="9" leftEarNotching="2">
+    <tags id="840003002956458">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T19:26:10.359-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T19:26:11.359-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T19:26:12.359-0500" electronicallyRead="true" comments="Nickolette" weight="32.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T19:26:13.359-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956457" rightEarNotching="9" leftEarNotching="3">
+    <tags id="840003002956457">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T19:26:46.984-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T19:26:47.984-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T19:26:48.984-0500" electronicallyRead="true" comments="Nickolette" weight="48.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T19:26:49.984-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956456" rightEarNotching="9" leftEarNotching="4">
+    <tags id="840003002956456">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T19:27:27.781-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T19:27:28.781-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T19:27:29.781-0500" electronicallyRead="true" comments="Nickolette" weight="10.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T19:27:30.781-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956455" rightEarNotching="9" leftEarNotching="5">
+    <tags id="840003002956455">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T19:28:07.437-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T19:28:08.437-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T19:28:09.437-0500" electronicallyRead="true" comments="Nickolette" weight="16.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T19:28:10.437-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956454" rightEarNotching="9" leftEarNotching="6">
+    <tags id="840003002956454">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T19:28:44.890-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T19:28:45.890-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T19:28:46.890-0500" electronicallyRead="true" comments="Nickolette" weight="16.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T19:28:47.890-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956453" rightEarNotching="1" leftEarNotching="5">
+    <tags id="840003002956453">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T19:55:21.484-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T19:55:22.484-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T19:55:23.484-0500" electronicallyRead="true" comments="Humfelt" weight="40.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T19:55:24.484-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956452" rightEarNotching="50" leftEarNotching="2">
+    <tags id="840003002956452">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T19:56:53.171-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T19:56:54.171-0500" electronicallyRead="true" sourcePin="007HLCN"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T19:56:55.171-0500" electronicallyRead="true" comments="Humfelt" weight="38.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T19:56:56.171-0500" electronicallyRead="true" destinationPin="007HLCN"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956451" rightEarNotching="50" leftEarNotching="1">
+    <tags id="840003002956451">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T19:57:37.140-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T19:57:38.140-0500" electronicallyRead="true" sourcePin="007HLCN"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T19:57:39.140-0500" electronicallyRead="true" comments="Wright" weight="58.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T19:57:40.140-0500" electronicallyRead="true" destinationPin="007HLCN"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003002956450">
+    <tags id="840003002956450">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T19:59:53.171-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T19:59:54.171-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T19:59:55.171-0500" electronicallyRead="true" comments="Wright 007HLCN" weight="62.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T19:59:56.171-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956118" scrapieTag="Wi2285 0064">
+    <tags id="840003002956118">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T15:53:58.703-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T15:53:59.703-0500" electronicallyRead="true" sourcePin="005G5I6"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T15:54:00.703-0500" electronicallyRead="true" comments="Peterson Sheep" weight="74.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T15:54:01.703-0500" electronicallyRead="true" destinationPin="005G5I6"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956119" scrapieTag="wi1816-08">
+    <tags id="840003002956119">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:20:14.000-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:20:15.000-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:20:16.000-0500" electronicallyRead="true" comments="Mallin Sheep" weight="38.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:20:17.000-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956120" scrapieTag="wi1816-07">
+    <tags id="840003002956120">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:21:17.828-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:21:18.828-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:21:19.828-0500" electronicallyRead="true" comments="Malin Sheep" weight="46.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:21:20.828-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956121" scrapieTag="wi1816-05">
+    <tags id="840003002956121">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:22:47.437-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:22:48.437-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:22:49.437-0500" electronicallyRead="true" comments="Malin Sheep" weight="54.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:22:50.437-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956122" scrapieTag="wi195-1243">
+    <tags id="840003002956122">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:23:29.968-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:23:30.968-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:23:31.968-0500" electronicallyRead="true" comments="Malin - Sheep" weight="68.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:23:32.968-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956123" scrapieTag="wi195-1253">
+    <tags id="840003002956123">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:24:12.734-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:24:13.734-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:24:14.734-0500" electronicallyRead="true" comments="Malin Sheep" weight="68.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:24:15.734-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956124" scrapieTag="wi1816-06">
+    <tags id="840003002956124">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:25:18.625-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:25:19.625-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:25:20.625-0500" electronicallyRead="true" comments="Malin Sheep" weight="58.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:25:21.625-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956125" scrapieTag="wi3204-86">
+    <tags id="840003002956125">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:33:58.687-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:33:59.687-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:34:00.687-0500" electronicallyRead="true" comments="Austin Cade Sheep" weight="118.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:34:01.687-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956126" scrapieTag="wi3204-93">
+    <tags id="840003002956126">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T16:35:49.468-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T16:35:50.468-0500" electronicallyRead="true" comments="Austin Cade Sheep"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T16:35:51.468-0500" electronicallyRead="true" comments="Austin Cade Sheep" weight="64.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T16:35:52.468-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956127" scrapieTag="WI2531-37">
+    <tags id="840003002956127">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:18:27.296-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:18:28.296-0500" electronicallyRead="true" sourcePin="006P50S"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:18:29.296-0500" electronicallyRead="true" comments="Adriana Reese Sheep" weight="56.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:18:30.296-0500" electronicallyRead="true" destinationPin="006P50S"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956128" scrapieTag="WI2531-36">
+    <tags id="840003002956128">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:20:28.750-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:20:29.750-0500" electronicallyRead="true" sourcePin="006P50S"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:20:30.750-0500" electronicallyRead="true" comments="Tallitha Sasha Reese Sheep" weight="66.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:20:31.750-0500" electronicallyRead="true" comments="" destinationPin="006P50S"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956129" scrapieTag="WI2531-38">
+    <tags id="840003002956129">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:21:54.093-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:21:55.093-0500" electronicallyRead="true" sourcePin="006P50S"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:21:56.093-0500" electronicallyRead="true" comments="Sasha Reese Sheep" weight="62.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:21:57.093-0500" electronicallyRead="true" destinationPin="006P50S"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956130" scrapieTag="WI3276-17">
+    <tags id="840003002956130">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:33:32.093-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:33:33.093-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:33:34.093-0500" electronicallyRead="true" comments="Kalley Kilmer" weight="76.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:33:35.093-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956131" scrapieTag="WI3276-16">
+    <tags id="840003002956131">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:35:17.125-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:35:18.125-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:35:19.125-0500" electronicallyRead="true" comments="Kalley Kilmer" weight="70.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:35:20.125-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956132" scrapieTag="WIHPGF-132">
+    <tags id="840003002956132">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:43:19.859-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:43:20.859-0500" electronicallyRead="true" sourcePin="006FX1R"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:43:21.859-0500" electronicallyRead="true" comments="Hinkel Sheep" weight="48.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:43:22.859-0500" electronicallyRead="true" destinationPin="006FX1R"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956133" scrapieTag="WI3265-615">
+    <tags id="840003002956133">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:46:13.781-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:46:14.781-0500" electronicallyRead="true" sourcePin="006FX1R"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:46:15.781-0500" electronicallyRead="true" comments="Hinkel Sheep" weight="44.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:46:16.781-0500" electronicallyRead="true" destinationPin="006FX1R"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956134" scrapieTag="WI3265-616">
+    <tags id="840003002956134">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:46:58.625-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:46:59.625-0500" electronicallyRead="true" sourcePin="006FX1R"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:47:00.625-0500" electronicallyRead="true" comments="Hinkel Sheep" weight="36.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:47:01.625-0500" electronicallyRead="true" destinationPin="006FX1R"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956135" scrapieTag="HPGF-128">
+    <tags id="840003002956135">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:47:44.187-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:47:45.187-0500" electronicallyRead="true" sourcePin="006FX1R"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:47:46.187-0500" electronicallyRead="true" comments="Hinkel Sheep" weight="54.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:47:47.187-0500" electronicallyRead="true" destinationPin="006FX1R"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956136" scrapieTag="HPGF-136">
+    <tags id="840003002956136">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:48:22.250-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:48:23.250-0500" electronicallyRead="true" sourcePin="006FX1R"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:48:24.250-0500" electronicallyRead="true" comments="Hinkel Sheep" weight="44.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:48:25.250-0500" electronicallyRead="true" destinationPin="006FX1R"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956137" scrapieTag="WI3265-611">
+    <tags id="840003002956137">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:49:00.203-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:49:01.203-0500" electronicallyRead="true" sourcePin="006FX1R"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:49:02.203-0500" electronicallyRead="true" comments="Hinkel Sheep" weight="58.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:49:03.203-0500" electronicallyRead="true" destinationPin="006FX1R"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956138" scrapieTag="WI3265-614">
+    <tags id="840003002956138">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:49:44.140-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:49:45.140-0500" electronicallyRead="true" sourcePin="006FX1R"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:49:46.140-0500" electronicallyRead="true" comments="" weight="50.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:49:47.140-0500" electronicallyRead="true" destinationPin="006FX1R"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956139" scrapieTag="WI3265-135">
+    <tags id="840003002956139">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:50:27.890-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:50:28.890-0500" electronicallyRead="true" sourcePin="006FX1R"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:50:29.890-0500" electronicallyRead="true" comments="Hinkel Sheep 006FX1R" weight="42.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:50:30.890-0500" electronicallyRead="true" destinationPin="006FX1R"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956140" scrapieTag="NST">
+    <tags id="840003002956140">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T17:51:53.015-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T17:51:54.015-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T17:51:55.015-0500" electronicallyRead="true" comments="Kathy Genatec Sheep" weight="38.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T17:51:56.015-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956141" scrapieTag="WI706-23">
+    <tags id="840003002956141">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:16:51.218-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:16:52.218-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:16:53.218-0500" electronicallyRead="true" comments="Cade Sheep" weight="34.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:16:54.218-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956142" scrapieTag="WI706-22">
+    <tags id="840003002956142">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:17:46.640-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:17:47.640-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:17:48.640-0500" electronicallyRead="true" comments="Cade Sheep" weight="46.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:17:49.640-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956143" scrapieTag="WI706-21">
+    <tags id="840003002956143">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:18:26.343-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:18:27.343-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:18:28.343-0500" electronicallyRead="true" comments="Cade Sheep" weight="42.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:18:29.343-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956144" scrapieTag="WI706-24">
+    <tags id="840003002956144">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:19:19.078-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:19:20.078-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:19:21.078-0500" electronicallyRead="true" comments="Cade Sheep" weight="18.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:19:22.078-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956145" scrapieTag="WI1057-380">
+    <tags id="840003002956145">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:54:50.640-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:54:51.640-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:54:52.640-0500" electronicallyRead="true" comments="Taylor Brummyer" weight="62.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:54:53.640-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956146" scrapieTag="Wi1057-370">
+    <tags id="840003002956146">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:56:27.281-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:56:28.281-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:56:29.281-0500" electronicallyRead="true" comments="Mekensie Bruhmyer" weight="76.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:56:30.281-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956147" scrapieTag="Wi1057-378">
+    <tags id="840003002956147">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:58:09.687-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:58:10.687-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:58:11.687-0500" electronicallyRead="true" comments="Kathy Radacheck" weight="48.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:58:12.687-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956148" scrapieTag="wi1057-369">
+    <tags id="840003002956148">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T18:59:30.031-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T18:59:31.031-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T18:59:32.031-0500" electronicallyRead="true" comments="Chris Clark Sheep" weight="60.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T18:59:33.031-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956149" scrapieTag="WI1057-368">
+    <tags id="840003002956149">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T19:02:21.875-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T19:02:22.875-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T19:02:23.875-0500" electronicallyRead="true" comments="Chris Clark Sheep" weight="52.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T19:02:24.875-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956150" scrapieTag="WI1057-367">
+    <tags id="840003002956150">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T19:04:25.390-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T19:04:26.390-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T19:04:27.390-0500" electronicallyRead="true" comments="Julie Stekel Sheep" weight="48.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T19:04:28.390-0500" electronicallyRead="true"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956151" scrapieTag="WI1635-34">
+    <tags id="840003002956151">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T19:50:00.171-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T19:50:01.171-0500" electronicallyRead="true" sourcePin="003CZKO"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T19:50:02.171-0500" electronicallyRead="true" comments="Seellow" weight="68.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T19:50:03.171-0500" electronicallyRead="true" destinationPin="003CZKO"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956152" scrapieTag="Wi1635-35">
+    <tags id="840003002956152">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T19:51:37.937-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T19:51:38.937-0500" electronicallyRead="true" sourcePin="003CZKO"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T19:51:39.937-0500" electronicallyRead="true" comments="Seellow" weight="64.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T19:51:40.937-0500" electronicallyRead="true" destinationPin="003CZKO"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956153" scrapieTag="WI3265-610">
+    <tags id="840003002956153">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T19:52:27.437-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T19:52:28.437-0500" electronicallyRead="true" sourcePin="003CZKO"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T19:52:29.437-0500" electronicallyRead="true" comments="Seellow" weight="62.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T19:52:30.437-0500" electronicallyRead="true" destinationPin="003CZKO"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003002956154" scrapieTag="WI3265-613">
+    <tags id="840003002956154">
+      <events xmi:type="premises:TagApplied" dateTime="2008-05-16T19:53:54.359-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2008-05-16T19:53:55.359-0500" electronicallyRead="true" sourcePin="003CZKO"/>
+      <events xmi:type="premises:WeighIn" dateTime="2008-05-16T19:53:56.359-0500" electronicallyRead="true" comments="Seellow" weight="50.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2008-05-16T19:53:57.359-0500" electronicallyRead="true" destinationPin="003CZKO"/>
+    </tags>
+  </animals>
+  <unAppliedTags id="840003002956438">
+    <events xmi:type="premises:TagRetired" dateTime="2008-05-17T08:40:03.750-0500" electronicallyRead="true" comments="Broke Tag while applying"/>
+  </unAppliedTags>
+</premises:Premises>

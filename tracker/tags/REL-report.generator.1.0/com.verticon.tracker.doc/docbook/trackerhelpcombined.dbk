@@ -1,0 +1,1229 @@
+<?xml version="1.0" encoding="UTF-8"?><book xmlns:xi="http://www.w3.org/2001/XInclude" id="Tracker" label="Tracker BI Toolkit and Features User Guide" status="Draft" vendor="Verticon, Inc.">
+
+	<bookinfo xml:base="bookinfo/bookinfo.xml">
+		<title>Tracker Business Intelligence Toolkit User Guide</title>
+		<authorgroup>
+			<author>
+				<firstname>John</firstname>
+				<surname>Conlon</surname>
+				<affiliation>
+					<orgname>Verticon, Inc.</orgname>
+				</affiliation>
+			</author>
+		</authorgroup>
+		<edition>
+			Tracker Business Intelligence Toolkit User Guide version 0.3.0
+		</edition>
+		<pubdate>November 1, 2012</pubdate>
+		<copyright>
+		    <year>2010</year>
+			<year>2011</year>
+			<year>2012</year>
+			<holder>Verticon, Inc.</holder>
+		</copyright>
+
+		<legalnotice>
+			<blockquote>
+				<para>
+					Permission is granted to copy, distribute and/or
+					modify this document under the terms of the GNU Free
+					Documentation License, Version 1.2 or any later
+					version published by the Free Software Foundation;
+					with no Invariant Sections, no Front-Cover Texts,
+					and no Back-Cover Texts. A copy of the license is
+					included in the section entitled "GNU Free
+					Documentation License".
+				</para>
+			</blockquote>
+		</legalnotice>
+
+		<legalnotice>
+			<blockquote>
+				<para>
+					Tracker Business Intelligence Toolkit is 
+				    free software: you can redistribute it
+					and/or modify it under the terms of the
+					<acronym>EPL</acronym>
+					Eclipse Public License as published by the Eclipse
+				    Foundation, version 1.0.</para>
+				    <para>
+					This program is distributed in the hope that it will
+					be useful, but WITHOUT ANY WARRANTY; without even
+					the implied warranty of MERCHANTABILITY or FITNESS
+					FOR A PARTICULAR PURPOSE. See the
+					Eclipse Foundation Software User Agreement for more details.
+				</para>
+				<para>
+				    A copy of the Eclipse Foundation Software User Agreement is included in the Section entitled 
+					“Eclipse Foundation Software User Agreement” and  
+					an online version of the <acronym>EPL</acronym>
+					Eclipse Public License version 1.0 can be found at
+			    <ulink url="http://www.eclipse.org/org/documents/epl-v10.php"><citetitle>http://www.eclipse.org/org/documents/epl-v10.php</citetitle></ulink>
+			    </para>
+			</blockquote>
+		</legalnotice>
+
+	</bookinfo>
+	<preface xml:base="preface/preface.xml">
+		<?dbhtml filename="preface/preface.html" ?>
+		<title>The Need for Livestock Information Management</title>
+		<para>
+			Either for hunting or husbandry, human beings have always
+			observed and remembered animal movements. Today, with larger
+			herds and more interaction between producers, infrastructure providers, and process
+			auditors more animal movements mean more information for the producer, the provider, 
+			and the auditor to manage.
+		</para>
+		
+		<para>
+		Markets reach peak efficiency when buyers and sellers have an equal 
+		<emphasis>or symmetric</emphasis> view of product information.
+		<footnote><para>In 2001, the Nobel Prize in Economics was awarded to 
+		George Akerlof, Michael Spence, and Joseph E. Stiglitz "for their 
+		analysis of markets constrained by asymmetric information."</para>
+		</footnote> 
+		How can animal agriculture markets, which are today constrained by an 
+		<emphasis>asymmetric information</emphasis> exchange between buyers and sellers 
+		be tuned to meet peak potential?
+		
+		</para>
+		
+		<para>
+			Tracker is a suite of Business Intelligence
+			<footnote><para>the process of gathering information about a 
+			business or industry matter; a broad range of applications and technologies 
+			for gathering, storing, analyzing, and providing access to data to 
+			help make business decisions; abbr. BI</para></footnote>
+			solutions 
+			for the
+			<itemizedlist mark="bullet">
+				<listitem>
+					<para>Documentation;</para>
+				</listitem>
+				<listitem>
+					<para>Management;</para>
+				</listitem>
+				<listitem>
+					<para>Analysis;</para>
+				</listitem>
+				<listitem>
+					<para>Reporting;</para>
+				</listitem>
+				<listitem>
+					<para>and Market Transaction Exchange;</para>
+				</listitem>
+			</itemizedlist>
+			of Animal Livestock <emphasis>Information</emphasis>.
+		</para>
+		
+		
+</preface>
+	<colophon xml:base="colophon/colophon.xml">
+	<?dbhtml filename="colophon/colophon.html" ?>
+	<para>
+		Production versions of this documentation were produced with
+		the <ulink url="http://www.docbook.org/">
+		<citetitle>Docbook</citetitle></ulink> 
+		<ulink url="http://en.wikipedia.org/wiki/Document_Style_Semantics_and_Specification_Language">
+			<citetitle><acronym>DSSSL</acronym></citetitle> style sheets,
+		</ulink> called by the
+		<ulink url="http://ant.apache.org/"><citetitle>Apache Ant build tool</citetitle></ulink>,
+		  from within an <ulink url="http://www.eclipse.org/"><citetitle>Eclipse IDE</citetitle></ulink>.
+	</para>
+		
+</colophon>
+	<chapter xml:base="overview/overview.xml">
+  	<?dbhtml filename="overview/frameworkOverview.html" ?>
+	<title>Overview</title>
+
+  	 <section>
+  	 <?dbhtml filename="overview/frameworkOverview_biwhatIsTracker.html" ?>
+	<title>What is the Tracker Toolkit?</title>
+	<para>
+	Tracker is a Business Intelligence Toolkit (BI) and suite of Business
+	Intelligence featured solutions for animal agriculture professionals.
+	The Tracker BI Toolkit is an Eclipse based
+	<emphasis>network aware rich client platform</emphasis>
+	that can be provisioned with one or more <acronym>BI</acronym>
+	Features.
+    </para>
+  	</section>
+  	
+  	<section>
+  	<?dbhtml filename="overview/frameworkOverview_bifeatures.html" ?>
+    <title>Tracker Business Intelligence Features</title>
+    <para>
+    Tracker Business Intelligence Features provide historical, current, and predictive views of animal agriculture business operations.
+  	Tracker <acronym>BI</acronym> Features are used by <emphasis>Animal Agriculture producers</emphasis>, 
+  	<emphasis>infrastructure providers</emphasis> and <emphasis>process control auditors</emphasis> to 
+ 	<itemizedlist mark="opencircle">
+			<listitem>
+				<para>Document;</para>
+			</listitem>
+			<listitem>
+				<para>Manage;</para>
+			</listitem>
+			<listitem>
+				<para>Analyze;</para>
+			</listitem>
+			<listitem>
+				<para>Report;</para>
+			</listitem>
+			<listitem>
+				<para>and Inter-exchange business information.</para>
+			</listitem>
+	</itemizedlist>
+    </para>
+    </section>
+  	
+  	<section>
+  	<?dbhtml filename="overview/frameworkOverview_bisolutions.html" ?>
+    <title>Tracker Business Intelligence Solutions</title>
+	<para>
+	Tracker <acronym>BI</acronym> Features are cost effective solutions for;
+	<itemizedlist mark="opencircle">
+			<listitem>
+				<para>recording animal event histories;</para>
+			</listitem>
+			<listitem>
+				<para>maintaining production efficiency;</para>
+			</listitem>
+			<listitem>
+				<para>improving herd quality;</para>
+			</listitem>
+			<listitem>
+				<para>documenting process controls;</para>
+			</listitem>
+			<listitem>
+				<para>recording animal movements;</para>
+			</listitem>
+			<listitem>
+				<para>and sharing animal history information.</para>
+			</listitem>
+	</itemizedlist>
+	</para>
+	</section>
+	
+
+    <section>
+        <?dbhtml filename="overview/frameworkOverview_goals.html" ?>
+		<title>Project Goals</title>
+		<para>
+			The Tracker project was undertaken to provide;
+			<orderedlist continuation="restarts" inheritnum="ignore" numeration="loweralpha">
+				<listitem>
+					<para>
+						a common platform container for a suite of Business Intelligence solutions useful for Livestock
+					    producers and infrastructure providers;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						free Open Source technologies to encourage widespread vendor
+						integration and user deployment of generic Livestock Business 
+						Intelligence solutions;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						lower costing custom solutions for Livestock producers, 
+						infrastructure providers and 
+						process auditors;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						create ubiquitous livestock event history inter-exchange solutions
+						via associations and marketplaces.
+					</para>
+				</listitem>
+
+			</orderedlist>
+		</para>
+	</section>
+	
+	</chapter>
+	<chapter xml:base="overview/usecases.xml">
+  	<?dbhtml filename="overview/frameworkUseCases.html" ?>
+	<title>Use Cases</title>
+	
+	<section>
+	<?dbhtml filename="overview/frameworkOverview_useCaseDiagrams.html" ?>
+		<title>Tracker Solution Use-Cases</title>
+		<para>
+		This section utilizes <emphasis>use-case diagrams</emphasis> to describe 
+		Tracker functionality from the users<footnote>
+		<para>Users of Tracker are typically Livestock <emphasis>Producers</emphasis> 
+		operating the Tracker Desktop applications, but they may also be auditors, infrastructure providers or
+		Livestock Information Analysts.  The section will use the terminology <emphasis>Operator</emphasis>
+		and <emphasis>Information Technology Analyst</emphasis> to distinguish between field operators and information
+		analysts.</para>
+		</footnote> point of view. Tracker user functionality can be organized 
+		into the following six categories:
+		<orderedlist continuation="restarts" inheritnum="ignore" numeration="arabic">
+				<listitem>
+					<para>
+						Data Collection;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Documentation;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Management;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Analysis;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Reporting;
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						and Collaboration.
+					</para>
+				</listitem>
+			</orderedlist>
+			<note>
+			 <para>
+				To accommodate the largest number of users, in the most open way possible,
+				Tracker applications support multiple Operating Systems.  Tracker application 
+				runtime binaries are available for the following leading Operating System 
+				platforms:
+				<itemizedlist mark="arabic">
+				<listitem>
+					<para>Microsoft <trademark class="trade">Windows</trademark>;</para>
+				</listitem>
+				<listitem>
+					<para>Linux;</para>
+				</listitem>
+				<listitem>
+					<para>and Apple <trademark class="trade">MacOS</trademark>.</para>
+				</listitem>
+				</itemizedlist>
+				</para>
+			</note>
+		</para>
+		
+		
+		<section>
+		    <?dbhtml filename="overview/frameworkOverview_useCaseDiagrams_dataCollection.html" ?>
+			<title>Data Collection</title>
+			<para>
+				Offering a value added suite of information solutions to livestock professionals initially
+				requires the collection of a diverse data set prior to processing and reporting. 
+			</para>
+			<para>
+				Tracker provides three ways to collect livestock data:
+				<itemizedlist mark="arabic">
+				<listitem>
+					<para>manual data entry by the Tracker operator;</para>
+				</listitem>
+				<listitem>
+					<para>importation of bulk data from external files;</para>
+				</listitem>
+				<listitem>
+					<para>and input of real-time electronic transactions from sensors and readers.</para>
+				</listitem>
+			</itemizedlist>
+			Data Collection functionality is shown in the <xref linkend="fig_DataCollectionUseCases"/>
+			<footnote>
+			<para>
+				More detailed use-case diagrams are documented in the latter chapters on 
+				Provisioned Editors and Features. 
+			</para>
+			</footnote>. 
+		
+			<figure float="0" id="fig_DataCollectionUseCases">
+				<title>Data Collection Use-Case Diagram</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata align="center" fileref="../images/useCases/dataCollection.png"/>
+					</imageobject>
+				</mediaobject>
+			</figure>
+	
+			</para>
+		</section>
+		
+		<section>
+		    <?dbhtml filename="overview/frameworkOverview_useCaseDiagrams_documentation.html" ?>
+			<title>Documentation</title>
+			<para>
+				After data is collected, the collected data itself needs to be structured, consolidated and 
+				persisted.   Next users need to confirm that the results of this process is a 
+				<emphasis>valid model</emphasis> of the real world process they are trying to 
+				capture.   
+			</para>
+			<para>
+				Tracker applications consolidate, structure and persist data to light weight
+				<ulink url="http://en.wikipedia.org/wiki/XMI">industry standard</ulink> document files. 
+				Since files can be attached and sent via email or other file sharing technologies using 
+				standard based document files for data storage provides Tracker users significant 
+				benefits over storing data in heavy weight relational databases or proprietary document 
+				formats.  If business requirements dictate the need for multi-user data storage or the storage of
+			    large volumes of premises data, the optional Tracker Store feature offers an easy to deploy,
+			    robust and highly scalable data storage solution. 
+				<footnote> 
+				<para>
+					Industry standard text based data documents offer greater mobility than database data storage 
+					and greater processing, tooling, analysis, reporting and collaborating
+				    options than proprietary document formats.  Open standard document formats are the key
+				    to many of the subsequent use-case scenarios presented in this section.
+				</para>
+				<para>
+					This documentation uses the term <emphasis>Tracker Data Documents</emphasis> as a 
+					shorthand for the more technically precise term 
+					<emphasis><ulink url="http://www.eclipse.org/modeling/emf/">EMF Ecore</ulink> 
+					Model Instance</emphasis> document.  
+				</para>
+				</footnote>.
+			</para>  
+			<para>
+				Structuring and consolidating data to documents is the first step of the process, but 
+				users need tools to confirm that documents are <emphasis>valid</emphasis> models of real world 
+				processes.  For the document to be considered valid for a real world 
+				process, rules for judging validity must be controlled by the user.<footnote>
+				<para>Document validation basically insures that data contained in documents 
+				meet user requirements. Since user requirements may change based on a specific project or 
+				livestock scenario, the user must be able to modify and change these rules. </para>
+				</footnote>	
+			</para>
+			<para>
+			Documentation functionality is shown in the <xref linkend="fig_DocumentationUseCases"/>	
+				<figure float="0" id="fig_DocumentationUseCases">
+				<title>Documentation Use-Case Diagram</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata align="center" fileref="../images/useCases/documentation.png"/>
+						</imageobject>
+					</mediaobject>
+				</figure>
+			</para>
+		</section>
+		
+		<section>
+		    <?dbhtml filename="overview/frameworkOverview_useCaseDiagrams_management.html" ?>
+			<title>Management</title>
+			<para>
+				Tracker data documents are created and used within a specific livestock 
+				business context. Within this context Tracker documents are often associated 
+				with other files and folders of files. 
+				<footnote>
+				<para>
+				For example: Tracker data documents may be associated with the raw data files that 
+				were initially imported into the Tracker documents; Tracker data documents are 
+				often accompanied by report design files used for running reports; and there 
+				may even be multiple Tracker document files associated with different data
+				viewpoints of a particular work activity.  
+				</para>
+				</footnote>
+			</para>
+			<para>
+				To address the requirement for grouping files into work contexts
+				Tracker supports the concept of a <emphasis>Project</emphasis>.
+				<footnote>
+				<para>
+					Eclipse also supports a higher or parent level of container above that of a project 
+					container. This higher level container is called an Eclipse <emphasis>workspace</emphasis>
+					and it exists to hold user settings and contain multiple projects. 
+					A Tracker user can work with Multiple Workspaces each containing multiple Projects. 
+					For the typical Tracker user, they can elect to only use the default
+					workspace and afterwards ignore the concept of workspaces.  
+				</para>
+				</footnote>
+			</para>
+			  
+			<para>
+				A Tracker project is a conceptual container for managing <emphasis>related</emphasis> files, folders, 
+				documents, reports and images. Files in Tracker projects can be created, organized in folders, 
+				removed, deleted and edited. Files in Tracker Projects can also be compared to each other and 
+				the editing histories of files can also be viewed and changes compared. Projects (and all the contained
+				files) can be archived, exported, and imported into the Tracker.<footnote>
+				<para>Tracker also supports simple project management tools for managing ToDo tasks and network
+				backup of projects. Tools 
+				for more sophisticated project management and file revision control are available as Eclipse
+				features that can also be added to the Tracker.</para>
+				</footnote>
+			</para>
+			<para>
+			Management functionality is shown in the <xref linkend="fig_ManagementUseCases"/>	
+				<figure float="0" id="fig_ManagementUseCases">
+				<title>Management Use-Case Diagram</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata align="center" fileref="../images/useCases/management.png"/>
+						</imageobject>
+					</mediaobject>
+				</figure>
+			</para>
+		</section>
+		
+		<section>
+		    <?dbhtml filename="overview/frameworkOverview_useCaseDiagrams_analysis.html" ?>
+			<title>Analysis and Reporting</title>
+			<para>
+				To create information useful to end users, Tracker data documents can be used as data 
+				sources to 
+				<ulink url="http://www.eclipse.org/birt/phoenix/intro/">Eclipse Business Intelligence Reporting Tool</ulink>
+				<acronym>(BIRT)</acronym> reports.
+				<footnote><para>TrackerStore can also be used as a data source for BIRT reports.</para> </footnote>
+			</para>
+			
+			<para>
+				BIRT reports are created by Livestock Information Technology Analysts.
+				<footnote>
+				<para>Also called Business Analysts or Report Designers.</para>
+				</footnote>
+			    After analyzing specific livestock information problems these analysts 
+				utilize the BIRT Report Designer tool to specify how to extract and create information from 
+				Tracker data documents.  These specifications result in a set of BIRT report 
+				design documents and report libraries.  Report design documents and libraries  
+				are distributed to Tracker End Users who use them to run reports against one or more 
+				data documents in order to visualize and export information. <footnote>
+				<para>Tracker end users would be able to run reports but would not have access
+				to the Report Designer tool.  
+				</para>
+				</footnote> 
+			</para>
+			
+			<para>
+				In addition to enabling Tracker users to run reports against Tracker data documents, Information
+				Technology Analysts can further enable Tracker End Users by crafting report based solutions
+				that integrate data from Tracker data documents and any other source of BIRT data.  
+				Besides Tracker data documents BIRT reports can access and visualize data from:
+			    <orderedlist continuation="restarts" inheritnum="ignore" numeration="arabic">
+					<listitem><para>SQL Relational Databased through any JDBC driver;</para></listitem>
+					<listitem><para>Eclipse Modeling Framework EMF Ecore data models;</para></listitem>
+					<listitem><para>Non-standard data models through custom code;</para></listitem>
+					<listitem><para>Flat file data using standard delimiters;</para></listitem>
+					<listitem><para>XML files or streams using XPath syntax to specify columns. </para></listitem>
+				</orderedlist>
+			</para>
+			<para>
+			Analysis and Reporting functionality is shown in the <xref linkend="fig_AnalysisReportingUseCases"/>	
+				<figure float="0" id="fig_AnalysisReportingUseCases">
+				<title>Analysis and Reporting Use-Case Diagram</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata align="center" fileref="../images/useCases/analysisReporting.png"/>
+						</imageobject>
+					</mediaobject>
+				</figure>
+			</para>
+		</section>
+		
+		<section>
+		    <?dbhtml filename="overview/frameworkOverview_useCaseDiagrams_collaboration.html" ?>
+			<title>Collaboration</title>
+			<para>
+				Because Tracker data documents are small industry standard data containers they are ideal 
+				for exchanging and sharing <emphasis>validated</emphasis> livestock information. Tracker 
+				documents are easily shared between individual users, groups of users, business collaborators 
+				and central auditing authorities.
+				<footnote>
+				<para>BIRT reports can also easily be created and shared with other users and collaborators.</para>
+				</footnote>
+			</para>
+			
+			<para>Collaboration technology options range from manual file over media transfers,
+				<footnote>
+				<para>
+					For example documents or document fragments can be exchanged on usb flash drives or flash memory 
+					cards.
+				</para>
+				</footnote>
+			to common Internet file transfer utilities,
+			<footnote>
+			<para>Email, FTP, and Web Server uploading and downloading.</para>
+			</footnote> 
+			to a mediated collaboration service that offers publish and request services to Tracker clients.
+			<footnote>
+			 <para>
+			 The TrackerStore is an example of such a service. One or more TrackerStore Collaboration Service Providers could be utilized by Tracker clients. Example administrators
+			 of these service providers could be industry associations or government auditing authorities.
+			 </para>
+			 </footnote>.
+			</para>
+ 
+			<para>
+			Collaboration functionality is shown in the <xref linkend="fig_CollaborationUseCases"/>	
+				<figure float="0" id="fig_CollaborationUseCases">
+				<title>Collaboration Use-Case Diagram</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata align="center" fileref="../images/useCases/collaboration.png"/>
+						</imageobject>
+					</mediaobject>
+				</figure>
+			</para>
+		</section>
+	</section>
+</chapter>
+	<chapter xml:base="product/product.xml">
+  	<?dbhtml filename="product/product.html" ?>
+
+	<title>Tracker Product Suite</title>
+	<para>The Tracker Product Suite is a comprehensive suite of livestock information products. 
+	The Tracker product suite consists of the following products:
+	<itemizedlist mark="bullet">
+				<listitem>
+					<para>Tracker BI Toolkit Desktop;</para>
+				</listitem>
+				<listitem>
+					<para>Tracker Information Exchange Cloud Service;</para>
+				</listitem>
+				<listitem>
+					<para>Tracker Web Client;</para>
+				</listitem>
+				<listitem>
+					<para>Tracker Mobile Client;</para>
+				</listitem>
+				<listitem>
+					<para>Tracker iRouter Appliance.</para>
+				</listitem>
+			</itemizedlist>
+ 		</para>
+     
+</chapter>
+	
+	
+	<appendix id="gfdl" xml:base="appendix/fdl.xml">
+  <?dbhtml filename="appendix/gnuDoclicense.html" ?>
+  <title>GNU Free Documentation License</title>
+  <para>
+    Copyright (C) 2000, 2001, 2002 Free Software Foundation,
+    <abbrev>Inc.</abbrev> 51 Franklin <abbrev>St</abbrev>, Fifth Floor,
+    Boston, <abbrev>MA</abbrev> 02110-1301 <abbrev role="initialism">USA</abbrev>.  Everyone is permitted to copy and
+    distribute verbatim copies of this license document, but changing it is
+    not allowed.
+  </para>
+  <bridgehead renderas="sect1">
+    0. PREAMBLE
+  </bridgehead>
+  <para>
+    The purpose of this License is to make a manual, textbook, or other
+    functional and useful document "free" in the sense of freedom: to assure
+    everyone the effective freedom to copy and redistribute it, with or
+    without modifying it, either commercially or noncommercially.
+    Secondarily, this License preserves for the author and publisher a way to
+    get credit for their work, while not being considered responsible for
+    modifications made by others.
+  </para>
+  <para>
+    This License is a kind of "copyleft", which means that derivative works of
+    the document must themselves be free in the same sense.  It complements
+    the GNU General Public License, which is a copyleft license designed for
+    free software.
+  </para>
+  <para>
+    We have designed this License in order to use it for manuals for free
+    software, because free software needs free documentation: a free program
+    should come with manuals providing the same freedoms that the software
+    does.  But this License is not limited to software manuals; it can be used
+    for any textual work, regardless of subject matter or whether it is
+    published as a printed book.  We recommend this License principally for
+    works whose purpose is instruction or reference.</para>
+  <bridgehead renderas="sect1">
+    1. APPLICABILITY AND DEFINITIONS
+  </bridgehead>
+  <para>
+    This License applies to any manual or other work, in any medium, that
+    contains a notice placed by the copyright holder saying it can be
+    distributed under the terms of this License.  Such a notice grants a
+    world-wide, royalty-free license, unlimited in duration, to use that work
+    under the conditions stated herein.  The "Document", below, refers to any
+    such manual or work.  Any member of the public is a licensee, and is
+    addressed as "you".  You accept the license if you copy, modify or
+    distribute the work in a way requiring permission under copyright
+    law.
+  </para>
+  <para>
+    A "Modified Version" of the Document means any work containing the
+    Document or a portion of it, either copied verbatim, or with modifications
+    and/or translated into another language.
+  </para>
+  <para>
+    A "Secondary Section" is a named appendix or a front-matter section of the
+    Document that deals exclusively with the relationship of the publishers or
+    authors of the Document to the Document's overall subject (or to related
+    matters) and contains nothing that could fall directly within that overall
+    subject.  (Thus, if the Document is in part a textbook of mathematics, a
+    Secondary Section may not explain any mathematics.)  The relationship
+    could be a matter of historical connection with the subject or with
+    related matters, or of legal, commercial, philosophical, ethical or
+    political position regarding them.
+  </para>
+  <para>
+    The "Invariant Sections" are certain Secondary Sections whose titles are
+    designated, as being those of Invariant Sections, in the notice that says
+    that the Document is released under this License.  If a section does not
+    fit the above definition of Secondary then it is not allowed to be
+    designated as Invariant.  The Document may contain zero Invariant
+    Sections.  If the Document does not identify any Invariant Sections then
+    there are none.
+  </para>
+  <para>
+    The "Cover Texts" are certain short passages of text that are listed, as
+    Front-Cover Texts or Back-Cover Texts, in the notice that says that the
+    Document is released under this License.  A Front-Cover Text may be at
+    most 5 words, and a Back-Cover Text may be at most 25 words.
+  </para>
+  <para>
+    A "Transparent" copy of the Document means a machine-readable copy,
+    represented in a format whose specification is available to the general
+    public, that is suitable for revising the document straightforwardly with
+    generic text editors or (for images composed of pixels) generic paint
+    programs or (for drawings) some widely available drawing editor, and that
+    is suitable for input to text formatters or for automatic translation to a
+    variety of formats suitable for input to text formatters.  A copy made in
+    an otherwise Transparent file format whose markup, or absence of markup,
+    has been arranged to thwart or discourage subsequent modification by
+    readers is not Transparent.  An image format is not Transparent if used
+    for any substantial amount of text.  A copy that is not "Transparent" is
+    called "Opaque".
+  </para>
+  <para>
+    Examples of suitable formats for Transparent copies include plain ASCII
+    without markup, Texinfo input format, LaTeX input format, SGML or XML
+    using a publicly available DTD, and standard-conforming simple HTML,
+    PostScript or PDF designed for human modification.  Examples of
+    transparent image formats include PNG, XCF and JPG.  Opaque formats
+    include proprietary formats that can be read and edited only by
+    proprietary word processors, SGML or XML for which the DTD and/or
+    processing tools are not generally available, and the machine-generated
+    HTML, PostScript or PDF produced by some word processors for output
+    purposes only.
+  </para>
+  <para>
+    The "Title Page" means, for a printed book, the title page itself, plus
+    such following pages as are needed to hold, legibly, the material this
+    License requires to appear in the title page.  For works in formats which
+    do not have any title page as such, "Title Page" means the text near the
+    most prominent appearance of the work's title, preceding the beginning of
+    the body of the text.
+  </para>
+  <para>
+    A section "Entitled XYZ" means a named subunit of the Document whose title
+    either is precisely XYZ or contains XYZ in parentheses following text that
+    translates XYZ in another language.  (Here XYZ stands for a specific
+    section name mentioned below, such as "Acknowledgements", "Dedications",
+    "Endorsements", or "History".)  To "Preserve the Title" of such a section
+    when you modify the Document means that it remains a section "Entitled
+    XYZ" according to this definition.
+  </para>
+  <para>
+    The Document may include Warranty Disclaimers next to the notice which
+    states that this License applies to the Document.  These Warranty
+    Disclaimers are considered to be included by reference in this License,
+    but only as regards disclaiming warranties: any other implication that
+    these Warranty Disclaimers may have is void and has no effect on the
+    meaning of this License.
+  </para>
+  <bridgehead renderas="sect1">
+    2. VERBATIM COPYING
+  </bridgehead>
+  <para>
+    You may copy and distribute the Document in any medium, either
+    commercially or noncommercially, provided that this License, the copyright
+    notices, and the license notice saying this License applies to the
+    Document are reproduced in all copies, and that you add no other
+    conditions whatsoever to those of this License.  You may not use technical
+    measures to obstruct or control the reading or further copying of the
+    copies you make or distribute.  However, you may accept compensation in
+    exchange for copies.  If you distribute a large enough number of copies
+    you must also follow the conditions in section 3.
+  </para>
+  <para>
+    You may also lend copies, under the same conditions stated above, and you
+    may publicly display copies.
+  </para>
+  <bridgehead renderas="sect1">
+    3. COPYING IN QUANTITY
+  </bridgehead>
+  <para>
+    If you publish printed copies (or copies in media that commonly have
+    printed covers) of the Document, numbering more than 100, and the
+    Document's license notice requires Cover Texts, you must enclose the
+    copies in covers that carry, clearly and legibly, all these Cover Texts:
+    Front-Cover Texts on the front cover, and Back-Cover Texts on the back
+    cover.  Both covers must also clearly and legibly identify you as the
+    publisher of these copies.  The front cover must present the full title
+    with all words of the title equally prominent and visible.  You may add
+    other material on the covers in addition.  Copying with changes limited to
+    the covers, as long as they preserve the title of the Document and satisfy
+    these conditions, can be treated as verbatim copying in other
+    respects.
+  </para>
+  <para>
+    If the required texts for either cover are too voluminous to fit legibly,
+    you should put the first ones listed (as many as fit reasonably) on the
+    actual cover, and continue the rest onto adjacent pages.
+  </para>
+  <para>
+    If you publish or distribute Opaque copies of the Document numbering more
+    than 100, you must either include a machine-readable Transparent copy
+    along with each Opaque copy, or state in or with each Opaque copy a
+    computer-network location from which the general network-using public has
+    access to download using public-standard network protocols a complete
+    Transparent copy of the Document, free of added material.  If you use the
+    latter option, you must take reasonably prudent steps, when you begin
+    distribution of Opaque copies in quantity, to ensure that this Transparent
+    copy will remain thus accessible at the stated location until at least one
+    year after the last time you distribute an Opaque copy (directly or
+    through your agents or retailers) of that edition to the public.
+  </para>
+  <para>
+    It is requested, but not required, that you contact the authors of the
+    Document well before redistributing any large number of copies, to give
+    them a chance to provide you with an updated version of the
+    Document.
+  </para>
+  <bridgehead renderas="sect1">
+    4. MODIFICATIONS
+  </bridgehead>
+  <para>
+    You may copy and distribute a Modified Version of the Document under the
+    conditions of sections 2 and 3 above, provided that you release the
+    Modified Version under precisely this License, with the Modified Version
+    filling the role of the Document, thus licensing distribution and
+    modification of the Modified Version to whoever possesses a copy of it.
+    In addition, you must do these things in the Modified Version:
+  </para>
+  <orderedlist continuation="restarts" inheritnum="ignore" numeration="upperalpha">
+    <listitem>
+      <simpara>
+        Use in the Title Page (and on the covers, if any) a title distinct
+        from that of the Document, and from those of previous versions (which
+        should, if there were any, be listed in the History section of the
+        Document).  You may use the same title as a previous version if the
+        original publisher of that version gives permission.
+        </simpara>
+    </listitem>
+    <listitem>
+      <simpara>
+        List on the Title Page, as authors, one or more persons or entities
+        responsible for authorship of the modifications in the Modified
+        Version, together with at least five of the principal authors of the
+        Document (all of its principal authors, if it has fewer than five),
+        unless they release you from this requirement.
+      </simpara>
+    </listitem>
+    <listitem>
+      <simpara>
+        State on the Title page the name of the publisher of the Modified
+        Version, as the publisher.
+      </simpara>
+    </listitem>
+    <listitem>
+      <simpara>
+        Preserve all the copyright notices of the Document.
+      </simpara>
+    </listitem>
+    <listitem>
+      <simpara>
+        Add an appropriate copyright notice for your modifications adjacent to
+        the other copyright notices.
+      </simpara>
+    </listitem>
+    <listitem>
+      <simpara>
+        Include, immediately after the copyright notices, a license notice
+        giving the public permission to use the Modified Version under the
+        terms of this License, in the form shown in the Addendum below.
+      </simpara>
+    </listitem>
+    <listitem>
+      <simpara>
+        Preserve in that license notice the full lists of Invariant Sections
+        and required Cover Texts given in the Document's license notice.
+      </simpara>
+    </listitem>
+    <listitem>
+      <simpara>
+        Include an unaltered copy of this License.
+      </simpara>
+    </listitem>
+    <listitem>
+      <simpara>
+        Preserve the section Entitled "History", Preserve its Title, and add
+        to it an item stating at least the title, year, new authors, and
+        publisher of the Modified Version as given on the Title Page.  If
+        there is no section Entitled "History" in the Document, create one
+        stating the title, year, authors, and publisher of the Document as
+        given on its Title Page, then add an item describing the Modified
+        Version as stated in the previous sentence.
+      </simpara>
+    </listitem>
+    <listitem>
+      <simpara>
+        Preserve the network location, if any, given in the Document for
+        public access to a Transparent copy of the Document, and likewise the
+        network locations given in the Document for previous versions it was
+        based on.  These may be placed in the "History" section.  You may omit
+        a network location for a work that was published at least four years
+        before the Document itself, or if the original publisher of the
+        version it refers to gives permission.
+      </simpara>
+    </listitem>
+    <listitem>
+      <simpara>
+        For any section Entitled "Acknowledgements" or "Dedications", Preserve
+        the Title of the section, and preserve in the section all the
+        substance and tone of each of the contributor acknowledgements and/or
+        dedications given therein.
+      </simpara>
+    </listitem>
+    <listitem>
+      <simpara>
+        Preserve all the Invariant Sections of the Document, unaltered in
+        their text and in their titles.  Section numbers or the equivalent are
+        not considered part of the section titles.
+      </simpara>
+    </listitem>
+    <listitem>
+      <simpara>
+        Delete any section Entitled "Endorsements".  Such a section may not be
+        included in the Modified Version.
+      </simpara>
+    </listitem>
+    <listitem>
+      <simpara>
+        Do not retitle any existing section to be Entitled "Endorsements" or
+        to conflict in title with any Invariant Section.
+      </simpara>
+    </listitem>
+    <listitem>
+      <simpara>
+        Preserve any Warranty Disclaimers.
+      </simpara>
+    </listitem>
+  </orderedlist>
+  <para>
+    If the Modified Version includes new front-matter sections or appendices
+    that qualify as Secondary Sections and contain no material copied from the
+    Document, you may at your option designate some or all of these sections
+    as invariant.  To do this, add their titles to the list of Invariant
+    Sections in the Modified Version's license notice.  These titles must be
+    distinct from any other section titles.
+  </para>
+  <para>
+    You may add a section Entitled "Endorsements", provided it contains
+    nothing but endorsements of your Modified Version by various parties--for
+    example, statements of peer review or that the text has been approved by
+    an organization as the authoritative definition of a standard.
+  </para>
+  <para>
+    You may add a passage of up to five words as a Front-Cover Text, and a
+    passage of up to 25 words as a Back-Cover Text, to the end of the list of
+    Cover Texts in the Modified Version.  Only one passage of Front-Cover Text
+    and one of Back-Cover Text may be added by (or through arrangements made
+    by) any one entity.  If the Document already includes a cover text for the
+    same cover, previously added by you or by arrangement made by the same
+    entity you are acting on behalf of, you may not add another; but you may
+    replace the old one, on explicit permission from the previous publisher
+    that added the old one.
+  </para>
+  <para>
+    The author(s) and publisher(s) of the Document do not by this License give
+    permission to use their names for publicity for or to assert or imply
+    endorsement of any Modified Version.
+  </para>
+  <bridgehead renderas="sect1">
+    5. COMBINING DOCUMENTS
+  </bridgehead>
+  <para>
+    You may combine the Document with other documents released under this
+    License, under the terms defined in section 4 above for modified versions,
+    provided that you include in the combination all of the Invariant Sections
+    of all of the original documents, unmodified, and list them all as
+    Invariant Sections of your combined work in its license notice, and that
+    you preserve all their Warranty Disclaimers.
+  </para>
+  <para>
+    The combined work need only contain one copy of this License, and multiple
+    identical Invariant Sections may be replaced with a single copy.  If there
+    are multiple Invariant Sections with the same name but different contents,
+    make the title of each such section unique by adding at the end of it, in
+    parentheses, the name of the original author or publisher of that section
+    if known, or else a unique number.  Make the same adjustment to the
+    section titles in the list of Invariant Sections in the license notice of
+    the combined work.
+  </para>
+  <para>
+    In the combination, you must combine any sections Entitled "History" in
+    the various original documents, forming one section Entitled "History";
+    likewise combine any sections Entitled "Acknowledgements", and any
+    sections Entitled "Dedications".  You must delete all sections Entitled
+    "Endorsements".
+  </para>
+  <bridgehead renderas="sect1">
+    6. COLLECTIONS OF DOCUMENTS
+  </bridgehead>
+  <para>
+    You may make a collection consisting of the Document and other documents
+    released under this License, and replace the individual copies of this
+    License in the various documents with a single copy that is included in
+    the collection, provided that you follow the rules of this License for
+    verbatim copying of each of the documents in all other respects.
+  </para>
+  <para>
+    You may extract a single document from such a collection, and distribute
+    it individually under this License, provided you insert a copy of this
+    License into the extracted document, and follow this License in all other
+    respects regarding verbatim copying of that document.
+  </para>
+  <bridgehead renderas="sect1">
+    7. AGGREGATION WITH INDEPENDENT WORKS
+  </bridgehead>
+  <para>
+    A compilation of the Document or its derivatives with other separate and
+    independent documents or works, in or on a volume of a storage or
+    distribution medium, is called an "aggregate" if the copyright resulting
+    from the compilation is not used to limit the legal rights of the
+    compilation's users beyond what the individual works permit.  When the
+    Document is included in an aggregate, this License does not apply to the
+    other works in the aggregate which are not themselves derivative works of
+    the Document.
+  </para>
+  <para>
+    If the Cover Text requirement of section 3 is applicable to these copies
+    of the Document, then if the Document is less than one half of the entire
+    aggregate, the Document's Cover Texts may be placed on covers that bracket
+    the Document within the aggregate, or the electronic equivalent of covers
+    if the Document is in electronic form.  Otherwise they must appear on
+    printed covers that bracket the whole aggregate.
+  </para>
+  <bridgehead renderas="sect1">
+    8. TRANSLATION
+  </bridgehead>
+  <para>
+    Translation is considered a kind of modification, so you may distribute
+    translations of the Document under the terms of section 4.  Replacing
+    Invariant Sections with translations requires special permission from
+    their copyright holders, but you may include translations of some or all
+    Invariant Sections in addition to the original versions of these Invariant
+    Sections.  You may include a translation of this License, and all the
+    license notices in the Document, and any Warranty Disclaimers, provided
+    that you also include the original English version of this License and the
+    original versions of those notices and disclaimers.  In case of a
+    disagreement between the translation and the original version of this
+    License or a notice or disclaimer, the original version will prevail.
+  </para>
+  <para>
+    If a section in the Document is Entitled "Acknowledgements",
+    "Dedications", or "History", the requirement (section 4) to Preserve its
+    Title (section 1) will typically require changing the actual title.
+  </para>
+  <bridgehead renderas="sect1">
+    9. TERMINATION
+  </bridgehead>
+  <para>
+    You may not copy, modify, sublicense, or distribute the Document except as
+    expressly provided for under this License.  Any other attempt to copy,
+    modify, sublicense or distribute the Document is void, and will
+    automatically terminate your rights under this License.  However, parties
+    who have received copies, or rights, from you under this License will not
+    have their licenses terminated so long as such parties remain in full
+    compliance.
+  </para>
+  <bridgehead renderas="sect1">
+    10. FUTURE REVISIONS OF THIS LICENSE
+  </bridgehead>
+  <para>
+    The Free Software Foundation may publish new, revised versions of the GNU
+    Free Documentation License from time to time.  Such new versions will be
+    similar in spirit to the present version, but may differ in detail to
+    address new problems or concerns.  See <ulink url="http://www.gnu.org/copyleft/">http://www.gnu.org/copyleft/</ulink>.
+  </para>
+  <para>
+    Each version of the License is given a distinguishing version number.  If
+    the Document specifies that a particular numbered version of this License
+    "or any later version" applies to it, you have the option of following the
+    terms and conditions either of that specified version or of any later
+    version that has been published (not as a draft) by the Free Software
+    Foundation.  If the Document does not specify a version number of this
+    License, you may choose any version ever published (not as a draft) by the
+    Free Software Foundation.
+  </para>
+  <bridgehead renderas="sect1">
+    ADDENDUM: How to use this License for your documents
+  </bridgehead>
+  <para>
+    To use this License in a document you have written, include a copy of the
+    License in the document and put the following copyright and license
+    notices just after the title page:
+  </para>
+  <blockquote>
+    <para>
+      Copyright (C) YEAR YOUR NAME.
+    </para>
+    <para>
+      Permission is granted to copy, distribute and/or modify this document
+      under the terms of the GNU Free Documentation License, Version 1.2 or
+      any later version published by the Free Software Foundation; with no
+      Invariant Sections, no Front-Cover Texts, and no Back-Cover Texts.  A
+      copy of the license is included in the section entitled "GNU Free
+      Documentation License".
+    </para>
+  </blockquote>
+  <para>
+    If you have Invariant Sections, Front-Cover Texts and Back-Cover Texts,
+    replace the "with...Texts." line with this:
+  </para>
+  <blockquote>
+    <para>
+      with the Invariant Sections being LIST THEIR TITLES, with the
+      Front-Cover Texts being LIST, and with the Back-Cover Texts being LIST.
+    </para>
+  </blockquote>
+  <para>
+    If you have Invariant Sections without Cover Texts, or some other
+    combination of the three, merge those two alternatives to suit the
+    situation.
+  </para>
+  <para>
+    If your document contains nontrivial examples of program code, we
+    recommend releasing these examples in parallel under your choice of free
+    software license, such as the GNU General Public License, to permit their
+    use in free software.
+  </para>
+</appendix>
+	<appendix xml:base="appendix/eclipseUserAgreement.xml">
+   <?dbhtml filename="appendix/epllicense.html" ?>
+  <title>Eclipse Foundation Software User Agreement
+  </title>
+<section><title>Eclipse Foundation Software User Agreement</title>
+<para>February 1, 2011</para>
+<bridgehead>Usage Of Content</bridgehead>
+<para>THE ECLIPSE FOUNDATION MAKES AVAILABLE SOFTWARE, DOCUMENTATION, INFORMATION AND/OR OTHER MATERIALS FOR OPEN SOURCE PROJECTS
+   (COLLECTIVELY “CONTENT”).  USE OF THE CONTENT IS GOVERNED BY THE TERMS AND CONDITIONS OF THIS AGREEMENT AND/OR THE TERMS AND
+   CONDITIONS OF LICENSE AGREEMENTS OR NOTICES INDICATED OR REFERENCED BELOW.  BY USING THE CONTENT, YOU AGREE THAT YOUR USE
+   OF THE CONTENT IS GOVERNED BY THIS AGREEMENT AND/OR THE TERMS AND CONDITIONS OF ANY APPLICABLE LICENSE AGREEMENTS OR
+   NOTICES INDICATED OR REFERENCED BELOW.  IF YOU DO NOT AGREE TO THE TERMS AND CONDITIONS OF THIS AGREEMENT AND THE TERMS AND
+   CONDITIONS OF ANY APPLICABLE LICENSE AGREEMENTS OR NOTICES INDICATED OR REFERENCED BELOW, THEN YOU MAY NOT USE THE CONTENT.</para>
+
+<bridgehead>Applicable Licenses</bridgehead>
+
+<para>Unless otherwise indicated, all Content made available by the Eclipse Foundation is provided to you under the terms and conditions of the Eclipse Public License Version 1.0
+   (“EPL”).  A copy of the EPL is provided with this Content and is also available at 
+   <ulink url="http://www.eclipse.org/legal/epl-v10.html">http://www.eclipse.org/legal/epl-v10.html</ulink>.
+   For purposes of the EPL, “Program” will mean the Content.</para>
+
+<para>
+Content includes, but is not limited to, source code, object code, documentation and other files maintained in the Eclipse Foundation source code
+   repository (“Repository”) in software modules (“Modules”) and made available as downloadable archives (“Downloads”).</para>
+
+<itemizedlist>
+       <listitem><para>Content may be structured and packaged into modules to facilitate delivering, extending, and upgrading the Content.  Typical modules may include plug-ins (“Plug-ins”), plug-in fragments (“Fragments”), and features (“Features”).</para></listitem>
+
+       <listitem><para>Each Plug-in or Fragment may be packaged as a sub-directory or JAR (<trademark class="trade">Java</trademark> ARchive) in a directory named “plugins”.</para></listitem>
+       <listitem><para>A Feature is a bundle of one or more Plug-ins and/or Fragments and associated material.  Each Feature may be packaged as a sub-directory in a directory named “features”.  Within a Feature, files named “feature.xml” may contain a list of the names and version numbers of the Plug-ins
+      and/or Fragments associated with that Feature.</para></listitem>
+       <listitem><para>Features may also include other Features (“Included Features”). Within a Feature, files named “feature.xml” may contain a list of the names and version numbers of Included Features.</para></listitem>
+
+</itemizedlist>
+
+<para>The terms and conditions governing Plug-ins and Fragments should be contained in files named “about.html” (“Abouts”). The terms and conditions governing Features and
+Included Features should be contained in files named “license.html” (“Feature Licenses”).  Abouts and Feature Licenses may be located in any directory of a Download or Module
+including, but not limited to the following locations:</para>
+
+<itemizedlist>
+       <listitem><para>The top-level (root) directory</para></listitem>
+
+       <listitem><para>Plug-in and Fragment directories</para></listitem>
+       <listitem><para>Inside Plug-ins and Fragments packaged as JARs</para></listitem>
+       <listitem><para>Sub-directories of the directory named “src” of certain Plug-ins</para></listitem>
+       <listitem><para>Feature directories</para></listitem>
+</itemizedlist>
+
+<para>Note: if a Feature made available by the Eclipse Foundation is installed using the Provisioning Technology (as defined below), you must agree to a license (“Feature Update License”) during the
+installation process.  If the Feature contains Included Features, the Feature Update License should either provide you with the terms and conditions governing the Included Features or
+inform you where you can locate them.  Feature Update Licenses may be found in the “license” property of files named “feature.properties” found within a Feature.
+Such Abouts, Feature Licenses, and Feature Update Licenses contain the terms and conditions (or references to such terms and conditions) that govern your use of the associated Content in
+that directory.</para>
+
+<para>THE ABOUTS, FEATURE LICENSES, AND FEATURE UPDATE LICENSES MAY REFER TO THE EPL OR OTHER LICENSE AGREEMENTS, NOTICES OR TERMS AND CONDITIONS.  SOME OF THESE
+OTHER LICENSE AGREEMENTS MAY INCLUDE (BUT ARE NOT LIMITED TO):</para>
+
+<itemizedlist>
+       <listitem><para>Eclipse Distribution License Version 1.0 (available at <ulink url="http://www.eclipse.org/legal/epl-v10.html">http://www.eclipse.org/legal/epl-v10.html</ulink>)</para></listitem>
+
+       <listitem><para>Common Public License Version 1.0 (available at 
+       <ulink url="http://www.eclipse.org/legal/cpl-v10.html">http://www.eclipse.org/legal/cpl-v10.html</ulink>)</para></listitem>
+       
+       <listitem><para>Apache Software License 1.1 (available at 
+       <ulink url="http://www.apache.org/licenses/LICENSE">http://www.apache.org/licenses/LICENSE</ulink>)</para></listitem>
+       
+       <listitem><para>Apache Software License 2.0 (available at 
+       <ulink url="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</ulink>)</para></listitem>
+       
+       <listitem><para>Metro Link Public License 1.00 (available at 
+       <ulink url="http://www.opengroup.org/openmotif/supporters/metrolink/license.html">http://www.opengroup.org/openmotif/supporters/metrolink/license.html</ulink>)</para></listitem>
+
+       <listitem><para>Mozilla Public License Version 1.1 (available at 
+       <ulink url="http://www.mozilla.org/MPL/MPL-1.1.html">http://www.mozilla.org/MPL/MPL-1.1.html</ulink>)</para></listitem>
+</itemizedlist>
+
+<para>IT IS YOUR OBLIGATION TO READ AND ACCEPT ALL SUCH TERMS AND CONDITIONS PRIOR TO USE OF THE CONTENT.  If no About, Feature License, or Feature Update License is provided, please
+contact the Eclipse Foundation to determine what terms and conditions govern that particular Content.</para>
+
+ 
+<bridgehead>Use of Provisioning Technology</bridgehead>
+
+
+<para>The Eclipse Foundation makes available provisioning software, examples of which include, but are not limited to, p2 and the Eclipse
+   Update Manager (“Provisioning Technology”) for the purpose of allowing users to install software, documentation, information and/or
+   other materials (collectively “Installable Software”). This capability is provided with the intent of allowing such users to
+   install, extend and update Eclipse-based products. Information about packaging Installable Software is available at <ulink url="http://eclipse.org/equinox/p2/repository_packaging.html">http://eclipse.org/equinox/p2/repository_packaging.html</ulink>
+
+   (“Specification”).</para>
+
+<para>You may use Provisioning Technology to allow other parties to install Installable Software. You shall be responsible for enabling the
+   applicable license agreements relating to the Installable Software to be presented to, and accepted by, the users of the Provisioning Technology
+   in accordance with the Specification. By using Provisioning Technology in such a manner and making it available in accordance with the
+   Specification, you further acknowledge your agreement to, and the acquisition of all necessary rights to permit the following:</para>
+
+<itemizedlist>
+       <listitem><para>A series of actions may occur (“Provisioning Process”) in which a user may execute the Provisioning Technology
+       on a machine (“Target Machine”) with the intent of installing, extending or updating the functionality of an Eclipse-based
+       product.</para></listitem>
+
+       <listitem><para>During the Provisioning Process, the Provisioning Technology may cause third party Installable Software or a portion thereof to be
+       accessed and copied to the Target Machine.</para></listitem>
+       <listitem><para>Pursuant to the Specification, you will provide to the user the terms and conditions that govern the use of the Installable
+       Software (“Installable Software Agreement”) and such Installable Software Agreement shall be accessed from the Target
+       Machine in accordance with the Specification. Such Installable Software Agreement must inform the user of the terms and conditions that govern
+       the Installable Software and must solicit acceptance by the end user in the manner prescribed in such Installable Software Agreement. Upon such
+       indication of agreement by the user, the provisioning Technology will complete installation of the Installable Software.</para></listitem>
+</itemizedlist>
+
+
+<bridgehead>Cryptography</bridgehead>
+
+
+<para>Content may contain encryption software. The country in which you are currently may have restrictions on the import, possession, and use, and/or re-export to
+   another country, of encryption software. BEFORE using any encryption software, please check the country's laws, regulations and policies concerning the import,
+   possession, or use, and re-export of encryption software, to see if this is permitted.</para>
+<para>Java and all Java-based trademarks are trademarks of Oracle Corporation in the United States, other countries, or both.</para>
+</section>
+
+
+</appendix>
+	<!--
+	
+	<xi:include href="appendix/gpl.xml"/>
+	-->
+	
+	<!-- TODO Add a chapter on the different kinds of products 
+	
+	-->
+</book>

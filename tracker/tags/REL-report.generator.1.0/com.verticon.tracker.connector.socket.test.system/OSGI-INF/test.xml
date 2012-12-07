@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" activate="startup" name="com.verticon.tracker.connector.socket.test.system">
+   <implementation class="com.verticon.tracker.connector.socket.test.system.internal.ConnectionFactoryServiceTest"/>
+   <reference bind="setConnectorService" cardinality="1..1" interface="org.osgi.service.io.ConnectorService" name="ConnectorService" policy="static"/>
+</scr:component>

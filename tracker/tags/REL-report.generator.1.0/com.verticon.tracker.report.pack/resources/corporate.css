@@ -1,0 +1,29 @@
+/*
+	The default body layout for all the pages.
+*/
+
+.Detail
+{
+background-color: #FFFFFF;
+font-family: Arial;
+font-size: small;
+}
+
+.Title
+{
+background-color: #FFFFFF;
+font-family: Arial;
+font-size: xx-large;
+font-weight: bold;
+color: #483D8B;
+text-align: center
+}
+.ReportHeader
+{
+background-color: #FFFFFF;
+font-family: Arial;
+font-size: Small;
+font-weight: bold;
+color: #42426F;
+}
+

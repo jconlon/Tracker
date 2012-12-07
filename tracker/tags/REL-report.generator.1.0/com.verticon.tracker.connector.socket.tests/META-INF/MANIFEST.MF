@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tests
+Bundle-SymbolicName: com.verticon.tracker.connector.socket.tests
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Fragment-Host: com.verticon.tracker.connector.socket
+Import-Package: javax.microedition.io,
+ junit.framework,
+ org.osgi.service.io

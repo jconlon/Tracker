@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Archiver-Version: Plexus Archiver
+Created-By: Apache Maven
+Built-By: jboss
+Build-Jdk: 1.6.0_20
+Export-Package: de.itemis.utils.jface.viewers,de.itemis.utils.jface.vi
+ ewers.help,de.itemis.xtext.utils.jface.fieldassist,de.itemis.xtext.ut
+ ils.jface.viewers,de.itemis.xtext.utils.jface.viewers.context,de.item
+ is.xtext.utils.jface.viewers.util
+Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.6.0,4.0.0)
+ ",org.eclipse.core.expressions;bundle-version="[3.4.0,4.0.0)",org.ecl
+ ipse.ui.ide;bundle-version="[3.6.0,4.0.0)",org.eclipse.jface;bundle-v
+ ersion="[3.6.0,4.0.0)",org.eclipse.jface.text;bundle-version="[3.6.0,
+ 4.0.0)",org.eclipse.emf.common;bundle-version="[2.6.0,3.0.0)",org.ecl
+ ipse.xtext.ui;bundle-version="[2.0.0,3.0.0)",org.eclipse.help;bundle-
+ version="3.5.0"
+Bundle-Vendor: itemis AG
+Bundle-ActivationPolicy: lazy
+Bundle-ClassPath: .
+Bundle-Version: 1.0.0.201205141449
+Bundle-Name: Xtext JFace Integration (XJI)
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: de.itemis.xtext.utils.jface;singleton:=true
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+

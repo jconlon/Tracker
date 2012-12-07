@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: com.verticon.mongo.json.query.tests
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0
+Bundle-SymbolicName: com.verticon.mongo.json.query.tests; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: com.verticon.mongo.json.query,
+ com.verticon.mongo.json.query.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.xtext,
+ org.eclipse.xtext.junit4,
+ org.eclipse.xtext.ui.junit,
+ org.junit4,
+ org.eclipse.ui.workbench;resolution:=optional,
+ org.eclipselabs.xtext.utils.unittesting
+Import-Package: org.apache.log4j,
+ org.apache.commons.logging
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

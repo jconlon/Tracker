@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tracker OCL Query Documentation
+Bundle-SymbolicName: com.verticon.tracker.ocl.query.doc;singleton:=true
+Bundle-Version: 0.1.1.qualifier
+Bundle-Vendor: Verticon, Inc.

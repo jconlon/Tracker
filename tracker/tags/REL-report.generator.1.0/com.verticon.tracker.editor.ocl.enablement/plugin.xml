@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="com.verticon.tracker.ocl.query.viewer.packages">
+      <package
+            uri="http://www.verticon.com/tracker/0.4.2/premises">
+      </package>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            id="com.verticon.tracker.editor.ocl.enablement.commands.contextFreeQuery.command"
+            name="%_UI_CtxFreeQuery_label">
+      </command>
+       <command
+            id="com.verticon.tracker.editor.ocl.enablement.commands.oclQuery.command"
+            name="%_UI_OclQuery_label">
+            <commandParameter
+				         id="com.verticon.tracker.ocl.commands.packageURIs"
+				         name="Package URIs">
+		    </commandParameter> 
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=edit">
+                 <menu
+                       id="com.verticon.tracker.ocl.query.main"
+                       label="Query"
+                       mnemonic="Q"
+                       tooltip="OCL Query Commands">
+                       
+                        <command
+		                     commandId="com.verticon.tracker.editor.ocl.enablement.commands.contextFreeQuery.command"
+		                     icon="icons/elcl16/oclqryedit_co.gif"
+		                     style="push">
+                           <visibleWhen
+                                 checkEnabled="false">
+                              <with
+                                    variable="selection">
+                                 <iterate
+                                       ifEmpty="false"
+                                       operator="or">
+                                    <instanceof
+                                          value="org.eclipse.emf.ecore.EObject">
+                                    </instanceof>
+                                 </iterate>
+                              </with>
+                           </visibleWhen>
+		                     
+		               	</command>
+		               	
+		               	<command
+                       		commandId="com.verticon.tracker.editor.ocl.enablement.commands.oclQuery.command"
+		                       icon="icons/elcl16/oclqryedit_co.gif"
+		                       style="push">
+		                       
+		                     <parameter
+			               		name="com.verticon.tracker.ocl.commands.packageURIs"
+			               		value="http://www.verticon.com/tracker/0.4.2/premises">
+			       		   </parameter>
+				        	<visibleWhen
+                                 checkEnabled="true">
+                               	<or>
+		          						<with variable="activeEditorId">
+		             						<equals
+		                   						value="com.verticon.tracker.transaction.editor.TrackerEditorID">
+		             						</equals>
+		          						</with>
+		          
+		          						<with
+		                					variable="activeEditorId">
+		             						<equals
+		                   						value="com.verticon.tracker.editor.presentation.TrackerEditorID">
+		             						</equals>
+		          						</with>
+	          					</or> 
+                           </visibleWhen>
+		               	</command>
+                 </menu>
+        
+      </menuContribution>
+ 
+      <menuContribution
+            locationURI="popup:com.verticon.tracker.editor.menus.popupany">
+        
+               <command
+                     commandId="com.verticon.tracker.editor.ocl.enablement.commands.contextFreeQuery.command"
+                     icon="icons/elcl16/oclqryedit_co.gif"
+                     style="push">
+                     <visibleWhen
+                           checkEnabled="false">
+               			<with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+      						 <instanceof value="org.eclipse.emf.ecore.EObject"/>
+    					  </iterate>
+    			     	</with>
+	            	</visibleWhen>
+               	</command>
+               	
+               	 <command
+                       commandId="com.verticon.tracker.editor.ocl.enablement.commands.oclQuery.command"
+                       icon="icons/elcl16/oclqryedit_co.gif"
+                       style="push">
+               	   
+				   <parameter
+			               name="com.verticon.tracker.ocl.commands.packageURIs"
+			               value="http://www.verticon.com/tracker/0.4.2/premises">
+			       </parameter>
+			       <!-- show when the selecting an EObject and either the Premise Editor or 
+			       	the Transaction Premises Editor -->
+			       <visibleWhen
+                           checkEnabled="true">
+                           <and>
+               					<with variable="selection">
+		                  			<iterate
+                          				ifEmpty="false"
+                          				operator="or">
+      						 		<instanceof value="org.eclipse.emf.ecore.EObject"/>
+    					  			</iterate>
+    			     			</with>
+    			     	
+    			     			<or>
+		          					<with variable="activeEditorId">
+		             					<equals
+		                   					value="com.verticon.tracker.transaction.editor.TrackerEditorID">
+		             					</equals>
+		          					</with>
+		          
+		          					<with
+		                				variable="activeEditorId">
+		             					<equals
+		                   						value="com.verticon.tracker.editor.presentation.TrackerEditorID">
+		             					</equals>
+		          					</with>
+	          					</or> 
+    			     	  </and>
+	            	</visibleWhen>
+               	</command>
+      </menuContribution>
+      
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="com.verticon.tracker.ocl.query.handlers.OCLContextFreeQueryHandler"
+            commandId="com.verticon.tracker.editor.ocl.enablement.commands.contextFreeQuery.command">
+         <activeWhen>
+         		<with variable="selection">
+		                  <iterate>
+      						 <instanceof value="org.eclipse.emf.ecore.EObject"/>
+    					  </iterate>
+    			 </with>
+         </activeWhen>
+      </handler>
+      <handler
+            class="com.verticon.tracker.ocl.query.handlers.OCLQueryHandler"
+            commandId="com.verticon.tracker.editor.ocl.enablement.commands.oclQuery.command">
+         <activeWhen>
+	          <or>
+		          <with variable="activeEditorId">
+		             <equals
+		                   value="com.verticon.tracker.transaction.editor.TrackerEditorID">
+		             </equals>
+		          </with>
+		          
+		          <with
+		                variable="activeEditorId">
+		             <equals
+		                   value="com.verticon.tracker.editor.presentation.TrackerEditorID">
+		             </equals>
+		          </with>
+	          </or> 
+         </activeWhen>
+      </handler>
+   </extension>
+</plugin>

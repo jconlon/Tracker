@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" 
+ "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter>
+  	<?dbhtml filename="product/product.html" ?>
+
+	<title>Tracker Product Suite</title>
+	<para>The Tracker Product Suite is a comprehensive suite of livestock information products. 
+	The Tracker product suite consists of the following products:
+	<itemizedlist mark='bullet'>
+				<listitem>
+					<para>Tracker BI Toolkit Desktop;</para>
+				</listitem>
+				<listitem>
+					<para>Tracker Information Exchange Cloud Service;</para>
+				</listitem>
+				<listitem>
+					<para>Tracker Web Client;</para>
+				</listitem>
+				<listitem>
+					<para>Tracker Mobile Client;</para>
+				</listitem>
+				<listitem>
+					<para>Tracker iRouter Appliance.</para>
+				</listitem>
+			</itemizedlist>
+ 		</para>
+     
+</chapter>
+	

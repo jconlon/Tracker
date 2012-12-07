@@ -1,0 +1,140 @@
+h1=. iRouter Premises Common Producers
+
+com.verticon.tracker.irouter.premises.common Version 0.1.0
+
+{toc:style=disc|minLevel=2|maxLevel=3}
+
+
+h2. Introduction
+
+iRouter enables iRouter component based networks to produce and process measurement and position products that can be sent to Loggers and/or Premises Transaction Editors.
+
+While the Tracker Desktop can be used by small to medium Livestock producers in an on-line production capacity, one or more desktop (or laptops) are not a good solution for larger enterprise operations. Why? 
+* Large enterprises can not utilize the Tracker Transaction Editors as an online transaction processor, but instead require a hands off method for the automation of animal information acquisition. 
+* iRouter logging components do not produce a full set of Animal event types, they only provide for measurements and positions to be sent to the logging adapters. 
+
+Enterprise livestock operations need:
+* high capacity, highly reliable, on-line transaction data acquisition
+* components that can create a comprehensive set of animal event types 
+
+This functionality can be provided by:
+
+# A network of iRouter content event processors running in headless appliances connected to:
+** network sensors
+** network actuators
+# The ability of network administrators to create 
+## any of the modeled Tracker premises event types
+## any new GenericEvent type
+# The processing of sensor events 
+# The interacting with network actuators 
+# Data persistence to high capacity enterprise data stores.
+# Off line analytical processing (OLAP) using
+## Tracker Business Intelligence Toolkit featuring BIRT
+
+h2. Functionality 
+
+iRouter Premises Common Producers allow iRouter networks to utilize the full set of Tracker Premises events by adding the following components:
+# A component that consumes Animal EIDs, Triggering states, and raw Measurements and Position products and produces products identified with an animal EID
+# A component that will:
+** associate an external premises document containing an Animal with an event history
+** consume Animal EID products as forwarding triggers
+** produce Envelopes identified with the EID and containing the Animal as a value
+
+h2. com.verticon.tracker.irouter.premises.event
+
+Implements an *iRouter* Composite *Consumer-Producer* that consumes unidentified Measurement, Position, and animal EID envelopes and produces Measurement and Position envelopes ''identified'' with an EID.
+
+h3. Consumer
+
+Consumes the following Product Envelopes
+
+# Long from EID producers
+# Position from GPS producers
+# GenericEvent from proxies
+# WeighIn from proxies
+# State as forwarding triggers
+
+h3. Producer
+
+Produces Envelopes that are identified with an Animal EID and containing one of the following Values:
+# Position
+# Measurement with Envelope scope WeighIn 
+# Measurement with Envelope scope associated with the OCD name of an GenericEvent
+
+h2. com.verticon.tracker.irouter.premises.animal
+
+Implements an *iRouter* Composite *Consumer-Producer* that consumes an EID triggering event and produces one or more Premises events that are copied from a referenced animal template document.
+
+h3. Consumer
+
+Consumes the following Product Envelopes
+# Long from EID producers that act as a trigger for production 
+# State as forwarding triggers
+
+h3. Producer
+
+Produces Animal Envelopes that are identified with an Animal EID and contain an Animal with tag and events that are time-stamped at production
+
+h2. iRouter Support
+
+iRouter sensor and actuator networks can now use MongoDB for real time transaction recording of any Tracker Premises events.  
+
+The following is a system configuration where the iRouter Premises Common Producers are producing products that are archived to an enterprise data store.
+
+!images/Premises_iRouter.png!
+
+ 
+h2. iRouter Example
+
+Goal: Demonstrate an iRouter component configuration that highlights the functionality of the Tracker Mongo Store
+# Components used
+## TruTest Proxy 
+*** This will serve at the top of the event production chain to produce events associated with a TruTest scale head indicator
+**** The scale will produce events as the weights of the animals are changed, these weight measurements will be sent in the _raw.animal.weight_ scope
+**** When an animal EID is detected on the scale head that eid will be produced in the _animal.eid_ scope
+**** When the operator presses the Enter Button that event will be produced in the _transaction.state_ scope  
+## Premises Event Producer
+*** This component will consume all products sent by the TruTest Proxy and on the detection of a _transaction.state_ indicating that the operator pressed the Enter Button, this component will produce the last measurement received and identify it with the animal eid.
+## Premises Animal Producer
+*** This component also sits towards the top of the event production chain, but consumes Animal EIDs on the _animal.eid_ scope and Enter Button presses on the _transaction.state_ scope that have originated on the TruTest Proxy.  Associated with this component is a _URI_ referencing an Tracker Premises Animal template in an external document. Production cycle of this component starts when a Enter Button press is detected. Then the Animal Template is copied, given the EID from the TruTest, and sent to consumers.
+## Tracker Mongo Store consumes products from the Premises Event Producer and the Premises Animal Producer and creates these on the MongoDB. 
+# Startup and Configuration
+## MongoDB must be installed and running on the local host
+## Startup Tracker
+## From the _Configuration_ menu, invoke _Import iRouter Configuration_
+## Import that configuration _autotype.metatype_ document in this project
+# TruTest simulator
+## Download and install the Tracker simulator product 
+## In the installation directory run the simulator executable
+## In a web browser go to "Simulated Devices":http://localhost:8081/client/devices and start the TruTest simulator
+## Select a TruTest simulator 
+## When the TruTest simulator comes up the _Connection_ should be Y
+## Change the EID, the weight and press the record button to simulate a transaction
+
+h4. iRouter Monitor View of the Demonstration
+
+In the iRouter Monitor View you should see the components displayed something like:
+
+!images/irouterMonitor.png!
+
+
+
+h2. Powered by Eclipse Technology
+
+Verticon's Mongo Store offering is powered by Eclipse technology and includes Eclipse plug-ins that
+can be installed and used with other Eclipse-based offerings.
+	
+h2. License
+
+Verticon, Inc. makes available all content in this plug-in (&quot;Content&quot;).  Unless otherwise 
+indicated below, the Content is provided to you under the terms and conditions of the
+Eclipse Public License version 1.0 (&quot;EPL 1&quot;).  A copy of the EPL 1 is available 
+at <a href="http://www.eclipse.org/legal/epl-v10.html">http://www.eclipse.org/legal/epl-v10.html</a>.
+For purposes of the EPL, &quot;Program&quot; will mean the Content.
+
+If you did not receive this Content directly from the Verticon,Inc., the Content is 
+being redistributed by another party (&quot;Redistributor&quot;) and different terms and conditions may
+apply to your use of any object code in the Content.  Check the Redistributor's license that was 
+provided with the Content.  If no such license exists, contact the Redistributor.  Unless otherwise
+indicated below, the terms and conditions of the EPL 1 still apply to any source code in the Content
+and such source code may be obtained at <a href="http://tracker.verticon.com/index.html">http://tracker.verticon.com/index.html</a>.</p>

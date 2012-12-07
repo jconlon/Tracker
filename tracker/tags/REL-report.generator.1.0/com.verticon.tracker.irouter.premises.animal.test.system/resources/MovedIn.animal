@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<com.verticon.tracker:BovineBison xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:com.verticon.tracker="http://www.verticon.com/ns/tracker/0.1.0" id="999999">
+  <tags id="999999">
+    <events xsi:type="com.verticon.tracker:MovedIn" dateTime="1009-02-08T09:57:46.831-0600" electronicallyRead="true"/>
+  </tags>
+</com.verticon.tracker:BovineBison>

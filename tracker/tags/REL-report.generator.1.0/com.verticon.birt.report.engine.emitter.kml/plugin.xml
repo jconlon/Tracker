@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         name="Engine KMZ Emitters"
+         point="org.eclipse.birt.report.engine.emitters">
+      <emitter
+            class="com.verticon.birt.report.engine.emitter.kml.KMLReportEmitter"
+            format="kmz"
+            id="com.verticon.birt.report.engine.emitter.kml"
+            mimeType="application/vnd.google-earth.kmz"
+            supportedImageFormats="PNG;GIF;JPG">
+      </emitter>
+   </extension>
+
+</plugin>

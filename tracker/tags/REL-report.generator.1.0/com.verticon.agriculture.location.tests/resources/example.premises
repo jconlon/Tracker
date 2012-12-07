@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<premises:Premises xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:premises="http://www.verticon.com/tracker/0.4.2/premises" premisesId="H89234X" emailContact="jack_condor@bogus.net" uri="urn:pin:H89234X" administrator="Jack Sprat" name="East Farm" description="An example farm" phoneNumber="404-971-8926">
+  <animals xmi:type="premises:BovineBeef" birthDate="2009-03-06T14:24:35.000-0600" sex="Male" id="840456789012341" comments="Old Bully" visualID="41" beefBreed="DANISH JERSEY">
+    <tags id="840456789012341">
+      <events xmi:type="premises:TagApplied" dateTime="2010-05-10T10:51:30.881-0500" comments="kkkkk"/>
+      <events xmi:type="premises:MovedIn" dateTime="2010-05-10T10:53:30.881-0500" sourcePin="HA92348" uri=""/>
+      <events xmi:type="premises:MovedOut" dateTime="2010-12-10T10:51:41.760-0600" destinationPin="00FXCTK"/>
+      <events xmi:type="premises:Sighting" dateTime="2010-05-10T10:55:30.881-0500" location="Bull Pen"/>
+      <events xmi:type="premises:WeighIn" dateTime="2010-05-10T10:57:30.881-0500" weight="249.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2010-08-10T11:31:30.881-0500" weight="515.0"/>
+      <events xmi:type="premises:Position" dateTime="2011-03-10T13:04:17.549-0600" longitude="-90.95048182270057" latitude="43.47622307339506"/>
+      <events xmi:type="premises:GenericEvent" dateTime="2011-05-05T16:14:46.208-0500" ocd="My.metatype#mettler.weight">
+        <eventAttributes key="Blood Weight" value="0.521"/>
+        <eventAttributes key="Measurement Precision" value=".001"/>
+        <eventAttributes key="Measurement Unit" value="kilogram"/>
+        <eventAttributes key="Percent PCV" value="44"/>
+      </events>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" birthDate="2008-05-10T10:49:30.871-0500" sex="Female" id="840456789012342" comments="Old Bessy" visualID="42" beefBreed="DANISH JERSEY">
+    <tags id="840456789012342">
+      <events xmi:type="premises:TagApplied" dateTime="2010-05-10T10:59:30.881-0500"/>
+      <events xmi:type="premises:MovedIn" dateTime="2010-05-10T11:01:30.881-0500" sourcePin="HA92348"/>
+      <events xmi:type="premises:Sighting" dateTime="2010-05-10T11:03:30.881-0500" location="FeedLot"/>
+      <events xmi:type="premises:WeighIn" dateTime="2010-05-10T11:05:30.881-0500" weight="205.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2010-08-10T11:33:30.881-0500" weight="564.0"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" birthDate="2009-03-10T10:49:30.871-0500" sex="Male" id="840456789012343" comments="Young Billy" dam="#840456789012342" sire="#840456789012341" visualID="43" beefBreed="DANISH JERSEY">
+    <tags id="840456789012343">
+      <events xmi:type="premises:TagApplied" dateTime="2010-05-10T11:07:30.881-0500"/>
+      <events xmi:type="premises:MovedIn" dateTime="2010-05-10T11:09:30.881-0500" sourcePin="HA92348"/>
+      <events xmi:type="premises:Sighting" dateTime="2010-05-10T11:11:30.881-0500"/>
+      <events xmi:type="premises:WeighIn" dateTime="2010-05-10T11:13:30.881-0500" weight="220.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2010-08-10T11:35:30.881-0500" weight="566.0"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" birthDate="2009-03-10T10:49:30.871-0500" sex="Neutered/castrated male" id="840456789012344" comments="Young Blackie" dam="#840456789012342" sire="#840456789012341" visualID="44" beefBreed="DANISH JERSEY">
+    <tags id="840456789012344">
+      <events xmi:type="premises:TagApplied" dateTime="2010-05-10T11:15:30.881-0500"/>
+      <events xmi:type="premises:MovedIn" dateTime="2010-05-10T11:17:30.881-0500" sourcePin="HA92348"/>
+      <events xmi:type="premises:Sighting" dateTime="2010-05-10T11:19:30.881-0500"/>
+      <events xmi:type="premises:WeighIn" dateTime="2010-05-10T11:21:30.881-0500" weight="207.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2010-08-10T11:37:30.881-0500" weight="575.0"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" birthDate="2008-08-10T10:49:30.871-0500" sex="Neutered/castrated male" id="840456789012345" comments="Brownie" visualID="45" beefBreed="DANISH JERSEY">
+    <tags id="840456789012345">
+      <events xmi:type="premises:TagApplied" dateTime="2010-05-10T11:23:30.881-0500"/>
+      <events xmi:type="premises:MovedIn" dateTime="2010-05-10T11:25:30.881-0500" sourcePin="HA92348"/>
+      <events xmi:type="premises:Sighting" dateTime="2010-05-10T11:27:30.881-0500"/>
+      <events xmi:type="premises:WeighIn" dateTime="2010-05-10T11:29:30.881-0500" weight="287.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2010-08-10T11:39:30.881-0500" weight="577.0"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineDairy" id="840003005565384">
+    <tags id="840003005565384">
+      <events xmi:type="premises:TagApplied" dateTime="2009-04-03T19:22:55.000-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-04-03T19:22:56.000-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-04-03T19:22:57.000-0500" electronicallyRead="true" weight="1070.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-09-16T14:41:34.125-0500" electronicallyRead="true" weight="1556.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-09-21T11:33:36.453-0500" electronicallyRead="true" comments="Animal implicitly moved out to an unknown destination." destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineDairy" id="840003005565385">
+    <tags id="840003005565385">
+      <events xmi:type="premises:TagApplied" dateTime="2009-04-03T19:22:55.000-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-04-03T19:22:56.000-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-04-03T19:22:57.000-0500" electronicallyRead="true" weight="766.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-09-16T14:37:08.859-0500" electronicallyRead="true" weight="1100.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-09-21T11:33:36.453-0500" electronicallyRead="true" comments="Animal implicitly moved out to an unknown destination." destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineDairy" id="840003005565386">
+    <tags id="840003005565386">
+      <events xmi:type="premises:TagApplied" dateTime="2009-04-03T19:22:55.000-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-04-03T19:22:56.000-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-04-03T19:22:57.000-0500" electronicallyRead="true" weight="860.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-09-16T14:46:18.796-0500" electronicallyRead="true" weight="1348.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-09-21T06:46:00.390-0500" electronicallyRead="true" comments="Verns" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineDairy" id="840003005565387">
+    <tags id="840003005565387">
+      <events xmi:type="premises:TagApplied" dateTime="2009-04-03T19:22:55.000-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-04-03T19:22:56.000-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-04-03T19:22:57.000-0500" electronicallyRead="true" weight="988.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-04-03T19:22:58.000-0500" electronicallyRead="true" destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineDairy" id="840003005565388">
+    <tags id="840003005565388">
+      <events xmi:type="premises:TagApplied" dateTime="2009-04-03T19:35:59.859-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-04-03T19:36:00.859-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-04-03T19:36:01.859-0500" electronicallyRead="true" weight="780.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-04-03T19:36:02.859-0500" electronicallyRead="true" destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineDairy" id="840003005565389">
+    <tags id="840003005565389">
+      <events xmi:type="premises:TagApplied" dateTime="2009-04-03T19:35:15.578-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-04-03T19:35:16.578-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-04-03T19:35:17.578-0500" electronicallyRead="true" weight="1000.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-09-16T14:34:19.593-0500" electronicallyRead="true" weight="1396.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-09-21T06:44:44.328-0500" electronicallyRead="true" comments="Verns" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineDairy" id="840003005565390">
+    <tags id="840003005565390">
+      <events xmi:type="premises:TagApplied" dateTime="2009-04-03T19:37:25.734-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-04-03T19:37:26.734-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-04-03T19:37:27.734-0500" electronicallyRead="true" weight="1002.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-09-16T14:46:59.265-0500" electronicallyRead="true" weight="1508.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-09-21T11:33:36.453-0500" electronicallyRead="true" comments="Animal implicitly moved out to an unknown destination." destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003005565230" scrapieTag="WI1816#12">
+    <tags id="840003005565230">
+      <events xmi:type="premises:TagAllocated" dateTime="2009-05-15T09:19:53.718-0500"/>
+      <events xmi:type="premises:TagApplied" dateTime="2009-05-15T16:23:04.765-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-05-15T16:23:05.765-0500" electronicallyRead="true" sourcePin="OO6BURH"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-05-15T16:23:06.765-0500" electronicallyRead="true" weight="52.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-09-16T13:05:32.515-0500" electronicallyRead="true" weight="122.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-09-21T12:00:39.343-0500" electronicallyRead="true" comments="Animal implicitly moved out to an unknown destination." destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003005565231" scrapieTag="WI95#1291">
+    <tags id="840003005565231">
+      <events xmi:type="premises:TagAllocated" dateTime="2009-05-15T09:19:53.718-0500"/>
+      <events xmi:type="premises:TagApplied" dateTime="2009-05-15T16:24:14.171-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-05-15T16:24:15.171-0500" electronicallyRead="true" sourcePin="OO6BURH"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-05-15T16:24:16.171-0500" electronicallyRead="true" weight="76.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-09-16T13:05:55.937-0500" electronicallyRead="true" weight="144.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-09-21T12:00:39.343-0500" electronicallyRead="true" comments="Animal implicitly moved out to an unknown destination." destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003005565241" scrapieTag="WI506#668">
+    <tags id="840003005565241">
+      <events xmi:type="premises:TagAllocated" dateTime="2009-05-15T09:19:53.718-0500"/>
+      <events xmi:type="premises:TagApplied" dateTime="2009-05-15T16:55:09.968-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-05-15T16:55:10.968-0500" electronicallyRead="true" sourcePin="OO6BURH"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-05-15T16:55:11.968-0500" electronicallyRead="true" weight="46.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-09-16T17:13:23.062-0500" electronicallyRead="true" weight="130.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-09-21T12:00:39.343-0500" electronicallyRead="true" comments="Animal implicitly moved out to an unknown destination." destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003005565240" scrapieTag="WI506#669">
+    <tags id="840003005565240">
+      <events xmi:type="premises:TagAllocated" dateTime="2009-05-15T09:19:53.718-0500"/>
+      <events xmi:type="premises:TagApplied" dateTime="2009-05-15T16:54:30.046-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-05-15T16:54:31.046-0500" electronicallyRead="true" sourcePin="OO6BURH"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-05-15T16:54:32.046-0500" electronicallyRead="true" weight="70.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-09-16T17:13:55.828-0500" electronicallyRead="true" weight="160.0"/>
+      <events xmi:type="premises:Sighting" dateTime="2009-09-21T11:56:25.218-0500"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003005565243" scrapieTag="WI1826#10">
+    <tags id="840003005565243">
+      <events xmi:type="premises:TagAllocated" dateTime="2009-05-15T09:19:53.718-0500"/>
+      <events xmi:type="premises:TagApplied" dateTime="2009-05-15T17:11:47.546-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-05-15T17:11:48.546-0500" electronicallyRead="true" sourcePin="OO6BURH"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-05-15T17:11:49.546-0500" electronicallyRead="true" weight="64.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-09-16T11:51:06.968-0500" electronicallyRead="true" weight="154.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-09-21T12:00:39.343-0500" electronicallyRead="true" comments="Animal implicitly moved out to an unknown destination." destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003005565242" scrapieTag="WI1826#11">
+    <tags id="840003005565242">
+      <events xmi:type="premises:TagAllocated" dateTime="2009-05-15T09:19:53.718-0500"/>
+      <events xmi:type="premises:TagApplied" dateTime="2009-05-15T17:11:07.937-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-05-15T17:11:08.937-0500" electronicallyRead="true" sourcePin="OO6BURH"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-05-15T17:11:09.937-0500" electronicallyRead="true" weight="76.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-09-16T11:50:53.296-0500" electronicallyRead="true" weight="164.0"/>
+      <events xmi:type="premises:Sighting" dateTime="2009-09-21T11:56:25.218-0500"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003005565245" scrapieTag="WI3287#32">
+    <tags id="840003005565245">
+      <events xmi:type="premises:TagAllocated" dateTime="2009-05-15T09:19:53.718-0500"/>
+      <events xmi:type="premises:TagApplied" dateTime="2009-05-15T17:37:02.812-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-05-15T17:37:03.812-0500" electronicallyRead="true" sourcePin="OO6BURH"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-05-15T17:37:04.812-0500" electronicallyRead="true" weight="126.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-05-15T17:37:05.812-0500" electronicallyRead="true" destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Ovine" id="840003005565244">
+    <tags id="840003005565244">
+      <events xmi:type="premises:TagAllocated" dateTime="2009-05-15T09:19:53.718-0500"/>
+      <events xmi:type="premises:TagApplied" dateTime="2009-05-15T17:36:27.156-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-05-15T17:36:28.156-0500" electronicallyRead="true" sourcePin="OO6BURH"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-05-15T17:36:29.156-0500" electronicallyRead="true" weight="54.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-05-15T17:36:30.156-0500" electronicallyRead="true" destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003005565480" rightEarNotching="1" leftEarNotching="8">
+    <tags id="840003005565480">
+      <events xmi:type="premises:TagApplied" dateTime="2009-05-15T16:09:27.343-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-05-15T16:09:28.343-0500" electronicallyRead="true" sourcePin="003BVJB"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-05-15T16:09:29.343-0500" electronicallyRead="true" weight="52.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-09-16T16:36:40.500-0500" electronicallyRead="true" weight="272.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-09-21T11:38:29.921-0500" electronicallyRead="true" comments="Animal implicitly moved out to an unknown destination." destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003005565481" rightEarNotching="1" leftEarNotching="9">
+    <tags id="840003005565481">
+      <events xmi:type="premises:TagApplied" dateTime="2009-05-15T16:09:32.093-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-05-15T16:09:33.093-0500" electronicallyRead="true" sourcePin="005FZ5T"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-05-15T16:09:34.093-0500" electronicallyRead="true" weight="46.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-05-15T16:09:35.093-0500" electronicallyRead="true" destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003005565482" rightEarNotching="2" leftEarNotching="6">
+    <tags id="840003005565482">
+      <events xmi:type="premises:TagApplied" dateTime="2009-05-15T16:11:11.703-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-05-15T16:11:12.703-0500" electronicallyRead="true" sourcePin="005FZ5T"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-05-15T16:11:13.703-0500" electronicallyRead="true" weight="38.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-09-16T16:35:26.125-0500" electronicallyRead="true" weight="308.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-09-20T14:00:37.000-0500" electronicallyRead="true" comments="Verns" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003005565483" rightEarNotching="1" leftEarNotching="1">
+    <tags id="840003005565483">
+      <events xmi:type="premises:TagApplied" dateTime="2009-05-15T16:15:36.656-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-05-15T16:15:37.656-0500" electronicallyRead="true" sourcePin="005FZ5T"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-05-15T16:15:38.656-0500" electronicallyRead="true" weight="40.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-09-16T13:55:21.609-0500" electronicallyRead="true" weight="240.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-09-21T11:38:29.921-0500" electronicallyRead="true" comments="Animal implicitly moved out to an unknown destination." destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003005565484" comments="Confirm Notches" rightEarNotching="1" leftEarNotching="2">
+    <tags id="840003005565484">
+      <events xmi:type="premises:TagApplied" dateTime="2009-05-15T16:16:33.828-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-05-15T16:16:34.828-0500" electronicallyRead="true" sourcePin="005FZ5T"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-05-15T16:16:35.828-0500" electronicallyRead="true" weight="44.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-05-15T16:16:36.828-0500" electronicallyRead="true" destinationPin="005FZ5T"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003005565485" rightEarNotching="1" leftEarNotching="3">
+    <tags id="840003005565485">
+      <events xmi:type="premises:TagApplied" dateTime="2009-05-15T16:17:14.515-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-05-15T16:17:15.515-0500" electronicallyRead="true" sourcePin="005FZ5T"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-05-15T16:17:16.515-0500" electronicallyRead="true" weight="54.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-05-15T16:17:17.515-0500" electronicallyRead="true" destinationPin="005FZ5T"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-09-16T16:59:16.000-0500" weight="296.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-09-20T15:11:37.000-0500" electronicallyRead="true" comments="Verns" destinationPin="005F59W"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003005565486" comments="Confirm Notches" rightEarNotching="1" leftEarNotching="4">
+    <tags id="840003005565486">
+      <events xmi:type="premises:TagApplied" dateTime="2009-05-15T16:17:57.500-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-05-15T16:17:58.500-0500" electronicallyRead="true" sourcePin="005FZ5T"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-05-15T16:17:59.500-0500" electronicallyRead="true" weight="46.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-09-16T13:54:20.953-0500" electronicallyRead="true" weight="274.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-09-21T11:38:29.921-0500" electronicallyRead="true" comments="Animal implicitly moved out to an unknown destination." destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:Swine" id="840003005565487" rightEarNotching="1" leftEarNotching="5">
+    <tags id="840003005565487">
+      <events xmi:type="premises:TagApplied" dateTime="2009-05-15T16:18:45.656-0500" electronicallyRead="true"/>
+      <events xmi:type="premises:MovedIn" dateTime="2009-05-15T16:18:46.656-0500" electronicallyRead="true" sourcePin="005FZ5T"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-05-15T16:18:47.656-0500" electronicallyRead="true" weight="60.0"/>
+      <events xmi:type="premises:WeighIn" dateTime="2009-09-14T18:01:26.484-0500" weight="308.0"/>
+      <events xmi:type="premises:MovedOut" dateTime="2009-09-21T11:38:29.921-0500" electronicallyRead="true" comments="Animal implicitly moved out to an unknown destination." destinationPin="003BVJB"/>
+    </tags>
+  </animals>
+  <animals xmi:type="premises:BovineBeef" birthDate="2011-03-03T14:28:31.000-0600" sex="Neutered/castrated male" id="534">
+    <tags id="534">
+      <events xmi:type="premises:TagApplied" dateTime="2011-03-04T14:30:17.000-0600" electronicallyRead="true"/>
+      <events xmi:type="premises:Sighting" dateTime="2011-03-04T14:30:17.000-0600" electronicallyRead="true" location="Pasture One"/>
+      <events xmi:type="premises:Sighting" dateTime="2011-04-06T14:38:09.000-0500" electronicallyRead="true" comments="Castrated and Branded" location="Pasture One"/>
+      <events xmi:type="premises:GenericEvent" dateTime="2011-04-06T14:38:09.000-0500" electronicallyRead="true" ocd="My.metatype#bull.calf.castration">
+        <eventAttributes key="Difficulty" value="easy"/>
+      </events>
+      <events xmi:type="premises:GenericEvent" dateTime="2011-04-06T14:38:09.000-0500" ocd="My.metatype#calf.branding">
+        <eventAttributes key="TypeOfBrand" value="BB Brand"/>
+      </events>
+      <events xmi:type="premises:Sighting" dateTime="2011-10-03T14:37:41.704-0500" comments="Weaned" location="Feedlot pens"/>
+      <events xmi:type="premises:GenericEvent" dateTime="2011-10-03T14:37:41.704-0500" ocd="My.metatype#calf.weaning">
+        <eventAttributes key="Difficulty" value="easy"/>
+      </events>
+      <events xmi:type="premises:MovedOut" dateTime="2012-04-03T14:48:45.426-0500" comments="xxxx" uri="urn:dn:com:cattlefeeding"/>
+    </tags>
+  </animals>
+  <unAppliedTags id="840456789012346">
+    <events xmi:type="premises:TagAllocated" dateTime="2010-12-10T10:49:30.886-0600"/>
+  </unAppliedTags>
+  <unAppliedTags id="840456789012347">
+    <events xmi:type="premises:TagAllocated" dateTime="2010-12-10T10:49:30.886-0600"/>
+  </unAppliedTags>
+  <policy/>
+  <location name="East Farm" description="An example location" phoneNumber="608-606-1292" street="E6055 Cina Rd." city="Viroqua" state="WI" postalCode="54665" longitude="-90.95674265545253" latitude="43.47493314332049" altitude="338.8866674272697" comments="Comments about the example location.  ">
+    <areas name="East Farm" boundary="-90.96293191127666,43.48105460142975,0 -90.96289591656407,43.46684639974686,0 -90.95304397778821,43.46678039274798,0 -90.95295947135202,43.47405613654796,0 -90.94808183437202,43.47413338110822,0 -90.94826145846801,43.481225767439,0 -90.94895640352394,43.48122368362838,0 -90.96293191127666,43.48105460142975,0" comments="Outer perimeter of the East Farm"/>
+    <areas name="Bull Pen" boundary="-90.95144841072224,43.47573292269726,0 -90.9511287452744,43.47569751388318,0 -90.95112278174558,43.47593891553867,0 -90.95141575444865,43.4759442535774,0 -90.95144841072224,43.47573292269726,0" comments="Perimeter of the Bull Pen"/>
+    <areas name="Feedlot pens" boundary="-90.95176467238119,43.47537056446878,0 -90.95149027439098,43.47536473865913,0 -90.95148210349947,43.47532721298695,0 -90.95106086897076,43.47532450537287,0 -90.95107650003213,43.47550714443399,0 -90.95176988685766,43.47550665025475,0 -90.95176467238119,43.47537056446878,0" comments="Perimeter around the Feedlot"/>
+    <areas name="Pasture One" boundary="-90.9513052862863,43.47653311825302,0 -90.95111872356885,43.47597097503178,0 -90.95111782334963,43.47568851589278,0 -90.95053331336904,43.47562479390019,0 -90.95050323766461,43.47527938974554,0 -90.94932690507628,43.47567504064158,0 -90.94912796552026,43.47580443288847,0 -90.94907717782114,43.47587340552102,0 -90.94903504414899,43.47682326708215,0 -90.9511099449537,43.47698303013262,0 -90.9513052862863,43.47653311825302,0"/>
+    <areas name="Holding Pen" boundary="-90.95225128803538,43.47590190966332,0 -90.95224664383686,43.47582033308012,0 -90.95235929193872,43.47581051947043,0 -90.95232145791879,43.47524257220275,0 -90.95189019662872,43.47524729693725,0 -90.9519247636451,43.47591430933738,0 -90.95225128803538,43.47590190966332,0"/>
+  </location>
+</premises:Premises>

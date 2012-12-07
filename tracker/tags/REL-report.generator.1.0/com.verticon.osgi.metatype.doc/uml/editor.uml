@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_eaV3cGb2EeCt5apRznBq0w" name="model">
+  <packagedElement xmi:type="uml:Actor" xmi:id="_gl_2sGb2EeCt5apRznBq0w" name="Operator"/>
+  <packagedElement xmi:type="uml:Package" xmi:id="_h0Tc4Gb2EeCt5apRznBq0w" name="Metatype Model Editor Overview"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_kNC14Gb2EeCt5apRznBq0w" name="Metatype Model Editor" useCase="_xQZ-gGb2EeCt5apRznBq0w _7w8TIGb4EeCt5apRznBq0w _9zDU0Gb4EeCt5apRznBq0w _xdb34GtqEeCnUt2uK4N8MQ _7tWogGtqEeCnUt2uK4N8MQ _JOiVkGtrEeCnUt2uK4N8MQ _8owAQGxbEeCr79kCr0fxtw">
+    <ownedUseCase xmi:id="_xQZ-gGb2EeCt5apRznBq0w" name="Create Documents" subject="_kNC14Gb2EeCt5apRznBq0w"/>
+    <ownedUseCase xmi:id="_7w8TIGb4EeCt5apRznBq0w" name="Compare Documents" subject="_kNC14Gb2EeCt5apRznBq0w"/>
+    <ownedUseCase xmi:id="_9zDU0Gb4EeCt5apRznBq0w" name="Validate Documents" subject="_kNC14Gb2EeCt5apRznBq0w"/>
+    <ownedUseCase xmi:id="_xdb34GtqEeCnUt2uK4N8MQ" name="Creates Feature that requires user customization" subject="_kNC14Gb2EeCt5apRznBq0w">
+      <include xmi:id="_HKI04GtrEeCnUt2uK4N8MQ" addition="_7tWogGtqEeCnUt2uK4N8MQ"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_7tWogGtqEeCnUt2uK4N8MQ" name="New Data Model" subject="_kNC14Gb2EeCt5apRznBq0w">
+      <extend xmi:id="_WTZTAGtrEeCnUt2uK4N8MQ" extendedCase="_JOiVkGtrEeCnUt2uK4N8MQ" extensionLocation="_WUOZcGtrEeCnUt2uK4N8MQ"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_JOiVkGtrEeCnUt2uK4N8MQ" name="Metatype Data Model" subject="_kNC14Gb2EeCt5apRznBq0w">
+      <extensionPoint xmi:id="_WUOZcGtrEeCnUt2uK4N8MQ" name="point"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_8owAQGxbEeCr79kCr0fxtw" name="Create Feature that uses configuration administration" clientDependency="_TBrxIGxcEeCr79kCr0fxtw" subject="_kNC14Gb2EeCt5apRznBq0w"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_B8LGUGb5EeCt5apRznBq0w" name="An operator creates documents" memberEnd="_B8LGUWb5EeCt5apRznBq0w _B8LGVGb5EeCt5apRznBq0w">
+    <ownedEnd xmi:id="_B8LGUWb5EeCt5apRznBq0w" name="operator" type="_gl_2sGb2EeCt5apRznBq0w" association="_B8LGUGb5EeCt5apRznBq0w">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_B8LGUmb5EeCt5apRznBq0w" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_B8LGU2b5EeCt5apRznBq0w" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_B8LGVGb5EeCt5apRznBq0w" name="create documents" type="_xQZ-gGb2EeCt5apRznBq0w" association="_B8LGUGb5EeCt5apRznBq0w">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_B8LGVWb5EeCt5apRznBq0w" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_B8LGVmb5EeCt5apRznBq0w" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_DJ-WMGb5EeCt5apRznBq0w" name="An operator compares documents" memberEnd="_DJ-WMWb5EeCt5apRznBq0w _DJ-WNGb5EeCt5apRznBq0w">
+    <ownedEnd xmi:id="_DJ-WMWb5EeCt5apRznBq0w" name="operator" type="_gl_2sGb2EeCt5apRznBq0w" association="_DJ-WMGb5EeCt5apRznBq0w">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_DJ-WMmb5EeCt5apRznBq0w" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_DJ-WM2b5EeCt5apRznBq0w" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_DJ-WNGb5EeCt5apRznBq0w" name="compare documents" type="_7w8TIGb4EeCt5apRznBq0w" association="_DJ-WMGb5EeCt5apRznBq0w">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_DJ-WNWb5EeCt5apRznBq0w" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_DJ-WNmb5EeCt5apRznBq0w" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_HdA4sGb5EeCt5apRznBq0w" name="An operator validates documents" memberEnd="_HdA4sWb5EeCt5apRznBq0w _HdA4tGb5EeCt5apRznBq0w">
+    <ownedEnd xmi:id="_HdA4sWb5EeCt5apRznBq0w" name="operator" type="_gl_2sGb2EeCt5apRznBq0w" association="_HdA4sGb5EeCt5apRznBq0w">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_HdA4smb5EeCt5apRznBq0w" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_HdA4s2b5EeCt5apRznBq0w" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_HdA4tGb5EeCt5apRznBq0w" name="validate documents" type="_9zDU0Gb4EeCt5apRznBq0w" association="_HdA4sGb5EeCt5apRznBq0w">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_HdA4tWb5EeCt5apRznBq0w" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_HdA4tmb5EeCt5apRznBq0w" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_tu2tUGtqEeCnUt2uK4N8MQ" name="Developer"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_ABaesGtrEeCnUt2uK4N8MQ" name="A developer creates new feature that require user customization" memberEnd="_ABaesWtrEeCnUt2uK4N8MQ _ABaetGtrEeCnUt2uK4N8MQ">
+    <ownedEnd xmi:id="_ABaesWtrEeCnUt2uK4N8MQ" name="developer" type="_tu2tUGtqEeCnUt2uK4N8MQ" association="_ABaesGtrEeCnUt2uK4N8MQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ABaesmtrEeCnUt2uK4N8MQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ABaes2trEeCnUt2uK4N8MQ" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_ABaetGtrEeCnUt2uK4N8MQ" name="creates features that require gis functionality" type="_xdb34GtqEeCnUt2uK4N8MQ" association="_ABaesGtrEeCnUt2uK4N8MQ">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ABaetWtrEeCnUt2uK4N8MQ" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ABaetmtrEeCnUt2uK4N8MQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Usage" xmi:id="_TBrxIGxcEeCr79kCr0fxtw" name="Usage0" supplier="_JOiVkGtrEeCnUt2uK4N8MQ" client="_8owAQGxbEeCr79kCr0fxtw"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_UwdnIGxcEeCr79kCr0fxtw" name="A developer creates feature that uses configuration administration" memberEnd="_UwdnIWxcEeCr79kCr0fxtw _UwdnJGxcEeCr79kCr0fxtw">
+    <ownedEnd xmi:id="_UwdnIWxcEeCr79kCr0fxtw" name="developer" type="_tu2tUGtqEeCnUt2uK4N8MQ" association="_UwdnIGxcEeCr79kCr0fxtw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_UwdnImxcEeCr79kCr0fxtw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_UwdnI2xcEeCr79kCr0fxtw" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_UwdnJGxcEeCr79kCr0fxtw" name="create feature that uses configuration administration" type="_8owAQGxbEeCr79kCr0fxtw" association="_UwdnIGxcEeCr79kCr0fxtw">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_UwdnJWxcEeCr79kCr0fxtw" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_UwdnJmxcEeCr79kCr0fxtw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>

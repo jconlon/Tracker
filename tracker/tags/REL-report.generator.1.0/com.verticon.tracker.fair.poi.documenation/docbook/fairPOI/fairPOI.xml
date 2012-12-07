@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DockBook XML V4.5//EN" 
+"http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter>
+    <?dbhtml filename="fairPoi/fairPoi.html" ?>
+    <title>Fair XLS Import and Export</title>
+    
+    <section>
+	<?dbhtml filename="overview/fairPoiOverview.html" ?>
+	<title>Fair XLS Import and Export Overview</title>
+	
+	<section>
+		<title>Exporting Functionality</title>
+		<warning>
+			<para>
+				The functionality described in this chapter is provided
+				on an interim basis only. It will be depreciated in the
+				future when the Tracker reporting infrastructure is
+				implemented.
+			</para>
+		</warning>
+		<para>
+			Premises Document Export Functionality is provided by utilities
+			that are called from the main Tracker Editor menu.
+		</para>
+	</section>
+
+	<section>
+	    <?dbhtml filename="overview/fairPoiOverview_exporting.html" ?>
+		<title>Exporting Information as Microsoft Excel documents</title>
+
+		<para>
+			<orderedlist numeration="arabic">
+				<listitem>
+					<para>
+						The menu item
+						<emphasis>
+							Fair Registration XLS file...
+						</emphasis>
+						will export the following Excel Spreadsheet
+						information:
+						<table frame='all'>
+							<title>
+								Worksheets exported by the
+								<emphasis>
+									Fair Registration XLS file...
+								</emphasis>
+							</title>
+							<tgroup cols='3' align='left' colsep='1'
+								rowsep='1'>
+								<colspec colname='c1' />
+								<colspec colname='c2' />
+								<colspec colname='c3' />
+								<thead>
+									<row>
+										<entry>WorkSheet Name</entry>
+										<entry>
+											Properties exported
+										</entry>
+										<entry>Comments</entry>
+									</row>
+								</thead>
+								<tbody>
+									<row>
+										<entry>
+											Fair WeighIn and
+											Registration
+										</entry>
+										<entry>
+											Parent, Club, Breed, WeighIn
+											Date, Weight, Ear Tag
+										</entry>
+										<entry>
+											Combined listing focusing on
+											the Registration and WeighIn
+											Events
+										</entry>
+									</row>
+
+								</tbody>
+							</tgroup>
+						</table>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The menu item
+						<emphasis>
+							Fair Registration Raw Event XLS file...
+						</emphasis>
+						will export the following Excel Spreadsheet
+						information:
+						<table frame='all'>
+							<title>
+								Worksheets exported by
+								<emphasis>
+									Fair Registration XLS file...
+								</emphasis>
+							</title>
+							<tgroup cols='3' align='left' colsep='1'
+								rowsep='1'>
+								<colspec colname='c1' />
+								<colspec colname='c2' />
+								<thead>
+									<row>
+										<entry>WorkSheet Name</entry>
+										<entry>
+											Properties exported
+										</entry>
+										<entry>Comments</entry>
+									</row>
+								</thead>
+								<tbody>
+									<row>
+										<entry>
+											Fair Registration Events
+										</entry>
+										<entry>
+											Ear Tag, Date, Participant,
+											Address, Phone, Parent, Club
+										</entry>
+										<entry>
+											Fair registration event
+											details
+										</entry>
+									</row>
+									<row>
+										<entry>Weigh-In Events</entry>
+										<entry>
+											Ear Tag, Date, Weight
+										</entry>
+										<entry>
+											WeighIn Event details
+										</entry>
+									</row>
+									<row>
+										<entry>MovedIn Events</entry>
+										<entry>
+											Ear Tag, Date, SourcePin
+										</entry>
+										<entry>
+											MovedIn Event details
+										</entry>
+									</row>
+									<row>
+										<entry>MovedOut Events</entry>
+										<entry>
+											Ear Tag, Date,
+											DestinationPin
+										</entry>
+										<entry>
+											MovedOut Event details
+										</entry>
+									</row>
+								</tbody>
+							</tgroup>
+						</table>
+					</para>
+
+
+				</listitem>
+			</orderedlist>
+		</para>
+	</section>
+
+	</section>
+</chapter>

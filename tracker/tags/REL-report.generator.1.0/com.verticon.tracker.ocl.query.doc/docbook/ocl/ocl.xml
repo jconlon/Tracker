@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+ "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter id="oclQuery">
+	<?dbhtml filename="overview/oclOverview.html" ?>
+	<title>OCL Query</title>
+	
+	<section id="oclQuery_overview">
+		<?dbhtml filename="ocl_overview/oclOverview.html" ?>
+		<title>Overview </title>
+		<para>
+			Even though the structure of the Tracker Editor data models may be
+			simple, some documents like Premises documents, can hold large amounts of animal
+			and event history data. Obtaining information about or selecting specific animals 
+			or events in these large Premises documents require the use of advanced
+			query and selection tools.
+		</para>
+		<para>
+			The <firstterm>Object Constraint Language</firstterm>,
+			<acronym>OCL</acronym> is a simple but powerful declarative language 
+			used within Tracker's advanced query and selection tools to interpret 
+			Tracker Editor specific documents for information or to query documents in order to
+			select specific elements for further manipulation. 
+			<tip><para>
+			When using the <acronym>OCL</acronym> Interpreter, Queries Viewer, 
+			or Query tools to interrogate Premises documents refer to the Editor specific data model
+			when composing <acronym>OCL</acronym> query statements.
+			</para></tip>
+		</para>	
+
+	</section>
+	
+	<section id="oclQuery_interpreter">
+	<?dbhtml filename="oclInterpreter/oclInterpreter.html" ?>
+	<title>OCL Interpreter</title>
+	<para>
+		The OCL Interpreter is a parser/interpreter<footnote >
+		<para>Tracker's OCL interpreter is based on the work done in the 
+		<ulink url="http://help.eclipse.org/help32/index.jsp?topic=/org.eclipse.emf.ocl.doc/tutorials/oclInterpreterTutorial.html">
+		<citetitle>EMF OCL Tutorial</citetitle></ulink>.
+		</para>
+		</footnote> for the Object Constraint Language (OCL) version 
+		2.0 for EMF. Using this parser, you can evaluate OCL expressions on elements in any 
+		Tracker document. 
+	</para>
+	
+	<para>
+		To bring up the OCL Interpreter, from the Tracker Editor menu in the Workbench:
+		
+		<orderedlist numeration="loweralpha">
+				<listitem><para>From the main menu select the <emphasis>Query</emphasis> menu. 
+					See <xref linkend="fig_ocl_query" />.</para></listitem>
+				<listitem><para>Press the <emphasis>Show Console</emphasis> menu item.</para>
+				<para>The OCL Interpreter console will show below the Tracker Editor.  See 
+				<xref linkend="fig_ocl_query_console" />.</para></listitem>
+				
+		</orderedlist>
+		
+		<figure id="fig_ocl_query">
+                <title>Invoking OCL Console 
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/ocl/invoking_console.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+        
+        <figure id="fig_ocl_query_console">
+                <title>OCL Query Console 
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/ocl/console.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+	</para>
+		
+	<para>
+			The following are example
+			<acronym>OCL</acronym>
+			Interpreter rules that can be used for the querying Premises
+			documents. All examples use the <code>Premises</code> Element
+			as the <emphasis>Context</emphasis> for Interpreter.  Select the 
+			Premises Element in the Premises Document and cut and past the 
+			following examples into the lower pane of the OCL Interpreter
+			Console Window.
+			<example>
+				<title>
+					Listing of animals and the number of events
+					associated with each.
+				</title>
+				<programlisting>
+animals -> collect(
+	a: Animal | Tuple {
+		animal: Animal = a,
+		numEvents: Integer = a->size()
+		
+	}
+)
+  				</programlisting>
+  			</example>
+  			<example>
+				<title>
+					Listing of animals and the set of events associated with each.
+				</title>
+				<programlisting>
+animals -> collect(
+	a: Animal | Tuple {
+		ain: String = a.id,
+		events: Set(Event) = a.allEvents()
+	}
+)
+  				</programlisting>
+  			</example>
+  			<example>
+				<title>
+					Listing of animalIds and the WeighIn events
+					associated with each.  
+				</title>
+				<programlisting>
+animals -> collect(
+	a: Animal | Tuple {
+		ain: String = a.id,
+		weighIns: Set(WeighIn) = WeighIn.allInstances()->select(id=a.id)
+	}
+)
+
+  				</programlisting>
+  			</example>
+  			<example>
+				<title>
+					Listing of animalIds and the Weights
+					associated with each. 
+				</title>
+				<programlisting>
+animals -> collect(
+	a: Animal | Tuple {
+		ain: String = a.id,
+		weights: Set(Integer) = WeighIn.allInstances()
+		 ->select(id=a.id)->collect(wi:WeighIn | wi.weight) 
+		 ->asSet()
+	}
+)
+  				</programlisting>
+  			</example>
+  			
+  	
+  	</para>
+  
+  </section>
+  
+    <section id="oclQuery_QueriesViewer">
+		<?dbhtml filename="overview/oclOverview_query_viewer.html" ?>
+		<title>Queries View</title>
+		
+		<para>
+		The Queries View is a convenient way to invoke frequently used OCL queries 
+		to select specific elements within Premises documents.  
+		
+		<figure id="fig_ocl_queryView">
+                <title>Queries View 
+                </title>
+                <mediaobject>
+                    <imageobject>
+                        <imagedata align="center"
+                            fileref="../images/ocl/queryViewer.png"/>
+                    </imageobject>
+                </mediaobject>
+        </figure>
+        
+		In order to use the Queries View you will have to configure the viewer by adding 
+		individual queries.  The view will persist all queries between
+		boots of the Tracker application, so you can over time create a suite of personalized
+	    custom queries associated with how you wish to select elements. Once the queries are
+	    added to the view using them is as simple as selecting them and pressing the <emphasis>Execute</emphasis> button.
+	    </para>
+	    
+	    <para>
+		To add a custom query to the Queries Viewer, select the Queries Viewer tab 
+		and press the Add button.  A new row representing a OCL query will be added to the 
+		Queries Viewer Table.  Each OCL Query row contains four columns.
+		</para>
+		<para>
+			<orderedlist numeration="loweralpha">
+				<listitem>
+					<para><code>Name</code> column takes an arbitrary string name used to identify your query.  
+					You will want to use a descriptive name here, so you can find it latter in order
+					to invoke it quickly.</para>
+				</listitem>
+				<listitem>
+					<para><code>Type</code> column is the element you wish to use as the target for your query.</para>
+				</listitem>
+				<listitem>
+					<para><code>Query</code> column is the OCL query string itself.  See following section for examples.</para>
+				</listitem>
+				<listitem>
+					<para><code>Syntax Errors</code> column is where erroneous <code>Query</code> strings will output error messages.
+					Once you enter a correct query string in the <code>Query</code> column you will not see
+					any error messages in this column.</para>
+				</listitem>
+			</orderedlist>
+		</para>
+		
+		<para>
+			The following are a few example
+			<code>Query</code> strings that can be used for adding custom
+			OCL Queries to the Queries Viewer. 
+			<example>
+				<title> 
+					Find the animal with active tag 985152002153189.
+				</title>
+				<para><code>Target</code> Animal</para>
+				<para><code>Query</code> - </para>
+				<programlisting>
+self.id='985152002153189'
+  				</programlisting>
+  			</example>
+  			<example>
+				<title>
+					Find all MilkTest Events with Somatic Cell Counts > 200
+				</title>
+				<para><code>Target</code> MilkTest</para>
+				<para><code>Query</code> - </para>
+				<programlisting>
+self.somaticCellCounts>200
+  				</programlisting>
+  			</example>
+  			<example>
+				<title>
+					Find all Animals with undefined MovedIn Source Pin attributes
+				</title>
+				<para><code>Target</code> Animal</para>
+				<para><code>Query</code> - </para>
+				<programlisting>
+Event.allInstances()->
+ select(e : Event | e.id=self.id and e.oclIsTypeOf(MovedIn) and 
+  e.oclAsType(MovedIn).sourcePin.oclIsUndefined() )->size()>0
+  				</programlisting>
+  			</example>
+  	</para>
+  	
+ </section>
+ 
+</chapter>

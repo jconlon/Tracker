@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><book xmlns:xi="http://www.w3.org/2001/XInclude" id="PremisesGatewayFeature" label="Premises Gateway User Guide" status="Draft" vendor="Verticon, Inc.">
+
+	<chapter id="PremisesCommonFeature" xml:base="iRouterPremisesCommon/iRouterPremisesCommon.xml">
+	    <?dbhtml filename="premisesCommon/premisesCommon.html" ?>
+		<title>iRouter Premises Common Producers</title>
+		
+		<para>Tracker Desktop can be used by small to medium Livestock producers in an on-line production capacity, 
+		but one or more desktop (or laptop) may not offer a complete solution for larger enterprise operations.
+		</para>
+		
+		<para>Enterprise livestock operations need:
+		<orderedlist continuation="restarts" inheritnum="ignore">
+		<listitem><para>hands free, high capacity, highly reliable, on-line transaction data acquisition;</para></listitem>
+		<listitem><para>integrated solution that can record a comprehensive set of animal event types;</para></listitem>
+		<listitem><para>a network of distributed headless appliances acting as:<orderedlist continuation="restarts" inheritnum="ignore">
+			<listitem><para>content event processors,</para></listitem>
+			<listitem><para>network sensor gateways,</para></listitem>
+			<listitem><para>network actuator controllers;</para></listitem>
+			</orderedlist>
+			</para></listitem>
+		<listitem><para>The ability of network components to create:<orderedlist continuation="restarts" inheritnum="ignore">
+			<listitem><para>any of the standard Tracker premises event types,</para></listitem>
+			<listitem><para>any premises specific GenericEvent type;</para></listitem>
+			</orderedlist>
+			</para></listitem>
+		<listitem><para>event recording to high capacity enterprise data stores;</para></listitem>
+		<listitem><para>off line analytical processing (OLAP) of collected data with Business Intelligence Toolkits</para></listitem>
+		</orderedlist>
+		</para>
+
+		<para>The iRouter Premises Common Producers provides functionality to: 
+			<orderedlist continuation="restarts" inheritnum="ignore">
+			<listitem><para>process measurements, positions, and generic events by combining Animal EIDs, 
+				Triggering states, with raw Measurements and Positions to produce Position and Measurement products that are 
+				identified with an animal EID;
+				</para></listitem>
+			<listitem><para>process all the standard Tracker 
+			Premises events by combining Animal EIDs, Triggering states and Animal templates to produce Animal products.</para></listitem>
+		</orderedlist>
+		</para>
+		
+		<note><para>See the <ulink url="http://tracker.verticon.com/Tracker/documentation/iRouter.pdf"> iRouter User Guide</ulink>
+		for details about the iRouter.
+		</para></note>
+		
+		
+		<para>The iRouter Premises Common Producers feature contains two iRouter Component Factories.
+		
+		<table frame="all"><title>Premises Common Component Factories</title>
+			<tgroup align="left" cols="6" colsep="1" rowsep="1">
+				<colspec colname="c1"/>
+				<colspec colname="c2"/>
+				<colspec colname="c3"/>
+				<colspec colname="c4"/>
+				<colspec colname="c5"/>
+				<colspec colname="c6"/>
+				<thead>
+					<row>
+  						<entry>Component Factory Name</entry>
+  						<entry>Description</entry>
+  						<entry>Consumes</entry>
+  						<entry>Interface input</entry>
+  						<entry>Produces</entry>
+  						<entry>Interface output</entry>
+  						
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry><link linkend="PremisesEventProducer">Premises Event Producer</link></entry>
+  						<entry>Transforms raw Measurement and Position envelopes into Measurement and 
+  						Position envelopes identified with an EID.</entry>
+  						<entry>Consumes Product Envelopes that are State, Long, Measurement and Position</entry>
+  						<entry/>
+  						<entry>Produces Envelopes that are Position, Measurement-WeighIn, Measurement-GenericEvent</entry>
+  						<entry/>
+  						
+					</row>
+
+					<row>
+  						<entry><link linkend="PremisesAnimalProducer">Premises Animal Producer</link></entry>
+						<entry>Uses an Animal template containing one or more standard events and an EID to act as a trigger</entry>
+  						<entry>Consumes Product Envelopes that are State and Long</entry>
+  						<entry/>
+  						<entry>Produces an Animal product containing all the events in the template</entry>
+  						<entry/>
+  						
+					</row>
+					
+				</tbody>
+			</tgroup>
+		</table>
+		<figure float="0" id="fig_premisesCommonExample">
+                <title>Premises Event Producer and Premises Animal Producer Example
+                </title>
+                <mediaobject>
+					<imageobject>
+						<imagedata fileref="../images/common/Premises_iRouter.png"/>
+					</imageobject>
+				</mediaobject>
+       			 </figure>
+		</para>
+		
+		<section id="PremisesEventProducer">
+			<title>Premises Event Producer</title>
+			<para><emphasis>com.verticon.tracker.irouter.premises.event</emphasis></para>
+			<para>Premises Event Producer is a is a factory for creating iRouter composite Consumer and Producer services 
+				that consume unidentified Measurement and Position envelopes and animal EID envelopes and produce
+			    Measurement and Position envelopes <emphasis>identified</emphasis> with an EID.</para>
+				 
+		    <para>The service consumes product envelopes containing:
+			    <orderedlist continuation="restarts" inheritnum="ignore">
+			    	<listitem><para>Long from EID producers</para></listitem>
+				    <listitem><para>Position from GPS producers</para></listitem>
+				    <listitem><para>GenericEvent from proxies</para></listitem>
+				    <listitem><para>WeighIn from proxies</para></listitem>
+				    <listitem><para>State as forwarding triggers</para></listitem>
+			    </orderedlist>
+ 			</para>
+ 			<para>The service produces envelopes that are identified with an Animal EID and containing one of the following Values:
+ 			<orderedlist continuation="restarts" inheritnum="ignore">
+				    <listitem><para>Position</para></listitem>
+				    <listitem><para>Measurement with Envelope scope WeighIn</para></listitem>
+				    <listitem><para>Measurement with Envelope scope associated with the OCD name of an GenericEvent</para></listitem>
+			    </orderedlist>
+			</para>
+		</section>
+
+		<section id="PremisesAnimalProducer">
+			<?dbhtml filename="premisesCommon/premisesAnimalProducer.html" ?>
+			<title>Premises Animal Producer</title>
+			<para><emphasis>com.verticon.tracker.irouter.premises.animal</emphasis> </para>
+			
+			<para>Premises Animal Producer is a factory for creating iRouter composite Consumer and Producer services 
+			that will produce one or more Premises events.  These premises events are contained in a referenced Animal 
+			template. An EID and optional State can act as trigger condition.
+			</para>
+	
+			<para>The service consumes product envelopes containing:
+			    <orderedlist continuation="restarts" inheritnum="ignore">
+			    	<listitem><para>Long from EID producers</para></listitem>
+				    <listitem><para>State as forwarding triggers</para></listitem>
+			    </orderedlist>
+ 			</para>
+ 			<para>The service produces envelopes containing:
+ 				<orderedlist continuation="restarts" inheritnum="ignore">
+			    	<listitem><para>an Animal that is identified with an Animal EID</para></listitem>
+				    <listitem><para>where the Animals events are copied from the Animal template and 
+				    timestamped with the time of trigger.</para></listitem>
+			 	</orderedlist>
+			</para>
+		</section>
+		
+	</chapter>
+	</book>

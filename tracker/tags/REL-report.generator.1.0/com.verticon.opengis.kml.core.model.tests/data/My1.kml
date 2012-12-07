@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml:kml xmlns:kml="http://www.opengis.net/kml/2.2">
+  <kml:Document>
+    <kml:description>Doc level</kml:description>
+    <kml:Folder>
+      <kml:name>MyFolder</kml:name>
+      <kml:description>The first folder</kml:description>
+      <kml:Placemark id="12345">
+        <kml:name>MyPlacemark</kml:name>
+      </kml:Placemark>
+    </kml:Folder>
+  </kml:Document>
+</kml:kml>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.2.2.1 2006/07/13 15:42:53 cdamus Exp $
+-->
+
+<plugin>
+
+
+  <extension point = "org.eclipse.ui.editors">
+    <editor
+        id = "com.verticon.tracker.transaction.editor.TrackerEditorID"
+        name = "%_UI_EXTLibraryEditor_label"
+        icon = "$nl$/icons/full/obj16/TrackerModelFile.gif"
+        extensions = "tracker, premises"
+        class = "com.verticon.tracker.transaction.editor.presentation.TrackerTransactionEditor" 
+        contributorClass="com.verticon.tracker.transaction.editor.presentation.TrackerActionBarContributor" >
+    </editor>
+  </extension>
+  <extension
+        point="org.eclipse.emf.transaction.editingDomains">
+     <editingDomain
+           factory="com.verticon.tracker.transaction.editor.domain.TrackerEditingDomainFactory"
+           id="com.verticon.transaction.editor.TrackerEditingDomain"/>
+  </extension>
+  <extension
+        point="org.eclipse.emf.transaction.listeners">
+     <listener class="com.verticon.tracker.transaction.editor.domain.ResourceLoadedListener">
+        <editingDomain id="com.verticon.transaction.editor.TrackerEditingDomain"/>
+     </listener>
+  </extension>    
+</plugin>

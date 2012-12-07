@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" enabled="true" immediate="true" name="com.verticon.mongo.emf.oda">
+   <implementation class="com.verticon.mongo.emf.oda.impl.MongoEMFComponent"/>
+   <reference bind="setResourceSetFactory" cardinality="1..1" interface="com.verticon.mongo.emf.api.IResourceSetFactory" name="IResourceSetFactory" policy="static" unbind="unsetResourceSetFactory"/>
+</scr:component>
