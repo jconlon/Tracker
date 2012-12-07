@@ -1,0 +1,116 @@
+<toc label="Product Family" link_to="../com.verticon.tracker.doc/toc.xml#tracker_irouter" topic="help/index.html">
+<topic href="help/index.html" label="Tracker iRouter">
+<topic href="help/Overview.html" label="1. Overview">
+<topic href="help/Overview.html#DocumentStatus" label="Document Status"></topic>
+<topic href="help/InformationModelingandProcessing.html" label="Information Modeling and Processing">
+<topic href="help/InformationModelingandProcessing.html#SolutionRequirements" label="Solution Requirements"></topic>
+<topic href="help/LeveragingIndustryStandards.html" label="Leveraging Industry Standards">
+<topic href="help/LeveragingIndustryStandards.html#OSGiMeasurementandState" label="OSGi Measurement and State"></topic>
+<topic href="help/WireAdmin.html" label="Wire Admin"></topic>
+<topic href="help/ConfigurationAdminandMetatype.html" label="Configuration Admin and Metatype"></topic>
+</topic>
+</topic>
+<topic href="help/WhatistheTrackeriRouter.html" label="What is the Tracker iRouter?"></topic>
+<topic href="help/Notes.html" label="Notes"></topic>
+</topic>
+<topic href="help/TheoryofOperations.html" label="2. Theory of Operations">
+<topic href="help/TheoryofOperations.html#Howdoesitwork" label="How does it work?">
+<topic href="help/TheoryofOperations.html#Customproxycomponentsforexternaldevices" label="Custom proxy components for external devices">
+<topic href="help/TheoryofOperations.html#Physicalcommunicationinterfaces" label="Physical communication interfaces"></topic>
+<topic href="help/TheoryofOperations.html#Datalinkcommunicationinterfaces" label="Datalink communication interfaces"></topic>
+<topic href="help/TheoryofOperations.html#Simplifiedinterfaces" label="Simplified interfaces"></topic>
+</topic>
+<topic href="help/TheoryofOperations.html#Generictransformationcomponents" label="Generic transformation components">
+<topic href="help/TheoryofOperations.html#MeasurementConverters" label="Measurement Converters"></topic>
+<topic href="help/TheoryofOperations.html#StateDetectors" label="State Detectors"></topic>
+</topic>
+<topic href="help/TheoryofOperations.html#Collaboratingwiregroups" label="Collaborating wire groups"></topic>
+</topic>
+<topic href="help/AdministrationTools.html" label="Administration Tools">
+<topic href="help/AdministrationTools.html#Configurationediting" label="Configuration editing"></topic>
+<topic href="help/Applicationmonitoring.html" label="Application monitoring"></topic>
+<topic href="help/Simplifiedoperation.html" label="Simplified operation"></topic>
+</topic>
+<topic href="help/Notes2.html" label="Notes"></topic>
+</topic>
+<topic href="help/UseCases.html" label="3. Use Cases">
+<topic href="help/UseCases.html#PremisesDesktopIntegrationwithSensors" label="Premises Desktop Integration with Sensors">
+<topic href="help/UseCases.html#Intention" label="Intention"></topic>
+<topic href="help/UseCases.html#MonitorView" label="Monitor View"></topic>
+<topic href="help/UseCases.html#Configuration" label="Configuration"></topic>
+<topic href="help/UseCases.html#Scenario" label="Scenario"></topic>
+</topic>
+<topic href="help/HeadlessRecordingofAnimalandBloodWeightstoaLogFile.html" label="Headless Recording of Animal and Blood Weights to a Log File">
+<topic href="help/HeadlessRecordingofAnimalandBloodWeightstoaLogFile.html#Intention2" label="Intention"></topic>
+<topic href="help/MonitorView2.html" label="Monitor View"></topic>
+<topic href="help/Configuration2.html" label="Configuration"></topic>
+<topic href="help/Scenario2.html" label="Scenario"></topic>
+</topic>
+<topic href="help/Notes3.html" label="Notes"></topic>
+</topic>
+<topic href="help/GettingStarted.html" label="4. Getting Started">
+<topic href="help/GettingStarted.html#GettingStartedOverview" label="Getting Started Overview"></topic>
+</topic>
+<topic href="help/Configuration3.html" label="5. Configuration">
+<topic href="help/Configuration3.html#ConfigurationAdministrationOverview" label="Configuration Administration Overview"></topic>
+<topic href="help/ConfigurationEditor.html" label="Configuration Editor">
+<topic href="help/ConfigurationEditor.html#ConfigurationeditorFactoriesviewtab" label="Configuration editor Factories view tab">
+<topic href="help/ConfigurationEditor.html#Creatingaserviceinstance" label="Creating a service instance"></topic>
+<topic href="help/ConfigurationEditor.html#Editingaserviceinstance" label="Editing a service instance"></topic>
+<topic href="help/ConfigurationEditor.html#Savingtheconfiguration" label="Saving the configuration"></topic>
+<topic href="help/ConfigurationEditor.html#Importingandexportingconfigurations" label="Importing and exporting configurations"></topic>
+</topic>
+</topic>
+<topic href="help/Notes4.html" label="Notes"></topic>
+</topic>
+<topic href="help/Monitoring.html" label="6. Monitoring">
+<topic href="help/Monitoring.html#ApplicationServiceMonitoring" label="Application Service Monitoring"></topic>
+<topic href="help/iRouterMonitorview.html" label="iRouter Monitor view">
+<topic href="help/iRouterMonitorview.html#WireGroupGraph" label="Wire Group Graph"></topic>
+<topic href="help/MonitoringStatusVariables.html" label="Monitoring Status Variables"></topic>
+</topic>
+</topic>
+<topic href="help/ComponentFactories.html" label="7. Component Factories">
+<topic href="help/ComponentFactories.html#BusinessLogicComponentFactories" label="Business Logic Component Factories">
+<topic href="help/ComponentFactories.html#ArithmeticMeasurementConverter" label="Arithmetic Measurement Converter"></topic>
+<topic href="help/ComponentFactories.html#MeasurementComparator" label="Measurement Comparator"></topic>
+<topic href="help/ComponentFactories.html#MeasurementTrigger" label="Measurement Trigger"></topic>
+<topic href="help/ComponentFactories.html#FlowTerminator" label="Flow Terminator"></topic>
+<topic href="help/ComponentFactories.html#BWControl" label="BW Control"></topic>
+<topic href="help/ComponentFactories.html#MeasurementLogger" label="Measurement Logger"></topic>
+</topic>
+<topic href="help/ProxyandGatewayComponentFactories.html" label="Proxy and Gateway Component Factories"></topic>
+<topic href="help/ExternalComponentFactories.html" label="External Component Factories"></topic>
+</topic>
+<topic href="help/MettlerProxyFeature.html" label="8. Mettler Proxy Feature">
+<topic href="help/MettlerProxyFeature.html#ProducerScopes" label="Producer Scopes"></topic>
+<topic href="help/ServiceDiagram.html" label="Service Diagram"></topic>
+<topic href="help/Notes5.html" label="Notes"></topic>
+</topic>
+<topic href="help/TruTestProxyFeature.html" label="9. TruTest Proxy Feature">
+<topic href="help/TruTestProxyFeature.html#ProxyComponentFactory" label="Proxy Component Factory">
+<topic href="help/TruTestProxyFeature.html#ConsumerScopes" label="Consumer Scopes"></topic>
+<topic href="help/TruTestProxyFeature.html#ProducerScopes2" label="Producer Scopes"></topic>
+<topic href="help/TruTestProxyFeature.html#ServiceDiagram2" label="Service Diagram"></topic>
+</topic>
+<topic href="help/BusinessLogicComponentFactories2.html" label="Business Logic Component Factories">
+<topic href="help/BusinessLogicComponentFactories2.html#MeasurementAdapter" label="Measurement Adapter"></topic>
+<topic href="help/EIDAdapter.html" label="EID Adapter"></topic>
+<topic href="help/AlarmAdapter.html" label="Alarm Adapter"></topic>
+</topic>
+<topic href="help/Notes6.html" label="Notes"></topic>
+</topic>
+<topic href="help/GPSProxyFeature.html" label="10. GPS Proxy Feature">
+<topic href="help/GPSProxyFeature.html#ProducerScopes3" label="Producer Scopes"></topic>
+<topic href="help/ServiceDiagram3.html" label="Service Diagram"></topic>
+<topic href="help/CreatingGPSComponents.html" label="Creating GPS Components"></topic>
+<topic href="help/Notes7.html" label="Notes"></topic>
+</topic>
+<topic href="help/iRouterPremisesFeatures.html" label="11. iRouter Premises Features">
+<topic href="help/iRouterPremisesFeatures.html#iRouterPremisesGateway" label="iRouter Premises Gateway"></topic>
+<topic href="help/iRouterPremisesCommonProducers.html" label="iRouter Premises Common Producers"></topic>
+<topic href="help/MongoDBTrackerStoreandLocationService.html" label="MongoDB Tracker Store and Location Service"></topic>
+</topic>
+<topic href="help/glossary.html" label="A. Glossary"></topic>
+</topic>
+</toc>

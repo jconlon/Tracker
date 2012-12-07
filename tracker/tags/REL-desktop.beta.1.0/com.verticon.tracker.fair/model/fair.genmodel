@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright 2007, 2008 Verticon, Inc. All Rights Reserved."
+    modelDirectory="/com.verticon.tracker.fair/src" modelPluginID="com.verticon.tracker.fair"
+    templateDirectory="com.verticon.tracker/templates" dynamicTemplates="true" modelName="Fair"
+    modelPluginClass="com.verticon.tracker.fair.FairPlugin" editPluginClass="com.verticon.tracker.fair.edit.provider.FairEditPlugin"
+    editorPluginClass="com.verticon.tracker.fair.editor.presentation.FairEditorPlugin"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" testSuiteClass="com.verticon.tracker.fair.tests.FairAllTests"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" providerRootExtendsClass=""
+    usedGenPackages="../../com.verticon.tracker/model/tracker.genmodel#//tracker ../../com.verticon.tracker/model/tracker.genmodel#//metatype">
+  <foreignModel>fair.ecore</foreignModel>
+  <modelPluginVariables>OCL_ECORE=org.eclipse.ocl.ecore</modelPluginVariables>
+  <genPackages prefix="Fair" basePackage="com.verticon.tracker" resource="XMI" disposableProviderFactory="true"
+      providerPackageSuffix="edit.provider" presentationPackageSuffix="editor.presentation"
+      contentTypeIdentifier="" ecorePackage="fair.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="fair.ecore#//Award">
+      <genEnumLiterals ecoreEnumLiteral="fair.ecore#//Award/Unspecified"/>
+      <genEnumLiterals ecoreEnumLiteral="fair.ecore#//Award/GrandChampion"/>
+      <genEnumLiterals ecoreEnumLiteral="fair.ecore#//Award/ReserveChampion"/>
+      <genEnumLiterals ecoreEnumLiteral="fair.ecore#//Award/BlueRibbon"/>
+      <genEnumLiterals ecoreEnumLiteral="fair.ecore#//Award/RedRibbon"/>
+      <genEnumLiterals ecoreEnumLiteral="fair.ecore#//Award/WhiteRibbon"/>
+      <genEnumLiterals ecoreEnumLiteral="fair.ecore#//Award/PinkRibbon"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="fair.ecore#//ZipCode"/>
+    <genDataTypes ecoreDataType="fair.ecore#//USTelephoneNumber"/>
+    <genClasses provider="Stateful" ecoreClass="fair.ecore#//Fair">
+      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute fair.ecore#//Fair/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fair.ecore#//Fair/youthClubs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fair.ecore#//Fair/divisions"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Identification"
+          propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//Fair/premises"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference fair.ecore#//Fair/people"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Fair/comments"/>
+      <genOperations ecoreOperation="fair.ecore#//Fair/exhibits"/>
+    </genClasses>
+    <genClasses ecoreClass="fair.ecore#//Exhibit">
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Details"
+          propertyDescription="Name of Exhibitor" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/name"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Details"
+          propertyDescription="Exhibitor Number" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/number">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/comments"/>
+      <genFeatures createChild="false" propertyCategory="Animal and Exhibitor" propertySortChoices="true"
+          ecoreFeature="ecore:EReference fair.ecore#//Exhibit/animal"/>
+      <genFeatures createChild="false" propertyCategory="Animal and Exhibitor" propertySortChoices="true"
+          ecoreFeature="ecore:EReference fair.ecore#//Exhibit/exhibitor"/>
+      <genFeatures property="None" createChild="false" propertyCategory="Details"
+          ecoreFeature="ecore:EReference fair.ecore#//Exhibit/lot">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Auction"
+          propertyDescription="The sales order of the animal in the auction. (Zero if not in the auction.)"
+          ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/salesOrder"/>
+      <genFeatures createChild="false" propertyCategory="Auction" propertyDescription="Is the animal in the Auction?"
+          ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/inAuction"/>
+      <genFeatures createChild="false" propertyCategory="Award" propertyDescription="Award given to the exhibit by the judge."
+          ecoreFeature="ecore:EAttribute fair.ecore#//Exhibit/award"/>
+    </genClasses>
+    <genClasses ecoreClass="fair.ecore#//YouthClub">
+      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute fair.ecore#//YouthClub/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//YouthClub/contacts"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//YouthClub/comments"/>
+    </genClasses>
+    <genClasses ecoreClass="fair.ecore#//Division">
+      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute fair.ecore#//Division/name"/>
+      <genFeatures property="None" children="true" createChild="true" propertyCategory="Family"
+          ecoreFeature="ecore:EReference fair.ecore#//Division/departments"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Division/comments"/>
+      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute fair.ecore#//Division/description"/>
+    </genClasses>
+    <genClasses ecoreClass="fair.ecore#//Department">
+      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute fair.ecore#//Department/name"/>
+      <genFeatures property="None" children="true" createChild="true" propertyCategory="Family"
+          ecoreFeature="ecore:EReference fair.ecore#//Department/classes"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//Department/superintendents"/>
+      <genFeatures property="None" notify="false" createChild="false" propertyCategory="Family"
+          ecoreFeature="ecore:EReference fair.ecore#//Department/division"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Department/comments"/>
+      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute fair.ecore#//Department/description"/>
+    </genClasses>
+    <genClasses ecoreClass="fair.ecore#//Class">
+      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute fair.ecore#//Class/name"/>
+      <genFeatures property="None" children="true" createChild="true" propertyCategory="Family"
+          ecoreFeature="ecore:EReference fair.ecore#//Class/lots"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//Class/judges"/>
+      <genFeatures property="None" notify="false" createChild="false" propertyCategory="Family"
+          ecoreFeature="ecore:EReference fair.ecore#//Class/department"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Class/comments"/>
+      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute fair.ecore#//Class/description"/>
+    </genClasses>
+    <genClasses ecoreClass="fair.ecore#//Lot">
+      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute fair.ecore#//Lot/name"/>
+      <genFeatures property="None" children="true" createChild="true" propertyCategory="Family"
+          ecoreFeature="ecore:EReference fair.ecore#//Lot/exhibits"/>
+      <genFeatures property="None" notify="false" createChild="false" propertyCategory="Family"
+          ecoreFeature="ecore:EReference fair.ecore#//Lot/class"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Lot/comments"/>
+      <genFeatures createChild="false" propertyCategory="Identification" ecoreFeature="ecore:EAttribute fair.ecore#//Lot/description"/>
+    </genClasses>
+    <genClasses ecoreClass="fair.ecore#//Person">
+      <genFeatures createChild="false" propertyCategory="Name" ecoreFeature="ecore:EAttribute fair.ecore#//Person/firstName"/>
+      <genFeatures createChild="false" propertyCategory="Name" ecoreFeature="ecore:EAttribute fair.ecore#//Person/lastName"/>
+      <genFeatures createChild="false" propertyCategory="Contact" ecoreFeature="ecore:EAttribute fair.ecore#//Person/phone"/>
+      <genFeatures createChild="false" propertyCategory="Address" propertyDescription="Street Address of Person"
+          ecoreFeature="ecore:EAttribute fair.ecore#//Person/street"/>
+      <genFeatures createChild="false" propertyCategory="Address" propertyDescription=""
+          ecoreFeature="ecore:EAttribute fair.ecore#//Person/city"/>
+      <genFeatures createChild="false" propertyCategory="Address" ecoreFeature="ecore:EAttribute fair.ecore#//Person/state"/>
+      <genFeatures createChild="false" propertyCategory="Address" ecoreFeature="ecore:EAttribute fair.ecore#//Person/zipCode"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Name"
+          ecoreFeature="ecore:EAttribute fair.ecore#//Person/name"/>
+      <genFeatures createChild="false" propertyDescription="Comments about the Person"
+          ecoreFeature="ecore:EAttribute fair.ecore#//Person/comments"/>
+      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="Number Assigned to the Livestock Premises of the Persons Animal(s)"
+          ecoreFeature="ecore:EAttribute fair.ecore#//Person/pin"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute fair.ecore#//Person/salesOrder"/>
+      <genFeatures createChild="false" propertyCategory="Identification" propertyDescription="Assigned Exhibitor Number"
+          ecoreFeature="ecore:EAttribute fair.ecore#//Person/exhibitorNumber"/>
+      <genFeatures createChild="false" propertyDescription="Email Address" ecoreFeature="ecore:EAttribute fair.ecore#//Person/email"/>
+    </genClasses>
+    <genClasses ecoreClass="fair.ecore#//YoungPerson">
+      <genFeatures notify="false" createChild="false" propertyCategory="Sponsors"
+          propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//YoungPerson/parents"/>
+      <genFeatures notify="false" createChild="false" propertyCategory="Sponsors"
+          propertySortChoices="true" ecoreFeature="ecore:EReference fair.ecore#//YoungPerson/club"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" 
+ "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<book id="Tracker" vendor="Verticon, Inc." label="Tracker User Guide"
+	status="Draft" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+	<xi:include href="../../com.verticon.tracker.doc/docbook/bookinfo/bookinfo.xml"/>
+	<xi:include href="../../com.verticon.tracker.doc/docbook/preface/preface.xml"/>
+	<xi:include href="../../com.verticon.tracker.doc/docbook/colophon/colophon.xml"/>
+	<xi:include href="../../com.verticon.tracker.doc/docbook/overview/overview.xml"/>
+	<xi:include href="../../com.verticon.tracker.doc/docbook/overview/usecases.xml"/>
+	<!-- Products -->
+	<xi:include href="../../com.verticon.tracker.doc/docbook/product/product.xml"/>
+	<!-- Add products -->
+	<xi:include href="../../com.verticon.tracker.product.desktop.doc/docbook/desktopProduct/desktopProduct.xml"/>
+	<!-- End products -->
+	
+	<!-- Editors -->
+	<xi:include href="../../com.verticon.tracker.product.desktop.doc/docbook/editors/editors.xml"/>
+	<!-- Add editors -->
+	<xi:include href="../../com.verticon.tracker.editor.doc/docbook/premisesEditor/premisesEditor.xml"/>
+	<xi:include href="../../com.verticon.osgi.metatype.doc/docbook/metatypeEditor/metatypeEditor.xml"/>
+	<xi:include href="../../com.verticon.geography.editor.doc/docbook/geographyEditor/geographyEditor.xml"/>
+	<xi:include href="../../com.verticon.agriculture.doc/docbook/agricultureEditor/agricultureEditor.xml"/>
+	<xi:include href="../../com.verticon.tracker.fair.doc/docbook/fairEditor/fairEditor.xml"/>
+	
+	
+	<!-- End editors -->
+	
+	<!-- Features -->
+	<xi:include href="../../com.verticon.tracker.product.desktop.doc/docbook/features/features.xml"/>
+	<!-- Add features -->
+	<xi:include href="../../com.verticon.tracker.export.wlic.doc/docbook/exportWLIC/exportWLIC.xml"/>
+	<xi:include href="../../com.verticon.tracker.fair.poi.documenation/docbook/fairPOI/fairPOI.xml"/>
+	<xi:include href="../../com.verticon.tracker.ocl.query.doc/docbook/ocl/ocl.xml"/>
+	<xi:include href="../../com.verticon.tracker.reader.doc/docbook/reader/reader.xml"/>
+	<xi:include href="../../com.verticon.tracker.irouter.premises.gateway.doc/docbook/premisesGateway/premisesGateway.xml"/>
+	<xi:include href="../../com.verticon.tracker.irouter.premises.common.doc/docbook/iRouterPremisesCommon/iRouterPremisesCommon.xml"/>
+	<xi:include href="../../com.verticon.tracker.store.mongo.doc/docbook/store/store.xml"/>
+	
+	
+	<xi:include href="../../com.verticon.tracker.doc/docbook/appendix/fdl.xml"/>
+	<xi:include href="../../com.verticon.tracker.doc/docbook/appendix/eclipseUserAgreement.xml"/>
+	<!--  <xi:include href="../../com.verticon.tracker.doc/docbook/appendix/gpl.xml"/>-->
+	
+	
+</book>

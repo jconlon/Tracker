@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?compositeMetadataRepository version='1.0.0'?>
+<repository name='Tracker Repository' type='org.eclipse.equinox.internal.p2.metadata.repository.CompositeMetadataRepository' version='1.0.0'>
+  <properties size='1'>
+    <property name='p2.timestamp' value='1270076671956'/>
+  </properties>
+  <children size='3'>
+    <child location='product-desktop.beta.01'/>
+    <child location='features-desktop.beta.01'/>
+    <child location='features-desktop.beta.01.v20100409'/>
+    <child location='features-desktop.beta.02'/>
+    <child location='features-desktop.beta.03'/>
+    <child location='features-desktop.beta.04'/>
+    <child location='features-desktop.beta.05'/>
+    <child location='features-desktop.beta.06'/>
+    <child location='features-desktop.beta.07'/>
+    <child location='product-desktop.beta.04'/>
+    <child location='product-desktop.beta.05'/>
+    <child location='product-desktop.beta.08'/>
+    <child location='features-desktop.beta.08'/>
+    <child location='features-desktop.beta.09'/>
+    <child location='features-desktop.beta.10'/>
+    <child location='product-desktop.beta.10'/>
+    <child location='categories'/>
+  </children>
+</repository>

@@ -1,0 +1,470 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<chapter>
+  <?dbhtml filename="premisesEditor/premisesEditor.html" ?>
+  <title>Agriculture Editor and Agriculture Location Service</title>
+
+  <section id="overviewAgricultureEditor">
+    <title>Overview</title>
+
+    <section id="overviewAgricultureEditorWhatis">
+      <title>What is the Agriculture Editor and Location Service?</title>
+      <para>The Agriculture Editor is an editor for specifying business associations of livestock producers and 
+      infrastructure providers.
+      </para>
+      <para>The Agriculture Location Service is a comprehensive desktop based implementation of the Tracker 
+      Location Service
+      <footnote><para>
+      	The Tracker Location Service is a global Tracker application service for resolving the real-world 
+      	geographic location of an object.
+      	</para>
+      	<para>Given the name or identification (ID) of an object, the Location Service can resolve geographic location
+      names, addresses, and sub areas of the object. Given the geographic coordinates of an object the service
+      can resolve the name of the containing location.
+      	</para>
+      	<para>The Tracker Location Service aggregates all implementations to provide a single service application 
+      	interface to enrich Tracker desktop editors and utilities.
+      	</para></footnote>. The Agriculture Location Service implementation utilizes local desktop resident Agriculture 
+      	document files to create a geolocation map for resolving geolocation requests.
+      </para>
+      <para>	
+      The Agriculture Editor and Location Service can be used for documenting, resolving and visualizing livestock 
+      herd distributions; identifying livestock business associations; and determining individual animal locations, 
+      and animal movements within and between premises locations.
+      </para>
+     
+    </section>
+
+    <section id="overviewAgricultureEditorGoals">
+      <title>Project Goals</title>
+      <para>As livestock markets continue to adapt to customer requirements, more livestock markets will require animal 
+      source information and the functionality to do trace-back and trace-forward between business associates. Yet even 
+      for some producers not facing this inter-premises requirement, just resolving animal locations, within 
+      a premises, is a must have requirement.</para>
+       <para>Making livestock location information easy to utilize and easy to electronically inter-exchange while 
+       maintaining data privacy within business associations of livestock producers is the goal of the Agriculture 
+       Editor and Location Service project.</para>
+      <para>
+        The Agriculture Editor and Location Service provide models, editors and services for the 
+        creation and management of Agriculture documents that:
+        <itemizedlist mark="bullet">
+          <listitem>
+            <para>Specify associated groups of business related livestock premises
+            	<footnote>
+            	<para>It is the optional 'Location' element and child 'Area' 
+            	elements in the Tracker 'Premises' document that specifies the geographic 
+            	information that will be used to create the Agriculture Location Service mapping. 
+            	</para>
+            	</footnote>
+            within geographic regions</para>
+          </listitem>
+          <listitem>
+            <para>Identify agriculture documents that will contribute location data to the Location Service.</para>
+          </listitem>
+          <listitem>
+            <para>Locate Animals that have moved to geographical  sub-locations within a premises</para>
+          </listitem>
+          <listitem>
+            <para>Locate Animals that have moved to another premises 
+            within associated groups of business related livestock 
+            premises</para>
+          </listitem>
+          <listitem>
+            <para>Identify a list of sub location areas within  
+            premises</para>
+          </listitem>
+          <listitem>
+            <para>Assign animal positions based on visual sighting 
+            records or data inputs from industry standard GPS 
+            devices</para>
+          </listitem>
+          <listitem>
+            <para>Will serve as the foundation for a full featured distributed livestock Traceability service</para>
+          </listitem>
+        </itemizedlist>
+      </para>
+    </section>
+
+    <section id="overviewAgricultureFunctinal">
+      <title>Functional Overview</title>
+      <para>The Agriculture Editor creates documents that assign Livestock premises to Associations.</para>
+      <note>
+        <para>The Agriculture Editor is dependent on documents created by the Tracker Premises Editor. 
+        The Agriculture element <code>Association</code> specifies one or more references to 
+        <code>Premises</code> elements in *.premises documents 
+        </para> 
+      </note>
+       <para>
+      The Agriculture Location Service provides a geolocation resolution service that is based on the information contained in 
+      specially designated Agriculture documents.</para>
+      <para>
+        The Agriculture Location Service implementation adds geographical visualization, location resolution 
+        and geographic analytical utilities to the Tracker Desktop Business Intelligence Toolkit:
+        <itemizedlist mark="bullet">
+          
+          <listitem>
+            <para>
+              Desktop editors, views, and utilities for modeling agriculture associations allowing livestock producers 
+              auditors, and processors to geographically -
+              <itemizedlist>
+                <listitem>
+                  <para>manage internal, inter-association and intra-association animal movements and information flows</para>
+                </listitem>
+                <listitem>
+                  <para>create marketing and/or auditing reports for regional and <emphasis>local</emphasis> based farm 
+                  products</para>
+                </listitem>
+              </itemizedlist>
+            </para>
+          </listitem>
+          <listitem>
+            <para>Easily view the location of animals within the local premises.
+             <itemizedlist>
+             	<listitem>
+            		<para>Resolution of locations based on animal Position events that were input from GPS devices associated with RFID readers.
+            			Where Position coordinates determine the location names based on best fit (smallest area) of list of 
+            			geographically specified locations</para>
+          		</listitem>
+          		<listitem>
+            		<para>Visual sighting of animals with manual assignment of location names selected from list of geographically 
+            		specified locations</para>
+          		</listitem>
+          		<listitem>
+            		<para>Most current Sighting event or Position event determines location</para>
+            		<para />
+          		</listitem>
+             </itemizedlist>
+            </para>
+          </listitem>
+          <listitem>
+            <para>Easily view the destination of animals moved to other business partners</para>
+          </listitem>
+         </itemizedlist>
+      </para>
+    </section>
+  </section>
+
+  <section id="agricultureDocuments">
+   <?dbhtml filename="model/agricultureEditorModel_agricultureDocuments.html" ?>
+    <title>Agriculture Documents</title>
+    <para>The Agriculture Editor enables users to create and 
+    edit documents that specify associations  Livestock Premises.</para>
+    <note>
+    <para>Because Agriculture Documents elements references elements in one or more
+    Premises, the Premises documents need to be created before the user creates an 
+    Agriculture document.</para>
+    </note>
+     <para>Agriculture document files utilize a <code>.agri</code> file extension to 
+    distinguish them from other types of files.</para>
+  </section>
+  
+  <section id="editingAgricultureDocuments">
+    	<?dbhtml filename="editingAgricultureDocuments/editingAgricultureDocuments.html" ?>
+		<title>Editing Agriculture Documents</title>
+		<section id="creatingAgricultureDocuments">
+			<title>Creating a new Document</title>
+			<para>
+			To create a new agriculture document. Go to the File menu and launch a 
+			<emphasis>New Wizard</emphasis> by selecting the menu items:<code>File|New|Other</code>.
+		
+			<figure id="fig_createNewAgricultureDocument">
+			<title>New Wizard for Creating a New Agriculture Document</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/editing/createNewDocument.png" />
+				</imageobject>
+			</mediaobject>
+			</figure>
+	     </para>
+		<para>Follow the instructions to choose a project, folder and a name for the document.
+		Select Association as the model object and press <code>Finish</code> to create the document. 
+			
+		</para>
+       <figure id="fig_selectAgricultureModelObject">
+			<title>New Agriculture Document Wizard ()Model Object Prompt</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/editing/selectModelObject.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+		</section>
+		
+		<section id="loadingAgricultureDocumentResources">
+		<?dbhtml filename="editingAgricultureDocuments/loadingAgricultureDocuments.html" ?>
+		<title>Loading Additional Resources into the Document</title>
+		 <note>
+			<para>
+				Since the Agriculture document references Premises elements, one or 
+				more of these Premises documents must exist as resources in the workspace.
+			</para>
+		 </note>
+			<para>
+			To enable the Agriculture Editor to create references to Premises the Premises
+			documents must be loaded as resources in the Agriculture document.  
+			When all the needed Premises documents are loaded as 
+			resources to the Agriculture document, these Premises elements 
+			can then be referenced as values of the Association Livestock 
+			attribute.</para>
+			<para>
+			To load a resource place the mouse cursor on the root element in the document, right click, 
+			and from the pull down menu choose <code>Load Resource...</code>
+			</para>
+			<figure id="fig_loadAgricultureResource">
+			<title>Load Resource Dialog</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/editing/loadResource.png" />
+				</imageobject>
+			</mediaobject>
+			</figure>
+			<para>From the dialog choose the KML or the Premises document that you wish to load. 
+			Repeat the loading process to load all the resources that will be referenced by the 
+			Agriculture document.</para>
+			<figure id="fig_loadedAgricultureResource">
+			<title>Agriculture Project with Loaded Resources</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/editing/loadedResources.png" />
+				</imageobject>
+			</mediaobject>
+			</figure>
+		</section>
+	    
+	    <section id="completingAgricultureDocument">
+	    <?dbhtml filename="editingAgricultureDocuments/completingAgricultureDocuments.html" ?>
+	    <title>Completing an Agriculuture Document</title>
+	    
+	   <para>When premises documents are loaded as resources into Agriculture documents, the editor  
+	    screens associated with the <code>Livestock</code> attribute of the <code>Association</code> element will be 
+	    populated by all <code>Premises</code> elements from all the loaded Premises resources.</para>
+	    <figure id="fig_completedAgricultureDocument">
+			<title>Picklist of Premises</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/editing/completedDocument.png" />
+				</imageobject>
+			</mediaobject>
+			</figure>
+	    </section>
+
+	</section>
+
+  <section id="agricultureDataModel">
+    <?dbhtml filename="model/agricultureEditorModel_agricultureDataModel.html" ?>
+    <title>Agriculture Data Model</title>
+    <para>Because all user activity centers around the creation and manipulation 
+    of Agriculture Documents <emphasis>Association</emphasis>, understanding the structure 
+    (called the <glossterm>data model</glossterm>) of Agriculture documents is the easiest 
+    way to learn to how to create documents with the Agriculture Editor.</para>
+    <section id="agricultureDataModel_coreElements">
+      <title>Data Model Core Elements</title>
+      <para>All Agriculture documents conform to a very simple structure called the
+      <emphasis>Agriculture Data Model</emphasis>. In the Agriculture Data 
+      Model, there is only a single element called an <emphasis>Association</emphasis>.
+	  The Association has three simple text based attributes, <code>name</code>,
+	  <code>description</code> and <code>comments</code>;
+	  and one complex attribute <code>livestock</code>. The <code>livestock</code> attribute
+	  is a multvalue attribute that references one or more Premises elements.</para>
+      <para>Core elements of the Agriculture Data Model are shown in 
+      <xref linkend="fig_AgricultureDataModel1"/>.</para>
+      <figure id="fig_AgricultureDataModel1">
+        <title>Agriculture Data Model Elements</title>
+        <mediaobject><imageobject><imagedata align="center"
+         fileref="../images/model/agriculture.png"/></imageobject></mediaobject>
+      </figure>
+      <para>
+        <orderedlist numeration="loweralpha">
+          <listitem>
+            <para>The only element of the Agriculture Model, Association is depicted 
+            as a rectangle in the figure.</para>
+          </listitem>
+          <listitem>
+            <para>The notation within the Association element are its attributes.</para>
+          </listitem>
+          <listitem>
+            <para>The notation outside of the Association element represents the 
+            <code>livestock</code> attribute's references to external Premises document elements.</para>
+          </listitem>
+        </orderedlist>
+      </para>
+      <para>
+        The following table offers a text explanation of the Association elements 
+        relationships.
+        <table frame="all">
+          <title>Core Elements of the Agriculture Model</title>
+          <tgroup align="left" cols="2" colsep="1" rowsep="1">
+            <colspec colname="c1"/>
+            <colspec colname="c2"/>
+            <thead>
+              <row>
+                <entry>Element Name</entry>
+                <entry>Relationship to other Elements</entry>
+              </row>
+            </thead>
+            <tbody>
+              <row>
+                <entry>Association</entry>
+                <entry>This is the only element in a document.</entry>
+              </row>
+              <row>
+                <entry>name</entry>
+                <entry>Asssociation has a name attribute.</entry>
+              </row>
+               <row>
+                <entry>description</entry>
+                <entry>Association has a description attribute.</entry>
+              </row>
+              <row>
+                <entry>livestock</entry>
+                <entry>Association has a multivalue livestock attribute.</entry>
+              </row>
+              <row>
+                <entry>Premises</entry>
+                <entry>Multiple Premises elements can be referenced by the livestock attribute.</entry>
+              </row>
+            </tbody>
+          </tgroup>
+        </table>
+      </para>
+    </section>
+  </section>
+
+  <section id="agricultureEditor_useCase">
+  <?dbhtml filename="usecase/agricultureEditor_useCase.html" ?>
+    <title>Agriculture Editor Use Cases</title>
+    <para>To best depict what the Agriculture Editor can do for Tracker users, the following figure presents a series of 
+    <emphasis>Use-Case</emphasis> diagrams. 
+    <xref linkend="fig_AgricultureEditorUseCases"/> shows core usage 
+    requirements for the Agriculture Editor.</para>
+    <figure id="fig_AgricultureEditorUseCases">
+      <title>Agriculture Editor Overview</title>
+      <mediaobject><imageobject><imagedata align="center"
+       fileref="../images/useCases/editor.png"/></imageobject></mediaobject>
+    </figure>
+  </section>
+
+  <section id="locationService_useCase">
+  <?dbhtml filename="usecase/locationService_useCase.html" ?>
+    <title>Location Service Use Cases</title>
+    <para>The Location Service is not directly accessible to the user, 
+    but operates in the background to provide geographical location 
+    resolution services to the Premises Editor and Premises document 
+    related tools. As a background service it resolves location 
+    specific elements and attributes within Premises documents,  
+    Premises utilities, and Business Intelligence reporting 
+    tools.</para>
+    <para>To provide location resolution, the Location Service derives 
+    it&apos;s data from one or more of Agriculture documents created by 
+    the operator with the Agriculture Editor.</para>
+    <para>The Location service provides the following 
+    <emphasis>Use-Cases</emphasis> to Tracker users. 
+    <xref linkend="fig_LocationServiceUseCases"/> shows core usage 
+    requirements for the Location Service.</para>
+    <figure id="fig_LocationServiceUseCases">
+      <title>Location Service Overview</title>
+      <mediaobject><imageobject><imagedata align="center"
+       fileref="../images/useCases/locationService.png"/></imageobject></mediaobject>
+    </figure>
+  </section>
+
+  <section id="configuringLocationService">
+	<?dbhtml filename="locationService/configuringLocationService.html" ?>
+	<title>Configuring the Location Service</title>
+	
+	<section id="requirementsForLocationService">
+	 <title>Agriculture Documents as Input to the Location Service</title>
+	 <para>The full benefit of declaring premises and geographical locations is achieved when Agriculture 
+	documents are defined as input to the Location Service.  
+	</para>
+	<para>
+	In order to assign an agriculture document to the Location Service. The following requirements must be met:
+	 <itemizedlist mark="bullet">
+          <listitem>
+            <para>The agriculture document must be a valid Agriculture documents</para>
+          </listitem>
+          <listitem>
+            <para>The agriculture document must be named: <code>doc.agri</code></para>
+          </listitem>
+          <listitem>
+            <para>The agriculture document must be located in the root folder of a project</para>
+          </listitem>
+          <listitem>
+            <para>The agriculture document must be in a project that has been configured with an <code>Agriculture Nature</code></para>
+          </listitem>
+        </itemizedlist>
+	</para>
+	</section>
+	
+	<section id="configuringAgricultureNature">
+	<?dbhtml filename="locationService/configuringAgricultureNatures.html" ?>
+	<title>Configuring a Project with an Agriculture Nature</title>
+	<para>To configure a project with an Agriculture Nature place the mouse cursor on the Project in the 
+	<code>Project Explorer</code> right click, and from the pull down menu choose <code>Add/Remove Agriculture Nature</code>.
+	</para>
+	<figure id="fig_configureAgricultureNature"><!-- 9.10 -->
+			<title>Configuring Project with an Agriculture Nature</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/locationService/configuringNature.png" />
+				</imageobject>
+			</mediaobject>
+	</figure>
+	<note><para>A project that has been configured as an Agriculture Nature will be designated with a 
+	<emphasis>small capital A</emphasis> on the upper right of the project folder icon.</para></note>
+	
+	</section>
+	</section>
+	
+  <section id="usingLocationService"> 
+  <?dbhtml filename="locationService/usingLocationService.html" ?>
+  <title>Using the Location Service</title>
+   <para>Once a premises has been defined in the <code>doc.agri</code>, placed in the root directory of a
+   project, and the project configured with an Agriculture Nature, the Location Service will provide resolution
+   services for all of Premises documents in the workspace:</para>
+   <itemizedlist mark="bullet">
+   		<listitem>
+   			<para>Resolving the <code>Premises</code> element's derived <code>address</code> attribute  
+   		     to the address in the referenced Premises Location element.</para>
+        </listitem>
+   		<listitem>
+   			<para>Resolving the <code>Animal</code> element's' derived <code>location</code> attribute when
+   			the last movement event in the <code>Animal</code> event history is a:</para>
+   			<itemizedlist mark="bullet">
+   				<listitem>
+   					<para><code>Position</code> event. Resolution will be the sub location within the 
+   					 <code>Location Area</code> boundaries that contains the point specified by the
+   					 <code>coordinate</code> attribute of the <code>Position</code> event.
+   					 See <xref linkend="fig_locationServiceAnimalResolved"/>
+   					 </para>
+   					  <note><para>If two or more sublocations contain the point, the one with the smallest area
+   					  will be choosen.</para></note>
+        		</listitem>
+   				<listitem>
+   					<para><code>MovedOut</code> event. Resolution will be the name of the 
+   					<code>Location</code> associated with the <code>Premises uri</code>
+   					attribute of the <code>MovedOut</code> event.</para>
+   				</listitem>
+   			</itemizedlist>
+   		</listitem>
+   		<listitem>
+   			<para>Provide the names of sublocations in a premises so that Premises editors can populate the
+   			 pick list of  <code>Sighting location</code> attribute editors</para></listitem>
+   </itemizedlist>
+   <figure id="fig_locationServiceAnimalResolved">
+			<title>Example of Resolving an Animal Location from Coordinates</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center"
+						fileref="../images/locationService/animalPosition.png" />
+				</imageobject>
+			</mediaobject>
+		</figure>
+   </section>
+</chapter>

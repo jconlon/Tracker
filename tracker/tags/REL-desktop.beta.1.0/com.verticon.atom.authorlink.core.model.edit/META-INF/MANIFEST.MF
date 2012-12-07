@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: com.verticon.atom.authorlink.core.model.edit;singleton:=true
+Bundle-Version: 1.0.3
+Bundle-ClassPath: .
+Bundle-Activator: com.verticon.atom.authorlink.provider.AtomauthorlinkEditPlugin$Implementation
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: com.verticon.atom.authorlink.provider;version="1.0.0"
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.8.0",
+ com.verticon.atom.authorlink.core.model;bundle-version="1.0.2";visibility:=reexport,
+ org.eclipse.emf.edit;bundle-version="2.8.0";visibility:=reexport
+Bundle-ActivationPolicy: lazy

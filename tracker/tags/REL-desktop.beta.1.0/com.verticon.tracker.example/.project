@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>com.verticon.tracker.example</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>com.verticon.agriculture.location.locationBuilderService</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>com.verticon.agriculture.location.agricultureServiceNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>autotype.metatype</name>
+			<type>1</type>
+			<location>/home/jconlon/Workspaces/runtime-Tracker/autotype.metatype</location>
+		</link>
+	</linkedResources>
+</projectDescription>

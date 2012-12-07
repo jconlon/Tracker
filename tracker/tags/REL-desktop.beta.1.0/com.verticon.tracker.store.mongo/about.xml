@@ -1,0 +1,359 @@
+<?xml version='1.0' ?><!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<book>
+	<title>about</title>
+	<chapter id="TrackerMongoStore">
+		<title>Tracker Mongo Store</title>
+		<para>com.verticon.tracker.store.mongo Version 0.1.0</para>
+		<orderedlist>
+			<listitem>
+				<para>
+					<link linkend="TrackerMongoStore">Tracker Mongo Store</link>
+				</para>
+				<orderedlist>
+					<listitem>
+						<para>
+							<link linkend="Introduction">Introduction</link>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<link linkend="UsersofTrackerDesktop">Users of Tracker Desktop</link>
+						</para>
+						<orderedlist>
+							<listitem>
+								<para>
+									<link linkend="DesktopSupportRequirements">Desktop Support Requirements</link>
+								</para>
+							</listitem>
+						</orderedlist>
+					</listitem>
+					<listitem>
+						<para>
+							<link linkend="iRouterSupport">iRouter Support</link>
+						</para>
+						<orderedlist>
+							<listitem>
+								<para>
+									<link linkend="iRouterComponentRequirements">iRouter Component Requirements</link>
+								</para>
+							</listitem>
+						</orderedlist>
+					</listitem>
+					<listitem>
+						<para>
+							<link linkend="Implementation">Implementation</link>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<link linkend="iRouterExample">iRouter Example</link>
+						</para>
+						<orderedlist>
+							<listitem>
+								<para>
+									<link linkend="iRouterMonitorViewoftheDemonstration">iRouter Monitor View of the Demonstration</link>
+								</para>
+							</listitem>
+						</orderedlist>
+					</listitem>
+					<listitem>
+						<para>
+							<link linkend="PoweredbyEclipseTechnology">Powered by Eclipse Technology</link>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							<link linkend="License">License</link>
+						</para>
+					</listitem>
+				</orderedlist>
+			</listitem>
+		</orderedlist>
+		<section id="Introduction">
+			<title>Introduction</title>
+			<para>Tracker Mongo Store is a multi-user enterprise class solution for storage and retrieval of Livestock Business Intelligence documents. </para>
+		</section>
+		<section id="UsersofTrackerDesktop">
+			<title>Users of Tracker Desktop</title>
+			<para>Authorized users of the Tracker Desktop can archive Premises animal life data and event histories to a MongoDB data store. Authorized users can also retrieve information about  </para>
+			<itemizedlist>
+				<listitem>
+					<para>a single animal and its</para>
+					<itemizedlist>
+						<listitem>
+							<para>event history </para>
+						</listitem>
+						<listitem>
+							<para>route between premises locations</para>
+						</listitem>
+					</itemizedlist>
+				</listitem>
+				<listitem>
+					<para>all the animals in a premises within a specified time frame</para>
+					<itemizedlist>
+						<listitem>
+							<para>event histories of all animals</para>
+						</listitem>
+					</itemizedlist>
+				</listitem>
+			</itemizedlist>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/Premises_Desktop.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<section id="DesktopSupportRequirements">
+				<title>Desktop Support Requirements</title>
+				<orderedlist>
+					<listitem>
+						<para>Administration </para>
+						<orderedlist>
+							<listitem>
+								<para>User designated as an Administrator</para>
+							</listitem>
+							<listitem>
+								<para>Manages access rules for all other users</para>
+								<orderedlist>
+									<listitem>
+										<para>Access rules are document based and are loaded by the administrator into MongoDB</para>
+									</listitem>
+									<listitem>
+										<para>Users are identified by the user name and the machine name they are logged into</para>
+									</listitem>
+									<listitem>
+										<para>Users are authorized to publish animal event histories from one or more premises</para>
+									</listitem>
+									<listitem>
+										<para>Users must be authorized by the administrator to read animal event histories from other premises than their own</para>
+									</listitem>
+								</orderedlist>
+							</listitem>
+						</orderedlist>
+					</listitem>
+					<listitem>
+						<para>Tracker Desktop archival of Agriculture GeoLocations, Premises and Animals</para>
+						<orderedlist>
+							<listitem>
+								<para>Archival support for one or multiple Premises</para>
+							</listitem>
+						</orderedlist>
+					</listitem>
+					<listitem>
+						<para>Tracker Desktop retrieval </para>
+						<orderedlist>
+							<listitem>
+								<para>All animals in a Premises</para>
+								<orderedlist>
+									<listitem>
+										<para>Given a date range and premises uri a retrieval request will generate Tracker premises documents containing animals that were resident during the given date range</para>
+									</listitem>
+								</orderedlist>
+							</listitem>
+							<listitem>
+								<para>Single animal</para>
+								<orderedlist>
+									<listitem>
+										<para>Given an animal id, creates KML documents for individual animals showing Geo location routing between Premises locations</para>
+									</listitem>
+								</orderedlist>
+							</listitem>
+						</orderedlist>
+					</listitem>
+					<listitem>
+						<para>Eclipse BIRT will support the reporting of geo locations, animal histories and movements </para>
+					</listitem>
+				</orderedlist>
+			</section>
+		</section>
+		<section id="iRouterSupport">
+			<title>iRouter Support</title>
+			<para>iRouter sensor and actuator networks can now use MongoDB for real time transaction recording of any Tracker Premises events.  </para>
+			<para>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/Premises_iRouter.png"/>
+					</imageobject>
+				</mediaobject>
+			</para>
+			<section id="iRouterComponentRequirements">
+				<title>iRouter Component Requirements</title>
+				<orderedlist>
+					<listitem>
+						<para>Animal Tag recording to MongoDB</para>
+						<orderedlist>
+							<listitem>
+								<para>Tags can contain one or more events</para>
+							</listitem>
+							<listitem>
+								<para>Runs in iRouter appliances for headless applications for automatic recording of tag events from one or more fixed sensors</para>
+							</listitem>
+							<listitem>
+								<para>Runs in Tracker Desktop BI Toolkit for hands free saving of animals, tags and events originating in iRouter sensor networks</para>
+							</listitem>
+							<listitem>
+								<para>Multiple components instances can be configured to connect to one or more MongoDB stores</para>
+							</listitem>
+							<listitem>
+								<para>Supports event updates to existing animals and the runtime creation of new animals</para>
+							</listitem>
+							<listitem>
+								<para>iRouter Consumer component that leverages the power of the iRouter infrastructure for creating complex sensor and actuator based solutions.</para>
+							</listitem>
+							<listitem>
+								<para>Configurable instances can support one or more tag readers or virtual tag producers</para>
+							</listitem>
+						</orderedlist>
+					</listitem>
+				</orderedlist>
+			</section>
+		</section>
+		<section id="Implementation">
+			<title>Implementation</title>
+			<para>An OSGi Declarative Services Factory component which implements an iRouter (Tag) Consumer and a com.verticon.tracker.store.ITrackerStore.</para>
+		</section>
+		<section id="iRouterExample">
+			<title>iRouter Example</title>
+			<para>Goal: Demonstrate an iRouter component configuration that highlights the functionality of the Tracker Mongo Store</para>
+			<orderedlist>
+				<listitem>
+					<para>Components used</para>
+					<orderedlist>
+						<listitem>
+							<para>TruTest Proxy </para>
+							<itemizedlist>
+								<listitem>
+									<para>This will serve at the top of the event production chain to produce events associated with a TruTest scale head indicator</para>
+									<itemizedlist>
+										<listitem>
+											<para>The scale will produce events as the weights of the animals are changed, these weight measurements will be sent in the 
+												<emphasis>raw.animal.weight</emphasis> scope
+											</para>
+										</listitem>
+										<listitem>
+											<para>When an animal EID is detected on the scale head that eid will be produced in the 
+												<emphasis>animal.eid</emphasis> scope
+											</para>
+										</listitem>
+										<listitem>
+											<para>When the operator presses the Enter Button that event will be produced in the 
+												<emphasis>transaction.state</emphasis> scope  
+											</para>
+										</listitem>
+									</itemizedlist>
+								</listitem>
+							</itemizedlist>
+						</listitem>
+						<listitem>
+							<para>Premises Event Producer</para>
+							<itemizedlist>
+								<listitem>
+									<para>This component will consume all products sent by the TruTest Proxy and on the detection of a 
+										<emphasis>transaction.state</emphasis> indicating that the operator pressed the Enter Button, this component will produce the last measurement received and identify it with the animal eid.
+									</para>
+								</listitem>
+							</itemizedlist>
+						</listitem>
+						<listitem>
+							<para>Premises Animal Producer</para>
+							<itemizedlist>
+								<listitem>
+									<para>This component also sits towards the top of the event production chain, but consumes Animal EIDs on the 
+										<emphasis>animal.eid</emphasis> scope and Enter Button presses on the 
+										<emphasis>transaction.state</emphasis> scope that have originated on the TruTest Proxy.  Associated with this component is a 
+										<emphasis>URI</emphasis> referencing an Tracker Premises Animal template in an external document. Production cycle of this component starts when a Enter Button press is detected. Then the Animal Template is copied, given the EID from the TruTest, and sent to consumers.
+									</para>
+								</listitem>
+							</itemizedlist>
+						</listitem>
+						<listitem>
+							<para>Tracker Mongo Store consumes products from the Premises Event Producer and the Premises Animal Producer and creates these on the MongoDB. </para>
+						</listitem>
+					</orderedlist>
+				</listitem>
+				<listitem>
+					<para>Startup and Configuration</para>
+					<orderedlist>
+						<listitem>
+							<para>MongoDB must be installed and running on the local host</para>
+						</listitem>
+						<listitem>
+							<para>Startup Tracker</para>
+						</listitem>
+						<listitem>
+							<para>From the 
+								<emphasis>Configuration</emphasis> menu, invoke 
+								<emphasis>Import iRouter Configuration</emphasis>
+							</para>
+						</listitem>
+						<listitem>
+							<para>Import that configuration 
+								<emphasis>autotype.metatype</emphasis> document in this project
+							</para>
+						</listitem>
+					</orderedlist>
+				</listitem>
+				<listitem>
+					<para>TruTest simulator</para>
+					<orderedlist>
+						<listitem>
+							<para>Download and install the Tracker simulator product </para>
+						</listitem>
+						<listitem>
+							<para>In the installation directory run the simulator executable</para>
+						</listitem>
+						<listitem>
+							<para>In a web browser go to 
+								<ulink url="http://localhost:8081/client/devices">Simulated Devices</ulink> and start the TruTest simulator
+							</para>
+						</listitem>
+						<listitem>
+							<para>Select a TruTest simulator </para>
+						</listitem>
+						<listitem>
+							<para>When the TruTest simulator comes up the 
+								<emphasis>Connection</emphasis> should be Y
+							</para>
+						</listitem>
+						<listitem>
+							<para>Change the EID, the weight and press the record button to simulate a transaction</para>
+						</listitem>
+					</orderedlist>
+				</listitem>
+			</orderedlist>
+			<section id="iRouterMonitorViewoftheDemonstration">
+				<section>
+					<title>iRouter Monitor View of the Demonstration</title>
+					<para>In the iRouter Monitor View you should see the components displayed something like:</para>
+					<para>
+						<mediaobject>
+							<imageobject>
+								<imagedata fileref="images/irouterMonitor.png"/>
+							</imageobject>
+						</mediaobject>
+					</para>
+				</section>
+			</section>
+		</section>
+		<section id="PoweredbyEclipseTechnology">
+			<title>Powered by Eclipse Technology</title>
+			<para>Verticon’s Mongo Store offering is powered by Eclipse technology and includes Eclipse plug-ins that
+				can be installed and used with other Eclipse-based offerings.</para>
+		</section>
+		<section id="License">
+			<title>License</title>
+			<para>Verticon, Inc. makes available all content in this plug-in (&quot;Content&quot;).  Unless otherwise 
+				indicated below, the Content is provided to you under the terms and conditions of the
+				Eclipse Public License version 1.0 (&quot;EPL 1&quot;).  A copy of the EPL 1 is available 
+				at <a href="http://www.eclipse.org/legal/epl-v10.html">http://www.eclipse.org/legal/epl-v10.html</a>.
+				For purposes of the EPL, &quot;Program&quot; will mean the Content.</para>
+			<para>If you did not receive this Content directly from the Verticon,Inc., the Content is 
+				being redistributed by another party (&quot;Redistributor&quot;) and different terms and conditions may
+				apply to your use of any object code in the Content.  Check the Redistributor’s license that was 
+				provided with the Content.  If no such license exists, contact the Redistributor.  Unless otherwise
+				indicated below, the terms and conditions of the EPL 1 still apply to any source code in the Content
+				and such source code may be obtained at <a href="http://tracker.verticon.com/index.html">http://tracker.verticon.com/index.html</a>.</p></para>
+		</section>
+	</chapter>
+</book>

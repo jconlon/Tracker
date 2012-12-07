@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" enabled="true" immediate="true" name="com.verticon.mongo.emf">
+   <implementation class="com.verticon.mongo.emf.internal.BuilderFactoryImpl"/>
+   <service>
+      <provide interface="org.eclipselabs.mongo.emf.IDBObjectBuilderFactory"/>
+      <provide interface="org.eclipselabs.mongo.emf.IEObjectBuilderFactory"/>
+   </service>
+   <reference bind="setDecorator" cardinality="0..n" interface="com.verticon.mongo.emf.api.IDBObjectBuilderDecorator" name="IDBObjectBuilderDecorator" policy="dynamic" unbind="unsetDecorator"/>
+</scr:component>

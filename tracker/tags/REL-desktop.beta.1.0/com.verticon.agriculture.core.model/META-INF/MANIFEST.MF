@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: com.verticon.agriculture.core.model;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: com.verticon.agriculture;version="1.0.0",
+ com.verticon.agriculture.util;version="1.0.0"
+Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.8.1",
+ org.eclipse.emf.ecore.xmi;bundle-version="2.8.0"
+Bundle-ActivationPolicy: lazy
+Import-Package: com.verticon.location;version="[1.0.0,2.0.0)",
+ com.verticon.osgi.metatype;version="[1.0.0,2.0.0)",
+ com.verticon.tracker;version="[0.1.0,2.0.0)"

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet
+      title="Adding Tracker Features to the Tracker BI Toolkit">
+   <intro
+         href="/org.eclipse.platform.doc.user/tasks/tasks-129.htm">
+      <description>
+         This cheat sheet will show you how to add Tracker features to the <b>Tracker BI Toolkit</b>.
+      </description>
+   </intro>
+   <item
+         dialog="true"
+         href="/org.eclipse.platform.doc.user/tasks/tasks-121.htm"
+         title="Open Software Updates">
+      <description>
+         To add Tracker Feature Plugins, open the <b>Install New Software </b> User Inteface.<br/>
+         From the workbench menu:<br/><br/>
+         Help &gt; Install New Software ...  
+      </description>
+      <command
+            required="false"
+            serialization="org.eclipse.equinox.p2.ui.sdk.install"/>
+     
+   </item>
+   <item
+         title="Choose a Software Site" 
+         href="/org.eclipse.platform.doc.user/tasks/tasks-121.htm"
+         dialog="true">
+      <description>
+         In the <b>Work with</b> pull down. Select the <b>Tracker Release</b> item.
+      </description>
+   </item>
+   <item
+         title="Review Available Features" 
+         href="/org.eclipse.platform.doc.user/tasks/tasks-121.htm"
+         dialog="true">
+      <description>
+         Select the arrow next to the entry name to display all the <b>Tracker</b> features you can install.
+      </description>
+   </item>
+   <item
+         title="Select Features to Install" 
+         href="/org.eclipse.platform.doc.user/tasks/tasks-121.htm"
+         dialog="true">
+      <description>
+         Select the desired features for installation.<br/>
+         <br/>If your a new user just select the parent checkbox of the Tracker Feature Update entry to install all the features.<br/><br/><b>You can always uninstall features you do not need later.</b>
+      </description>
+   </item>
+   <item
+         title="Install the Features." 
+         href="/org.eclipse.platform.doc.user/tasks/tasks-121.htm"
+         dialog="true">
+      <description>
+         Select the <b>Install</b> button in the upper right hand corner of the window to install the selected features.<br/>
+         <br/>Follow the directions given in the Updates Dialog boxes that follow.
+      </description>
+   </item>
+</cheatsheet>

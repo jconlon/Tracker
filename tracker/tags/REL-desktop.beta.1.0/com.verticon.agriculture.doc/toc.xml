@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><toc topic="html//index.html" label="Editors" link_to="../com.verticon.tracker.product.desktop.doc/toc.xml#tracker_editor_agriculture">
+<topic href="html//premisesEditor/premisesEditor.html" label="Agriculture Editor and Agriculture Location Service">
+<topic href="html//premisesEditor/premisesEditor.html#overviewAgricultureEditor" label="Overview">
+<topic href="html//premisesEditor/premisesEditor.html#overviewAgricultureEditorWhatis" label="What is the Agriculture Editor and Location Service?"/>
+<topic href="html//premisesEditor/premisesEditor.html#overviewAgricultureEditorGoals" label="Project Goals"/>
+<topic href="html//premisesEditor/premisesEditor.html#overviewAgricultureFunctinal" label="Functional Overview"/>
+</topic>
+<topic href="html//model/agricultureEditorModel_agricultureDocuments.html" label="Agriculture Documents"/>
+<topic href="html//editingAgricultureDocuments/editingAgricultureDocuments.html" label="Editing Agriculture Documents">
+<topic href="html//editingAgricultureDocuments/editingAgricultureDocuments.html#creatingAgricultureDocuments" label="Creating a new Document"/>
+<topic href="html//editingAgricultureDocuments/loadingAgricultureDocuments.html" label="Loading Additional Resources into the Document"/>
+<topic href="html//editingAgricultureDocuments/completingAgricultureDocuments.html" label="Completing an Agriculuture Document"/>
+</topic>
+<topic href="html//model/agricultureEditorModel_agricultureDataModel.html" label="Agriculture Data Model">
+<topic href="html//model/agricultureEditorModel_agricultureDataModel.html#agricultureDataModel_coreElements" label="Data Model Core Elements"/>
+</topic>
+<topic href="html//usecase/agricultureEditor_useCase.html" label="Agriculture Editor Use Cases"/>
+<topic href="html//usecase/locationService_useCase.html" label="Location Service Use Cases"/>
+<topic href="html//locationService/configuringLocationService.html" label="Configuring the Location Service">
+<topic href="html//locationService/configuringLocationService.html#requirementsForLocationService" label="Agriculture Documents as Input to the Location Service"/>
+<topic href="html//locationService/configuringAgricultureNatures.html" label="Configuring a Project with an Agriculture Nature"/>
+</topic>
+<topic href="html//locationService/usingLocationService.html" label="Using the Location Service"/>
+</topic>
+</toc>

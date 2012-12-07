@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet
+      title="Create a Premises Document">
+   <intro
+         href="/com.verticon.tracker.editor.doc/html/model/premisesEditorModel_premisesDocuments.html">
+      <description>
+         This cheat sheet will show you how to create a <b>Premises Document</b> for documenting information about the Livestock at your Premises.
+      </description>
+   </intro>
+   <item
+         href="/com.verticon.tracker.product.desktop.doc/html/desktopProduct/desktopProduct.html#Perspective"
+         title="Show Tracker Perspective">
+      <description>
+         Open the <b>Tracker</b> perspective in the Workbench.
+      </description>
+      <command
+            required="false"
+            serialization="org.eclipse.ui.perspectives.showPerspective(org.eclipse.ui.perspectives.showPerspective.perspectiveId=com.verticon.tracker.product.desktop.perspective)"/>
+   </item>
+   <item
+         skip="true"
+         title="Create or Open a Project">
+      <description>
+         Create a new <b>Project</b> or Open an old <b>Project</b> in the Workbench.
+      </description>
+      <command
+            required="false"
+            serialization="org.eclipse.ui.newWizard(newWizardId=org.eclipse.ui.wizards.new.project)"/>
+   </item>
+   <item
+         dialog="true"
+         href="/com.verticon.tracker.editor.doc/html/model/premisesEditorModel_premisesDocuments.html"
+         title="Create New Premises Document">
+      <description>
+         File &gt; New &gt; <b>Premises Document</b>.<br/><br/>Then Select the parent project folder of the <b>Premises Document</b>.
+      </description>
+      <command
+            required="false"
+            serialization="org.eclipse.ui.newWizard(newWizardId=com.verticon.tracker.editor.presentation.TrackerModelWizardID)"/>
+   </item>
+  
+   <item title="Show Properties View">
+      <command
+            required="false"
+            serialization="org.eclipse.ui.views.showView(org.eclipse.ui.views.showView.viewId=org.eclipse.ui.views.PropertySheet)"/> 
+      <description>
+          To edit the entries in a <b>Premises Document</b> open the <b>Properties</b> view. 
+      </description>
+   </item>
+   
+    <item
+          href="/com.verticon.tracker.editor.doc/html/editingPremisesDocuments/editingPremisesDocuments.html"
+          title="Document Premises Details">
+      <description>
+         Tracker Editors show documents as trees of parent and child entries.<br/><br/>Selecting entries in the Editor trees will display their details in the <b>Properties</b> view. <br/><br/>In the instance of the <b>Premises Editor</b> where the new <b>Premises Document</b> is displayed, select the root <b>Premises</b> entry.<br/><br/>
+ In the <b>Properties</b> view you can now enter or change the properties of the <b>Premises</b> entry.
+      </description>
+   </item>
+   
+   <item
+         href="/com.verticon.tracker.editor.doc/html/masterDetailViews/masterDetailViews.html"
+         title="Show Animals View">
+      <command
+            required="false"
+            serialization="org.eclipse.ui.views.showView(org.eclipse.ui.views.showView.viewId=com.verticon.tracker.views.AnimalsView)"/> 
+      <description>
+          Open the <b>Animals</b> view to add <b>Animals</b> to the <b>Premises Document</b>.<br/><br/>
+      </description>
+   </item>
+   
+   <item
+         href="/com.verticon.tracker.editor.doc/html/masterDetailViews/masterDetailViews.html"
+         title="Add Animals">
+            <description>
+          The <b>Animals</b> view is a composite master-detail view of the <b>Animals</b> in a <b>Premises</b>. <br/><br/>
+		  Like the <b>Properties</b> view you can use this view to see and edit details about <b>Animals</b>.  You can also use this view to sort, filter, and navigate through all <b>Animals</b> in the <b>Premises Document</b>.
+      	  Select the green + in the toolbar of the <b>Animals</b> view to add <b>Animals</b> to the <b>Premises</b>.
+      </description>
+   </item>
+   
+   <item
+         href="/com.verticon.tracker.editor.doc/html/masterDetailViews/masterDetailViews_events.html"
+         title="Show Events View">
+      <description>
+      Once you have added one or more <b>Animals</b> you can associate event information with them.  Open the <b>Events</b> view to add <b>Events</b> to <b>Animals</b> in the <b>Premises Document</b>.<br/><br/>
+      </description>
+      <command
+            required="false"
+            serialization="org.eclipse.ui.views.showView(org.eclipse.ui.views.showView.viewId=com.verticon.tracker.views.EventsView)"/>
+   </item>
+   
+   <item
+         href="/com.verticon.tracker.editor.doc/html/masterDetailViews/masterDetailViews_events.html"
+         title="Add Events">
+      <description>
+      Like the <b>Animals</b> view the <b>Events</b> view is a composite master-detail view of the <b>Events</b> associated with the <b>Animals</b> in a <b>Premises</b>.<br/><br/>
+ 	  Use this view to add details, filter, and navigate through all <b>Events</b> in the <b>Premises Document</b>.
+      Select the green + in the toolbar of the <b>Events</b> view to add <b>Events</b> to the <b>Animals</b>.
+      </description>
+   </item>
+   
+   <item
+         title="Save Document">
+      <description>
+        Once your done with adding Premises details, Animals and Events to the Premises Document save the file.<br/><br/>
+		File &gt; Save <br/><br/>         
+        To save the <b>Premises Document</b> to Disk.
+      </description>
+      <command
+            required="false"
+            serialization="org.eclipse.ui.file.save"/>
+   </item>
+  
+</cheatsheet>

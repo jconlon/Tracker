@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="com.verticon.tracker.connector.socket">
+   <implementation class="com.verticon.tracker.connector.socket.ConnectionFactoryImpl"/>
+   <service>
+      <provide interface="org.osgi.service.io.ConnectionFactory"/>
+   </service>
+   <property name="io.scheme" type="String" value="socket"/>
+</scr:component>

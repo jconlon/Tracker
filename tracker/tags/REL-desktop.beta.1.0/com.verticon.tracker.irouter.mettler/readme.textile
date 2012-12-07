@@ -1,0 +1,14 @@
+h1. Mettler iRouter Component
+
+h2. Functionality
+
+The Mettler iRouter component is a user configurable sensor component. It acts as a wireAdmin proxy for Mettler weight balances.
+
+h2. Producer Scopes
+
+It produces the following wireAdmin products that are consumed by business domain  controller components. 
+# <user configurable name>.weight.measurement
+
+h3. Component Diagram
+
+!{padding-left:3em}mettlerComponent.png!

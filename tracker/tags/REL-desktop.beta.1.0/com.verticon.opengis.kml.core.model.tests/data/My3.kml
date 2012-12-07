@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:gs="http://www.google.com/kml/ext/2.2" xmlns:p="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+    http://www.opengis.net/kml/2.2 http://schemas.opengis.net/kml/2.2.0/ogckml22.xsd
+    http://www.w3.org/2005/Atom http://schemas.opengis.net/kml/2.2.0/atom-author-link.xsd
+    http://www.google.com/kml/ext/2.2 http://code.google.com/apis/kml/schema/kml22gx.xsd
+    urn:oasis:names:tc:ciq:xsdschema:xAL:2.0 http://docs.oasis-open.org/election/external/xAL.xsd"
+	>
+	<Document>
+		<atom:author>
+			<atom:name>John Conlon</atom:name>
+			<atom:email>jconlon@verticon.com</atom:email>
+		</atom:author>
+		<atom:link href="http://www.verticon.com"/>
+		<address>E6055 Cina Road, Viroqua, WI</address>
+		<Snippet maxLines="4">
+	Dan Diehl's Beef and Grain Farm</Snippet>
+		<Style>
+			<BalloonStyle>
+				<bgColor>ff87d1ec</bgColor>
+				<textColor>ff0055aa</textColor>
+				<text><![CDATA[
+				$[name]
+				$[description]
+				]]>
+				</text></BalloonStyle></Style>
+		<Style id="normal_state">
+			<IconStyle>
+				<Icon>
+					<href>http://maps.google.com/mapfiles/kml/shapes/flag.png</href>
+				</Icon>
+				<hotSpot x="0.5" xunits="fraction" y="0" yunits="fraction" />
+			</IconStyle>
+			<LineStyle>
+				<color>00000000</color>
+			</LineStyle>
+			<PolyStyle>
+				<color>00000000</color>
+			</PolyStyle>
+		</Style>
+		<Style id="selected_state">
+			<IconStyle>
+				<Icon>
+					<href>http://maps.google.com/mapfiles/kml/shapes/flag.png</href>
+				</Icon>
+				<hotSpot x="0.5" xunits="fraction" y="0" yunits="fraction" />
+			</IconStyle>
+			<LineStyle>
+				<color>ff00ffff</color>
+				<width>4</width>
+			</LineStyle>
+			<PolyStyle>
+				<colorMode>random</colorMode>
+			</PolyStyle>
+		</Style>
+		<StyleMap id="highlight_the_state">
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#normal_state</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#selected_state</styleUrl>
+			</Pair>
+		</StyleMap>
+		<Placemark>
+			<name>Diehl's Farm</name>
+			<description>This is a place for the description of the placemark.</description>
+			<styleUrl>#highlight_the_state</styleUrl>
+			<MultiGeometry>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<coordinates>-90.96293191127666,43.48105460142975,0
+								-90.96289591656407,43.46684639974686,0
+								-90.95304397778821,43.46678039274798,0
+								-90.95295947135202,43.47405613654796,0
+								-90.94808183437202,43.47413338110822,0
+								-90.94826145846801,43.481225767439,0
+								-90.94895640352394,43.48122368362838,0
+								-90.96293191127666,43.48105460142975,0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+				<Point>
+					<altitudeMode>absolute</altitudeMode>
+					<coordinates>-90.95674265545253,43.47493314332049,338.8866674272697</coordinates>
+				</Point>
+			</MultiGeometry>
+		</Placemark>
+		<Placemark>
+  <name>Western homeplace</name>
+ <p:AddressDetails>
+    <p:Country>
+      <p:CountryName>Australia</p:CountryName>
+      <p:AdministrativeArea>
+        <p:AdministrativeAreaName>NSW</p:AdministrativeAreaName>
+        <p:Locality>
+          <p:LocalityName>Chatswood</p:LocalityName>
+          <p:Thoroughfare Type="Street">
+            <p:ThoroughfareNumber>67</p:ThoroughfareNumber>
+            <p:ThoroughfareName>Archer Street</p:ThoroughfareName>
+            <p:Premise Type="Building">
+              <p:BuildingName>Egis</p:BuildingName>
+              <p:SubPremise Type="LEVEL">
+                <p:SubPremiseNumber>12</p:SubPremiseNumber>
+              </p:SubPremise>
+            </p:Premise>
+          </p:Thoroughfare>
+          <p:PostalCode>
+            <p:PostalCodeNumber>2067</p:PostalCodeNumber>
+          </p:PostalCode>
+        </p:Locality>
+      </p:AdministrativeArea>
+    </p:Country>
+  </p:AddressDetails>
+
+  </Placemark>
+	</Document>
+</kml>

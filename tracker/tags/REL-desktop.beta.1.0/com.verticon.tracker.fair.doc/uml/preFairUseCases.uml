@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="_lQ6MEXTrEeCrsMYh7O-_Ow" name="model">
+  <packagedElement xmi:type="uml:Package" xmi:id="_WCWsUHTtEeCrsMYh7O-_Ow" name="Fair Editor Prepare for fair"/>
+  <packagedElement xmi:type="uml:Component" xmi:id="_fBubEHTtEeCrsMYh7O-_Ow" name="Fair Editor" useCase="_ljSDkHTtEeCrsMYh7O-_Ow _o1tdoHTtEeCrsMYh7O-_Ow _x-p_IHTtEeCrsMYh7O-_Ow _AtMQIHTuEeCrsMYh7O-_Ow _9Mmo0HTuEeCrsMYh7O-_Ow __8_FwHTuEeCrsMYh7O-_Ow _h5nKAHT0EeCrsMYh7O-_Ow _ng1RMHT0EeCrsMYh7O-_Ow _EuEAYHT1EeCrsMYh7O-_Ow _JSPWMHT1EeCrsMYh7O-_Ow">
+    <ownedComment xmi:id="_PVhLcHTuEeCrsMYh7O-_Ow">
+      <body> In cases where import files are not available, use a RFID reader to allocate tags</body>
+    </ownedComment>
+    <ownedUseCase xmi:id="_ljSDkHTtEeCrsMYh7O-_Ow" name="Allocate Tags to Animals " subject="_fBubEHTtEeCrsMYh7O-_Ow">
+      <include xmi:id="_H3DOwHTuEeCrsMYh7O-_Ow" addition="_x-p_IHTtEeCrsMYh7O-_Ow"/>
+      <include xmi:id="_JDnIgHTuEeCrsMYh7O-_Ow" name="if necessary" addition="_AtMQIHTuEeCrsMYh7O-_Ow"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_o1tdoHTtEeCrsMYh7O-_Ow" name="Setup People" subject="_fBubEHTtEeCrsMYh7O-_Ow">
+      <include xmi:id="_HY9IEHTvEeCrsMYh7O-_Ow" addition="_9Mmo0HTuEeCrsMYh7O-_Ow"/>
+      <include xmi:id="_IXOHIHTvEeCrsMYh7O-_Ow" addition="__8_FwHTuEeCrsMYh7O-_Ow"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_x-p_IHTtEeCrsMYh7O-_Ow" name="Import tags from files " subject="_fBubEHTtEeCrsMYh7O-_Ow"/>
+    <ownedUseCase xmi:id="_AtMQIHTuEeCrsMYh7O-_Ow" name="Read tags with appropriate templates" subject="_fBubEHTtEeCrsMYh7O-_Ow"/>
+    <ownedUseCase xmi:id="_9Mmo0HTuEeCrsMYh7O-_Ow" name="Copy from previous year's document" subject="_fBubEHTtEeCrsMYh7O-_Ow"/>
+    <ownedUseCase xmi:id="__8_FwHTuEeCrsMYh7O-_Ow" name="Import people from files" subject="_fBubEHTtEeCrsMYh7O-_Ow"/>
+    <ownedUseCase xmi:id="_h5nKAHT0EeCrsMYh7O-_Ow" name="Setup lots" subject="_fBubEHTtEeCrsMYh7O-_Ow">
+      <include xmi:id="_UDYkkHT1EeCrsMYh7O-_Ow" addition="_ng1RMHT0EeCrsMYh7O-_Ow"/>
+      <include xmi:id="_UqNUAHT1EeCrsMYh7O-_Ow" addition="_EuEAYHT1EeCrsMYh7O-_Ow"/>
+      <include xmi:id="_V_nnwHT1EeCrsMYh7O-_Ow" addition="_JSPWMHT1EeCrsMYh7O-_Ow"/>
+    </ownedUseCase>
+    <ownedUseCase xmi:id="_ng1RMHT0EeCrsMYh7O-_Ow" name="Create Divisions" subject="_fBubEHTtEeCrsMYh7O-_Ow"/>
+    <ownedUseCase xmi:id="_EuEAYHT1EeCrsMYh7O-_Ow" name="Create Departments" subject="_fBubEHTtEeCrsMYh7O-_Ow"/>
+    <ownedUseCase xmi:id="_JSPWMHT1EeCrsMYh7O-_Ow" name="Create Classes" subject="_fBubEHTtEeCrsMYh7O-_Ow"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Actor" xmi:id="_p-NWwHTtEeCrsMYh7O-_Ow" name="Operator"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_ihppIHTuEeCrsMYh7O-_Ow" name="An operator allocates tags to animal types" memberEnd="_ihppIXTuEeCrsMYh7O-_Ow _ihppJHTuEeCrsMYh7O-_Ow">
+    <ownedEnd xmi:id="_ihppIXTuEeCrsMYh7O-_Ow" name="operator" type="_p-NWwHTtEeCrsMYh7O-_Ow" association="_ihppIHTuEeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ihppInTuEeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ihppI3TuEeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_ihppJHTuEeCrsMYh7O-_Ow" name="allocate tags to animals " type="_ljSDkHTtEeCrsMYh7O-_Ow" association="_ihppIHTuEeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ihppJXTuEeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ihppJnTuEeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_lS6P0HTuEeCrsMYh7O-_Ow" name="An operator setups people" memberEnd="_lS6P0XTuEeCrsMYh7O-_Ow _lS6P1HTuEeCrsMYh7O-_Ow">
+    <ownedEnd xmi:id="_lS6P0XTuEeCrsMYh7O-_Ow" name="operator" type="_p-NWwHTtEeCrsMYh7O-_Ow" association="_lS6P0HTuEeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lS6P0nTuEeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lS6P03TuEeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_lS6P1HTuEeCrsMYh7O-_Ow" name="setup people" type="_o1tdoHTtEeCrsMYh7O-_Ow" association="_lS6P0HTuEeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lS6P1XTuEeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lS6P1nTuEeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_QtQWQHT1EeCrsMYh7O-_Ow" name="An operator setups lots" memberEnd="_QtQWQXT1EeCrsMYh7O-_Ow _QtQWRHT1EeCrsMYh7O-_Ow">
+    <ownedEnd xmi:id="_QtQWQXT1EeCrsMYh7O-_Ow" name="operator" type="_p-NWwHTtEeCrsMYh7O-_Ow" association="_QtQWQHT1EeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_QtQWQnT1EeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_QtQWQ3T1EeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_QtQWRHT1EeCrsMYh7O-_Ow" name="setup lots" type="_h5nKAHT0EeCrsMYh7O-_Ow" association="_QtQWQHT1EeCrsMYh7O-_Ow">
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_QtQWRXT1EeCrsMYh7O-_Ow" value="1"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_QtQWRnT1EeCrsMYh7O-_Ow" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>

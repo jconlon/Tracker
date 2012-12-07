@@ -1,0 +1,15 @@
+h1. Simulated Devices
+
+Navigate a browser to the internal "home page":http://localhost:8081/client/devices of the 
+simulator[4].
+
+h2. Simulation Home Page
+
+!images/homepage.png!
+
+The home page will show links to all the supported simulated devices.
+
+h2. Notes
+
+fn4. To change defaults for the web server or any of the simulated devices edit the simulator.ini file.
+

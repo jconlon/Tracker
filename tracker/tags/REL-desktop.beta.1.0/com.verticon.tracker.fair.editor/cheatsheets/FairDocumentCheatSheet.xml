@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cheatsheet
+      title="Create a Fair Document">
+   <intro>
+      <description>
+         This cheat sheet will show you how to create a <b>Fair Document</b> for documenting information about the People, Exhibits, and Livestock at an Animal Exposition.
+      </description>
+   </intro>
+   <item
+         title="Show Tracker Perspective">
+      <description>
+         Open the <b>Tracker</b> perspective in the Workbench.
+      </description>
+      <command
+            required="false"
+            serialization="org.eclipse.ui.perspectives.showPerspective(org.eclipse.ui.perspectives.showPerspective.perspectiveId=com.verticon.tracker.product.desktop.perspective)"/>
+   </item>
+   <item
+         skip="true"
+         title="Create or Open a Project">
+      <description>
+         Create a new <b>Project</b> or Open an old <b>Project</b> in the Workbench.
+      </description>
+      <command
+            required="false"
+            serialization="org.eclipse.ui.newWizard(newWizardId=org.eclipse.ui.wizards.new.project)"/>
+   </item>
+   <item title="Create New Fair Document" dialog="true">
+      <description>
+         File &gt; New &gt; <b>Fair Document</b>.<br/><br/>Then Select the parent project folder of the <b>Fair Document</b>.
+      </description>
+      <command
+            required="false"
+            serialization="org.eclipse.ui.newWizard(newWizardId=com.verticon.tracker.fair.editor.presentation.FairModelWizardID)"/>
+   </item>
+   
+   <item title="Choose Fair Root Entry" dialog="true">
+      <description>
+         You will be prompted for the root <b>Fair</b> Model Object to create.<br/><br/>Choose <b>Fair</b> element in the drop down list.
+      </description>
+      
+   </item>
+  
+   <item title="Load a Premises Document Resource">
+      <description>
+         The <b>Fair</b> Editor is a composite document editor.  It manages the edits for both a <b>Fair Document</b> resource and an associated <b>Premises Document</b> resource.<br/><br/>
+         In the instance of the <b>Fair Editor</b> where the new <b>Fair Document</b> is displayed, right mouse click on the entry showing the document name to show the popup menu.<br/><br/>
+ 		 Select the <b>Load Resource</b> menu item and browse for a <b>Premises Document</b> to associate with this <b>Fair Document</b>.<br/><br/>
+      	 You should now see a <b>Premises Document</b> showing in the editor below the <b>Fair Document</b>.<br/><br/>
+      	 You can view, edit and manipulate this <b>Premises Document</b> like a normal <b>Premises Document</b>.
+      </description>
+   </item>
+   
+   <item title="Show Properties View">
+      <command
+            required="false"
+            serialization="org.eclipse.ui.views.showView(org.eclipse.ui.views.showView.viewId=org.eclipse.ui.views.PropertySheet)"/> 
+      <description>
+          To edit the entries in a <b>Fair Document</b> open the <b>Properties</b> view. 
+      </description>
+   </item>
+   
+    <item title="Document Fair Details">
+      <description>
+         Tracker Editors show documents as trees of parent and child entries.<br/><br/>
+         Selecting entries in the Editor trees will display their details in the <b>Properties</b> view.<br/><br/>
+         In the instance of the <b>Fair Editor</b> where the new <b>Fair Document</b> is displayed, unfold the entry showing the document name and select the root <b>Fair</b> entry.<br/><br/>
+ 		 In the <b>Properties</b> view you can now enter or change the properties of the <b>Fair</b> entry.<br/><br/>
+		 Note the <b>Fair Premises</b> attribute.  The drop down will show the loaded <b>Premises Document</b>.  Select it.
+      </description>
+   </item>
+   
+   <item title="Show People View">
+      <command
+            required="false"
+            serialization="org.eclipse.ui.views.showView(org.eclipse.ui.views.showView.viewId=com.verticon.tracker.fair.views.PeopleView)"/> 
+      <description>
+          Open the <b>People</b> view to add <b>People</b> to the <b>Fair Document</b>.<br/><br/>
+      </description>
+   </item>
+   
+   <item title="Add People">
+      <description>
+The <b>People</b> view is a composite master-detail view of the <b>Young People</b> and <b>Adults</b>associtated with the <b>Fair</b>. <br/><br/>
+Like the <b>Properties</b> view you can use this view to see and edit details about <b>People</b>.  You can also use this view to sort, filter, and navigate through all <b>People</b> in the <b>Fair Document</b>.<br/><br/>
+Select the green + in the toolbar of the <b>People</b> view to add <b>People</b> to the <b>Fair</b>.
+      </description>
+   </item>
+   
+   <item title="Show Exhibits View">
+      <description>
+      Once you have added one or more <b>People</b> you can associate them with <b>Exhibits</b>.  Open the <b>Exhibits</b> view to add <b>Exhibits</b> to a hierarchy of <b>Lot-Class-Department-Division</b> entries in the <b>Fair Document</b>.<br/><br/>
+	  </description>
+      <command
+            required="false"
+            serialization="org.eclipse.ui.views.showView(org.eclipse.ui.views.showView.viewId=com.verticon.tracker.fair.views.ExhibitsView)"/>
+   </item>
+   
+   <item title="Add Exhibits">
+      <description>
+     	Like the <b>People</b> view the <b>Exhibits</b> view is a master-detail view of all the <b>Exhibits</b> in the <b>Fair</b>.<br/><br/>
+ 		Use this view to add details, filter, and navigate through all <b>Exhibits</b> in the <b>Premises Document</b>.
+      	Select the green + in the toolbar of the <b>Exhibits</b> view to add <b>Exhibits</b> to the <b>Fair</b>.
+      </description>
+        </item>
+   <item
+         title="Save Document">
+      <description>
+        Once your done editing the save the file.<br/><br/>
+		File &gt; Save <br/><br/>         
+        To save the <b>Fair Document</b> to Disk.
+      </description>
+      <command
+            required="false"
+            serialization="org.eclipse.ui.file.save"/>
+   </item>
+  
+</cheatsheet>

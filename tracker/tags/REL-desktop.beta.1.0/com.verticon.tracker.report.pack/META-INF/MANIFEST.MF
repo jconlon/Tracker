@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tracker Premises Report Pack
+Bundle-SymbolicName: com.verticon.tracker.report.pack
+Bundle-Version: 0.1.1.qualifier
+Bundle-Vendor: Verticon, Inc.

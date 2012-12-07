@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="readerWizards" name="EventPublisherWizards" schema="schema/readerWizards.exsd"/>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Tracker"
+            id="com.verticon.tracker.views">
+      </category>
+      <view
+            name="Readers"
+            icon="icons/Readers.gif"
+            category="com.verticon.tracker.views"
+            class="com.verticon.tracker.reader.views.ReaderViewPart"
+            id="com.verticon.tracker.reader.view">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.ui.resourcePerspective">
+         <view
+               ratio="0.5"
+               relative="org.eclipse.ui.views.TaskList"
+               relationship="right"
+               id="com.verticon.tracker.reader.view">
+         </view>
+         <viewShortcut id="com.verticon.tracker.reader.view"/>
+      </perspectiveExtension>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="com.verticon.tracker.product.desktop.perspective">
+         <view
+               visible="true"
+               relative="org.eclipse.ui.views.PropertySheet"
+               relationship="stack"
+               id="com.verticon.tracker.reader.view">
+         </view>
+         <viewShortcut id="com.verticon.tracker.reader.view"/>
+      </perspectiveExtension>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="com.verticon.tracker.prefs.view"
+            class="com.verticon.tracker.reader.event.file.PreferencePage"
+            id="com.verticon.tracker.reader.preferences.FileReaderPreferencePage"
+            name="FileReader"/>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer class="com.verticon.tracker.reader.event.file.PreferenceInitializer"/>
+   </extension>
+   <extension
+         point="com.verticon.tracker.reader.readerWizards">
+      <wizard
+            class="com.verticon.tracker.reader.event.file.FileReaderWizard"
+            factory="com.verticon.tracker.reader.event.file.FileReaderFactory"
+            id="com.verticon.tracker.reader.fileTailer"
+            name="FileReader">
+         <description>
+            reads TagIDs as they are appended to a file. 
+         </description>
+      </wizard>
+      
+      <wizard
+            class="com.verticon.tracker.reader.event.generator.GeneratingReaderWizard"
+            factory="com.verticon.tracker.reader.event.generator.GeneratingReaderFactory"
+            id="com.verticon.tracker.reader.generatingReader"
+            name="GeneratingReader">
+         <description>
+            randomly generates TagIDs from the set of TagIDs present in a file. 
+         </description>
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.cheatsheets.cheatSheetContent">
+      <category
+            id="com.verticon.tracker.category.cheatSheets"
+            name="Tracker">
+      </category>
+      <cheatsheet
+            category="com.verticon.tracker.category.cheatSheets"
+            composite="false"
+            contentFile="$nl$/cheatsheets/ReaderCheatSheet.xml"
+            id="com.verticon.tracker.reader.cheatsheet1934224592"
+            name="Adding a TagId Reader">
+         <description>
+            This cheat sheet will show you how to add a Tag ID Reader to the Tracker Toolkit.
+         </description>
+      </cheatsheet>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            description="Commands related to TagID Readers"
+            id="com.verticon.tracker.reader.category1"
+            name="Tracker Readers">
+      </category>
+      <command
+            categoryId="com.verticon.tracker.reader.category1"
+            defaultHandler="com.verticon.tracker.reader.handlers.AddTagIDReaderHandler"
+            description="Add a Tag ID Reader to the Readers view"
+            id="com.verticon.tracker.reader.commands.addReader"
+            name="Add Reader">
+      </command>
+   </extension>
+
+</plugin>

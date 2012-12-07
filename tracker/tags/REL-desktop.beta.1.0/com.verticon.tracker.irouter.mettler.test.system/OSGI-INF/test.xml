@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" activate="startup" name="com.verticon.tracker.irouter.mettler.test.system.internal">
+   <implementation class="com.verticon.tracker.irouter.mettler.test.system.internal.MettlerBalanceSystemTest"/>
+   <reference bind="setListener" cardinality="1..1" interface="com.verticon.tracker.irouter.dev.IDeviceListener" name="IListener" policy="static" target="(service.pid=mettler.fake.dev)"/>
+   <reference bind="setConsumer" cardinality="1..1" interface="org.osgi.service.wireadmin.Consumer" name="Consumer" policy="static" target="(service.pid=mettler.mockConsumer)"/>
+</scr:component>

@@ -1,0 +1,14 @@
+h1. Getting Started
+
+h2. Getting Started Overview
+
+iRouter is packaged as a set of software artifacts called features. These features must run in an Eclipse RCP(Rich Client Platform) running on the user desktop. The Tracker Business Intelligence Toolkit is just such a platform.  
+
+To get started:
+# Download the "Tracker BI Toolkit Desktop":http://tracker.verticon.com/downloads/index.html and extract the archive
+# Start the application
+# Provision the Tracker Desktop with the iRouter features
+## Go to the __Help__ menu and choose __Install New Software...__
+# In the __Work With__ choice box, choose the __Tracker Releases__ repositories
+## Select the iRouter features to install
+ 

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.4"?>
+
+<product name="Tracker Animal Information Platform" id="com.verticon.tracker.Tracker" application="org.eclipse.ui.ide.workbench" version="0.0.0.qualifier" useFeatures="true">
+
+   <aboutInfo>
+      <image path="/com.verticon.tracker.product.desktop/icons/cattle_lg.gif"/>
+      <text>
+         Tracker Animal Information Platform
+Version: {0}
+Build id: {1}
+
+(c) Copyright Verticon, Inc. 2008.  All rights reserved. 
+
+Visit http:/www.verticon.com
+
+Tracker is powered by Eclipse technology and includes Eclipse plugins that can be installed and used with other Eclipsr (3.4.1) based offerings.
+      </text>
+   </aboutInfo>
+
+   <configIni use="default">
+      <linux>/com.verticon.tracker.editor/config.ini</linux>
+      <macosx>/com.verticon.tracker.editor/config.ini</macosx>
+      <solaris>/com.verticon.tracker.editor/config.ini</solaris>
+      <win32>/com.verticon.tracker.editor/config.ini</win32>
+   </configIni>
+
+   <launcherArgs>
+   </launcherArgs>
+
+   <windowImages i16="/com.verticon.tracker.product.desktop/icons/tracker_desktop_16.png" i32="/com.verticon.tracker.product.desktop/icons/verticon_32.gif"/>
+
+   <splash
+      location="com.verticon.tracker.product.desktop"
+      startupProgressRect="62,400,515,15"
+      startupMessageRect="7,225,441,20"
+      startupForegroundColor="ADD8E6" />
+   <launcher name="tracker">
+      <linux icon="/com.verticon.tracker.product.desktop/icons/icon.xpm"/>
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+   <intro introId="org.eclipse.ui.intro.universal"/>
+
+   <vm>
+   </vm>
+
+   <plugins>
+      <plugin id="com.verticon.tracker"/>
+      <plugin id="com.verticon.tracker.edit"/>
+      <plugin id="com.verticon.tracker.editor"/>
+      <plugin id="com.verticon.tracker.editor.ocl.enablement"/>
+      <plugin id="com.verticon.tracker.help"/>
+      <plugin id="com.verticon.tracker.logging"/>
+      <plugin id="com.verticon.tracker.logging.logback"/>
+      <plugin id="com.verticon.tracker.logging.logback.config" fragment="true"/>
+      <plugin id="com.verticon.tracker.ocl.interpreter"/>
+      <plugin id="com.verticon.tracker.ocl.query"/>
+      <plugin id="com.verticon.tracker.ocl.query.viewer"/>
+      <plugin id="com.verticon.tracker.reader"/>
+      <plugin id="com.verticon.tracker.reader.bluetooth"/>
+      <plugin id="com.verticon.tracker.reader.comm"/>
+      <plugin id="com.verticon.tracker.transaction.editor"/>
+      <plugin id="com.verticon.tracker.validation.adapter"/>
+      <plugin id="com.verticon.tracker.validation.core"/>
+      <plugin id="com.verticon.tracker.views"/>
+      <plugin id="gnu.io.rxtx"/>
+      <plugin id="gnu.io.rxtx.linux.x86" fragment="true"/>
+      <plugin id="javax.servlet"/>
+      <plugin id="net.sf.bluecove"/>
+      <plugin id="net.sourceforge.lpg.lpgjavaruntime"/>
+      <plugin id="org.eclipse.emf"/>
+      <plugin id="org.eclipse.emf.ant"/>
+      <plugin id="org.eclipse.emf.codegen"/>
+      <plugin id="org.eclipse.emf.codegen.ecore"/>
+      <plugin id="org.eclipse.emf.codegen.ecore.ui"/>
+      <plugin id="org.eclipse.emf.codegen.ui"/>
+      <plugin id="org.eclipse.emf.common"/>
+      <plugin id="org.eclipse.emf.common.ui"/>
+      <plugin id="org.eclipse.emf.converter"/>
+      <plugin id="org.eclipse.emf.databinding"/>
+      <plugin id="org.eclipse.emf.databinding.edit"/>
+      <plugin id="org.eclipse.emf.ecore"/>
+      <plugin id="org.eclipse.emf.ecore.change"/>
+      <plugin id="org.eclipse.emf.ecore.change.edit"/>
+      <plugin id="org.eclipse.emf.ecore.edit"/>
+      <plugin id="org.eclipse.emf.ecore.editor"/>
+      <plugin id="org.eclipse.emf.ecore.xmi"/>
+      <plugin id="org.eclipse.emf.edit"/>
+      <plugin id="org.eclipse.emf.edit.ui"/>
+      <plugin id="org.eclipse.emf.exporter"/>
+      <plugin id="org.eclipse.emf.importer"/>
+      <plugin id="org.eclipse.emf.importer.ecore"/>
+      <plugin id="org.eclipse.emf.importer.java"/>
+      <plugin id="org.eclipse.emf.importer.rose"/>
+      <plugin id="org.eclipse.emf.mapping"/>
+      <plugin id="org.eclipse.emf.mapping.ecore"/>
+      <plugin id="org.eclipse.emf.mapping.ecore.editor"/>
+      <plugin id="org.eclipse.emf.mapping.ecore2ecore"/>
+      <plugin id="org.eclipse.emf.mapping.ecore2ecore.editor"/>
+      <plugin id="org.eclipse.emf.mapping.ecore2xml"/>
+      <plugin id="org.eclipse.emf.mapping.ecore2xml.ui"/>
+      <plugin id="org.eclipse.emf.mapping.ui"/>
+      <plugin id="org.eclipse.emf.ocl"/>
+      <plugin id="org.eclipse.emf.ocl.doc"/>
+      <plugin id="org.eclipse.emf.ocl.examples"/>
+      <plugin id="org.eclipse.emf.ocl.examples.interpreter"/>
+      <plugin id="org.eclipse.emf.query"/>
+      <plugin id="org.eclipse.emf.query.doc"/>
+      <plugin id="org.eclipse.emf.query.examples"/>
+      <plugin id="org.eclipse.emf.query.ocl"/>
+      <plugin id="org.eclipse.emf.transaction"/>
+      <plugin id="org.eclipse.emf.transaction.ui"/>
+      <plugin id="org.eclipse.emf.validation"/>
+      <plugin id="org.eclipse.emf.validation.doc"/>
+      <plugin id="org.eclipse.emf.validation.examples"/>
+      <plugin id="org.eclipse.emf.validation.ocl"/>
+      <plugin id="org.eclipse.emf.validation.ui"/>
+      <plugin id="org.eclipse.emf.validation.ui.ide"/>
+      <plugin id="org.eclipse.emf.workspace"/>
+      <plugin id="org.eclipse.emf.workspace.doc"/>
+      <plugin id="org.eclipse.emf.workspace.ui"/>
+      <plugin id="org.eclipse.equinox.cm"/>
+      <plugin id="org.eclipse.equinox.event"/>
+      <plugin id="org.eclipse.equinox.io"/>
+      <plugin id="org.eclipse.equinox.util"/>
+      <plugin id="org.eclipse.net4j.jms.api"/>
+      <plugin id="org.eclipse.ocl"/>
+      <plugin id="org.eclipse.ocl.doc"/>
+      <plugin id="org.eclipse.ocl.ecore"/>
+      <plugin id="org.eclipse.ocl.uml"/>
+      <plugin id="org.eclipse.uml2.common"/>
+      <plugin id="org.eclipse.uml2.uml"/>
+   </plugins>
+
+   <features>
+      <feature id="com.verticon.tracker.product.desktop" version="0.3.4.qualifier"/>
+      <feature id="com.verticon.tracker.base.dep" version="0.3.1.qualifier"/>
+      <feature id="com.verticon.tracker.editor" version="0.3.1.qualifier"/>
+      <feature id="com.verticon.tracker.reader" version="0.2.7.qualifier"/>
+      <feature id="org.eclipse.help" version="1.0.1.R34x_v20080827-7r7xEIxEI6Zu5nEqN7M3UBpglaat"/>
+      <feature id="org.eclipse.equinox.p2.user.ui" version="1.0.1.r34x_v20080721-7d-7OEMsLAz-vTBJ-ZHQaF155CE"/>
+      <feature id="org.eclipse.platform" version="3.4.1.r341_v20080731-9I96EiDElYevwz-p1bP5z-NlAaP7vtX6Utotqsu"/>
+      <feature id="org.eclipse.emf.ecore" version="2.4.1.v200808251517"/>
+      <feature id="org.eclipse.emf.common" version="2.4.0.v200808251517"/>
+      <feature id="org.eclipse.emf.edit" version="2.4.1.v200808251517"/>
+      <feature id="org.eclipse.emf.edit.ui" version="2.4.1.v200808251517"/>
+      <feature id="org.eclipse.emf.common.ui" version="2.4.0.v200808251517"/>
+      <feature id="org.eclipse.emf.databinding" version="1.0.0.v200808251517"/>
+      <feature id="org.eclipse.emf.databinding.edit" version="1.0.0.v200808251517"/>
+      <feature id="org.eclipse.emf.transaction" version="1.2.1.v200807161719-2308s733I3E5B4B7J"/>
+      <feature id="org.eclipse.ocl" version="1.2.2.v200808291106-3429oA55S5N9A8UED"/>
+      <feature id="org.eclipse.emf.ocl" version="1.1.101.v200808291106-108Z7w3119193_2217"/>
+      <feature id="org.eclipse.emf.validation" version="1.2.0.v200805130238-35-9oA55S5L8G6FCT"/>
+      <feature id="org.eclipse.emf.validation.ocl" version="1.2.0.v200805130238-11-7w311916241349"/>
+      <feature id="org.eclipse.emf.workspace" version="1.2.2.v200809171833-2318s733I3G5C4C9D"/>
+      <feature id="org.eclipse.emf.query" version="1.2.0.v200805130238-11-7w311916241349"/>
+      <feature id="org.eclipse.emf.query.ocl" version="1.2.0.v200805130238-11-7w311916241349"/>
+      <feature id="org.eclipse.emf.ecore.edit" version="2.4.1.v200808251517"/>
+   </features>
+
+</product>
