@@ -90,7 +90,7 @@
 .site-search #maincontent h2,
 /* no h1 for the following pages */
 .home h1, 
-.doc-phenix h1,
+.doc-phenix h1{
         display: none; 
 	}
 
