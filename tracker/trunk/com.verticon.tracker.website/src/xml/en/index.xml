@@ -5,7 +5,7 @@
  -->
 
 <webpage id="home">
-	<config param="rcsdate" value="$Date$" />
+	<config param="rcsdate" value="$LastChangeDate: 2010-09-27 14:44:13 -0500 (Mon, 27 Sep 2010) $" />
 	<head>
 		<title>Tracker</title>
 		<summary>Business Intelligence for Animal Agriculture Professionals</summary>
