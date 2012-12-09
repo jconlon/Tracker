@@ -40,5 +40,6 @@
   <xsl:param name="pages.search-box" select="1"/>
   <xsl:param name="pages.search.input-label" select="'Search This Site'"/>
   <xsl:param name="pages.search.submit-label" select="'Go'"/>
+  <xsl:param name="access.validator.url" select="'http://wave.webaim.org/report?url=http://tracker.verticon.com'"/>
 
 </xsl:stylesheet>
