@@ -1,0 +1,39 @@
+<webpage id="iRouter">
+  <config param="rcsdate" value="$Date: 2009-08-19 20:26:08 -0500 (Wed, 19 Aug 2009) $"/>
+  <head>
+    <title>iRouter - Information Router Appliance</title>
+    <summary>
+    Integration, Data Acquisition and Control Appliance.
+    </summary>
+    <keywords>Tracker, iRouter, Eclipse, OSGi</keywords>
+  </head>
+  <para>
+    The iRouter (Information Router) is an content event processor and integration solution for acquiring, transforming 
+    and exchanging information between network connected sensors and actuators.  The iRouter - a Just-In-Time 
+    integration solution for multiple input devices, sensors and actuators.</para>
+  
+  <section id="businessIntelligenceFeatures">
+    <title>iRouter Standards</title>
+    <para>
+    The Tracker iRouter is an <acronym>OSGi</acronym> standard based runtime that can be configured to run:
+    <itemizedlist mark='opencircle'>
+			<listitem>
+				<para>as an appliance<footnote><para>A network attached computer without a display.</para>
+				</footnote>;</para>
+			</listitem>
+			<listitem >
+				<para>integrated with the <olink targetdoc="trackerPro">Tracker Professional</olink>;</para>
+			</listitem>
+			<listitem>
+				<para>or provisioned within a full Eclipse application.</para>
+			</listitem>
+	</itemizedlist>
+	</para>
+     <para>The iRouter - a Just-In-Time integration solution for multiple input devices, sensors and actuators.</para>
+    
+     <para>To learn more go to <olink targetdoc="docs">Documentation page</olink> and download the iRouter User Guide.</para>
+	</section>
+
+
+  
+</webpage>

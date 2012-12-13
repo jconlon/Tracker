@@ -8,16 +8,15 @@
 	<config param="rcsdate" value="$Date$" />
 	<head>
 		<title>Tracker</title>
-		<summary>Business Intelligence for Animal Agriculture Professionals</summary>
+		<summary>Business Intelligence, mobile and big data solutions for Livestock Agriculture Professionals</summary>
 		<keywords>Livestock, Open Source, NAIS, XML, Eclipse, RFID,
 			Herd management
 		</keywords>
 	</head>
 	<para>
 			Tracker is an <ulink url="http://www.eclipse.org/">Eclipse</ulink>
-			based <olink targetdoc="about">Business Intelligence Toolkit and suite of 
-			Business Intelligence
-            solutions </olink> for animal agriculture professionals.
+			based <ulink url="http://en.wikipedia.org/wiki/Business_intelligence">Business Intelligence</ulink> 
+			Toolkit and suite of product solutions for animal agriculture professionals.
 			<olink targetdoc="docs">Learn More</olink>
 	</para>
 	<section id="keyfeatures">
@@ -50,12 +49,22 @@
 				</listitem>
 			</varlistentry>
 			<varlistentry>
+				<term>Easily access information</term>
+				<listitem>
+					<para>
+						<olink targetdoc="trackerLite">Tracker Lite</olink>
+						is an easy to use smartphone application that gives users 
+						access to networked premises information and allows them to acquire new animal 
+						information. 
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
 				<term>Manage Physical Sensors and Actuators</term>
 				<listitem>
 					<para>
-						Tracker 
-						<ulink url="http://tracker-project.verticon.com/verticon_Tracker/wiki/InformationRouter">
-						<acronym>iRouter</acronym></ulink>
+						Tracker <olink targetdoc="iRouter">iRouter appliance
+						<acronym>iRouter</acronym></olink>
 						is a generic data integration framework to 
 						acquire, transform and exchange data between network connected sensors and 
 						actuators. 
@@ -101,16 +110,19 @@
 					</para>
 				</listitem>
 			</varlistentry>
+			<varlistentry>
+				<term>Register, Archive and Trace Locations</term>
+				<listitem>
+					<para>
+						 Tracker cloud services offers a highly scalable, reliable way to register premises information,
+						 archive animal life data and event history and do animal traceback and traceforward 
+						 queries.
+					</para>
+				</listitem>
+			</varlistentry>
+			
 		</variablelist>
-		<!--
-			<itemizedlist> <listitem> <para> <ulink
-			url="http://silkpage.markupware.com/docs/user-guide/"> User
-			Guide</ulink> </para> </listitem> <listitem> <para> <ulink
-			url="http://silkpage.markupware.com/downloads/"> Latest Downloads
-			</ulink> </para> </listitem> <listitem> <para> <ulink
-			url="http://silkpage.markupware.com/dev/"> Developers </ulink>
-			</para> </listitem> </itemizedlist>
-		-->
+		
 	</section>
 	
 	<section id="whatsnew">
