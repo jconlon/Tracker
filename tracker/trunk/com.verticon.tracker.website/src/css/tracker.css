@@ -58,7 +58,9 @@
 
 #headitems { color: #fff; }
 
+/* Main menus on each of the pages*/
 #menu ul li a, #menu ul li.current {
+	width: 155px;
 	background: #dce5d4;
 	border-top: 1px solid #ccc;
 	border-left: 1px solid #ccc;
@@ -77,7 +79,7 @@
 	background: #26630A;
 	}
 
-
+	
 /* hidden references */
 #secnav li.sitemap,
 #secnav li.site-license,

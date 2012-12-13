@@ -648,4 +648,24 @@
   -->
   <glossseealso otherterm="bi"/>
 </glossentry>
+
+<glossentry xml:id="osgi">
+  <glossterm>Open System Gateway Initiative</glossterm>
+  <acronym>OSGi</acronym>
+  <glossdef>
+  <para>Open System Gateway Initiative is a module system and service platform for the Java programming language 
+  that implements a complete and dynamic component model,</para>
+  <para>The OSGi Alliance (formerly known as the Open Services Gateway initiative, now an obsolete name) is an open 
+  standards organization founded in March 1999 that originally specified and continues to maintain the OSGi standard.
+ </para></glossdef>
+</glossentry>
+
+<glossentry xml:id="osgi">
+  <glossterm>Radio Frequency Identification</glossterm>
+  <acronym>RFID</acronym>
+  <glossdef>
+  <para>Wireless system that uses radio-frequency to read data from a tag attached to an object.
+ </para></glossdef>
+</glossentry>
+
 </glossary>

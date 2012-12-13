@@ -15,10 +15,7 @@
 <config param="banner" value="img/logo.png" altval="Tracker"/>
 
 <copyright >
-  <year>2007</year>
-  <year>2008</year>
-  <year>2009</year>
-  <year>2010</year>
+  <year>2007-2012</year>
   <holder role="http://www.verticon.com/">Verticon, Inc.</holder>
 </copyright>
 
@@ -30,6 +27,13 @@
    		<tocentry page="about/contact.xml" filename="contact.html"/>
    		<tocentry page="about/aboutWebsite.xml" filename="aboutWebsite.html"/>
    		<tocentry page="about/license.xml" filename="license.html"/>
+  </tocentry>
+  
+  <tocentry page="products/products.xml" dir="products" filename="index.html">
+   		<tocentry page="products/trackerPro.xml" filename="trackerPro.html"/>
+   		<tocentry page="products/trackerLite.xml" filename="trackerLite.html"/>
+   		<tocentry page="products/trackerCloud.xml" filename="trackerCloud.html"/>
+   		<tocentry page="products/iRouter.xml" filename="iRouter.html"/>
   </tocentry>
   
   <tocentry page="downloads/downloads.xml" dir="downloads" filename="index.html"/>
