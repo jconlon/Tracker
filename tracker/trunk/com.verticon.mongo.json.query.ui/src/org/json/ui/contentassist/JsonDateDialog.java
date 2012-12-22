@@ -1,9 +1,6 @@
 package org.json.ui.contentassist;
 
-import java.util.Date;
-
 import org.eclipse.swt.widgets.Shell;
-import org.json.validation.MongoQueryJavaValidator;
 
 import com.verticon.ui.dialogs.DateDialog;
 
@@ -23,6 +20,7 @@ public class JsonDateDialog extends DateDialog {
 	/**
 	 * Need to wrap the formated date with the Json structure
 	 */
+	@Override
 	protected String saveInput() {
 		StringBuffer sb = new StringBuffer("new Date(");
 		if (getSelection() != null) {
