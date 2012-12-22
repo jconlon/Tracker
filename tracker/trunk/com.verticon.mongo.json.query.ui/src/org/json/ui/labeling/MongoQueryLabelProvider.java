@@ -5,8 +5,6 @@ package org.json.ui.labeling;
 
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
-import org.json.mongoQuery.FieldSelection;
-import org.json.mongoQuery.JsonDate;
 
 import com.google.inject.Inject;
 
