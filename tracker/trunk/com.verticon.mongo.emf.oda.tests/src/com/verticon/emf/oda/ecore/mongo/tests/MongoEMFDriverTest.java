@@ -7,6 +7,8 @@ import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.fail;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.Map;
 import java.util.Properties;
 
@@ -34,13 +36,23 @@ public class MongoEMFDriverTest {
 	private static final String MONGO_COL_NAME = "Animal";
 //	private static final String MONGO_SIMPLE_EMF_QUERY = "id=='985152001389613'";
 	private static final String MONGO_JSON_QUERY = "{'id' : '985152001389613'}";
-	private static final String MONGO_HOSTNAME = "localhost";
 	private static final String MONGO_DATABASE = "tracker";
+	private static final String UNITTEST_PROPERTIES = "private/unittest.properties";
 	private MongoEMFDriver driver = null;
+	private static String hostname;
+	private static String username;
+	private static String password;
+	private static String port;
 	
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		Properties localProps = new Properties();
+		localProps.load(new FileInputStream(new File(UNITTEST_PROPERTIES)));
+		hostname = (String) localProps.get("hostname");
+		username = (String) localProps.get("username");
+		password = (String) localProps.get("password");
+		port = localProps.getProperty("port");
 	}
 
 	@Before
@@ -64,7 +76,10 @@ public class MongoEMFDriverTest {
 		//Open the Connection
 		Properties connProperties = new Properties();
 		connProperties.put(MongoEMFConnection.DB_PROPERTY_NAME, MONGO_DATABASE);
-		connProperties.put(MongoEMFConnection.HOST_PROPERTY_NAME, MONGO_HOSTNAME);
+		connProperties.put(MongoEMFConnection.HOST_PROPERTY_NAME, hostname);
+		connProperties.put(MongoEMFConnection.PORT_PROPERTY_NAME, port);
+		connProperties.put(MongoEMFConnection.DB_USER_NAME, username);
+		connProperties.put(MongoEMFConnection.DB_PASSWORD_NAME, password);
 //		TimeUnit.SECONDS.sleep(5);
 		connection.open(connProperties);
 		assertThat("Connection must be open.", connection.isOpen(), is(true));

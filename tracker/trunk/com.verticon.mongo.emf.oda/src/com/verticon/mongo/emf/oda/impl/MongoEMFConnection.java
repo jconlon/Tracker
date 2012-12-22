@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.oda.ecore.impl.Connection;
 
 import com.mongodb.DB;
+import com.mongodb.MongoURI;
+import com.verticon.mongo.emf.api.MongoURIBuilder;
 import com.verticon.mongo.emf.api.MongoUtils;
 import com.verticon.mongo.emf.api.SingleMongoLocator;
 
@@ -27,6 +29,8 @@ public class MongoEMFConnection extends Connection implements IConnection {
 	public static final String HOST_PROPERTY_NAME = "host"; //$NON-NLS-1$
 	public static final String PORT_PROPERTY_NAME = "port"; //$NON-NLS-1$
 	public static final String DB_PROPERTY_NAME = "database"; //$NON-NLS-1$
+	public static final String DB_PASSWORD_NAME = "password"; //$NON-NLS-1$
+	public static final String DB_USER_NAME = "username"; //$NON-NLS-1$
 	private SingleMongoLocator mongoLocator;
 
 	/**
@@ -111,10 +115,11 @@ public class MongoEMFConnection extends Connection implements IConnection {
 		String port = connProperties.getProperty(PORT_PROPERTY_NAME);
 		String db = connProperties.getProperty(DB_PROPERTY_NAME);
 		checkNotNull(db);
-
+		String user = connProperties.getProperty(DB_USER_NAME);
+		String password = connProperties.getProperty(DB_PASSWORD_NAME);
 		DB mongo;
 		try {
-			mongo = MongoUtils.getMongoDB(hostname, port, db);
+			mongo = MongoUtils.getMongoDB(hostname, port, db, user, password);
 
 		} catch (Exception e) {
 			throw new OdaException(e);
@@ -129,7 +134,11 @@ public class MongoEMFConnection extends Connection implements IConnection {
 		String port = connProperties.getProperty(PORT_PROPERTY_NAME);
 		String database = connProperties.getProperty(DB_PROPERTY_NAME);
 		checkNotNull(database);
-		return MongoUtils.getEMFBaseURI(hostname, port, database);
+		String username = connProperties.getProperty(DB_USER_NAME);
+		String password = connProperties.getProperty(DB_PASSWORD_NAME);
+		MongoURI mongoURI = new MongoURIBuilder().host(hostname).port(port)
+				.db(database).user(username).pw(password).build();
+		return MongoUtils.getEMFBaseURI(mongoURI);
 	}
 
 }
