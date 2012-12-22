@@ -11,6 +11,9 @@
 
 package com.verticon.mongo.emf.api;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
+
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
@@ -26,6 +29,7 @@ import com.mongodb.DB;
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
 import com.mongodb.MongoOptions;
+import com.mongodb.MongoURI;
 import com.mongodb.ServerAddress;
 
 /**
@@ -172,7 +176,10 @@ public class SingleMongoLocator implements IMongoProvider, IDatabaseLocator, IDa
 			throw new UnknownHostException(
 					"The MongoDB URI was not found in the configuration properties");
 
+		
 		rawUri = (String) uriProperty;
+		
+
 		String[] uris = (rawUri).split(",");
 
 		if (uris.length == 1) {
@@ -187,9 +194,18 @@ public class SingleMongoLocator implements IMongoProvider, IDatabaseLocator, IDa
 
 			mongo = new Mongo(serverAddresses, options);
 		}
+		// User and password can be passed in the uri or as a property via the
+		// constructor
 
 		user = (String) config.get(PROP_USER);
 		password = (String) config.get(PROP_PASSWORD);
+
+		if (isNullOrEmpty(user)) {
+			MongoURI mongoURI = new MongoURI(rawUri);
+			user = mongoURI.getUsername();
+			password = mongoURI.getPassword() != null ? new String(
+					mongoURI.getPassword()) : null;
+		}
 	}
 
 	private ServerAddress createServerAddress(String uriProperty)
@@ -202,36 +218,34 @@ public class SingleMongoLocator implements IMongoProvider, IDatabaseLocator, IDa
 		return serverAddress;
 	}
 
+
 	@Override
 	public DB getDatabase(String uri) {
 		String[] parts = uri.split("/");
 
-		if (parts.length < 4)
+		if (parts.length < 4) {
 			return null;
-
-		DB db = getMongo().getDB(parts[3]);
-		String user = getUser();
-
-		if (user != null)
-			db.authenticate(user, getPassword().toCharArray());
-
-		return db;
+		}
+		return authenicate(getMongo().getDB(parts[3]));
 	}
 
-//	@Override
-//	public Mongo getMongo(String arg0) {
-//		return getMongo();
-//	}
-
-	public DB getTrackerDatabase() {
-		DB db = getMongo().getDB("tracker");
-		String user = getUser();
-
-		if (user != null)
-			db.authenticate(user, getPassword().toCharArray());
-
-		return db;
+	public DB getTrackerDatabase() throws IOException {
+		return authenicate(getMongo().getDB("tracker"));
 	}
+
+	private DB authenicate(DB db) {
+		String user = getUser();
+		boolean authenicated = true;
+		if (user != null && !db.isAuthenticated()) {
+			authenicated = db.authenticate(user, getPassword().toCharArray());
+		}
+		if (authenicated) {
+			return db;
+		}
+		return null;
+	}
+
+
 
 	private static Integer getConfigurationInteger(Object o) {
 		Integer result = null;
