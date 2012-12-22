@@ -31,6 +31,8 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import com.mongodb.MongoURI;
+import com.verticon.mongo.emf.api.MongoURIBuilder;
 import com.verticon.mongo.emf.api.MongoUtils;
 import com.verticon.mongo.emf.oda.impl.MongoEMFConnection;
 import com.verticon.mongo.emf.oda.ui.MongoEMFUIPlugin;
@@ -111,6 +113,8 @@ public class DataSourcePageHelper {
 		createHostNameControl(composite);
 		createPortControl(composite);
 		createDatabaseControl(composite);
+		createUserNameControl(composite);
+		createPasswordControl(composite);
 		setPageComplete(false);
 	}
 
@@ -121,6 +125,7 @@ public class DataSourcePageHelper {
 
 		hostNameField = new Text(composite, SWT.BORDER);
 		hostNameField.addModifyListener(new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent me) {
 				validateData();
 			}
@@ -137,6 +142,7 @@ public class DataSourcePageHelper {
 
 		portField = new Text(composite, SWT.BORDER);
 		portField.addModifyListener(new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent me) {
 				validateData();
 			}
@@ -153,6 +159,7 @@ public class DataSourcePageHelper {
 
 		databaseField = new Text(composite, SWT.BORDER);
 		databaseField.addModifyListener(new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent me) {
 				validateData();
 			}
@@ -160,6 +167,40 @@ public class DataSourcePageHelper {
 
 		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER)
 				.grab(true, false).applyTo(databaseField);
+	}
+
+	private void createUserNameControl(Composite composite) {
+		Label resourceLabel = new Label(composite, SWT.NONE);
+		resourceLabel.setText(MongoEMFUIPlugin.INSTANCE
+				.getString("_UI_UserName_label")); //$NON-NLS-1$
+
+		userNameField = new Text(composite, SWT.BORDER);
+		userNameField.addModifyListener(new ModifyListener() {
+			@Override
+			public void modifyText(ModifyEvent me) {
+				validateData();
+			}
+		});
+
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER)
+				.grab(true, false).applyTo(userNameField);
+	}
+
+	private void createPasswordControl(Composite composite) {
+		Label resourceLabel = new Label(composite, SWT.NONE);
+		resourceLabel.setText(MongoEMFUIPlugin.INSTANCE
+				.getString("_UI_Password_label")); //$NON-NLS-1$
+
+		passWordField = new Text(composite, SWT.BORDER);
+		passWordField.addModifyListener(new ModifyListener() {
+			@Override
+			public void modifyText(ModifyEvent me) {
+				validateData();
+			}
+		});
+
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.CENTER)
+				.grab(true, false).applyTo(passWordField);
 	}
 
 	/**
@@ -178,7 +219,7 @@ public class DataSourcePageHelper {
 			hostNameField.setText(hostname);
 		}
 
-		// /
+		//
 		String port = properties
 				.getProperty(MongoEMFConnection.PORT_PROPERTY_NAME);
 
@@ -186,7 +227,7 @@ public class DataSourcePageHelper {
 			// initialize context type
 			portField.setText(port);
 		}
-		// /
+		//
 		String database = properties
 				.getProperty(MongoEMFConnection.DB_PROPERTY_NAME);
 
@@ -194,6 +235,24 @@ public class DataSourcePageHelper {
 			// initialize context type
 			databaseField.setText(database);
 		}
+
+		//
+		String userName = properties
+				.getProperty(MongoEMFConnection.DB_USER_NAME);
+
+		if (!StringUtil.isEmpty(userName)) {
+			// initialize context type
+			userNameField.setText(userName);
+		}
+		//
+		String passWord = properties
+				.getProperty(MongoEMFConnection.DB_PASSWORD_NAME);
+
+		if (!StringUtil.isEmpty(passWord)) {
+			// initialize context type
+			passWordField.setText(passWord);
+		}
+
 
 		validateData();
 	}
@@ -226,6 +285,19 @@ public class DataSourcePageHelper {
 					database);
 		}
 
+		String userName = getUserName();
+
+		if (!StringUtil.isEmpty(userName)) {
+			properties.setProperty(MongoEMFConnection.DB_USER_NAME, userName);
+		}
+
+		String passWord = getPassword();
+
+		if (!StringUtil.isEmpty(passWord)) {
+			properties.setProperty(MongoEMFConnection.DB_PASSWORD_NAME,
+					passWord);
+		}
+
 		return properties;
 	}
 
@@ -247,7 +319,10 @@ public class DataSourcePageHelper {
 					try {
 						Integer.parseInt(port);
 						try {
-							MongoUtils.getEMFBaseURI(hostname, port, database);
+							MongoURI mongoURI = new MongoURIBuilder()
+									.host(hostname).port(port).db(database)
+									.build();
+							MongoUtils.getEMFBaseURI(mongoURI);
 							setMessage(DEFAULT_MESSAGE, IMessageProvider.NONE);
 							isValid = true;
 						} catch (Exception e) {

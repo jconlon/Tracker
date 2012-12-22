@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.mongo.emf.oda"
       label="Mongo EMF ODA Driver"
-      version="0.1.0.qualifier"
+      version="1.0.0.qualifier"
       provider-name="Verticon, Inc."
       plugin="com.verticon.mongo.emf.oda">
 

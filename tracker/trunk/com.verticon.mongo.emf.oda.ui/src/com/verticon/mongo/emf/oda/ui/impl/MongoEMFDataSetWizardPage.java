@@ -65,6 +65,7 @@ import org.eclipse.emf.oda.ecore.util.StringUtil;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.Document;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextListener;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.TextEvent;
@@ -249,6 +250,7 @@ public class MongoEMFDataSetWizardPage extends DataSetWizardPage {
 
 		collectionCombo = new Combo(parent, SWT.BORDER | SWT.READ_ONLY);
 		collectionCombo.addModifyListener(new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent me) {
 				initializeMongoDBQueryFieldPicker(getProposalProvider());
 				validateData();
@@ -272,7 +274,13 @@ public class MongoEMFDataSetWizardPage extends DataSetWizardPage {
 					.getProperty(MongoEMFConnection.PORT_PROPERTY_NAME);
 			String database = properties
 					.getProperty(MongoEMFConnection.DB_PROPERTY_NAME);
-			DB db = MongoUtils.getMongoDB(hostname, port, database);
+			String user = properties
+					.getProperty(MongoEMFConnection.DB_USER_NAME);
+			String password = properties
+					.getProperty(MongoEMFConnection.DB_PASSWORD_NAME);
+
+			DB db = MongoUtils.getMongoDB(hostname, port, database, user,
+					password);
 			collectionMap = MongoUtils.getEMFCollections(db);
 			for (String name : collectionMap.keySet()) {
 				collectionCombo.add(name);
@@ -337,6 +345,7 @@ public class MongoEMFDataSetWizardPage extends DataSetWizardPage {
 
 		queryDelegateCombo = new Combo(parent, SWT.BORDER | SWT.READ_ONLY);
 		queryDelegateCombo.addModifyListener(new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent me) {
 				String queryDelegate = getQueryDelegate();
 				QueryDelegateTextViewer.Factory factory = (QueryDelegateTextViewer.Factory) QueryDelegateTextViewer.Factory.Registry.INSTANCE
@@ -353,10 +362,13 @@ public class MongoEMFDataSetWizardPage extends DataSetWizardPage {
 									SWT.BORDER | SWT.V_SCROLL | SWT.H_SCROLL);
 
 					queryTextViewer.addTextListener(new ITextListener() {
+						@Override
 						public void textChanged(TextEvent te) {
 							validateData();
 						}
 					});
+
+					queryTextViewer.setDocument(new Document());
 
 					queryTextViewers.put(queryDelegate, queryTextViewer);
 				}
@@ -558,6 +570,7 @@ public class MongoEMFDataSetWizardPage extends DataSetWizardPage {
 
 		variablesViewer = new TableViewer(variablesTable);
 		variablesViewer.setContentProvider(new IStructuredContentProvider() {
+			@Override
 			public void inputChanged(Viewer viewer, Object oldInput,
 					Object newInput) {
 				ITextViewer queryTextViewer = getQueryTextViewer();
@@ -568,34 +581,42 @@ public class MongoEMFDataSetWizardPage extends DataSetWizardPage {
 				}
 			}
 
+			@Override
 			public void dispose() {
 			}
 
+			@Override
 			@SuppressWarnings("unchecked")
 			public Object[] getElements(Object inputElement) {
 				return ((List<Variable>) inputElement).toArray();
 			}
 		});
 		variablesViewer.setLabelProvider(new ITableLabelProvider() {
+			@Override
 			public void removeListener(ILabelProviderListener listener) {
 			}
 
+			@Override
 			public boolean isLabelProperty(Object element, String property) {
 				return false;
 			}
 
+			@Override
 			public void dispose() {
 			}
 
+			@Override
 			public void addListener(ILabelProviderListener listener) {
 			}
 
+			@Override
 			public String getColumnText(Object element, int columnIndex) {
 				Variable variable = (Variable) element;
 				return columnIndex == 0 ? variable.getName() : StringUtil
 						.getTypeText(variable.getType());
 			}
 
+			@Override
 			public Image getColumnImage(Object element, int columnIndex) {
 				return null;
 			}
@@ -693,6 +714,7 @@ public class MongoEMFDataSetWizardPage extends DataSetWizardPage {
 
 		variablesViewer
 				.addSelectionChangedListener(new ISelectionChangedListener() {
+					@Override
 					public void selectionChanged(SelectionChangedEvent sce) {
 						IStructuredSelection selection = (IStructuredSelection) sce
 								.getSelection();
@@ -1058,7 +1080,9 @@ public class MongoEMFDataSetWizardPage extends DataSetWizardPage {
 	 */
 	protected String getQueryText() {
 		ITextViewer queryTextViewer = getQueryTextViewer();
-		return queryTextViewer == null ? null : queryTextViewer.getDocument()
+		IDocument result = queryTextViewer == null ? null : queryTextViewer
+				.getDocument();
+		return result == null ? null : result
 				.get();
 	}
 
