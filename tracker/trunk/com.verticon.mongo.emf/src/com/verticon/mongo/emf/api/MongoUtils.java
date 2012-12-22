@@ -2,6 +2,7 @@ package com.verticon.mongo.emf.api;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Strings.isNullOrEmpty;
 
 import java.net.UnknownHostException;
 import java.util.Collections;
@@ -40,9 +41,12 @@ import com.mongodb.MongoURI;
  */
 public class MongoUtils {
 
-	private static MongoURI getMongoDBURI(String hostname, String port,
-			String database) {
-		return new MongoURI(getURITail("mongodb", hostname, port, database));
+	public static DB getMongoDB(String hostname, String port, String database,
+			String userName, String password)
+			throws MongoException, UnknownHostException {
+		MongoURI mongoURI = new MongoURIBuilder().host(hostname).port(port)
+				.db(database).user(userName).pw(password).build();
+		return getAuthenticatedDB(mongoURI);
 	}
 
 	public static EList<EObject> query(ResourceSet resourceSet, URI base,
@@ -62,15 +66,35 @@ public class MongoUtils {
 				URI.encodeQuery(query, false));
 	}
 
+	/**
+	 * @deprecated use getEMFBaseURI(MongoURI)
+	 * @param hostname
+	 * @param port
+	 * @param database
+	 * @return URI
+	 */
+	@Deprecated
 	public static URI getEMFBaseURI(String hostname, String port,
 			String database) {
 		return URI.createURI(getURITail("mongodb", hostname, port, database));// +'/';
 	}
 
-	public static DB getMongoDB(String hostname, String port, String database)
-			throws MongoException, UnknownHostException {
-		return getMongoDBURI(hostname, port, database).connectDB();
+	public static URI getEMFBaseURI(MongoURI uri) {
+		return URI.createURI(uri.toString());// +'/';
 	}
+
+	public static DB getAuthenticatedDB(MongoURI mongoURI)
+			throws MongoException, UnknownHostException {
+		DB db = mongoURI.connectDB();
+		if (isNullOrEmpty(mongoURI.getUsername())
+				|| mongoURI.getPassword().length < 1) {
+			// no user or password do nothing
+		} else if (!db.isAuthenticated()) {
+			db.authenticate(mongoURI.getUsername(), mongoURI.getPassword());
+		}
+		return db;
+	}
+
 
 	/**
 	 * 
@@ -220,7 +244,7 @@ public class MongoUtils {
 			EClassifier classifier = iterator.next();
 			if (classifier instanceof EClass) {
 				if (targetClass.isSuperTypeOf((EClass) classifier)) {
-					choices.add((EClass) classifier);
+					choices.add(classifier);
 				}
 
 			}
