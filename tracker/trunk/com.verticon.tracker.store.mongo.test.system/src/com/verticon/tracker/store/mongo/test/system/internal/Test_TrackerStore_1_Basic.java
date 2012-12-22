@@ -11,7 +11,7 @@
 
 package com.verticon.tracker.store.mongo.test.system.internal;
 
-import static com.verticon.tracker.store.mongo.test.system.TestUtils.*;
+import static com.verticon.tracker.store.mongo.test.system.TestUtils.getXMIResource;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -224,6 +224,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	 * 
 	 * @see junit.framework.TestCase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		startUpGate.await();// wait for startUp to finish
@@ -440,17 +441,18 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 				.getInteger(), is(0));
 	}
 	
-	@Test 
-	public void testTrackerStore_URI(){
-		assertThat("ITrackerStore must have a uri.", store.uri(),
-				is("mongodb://localhost"));
-	}
-	
-	@Test 
-	public void testTrackerStoreAdmin_URI(){
-		assertThat("ITrackerStoreAdmin must have a uri.", trackerStoreAdmin.uri(),
-				is("mongodb://localhost"));
-	}
+	// @Test
+	// public void testTrackerStore_URI(){
+	// assertThat("ITrackerStore must have a uri.", store.uri(),
+	// is("mongodb://localhost"));
+	// }
+	//
+	// @Test
+	// public void testTrackerStoreAdmin_URI(){
+	// assertThat("ITrackerStoreAdmin must have a uri.",
+	// trackerStoreAdmin.uri(),
+	// is("mongodb://localhost"));
+	// }
 
 	/**
 	 * What happens when recording a null.
@@ -864,8 +866,8 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		Position position = (Position) e;
 
 		assertThat("Longitude value is wrong",
-				(Double) position.getLongitude(), is(-90.95048182270057));
-		assertThat("Latitude value is wrong", (Double) position.getLatitude(),
+				position.getLongitude(), is(-90.95048182270057));
+		assertThat("Latitude value is wrong", position.getLatitude(),
 				is(43.47622307339506));
 	}
 

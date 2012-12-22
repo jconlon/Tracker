@@ -11,17 +11,26 @@
 
 package com.verticon.tracker.store.mongo.test.system.internal;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
 import static com.verticon.tracker.store.mongo.test.system.Member.ONE;
 import static com.verticon.tracker.store.mongo.test.system.Variables.PREMISES_URI;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Dictionary;
 import java.util.Hashtable;
+import java.util.Properties;
 
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
+import org.osgi.framework.Bundle;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.wireadmin.WireConstants;
 
+import com.mongodb.MongoURI;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.store.mongo.test.system.Member;
 import com.verticon.tracker.store.mongo.test.system.Variables;
@@ -31,8 +40,10 @@ import com.verticon.tracker.store.mongo.test.system.Variables;
  * 
  */
 public class Configuator {
+	private static final String UNITTEST_PROPERTIES = "private/unittest.properties";
+
 	private static final String FACTORY_PID = "com.verticon.tracker.store.mongo";
-	static final String MONGO_LOCALHOST = "mongodb://localhost";
+	//static final String MONGO_LOCALHOST = "mongodb://localhost";
     
 	static final String ANIMAL_SCOPE = "premises.animald";
 	static final String TAG_SCOPE = "premises.tag";
@@ -41,6 +52,7 @@ public class Configuator {
     static final String METTLER_WEIGHT_SCOPE = "mettler.weight";
     
 
+	private static Properties localProps = null;
 
 	public void setConfigurationAdmin(ConfigurationAdmin configAdmin)
 			throws IOException {
@@ -56,10 +68,10 @@ public class Configuator {
 		config.update(props);
 	}
 
+
 	private static Dictionary<String, Object> configure1() {
 		Dictionary<String, Object> props = new Hashtable<String, Object>();
-		//MongoConnection related variables
-		props.put(Variables.MONGO_URI.configID, MONGO_LOCALHOST);
+		configureConnection(props);
 		
 		//Provided 
 		props.put("com.verticon.tracker.mongo.test","testOne");
@@ -73,18 +85,61 @@ public class Configuator {
 				METTLER_WEIGHT_SCOPE,//Measurement -> GenericEvents
 				ANIMAL_SCOPE//Animals -> Animals
 				});
+
+		props.put("w", 1);
 		return props;
+	}
+
+	public static MongoURI getLocalMongoURL() {
+		// ResourceBundle myResources = ResourceBundle
+		// .getBundle(UNITTEST_PROPERTIES);
+		// for (String s : myResources.keySet()) {
+		// System.out.println(s);
+		// }
+
+		if (localProps == null) {
+			Bundle bundle = Platform
+					.getBundle("com.verticon.tracker.store.mongo.test.system");
+			URL fileURL = bundle.getEntry(UNITTEST_PROPERTIES);
+			File file = null;
+			try {
+				file = new File(FileLocator.resolve(fileURL).toURI());
+				localProps = new Properties();
+				localProps.load(new FileReader(file));
+			} catch (Exception e1) {
+				// e1.printStackTrace();
+				throw new IllegalStateException(e1);
+			}
+		}
+
+		return new MongoURI((String) localProps.get("mongourl"));
 	}
 	
 	private static Dictionary<String, Object> configure2() {
 		Dictionary<String, Object> props = new Hashtable<String, Object>();
-		props.put(Variables.MONGO_URI.configID, MONGO_LOCALHOST);
+		configureConnection(props);
+
 		props.put("com.verticon.tracker.mongo.test","testTwo");
 		props.put(Variables.DEFAULT_ANIMAL.configID, TrackerPackage.SWINE);
 		props.put("tracker.wiring.group.name", "test2");
 		props.put(Variables.PREMISES_URI.configID, Member.THREE.uri);
 		props.put(WireConstants.WIREADMIN_CONSUMER_SCOPE, new String[]{TAG_SCOPE});
 		return props;
+	}
+
+	public static void configureConnection(Dictionary<String, Object> props) {
+		MongoURI mongoURI = getLocalMongoURL();
+		if (isNullOrEmpty(mongoURI.getUsername())
+				|| mongoURI.getPassword().length < 1) {
+
+		} else {
+
+			props.put("user", mongoURI.getUsername());
+
+			props.put("password", mongoURI.getPassword() != null ? new String(
+					mongoURI.getPassword()) : null);
+		}
+		props.put(Variables.MONGO_URI.configID, mongoURI.toString());
 	}
 
 //	private static void addMembersCollection() throws UnknownHostException,
