@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Metrics-core
+Bundle-SymbolicName: com.yammer.metrics.core
+Bundle-Version: 2.2.0
+Bundle-Vendor: Yammer
+Export-Package: com.yammer.metrics,
+ com.yammer.metrics.core,
+ com.yammer.metrics.reporting,
+ com.yammer.metrics.stats,
+ com.yammer.metrics.util
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.slf4j;version="1.5.11"
