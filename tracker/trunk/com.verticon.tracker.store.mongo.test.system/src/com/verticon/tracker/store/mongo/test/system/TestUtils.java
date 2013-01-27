@@ -40,12 +40,12 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.Mongo;
 import com.mongodb.MongoException;
 import com.verticon.osgi.metatype.MetatypePackage;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.store.admin.AdminPackage;
+import com.verticon.tracker.store.mongo.test.system.internal.Configuator;
 
 public class TestUtils {
 
@@ -240,8 +240,7 @@ public class TestUtils {
 				new BasicDBObject());
 		db.getCollection(TrackerPackage.Literals.PREMISES.getName()).remove(
 				new BasicDBObject());
-//		db.getCollection(AgriculturePackage.Literals.LOCATION.getName())
-//				.remove(new BasicDBObject());
+		db.getCollection("Updates").remove(new BasicDBObject());
 //		db.getCollection(KmlPackage.eINSTANCE.getContainer().getName()).remove(
 //				new BasicDBObject());
 //		db.getCollection(KmlPackage.eINSTANCE.getPlacemark().getName()).remove(
@@ -249,10 +248,9 @@ public class TestUtils {
 		removeLastModificationTimesOnAllResources(db);
 	}
 	
-	public static void clearLocalTrackerDB() throws UnknownHostException, MongoException{
-		Mongo m = new Mongo();
-		DB db = m.getDB("tracker");
-		TestUtils.clearDB(db);
+	public static void clearTrackerDB() throws UnknownHostException, MongoException{
+		DB db = Configuator.getTrackerDB();
+		clearDB(db);
 	}
 
 //	static String getCoordinates(Point point) {

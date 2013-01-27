@@ -17,7 +17,7 @@ import junit.textui.TestRunner;
 
 public class AllTests extends TestSuite {
 	
-	public static final String copyright = "Copyright 2012 Verticon, Inc. All Rights Reserved.";
+	public static final String copyright = "Copyright 2013 Verticon, Inc. All Rights Reserved.";
 
 	/**
 	 * <!-- begin-user-doc -->

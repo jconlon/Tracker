@@ -77,7 +77,7 @@ import com.verticon.tracker.store.mongo.test.system.Variables;
  * specification to inject the ITrackerStore. Use of both of these frameworks
  * require synchronization of the initialization of the injected services and
  * the test setup. To accomplish this a CountDownLatch is used.
- * 
+ * Pizza Amore
  * 
  * @author jconlon
  * 
@@ -128,7 +128,6 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 	 */
 	static ITrackerStore store;
 	static Monitorable monitorable;
-	// static IController controller;
 
 	/**
 	 * Set of tag ids that will be assigned to Premises animals persisted to
@@ -185,15 +184,6 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 		Test_TrackerStore_2_Updates.monitorable = monitorable;
 	}
 
-	/**
-	 * Injected by ds
-	 * 
-	 * @param controller
-	 */
-	public void setController(IController controller) {
-		logger.debug(bundleMarker, "DS injecting the controller");
-		// Test_TrackerStore_2_Base.controller = controller;
-	}
 
 	/**
 	 * 
@@ -203,6 +193,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 	 * 
 	 * @see junit.framework.TestCase#setUp()
 	 */
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		// logger.debug(
@@ -233,6 +224,10 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 
 	}
 
+	protected void deactivate() {
+		logger.debug(bundleMarker, "DEActivating");
+	}
+
 	// Tests
 	public void testContext() throws InterruptedException {
 		assertThat("BundleContext was not setup", context, is(notNullValue()));
@@ -242,8 +237,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 
 	public void testMongoDB_InitialStateOfCollections()
 			throws UnknownHostException, MongoException {
-		Mongo m = new Mongo();
-		DB db = m.getDB("tracker");
+		DB db = Configuator.getTrackerDB();
 		assertThat(db, is(notNullValue()));
 
 		// Animals
@@ -385,6 +379,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 
 		// Now add the animals from the premises
 		store.recordAnimals(premises);
+
 		assertThat("Must not have changed the uri of the premises", premises
 				.eResource().getURI(), is(premisesURI));
 		assertThat("Premises must still have 72 animalsl", premises
@@ -429,6 +424,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 
 		// Now add the animals from the premises
 		store.recordAnimals(premises);
+
 		assertThat("Must not have changed the uri of the premises", premises
 				.eResource().getURI(), is(premisesURI));
 		assertThat("Premises must still have 109 animalsl", premises
@@ -475,6 +471,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 
 		// Now add the animals from the premises
 		store.recordAnimals(premises);
+		
 		assertThat("Must not have changed the uri of the premises", premises
 				.eResource().getURI(), is(premisesURI));
 		assertThat("Premises must still have 203 animalsl", premises
@@ -523,6 +520,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 
 		// Now add the animals from the premises
 		store.recordAnimals(premises);
+		
 		assertThat("Must not have changed the uri of the premises", premises
 				.eResource().getURI(), is(premisesURI));
 		assertThat("Premises must still have 326 animalsl", premises
@@ -564,6 +562,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 
 		// Now add the animals from the premises
 		store.recordAnimals(premises);
+		
 		assertThat("Must not have changed the uri of the premises", premises
 				.eResource().getURI(), is(premisesURI));
 		assertThat("Premises must still have 326 animalsl", premises
@@ -605,6 +604,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 
 		// Now add the animals from the premises
 		store.recordAnimals(premises);
+		
 		assertThat("Must not have changed the uri of the premises", premises
 				.eResource().getURI(), is(premisesURI));
 		assertThat("Premises must still have 326 animalsl", premises
@@ -645,6 +645,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 
 		// Now add the animals from the premises
 		store.recordAnimals(premises);
+		
 		assertThat("Must not have changed the uri of the premises", premises
 				.eResource().getURI(), is(premisesURI));
 		assertThat("Premises must still have 326 animalsl", premises
@@ -1036,8 +1037,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 	}
 	
 	private void countEvents(int count) throws UnknownHostException {
-		Mongo m = new Mongo();
-		DB db = m.getDB("tracker");
+		DB db = Configuator.getTrackerDB();
 		assertThat(db, is(notNullValue()));
 		int events = TestUtils.eventCount(db, Member.THREE.uri);
 		assertThat(events, is(count));

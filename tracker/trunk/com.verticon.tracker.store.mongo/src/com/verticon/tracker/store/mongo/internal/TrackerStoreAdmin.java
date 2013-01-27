@@ -257,14 +257,21 @@ public class TrackerStoreAdmin implements ITrackerStoreAdmin, Predicate<Event>,
 
 	private void loadAdminFromMongo() {
 	    persistedAdmin2.set(null);
-		org.eclipse.emf.ecore.resource.Resource resource = resourceFactory
-				.getResource(Element.ADMIN, "1");
-		logger.debug(bundleMarker, "Loading Admin from {}",resource.getURI());
-		if (!resource.getContents().isEmpty()) {
-			persistedAdmin2.set((Admin) resource.getContents().get(0));
-			assert(isAdminLoaded());
+		org.eclipse.emf.ecore.resource.Resource resource = null;
+		try {
+			resource = resourceFactory.getResource(Element.ADMIN, "1");
+			logger.debug(bundleMarker, "Loading Admin from {}",
+					resource.getURI());
+			if (!resource.getContents().isEmpty()) {
+				persistedAdmin2.set((Admin) resource.getContents().get(0));
+				assert (isAdminLoaded());
+			}
+		} catch (Exception e) {
+			logger.debug(bundleMarker, "Failed to load Admin from {}",
+					resourceFactory.getMongoBaseURI());
 		}
 		
+
 	}
 
 }

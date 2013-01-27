@@ -12,8 +12,6 @@ package com.verticon.tracker.store.mongo.test.system.internal;
 
 import static com.verticon.tracker.store.mongo.test.system.internal.Test_TrackerStore_1_Basic.bundleMarker;
 
-import java.util.Arrays;
-
 import org.osgi.service.wireadmin.Producer;
 import org.osgi.service.wireadmin.Wire;
 import org.slf4j.Logger;
@@ -53,7 +51,8 @@ public class MockProducer implements Producer, IController {
 	public void consumersConnected(Wire[] wires) {
 		this.wires = wires;
 		logger.info(bundleMarker, "{} Consumers connected",
-				wires!=null?Arrays.toString(wires):0);
+		// wires!=null?Arrays.toString(wires):0);
+				wires != null ? wires.length : 0);
 	}
 
 	/**

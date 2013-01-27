@@ -50,8 +50,10 @@ import org.slf4j.MarkerFactory;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
+import com.mongodb.MongoURI;
 import com.verticon.location.Location;
 import com.verticon.osgi.metatype.MetatypePackage;
 import com.verticon.osgi.metatype.OCD;
@@ -143,6 +145,25 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	private final Logger logger = LoggerFactory
 			.getLogger(Test_TrackerStore_1_Basic.class);
 
+//	// Registration elapsed time in milliseconds and invocations per second.
+//	private final Timer registrationTimer = MongoTrackerStoreMonitor
+//			.getMetricsregistry()
+//			.newTimer(
+//Test_TrackerStore_1_Basic.class,
+//					"Premises-Registration-Time");
+//	// Animal store elapsed time in milliseconds and invocations per second.
+//	private final Timer storeTimer = MongoTrackerStoreMonitor
+//			.getMetricsregistry().newTimer(
+//			Test_TrackerStore_1_Basic.class, "Animal-Store-Time");
+//	// Animal query elapsed time in milliseconds and invocations per second.
+//	private final Timer animalQueryTimer = MongoTrackerStoreMonitor
+//			.getMetricsregistry()
+//			.newTimer(Test_TrackerStore_1_Basic.class, "Animal-Query-Time");
+//
+//	private final Counter processedAnimalCounter = MongoTrackerStoreMonitor
+//			.getMetricsregistry().newCounter(Test_TrackerStore_1_Basic.class,
+//					"Processed-animals");
+
 	private static BundleContext context;
 	/**
 	 * This class is a JUnit class and a DS component. There needs to be a
@@ -158,12 +179,17 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	private static final CountDownLatch startUpGate = new CountDownLatch(1);
 
 	/**
-	 * Injected services
+	 * Injected services implement by
+	 * com.verticon.tracker.store.mongo.internal.Component
 	 */
 	static ITrackerStore store;
 	static Monitorable monitorable;
-	static IController controller;
 	static ITrackerStoreAdmin trackerStoreAdmin;
+
+	/**
+	 * Injected service implemented by the test framework
+	 */
+	static IController controller;
 
 	/**
 	 * Set of tag ids that will be assigned to Premises animals persisted to
@@ -251,16 +277,21 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	 * @param context
 	 */
 	public void startup(BundleContext context) {
+		logger.debug(bundleMarker, "Activating");
 		Test_TrackerStore_1_Basic.context = context;
 		startUpGate.countDown();
+	}
 
+	protected void deactivate() {
+		logger.debug(bundleMarker, "DEActivating");
 	}
 
 	//Tests
-	
+	/**
+	 * This is mostly redundant all of these should be there to get this far.
+	 */
 	@Test
-	public void testContext() throws InterruptedException,
-			UnknownHostException, MongoException {
+	public void testContext() {
 		assertThat("BundleContext was not setup", context, is(notNullValue()));
 		assertThat("TrackerStore was not setup", store, is(notNullValue()));
 		assertThat("Monitorable was not setup", monitorable, is(notNullValue()));
@@ -269,8 +300,36 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 				is(true));
 		assertThat("Loader must be setup", trackerStoreAdmin, is(notNullValue()));
 
-		
-		TestUtils.clearLocalTrackerDB();
+	}
+
+	@Test
+	public void testMongo() throws UnknownHostException {
+		MongoURI uri = Configuator.getMongoURI();
+		List<String> hosts = uri.getHosts();
+		assertThat("One host", hosts.size(), is(1));
+
+		DB db = Configuator.getTrackerDB();
+		assertThat("Wrong db", db.getName(), is("tracker"));
+		DBCollection collection = db.getCollection("test");
+		collection.drop();
+		DBObject dbObject = new BasicDBObject();
+		dbObject.put("key1", "value1");
+		collection.insert(dbObject);
+		assertThat("Wrong number of collectons", collection.count(), is(1l));
+
+	}
+
+	/**
+	 * Clear the MongoDB
+	 * 
+	 * @throws UnknownHostException
+	 * @throws MongoException
+	 * @throws InterruptedException
+	 */
+	@Test
+	public void testClearMongoDB() throws UnknownHostException, MongoException,
+			InterruptedException {
+		TestUtils.clearTrackerDB();
 		monitorable
 				.resetStatusVariable(Variables.MONGO_ADMIN_LOADED.statusVarID);
 
@@ -278,9 +337,9 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 
 	}
 	
-	
-
 	/**
+	 * Check all the collections are there and there indexes
+	 * 
 	 * @throws MongoException
 	 * @throws UnknownHostException
 	 * 
@@ -288,8 +347,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	@Test
 	public void testMongoDB_InitialStateOfCollections()
 			throws UnknownHostException, MongoException {
-		Mongo m = new Mongo();
-		DB db = m.getDB("tracker");
+		DB db = Configuator.getTrackerDB();
 		assertThat(db, is(notNullValue()));
 
 		// Animals
@@ -330,6 +388,10 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		assertThat("Has index for PREMISES", TestUtils.hasIndexedIDAttribute(
 				TrackerPackage.Literals.PREMISES.getName(), db, "uri_1"),
 				is(true));
+		assertThat("Must have index on Premises for geolocation",
+				TestUtils.hasIndexedIDAttribute(
+						TrackerPackage.Literals.PREMISES.getName(), db,
+						"location.loc_2d"), is(true));
 		assertThat("No docs", coll.find().count(), is(0));
 
 		// OCDs
@@ -353,6 +415,11 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 
 	}
 
+	/**
+	 * Use the monitorable service to determine admin permissions are all true
+	 * and admin doc is NOT loaded
+	 * 
+	 */
 	public void testPreLoaderState() {
 		StatusVariable isAdmin = monitorable
 				.getStatusVariable(Variables.IS_ADMINISTRATOR.statusVarID);
@@ -368,6 +435,12 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 				is(false));
 	}
 
+	/**
+	 * Use the trackerStoreAdmin service to load an Admin doc
+	 * 
+	 * @throws IOException
+	 * @throws InterruptedException
+	 */
 	public void testLoader() throws IOException, InterruptedException {
 		logger.debug(bundleMarker, "starting testLoader");
 		Resource resource = getXMIResource(DOC_ADMIN, "");
@@ -380,6 +453,11 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 
 	}
 
+	/**
+	 * Use the monitorable service to determine admin permissions are all true
+	 * and admin doc IS loaded
+	 * 
+	 */
 	public void testPostLoaderState() {
 		logger.debug(bundleMarker, "starting testPostLoaderState");
 		StatusVariable isAdmin = monitorable
@@ -395,6 +473,9 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		assertThat("Must have loaded admin", isLoaded.getBoolean(), is(true));
 	}
 
+	/**
+	 * Test that all the status variables are visible in monitorable
+	 */
 	@Test
 	public void testMonitorable_StatusVariables_Presence() {
 		logger.debug(bundleMarker,
@@ -421,18 +502,21 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		}
 	}
 
+	/**
+	 * Test Connected and Animal status variables before adding animals.
+	 */
 	@Test
 	public void testMonitorable_Get_StatusVariables() {
 		assertThat("Variable Status must be Connected", monitorable
 				.getStatusVariable(Variables.STATUS.statusVarID).getString(),
 				startsWith("Connected"));
 		assertThat(
-				"Must have processed animals.",
+				"Must have processed NO animals.",
 				monitorable.getStatusVariable(
 						Variables.TOTAL_ANIMALS_PROCESSED.statusVarID)
 						.getInteger(), is(0));
 		assertThat(
-				"Must have added animals.",
+				"Must have added NO animals.",
 				monitorable.getStatusVariable(
 						Variables.NEW_ANIMALS_ADDED.statusVarID).getInteger(),
 				is(0));
@@ -441,21 +525,8 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 				.getInteger(), is(0));
 	}
 	
-	// @Test
-	// public void testTrackerStore_URI(){
-	// assertThat("ITrackerStore must have a uri.", store.uri(),
-	// is("mongodb://localhost"));
-	// }
-	//
-	// @Test
-	// public void testTrackerStoreAdmin_URI(){
-	// assertThat("ITrackerStoreAdmin must have a uri.",
-	// trackerStoreAdmin.uri(),
-	// is("mongodb://localhost"));
-	// }
-
 	/**
-	 * What happens when recording a null.
+	 * Insure Premises registration fails with a null.
 	 */
 	@Test
 	public void testRegister_NullAgrument() {
@@ -471,6 +542,12 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		}
 	}
 
+	/**
+	 * TODO Validating EObjects with com.verticon.tracker.util.TrackerValidator
+	 * Remove? should this be moved?
+	 * 
+	 * @throws InterruptedException
+	 */
 	@Test
 	public void testValidation_Uri() throws InterruptedException {
 		Premises premises = TrackerFactory.eINSTANCE.createPremises();
@@ -483,6 +560,11 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 				validator.validate(premises, null, null), is(true));
 	}
 
+	/**
+	 * TODO Validating EObjects. Remove? Test local validation method
+	 * 
+	 * @throws ValidationException
+	 */
 	@Test
 	public void testValidation_Service_Uri() throws ValidationException {
 		Premises premises = TrackerFactory.eINSTANCE.createPremises();
@@ -514,7 +596,15 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		assertThat("Animal must validate.", validateObject(animal), is(true));
 	}
 
-	static boolean validateObject(EObject eObject) throws ValidationException {
+	/**
+	 * TODO Validating EObjects. Remove?
+	 * 
+	 * @param eObject
+	 * @return
+	 * @throws ValidationException
+	 */
+	private static boolean validateObject(EObject eObject)
+			throws ValidationException {
 		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject);
 		if (diagnostic.getSeverity() == Diagnostic.ERROR
 				|| diagnostic.getSeverity() == Diagnostic.WARNING) {
@@ -530,6 +620,9 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		return true;
 	}
 
+	/**
+	 * Test registering invalid premises
+	 */
 	@Test
 	public void testRegister_InvalidPremises() {
 		logger.debug(bundleMarker, "starting testRegister_InvalidPremises");
@@ -561,19 +654,19 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	}
 
 	/**
-	 * Registers a Premises with urn:pin:H89234X
+	 * Registers a valid Premises with urn:pin:H89234X
 	 * 
 	 * @throws IOException
 	 */
 	@Test
-	public void testRegister() throws IOException {
+	public void testRegister_ValidPremises() throws IOException {
 		logger.debug(bundleMarker, "starting testRegister");
 		Resource resource = getXMIResource(DOC_PREMISES, "");
 		Premises premises = (Premises) resource.getContents().get(0);
 		assertThat("URI must be urn:pin:H89234X", premises.getUri(), is(Member.ONE.uri));
 		assertThat("Premises must have 7 animalsl", premises.getAnimals()
 				.size(), is(7));
-		assertThat("Premises not enough events",
+		assertThat("Premises must have 30 events",
 				premises.eventHistory().size(), is(30));
 
 		Location location = premises.getLocation();
@@ -598,7 +691,9 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		URI premisesURI = premises.eResource().getURI();
 		URI firstAnimalURI = premises.getAnimals().get(0).eResource().getURI();
 
+
 		store.register(premises);
+
 		assertThat("Must not have changed the uri of the location", location
 				.eResource().getURI(), is(locationURI));
 		assertThat("Must not have changed the uri of the premises", premises
@@ -634,6 +729,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 
 		// Now add the animals from the premises
 		int totalAnimalsProcessed = store.recordAnimals(premises);
+
 		assertThat("Must have processed 7 animals.", totalAnimalsProcessed,
 				is(7));
 		assertThat("Must not have changed the uri of the premises", premises
@@ -762,6 +858,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	public void testRetrieveAnimal_Id() throws IOException,
 			InterruptedException {
 		Animal animal = store.retrieveAnimal(FIRST_ANIMAL_ID);
+
 		assertThat("Animal should not be null", animal, is(notNullValue()));
 		assertThat("There should be one tag and one events", animal.getTags()
 				.size(), is(1));
@@ -785,6 +882,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	@Test
 	public void testRetrieveAnimal_Normalization() {
 		Animal animal = store.retrieveAnimal(FIRST_ANIMAL_ID);
+
 		assertThat("Animal must have id: " + FIRST_ANIMAL_ID, animal.getId(),
 				is(FIRST_ANIMAL_ID));
 		assertThat("Animal must be a Beef", animal,
@@ -832,6 +930,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	public void testRetrieveAnimal_GenericEvent() throws IOException,
 			InterruptedException {
 		Animal animal = store.retrieveAnimal(FIRST_ANIMAL_ID);
+
 		Event e = animal.eventHistory().get(GENERIC_EVENT);
 		assertThat(e, is(instanceOf(GenericEvent.class)));
 		GenericEvent ge = (GenericEvent) e;
@@ -861,6 +960,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	public void testRetrieveAnimal_PositionEvent() throws IOException,
 			InterruptedException {
 		Animal animal = store.retrieveAnimal(FIRST_ANIMAL_ID);
+
 		Event e = animal.eventHistory().get(POSTION_EVENT);
 		assertThat(e, is(instanceOf(Position.class)));
 		Position position = (Position) e;

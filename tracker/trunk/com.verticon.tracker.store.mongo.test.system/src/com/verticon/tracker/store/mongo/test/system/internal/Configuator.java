@@ -14,11 +14,13 @@ package com.verticon.tracker.store.mongo.test.system.internal;
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static com.verticon.tracker.store.mongo.test.system.Member.ONE;
 import static com.verticon.tracker.store.mongo.test.system.Variables.PREMISES_URI;
+import static com.verticon.tracker.store.mongo.test.system.internal.Test_TrackerStore_1_Basic.bundleMarker;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.Properties;
@@ -29,7 +31,11 @@ import org.osgi.framework.Bundle;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.wireadmin.WireConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.mongodb.DB;
+import com.mongodb.Mongo;
 import com.mongodb.MongoURI;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.store.mongo.test.system.Member;
@@ -40,10 +46,15 @@ import com.verticon.tracker.store.mongo.test.system.Variables;
  * 
  */
 public class Configuator {
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory.getLogger(Configuator.class);
+
 	private static final String UNITTEST_PROPERTIES = "private/unittest.properties";
 
 	private static final String FACTORY_PID = "com.verticon.tracker.store.mongo";
-	//static final String MONGO_LOCALHOST = "mongodb://localhost";
+	private static final String MONITORED_FACTORY_PID = "com.verticon.tracker.store.mongo.monitored";
     
 	static final String ANIMAL_SCOPE = "premises.animald";
 	static final String TAG_SCOPE = "premises.tag";
@@ -54,22 +65,118 @@ public class Configuator {
 
 	private static Properties localProps = null;
 
-	public void setConfigurationAdmin(ConfigurationAdmin configAdmin)
-			throws IOException {
-//		addMembersCollection();
-		// Configure the first instance
-		Configuration config = configAdmin.createFactoryConfiguration(FACTORY_PID);
-		Dictionary<String, Object> props = configure1();
-		config.update(props);
-		
-		//The second
-		config = configAdmin.createFactoryConfiguration(FACTORY_PID);
-		props = configure2();
-		config.update(props);
+
+	public static DB getTrackerDB() throws UnknownHostException {
+		MongoURI mongoURI = getMongoURI();
+		Mongo mongo = mongoURI.connect();
+		DB result = mongo.getDB("tracker");
+		String userName = mongoURI.getUsername();
+		if (userName != null && !result.isAuthenticated()) {
+			result.authenticate(userName, mongoURI.getPassword());
+		}
+		return result;
 	}
 
+	public void setConfigurationAdmin(ConfigurationAdmin configAdmin)
+			throws IOException {
+		logger.debug(bundleMarker, "Setting ConfigurationAdmin");
+		deleteConfigurations(configAdmin);
+//		addMembersCollection();
+		// Configure the monitor
+		// Configuration config = configAdmin
+		// .createFactoryConfiguration(MONITOR_FACTORY_PID.getKey());
+		// Dictionary<String, Object> props = configureMonitor();
+		// config.update(props);
+		// logger.debug(bundleMarker, "Created Configuration Monitor {}",
+		// config.getPid());
+		
+		// Configure the first test class
+		Configuration config;
+		if (isMonitored()) {
+			config = configAdmin
+					.createFactoryConfiguration(MONITORED_FACTORY_PID);
+		} else {
+			config = configAdmin.createFactoryConfiguration(FACTORY_PID);
+		}
 
-	private static Dictionary<String, Object> configure1() {
+		Dictionary<String, Object> props = configureTest1();
+		config.update(props);
+		logger.debug(bundleMarker, "Created Configuration for Test 1 {}",
+				config.getPid());
+
+		// Configure the second test class
+		if (isMonitored()) {
+			config = configAdmin
+					.createFactoryConfiguration(MONITORED_FACTORY_PID);
+		} else {
+			config = configAdmin.createFactoryConfiguration(FACTORY_PID);
+		}
+		props = configureTest2();
+		config.update(props);
+		logger.debug(bundleMarker, "Created Configuration for Test 2 {}",
+				config.getPid());
+	}
+
+	public void unsetConfigurationAdmin(ConfigurationAdmin configAdmin)
+			throws IOException {
+		logger.debug(bundleMarker, "UnSetting ConfigurationAdmin");
+		deleteConfigurations(configAdmin);
+
+	}
+
+	public static MongoURI getMongoURI() {
+		if (localProps == null) {
+			loadLocalProps();
+		}
+
+		return new MongoURI((String) localProps.get("mongourl"));
+	}
+
+	private static boolean isMonitored() {
+		boolean monitored = false;
+		if (localProps == null) {
+			loadLocalProps();
+		}
+
+		if (localProps.get("monitored") != null) {
+			monitored = localProps.get("monitored").equals("true");
+		}
+
+		return monitored;
+	}
+
+	private static void loadLocalProps() {
+		Bundle bundle = Platform
+				.getBundle("com.verticon.tracker.store.mongo.test.system");
+		URL fileURL = bundle.getEntry(UNITTEST_PROPERTIES);
+		File file = null;
+		try {
+			file = new File(FileLocator.resolve(fileURL).toURI());
+			localProps = new Properties();
+			localProps.load(new FileReader(file));
+		} catch (Exception e1) {
+			// e1.printStackTrace();
+			throw new IllegalStateException(e1);
+		}
+	}
+
+	private void deleteConfigurations(ConfigurationAdmin configAdmin) {
+		try {
+			Configuration[] configs = configAdmin.listConfigurations(null);
+			if (configs != null) {
+			for (Configuration configuration : configs) {
+				logger.debug(bundleMarker, "Deleting Configuration {}",
+						configuration.getPid());
+				configuration.delete();
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	private static Dictionary<String, Object> configureTest1() {
 		Dictionary<String, Object> props = new Hashtable<String, Object>();
 		configureConnection(props);
 		
@@ -85,37 +192,12 @@ public class Configuator {
 				METTLER_WEIGHT_SCOPE,//Measurement -> GenericEvents
 				ANIMAL_SCOPE//Animals -> Animals
 				});
-
-		props.put("w", 1);
+		props.put("enableConsole", Boolean.TRUE);
+		props.put("output.directory.name", "/tmp/trackerStore1");
 		return props;
 	}
-
-	public static MongoURI getLocalMongoURL() {
-		// ResourceBundle myResources = ResourceBundle
-		// .getBundle(UNITTEST_PROPERTIES);
-		// for (String s : myResources.keySet()) {
-		// System.out.println(s);
-		// }
-
-		if (localProps == null) {
-			Bundle bundle = Platform
-					.getBundle("com.verticon.tracker.store.mongo.test.system");
-			URL fileURL = bundle.getEntry(UNITTEST_PROPERTIES);
-			File file = null;
-			try {
-				file = new File(FileLocator.resolve(fileURL).toURI());
-				localProps = new Properties();
-				localProps.load(new FileReader(file));
-			} catch (Exception e1) {
-				// e1.printStackTrace();
-				throw new IllegalStateException(e1);
-			}
-		}
-
-		return new MongoURI((String) localProps.get("mongourl"));
-	}
 	
-	private static Dictionary<String, Object> configure2() {
+	private static Dictionary<String, Object> configureTest2() {
 		Dictionary<String, Object> props = new Hashtable<String, Object>();
 		configureConnection(props);
 
@@ -124,11 +206,15 @@ public class Configuator {
 		props.put("tracker.wiring.group.name", "test2");
 		props.put(Variables.PREMISES_URI.configID, Member.THREE.uri);
 		props.put(WireConstants.WIREADMIN_CONSUMER_SCOPE, new String[]{TAG_SCOPE});
+		props.put("enableConsole", Boolean.TRUE);
+		props.put("output.directory.name", "/tmp/trackerStore2");
 		return props;
 	}
 
-	public static void configureConnection(Dictionary<String, Object> props) {
-		MongoURI mongoURI = getLocalMongoURL();
+
+
+	private static void configureConnection(Dictionary<String, Object> props) {
+		MongoURI mongoURI = getMongoURI();
 		if (isNullOrEmpty(mongoURI.getUsername())
 				|| mongoURI.getPassword().length < 1) {
 
@@ -142,19 +228,5 @@ public class Configuator {
 		props.put(Variables.MONGO_URI.configID, mongoURI.toString());
 	}
 
-//	private static void addMembersCollection() throws UnknownHostException,
-//			MongoException {
-//		Mongo mongo = new Mongo();
-//		DB db = mongo.getDB("tracker");
-//		if (!db.collectionExists("Members")) {
-//			// db.getCollection(TrackerPackage.Literals.ANIMAL.getName()).drop();
-//			DBCollection collection = db.getCollection("Members");
-//			for (Member m : Member.values()) {
-//				DBObject member = new BasicDBObject("id", m.uri);
-////				member.put("pw", m.password);
-//				collection.insert(member);
-//			}
-//
-//		}
-//	}
+
 }
