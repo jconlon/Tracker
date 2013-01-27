@@ -67,7 +67,7 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 	private IResourceSetFactory resourceSetFactory;
 
 	// Created from configuration
-	private final SingleMongoLocator mongoLocator;
+	protected final SingleMongoLocator mongoLocator;
 
 	public Component() {
 		super();
