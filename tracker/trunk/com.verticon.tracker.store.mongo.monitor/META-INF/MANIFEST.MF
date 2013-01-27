@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Mongo TrackerStore Monitor
+Bundle-SymbolicName: com.verticon.tracker.store.mongo.monitor
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Vericon, Inc.
+Fragment-Host: com.verticon.tracker.store.mongo;bundle-version="0.1.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: com.yammer.metrics.core;bundle-version="2.2.0",com.mongodb;bundle-version="2.7.2"
