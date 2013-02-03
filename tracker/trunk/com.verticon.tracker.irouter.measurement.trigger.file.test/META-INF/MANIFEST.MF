@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: iRouter Measurement Trigger File Test
+Bundle-SymbolicName: com.verticon.tracker.irouter.measurement.trigger.file.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Require-Bundle: com.verticon.tracker.irouter.measurement.trigger.file;bundle-version="1.0.0",
+ org.junit,
+ com.google.guava;bundle-version="10.0.1"
+Import-Package: org.osgi.util.measurement;version="1.0.1"
