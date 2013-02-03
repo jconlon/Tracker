@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
+    activate="startup" name="com.verticon.tracker.irouter.ohaus.test.system">
+   <implementation 
+    class="com.verticon.tracker.irouter.ohaus.test.system.internal.Test_Ohaus_Proxy"/>
+  <reference bind="setMonitorable" cardinality="1..1" interface="org.osgi.service.monitor.Monitorable" name="Monitorable" policy="static" target="(com.verticon.tracker.irouter.ohaus.test=testOne)"/>
+  <reference bind="setProducer" cardinality="1..1" interface="org.osgi.service.wireadmin.Producer" name="Producer" policy="static" target="(com.verticon.tracker.irouter.ohaus.test=testOne)" unbind="unsetProducer"/>
+  <reference bind="setConsumer" cardinality="1..1" interface="org.osgi.service.wireadmin.Consumer" 
+      name="Consumer" policy="static" target="(service.pid=ohaus.mockConsumer)"/>
+</scr:component>
