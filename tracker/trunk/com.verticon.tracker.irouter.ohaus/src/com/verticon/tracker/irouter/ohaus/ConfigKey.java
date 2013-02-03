@@ -66,7 +66,7 @@ public enum ConfigKey {
 
 	public static String getWiringGroup(Map<String, Object> config) {
 		return config.get(WIRING_GROUP.getKey()) != null ? (String) config
-				.get(WIRING_GROUP.getKey()) : "none";
+				.get(WIRING_GROUP.getKey()) : "one";
 	}
 
 	public static Double getScaleError(Map<String, Object> config) {
