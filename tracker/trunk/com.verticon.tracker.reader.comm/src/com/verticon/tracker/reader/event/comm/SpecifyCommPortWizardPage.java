@@ -2,7 +2,7 @@
  * 
  */
 package com.verticon.tracker.reader.event.comm;
-import static com.verticon.tracker.connector.comm.CommReaderPlugin.bundleMarker;
+import static com.verticon.tracker.reader.event.comm.CommReaderPlugin.bundleMarker;
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.PortInUseException;
@@ -26,7 +26,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.verticon.tracker.connector.comm.CommReaderPlugin;
 
 /**
  * 

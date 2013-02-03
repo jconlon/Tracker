@@ -1,16 +1,13 @@
-package com.verticon.tracker.connector.comm;
+package com.verticon.tracker.reader.event.comm;
 
-import java.util.Hashtable;
+import static com.verticon.tracker.reader.event.comm.PreferenceConstants.P_SERIAL_PORTS;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
-import org.osgi.service.io.ConnectionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
-
-import static com.verticon.tracker.reader.event.comm.PreferenceConstants.P_SERIAL_PORTS;;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -19,17 +16,13 @@ public class CommReaderPlugin extends AbstractUIPlugin {
 	
 	public static final String GNU_IO_RXTX_SERIAL_PORTS = "gnu.io.rxtx.SerialPorts";
 
-	//Schema provided for connections
-	private static final String SCHEMA = "comm";
-
 	// The plug-in ID
 	public static final String PLUGIN_ID = "com.verticon.tracker.connector.comm";
 
 	// The shared instance
 	private static CommReaderPlugin plugin;
 	
-	// The ConnectionFactory Service implementation
-	private ConnectionFactoryImpl connectionFactory;
+
 
 	/**
 	 * slf4j Logger
@@ -57,11 +50,7 @@ public class CommReaderPlugin extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 		configureValidSerialPorts();
-		Hashtable properties = new Hashtable();
-		properties.put(ConnectionFactory.IO_SCHEME, new String[] { SCHEMA });
-		connectionFactory = new ConnectionFactoryImpl();
-		context.registerService(ConnectionFactory.class.getName(), connectionFactory,
-				properties);
+
 		logger.debug(bundleMarker, "Started Bundle");
 	}
 
@@ -72,7 +61,7 @@ public class CommReaderPlugin extends AbstractUIPlugin {
 	 */
 	@Override
 	public void stop(BundleContext context) throws Exception {
-		connectionFactory = null;
+
 		plugin = null;
 		
 		super.stop(context);
