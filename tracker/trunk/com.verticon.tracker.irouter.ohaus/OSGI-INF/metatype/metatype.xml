@@ -13,7 +13,7 @@
     <AD name="Wiring group name"  id="tracker.wiring.group.name" 
     	required="true" 
     	type="String" 
-    	default="none"
+    	default="one"
         description="Name of the group of iRouter components that will be wired together. (If no iRouter functionality is required this value is ignored.)"/>
   
     <AD name="Connection retry interval seconds" id="connection.retry.seconds"

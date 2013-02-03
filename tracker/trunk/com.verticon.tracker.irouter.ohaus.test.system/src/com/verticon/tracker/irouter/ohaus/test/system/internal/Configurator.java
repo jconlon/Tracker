@@ -127,6 +127,7 @@ public class Configurator {
 			URI uri = new URI("comm",// schema
 					getSsp(portName),// ssp
 					null);
+			System.out.println(uri);
 			return uri.toString();
 		} catch (URISyntaxException e) {
 			throw new IllegalStateException(e);
