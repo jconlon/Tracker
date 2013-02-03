@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="Ohaus Proxy" id="com.verticon.tracker.irouter.ohaus"
+       description="Provides proxy connection and data transfer of measurements from Ohaus Corporation Series 3000 Weigh indicators">
+    
+    <AD name="Connection uri" id="connection.uri" 
+    	type="String"
+    	required="true" 
+    	default="socket://localhost:2345" 
+    	description="URI to connect to the balance. Example socket://192.168.0.116:2345"/> 
+    	
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" 
+    	required="true" 
+    	type="String" 
+    	default="none"
+        description="Name of the group of iRouter components that will be wired together. (If no iRouter functionality is required this value is ignored.)"/>
+  
+    <AD name="Connection retry interval seconds" id="connection.retry.seconds"
+    	required="true" 
+    	type="Long" 
+    	default="5"
+    	description="Seconds to wait before retrying to establish a connection to the balance."/>
+   
+    <AD name="Command Delay interval seconds" id="command.delay.millis"
+    	required="true" 
+    	type="Long" 
+    	default="0"
+    	description="MilliSeconds to wait between command sends."/>
+    	
+    <AD name="Producer Scope" id="wireadmin.producer.scope" 
+    	type="String"
+		required="true"
+		cardinality="1" 
+		default="ohaus.weight" 
+		description="Name of the product created by this wire producer and sent to wire consumers."/>
+		
+	
+    
+    <AD name="Minimum Weight Threshold" id="minimum.weight.threshold" 
+    	required="true" 
+    	type="Double" 
+    	default=".03" 
+    	description="Value of the minimum weight before a mesurement product is produced. The unit of measurement is the one configured in the indicator."/>
+  
+    <AD name="Component container label"  id="tracker.monitor.label" 
+    	type="String"
+    	required="false" 
+        description="Name to label node in the iRouter Monitor View graphics."
+        default="Ohaus Proxy"/> 
+   
+    <AD name="Description"  id="description"                                  
+    	type="String"                           
+    	description="The description for Ohaus proxy instance created with these options. This is used in various places like logging."/>
+    
+   
+  
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.ohaus" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.ohaus"/>
+  </Designate>
+  
+  
+</metatype:MetaData>
