@@ -5,7 +5,6 @@ import org.eclipse.jface.preference.FieldEditorPreferencePage;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPreferencePage;
 
-import com.verticon.tracker.connector.comm.CommReaderPlugin;
 
 import static com.verticon.tracker.reader.event.comm.PreferenceConstants.P_SERIAL_PORTS;
 

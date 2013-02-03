@@ -4,7 +4,6 @@ import org.eclipse.core.runtime.preferences.AbstractPreferenceInitializer;
 import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 
-import com.verticon.tracker.connector.comm.CommReaderPlugin;
 
 import static com.verticon.tracker.reader.event.comm.PreferenceConstants.P_SERIAL_PORTS;
 
