@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.reader"
       label="%featureName"
-      version="0.4.3.qualifier"
+      version="1.0.0.qualifier"
       provider-name="%providerName"
       plugin="com.verticon.tracker.reader">
 
@@ -22,13 +22,10 @@
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates"/>
    </url>
 
-   <includes
-         id="gnu.io.rxtx"
-         version="0.0.0"/>
-
    <requires>
-      <import plugin="gnu.io.rxtx"/>
       <import plugin="org.eclipse.ui.cheatsheets"/>
+      <import feature="org.eclipse.equinox.core.feature" version="1.1.0.v20120522-1841-7K7XFMTF7RZHQZI4_c8S-nnFB"/>
+      <import feature="com.verticon.tracker.connector" version="1.0.0.qualifier"/>
    </requires>
 
    <plugin
@@ -47,13 +44,6 @@
 
    <plugin
          id="com.verticon.tracker.reader.comm"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.equinox.io"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -85,21 +75,6 @@
          download-size="0"
          install-size="0"
          version="0.0.0"/>
-
-   <plugin
-         id="org.bluecove"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.bluecove.gpl"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"
-         unpack="false"/>
 
    <plugin
          id="com.verticon.tracker.connector.bluetooth"
