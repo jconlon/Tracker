@@ -156,7 +156,7 @@ public class ConfigKeyTest {
 	public final void testGetWiringGroup() {
 
 		assertThat("Wrong wiring group default",
-				ConfigKey.getWiringGroup(config), is("none"));
+				ConfigKey.getWiringGroup(config), is("one"));
 
 		ConfigKey.WIRING_GROUP.configure(config, "cheese");
 
@@ -242,17 +242,22 @@ public class ConfigKeyTest {
 				System.currentTimeMillis());
 		String values = ConfigKey.getFormatedMeasurement(config, measurement);
 		assertThat("Values was not created", values, is(notNullValue()));
-		assertThat("Values default incorrect",
-				values.matches("\\d.*,POUNDS,220.462,2.20462E-4"), is(true));
+
+		// Sun Feb 03 18:03:23 CST 2013,POUNDS,220.462,0.0002
+
+		assertThat("Values default incorrect was " + values,
+				values.matches(".*,POUNDS,220.462,0.0002"), is(true));
 
 		ConfigKey.MEASUREMENT_VALUE_FORMAT.configure(config,
-				"Values are: %tc, %s,%5.2f");
+				"Values are: %1$tc,%3$5.2f,lbs,%4$5.4f");
 
 		values = ConfigKey.getFormatedMeasurement(config, measurement);
 		assertThat("Values was not created", values, is(notNullValue()));
+		assertThat("Values default incorrect was " + values,
+				values.matches("Values are:.*,220.46,lbs,0.0002"), is(true));
 		// Uncomment the following to see output easier. Note this will cause an
 		// error!
-		// assertThat("Values default incorrect", values, is("whatever"));
+		assertThat("Values default incorrect", values, is("whatever"));
 
 	}
 
