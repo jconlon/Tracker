@@ -35,8 +35,6 @@
 		default="ohaus.weight" 
 		description="Name of the product created by this wire producer and sent to wire consumers."/>
 		
-	
-    
     <AD name="Minimum Weight Threshold" id="minimum.weight.threshold" 
     	required="true" 
     	type="Double" 
