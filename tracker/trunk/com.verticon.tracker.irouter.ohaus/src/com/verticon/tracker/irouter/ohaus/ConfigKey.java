@@ -51,13 +51,13 @@ public enum ConfigKey {
 	// }
 
 	public static Long getCommandDelayMilliSeconds(Map<String, Object> config) {
-		return config.get(COMMAND_DELAY_MILLIS.getKey()) != null ? (Long) config
-				.get(COMMAND_DELAY_MILLIS.getKey()) : 0l;
+		return config.get(COMMAND_DELAY_MILLIS.getKey()) != null ? getConfigurationLong(config
+				.get(COMMAND_DELAY_MILLIS.getKey())) : 0l;
 	}
 
 	public static Double getMinimumWeight(Map<String, Object> config) {
-		return config.get(MINIMUM_WEIGHT_THRESHOLD.getKey()) != null ? (Double) config
-				.get(MINIMUM_WEIGHT_THRESHOLD.getKey()) : .03;
+		return config.get(MINIMUM_WEIGHT_THRESHOLD.getKey()) != null ? getConfigurationDouble(config
+				.get(MINIMUM_WEIGHT_THRESHOLD.getKey())) : .03;
 	}
 
 	public static String getServicePid(Map<String, Object> config) {
@@ -70,16 +70,46 @@ public enum ConfigKey {
 	}
 
 	public static Double getScaleError(Map<String, Object> config) {
-		return config.get(SCALE_ERROR.getKey()) != null ? (Double) config
-				.get(SCALE_ERROR.getKey()) : .0001;
+		return config.get(SCALE_ERROR.getKey()) != null ? getConfigurationDouble(config
+				.get(SCALE_ERROR.getKey())) : .0001;
 	}
 
 	public static Long getRetryDelay(Map<String, Object> config) {
-		return config.get(CONNECTION_RETRY_SECONDS.getKey()) != null ? (Long) config
-				.get(CONNECTION_RETRY_SECONDS.getKey()) : 10l;
+		return config.get(CONNECTION_RETRY_SECONDS.getKey()) != null ? getConfigurationLong(config
+				.get(CONNECTION_RETRY_SECONDS.getKey())) : 10l;
 	}
 
 	public void configure(Dictionary<String, Object> config, Object value) {
 		config.put(key, value);
+	}
+
+	private static Integer getConfigurationInteger(Object o) {
+		Integer result = null;
+		if (o instanceof Integer) {
+			result = (Integer) o;
+		} else if (o instanceof String) {
+			result = Integer.parseInt((String) o);
+		}
+		return result;
+	}
+
+	private static Long getConfigurationLong(Object o) {
+		Long result = null;
+		if (o instanceof Long) {
+			result = (Long) o;
+		} else if (o instanceof String) {
+			result = Long.parseLong((String) o);
+		}
+		return result;
+	}
+
+	private static Double getConfigurationDouble(Object o) {
+		Double result = null;
+		if (o instanceof Double) {
+			result = (Double) o;
+		} else if (o instanceof String) {
+			result = Double.parseDouble((String) o);
+		}
+		return result;
 	}
 }
