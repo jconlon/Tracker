@@ -113,7 +113,7 @@ public enum ConfigKey {
 
 	public static String getWiringGroup(Map<String, Object> config) {
 		return config.get(WIRING_GROUP.getKey()) != null ? (String) config
-				.get(WIRING_GROUP.getKey()) : "none";
+				.get(WIRING_GROUP.getKey()) : "one";
 	}
 
 	public static WeightUnit getWeightUnit(Map<String, Object> config) {
@@ -127,7 +127,7 @@ public enum ConfigKey {
 
 	public static String getMeasurementValueFormat(Map<String, Object> config) {
 		return config.get(MEASUREMENT_VALUE_FORMAT.getKey()) != null ? (String) config
-				.get(MEASUREMENT_VALUE_FORMAT.getKey()) : "%d,%s,%s,%s";
+				.get(MEASUREMENT_VALUE_FORMAT.getKey()) : "%tc,%s,%s,%5.4f";
 	}
 
 	/**

@@ -35,14 +35,14 @@
 
     <AD name="Measurement Value Format" id="measurement.value.format" 
     	type="String"
-		default="measurement-***.txt"
+		default="%tc,%s,%s,%5.4f"
 		required="true" 
 		description="String format to use for outputing the measurement value in the file.  Variable ordering is: dateTime, unit, value, error." />
 		
      <AD name="Connection uri"  id="connection.uri" 
      	type="String" 
      	required="true" 
-        default="file:///~/measurement/scan" 
+        default="file:///tmp" 
         description="Identifier referencing the output destination for measurement files.  This will also associate this service with an external node in the monitor view."/> 
     
   </OCD>
