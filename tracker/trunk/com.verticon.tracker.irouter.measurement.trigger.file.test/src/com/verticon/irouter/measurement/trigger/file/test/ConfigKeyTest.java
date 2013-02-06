@@ -257,6 +257,11 @@ public class ConfigKeyTest {
 				values.matches("Values are:.*,220.46,lbs,0.0002"), is(true));
 		// Uncomment the following to see output easier. Note this will cause an
 		// error!
+		ConfigKey.MEASUREMENT_VALUE_FORMAT.configure(config,
+				"Values are: %3$5.2f,%2$s,%1$tm%1$td%ty,%4$5.4f");
+		measurement = new Measurement(1.6666666666, .0001, Unit.kg,
+				System.currentTimeMillis());
+		values = ConfigKey.getFormatedMeasurement(config, measurement);
 		assertThat("Values default incorrect", values, is("whatever"));
 
 	}

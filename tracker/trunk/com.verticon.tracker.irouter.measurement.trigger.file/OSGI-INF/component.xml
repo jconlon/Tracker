@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" activate="activate" configuration-policy="require" immediate="true" name="com.verticon.tracker.irouter.measurement.trigger.file">
-   <implementation class="com.verticon.tracker.irouter.measurement.trigger.file.internal.Component"/>
+   <implementation class="com.verticon.tracker.irouter.measurement.trigger.file.internal.TriggerFile"/>
    <service>
       <provide interface="org.osgi.service.wireadmin.Consumer"/>
       <provide interface="org.osgi.service.monitor.Monitorable"/>

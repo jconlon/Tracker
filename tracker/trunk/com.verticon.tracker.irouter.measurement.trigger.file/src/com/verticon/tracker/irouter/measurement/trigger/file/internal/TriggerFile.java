@@ -21,7 +21,7 @@ import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import com.verticon.tracker.irouter.measurement.trigger.file.ConfigKey;
 
-public class Component implements Monitorable, Consumer {
+public class TriggerFile implements Monitorable, Consumer {
 
 	private static String PLUGIN_ID = "com.verticon.tracker.irouter.measurement.trigger.file";
 	/**
@@ -30,13 +30,13 @@ public class Component implements Monitorable, Consumer {
 	static final Marker bundleMarker = MarkerFactory.getMarker(PLUGIN_ID);
 
 	static {
-		Component.bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
+		TriggerFile.bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
 	}
 
 	/**
 	 * slf4j Logger
 	 */
-	private final Logger logger = LoggerFactory.getLogger(Component.class);
+	private final Logger logger = LoggerFactory.getLogger(TriggerFile.class);
 
 	private final StatusMonitor statusMonitor = new StatusMonitor();
 
@@ -135,7 +135,8 @@ public class Component implements Monitorable, Consumer {
 	private void handle(Measurement measurement) {
 		File destination = ConfigKey.getFile(config);
 		String values = ConfigKey.getFormatedMeasurement(config, measurement);
-		logger.info(bundleMarker, "Writting values = {} to file = {}", values);
+		logger.info(bundleMarker, "Writing values = {} to file = {}", values,
+				destination);
 		try {
 			Files.write(values, destination, Charsets.US_ASCII);
 			statusMonitor.setLastFileName(destination.toString());
