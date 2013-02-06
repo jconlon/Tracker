@@ -6,6 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.verticon.tracker.reader.comm.tests.Activator
 Bundle-Vendor: Verticon, Inc.
 Require-Bundle: org.eclipse.core.runtime,
+ com.verticon.tracker.connector.comm;bundle-version="1.0.0",
  com.verticon.tracker.reader.comm;bundle-version="0.1.1",
  com.verticon.tracker.reader;bundle-version="0.2.6",
  org.junit4;bundle-version="4.5.0",

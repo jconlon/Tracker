@@ -10,8 +10,8 @@
  *******************************************************************************/
 package com.verticon.tracker.reader.comm.tests;
 
-import static com.verticon.tracker.connector.comm.CommReaderPlugin.GNU_IO_RXTX_SERIAL_PORTS;
 import static com.verticon.tracker.reader.comm.tests.Activator.bundleMarker;
+import static com.verticon.tracker.reader.event.comm.CommReaderPlugin.GNU_IO_RXTX_SERIAL_PORTS;
 import gnu.io.CommPort;
 import gnu.io.CommPortIdentifier;
 import gnu.io.PortInUseException;
@@ -41,7 +41,7 @@ import org.osgi.service.io.ConnectorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.verticon.tracker.connector.comm.ConnectionFactoryImpl;
+import com.verticon.tracker.connector.comm.Component;
 
 /**
  * Set of Junit (not plugin) tests of connections to a Bluetooth RFID Animal Tag
@@ -78,11 +78,13 @@ public class ConnectionFactoryImplTest extends TestCase {
 	private static final String FELL_THROUGH = "Fell through";
 	private ConnectionFactory instance;
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		instance = new ConnectionFactoryImpl();
+		instance = new Component();
 	}
 
+	@Override
 	protected void tearDown() throws Exception {
 		instance = null;
 		super.tearDown();
@@ -340,6 +342,7 @@ public class ConnectionFactoryImplTest extends TestCase {
 				
 			}
 			
+			@Override
 			public String call() {
 				InputConnection c = null;
 				byte[] tmp=new byte[1024];

@@ -13,10 +13,10 @@
  */
 package com.verticon.tracker.reader.comm.tests;
 
-import static com.verticon.tracker.connector.comm.CommReaderPlugin.GNU_IO_RXTX_SERIAL_PORTS;
 import static com.verticon.tracker.reader.comm.tests.Activator.bundleMarker;
 import static com.verticon.tracker.reader.comm.tests.ConnectionFactoryImplTest.JAVA_LIBRARY_PATH;
 import static com.verticon.tracker.reader.comm.tests.ConnectionFactoryImplTest.testPortSetting;
+import static com.verticon.tracker.reader.event.comm.CommReaderPlugin.GNU_IO_RXTX_SERIAL_PORTS;
 
 import java.io.File;
 import java.net.URI;
