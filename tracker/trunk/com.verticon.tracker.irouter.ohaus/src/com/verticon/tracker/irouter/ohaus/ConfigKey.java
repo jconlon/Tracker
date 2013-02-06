@@ -14,7 +14,8 @@ public enum ConfigKey {
 	CONNECTION_URI("connection.uri"), //
 	CONNECTION_RETRY_SECONDS("connection.retry.seconds"), //
 	PRODUCER_SCOPE("wireadmin.producer.scope"), //
-	COMMAND_DELAY_MILLIS("command.delay.millis"), //
+	RESPONSE_DELAY_MILLIS("response.delay.millis"), //
+	RESPONSE_RETRIES_BEFORE_ABORT("response.retries"), //
 	MINIMUM_WEIGHT_THRESHOLD("minimum.weight.threshold"), //
 	SERVICE_PID("service.pid"), //
 	FACTORY_PID("com.verticon.tracker.irouter.ohaus"), //
@@ -46,13 +47,16 @@ public enum ConfigKey {
 		return "ohaus.weight";
 	}
 
-	// public static Long getRetrySeconds(Map<String, Object> config) {
-	// return (Long) config.get(CONNECTION_RETRY_SECONDS.getKey());
-	// }
 
-	public static Long getCommandDelayMilliSeconds(Map<String, Object> config) {
-		return config.get(COMMAND_DELAY_MILLIS.getKey()) != null ? getConfigurationLong(config
-				.get(COMMAND_DELAY_MILLIS.getKey())) : 0l;
+	public static Long getResponseDelayMilliSeconds(Map<String, Object> config) {
+		return config.get(RESPONSE_DELAY_MILLIS.getKey()) != null ? getConfigurationLong(config
+				.get(RESPONSE_DELAY_MILLIS.getKey())) : 50l;
+	}
+
+	public static Integer getResponseRetriesBeforeAbort(
+			Map<String, Object> config) {
+		return config.get(RESPONSE_RETRIES_BEFORE_ABORT.getKey()) != null ? getConfigurationInteger(config
+				.get(RESPONSE_RETRIES_BEFORE_ABORT.getKey())) : 10;
 	}
 
 	public static Double getMinimumWeight(Map<String, Object> config) {
@@ -74,10 +78,12 @@ public enum ConfigKey {
 				.get(SCALE_ERROR.getKey())) : .0001;
 	}
 
-	public static Long getRetryDelay(Map<String, Object> config) {
+	public static Long getConnectionRetrySeconds(Map<String, Object> config) {
 		return config.get(CONNECTION_RETRY_SECONDS.getKey()) != null ? getConfigurationLong(config
 				.get(CONNECTION_RETRY_SECONDS.getKey())) : 10l;
 	}
+
+
 
 	public void configure(Dictionary<String, Object> config, Object value) {
 		config.put(key, value);

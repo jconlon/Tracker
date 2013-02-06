@@ -12,8 +12,9 @@ package com.verticon.tracker.irouter.ohaus.internal;
 
 
 import static com.google.common.base.Preconditions.checkState;
-import static com.verticon.tracker.irouter.ohaus.ConfigKey.getCommandDelayMilliSeconds;
 import static com.verticon.tracker.irouter.ohaus.ConfigKey.getMinimumWeight;
+import static com.verticon.tracker.irouter.ohaus.ConfigKey.getResponseDelayMilliSeconds;
+import static com.verticon.tracker.irouter.ohaus.ConfigKey.getResponseRetriesBeforeAbort;
 import static com.verticon.tracker.irouter.ohaus.ConfigKey.getScaleError;
 import static com.verticon.tracker.irouter.ohaus.ConfigKey.getServicePid;
 import static com.verticon.tracker.irouter.ohaus.ConfigKey.getURI;
@@ -55,24 +56,38 @@ public class OhausProxy implements Callable<Void> {
 	/**
 	 * slf4j Logger
 	 */
-	private final Logger log = LoggerFactory
+	final Logger log = LoggerFactory
 			.getLogger(OhausProxy.class);
 
 
 	private final OhausProducer ohausProducer;
 	private final double minimumWeightThreshold;
 	private final String uri;
-	private final long commandDelay;
+	private final long responseDelay;
+	private final int responseRetries;
 	private final String pid;
 	private double minimumWeightThresholdInKiloGrams;
-	private final String STOP_SENDING_COMMAND = "0P\r";
-	private final String PRINT_UNIT_COMMAND = "PU\r";
-	private final String STABLE_PRINT_COMMAND = "SP\r";
-	private final String EVERY_SECOND_PRINT_COMMAND = "1P\r";
 	private final double scaleError;
 	private boolean enabled = true;
 
 	private MeasurementUnit measurementUnit;
+
+	enum Command {
+		STOP_SENDING("0P%13%%10%"), //
+		PRINT_UNIT("PU%13%%10%"), //
+		STABLE_PRINT("SP%13%%10%"), //
+		EVERY_SECOND_PRINT("1P%13%%10%"), //
+		POLL("IP%13%%10%");// Not used
+		final String ascii;
+
+		Command(String ascii) {
+			this.ascii = ascii;
+		}
+
+		String fromAscii() {
+			return ascii != null ? Utils.fromAscii(ascii) : null;
+		}
+	}
 
 	/**
 	 * Manages a connection to a balance. Continuously reads from a balance and
@@ -88,12 +103,13 @@ public class OhausProxy implements Callable<Void> {
 		pid = getServicePid(config);
 		minimumWeightThreshold = getMinimumWeight(config);
 		scaleError = getScaleError(config);
-		commandDelay = getCommandDelayMilliSeconds(config);
+		responseDelay = getResponseDelayMilliSeconds(config);
+		responseRetries = getResponseRetriesBeforeAbort(config);
 		log.debug(
 				bundleMarker,
-				"{} uri={}, minimumWeightThreshold={}, scaleError={}, commandDelay={}",
+				"{} uri={}, minimumWeightThreshold={}, scaleError={}, responseDelay={}",
 				new Object[] { this, uri, minimumWeightThreshold, scaleError,
-						commandDelay });
+						responseDelay });
 	}
 
 	@Override
@@ -103,15 +119,16 @@ public class OhausProxy implements Callable<Void> {
 
 	@Override
 	public Void call() throws Exception {
+		Connection con = null;
 		try {
 			ohausProducer.getStatusMonitor().setConnectStatus(false);
-			log.debug(bundleMarker, "{} Starting uri={} with commandDelay={}",
-					new Object[] { this, uri, commandDelay });
+			log.debug(bundleMarker, "{} Starting uri={} with responseDelay={}",
+					new Object[] { this, uri, responseDelay });
 			BufferedReader in = null;
 			BufferedWriter out = null;
 			boolean swallowExcetionsDuringClose = true;
 			ConnectorService cs = ohausProducer.getConnectorService();
-			Connection con = cs.open(uri,
+			con = cs.open(uri,
 					ConnectorService.READ_WRITE, true);
 			checkState(con != null,
 					"ConnectionService could not create a connection");
@@ -127,15 +144,21 @@ public class OhausProxy implements Callable<Void> {
 				log.debug(bundleMarker, "{} connected.", this);
 				ohausProducer.getStatusMonitor().setConnectStatus(true);
 				sendInitializationCommands(out, in);
+				// long lastRead = System.currentTimeMillis();
 				while (!Thread.currentThread().isInterrupted()) {
-					handle(in.readLine());
-					if (commandDelay > 0) {
-						// if(log.isDebugEnabled()){
-						// log.debug(this+": Sleeping "+commandDelay+
-						// " milliseconds");
-						// }
-						TimeUnit.MILLISECONDS.sleep(commandDelay);
+
+					String line;
+					while ((in.ready()) && (line = in.readLine()) != null) {
+						// long previousRead = lastRead;
+						// long start = System.currentTimeMillis();
+						handle(line);
+						// lastRead = System.currentTimeMillis();
+						// log.info(bundleMarker,
+						// "Elapsed time for read={} between reads={}",
+						// lastRead - start, lastRead - previousRead);
+						TimeUnit.MILLISECONDS.sleep(990);
 					}
+
 				}
 				swallowExcetionsDuringClose = false;
 				log.debug(bundleMarker, "{} closing connection", this);
@@ -145,11 +168,31 @@ public class OhausProxy implements Callable<Void> {
 				ohausProducer.getStatusMonitor().setConnectStatus(false);
 				Closeables.close(in, swallowExcetionsDuringClose);
 				Closeables.close(out, swallowExcetionsDuringClose);
-				log.debug(bundleMarker, "{} closed connection", this);
+				if (con != null) {
+					con.close();// The connection must be closed to free the
+								// port
+					con = null;
+					log.debug(bundleMarker,
+							"{} closed connection in inner loop", this);
+				}
+
 			}
 		} catch (Exception e) {
 			log.warn(bundleMarker, this + " failed to connect", e);
+			if (con != null) {
+				con.close();// The connection must be closed to free the port
+				con = null;
+				log.debug(bundleMarker,
+						"{} closed connection in exception catch", this);
+			}
 			throw e;
+		} finally {
+			if (con != null) {
+				con.close();// The connection must be closed to free the port
+				con = null;
+				log.debug(bundleMarker, "{} closed connection in top loop",
+						this);
+			}
 		}
 
 		return null;
@@ -157,39 +200,68 @@ public class OhausProxy implements Callable<Void> {
 
 	private void sendInitializationCommands(Writer out, BufferedReader in)
 			throws IOException, InterruptedException {
-		sendCommand(STOP_SENDING_COMMAND, out, in);
+		send(Command.STOP_SENDING, out, in);
 		MeasurementUnit measurementUnit = getUnit(out, in);
 		minimumWeightThresholdInKiloGrams = measurementUnit
 				.convertToKilograms(minimumWeightThreshold);
 
 		log.debug(bundleMarker, "Ohaus scale is configured for {}",
 				measurementUnit);
-		sendCommand(STABLE_PRINT_COMMAND, out, in);
-		sendCommand(EVERY_SECOND_PRINT_COMMAND, out, in);
+		send(Command.STABLE_PRINT, out, in);
+		send(Command.EVERY_SECOND_PRINT, out, in);
 		this.measurementUnit = measurementUnit;
 	}
 
-	private void sendCommand(String command, Writer out, BufferedReader in)
+	private void send(Command commandType, Writer out, BufferedReader in)
 			throws IOException, InterruptedException {
+
 		log.debug(bundleMarker, "{} Sending  command={}", this,
-				Utils.toAscii(command));
-		out.write(command);
+				commandType.ascii);
+		out.write(commandType.fromAscii());
 		out.flush();
-		if (!acknowledge(in.readLine())) {
-			throw new IOException("failed to acknoledge command="
-					+ Utils.toAscii(command));
+		if (!acknowledge(getResponse(in, commandType))) {
+			throw new IOException("failed to acknowledge command="
+					+ commandType.ascii);
 		}
+	}
+
+	private String getResponse(BufferedReader in, Command command)
+			throws InterruptedException,
+			IOException {
+		int sleepCounter = 0;
+		String result = null;
+		while (!Thread.currentThread().isInterrupted()) {
+			if (in.ready()) {
+				result = in.readLine();
+				break;
+			} else {
+
+				TimeUnit.MILLISECONDS.sleep(responseDelay);
+				if (sleepCounter >= responseRetries) {
+					log.debug(bundleMarker,
+							"Timedout waiting for {} response reached max responseDelay of {} ms.",
+							command, (responseRetries * responseDelay));
+					// Reached max timeout waiting for data. Bail..
+					throw new IOException(
+							"failed to receive an acknowledge from the scale.");
+				}
+				sleepCounter++;
+			}
+			
+		}
+		return result;
 	}
 
 	private MeasurementUnit getUnit(Writer out, BufferedReader in) throws IOException,
 			InterruptedException {
+
 		log.debug(bundleMarker, "{} Sending  PU command={}", this,
-				Utils.toAscii(PRINT_UNIT_COMMAND));
-		out.write(PRINT_UNIT_COMMAND);
+				Command.PRINT_UNIT.ascii);
+		out.write(Command.PRINT_UNIT.fromAscii());
 		out.flush();
-		String response = in.readLine();
+		String response = getResponse(in, Command.PRINT_UNIT);
 		log.debug(bundleMarker, "{} Response from  PU command={}", this,
-				Utils.toAscii(response));
+				Command.PRINT_UNIT.ascii);
 		MeasurementUnit result = MeasurementUnit.getUnit(response.trim());
 		log.info(bundleMarker, "Scale configured for: {}",
 				result);
@@ -254,8 +326,6 @@ public class OhausProxy implements Callable<Void> {
 								minimumWeightThreshold });
 				return null;
 			}
-
-
 
 		} catch (NumberFormatException e) {
 			log.error(bundleMarker, "Parse weight response "+response+" is not a number.");
