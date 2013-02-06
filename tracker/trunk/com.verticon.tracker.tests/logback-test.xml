@@ -91,19 +91,32 @@
   </logger>
   
    <logger name="com.verticon.tracker.store">
-    <level value="DEBUG"/>
+    <level value="INFO"/>
   </logger>     
-  
+   <logger name="com.verticon.tracker.store.mongo.test.system.internal">
+    <level value="INFO"/>
+  </logger>
+   <logger name="com.verticon.tracker.store.mongo.internal.MongoStatusMonitor">
+    <level value="INFO"/>
+  </logger>   
    <logger name="com.verticon.tracker.irouter.premises.event">
     <level value="WARN"/>
   </logger> 
+  
+  <logger name="com.verticon.tracker.irouter.ohaus">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.connector.comm">
+    <level value="WARN"/>
+  </logger>
   
    <logger name="com.verticon.tracker.irouter.premises.animal">
     <level value="WARN"/>
   </logger> 
                  
    <logger name="com.verticon.agriculture.location.internal">
-    <level value="DEBUG"/>
+    <level value="WARN"/>
   </logger>
   
   <logger name="com.verticon.location.service.internal.Component">
@@ -205,11 +218,11 @@
   </logger>
  
   <logger name="com.verticon.tracker.irouter.measurement">
-    <level value="WARN"/>
+    <level value="INFO"/>
   </logger>
   
   <logger name="com.verticon.tracker.irouter.wireadmin">
-    <level value="WARN"/>
+    <level value="INFO"/>
     <appender-ref ref="STDOUT"/>
   </logger>
   
@@ -218,7 +231,7 @@
   </logger>
    
   <logger name="com.verticon.mongo">
-    <level value="DEBUG"/>
+    <level value="WARN"/>
   </logger>
   
   <logger name="com.verticon.mongo.emf.json.query">
@@ -244,9 +257,9 @@
     <level value="WARN"/>
     
     <appender-ref ref="multiplex"/>
-   <appender-ref ref="STDOUT"/>
+   
     <!--  
-     
+     <appender-ref ref="STDOUT"/>
      <appender-ref ref="RollingFile"/>
     -->
   </root>
