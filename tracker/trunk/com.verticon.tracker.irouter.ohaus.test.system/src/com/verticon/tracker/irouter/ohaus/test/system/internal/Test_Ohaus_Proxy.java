@@ -189,7 +189,7 @@ public class Test_Ohaus_Proxy extends TestCase {
 	@Test
 	public void testPause() throws InterruptedException {
 		// TimeUnit.SECONDS.sleep(100);
-		long sleep = 1;
+		long sleep = 3;
 		logger.debug(bundleMarker, "Sleeping for {} minutes", sleep);
 		TimeUnit.MINUTES.sleep(sleep);
 		assertThat("Consumer must have received one or more weights",

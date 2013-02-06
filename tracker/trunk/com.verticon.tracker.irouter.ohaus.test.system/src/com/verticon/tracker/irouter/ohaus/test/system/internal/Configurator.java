@@ -11,7 +11,7 @@
 
 package com.verticon.tracker.irouter.ohaus.test.system.internal;
 
-import static com.verticon.tracker.irouter.ohaus.ConfigKey.COMMAND_DELAY_MILLIS;
+import static com.verticon.tracker.irouter.ohaus.ConfigKey.RESPONSE_DELAY_MILLIS;
 import static com.verticon.tracker.irouter.ohaus.ConfigKey.CONNECTION_URI;
 import static com.verticon.tracker.irouter.ohaus.ConfigKey.FACTORY_PID;
 import static com.verticon.tracker.irouter.ohaus.ConfigKey.MINIMUM_WEIGHT_THRESHOLD;
@@ -109,7 +109,7 @@ public class Configurator {
 		WIRING_GROUP.configure(config, "test");
 		CONNECTION_URI.configure(config, getCommURI());
 		MINIMUM_WEIGHT_THRESHOLD.configure(config, .1);
-		COMMAND_DELAY_MILLIS.configure(config, new Long(DELAY_IN_MILLIS));
+		RESPONSE_DELAY_MILLIS.configure(config, new Long(DELAY_IN_MILLIS));
 		PRODUCER_SCOPE.configure(config, new String[] { OHAUS_WEIGHT });
 
 		return config;

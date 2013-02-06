@@ -3,7 +3,7 @@
  */
 package com.verticon.tracker.irouter.ohaus.internal;
 
-import static com.verticon.tracker.irouter.ohaus.ConfigKey.getRetryDelay;
+import static com.verticon.tracker.irouter.ohaus.ConfigKey.getConnectionRetrySeconds;
 import static com.verticon.tracker.irouter.ohaus.ConfigKey.getScope;
 import static com.verticon.tracker.irouter.ohaus.ConfigKey.getServicePid;
 import static com.verticon.tracker.irouter.ohaus.ConfigKey.getURI;
@@ -319,7 +319,7 @@ public class OhausProducer implements Monitorable, Producer {
 	private void resubmit() {
 		logger.warn(bundleMarker, "{}: resubmit invoked", this);
 		if (!Thread.currentThread().isInterrupted()) {
-			long delay = getRetryDelay(config);
+			long delay = getConnectionRetrySeconds(config);
 			try {
 				logger.debug(
 						bundleMarker,

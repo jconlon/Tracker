@@ -22,11 +22,17 @@
     	default="5"
     	description="Seconds to wait before retrying to establish a connection to the balance."/>
    
-    <AD name="Command Delay interval seconds" id="command.delay.millis"
+    <AD name="Response delay interval in milliseconds" id="response.delay.millis"
     	required="true" 
     	type="Long" 
-    	default="0"
-    	description="MilliSeconds to wait between command sends."/>
+    	default="50"
+    	description="If no data was received from the scale the milliSeconds to wait before checking again."/>
+    	
+    <AD name="Response retries before abort" id="response.retries"
+    	required="true" 
+    	type="Integer" 
+    	default="10"
+    	description="Number of times to listen for a scale response before aborting the connection."/>
     	
     <AD name="Producer Scope" id="wireadmin.producer.scope" 
     	type="String"
