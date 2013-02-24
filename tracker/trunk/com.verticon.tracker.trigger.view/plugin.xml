@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            category="com.verticon.tracker.prefs.view"
+            class="com.verticon.tracker.trigger.view.preferences.TriggerManagerPreferencePage"
+            id="com.verticon.tracker.trigger.view.preferences.TriggerManagerPreferencePage"
+            name="Trigger Manager">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.core.runtime.preferences">
+      <initializer
+            class="com.verticon.tracker.trigger.view.preferences.PreferenceInitializer">
+      </initializer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="Tracker"
+            id="com.verticon.tracker.views">
+      </category>
+      <view
+            name="Trigger Manager"
+            icon="icons/sample.gif"
+            category="com.verticon.tracker.views"
+            class="com.verticon.tracker.trigger.view.views.TriggerViewPart"
+            id="com.verticon.tracker.trigger.view">
+      </view>
+   </extension>
+  
+  
+   <extension
+       point="org.eclipse.ui.menus">
+    <menuContribution
+          locationURI="menu:com.verticon.tracker.trigger.view?after=additions">
+       <separator
+             name="com.verticon.tracker.trigger.view.separator1">
+       </separator>
+       <command
+               commandId="com.verticon.tracker.trigger.view.commands.importTriggerEntries"
+               label="Import Trigger Entries"
+               mnemonic="A"
+               style="pulldown">
+       </command>
+       <command
+               commandId="com.verticon.tracker.trigger.view.commands.exportTriggerEntries"
+               label="Export Trigger Entries"
+               mnemonic="F"
+               style="pulldown">
+        </command>
+    </menuContribution>
+ </extension>
+ 
+ <extension
+       point="org.eclipse.ui.commands">
+    <category
+          id="com.verticon.tracker.trigger.view.commands.category"
+          name="Default Queries">
+    </category>
+    <command
+          categoryId="com.verticon.tracker.trigger.view.commands.category"
+          id="com.verticon.tracker.trigger.view.commands.importTriggerEntries"
+          name="Import Trigger Entries">
+    </command>
+    <command
+          categoryId="com.verticon.tracker.trigger.view.commands.category"
+          id="com.verticon.tracker.trigger.view.commands.exportTriggerEntries"
+          name="Export Trigger Entries">
+    </command>
+ </extension>
+ 
+ 
+ 
+ <extension
+       point="org.eclipse.ui.handlers">
+    <handler
+          class="com.verticon.tracker.trigger.view.handlers.ImportTriggerFileHandler"
+          commandId="com.verticon.tracker.trigger.view.commands.importTriggerEntries">
+    </handler>
+     <handler
+          class="com.verticon.tracker.trigger.view.handlers.ExportTriggerFileHandler"
+          commandId="com.verticon.tracker.trigger.view.commands.exportTriggerEntries">
+    </handler>
+ </extension>
+ <extension
+       point="org.eclipse.ui.bindings">
+    <key
+          commandId="com.verticon.tracker.trigger.view.commands.importTriggerEntries"
+          contextId="org.eclipse.ui.contexts.window"
+          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+          sequence="M1+7">
+    </key>
+    <key
+          commandId="com.verticon.tracker.trigger.view.commands.exportTriggerEntries"
+          contextId="org.eclipse.ui.contexts.window"
+          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+          sequence="M1+8">
+    </key>
+ </extension>
+
+</plugin>
