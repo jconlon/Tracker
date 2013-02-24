@@ -1,6 +1,9 @@
 package com.verticon.tracker.irouter.measurement.trigger.file.internal;
 
 
+import static com.google.common.collect.Maps.newConcurrentMap;
+
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -13,12 +16,12 @@ import com.verticon.tracker.irouter.measurement.trigger.file.StatusVar;
 public class StatusMonitor implements Monitorable {
 
 	private final AtomicInteger wiresConnected = new AtomicInteger(0);
-	private final AtomicLong timeOfLastMessage = new AtomicLong(0);
+	private final AtomicLong timeOfLastMeasurement = new AtomicLong(0);
+	private final AtomicLong timeOfLastFormatChange = new AtomicLong(0);
+	private final AtomicInteger formatChangeCount = new AtomicInteger(0);
 	private final AtomicInteger measurementCount = new AtomicInteger(0);
-	private String lastFileName = "";
-	private String lastMeasurementValue = "";
+	private final Map<StatusVar, String> map = newConcurrentMap();
 
-	
 	@SuppressWarnings("unused")
 	private MonitorListener monitorListener;
 	
@@ -45,6 +48,10 @@ public class StatusMonitor implements Monitorable {
 			sv = new StatusVariable(id, StatusVariable.CM_GAUGE,
 					measurementCount.get());
 			break;
+		case FORMAT_CHANGE_COUNT:
+			sv = new StatusVariable(id, StatusVariable.CM_GAUGE,
+					formatChangeCount.get());
+			break;
 		case WIRES_COUNT:
 			sv = new StatusVariable(id,
 					StatusVariable.CM_GAUGE,
@@ -55,6 +62,18 @@ public class StatusMonitor implements Monitorable {
 			sv = new StatusVariable(id, StatusVariable.CM_SI,
 					getTimeOfLastMessage());
 			break;
+		case LAST_FORMAT_CHANGE_TIME:
+			sv = new StatusVariable(id, StatusVariable.CM_SI,
+					getTimeOfLastFormatChange());
+			break;
+		case WIRING_GROUP:
+			sv = new StatusVariable(id, StatusVariable.CM_SI,
+ getWiringGroup());
+			break;
+		case MEASUREMENT_VALUE_FORMAT:
+			sv = new StatusVariable(id, StatusVariable.CM_SI,
+					getMeasurementValueFormat());
+			break;
 		default:
 			throw new IllegalArgumentException("Unknown id: "+id);
 		}
@@ -62,9 +81,11 @@ public class StatusMonitor implements Monitorable {
 		
 	}
 
-	private String getTimeOfLastMessage() {
-		return timeOfLastMessage.get() != 0 ? String.format("%tT",
-				timeOfLastMessage.get()) : "";
+
+
+	private String getTimeOfLastFormatChange() {
+		return timeOfLastFormatChange.get() != 0 ? String.format("%tT",
+				timeOfLastFormatChange.get()) : "";
 	}
 
 	@Override
@@ -87,13 +108,10 @@ public class StatusMonitor implements Monitorable {
 		wiresConnected.set(newValue);
 	}
 
-	private void setTimeOfLastMessage() {
-		timeOfLastMessage.set(System.currentTimeMillis());
-	}
 
 	void incMeasurementCount() {
 		measurementCount.incrementAndGet();
-		setTimeOfLastMessage();
+		timeOfLastMeasurement.set(System.currentTimeMillis());
 	}
 
 	/**
@@ -115,32 +133,79 @@ public class StatusMonitor implements Monitorable {
 	}
 
 	/**
-	 * @return the lastFileName
-	 */
-	synchronized String getLastFileName() {
-		return lastFileName;
-	}
-
-	/**
 	 * @param lastFileName
 	 *            the lastFileName to set
 	 */
-	synchronized void setLastFileName(String lastFileName) {
-		this.lastFileName = lastFileName;
+	void setLastFileName(String lastFileName) {
+		map.put(StatusVar.LAST_FILE_NAME, lastFileName);
 	}
 
-	/**
-	 * @return the lastMeasurementValue
-	 */
-	synchronized String getLastMeasurementValue() {
-		return lastMeasurementValue;
-	}
 
 	/**
 	 * @param lastMeasurementValue
 	 *            the lastMeasurementValue to set
 	 */
-	synchronized void setLastMeasurementValue(String lastMeasurementValue) {
-		this.lastMeasurementValue = lastMeasurementValue;
+	void setLastMeasurementValue(String lastMeasurementValue) {
+		map.put(StatusVar.LAST_MEASUREMENT_VALUE, lastMeasurementValue);
 	}
+
+	/**
+	 * @param wiringGroup
+	 *            the wiringGroup to set
+	 */
+	void setWiringGroup(String wiringGroup) {
+		map.put(StatusVar.WIRING_GROUP, wiringGroup);
+	}
+
+	void setMeasurementValueFormat(String value) {
+		map.put(StatusVar.MEASUREMENT_VALUE_FORMAT, value);
+		timeOfLastFormatChange.set(System.currentTimeMillis());
+		formatChangeCount.incrementAndGet();
+	}
+
+	/**
+	 * @return the formatPattern
+	 */
+	String getMeasurementValueFormat() {
+		return map.get(StatusVar.MEASUREMENT_VALUE_FORMAT) != null ? map
+				.get(StatusVar.MEASUREMENT_VALUE_FORMAT) : "";
+	}
+
+	void deactivate() {
+		wiresConnected.set(0);
+		timeOfLastMeasurement.set(0);
+		measurementCount.set(0);
+		map.clear();
+	}
+
+	/**
+	 * @return the lastFileName
+	 */
+	private String getLastFileName() {
+		return map.get(StatusVar.LAST_FILE_NAME) != null ? map
+				.get(StatusVar.LAST_FILE_NAME) : "";
+	}
+
+	private String getWiringGroup() {
+		return map.get(StatusVar.WIRING_GROUP) != null ? map
+				.get(StatusVar.WIRING_GROUP) : "";
+	}
+
+	private String getTimeOfLastMessage() {
+		return timeOfLastMeasurement.get() != 0 ? String.format("%tT",
+				timeOfLastMeasurement.get()) : "";
+	}
+
+
+
+	/**
+	 * @return the lastMeasurementValue
+	 */
+	private String getLastMeasurementValue() {
+		return map.get(StatusVar.LAST_MEASUREMENT_VALUE) != null ? map
+				.get(StatusVar.LAST_MEASUREMENT_VALUE) : "";
+	}
+
+
+
 }
