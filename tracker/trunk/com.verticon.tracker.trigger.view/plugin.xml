@@ -25,7 +25,7 @@
       </category>
       <view
             name="Trigger Manager"
-            icon="icons/sample.gif"
+            icon="icons/pistol.gif"
             category="com.verticon.tracker.views"
             class="com.verticon.tracker.trigger.view.views.TriggerViewPart"
             id="com.verticon.tracker.trigger.view">
