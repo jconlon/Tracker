@@ -29,6 +29,7 @@
       <import plugin="com.verticon.osgi.monitor"/>
       <import plugin="org.osgilab.bundles.monitoradmin"/>
       <import feature="com.verticon.tracker.logging.logback" version="0.3.1" match="compatible"/>
+      <import feature="com.verticon.tracker.connector" version="1.0.0" match="compatible"/>
    </requires>
 
    <plugin
@@ -61,13 +62,6 @@
 
    <plugin
          id="com.verticon.tracker.configuration.editor"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.verticon.tracker.connector.socket"
          download-size="0"
          install-size="0"
          version="0.0.0"
