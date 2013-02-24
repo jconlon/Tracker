@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="EventAdmin Gateway" id="com.verticon.tracker.irouter.eventadmin.gateway"
+       description="Gateway between OSGi EventAdmin messaage bus and iRouter. Initally only forwards String products.">
+   
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" 
+    	required="true" 
+    	type="String" 
+    	default="one"
+        description="Name of the group of components that will be wired together."/>
+    
+   	<AD name="Event Topics" id="event.topics" 
+   		type="String" 
+   		default="com/verticon/tracker/irouter"
+   	    description="Default event topics. Do not change."/>
+   	
+    	
+	<AD name="Producer scope" id="wireadmin.producer.scope" 
+		required="true" 
+        type="String" 
+        default="event.admin.gateway"
+		cardinality="1" 
+		description="The produced scope containing the products. (Use full scope names)" />
+  
+   
+
+    <AD name="Component container label"  id="tracker.monitor.label" 
+    	type="String"
+    	required="false" 
+        description="Name to label node in the iRouter Monitor View graphics and other user interface components."
+        default="EventAdmin Gateway"/> 
+ 
+  
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.eventadmin.gateway" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.eventadmin.gateway"/>
+  </Designate>
+  
+  
+</metatype:MetaData>
