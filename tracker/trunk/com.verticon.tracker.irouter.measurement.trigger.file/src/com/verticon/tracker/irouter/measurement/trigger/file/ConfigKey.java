@@ -135,12 +135,19 @@ public enum ConfigKey {
 	 * 
 	 * @param config
 	 * @param measurement
+	 * @param current
 	 * @return formated string from values: dateTime, unit, value, error
 	 */
 	public static String getFormatedMeasurement(Map<String, Object> config,
-			Measurement measurement) {
+			String current, Measurement measurement) {
 		WeightUnit wu = getWeightUnit(config);
-		String formatString = getMeasurementValueFormat(config);
+		String formatString;
+		if (isNullOrEmpty(current)) {
+			formatString = getMeasurementValueFormat(config);
+		} else {
+			formatString = current;
+		}
+
 		return wu.getFormatedValue(measurement, formatString);
 	}
 

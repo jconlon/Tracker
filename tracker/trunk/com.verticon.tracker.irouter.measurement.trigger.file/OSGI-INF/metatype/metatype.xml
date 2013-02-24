@@ -13,9 +13,9 @@
     <AD name="Consumable scopes" id="wireadmin.consumer.scope" 
     	type="String"
 		cardinality="5"
-		default="ohaus.weight"
+		default="ohaus.weight,event.admin.gateway"
 		required="true" 
-		description="Comma delimited list of the scopes for measurements. (Use full scope names)" />
+		description="Comma delimited list of the scopes for measurements and strings. Only a measurement scope is required. A string will be used to reconfigure this component." />
 		
 	<AD name="File Name Pattern" id="file.name.pattern" 
     	type="String"
@@ -33,11 +33,12 @@
 		<Option label="Grams" value="GRAMS"/>
 	</AD>
 
+<!-- This value is subjected to dynamic resetting.  -->
     <AD name="Measurement Value Format" id="measurement.value.format" 
     	type="String"
 		default="%tc,%s,%s,%5.4f"
 		required="true" 
-		description="String format to use for outputing the measurement value in the file.  Variable ordering is: dateTime, unit, value, error." />
+		description="String format to use for outputing the measurement value in the file.  Variable ordering is: dateTime, unit, value, error. A consumed string product will use to reset this to a new value." />
 		
      <AD name="Connection uri"  id="connection.uri" 
      	type="String" 
@@ -45,6 +46,11 @@
         default="file:///tmp" 
         description="Identifier referencing the output destination for measurement files.  This will also associate this service with an external node in the monitor view."/> 
     
+    <AD name="Component container label"  id="tracker.monitor.label" 
+    	type="String"
+    	required="false" 
+        description="Name to label node in the iRouter Monitor View graphics and other user interface components."
+        default="Measurement Trigger File"/> 
   </OCD>
   
   <Designate pid="com.verticon.tracker.irouter.measurement.trigger.file" bundle="*">

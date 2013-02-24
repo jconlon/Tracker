@@ -42,6 +42,8 @@ public class TriggerFile implements Monitorable, Consumer {
 
 	private Map<String, Object> config;
 
+	private volatile String format = null;
+
 	@Override
 	public void updated(Wire wire, Object in) {
 		logger.debug(bundleMarker, "Invoked updated with value={}", in);
@@ -107,7 +109,9 @@ public class TriggerFile implements Monitorable, Consumer {
 	void activate(Map<String, Object> config) throws IOException {
 		logger.debug(bundleMarker, "Activating");
 		this.config = config;
-
+		statusMonitor.setWiringGroup(ConfigKey.getWiringGroup(config));
+		statusMonitor.setMeasurementValueFormat(ConfigKey
+				.getMeasurementValueFormat(config));
 	}
 
 	/**
@@ -116,13 +120,15 @@ public class TriggerFile implements Monitorable, Consumer {
 	 */
 	void deactivate() {
 		logger.debug(bundleMarker, "Deactivating");
-
 		config = null;
+		statusMonitor.deactivate();
 	}
 
 	private void handle(Envelope envelope) {
 		if ((envelope.getValue() instanceof Measurement)) {
 			handle((Measurement) envelope.getValue());
+		} else if ((envelope.getValue() instanceof String)) {
+			handle((String) envelope.getValue());
 		} else {
 			logger.warn(
 					bundleMarker,
@@ -134,7 +140,8 @@ public class TriggerFile implements Monitorable, Consumer {
 
 	private void handle(Measurement measurement) {
 		File destination = ConfigKey.getFile(config);
-		String values = ConfigKey.getFormatedMeasurement(config, measurement);
+		String values = ConfigKey.getFormatedMeasurement(config, format,
+				measurement);
 		logger.info(bundleMarker, "Writing values = {} to file = {}", values,
 				destination);
 		try {
@@ -146,5 +153,71 @@ public class TriggerFile implements Monitorable, Consumer {
 			logger.error(bundleMarker, "Failed to write " + measurement, e);
 		}
 	}
+
+	private void handle(String string) {
+		format = string;
+
+		statusMonitor.setMeasurementValueFormat(string);
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((config == null) ? 0 : config.hashCode());
+		result = prime * result + ((logger == null) ? 0 : logger.hashCode());
+		result = prime * result
+				+ ((statusMonitor == null) ? 0 : statusMonitor.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof TriggerFile)) {
+			return false;
+		}
+		TriggerFile other = (TriggerFile) obj;
+		if (config == null) {
+			if (other.config != null) {
+				return false;
+			}
+		} else if (!config.equals(other.config)) {
+			return false;
+		}
+		if (logger == null) {
+			if (other.logger != null) {
+				return false;
+			}
+		} else if (!logger.equals(other.logger)) {
+			return false;
+		}
+		if (statusMonitor == null) {
+			if (other.statusMonitor != null) {
+				return false;
+			}
+		} else if (!statusMonitor.equals(other.statusMonitor)) {
+			return false;
+		}
+		return true;
+	}
+
+
 
 }
