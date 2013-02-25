@@ -30,11 +30,17 @@ public class LotPageThreeSuffix extends WizardPage {
 	private Text text1;
 	private Composite container;
 	private List<String> validSuffixes = null;
+	private final IPreferenceStore store = TriggerViewPlugin.getDefault()
+			.getPreferenceStore();
+	private final String suffixes = store
+			.getString(PreferenceConstants.P_VALID_LOT_SUFFIXES_STRING);
 
 	public LotPageThreeSuffix() {
 		super("Third Page");
 		setTitle("Lot Creatiion Wizard");
-		setDescription("Enter the suffix for the Lot");
+		setDescription(String.format(
+				"Enter the suffix for the Lot. The valid suffixes are: %s",
+				suffixes));
 		setControl(text1);
 	}
 
@@ -53,10 +59,7 @@ public class LotPageThreeSuffix extends WizardPage {
 
 	@Override
 	public void createControl(Composite parent) {
-		IPreferenceStore store = TriggerViewPlugin.getDefault()
-				.getPreferenceStore();
-		String suffixes = store
-				.getString(PreferenceConstants.P_VALID_LOT_SUFFIXES_STRING);
+
 		Iterable<String> elements = null;
 		if (!isNullOrEmpty(suffixes)) {
 			elements = Splitter.on(',').trimResults()

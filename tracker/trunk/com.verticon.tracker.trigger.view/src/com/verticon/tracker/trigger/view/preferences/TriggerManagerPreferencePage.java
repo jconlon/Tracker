@@ -2,6 +2,7 @@ package com.verticon.tracker.trigger.view.preferences;
 
 import static com.verticon.tracker.trigger.view.preferences.PreferenceConstants.P_BODY_STRING;
 import static com.verticon.tracker.trigger.view.preferences.PreferenceConstants.P_LABEL_EXTENSION_STRING;
+import static com.verticon.tracker.trigger.view.preferences.PreferenceConstants.P_LOT_DAY_AT_WEIGHING_FORMATTER;
 import static com.verticon.tracker.trigger.view.preferences.PreferenceConstants.P_LOT_SEPARATOR_STRING;
 import static com.verticon.tracker.trigger.view.preferences.PreferenceConstants.P_PRINT_STRING;
 import static com.verticon.tracker.trigger.view.preferences.PreferenceConstants.P_REPORTS_PATH;
@@ -56,8 +57,7 @@ public class TriggerManagerPreferencePage
 	public void createFieldEditors() {
 		addField(new DirectoryFieldEditor(P_REPORTS_PATH,
 				"&Label Directory:", getFieldEditorParent()));
-		addField(new BooleanFieldEditor(
-P_SHOW_LABEL_PATH_BOOLEAN,
+		addField(new BooleanFieldEditor(P_SHOW_LABEL_PATH_BOOLEAN,
 				"&Show path of label:", getFieldEditorParent()));
 
 		addField(new DirectoryFieldEditor(P_TESTING_PATH,
@@ -72,8 +72,7 @@ P_SHOW_LABEL_PATH_BOOLEAN,
 						"This will be the format of file names that will be created when directly printing the the entry.");
 		addField(stringFieldEditor);
 
-		stringFieldEditor = new StringFieldEditor(
-P_PRINT_STRING,
+		stringFieldEditor = new StringFieldEditor(P_PRINT_STRING,
 				"Print data value:",
 				getFieldEditorParent());
 		stringFieldEditor
@@ -83,8 +82,7 @@ P_PRINT_STRING,
 		addField(stringFieldEditor);
 
 
-		stringFieldEditor = new StringFieldEditor(
-P_LABEL_EXTENSION_STRING,
+		stringFieldEditor = new StringFieldEditor(P_LABEL_EXTENSION_STRING,
 				"Label File Extension:", getFieldEditorParent());
 		stringFieldEditor
 				.getTextControl(getFieldEditorParent())
@@ -102,6 +100,18 @@ P_LABEL_EXTENSION_STRING,
 				.getTextControl(getFieldEditorParent())
 				.setToolTipText(
 						"This will be the string of characters used by the Lot Creation Wizard when it concatinates the three segments of the Lot numbers that were spcecified in the Wizard pages.");
+		addField(stringFieldEditor);
+
+		// formater
+		stringFieldEditor = new StringFieldEditor(
+				P_LOT_DAY_AT_WEIGHING_FORMATTER,
+				"Format for Lot date time  at weighing:",
+				getFieldEditorParent());
+
+		stringFieldEditor
+				.getTextControl(getFieldEditorParent())
+				.setToolTipText(
+						"This will be the string of characters that specify how to format the date at weight time.");
 		addField(stringFieldEditor);
 
 		// max id size

@@ -1,6 +1,7 @@
 package com.verticon.tracker.trigger.view.views;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
+import static com.google.common.base.Strings.nullToEmpty;
 import static com.google.common.collect.Lists.newLinkedList;
 
 import java.util.Collections;
@@ -22,8 +23,10 @@ public class LotWizard extends Wizard {
 	protected LotPageThreeSuffix three;
 	final Text lotText;
 	private final List<String> currentValues;
-	private String lotSeparator;
-
+	private final IPreferenceStore store = TriggerViewPlugin.getDefault()
+			.getPreferenceStore();
+	private final String lotSeparator = store
+			.getString(PreferenceConstants.P_LOT_SEPARATOR_STRING);
 
 
 	public LotWizard(Text lotText) {
@@ -37,18 +40,19 @@ public class LotWizard extends Wizard {
 		List<String> result;
 
 		if (!isNullOrEmpty(values)) {
-			IPreferenceStore store = TriggerViewPlugin.getDefault()
-					.getPreferenceStore();
-			lotSeparator = store
-					.getString(PreferenceConstants.P_LOT_SEPARATOR_STRING);
+
+
 			if (isNullOrEmpty(lotSeparator)) {
 				result = newLinkedList();
 				result.add(values);
-			}
-			Iterable<String> elements = Splitter.on(lotSeparator).trimResults()
+				result = ImmutableList.copyOf(result);
+			} else {
+				Iterable<String> elements = Splitter.on(lotSeparator)
+						.trimResults()
 					.split(values);
 
-			result = ImmutableList.copyOf(newLinkedList(elements));
+				result = ImmutableList.copyOf(elements);
+			}
 
 		} else {
 			result = Collections.emptyList();
@@ -70,13 +74,15 @@ public class LotWizard extends Wizard {
 	@Override
 	public boolean performFinish() {
 
+		String lotSeparatorTrimmed = nullToEmpty(lotSeparator).trim();
+
 		StringBuilder builder = new StringBuilder();
 		builder.append(one.getText1());
 		if (!isNullOrEmpty(two.getText1())) {
-			builder.append(lotSeparator).append(two.getText1());
+			builder.append(lotSeparatorTrimmed).append(two.getText1());
 		}
 		if (!isNullOrEmpty(three.getText1())) {
-			builder.append(lotSeparator).append(three.getText1());
+			builder.append(lotSeparatorTrimmed).append(three.getText1());
 		}
 
 		lotText.setText(builder.toString());

@@ -22,8 +22,9 @@
       <update label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
+
    <plugin
-         id="com.verticon.tracker.irouter.eventadmin.gateway"
+         id="com.verticon.tracker.trigger.view"
          download-size="0"
          install-size="0"
          version="0.0.0"

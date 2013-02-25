@@ -15,6 +15,7 @@ public class PreferenceConstants {
 	public static final String P_SHOW_LABEL_PATH_BOOLEAN = "booleanShowFullLabelPathPreference";
 	public static final String P_PRINT_STRING = "stringPrintPreference";
 	public static final String P_LOT_SEPARATOR_STRING = "stringLotSepartorPreference";
+	public static final String P_LOT_DAY_AT_WEIGHING_FORMATTER = "stringLotAtWeighDayFormaterPreference";
 
 	public static final String P_VALID_LOT_SUFFIXES_STRING = "stringLotValidSuffixesPreference";
 	public static final String P_VALID_LOT_ID_MAX_SIZE_INTEGER = "stringLotValidIDMaxSizePreference";
@@ -29,9 +30,9 @@ public class PreferenceConstants {
 	/**
 	 * Value,unit,datestamp-mmddyy,error
 	 */
-	public static final String DEFAULT_BODY = "%3$5.2f,%2$s,%1$tm%1$td%ty,%4$5.4f";
+	public static final String DEFAULT_BODY = "%3$5.2f,%2$s,%1$tm%1$td%1$ty,%4$5.4f";
 	public static final String DEFAULT_ROOT = "%%BTW%% /AF=\"" + LABEL_FILE
 			+ "\" /D=<Trigger File Name> /PRN=\"" + PRINTER
 			+ "\" /R=3 /P /DD %n%%END%%%n";
-
+	public static final String DEFAULT_DATE_AT_WEIGHING_FORMATTER = "%1$tm%1$td%1$ty";
 }
