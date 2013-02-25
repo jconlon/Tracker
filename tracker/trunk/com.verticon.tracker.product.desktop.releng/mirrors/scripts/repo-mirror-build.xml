@@ -179,6 +179,23 @@
 			</p2.mirror>
 		</target>
 	
+	<target name="create-mirror-restlet">   	    
+		<p2.mirror source="http://p2.restlet.org/2.1" destination="${mirrors.dir}restlet">	
+			<iu id="org.restlet.feature.group"/>
+			<iu id="org.restlet.ext.servlet.feature.group"/>
+		</p2.mirror>
+	</target>
+	
+	<target name="create-mirror-restlet-osgi">		   	    
+		<p2.mirror source="http://bryanhunt.github.com/Restlet-Extension-for-OSGi-Environments/releases/0.5.3" destination="${mirrors.dir}restlet-osgi">	
+			<iu id="org.restlet.ext.osgi.di.eclipse.feature.feature.group"/>
+			<iu id="org.restlet.ext.osgi.servlet.feature.feature.group"/>
+			<iu id="org.restlet.ext.osgi.wadl.di.eclipse.feature.feature.group"/>
+			<iu id="org.restlet.ext.osgi.developer.junit.feature.feature.group"/>
+		</p2.mirror>
+	</target>
+	
+	
 	<!-- Currently not used -->
 	<target name="create-mirror-juno-uml2">
    	    
