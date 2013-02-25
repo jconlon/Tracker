@@ -6,7 +6,7 @@ com.verticon.tracker.irouter.event.admin.gateway Version 1.0.0
 
 h2. Introduction
 
-The EventAdmin Gateway is iRouter component is a user configurable business domain gateway. It acts as a EventAdmin consumer of String and sends these as String products to the iRouter.
+The EventAdmin Gateway iRouter component is a user configurable business domain gateway. It acts as a EventAdmin consumer of String and sends these as String products to the iRouter.
 
 An OSGi EventAdmin to iRouter gateway enables desktop applications to inject arbitrary products into iRouter consumer components. This component implements the OSBi EventHandler for listening to the EventAdmin message bus and an iRouter Producer interface that initially produces String products.
 
