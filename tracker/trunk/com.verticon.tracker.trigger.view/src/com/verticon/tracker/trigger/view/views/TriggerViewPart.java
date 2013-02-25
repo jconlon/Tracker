@@ -402,10 +402,7 @@ public class TriggerViewPart extends ViewPart {
 		group.add(lotLink);
 		section.setClient(client);
 
-		// td = new TableWrapData(TableWrapData.FILL);
-		// td.grabHorizontal = true;
-		// td.colspan = 4;
-		// lotLink.setLayoutData(td);
+
 		lotLink.addHyperlinkListener(new HyperlinkAdapter() {
 			@Override
 			public void linkActivated(HyperlinkEvent e) {
@@ -413,6 +410,7 @@ public class TriggerViewPart extends ViewPart {
 						new LotWizard(lotText));
 				dialog.open();
 				triggerViewer.refresh();
+				validate();
 			}
 		});
 
@@ -491,7 +489,7 @@ public class TriggerViewPart extends ViewPart {
 				if (dialog.open() == Window.OK) {
 					valuesText.setText(dialog.getValues());
 					triggerViewer.refresh();
-
+					validate();
 				}
 			}
 		});
@@ -613,16 +611,6 @@ public class TriggerViewPart extends ViewPart {
 
 		createBottomButtonBar(parent, sashForm, adminControl, formControl);
 
-		triggerViewer.getTableViewer().addSelectionChangedListener(
-				new ISelectionChangedListener() {
-					@Override
-					public void selectionChanged(SelectionChangedEvent event) {
-						boolean canExecute = canExecuteQuery(event);
-						setTriggerButton.setEnabled(canExecute);
-						createTriggerFileButton.setEnabled(canExecute);
-
-					}
-				});
 
 	}
 
@@ -806,35 +794,32 @@ public class TriggerViewPart extends ViewPart {
 
 	private IStatus currentStatus;
 
-	private boolean canExecuteQuery(SelectionChangedEvent event) {
-		boolean result = false;
-		boolean isOnlyOne = ((IStructuredSelection) event.getSelection())
-				.size() == 1;
-		if (isOnlyOne) {
-			ITriggerEntry entry = (ITriggerEntry) ((IStructuredSelection) event
-					.getSelection()).getFirstElement();
-
-			validate(entry);
-
-			if (currentStatus.getSeverity() < IStatus.ERROR) {
-				result = true;
-			}
-
-		}
-		return result;
-	}
-
 	private void validate(ITriggerEntry entry) {
 		currentStatus = entry.validateEntry();
 		updateFormMessages();
-
+		updateExecutionActionsAndButtonEnableStatus();
 	}
 
 	private void validate() {
 		ITriggerEntry entry = (ITriggerEntry) ((IStructuredSelection) triggerViewer
 				.getSelection()).getFirstElement();
 		currentStatus = entry.validateEntry();
+		// System.out.println("Current status = " + currentStatus);
 		updateFormMessages();
+		updateExecutionActionsAndButtonEnableStatus();
+	}
+	
+	private void updateExecutionActionsAndButtonEnableStatus() {
+		//can check currentStatus
+		boolean enabled = currentStatus != null
+				&& currentStatus.getSeverity() == IStatus.OK
+				&& ((IStructuredSelection) triggerViewer.getSelection()).size() == 1;
+		// System.out.println("Actions: " + enabled);
+		setTriggerAction.setEnabled(enabled);
+		createTriggerFileAction.setEnabled(enabled);
+		setTriggerButton.setEnabled(enabled);
+		createTriggerFileButton.setEnabled(enabled);
+
 	}
 
 	private void updateForm(SelectionChangedEvent event) {
@@ -870,17 +855,22 @@ public class TriggerViewPart extends ViewPart {
 			listener = new ISelectionChangedListener() {
 				@Override
 				public void selectionChanged(SelectionChangedEvent event) {
-					boolean isEmpty = event.getSelection().isEmpty();
-					if (isEmpty) {
+					int size = ((IStructuredSelection) event.getSelection())
+							.size();
+					if (size > 1) {
 						removeTriggerAction.setEnabled(false);
 						setTriggerAction.setEnabled(false);
 						createTriggerFileAction.setEnabled(false);
+						setTriggerButton.setEnabled(false);
+						createTriggerFileButton.setEnabled(false);
+					} else if (event.getSelection().isEmpty()) {
+						removeTriggerAction.setEnabled(false);
+						setTriggerAction.setEnabled(false);
+					    createTriggerFileAction.setEnabled(false);
+					    setTriggerButton.setEnabled(false);
+						createTriggerFileButton.setEnabled(false);
 					} else {
 						removeTriggerAction.setEnabled(true);
-						boolean canExecute = canExecuteQuery(event);
-						setTriggerAction.setEnabled(canExecute);
-						createTriggerFileAction.setEnabled(canExecute);
-
 						updateForm(event);
 					}
 
@@ -889,6 +879,7 @@ public class TriggerViewPart extends ViewPart {
 		}
 		triggerViewer.addSelectionChangedListener(listener);
 	}
+
 
 	private void createActions() {
 		IWorkbench workbench = PlatformUI.getWorkbench();

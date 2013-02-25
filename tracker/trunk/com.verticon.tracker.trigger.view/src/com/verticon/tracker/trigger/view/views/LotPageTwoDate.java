@@ -4,6 +4,7 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 
 import java.util.List;
 
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
@@ -17,8 +18,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import com.verticon.tracker.trigger.view.TriggerViewPlugin;
+import com.verticon.tracker.trigger.view.preferences.PreferenceConstants;
+
 public class LotPageTwoDate extends WizardPage {
-	private static final String TIME_AT_WEIGHING_FORMATTER = "%1$tm%1$td%ty";
+
 	private Text text1;
 	private Composite container;
 	static final String USE_CURRENT_DATE = "USE TIME OF WEIGHING";
@@ -29,7 +33,8 @@ public class LotPageTwoDate extends WizardPage {
 		super("Second Page");
 		setTitle("Lot Creatiion Wizard");
 		setDescription("Please enter a value for the Lot Date field or check the box"
-				+ " to have the system insert the date at weighing.");
+				+ " to have the system insert the format characters to print the date at weighing."
+				+ "(Note the format characters are specified in the user preferences.)");
 		setControl(text1);
 	}
 
@@ -86,8 +91,12 @@ public class LotPageTwoDate extends WizardPage {
 				.getCurrentValues();
 		String myValue = initialTextValues.size() > 1 ? initialTextValues
 				.get(1) : null;
+		IPreferenceStore store = TriggerViewPlugin.getDefault()
+				.getPreferenceStore();
+		String lotDateFormatter = store
+				.getString(PreferenceConstants.P_LOT_DAY_AT_WEIGHING_FORMATTER);
 		if (!isNullOrEmpty(myValue)
-				&& !TIME_AT_WEIGHING_FORMATTER.equals(myValue)) {
+ && !lotDateFormatter.equals(myValue)) {
 			text1.setText(myValue);
 		}
 
@@ -134,7 +143,12 @@ public class LotPageTwoDate extends WizardPage {
 		}
 	}
 	public String getText1() {
-		return useWeighingDate.getSelection() ? TIME_AT_WEIGHING_FORMATTER
-				: text1.getText();
+		if (useWeighingDate.getSelection()) {
+			IPreferenceStore store = TriggerViewPlugin.getDefault()
+					.getPreferenceStore();
+			return store
+					.getString(PreferenceConstants.P_LOT_DAY_AT_WEIGHING_FORMATTER);
+		}
+		return text1.getText();
 	}
 }

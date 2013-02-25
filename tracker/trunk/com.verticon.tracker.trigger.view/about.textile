@@ -10,19 +10,19 @@ Triggers are messages that interact with external programs or devices. Triggers 
 
 h3. Trigger Files
 
-Trigger files are files written to a directory that cause (or Trigger) a specification to occur.  External services can monitor a scan directory for these trigger files and triggers a specified action.  
+Trigger files are files written to a directory that cause (or Trigger) an external action, process or service.  External applications can monitor a directory for these trigger files and to invoke an action on their detection.  
 
-h4. 
+h4. Label Printing Application Example
 
-For example the printing of a label.  Trigger files can contain data that can be read by printing applications and placed within the fields of a label.   Trigger files can also contain commands that can specify certain functions, like use this label file or print from this printer.
+Label printing is an example.  Trigger files can contain data that can be read by some printing applications and placed within the fields of a label.   Trigger files can also contain commands that can specify variables that are interpreted by the application.
 	
-h2. Label Printing Example
+h4. Measurements in Trigger files
 
 iRouter components can connect to scales and create Trigger files when a weight is placed on the scale.  The actual weight information is written inside of the Trigger file and interpreted by an external application to create weight fields with numbers. 
 
 h2. User Interface
 
-This component provides an Administration and an user interface for managing multiple trigger files. 
+Trigger File Manager is an administrator and an operator interface for managing multiple trigger files. 
 
 * Admin and user interfaces use a master table of triggers and form that shows the details of the selected trigger.
 * Table columns can be sorted, moved and hidden and its rows can be filtered.
