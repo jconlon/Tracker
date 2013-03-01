@@ -240,7 +240,8 @@ public class ConfigKeyTest {
 	public final void testGetFormatedMeasurement() {
 		Measurement measurement = new Measurement(100, .0001, Unit.kg,
 				System.currentTimeMillis());
-		String values = ConfigKey.getFormatedMeasurement(config, measurement);
+		String values = ConfigKey.getFormatedMeasurement(config, null,
+				measurement);
 		assertThat("Values was not created", values, is(notNullValue()));
 
 		// Sun Feb 03 18:03:23 CST 2013,POUNDS,220.462,0.0002
@@ -251,19 +252,83 @@ public class ConfigKeyTest {
 		ConfigKey.MEASUREMENT_VALUE_FORMAT.configure(config,
 				"Values are: %1$tc,%3$5.2f,lbs,%4$5.4f");
 
-		values = ConfigKey.getFormatedMeasurement(config, measurement);
+		values = ConfigKey.getFormatedMeasurement(config, null, measurement);
 		assertThat("Values was not created", values, is(notNullValue()));
 		assertThat("Values default incorrect was " + values,
 				values.matches("Values are:.*,220.46,lbs,0.0002"), is(true));
-		// Uncomment the following to see output easier. Note this will cause an
-		// error!
+
 		ConfigKey.MEASUREMENT_VALUE_FORMAT.configure(config,
 				"Values are: %3$5.2f,%2$s,%1$tm%1$td%ty,%4$5.4f");
 		measurement = new Measurement(1.6666666666, .0001, Unit.kg,
 				System.currentTimeMillis());
-		values = ConfigKey.getFormatedMeasurement(config, measurement);
-		assertThat("Values default incorrect", values, is("whatever"));
+		values = ConfigKey.getFormatedMeasurement(config, "This is the output",
+				measurement);
+		assertThat("Values default incorrect", values, is("This is the output"));
+
+		// Null out the "This failure is expected" value to see output easier.
+		// Note this will cause an
+		// error!
+		values = ConfigKey.getFormatedMeasurement(config,
+				"This failure is expected", measurement);
+		assertThat("Values default incorrect", values,
+				is("This failure is expected"));
 
 	}
 
+	@Test
+	public final void testFormatting() {
+
+		Object[] args = { System.currentTimeMillis(), "POUNDS", 100d, .0001d,
+				"c:\\command\\command.btw", "EasyCoder F4 (203 dpi)" };
+		// Map<String, Object> map = newLinkedHashMap();
+		// // Measurement
+		// map.put("date", System.currentTimeMillis());
+		// map.put("units", "POUNDS");
+		// map.put("value", 100d);
+		// map.put("error", .0001d);
+		// // BT
+		// map.put("labelPath", "c:\\command\\command.btw");
+		// map.put("printer", "\"EasyCoder F4 (203 dpi)\"");
+		// // Reserved
+		//
+		// // Customer
+		// map.put("labelTitle", "Around the Town");
+		// map.put("name", "Jerome Davis");
+		// map.put("title", "Buyer");
+		// map.put("street", "1220 Governor Sq.");
+		// map.put("city", "Hadden");
+		// map.put("state", "Alberta");
+		// map.put("postalCode", "WA1 1DP");
+		//
+		// map.put("country", "Canada");
+		// map.put("phone", "(171) 555-7788");
+
+// System.out.printf("%s,%s, %s", args);
+		
+		String expected;
+		// "BTW /AF=%s /D=<Trigger File Name> /PRN=%s /R=3 /P /DD \n"
+		// +
+		// "%END%\n"+
+		// "%s,%s,%s"
+		// +
+		// "Around the Town,Jerome Davis,Buyer,1220 Governor Sq.,Hadden,Alberta,WA1 1DP,Canada,(171) 555-7788,(171) 555-6750";
+
+		expected = "%%BTW%% /AF=\"%5$s\" /D=<Trigger File Name> /PRN=\"%6$s\" /R=3 /P /DD"
+				+ "\n"
+				+ "%%END%%"
+				+ "\n"
+				+ "%3$5.2f,%2$s,%1$tm%1$td%ty,%4$5.4f";
+
+		System.out.printf(expected, args);
+
+		// PrintService[] printServices =
+		// PrintServiceLookup.lookupPrintServices(
+		// null, null);
+		// System.out.println("Number of print services: " +
+		// printServices.length);
+		//
+		// for (PrintService printer : printServices)
+		// System.out.println("Printer: " + printer.getName());
+
+	}
 }
