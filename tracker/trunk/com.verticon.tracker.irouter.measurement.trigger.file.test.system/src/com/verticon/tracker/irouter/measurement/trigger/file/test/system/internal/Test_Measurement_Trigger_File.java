@@ -13,11 +13,13 @@ package com.verticon.tracker.irouter.measurement.trigger.file.test.system.intern
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.assertThat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -25,6 +27,9 @@ import junit.framework.TestCase;
 
 import org.junit.Test;
 import org.osgi.framework.BundleContext;
+import org.osgi.service.event.Event;
+import org.osgi.service.event.EventAdmin;
+import org.osgi.service.monitor.MonitorAdmin;
 import org.osgi.service.monitor.Monitorable;
 import org.osgi.service.monitor.StatusVariable;
 import org.osgi.service.wireadmin.BasicEnvelope;
@@ -37,7 +42,9 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
+import com.google.common.collect.ImmutableMap;
 import com.verticon.tracker.irouter.measurement.trigger.file.StatusVar;
+
 
 /**
  * 
@@ -65,6 +72,9 @@ public class Test_Measurement_Trigger_File extends TestCase {
 
 
 	static String PLUGIN_ID = "com.verticon.tracker.irouter.measurement.trigger.file.test.system";
+	private static final String EVENT_TOPIC = "com/verticon/tracker/irouter";
+	private static final String P_EVENT_PROPERTY_VERTICON_STRING = "com.verticon.product.string";
+
 	/**
 	 * slf4j Marker to keep track of bundle
 	 */
@@ -100,16 +110,18 @@ public class Test_Measurement_Trigger_File extends TestCase {
 	 * Injected services implement by
 	 * com.verticon.tracker.store.mongo.internal.Component
 	 */
-	static Monitorable monitorable;
+	static Monitorable monitorable;// TODO remove this and do everything through
+								// the administrator
 	static Consumer consumer;
+	static MonitorAdmin administrator;
+	static EventAdmin eventAdmin;
+
 
 	/**
 	 * Injected service implemented by the test framework
 	 */
 	static IController controller;
 
-	
-	
 
 	/**
 	 * Injected by ds
@@ -155,6 +167,26 @@ public class Test_Measurement_Trigger_File extends TestCase {
 	/**
 	 * Injected by ds
 	 * 
+	 * @param administrator
+	 */
+	public void setAdmin(MonitorAdmin administrator) {
+		logger.debug(bundleMarker, "DS injecting the administrator");
+		Test_Measurement_Trigger_File.administrator = administrator;
+	}
+
+	/**
+	 * Injected by ds
+	 * 
+	 * @param administrator
+	 */
+	public void unsetAdmin(MonitorAdmin administrator) {
+		logger.debug(bundleMarker, "DS nulling the administrator");
+		Test_Measurement_Trigger_File.administrator = null;
+	}
+
+	/**
+	 * Injected by ds
+	 * 
 	 * @param controller
 	 */
 	public void setController(IController controller) {
@@ -170,6 +202,22 @@ public class Test_Measurement_Trigger_File extends TestCase {
 	public void unsetController(IController controller) {
 		logger.debug(bundleMarker, "DS nulling the controller");
 		Test_Measurement_Trigger_File.controller = null;
+	}
+
+	/**
+	 * @param eventAdmin
+	 *            the eventAdmin to set
+	 */
+	public void setEventAdmin(EventAdmin eventAdmin) {
+		Test_Measurement_Trigger_File.eventAdmin = eventAdmin;
+	}
+
+	/**
+	 * @param eventAdmin
+	 *            the eventAdmin to set
+	 */
+	public void unsetEventAdmin(EventAdmin eventAdmin) {
+		Test_Measurement_Trigger_File.eventAdmin = null;
 	}
 
 	/**
@@ -215,13 +263,32 @@ public class Test_Measurement_Trigger_File extends TestCase {
 	//Tests
 	/**
 	 * This is mostly redundant all of these should be there to get this far.
+	 * 
+	 * @throws InterruptedException
 	 */
 	@Test
-	public void testContext() {
+	public void testContext() throws InterruptedException {
 		assertThat("BundleContext was not setup", context, is(notNullValue()));
+		TimeUnit.SECONDS.sleep(1);
 		StatusVariable var = monitorable
 				.getStatusVariable(StatusVar.WIRES_COUNT.id);
-		assertThat("Must have one wire connected", var.getInteger(), is(1));
+		assertThat("Must have one wire connected", var.getInteger(), is(2));
+
+		var = monitorable.getStatusVariable(StatusVar.WIRING_GROUP.id);
+		assertThat("Must have wire group test", var.getString(), is("test"));
+
+		var = monitorable
+				.getStatusVariable(StatusVar.MEASUREMENT_VALUE_FORMAT.id);
+		assertThat("Must have format ", var.getString(), is("%tc,%s,%s,%5.4f"));
+
+		// boolean settable = monitorable
+		// .settable(StatusVar.MEASUREMENT_VALUE_FORMAT.id);
+		// assertThat("Must be able to set the Measurement Value Formatter.",
+		// settable, is(true));
+		//
+		// settable = monitorable.settable(StatusVar.WIRING_GROUP.id);
+		// assertThat("Must be NOT able to set the WIRING_GROUP.", settable,
+		// is(false));
 	}
 
 	/**
@@ -235,7 +302,7 @@ public class Test_Measurement_Trigger_File extends TestCase {
 	public void testSendMeasurements() throws InterruptedException {
 		StatusVariable var = monitorable
 				.getStatusVariable(StatusVar.WIRES_COUNT.id);
-		assertThat("Must have one wire connected", var.getInteger(), is(1));
+		assertThat("Must have one wire connected", var.getInteger(), is(2));
 
 		var = monitorable
 				.getStatusVariable(StatusVar.MEASUREMENT_COUNT.id);
@@ -257,7 +324,7 @@ public class Test_Measurement_Trigger_File extends TestCase {
 		TimeUnit.SECONDS.sleep(1);
 		var = monitorable
 				.getStatusVariable(StatusVar.MEASUREMENT_COUNT.id);
-		assertThat("Must be Admin", var.getInteger(), is(1));
+		assertThat("Must have one measurement", var.getInteger(), is(1));
 
 		var = monitorable.getStatusVariable(StatusVar.LAST_FILE_NAME.id);
 		assertThat("FileName is incorrect, was: " + var.getString(), var
@@ -266,8 +333,8 @@ public class Test_Measurement_Trigger_File extends TestCase {
 		var = monitorable
 				.getStatusVariable(StatusVar.LAST_MEASUREMENT_VALUE.id);
 
-		assertThat("Values incorrect was: " + var.getString(),
-				var.getString().matches("\\d.*,POUNDS,220.462,2.20462E-4"),
+		assertThat("Values incorrect was: " + var.getString(), var.getString()
+				.matches("\\w.*,POUNDS,220.462,0.0002"),
 				is(true));
 
 		var = monitorable.getStatusVariable(StatusVar.LAST_MEASUREMENT_TIME.id);
@@ -280,6 +347,74 @@ public class Test_Measurement_Trigger_File extends TestCase {
 
 	}
 
+
+
+	/**
+	 * 
+	 * {'events.dateTime' : {$gte :new Date(2010, 02, 01), $lt : new Date(2011,
+	 * 04, 01)}}
+	 * 
+	 * @throws InterruptedException
+	 */
+	@Test
+	public void testSendMeasurementsWithChangedFormat()
+			throws InterruptedException {
+
+		StatusVariable var = monitorable
+				.getStatusVariable(StatusVar.MEASUREMENT_VALUE_FORMAT.id);
+		assertThat("Must have format ", var.getString(), is("%tc,%s,%s,%5.4f"));
+
+		// monitorable.setVar(StatusVar.MEASUREMENT_VALUE_FORMAT.id,
+		// "%tc,%s,%s,%5.4f Hi there!");
+		sendString("%tc,%s,%s,%5.4f Hi there!");
+
+		TimeUnit.SECONDS.sleep(1);
+		var = monitorable
+				.getStatusVariable(StatusVar.MEASUREMENT_VALUE_FORMAT.id);
+		assertThat("Must have format ", var.getString(),
+				is("%tc,%s,%s,%5.4f Hi there!"));
+
+		long t = sendMeasurement(100, .0001);
+		TimeUnit.SECONDS.sleep(1);
+		var = monitorable.getStatusVariable(StatusVar.MEASUREMENT_COUNT.id);
+		assertThat("Must be Admin", var.getInteger(), is(2));
+
+		var = monitorable.getStatusVariable(StatusVar.LAST_FILE_NAME.id);
+		assertThat("FileName is incorrect, was: " + var.getString(), var
+				.getString().matches("/tmp/measurement-\\d.*.txt"), is(true));
+
+		var = monitorable
+				.getStatusVariable(StatusVar.LAST_MEASUREMENT_VALUE.id);
+
+		assertThat("Values incorrect was: " + var.getString(), var.getString()
+				.matches("\\w.*,POUNDS,220.462,0.0002 Hi there!"), is(true));
+
+		var = monitorable.getStatusVariable(StatusVar.LAST_MEASUREMENT_TIME.id);
+		assertThat("Time of event is wrong", var.getString(),
+				is(String.format("%tT", t)));
+
+		// TimeUnit.SECONDS.sleep(100);
+
+		// assertThat("Output file must exist.", , is(notNullValue()));
+
+	}
+
+	@Test
+	public void testMonitorAdmin() {
+		String[] names = administrator.getMonitorableNames();
+		assertThat("There must be monitorable names", names.length,
+				is(greaterThan(0)));
+		for (String monitorableId : names) {
+			String[] varNames = administrator
+					.getStatusVariableNames(monitorableId);
+			for (String varName : varNames) {
+				System.out.printf(
+						"Monitorable monitorableId=%s, statusVarName=%s\n",
+						monitorableId, varName);
+			}
+		}
+	}
+
 	private long sendMeasurement(double d, double e) {
 		Measurement m = new Measurement(d, e, Unit.kg,
 				System.currentTimeMillis());
@@ -287,6 +422,14 @@ public class Test_Measurement_Trigger_File extends TestCase {
 				Configurator.OHAUS_WEIGHT);
 		controller.send(envelope);
 		return m.getTime();
+	}
+
+	private void sendString(String s) {
+		Map<String, String> output = ImmutableMap.of(
+				P_EVENT_PROPERTY_VERTICON_STRING, s);
+		Event event = new Event(EVENT_TOPIC, output);
+
+		eventAdmin.sendEvent(event);
 	}
 
 	@SuppressWarnings("unused")

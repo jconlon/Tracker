@@ -6,4 +6,6 @@
   <reference bind="setMonitorable" cardinality="1..1" interface="org.osgi.service.monitor.Monitorable" name="Monitorable" policy="static" target="(com.verticon.tracker.irouter.measurement.trigger.file.test=testOne)"/>
   <reference bind="setConsumer" cardinality="1..1" interface="org.osgi.service.wireadmin.Consumer" name="Consumer" policy="static" target="(com.verticon.tracker.irouter.measurement.trigger.file.test=testOne)" unbind="unsetConsumer"/>
   <reference bind="setController" cardinality="1..1" interface="com.verticon.tracker.irouter.measurement.trigger.file.test.system.internal.IController" name="IController" policy="static" unbind="unsetController"/>
+  <reference bind="setAdmin" cardinality="1..1" interface="org.osgi.service.monitor.MonitorAdmin" name="MonitorAdmin" policy="static" unbind="unsetAdmin"/>
+  <reference bind="setEventAdmin" cardinality="1..1" interface="org.osgi.service.event.EventAdmin" name="EventAdmin" policy="static" unbind="unsetEventAdmin"/>
 </scr:component>
