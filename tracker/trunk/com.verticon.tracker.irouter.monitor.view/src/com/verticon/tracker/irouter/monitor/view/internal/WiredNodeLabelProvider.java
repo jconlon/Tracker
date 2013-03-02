@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.verticon.tracker.irouter.monitor.view.internal;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_CONSUMER_PID;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_PRODUCER_PID;
 
@@ -64,10 +65,12 @@ public class WiredNodeLabelProvider extends LabelProvider implements
 					
 				}
     		}
-    		return images.get(this);
+			Image result = images.get(this);
+			checkArgument(!result.isDisposed(), "The image was disposed.");
+			return result;
     	}
     }
-    private Map<String, Color> nodeColors = new HashMap<String, Color>();
+    private final Map<String, Color> nodeColors = new HashMap<String, Color>();
 	private boolean showWireLables = true;
 	private static Map<NODE, Image> images = new HashMap<NODE, Image>();
 	
@@ -79,6 +82,7 @@ public class WiredNodeLabelProvider extends LabelProvider implements
     void setShowWireLabels(boolean showWireLables) {
 		this.showWireLables = showWireLables;
 	}
+
 
 	
 	@Override
@@ -176,11 +180,12 @@ public class WiredNodeLabelProvider extends LabelProvider implements
 	 */
 	@Override
 	public void dispose() {
-		for (Image image : images.values()) {
-			image.dispose();
-		}
-		
 		super.dispose();
+		for (Image image : images.values()) {
+				image.dispose();
+
+		}
+		images.clear();
 	}
 
 	@Override
