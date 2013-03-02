@@ -46,8 +46,8 @@ import org.eclipse.swt.widgets.TableColumn;
 import org.eclipse.ui.IMemento;
 
 import com.verticon.tracker.trigger.view.ITriggerEntry;
-import com.verticon.tracker.trigger.view.TriggerViewPlugin;
 import com.verticon.tracker.trigger.view.TriggerEntryFactory;
+import com.verticon.tracker.trigger.view.TriggerViewPlugin;
 import com.verticon.tracker.trigger.view.preferences.PreferenceConstants;
 
 /**
@@ -57,7 +57,7 @@ import com.verticon.tracker.trigger.view.preferences.PreferenceConstants;
  */
 enum Column {
 	NAME("name", "Name", 210, 12), //
-	COMMENTS("comments", "Coments", 80, 13), //
+	COMMENTS("comments", "Comments", 80, 13), //
 	STATUS("status", "Status", 400, 15), //
 	FILE("file", "File", 70, 10), //
 	PRINTER("printer", "Printer", 70, 5), //
