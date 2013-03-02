@@ -32,7 +32,7 @@ import org.slf4j.MarkerFactory;
  */
 public class EventAdminGateway implements Monitorable, Producer, EventHandler {
 
-	private static String PLUGIN_ID = "com.verticon.tracker.irouter.measurement.trigger.file";
+	private static String PLUGIN_ID = "com.verticon.tracker.irouter.eventadmin.gateway";
 
 	/**
 	 * slf4j Marker to keep track of bundle
@@ -97,7 +97,7 @@ public class EventAdminGateway implements Monitorable, Producer, EventHandler {
 	public void consumersConnected(Wire[] wires) {
 		logger.debug(bundleMarker, "{} consumersConnected with wires={}", this,
 				Arrays.toString(wires));
-		statusMonitor.setWiresConnected(wires.length);
+		statusMonitor.setWiresConnected(wires != null ? wires.length : 0);
 		this.wires = wires;
 	}
 
