@@ -4,8 +4,6 @@ import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.KeyEvent;
-import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -13,46 +11,30 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import com.google.common.base.Splitter;
-import com.google.common.collect.Iterables;
-import com.verticon.tracker.trigger.view.ITriggerEntry;
+public class CopiesToPrintDialog extends TitleAreaDialog {
 
-public class ValuesDialog extends TitleAreaDialog {
+	private Text numberOfCopiesText;
 
+	private String numberOfCopies;
 
-	private Text values;
-	private String result;
-	private final ITriggerEntry triggerEntry;
-	private Text requiredValues;
-	private final int countRequired;
-	private final String requiredValuesValue;
-	private Button addButton;
-
-
-	public ValuesDialog(Shell parentShell, ITriggerEntry triggerEntry) {
+	public CopiesToPrintDialog(Shell parentShell) {
 		super(parentShell);
-		this.triggerEntry = triggerEntry;
-		this.requiredValuesValue = triggerEntry.getRequireValues();
-		Iterable<String> split = Splitter.on(',').trimResults()
-				.split(requiredValuesValue);
-		this.countRequired = Iterables.size(split);
-
 	}
-
 
 	@Override
 	public void create() {
 		super.create();
 		// Set the title
-		setTitle("Values Selector");
-
+		setTitle("Create Trigger File");
 		// Set the message
-		setMessage(String.format("Specify %s comma separated values.",
-				countRequired), IMessageProvider.INFORMATION);
+		setMessage("Enter the number of copies to create.",
+				IMessageProvider.INFORMATION);
 
 	}
 
@@ -69,34 +51,23 @@ public class ValuesDialog extends TitleAreaDialog {
 		gridData.horizontalAlignment = GridData.FILL;
 
 		Label label1 = new Label(parent, SWT.NONE);
-		label1.setText("Names of the Required Values:");
+		label1.setText("Number of Trigger File Copies:");
 
-		requiredValues = new Text(parent, SWT.BORDER | SWT.READ_ONLY);
-		requiredValues.setLayoutData(gridData);
-		requiredValues.setText(triggerEntry.getRequireValues());
-
-		Label label2 = new Label(parent, SWT.NONE);
-		label2.setText(String.format("%s Values:", countRequired));
-		// You should not re-use GridData
-		gridData = new GridData();
-		gridData.grabExcessHorizontalSpace = true;
-		gridData.horizontalAlignment = GridData.FILL;
-		values = new Text(parent, SWT.BORDER);
-		values.setText(triggerEntry.getValues());
-		values.setLayoutData(gridData);
-		values.addKeyListener(new KeyListener() {
-
+		numberOfCopiesText = new Text(parent, SWT.BORDER);
+		numberOfCopiesText.setLayoutData(gridData);
+		numberOfCopiesText.addListener(SWT.Verify, new Listener() {
 			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-
+			public void handleEvent(Event e) {
+				String string = e.text;
+				char[] chars = new char[string.length()];
+				string.getChars(0, chars.length, chars, 0);
+				for (int i = 0; i < chars.length; i++) {
+					if (!('0' <= chars[i] && chars[i] <= '9')) {
+						e.doit = false;
+						return;
+					}
+				}
 			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				isValidInput();
-			}
-
 		});
 
 		return parent;
@@ -114,7 +85,7 @@ public class ValuesDialog extends TitleAreaDialog {
 		parent.setLayoutData(gridData);
 		// Create Add button
 		// Own method as we need to overview the SelectionAdapter
-		createOkButton(parent, OK, "Add", true);
+		createOkButton(parent, OK, "Print", true);
 		// Add a SelectionListener
 
 		// Create Cancel button
@@ -127,18 +98,17 @@ public class ValuesDialog extends TitleAreaDialog {
 				close();
 			}
 		});
-		isValidInput();
 	}
 
 	protected Button createOkButton(Composite parent, int id, String label,
 			boolean defaultButton) {
 		// increment the number of columns in the button bar
 		((GridLayout) parent.getLayout()).numColumns++;
-		addButton = new Button(parent, SWT.PUSH);
-		addButton.setText(label);
-		addButton.setFont(JFaceResources.getDialogFont());
-		addButton.setData(new Integer(id));
-		addButton.addSelectionListener(new SelectionAdapter() {
+		Button button = new Button(parent, SWT.PUSH);
+		button.setText(label);
+		button.setFont(JFaceResources.getDialogFont());
+		button.setData(new Integer(id));
+		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent event) {
 				if (isValidInput()) {
@@ -149,36 +119,21 @@ public class ValuesDialog extends TitleAreaDialog {
 		if (defaultButton) {
 			Shell shell = parent.getShell();
 			if (shell != null) {
-				shell.setDefaultButton(addButton);
+				shell.setDefaultButton(button);
 			}
 		}
-		setButtonLayoutData(addButton);
-		return addButton;
+		setButtonLayoutData(button);
+		return button;
 	}
 
 	private boolean isValidInput() {
 		boolean valid = true;
-		setErrorMessage(null);
-		if (values.getText().length() == 0) {
-			setErrorMessage(String.format(
-					"Please add %s comma separated values.",
-					countRequired));
-			valid = false;
-		} else if (countRequired != countOfValues()) {
-			setErrorMessage(String.format(
-					"You must specify %s comma separted values instead of %s.",
-					countRequired, countOfValues()));
+		if (numberOfCopiesText.getText().length() == 0) {
+			setErrorMessage("Please enter the number of copies");
 			valid = false;
 		}
 
-		addButton.setEnabled(valid);
 		return valid;
-	}
-
-	private int countOfValues() {
-		Iterable<String> split = Splitter.on(',').trimResults()
-				.split(values.getText());
-		return Iterables.size(split);
 	}
 
 	@Override
@@ -189,8 +144,8 @@ public class ValuesDialog extends TitleAreaDialog {
 	// Coyy textFields because the UI gets disposed
 	// and the Text Fields are not accessible any more.
 	private void saveInput() {
+		numberOfCopies = numberOfCopiesText.getText();
 
-		result = values.getText();
 	}
 
 	@Override
@@ -199,7 +154,8 @@ public class ValuesDialog extends TitleAreaDialog {
 		super.okPressed();
 	}
 
-	public String getValues() {
-		return result;
+	public int getNumberOfCopies() {
+		return Integer.parseInt(numberOfCopies);
 	}
+
 }

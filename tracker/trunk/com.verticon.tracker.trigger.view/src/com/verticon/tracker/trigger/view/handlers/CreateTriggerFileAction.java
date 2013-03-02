@@ -26,6 +26,7 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.window.Window;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,6 +36,7 @@ import com.google.common.io.Files;
 import com.verticon.tracker.trigger.view.ITriggerEntry;
 import com.verticon.tracker.trigger.view.TriggerViewPlugin;
 import com.verticon.tracker.trigger.view.preferences.PreferenceConstants;
+import com.verticon.tracker.trigger.view.views.CopiesToPrintDialog;
 import com.verticon.tracker.trigger.view.views.TriggerViewer;
 
 /**
@@ -69,15 +71,38 @@ public class CreateTriggerFileAction extends Action {
 		IPreferenceStore store = TriggerViewPlugin.getDefault()
 				.getPreferenceStore();
 
-		try {
-			File destination = getFile(store);
-			logger.info(bundleMarker, "Outputing trigger file = {}",
-					destination);
+		int count = 0;
+		CopiesToPrintDialog dialog = new CopiesToPrintDialog(viewer
+				.getControl().getShell());
+		dialog.create();
+		if (dialog.open() == Window.OK) {
+			count = dialog.getNumberOfCopies();
 
-			Files.write(getValues(entry), destination, Charsets.US_ASCII);
+		} else {
+			return;
+		}
+
+
+
+		try {
+			File destination = null;
+			for (int i = 0; i < count; i++) {
+				destination = createFile(entry, store);
+
+			}
+
+			if (count == 1) {
+				MessageDialog.openInformation(viewer.getControl().getShell(),
+						"Trigger File Creator",
+						String.format("Created trigger file: %s", destination));
+			} else {
+
 			MessageDialog.openInformation(viewer.getControl().getShell(),
 					"Trigger File Creator",
-					String.format("Created file: %s", destination));
+ String.format(
+								"Created %s trigger files in %s", count,
+								destination.getParent()));
+			}
 		} catch (IOException e) {
 			logger.error(bundleMarker, "Failed to write test trigger.", e);
 			MessageDialog.openError(viewer.getControl().getShell(),
@@ -85,11 +110,20 @@ public class CreateTriggerFileAction extends Action {
 		}
 	}
 
+	private File createFile(ITriggerEntry entry, IPreferenceStore store)
+			throws IOException {
+		File destination = getFile(store);
+		logger.info(bundleMarker, "Outputing trigger file = {}", destination);
+
+		Files.write(getValues(entry), destination, Charsets.US_ASCII);
+		return destination;
+	}
+
 	private static String getValues(ITriggerEntry entry) {
 		String format = entry.format();
 		String result = String.format(
 				format, System.currentTimeMillis(), //
-				null,// weight units
+				"",// weight units
 				Double.NaN,// Double.NaN, //
 				Double.NaN);
 		// Find the first comma it should and prepend the noWeight message
