@@ -58,7 +58,7 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock {
 	 * Map factory Pids as keys to IDetailsPage implementations. A template
 	 * factory use a TEMPLATE constant .
 	 */
-	private Map<INode, IDetailsPage> keyMap = new HashMap<INode, IDetailsPage>();
+	private final Map<INode, IDetailsPage> keyMap = new HashMap<INode, IDetailsPage>();
 
 	private WiredNodeLabelProvider labelProvider;
 
@@ -86,6 +86,7 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock {
 		managedForm.addPart(spart);
 
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
+			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				managedForm.fireSelectionChanged(spart, event.getSelection());
 			}
@@ -147,6 +148,7 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock {
 	protected void createToolBarActions(IManagedForm managedForm) {
 		final ScrolledForm form = managedForm.getForm();
 		Action haction = new Action("hor", Action.AS_RADIO_BUTTON) {
+			@Override
 			public void run() {
 				sashForm.setOrientation(SWT.HORIZONTAL);
 				form.reflow(true);
@@ -163,6 +165,7 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock {
 
 		}
 		Action vaction = new Action("ver", Action.AS_RADIO_BUTTON) {
+			@Override
 			public void run() {
 				sashForm.setOrientation(SWT.VERTICAL);
 				form.reflow(true);
@@ -182,6 +185,7 @@ public class MonitorMasterDetailsBlock extends MasterDetailsBlock {
 		form.getToolBarManager().add(vaction);
 
 		Action screenshotAction = new Action() {
+			@Override
 			public void run() {
 
 				Shell shell = Display.getCurrent().getActiveShell();
