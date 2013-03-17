@@ -86,20 +86,6 @@
           commandId="com.verticon.tracker.trigger.view.commands.exportTriggerEntries">
     </handler>
  </extension>
- <extension
-       point="org.eclipse.ui.bindings">
-    <key
-          commandId="com.verticon.tracker.trigger.view.commands.importTriggerEntries"
-          contextId="org.eclipse.ui.contexts.window"
-          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-          sequence="M1+7">
-    </key>
-    <key
-          commandId="com.verticon.tracker.trigger.view.commands.exportTriggerEntries"
-          contextId="org.eclipse.ui.contexts.window"
-          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-          sequence="M1+8">
-    </key>
- </extension>
+
 
 </plugin>
