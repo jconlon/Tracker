@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="MongoDB Collection Provider" id="com.verticon.mongo"
+       description="A MongoDB collection provider." >
+
+    <AD name="MongoDB Server Name"  id="server" 
+    	required="true" 
+    	type="String" 
+    	default="localhost:27017"
+        description="Name of the MongoDB Server Host and Port.)"/>
+   
+   <AD name="MongoDB Database Name" id="dbname" 
+ 		type="String"
+ 		required="true" 
+ 		default="ua_repo"
+		description="Name of the MongoDB database to use." />
+ 
+    <AD name="MongoDB User Name" id="username" 
+     	type="String" 
+     	required="false" 
+        description="Optional name of the MongoDB User."/> 
+   
+    <AD name="MongoDB User Password"                 
+    	id="password" 
+    	required="false"                                  
+    	type="String"                           
+    	description="Password for the MongoDB user."/>
+    
+    
+	<AD name="MongoDB Collection" id="collection" 
+    	type="String" 
+         description="Name of the MongoDB Collection"
+         default="useradmin"/> 
+  
+  </OCD>
+  
+  <Designate pid="com.verticon.mongo" bundle="*">
+		<Object ocdref="com.verticon.mongo"/>
+  </Designate>
+  
+  
+</metatype:MetaData>

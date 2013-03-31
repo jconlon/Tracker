@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Mongo UserAdmin Test
+Bundle-SymbolicName: com.verticon.osgi.useradmin.mongo.test
+Bundle-Version: 1.0.0.qualifier
+Fragment-Host: com.verticon.osgi.useradmin.mongo;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.junit
+Import-Package: com.google.common.eventbus;version="14.0.1"
