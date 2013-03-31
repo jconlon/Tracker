@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.fair.poi"
       label="%featureName"
-      version="0.2.1.qualifier"
+      version="0.2.2.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -20,6 +20,10 @@
    <url>
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates"/>
    </url>
+
+   <requires>
+      <import feature="org.apache.poi" version="2.5.1.qualifier"/>
+   </requires>
 
    <plugin
          id="com.verticon.tracker.fair.poi"
