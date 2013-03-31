@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+<extension
+         point="org.eclipse.core.expressions.propertyTesters">
+     
+      <propertyTester
+            class="com.verticon.osgi.useradmin.ui.internal.IsAuthenticatedUserPropertyTester"
+            id="com.verticon.osgi.useradmin.ui.propertyTester.IsAuthenticatedUser"
+            namespace="com.verticon.osgi.useradmin.ui"
+            properties="isNotSignedOn,isSignedOn,hasUserAdminService"
+            type="java.lang.Object">
+      </propertyTester>
+      
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            name="User"
+            id="com.verticon.osgi.useradmin.ui.commands.category">
+      </category>
+      <command
+            name="Sign On"
+            categoryId="com.verticon.osgi.useradmin.ui.commands.category"
+            id="com.verticon.osgi.useradmin.ui.commands.signOnCommand">
+      </command>
+       <command
+            name="Change Password"
+            categoryId="com.verticon.osgi.useradmin.ui.commands.category"
+            id="com.verticon.osgi.useradmin.ui.commands.changePasswordCommand">
+      </command>
+       <command
+            name="Sign Off"
+            categoryId="com.verticon.osgi.useradmin.ui.commands.category"
+            id="com.verticon.osgi.useradmin.ui.commands.signOffCommand">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="com.verticon.osgi.useradmin.ui.commands.signOnCommand"
+            class="com.verticon.osgi.useradmin.ui.internal.SignOnHandler">
+      </handler>
+      <handler
+            commandId="com.verticon.osgi.useradmin.ui.commands.signOffCommand"
+            class="com.verticon.osgi.useradmin.ui.internal.SignOffHandler">
+      </handler>
+      <handler
+            commandId="com.verticon.osgi.useradmin.ui.commands.changePasswordCommand"
+            class="com.verticon.osgi.useradmin.ui.internal.ChangePasswordHandler">
+      </handler>
+      
+   </extension>
+  
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <menu
+               label="User"
+               mnemonic="U"
+               id="com.verticon.osgi.useradmin.ui.menus.userMenu">
+            <command
+                  commandId="com.verticon.osgi.useradmin.ui.commands.signOnCommand"
+                  mnemonic="S"
+                  id="com.verticon.osgi.useradmin.ui.menus.signOnCommand">
+               <visibleWhen>
+                    <and>
+               		<test forcePluginActivation="true"
+                 		 property="com.verticon.osgi.useradmin.ui.isNotSignedOn">
+            		</test>
+            		<test
+                 		 property="com.verticon.osgi.useradmin.ui.hasUserAdminService">
+            		</test>
+            		</and>
+            	</visibleWhen>
+            </command>
+             <command
+                  commandId="com.verticon.osgi.useradmin.ui.commands.changePasswordCommand"
+                  mnemonic="C"
+                  id="com.verticon.osgi.useradmin.ui.menus.changePasswordCommand">
+               <visibleWhen>
+               		<and>
+               		<test
+                 		 property="com.verticon.osgi.useradmin.ui.isSignedOn">
+            		</test>
+            		<test
+                 		 property="com.verticon.osgi.useradmin.ui.hasUserAdminService">
+            		</test>
+            		</and>
+            	</visibleWhen>
+            </command>
+            <command
+                  commandId="com.verticon.osgi.useradmin.ui.commands.signOffCommand"
+                  mnemonic="O"
+                  id="com.verticon.osgi.useradmin.ui.menus.signOffCommand">
+               <visibleWhen>
+                    <and>
+               		<test
+                 		 property="com.verticon.osgi.useradmin.ui.isSignedOn">
+            		</test>
+            		<test
+                 		 property="com.verticon.osgi.useradmin.ui.hasUserAdminService">
+            		</test>
+            		</and>
+            	</visibleWhen>
+            </command>
+         </menu>
+      </menuContribution>
+      <!--
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="com.verticon.osgi.useradmin.ui.toolbars.userToolbar">
+            <command
+                  commandId="com.verticon.osgi.useradmin.ui.commands.signOnCommand"
+                  icon="icons/sample.gif"
+                  tooltip="Authenticates the user for access to controlled services."
+                  id="com.verticon.osgi.useradmin.ui.toolbars.signOnCommand">
+            </command>
+         </toolbar>
+      </menuContribution>
+      -->
+   </extension>
+
+</plugin>
