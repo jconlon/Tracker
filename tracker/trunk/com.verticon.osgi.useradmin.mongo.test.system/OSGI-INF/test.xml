@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
+    activate="startup" name="com.verticon.osgi.useradmin.test.system">
+   <implementation 
+    class="com.verticon.osgi.useradmin.mongo.test.system.internal.Test_UserAdmin_Service"/>
+   <reference bind="setUserAdminService" cardinality="1..1" interface="org.osgi.service.useradmin.UserAdmin" name="UserAdminService" policy="static"/>
+</scr:component>
