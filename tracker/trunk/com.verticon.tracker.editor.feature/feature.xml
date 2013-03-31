@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.editor"
       label="%featureName"
-      version="0.5.5.qualifier"
+      version="0.5.6.qualifier"
       provider-name="%providerName"
       plugin="com.verticon.tracker.editor">
 
@@ -22,6 +22,10 @@
       <update label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
+
+   <requires>
+      <import feature="com.verticon.tracker.ocl.query" version="0.4.1.qualifier"/>
+   </requires>
 
    <plugin
          id="com.verticon.tracker"
