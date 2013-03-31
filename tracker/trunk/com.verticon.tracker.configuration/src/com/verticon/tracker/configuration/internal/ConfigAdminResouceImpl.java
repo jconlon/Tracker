@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2010 Verticon, Inc. and others.
+ * Copyright (c) 2013 Verticon, Inc. and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -12,10 +12,8 @@ package com.verticon.tracker.configuration.internal;
 
 import static com.google.common.collect.Sets.newHashSet;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,17 +21,14 @@ import java.util.Collection;
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
@@ -98,9 +93,9 @@ public class ConfigAdminResouceImpl extends XMLResourceImpl {
 	/**
 	 * Map of the model designates to their configuration
 	 */
-	private Map<String, Configuration> configMap = new HashMap<String, Configuration>();
+	private final Map<String, Configuration> configMap = new HashMap<String, Configuration>();
 
-	private Collection<Designate> snapshotDesignates = new ArrayList<Designate>();
+	private final Collection<Designate> snapshotDesignates = new ArrayList<Designate>();
 
 	/**
 	 * Constructor
@@ -140,7 +135,7 @@ public class ConfigAdminResouceImpl extends XMLResourceImpl {
 		Configuration[] configurations = null;
 		try {
 			configurations = configurationAdmin
-					.listConfigurations("(service.factoryPid=*tracker*)");
+					.listConfigurations("(service.factoryPid=*verticon*)");
 
 		} catch (InvalidSyntaxException e) {
 			throw new IOException("Could not list Configurations.", e);
@@ -412,7 +407,6 @@ public class ConfigAdminResouceImpl extends XMLResourceImpl {
 		return deletedDesignates;
 	}
 
-	@SuppressWarnings("unchecked")
 	private void integrated(MetaData metaData, Configuration[] configurations) {
 		if (configurations == null) {
 			logger.warn(bundleMarker, "Found no configuraitons.");
@@ -452,7 +446,7 @@ public class ConfigAdminResouceImpl extends XMLResourceImpl {
 					}
 					configMap.put(configDesignate.getPid(), configuration);
 					metaData.getDesignate().add(configDesignate);
-					snapshotDesignates.add((Designate)EcoreUtil.copy(configDesignate));
+					snapshotDesignates.add(EcoreUtil.copy(configDesignate));
 					break;
 				}
 
@@ -586,7 +580,7 @@ public class ConfigAdminResouceImpl extends XMLResourceImpl {
 	
 
     static ConfigurationAdmin findConfigurationAdmin() {
-		ServiceReference reference = getBundleContext().getServiceReference(
+		ServiceReference<?> reference = getBundleContext().getServiceReference(
 				ConfigurationAdmin.class.getName());
 		Object o = getBundleContext().getService(reference);
 		return o == null ? null : (ConfigurationAdmin) o;
