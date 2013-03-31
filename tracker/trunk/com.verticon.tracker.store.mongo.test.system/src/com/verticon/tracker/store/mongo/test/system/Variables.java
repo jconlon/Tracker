@@ -46,21 +46,25 @@ public enum Variables {
 	DEFAULT_ANIMAL("premises.animal.default", "consumer.Default_New_Animal",
 			false, "The kind of animal to save when a new tag is saved."),
 	//
-	MONGO_ADMIN_LOADED(null, "consumer.Admin_Loaded", 
-			true, "Administration configuration has been loaded to Mongo"),
-			//
-	IS_PUBLISHER(null, "consumer.Is_Publisher", 
-			true, "Authorized to publish (save) event histories for this Premises."),
-			//
-	IS_ADMINISTRATOR(null, "consumer.Is_Administrator", 
-			true, "Authorized to load administration configuration documents.");
+	PROVIDED_COLLECTION("collection", null, false, "Provided collection");
+	;
+	//
+	// MONGO_ADMIN_LOADED(null, "consumer.Admin_Loaded",
+	// true, "Administration configuration has been loaded to Mongo"),
+	// //
+	// IS_PUBLISHER(null, "consumer.Is_Publisher",
+	// true, "Authorized to publish (save) event histories for this Premises."),
+	// //
+	// IS_ADMINISTRATOR(null, "consumer.Is_Administrator",
+	// true, "Authorized to load administration configuration documents.");
 
 	public final String configID;
 	public final String statusVarID;
 	public final boolean notifiesOnChange;
 	public final String description;
 
-	Variables(String configKey, String statusVarID, boolean notifiesOnChange, String description) {
+	private Variables(String configKey, String statusVarID,
+			boolean notifiesOnChange, String description) {
 		this.configID = configKey;
 		this.statusVarID = statusVarID;
 		this.notifiesOnChange = notifiesOnChange;

@@ -66,6 +66,8 @@ public class Configuator {
 		props.put(Variables.DEFAULT_ANIMAL.configID, TrackerPackage.BOVINE_BISON);
 		props.put("tracker.wiring.group.name", "test");
 		props.put(PREMISES_URI.configID, ONE.uri);
+		// Prevent the connection of Mongo Authenticator to the TrackerStore
+		props.put("collection", "DONOT CONNECT TO THIS");
 		props.put(WireConstants.WIREADMIN_CONSUMER_SCOPE, new String[]{
 				TAG_SCOPE,//Tags ->Tags
 				ANIMAL_WEIGHT_SCOPE, //Measurements ->WeighIn
@@ -79,6 +81,8 @@ public class Configuator {
 	@SuppressWarnings("unused")
 	private static Dictionary<Object, Object> configure2() {
 		Dictionary<Object, Object> props = new Properties();
+		// Prevent the connection of Mongo Authenticator to the TrackerStore
+		props.put("collection", "DONOT CONNECT TO THIS");
 		props.put(Variables.MONGO_URI.configID, MONGO_LOCALHOST);
 		props.put("com.verticon.tracker.mongo.test","testTwo");
 		props.put(Variables.DEFAULT_ANIMAL.configID, TrackerPackage.SWINE);

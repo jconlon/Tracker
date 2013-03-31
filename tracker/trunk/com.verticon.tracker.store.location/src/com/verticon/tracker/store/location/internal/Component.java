@@ -39,9 +39,9 @@ public class Component implements ILocationServiceProvider {
 	}
 
 	/**
-	 * Injected by Declarative Services.
+	 * Entries injected by Declarative Services.
 	 */
-	private List<ITrackerStore> trackerStores = new CopyOnWriteArrayList<ITrackerStore>();
+	private final List<ITrackerStore> trackerStores = new CopyOnWriteArrayList<ITrackerStore>();
 	
 
 	public void activate() {
@@ -172,7 +172,7 @@ public class Component implements ILocationServiceProvider {
 	private Premises retrievePremises(String targetUri) throws IOException{
 		Premises result = null;
 		for (ITrackerStore trackerStore : trackerStores) {
-			result = trackerStore.retrievePremises(targetUri, null, null);
+			result = trackerStore.retrievePremises(targetUri);
 			if(result!=null){
 				break;
 			}
@@ -192,7 +192,4 @@ public class Component implements ILocationServiceProvider {
 		
 		return result;
 	}
-
-	
-
 }

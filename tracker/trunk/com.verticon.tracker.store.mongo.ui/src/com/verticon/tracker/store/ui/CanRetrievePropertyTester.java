@@ -10,19 +10,20 @@
  *******************************************************************************/
 package com.verticon.tracker.store.ui;
 
-import static com.verticon.osgi.useradmin.authenticator.Authenticator.TRACKER_STORE_REGISTRANT;
-
 import org.eclipse.core.expressions.PropertyTester;
 
-public class CanRegisterLocationsPropertyTester extends PropertyTester {
+public class CanRetrievePropertyTester extends PropertyTester {
 
-	
-	private static final String CAN_REGISTER_PREMISES = "canRegisterPremises";
+
+	private static final String CAN_RETRIEVE_ANIMALS = "canRetrieveAnimals";
+	private static final String CAN_RETRIEVE_PREMISES = "canRetrievePremises";
 
 	/**
 	 * 
-	 * Tests to see if there is a ITrackerStore and a the user has authorization
-	 * to register premises.
+	 * For premises retrievals tests if user is in the premises or the Retrieve
+	 * Global Group.
+	 * 
+	 * For animal retrievals test if the user is authorized.
 	 * 
 	 * Executes the property test determined by the parameter
 	 * <code>property</code>.
@@ -47,13 +48,14 @@ public class CanRegisterLocationsPropertyTester extends PropertyTester {
 	@Override
 	public boolean test(Object receiver, String property, Object[] args,
 			Object expectedValue) {
-		boolean result = false;
-		if (CAN_REGISTER_PREMISES.equals(property)) {
-			result = Activator.getDefault().hasRole(
-TRACKER_STORE_REGISTRANT)
-					&& Activator.getDefault().hasTrackerStoreService(null);
+
+		boolean results = false;
+		if (CAN_RETRIEVE_PREMISES.equals(property)) {
+			results = Activator.getDefault().isAuthenticatedUser();
+		} else if (CAN_RETRIEVE_ANIMALS.equals(property)) {
+			results = Activator.getDefault().isAuthenticatedUser();
 		}
-		return result;
+		return results;
 	}
 
 }

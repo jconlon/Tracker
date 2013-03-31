@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.store.mongo"
       label="%featureName"
-      version="1.0.0.qualifier"
+      version="1.2.0.qualifier"
       provider-name="%providerName"
       plugin="com.verticon.tracker.store.mongo">
 
@@ -24,7 +24,7 @@
    </url>
 
    <requires>
-      <import feature="com.verticon.mongo.emf.json.query" version="0.1.0.qualifier"/>
+      <import feature="com.verticon.mongo.emf.json.query" version="1.0.0.qualifier"/>
    </requires>
 
    <plugin

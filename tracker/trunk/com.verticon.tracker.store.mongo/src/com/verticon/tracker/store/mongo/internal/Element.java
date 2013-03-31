@@ -19,7 +19,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.verticon.osgi.metatype.MetatypePackage;
 import com.verticon.tracker.TrackerPackage;
-import com.verticon.tracker.store.admin.AdminPackage;
+
 
 /**
  * 
@@ -28,22 +28,13 @@ import com.verticon.tracker.store.admin.AdminPackage;
  */
 public enum Element {
 
-//	LOCATION(null, AgriculturePackage.Literals.LOCATION,"loc"),
-	//
-//	CONTAINER("id", KmlPackage.eINSTANCE.getContainer(), null),
-//	ASSOCIATION("name", AgriculturePackage.Literals.ASSOCIATION, null),
-	//
-//	PLACEMARK("id", KmlPackage.eINSTANCE.getPlacemark(), null),
-	//
 	PREMISES("uri", TrackerPackage.Literals.PREMISES, "location.loc"),
 	//
 	ANIMAL("id", TrackerPackage.Literals.ANIMAL, null),
 	//
 	TAG("id", TrackerPackage.Literals.TAG, "events.loc"),
 	//
-	OCD("iD", MetatypePackage.Literals.OCD, null),
-	//
-	ADMIN(null, AdminPackage.Literals.ADMIN, null);
+	OCD("iD", MetatypePackage.Literals.OCD, null);
 
 	// private final String indexName;
 	private final String indexKey;
@@ -67,11 +58,7 @@ public enum Element {
 		return colName;
 	}
 
-//	void ensureIndexForIDAttribute(DB db) {
-////		if (!hasIndexedIDAttribute(db)) {
-//			ensureIndex(db);
-////		}
-//	}
+
 	//FIXME for alternate query languages
 	String getQuery(String id) {
 		String query;
@@ -85,20 +72,6 @@ public enum Element {
 		
 	}
 
-//	private boolean hasIndexedIDAttribute(DB db) {
-//		if(indexKey==null){
-//			return false;
-//		}
-//
-//		for (DBObject dbObject : db.getCollection(getCollectionName())
-//				.getIndexInfo()) {
-//			if (dbObject.containsField("name")
-//					&& dbObject.get("name").equals(indexKey + "_1")) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
 
 	 void ensureIndex(DB db) {
 		if(indexKey!=null){

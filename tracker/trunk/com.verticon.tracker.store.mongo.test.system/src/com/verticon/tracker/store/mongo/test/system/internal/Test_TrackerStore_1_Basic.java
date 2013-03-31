@@ -11,6 +11,8 @@
 
 package com.verticon.tracker.store.mongo.test.system.internal;
 
+import static com.verticon.osgi.useradmin.authenticator.Authenticator.TRACKER_STORE_BI;
+import static com.verticon.osgi.useradmin.authenticator.Authenticator.TRACKER_STORE_REGISTRANT;
 import static com.verticon.tracker.store.mongo.test.system.TestUtils.getXMIResource;
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
@@ -25,6 +27,7 @@ import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -68,9 +71,7 @@ import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.store.ITrackerStore;
 import com.verticon.tracker.store.ValidationException;
-import com.verticon.tracker.store.admin.Admin;
-import com.verticon.tracker.store.admin.AdminPackage;
-import com.verticon.tracker.store.admin.api.ITrackerStoreAdmin;
+import com.verticon.tracker.store.mongo.test.system.IMockAuthenticatorController;
 import com.verticon.tracker.store.mongo.test.system.Member;
 import com.verticon.tracker.store.mongo.test.system.TestUtils;
 import com.verticon.tracker.store.mongo.test.system.Variables;
@@ -184,12 +185,13 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	 */
 	static ITrackerStore store;
 	static Monitorable monitorable;
-	static ITrackerStoreAdmin trackerStoreAdmin;
+	// static ITrackerStoreAdmin trackerStoreAdmin;
 
 	/**
 	 * Injected service implemented by the test framework
 	 */
 	static IController controller;
+	static IMockAuthenticatorController mockAuthenticatorController;
 
 	/**
 	 * Set of tag ids that will be assigned to Premises animals persisted to
@@ -237,9 +239,14 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		Test_TrackerStore_1_Basic.controller = controller;
 	}
 
-	public void setAdminLoader(ITrackerStoreAdmin loader) {
-		logger.debug(bundleMarker, "DS injecting the loader");
-		Test_TrackerStore_1_Basic.trackerStoreAdmin = loader;
+	// public void setAdminLoader(ITrackerStoreAdmin loader) {
+	// logger.debug(bundleMarker, "DS injecting the loader");
+	// Test_TrackerStore_1_Basic.trackerStoreAdmin = loader;
+	// }
+
+	void setMockAuthenticatorController(
+			IMockAuthenticatorController mockAuthenticatorController) {
+		Test_TrackerStore_1_Basic.mockAuthenticatorController = mockAuthenticatorController;
 	}
 
 	/**
@@ -298,7 +305,8 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		assertThat("Controller was not setup", controller, is(notNullValue()));
 		assertThat("Controller must have wires", controller.hasWires(),
 				is(true));
-		assertThat("Loader must be setup", trackerStoreAdmin, is(notNullValue()));
+		// assertThat("Loader must be setup", trackerStoreAdmin,
+		// is(notNullValue()));
 
 	}
 
@@ -312,8 +320,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		assertThat("Wrong db", db.getName(), is("tracker"));
 		DBCollection collection = db.getCollection("test");
 		collection.drop();
-		DBObject dbObject = new BasicDBObject();
-		dbObject.put("key1", "value1");
+		DBObject dbObject = new BasicDBObject("key1", "value1");
 		collection.insert(dbObject);
 		assertThat("Wrong number of collectons", collection.count(), is(1l));
 
@@ -330,8 +337,8 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	public void testClearMongoDB() throws UnknownHostException, MongoException,
 			InterruptedException {
 		TestUtils.clearTrackerDB();
-		monitorable
-				.resetStatusVariable(Variables.MONGO_ADMIN_LOADED.statusVarID);
+		// monitorable
+		// .resetStatusVariable(Variables.MONGO_ADMIN_LOADED.statusVarID);
 
 		TimeUnit.SECONDS.sleep(2);
 
@@ -406,71 +413,6 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 				is(true));
 		assertThat("No docs", coll.find().count(), is(0));
 
-		// Admin
-		coll = db.getCollection(AdminPackage.Literals.ADMIN.getName());
-		assertThat("Admin collection must exist.",
-				db.collectionExists(AdminPackage.Literals.ADMIN.getName()),
-				is(true));
-		assertThat("No docs", coll.find().count(), is(0));
-
-	}
-
-	/**
-	 * Use the monitorable service to determine admin permissions are all true
-	 * and admin doc is NOT loaded
-	 * 
-	 */
-	public void testPreLoaderState() {
-		StatusVariable isAdmin = monitorable
-				.getStatusVariable(Variables.IS_ADMINISTRATOR.statusVarID);
-		assertThat("Must be Admin", isAdmin.getBoolean(), is(true));
-
-		StatusVariable isPub = monitorable
-				.getStatusVariable(Variables.IS_PUBLISHER.statusVarID);
-		assertThat("Must be Publisher", isPub.getBoolean(), is(true));
-
-		StatusVariable isLoaded = monitorable
-				.getStatusVariable(Variables.MONGO_ADMIN_LOADED.statusVarID);
-		assertThat("Must not have loaded admin", isLoaded.getBoolean(),
-				is(false));
-	}
-
-	/**
-	 * Use the trackerStoreAdmin service to load an Admin doc
-	 * 
-	 * @throws IOException
-	 * @throws InterruptedException
-	 */
-	public void testLoader() throws IOException, InterruptedException {
-		logger.debug(bundleMarker, "starting testLoader");
-		Resource resource = getXMIResource(DOC_ADMIN, "");
-		Admin admin = (Admin) resource.getContents().get(0);
-		assertNotNull("Admin doc was not loaded from the file.", admin);
-		logger.debug(bundleMarker, "loading admin");
-		boolean isLoaded = trackerStoreAdmin.load(admin);
-		logger.debug(bundleMarker, "loaded admin");
-		assertThat("Must have loaded admin", isLoaded, is(true));
-
-	}
-
-	/**
-	 * Use the monitorable service to determine admin permissions are all true
-	 * and admin doc IS loaded
-	 * 
-	 */
-	public void testPostLoaderState() {
-		logger.debug(bundleMarker, "starting testPostLoaderState");
-		StatusVariable isAdmin = monitorable
-				.getStatusVariable(Variables.IS_ADMINISTRATOR.statusVarID);
-		assertThat("Must be Admin", isAdmin.getBoolean(), is(true));
-
-		StatusVariable isPub = monitorable
-				.getStatusVariable(Variables.IS_PUBLISHER.statusVarID);
-		assertThat("Must be Publisher", isPub.getBoolean(), is(true));
-
-		StatusVariable isLoaded = monitorable
-				.getStatusVariable(Variables.MONGO_ADMIN_LOADED.statusVarID);
-		assertThat("Must have loaded admin", isLoaded.getBoolean(), is(true));
 	}
 
 	/**
@@ -485,10 +427,14 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 
 		assertThat("Must have all the StatusVariableNames",
 				monitorable.getStatusVariableNames().length,
-				is(Variables.values().length));
+				is(Variables.values().length - 1));// One of them is not a
+													// status variable
 
 		for (Variables var : Variables.values()) {
 			StatusVariable sv = null;
+			if (var.statusVarID == null) {
+				continue;
+			}
 			try {
 				sv = monitorable.getStatusVariable(var.statusVarID);
 			} catch (IllegalArgumentException e) {
@@ -624,10 +570,72 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	 * Test registering invalid premises
 	 */
 	@Test
+	public void testRegister_Authorization() {
+		logger.debug(bundleMarker, "starting testRegister_Authorization");
+		Resource resource = getXMIResource(DOC_PREMISES, "");
+		Premises premises = (Premises) resource.getContents().get(0);
+		assertThat("URI must be urn:pin:H89234X", premises.getUri(),
+				is(Member.ONE.uri));
+		try {
+			store.register(premises);
+			fail("Should throw an Security exception.");
+		} catch (SecurityException e) {
+			assertThat("Failed to detect no authenticated user.",
+					e.getMessage(), is("User is not authenticated."));
+		} catch (Exception e) {
+			fail("Should throw a Security exception.");
+		}
+
+		try {
+			store.recordAnimals(premises);
+			fail("Should throw an Security exception.");
+		} catch (SecurityException e) {
+			assertThat("Failed to detect no authenticated user.",
+					e.getMessage(), is("User is not authenticated."));
+		} catch (Exception e) {
+			fail("Should throw a Security exception.");
+		}
+
+		try {
+			store.retrievePremises(Member.ONE.uri);
+			fail("Should throw an Security exception.");
+		} catch (SecurityException e) {
+			assertThat("Failed to detect no authenticated user.",
+					e.getMessage(), is("User is not authenticated."));
+		} catch (Exception e) {
+			fail("Should throw a Security exception.");
+		}
+		// Set the mock user
+		mockAuthenticatorController.setAuthenticatedUser(true);
+
+		try {
+			store.retrievePremises(Member.ONE.uri);
+			// fail("Should throw an Security exception.");
+		} catch (SecurityException e) {
+			assertThat("User has no authority to retrieve this premises.",
+					e.getMessage(),
+					is("User has no authority to retrieve this premises."));
+		} catch (Exception e) {
+			fail("Should throw a Security exception.");
+		}
+
+		// Set the mock roles
+		mockAuthenticatorController.setRoles(Arrays
+				.asList(Member.ONE.uri, Member.TWO.uri, Member.THREE.uri,
+ TRACKER_STORE_REGISTRANT,
+				TRACKER_STORE_BI));
+	}
+
+	/**
+	 * Test registering invalid premises
+	 */
+	@Test
 	public void testRegister_InvalidPremises() {
 		logger.debug(bundleMarker, "starting testRegister_InvalidPremises");
 		Resource resource = getXMIResource(DOC_INVALID_PREMISES_NO_LOCATION, "");
 		Premises premises = (Premises) resource.getContents().get(0);
+		assertThat("URI must be urn:pin:H89234X", premises.getUri(),
+				is(Member.ONE.uri));
 		try {
 			store.register(premises);
 			fail("Should throw an null pointer argument exception.");

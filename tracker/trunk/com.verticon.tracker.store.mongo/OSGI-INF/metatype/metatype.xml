@@ -56,6 +56,12 @@
 		<Option label="SWINE" value="24"/>	
 	</AD>
 	
+	<AD name="MongoDB UserAdmin Collection" id="collection" 
+    	type="String" 
+         description="Name of the MongoDB Collection to use for UserAdmin"
+         default="useradmin"/> 
+  
+	
 	<AD name="Component container label"  id="tracker.monitor.label" 
   	 	 type="String" 
          description="Name to label the node in the iRouter Monitor View graphics."
