@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.store"
       label="%featureName"
-      version="0.1.0.qualifier"
+      version="1.0.0.qualifier"
       provider-name="%providerName"
       plugin="com.verticon.tracker.store">
 
@@ -23,26 +23,23 @@
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
 
-   <plugin
-         id="com.verticon.tracker.store.admin.model"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.verticon.tracker.store.admin.model.edit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.verticon.tracker.store.admin.model.editor"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+   <requires>
+      <import plugin="org.eclipse.ui" version="3.8.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.8.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.expressions" version="3.4.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui.ide" version="3.8.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.resources" version="3.8.1" match="greaterOrEqual"/>
+      <import plugin="com.google.guava"/>
+      <import plugin="com.verticon.osgi.useradmin.authenticator"/>
+      <import plugin="com.verticon.tracker"/>
+      <import plugin="com.verticon.ui"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="org.eclipse.emf.gwt.ecore"/>
+      <import plugin="org.eclipse.osgi.services"/>
+      <import plugin="org.slf4j.api"/>
+      <import plugin="com.verticon.location.core.model"/>
+      <import plugin="com.verticon.location.service"/>
+   </requires>
 
    <plugin
          id="com.verticon.tracker.store.ui"

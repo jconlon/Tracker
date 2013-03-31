@@ -1,8 +1,8 @@
 package com.verticon.tracker.store.location.test.system.internal;
 
-import static com.verticon.tracker.store.mongo.test.system.TestUtils.clearLocalTrackerDB;
-import static com.verticon.tracker.store.mongo.test.system.TestUtils.getXMIResource;
 import static com.verticon.tracker.store.TrackerStoreUtils.registerPremises;
+import static com.verticon.tracker.store.mongo.test.system.TestUtils.clearTrackerDB;
+import static com.verticon.tracker.store.mongo.test.system.TestUtils.getXMIResource;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
@@ -31,6 +31,7 @@ import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.Position;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.store.ITrackerStore;
+import com.verticon.tracker.store.mongo.test.system.IMockAuthenticatorController;
 import com.verticon.tracker.store.mongo.test.system.Member;
 
 /**
@@ -82,6 +83,7 @@ public class Test_Store_LocationService {
 	 */
 	static ITrackerStore trackerStore;
 	static ILocationService locationService;
+	static IMockAuthenticatorController mockAuthenticatorController;
 
 	/**
 	 * @param locationService
@@ -102,6 +104,11 @@ public class Test_Store_LocationService {
 		Test_Store_LocationService.trackerStore = trackerStore;
 	}
 
+	void setMockAuthenticatorController(
+			IMockAuthenticatorController mockAuthenticatorController) {
+		Test_Store_LocationService.mockAuthenticatorController = mockAuthenticatorController;
+	}
+
 	/**
 	 * On activation of this component this method is called.
 	 * 
@@ -112,7 +119,7 @@ public class Test_Store_LocationService {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		clearLocalTrackerDB();
+		clearTrackerDB();
 	}
 
 	/**
@@ -131,6 +138,9 @@ public class Test_Store_LocationService {
 		// Setup the Mongo JSON query environment
 		new MongoQueryStandaloneSetupGenerated()
 				.createInjectorAndDoEMFRegistration();
+
+		// Set the mock user
+		mockAuthenticatorController.setAuthenticatedUser(true);
 
 	}
 

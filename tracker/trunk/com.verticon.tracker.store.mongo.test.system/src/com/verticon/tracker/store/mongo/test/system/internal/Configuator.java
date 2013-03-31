@@ -14,6 +14,7 @@ package com.verticon.tracker.store.mongo.test.system.internal;
 import static com.google.common.base.Strings.isNullOrEmpty;
 import static com.verticon.tracker.store.mongo.test.system.Member.ONE;
 import static com.verticon.tracker.store.mongo.test.system.Variables.PREMISES_URI;
+import static com.verticon.tracker.store.mongo.test.system.Variables.PROVIDED_COLLECTION;
 import static com.verticon.tracker.store.mongo.test.system.internal.Test_TrackerStore_1_Basic.bundleMarker;
 
 import java.io.File;
@@ -185,6 +186,8 @@ public class Configuator {
 		props.put(Variables.DEFAULT_ANIMAL.configID, TrackerPackage.BOVINE_BISON);
 		props.put("tracker.wiring.group.name", "test");
 		props.put(PREMISES_URI.configID, ONE.uri);
+		props.put(PROVIDED_COLLECTION.configID, "useradmin");
+
 		props.put(WireConstants.WIREADMIN_CONSUMER_SCOPE, new String[]{
 				TAG_SCOPE,//Tags ->Tags
 				ANIMAL_WEIGHT_SCOPE, //Measurements ->WeighIn
@@ -200,7 +203,7 @@ public class Configuator {
 	private static Dictionary<String, Object> configureTest2() {
 		Dictionary<String, Object> props = new Hashtable<String, Object>();
 		configureConnection(props);
-
+		props.put(PROVIDED_COLLECTION.configID, "useradmin");
 		props.put("com.verticon.tracker.mongo.test","testTwo");
 		props.put(Variables.DEFAULT_ANIMAL.configID, TrackerPackage.SWINE);
 		props.put("tracker.wiring.group.name", "test2");

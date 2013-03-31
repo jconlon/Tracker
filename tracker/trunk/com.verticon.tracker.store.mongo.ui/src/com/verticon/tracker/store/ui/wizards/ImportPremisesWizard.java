@@ -19,6 +19,7 @@ import org.eclipse.ui.IWorkbench;
 
 import com.google.common.base.Strings;
 import com.verticon.tracker.store.ITrackerStore;
+import com.verticon.tracker.store.ui.Activator;
 
 public class ImportPremisesWizard extends Wizard implements IImportWizard {
 
@@ -36,6 +37,7 @@ public class ImportPremisesWizard extends Wizard implements IImportWizard {
 	 * 
 	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
 	 */
+	@Override
 	public boolean performFinish() {
 		URI uri = null;
 		try {
@@ -58,6 +60,7 @@ public class ImportPremisesWizard extends Wizard implements IImportWizard {
 	 * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench,
 	 * org.eclipse.jface.viewers.IStructuredSelection)
 	 */
+	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		setWindowTitle("TrackerStore Premises Import Wizard"); // NON-NLS-1
 		setNeedsProgressMonitor(true);
@@ -70,10 +73,24 @@ public class ImportPremisesWizard extends Wizard implements IImportWizard {
 	 * 
 	 * @see org.eclipse.jface.wizard.IWizard#addPages()
 	 */
+	@Override
 	public void addPages() {
 		super.addPages();
+		if (!Activator.getDefault().hasTrackerStoreService(null)) {
+			addPage(new ErrorWizardPage(
+					"Import Premises",
+					"Can't import premises - No Tracker Store Service",
+					"Can't import premises! There is no active Tracker Store Service. Please Configure one and try again."));
+		} else if (!Activator.getDefault().isAuthenticatedUser()) {
+			addPage(new ErrorWizardPage(
+					"Import Premises",
+					"Can't import premises - You are not signed on",
+					"Can't import premises! You are not an authenticated user. Please Sign On and try again."));
+		} else {
 		addPage(trackerStorePage);
 		addPage(mainPage);
+		}
+
 	}
 
 	void setTrackerStore(ITrackerStore trackerStore) {

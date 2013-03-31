@@ -20,6 +20,8 @@ import com.verticon.tracker.Premises;
 public class CanPublishAnimalsPropertyTester extends PropertyTester {
 
 
+	private static final String CAN_PUBLISH_ANIMALS = "canPublishAnimals";
+
 	/**
 	 * 
 	 * Tests a Premises to see if there is a ITrackerLoader service available for it.
@@ -41,18 +43,24 @@ public class CanPublishAnimalsPropertyTester extends PropertyTester {
 	public boolean test(Object receiver, String property, Object[] args,
 			Object expectedValue) {
 		boolean result = false;
-		Premises premises =null;
-		if(receiver instanceof List){
-			 premises = (Premises)((List<?>)receiver).get(0);
-		}else{
-			 premises = (Premises) receiver;
+		if (CAN_PUBLISH_ANIMALS.equals(property)) {
+			Premises premises = null;
+			if (receiver instanceof List) {
+				premises = (Premises) ((List<?>) receiver).get(0);
+			} else {
+				premises = (Premises) receiver;
+			}
+
+			String uri = premises.getUri();
+			if (!Strings.isNullOrEmpty(uri)) {
+
+				// Tracker Store service with this uri and a member of the
+				// premises
+				result = Activator.getDefault().hasTrackerStoreService(uri)
+						&& Activator.getDefault().hasRole(uri);
+			}
 		}
-		
-		String uri = premises.getUri();
-		if(!Strings.isNullOrEmpty(uri)){
-				result = Activator.getDefault().hasTrackerStoreService(uri);
-		}
-				
+
 		return result;
 	}
 

@@ -91,7 +91,7 @@ public class TrackerStore implements ITrackerStore {
 	private String premisesURI;
 	private DB db;
 	private MergeListener mergeListener;
-	private TrackerStoreAdmin trackerStoreAdmin;
+	private Predicate<Event> eventFilterByAuthority;
 
 	TrackerStore(MongoStatusMonitor monitor, MongoConsumer tagConsumer) {
 		super();
@@ -123,11 +123,11 @@ public class TrackerStore implements ITrackerStore {
 	public Premises retrievePremises(String uri, String fromDate, String toDate)
 			throws IOException {
 		Premises result = (Premises) resourceFactory.query(PREMISES, uri);
-		addAnimals(result, fromDate, toDate);
+		findAndAddAnimalsToPremises(result, fromDate, toDate);
 		return result;
 	}
 
-	private void addAnimals(Premises premises, String fromDate, String toDate)
+	private void findAndAddAnimalsToPremises(Premises premises, String fromDate, String toDate)
 			throws IOException {
 		if (Strings.isNullOrEmpty(fromDate) || Strings.isNullOrEmpty(toDate)) {
 			// Do nothing to the result
@@ -137,7 +137,7 @@ public class TrackerStore implements ITrackerStore {
 			try {
 				animals = getAnimals(db, resourceFactory, premises.getUri(),
 						dfm.parse(fromDate), dfm.parse(toDate),
-						trackerStoreAdmin);
+						eventFilterByAuthority);
 			} catch (ParseException e) {
 				throw new IOException(e);
 			}
@@ -158,7 +158,7 @@ public class TrackerStore implements ITrackerStore {
 				}
 			});
 			premises.getAnimals().addAll(animals);
-			// TODO must deal with OCDs
+
 		}
 	}
 
@@ -252,18 +252,6 @@ public class TrackerStore implements ITrackerStore {
 		return result.getValues();
 	}
 
-//	@Override
-//	public Association retrieveAssociation(Set<String> uris) throws IOException {
-//		Association result = AgricultureFactory.eINSTANCE.createAssociation();
-//		Premises location = null;
-//		for (String uri : uris) {
-//			location = retrievePremises(uri, null, null);
-//			if (location != null) {
-//				result.getLivestock().add(location);
-//			}
-//		}
-//		return result;
-//	}
 
 	/**
 	 * Primary entry method for Tracker Desktop clients. Does NOT save animals,
@@ -283,10 +271,10 @@ public class TrackerStore implements ITrackerStore {
 		checkNotNull(location, "Premises location must not be null.");
 		validateObject(premises);
 
-		if (!trackerStoreAdmin.isCurrentUserAdmin()) {
-			throw new StoreAccessException(
-					"Attempt to save premises with out administration privelages.");
-		}
+		// if (!trackerStoreAdmin.isCurrentUserAdmin()) {
+		// throw new StoreAccessException(
+		// "Attempt to save premises with out administration privelages.");
+		// }
 
 		// if (!trackerStoreAdmin.isValidUri(premises.getUri())) {
 		// throw new StoreAccessException(
@@ -367,7 +355,7 @@ public class TrackerStore implements ITrackerStore {
 			}
 		}
 
-		this.addAnimals(result, fromDate, toDate);
+		this.findAndAddAnimalsToPremises(result, fromDate, toDate);
 		return result;
 
 	}
@@ -379,12 +367,12 @@ public class TrackerStore implements ITrackerStore {
 	}
 
 	void activate(ResourceSetFactoryContext resourceFactory,
-			String premisesURI, DB db, TrackerStoreAdmin trackerStoreAdmin) {
+			String premisesURI, DB db, Predicate<Event> eventFilterByAuthority) {
 		logger.debug(bundleMarker, "Activating");
 		this.resourceFactory = resourceFactory;
 		this.premisesURI = premisesURI;
 		this.db = db;
-		this.trackerStoreAdmin = trackerStoreAdmin;
+		this.eventFilterByAuthority = eventFilterByAuthority;
 		// TODO need mergelisteners??
 		mergeListener = new MergeListener(db);
 		MergeService.addMergeListener(mergeListener);
@@ -396,7 +384,7 @@ public class TrackerStore implements ITrackerStore {
 		resourceFactory = null;
 		premisesURI = null;
 		db = null;
-		trackerStoreAdmin = null;
+		eventFilterByAuthority = null;
 		mergeListener = null;
 		logger.debug(bundleMarker, "Deactivated");
 	}

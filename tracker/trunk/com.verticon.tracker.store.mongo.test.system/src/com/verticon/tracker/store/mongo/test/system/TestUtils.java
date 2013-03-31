@@ -44,7 +44,6 @@ import com.mongodb.MongoException;
 import com.verticon.osgi.metatype.MetatypePackage;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
-import com.verticon.tracker.store.admin.AdminPackage;
 import com.verticon.tracker.store.mongo.test.system.internal.Configuator;
 
 public class TestUtils {
@@ -230,8 +229,8 @@ public class TestUtils {
 	}
 
 	public static void clearDB(DB db) {
-		db.getCollection(AdminPackage.Literals.ADMIN.getName()).remove(
-				new BasicDBObject());
+		// db.getCollection(AdminPackage.Literals.ADMIN.getName()).remove(
+		// new BasicDBObject());
 		db.getCollection(TrackerPackage.Literals.ANIMAL.getName()).remove(
 				new BasicDBObject());
 		db.getCollection(TrackerPackage.Literals.TAG.getName()).remove(

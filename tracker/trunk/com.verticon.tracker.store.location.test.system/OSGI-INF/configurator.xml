@@ -4,6 +4,6 @@
    <implementation 
     class="com.verticon.tracker.store.location.test.system.internal.Configuator"/>
    <reference bind="setConfigurationAdmin" cardinality="1..1" interface="org.osgi.service.cm.ConfigurationAdmin" name="ConfigurationAdmin" policy="static"/>
-   
+  
    
 </scr:component>

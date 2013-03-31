@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
+   name="com.verticon.tracker.store.location.test.system.mock.authenticator">
+   <implementation 
+    class="com.verticon.tracker.store.location.test.system.internal.MockAuthenticator"/>
+   <service>
+      <provide interface="com.verticon.osgi.useradmin.authenticator.Authenticator"/>
+   </service>
+   <property name="com.verticon.tracker.mongo.test" type="String" value="testOne"/>
+</scr:component>

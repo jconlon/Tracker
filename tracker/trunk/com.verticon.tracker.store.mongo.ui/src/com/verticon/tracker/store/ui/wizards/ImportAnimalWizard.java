@@ -19,6 +19,7 @@ import org.eclipse.ui.IWorkbench;
 
 import com.google.common.base.Strings;
 import com.verticon.tracker.store.ITrackerStore;
+import com.verticon.tracker.store.ui.Activator;
 
 public class ImportAnimalWizard extends Wizard implements IImportWizard {
 
@@ -36,6 +37,7 @@ public class ImportAnimalWizard extends Wizard implements IImportWizard {
 	 * 
 	 * @see org.eclipse.jface.wizard.Wizard#performFinish()
 	 */
+	@Override
 	public boolean performFinish() {
 		URI uri = null;
 		try {
@@ -60,6 +62,7 @@ public class ImportAnimalWizard extends Wizard implements IImportWizard {
 	 * @see org.eclipse.ui.IWorkbenchWizard#init(org.eclipse.ui.IWorkbench,
 	 * org.eclipse.jface.viewers.IStructuredSelection)
 	 */
+	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		setWindowTitle("TrackerStore Animal Import Wizard"); // NON-NLS-1
 		setNeedsProgressMonitor(true);
@@ -72,10 +75,23 @@ public class ImportAnimalWizard extends Wizard implements IImportWizard {
 	 * 
 	 * @see org.eclipse.jface.wizard.IWizard#addPages()
 	 */
+	@Override
 	public void addPages() {
 		super.addPages();
+		if (!Activator.getDefault().hasTrackerStoreService(null)) {
+			addPage(new ErrorWizardPage(
+					"Import Animal",
+					"Can't import animal - No Tracker Store Service!",
+					"Can't import animal! There is no active Tracker Store Service. Please go to the Configure menu, and configure a Tracker Store and try again."));
+		} else if (!Activator.getDefault().isAuthenticatedUser()) {
+			addPage(new ErrorWizardPage(
+					"Import Animal",
+					"Can't import animal - You are not an authenticated user!",
+					"Can't import animal! You are not signed on as an authenticated user. Please go to the User menu, sign on and try again."));
+		} else {
 		addPage(trackerStorePage);
 		addPage(mainPage);
+		}
 	}
 
 	void setTrackerStore(ITrackerStore trackerStore) {
