@@ -74,8 +74,7 @@ public class ReportLoader implements BundleListener {
 				"com.verticon.google.kmlgx.core.model",
 				"com.verticon.oasis.xal.core.model",
 				"com.verticon.osgi.metatype.core.model",
-				"com.verticon.tracker.fair",
-				"com.verticon.tracker.store.admin.model", };
+				"com.verticon.tracker.fair" };
 		TARGET_LIST = Arrays.asList(targets);
 	}
 

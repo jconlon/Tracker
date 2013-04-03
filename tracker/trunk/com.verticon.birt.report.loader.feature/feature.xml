@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.birt.report.loader"
       label="%featureName"
-      version="0.1.1.qualifier"
+      version="0.1.2.qualifier"
       provider-name="%providerName"
       plugin="com.verticon.birt.report.loader">
 
@@ -21,6 +21,10 @@
    <url>
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
+
+   <requires>
+      <import feature="org.eclipse.ocl.examples" version="3.2.1.v20120919-0602"/>
+   </requires>
 
    <plugin
          id="com.verticon.birt.report.loader"
