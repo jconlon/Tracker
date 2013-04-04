@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.2.v20120213 Build &lt;3.7.2.v20120214-1408></property>
     <property name="units">in</property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="bidiLayoutOrientation">ltr</property>
@@ -114,7 +114,18 @@
                             <ref-entry baseId="854" id="854"/>
                             <ref-entry baseId="855" name="NewLabel3" id="855"/>
                             <ref-entry baseId="856" id="856"/>
-                            <ref-entry baseId="857" name="NewData5" id="857"/>
+                            <ref-entry baseId="857" name="NewData5" id="857">
+                                <property name="resultSetColumn">uri</property>
+                                <list-property name="boundDataColumns">
+                                    <structure>
+                                        <property name="name">uri</property>
+                                        <text-property name="displayName">Uri</text-property>
+                                        <expression name="expression" type="javascript">dataSetRow["url_string"]</expression>
+                                        <property name="dataType">javaObject</property>
+                                        <property name="allowExport">true</property>
+                                    </structure>
+                                </list-property>
+                            </ref-entry>
                         </overridden-values>
                     </grid>
                 </cell>
