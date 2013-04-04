@@ -64,7 +64,7 @@ public class ReportLoader implements BundleListener {
 	private final Set<String> startedBundles = new ConcurrentSkipListSet<String>();
 	private final BundleContext context;
 
-	final static List<String> TARGET_LIST;
+	private final static List<String> TARGET_LIST;
 
 	static {
 		String[] targets = { "org.eclipse.emf.oda.ecore",
