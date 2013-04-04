@@ -204,6 +204,20 @@
 		</p2.mirror>
 	</target>
 	
+	<!-- Built but not used -->
+	<target name="create-mirror-e4-bridge">
+				<p2.mirror source="http://download.eclipse.org/e4/updates/0.13" destination="${mirrors.dir}e4-bridge">
+					<iu id="org.eclipse.e4.tools.e3x.bridge.feature.feature.group"/>
+				</p2.mirror>
+	</target>
+	
+	<!-- Not used -->
+		<target name="create-mirror-google-osgi">
+					<p2.mirror source="http://guava-osgi.googlecode.com/svn/trunk/repository" destination="${mirrors.dir}google-osgi">
+						<iu id="com.google.guava.sdk.feature.feature.group"/>
+					</p2.mirror>
+		</target>
+	
 	<!-- Default but Currently not used -->
 	<target name="create-mirror-juno-ocl">
    	    

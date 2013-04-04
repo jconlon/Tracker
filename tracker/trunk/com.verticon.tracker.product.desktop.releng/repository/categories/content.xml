@@ -6,9 +6,7 @@
     <property name='p2.timestamp' value='1235426489722'/>
   </properties>
 
-
-
-  <units size='38'>
+  <units size='40'>
     <unit id='com.verticon.tracker.editor.categoryIU' version='0.0.0'>
       <properties size='3'>
         <property name='org.eclipse.equinox.p2.name' value='Premises Editor'/>
@@ -579,6 +577,36 @@
       </provides>
       <requires size='1'>
         <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.tracker.trigger.view.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+    <unit id='com.verticon.osgi.useradmin.ui.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Collaboration'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Tracker Core framework features.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.osgi.useradmin.ui.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.osgi.useradmin.ui.feature.group' range='0.0.0'/>
+      </requires>
+      <touchpoint id='null' version='0.0.0'/>
+    </unit>
+    
+    <unit id='com.verticon.osgi.useradmin.mongo.categoryIU' version='0.0.0'>
+      <properties size='3'>
+        <property name='org.eclipse.equinox.p2.name' value='Collaboration'/>
+        <property name='org.eclipse.equinox.p2.type.category' value='true'/>
+        <property name='org.eclipse.equinox.p2.description' value='Tracker Core framework features.'/>
+      </properties>
+      <provides size='1'>
+        <provided namespace='org.eclipse.equinox.p2.iu' name='com.verticon.osgi.useradmin.mongo.categoryIU' version='0.0.0'/>
+      </provides>
+      <requires size='1'>
+        <required namespace='org.eclipse.equinox.p2.iu' name='com.verticon.osgi.useradmin.mongo.feature.group' range='0.0.0'/>
       </requires>
       <touchpoint id='null' version='0.0.0'/>
     </unit>
