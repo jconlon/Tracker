@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 3.7.1.v20110905 Build &lt;3.7.1.v20110905-1820></property>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.2.v20120213 Build &lt;3.7.2.v20120214-1408></property>
     <property name="units">in</property>
     <property name="iconFile">/templates/first_report.gif</property>
     <property name="cheatSheet">org.eclipse.birt.report.designer.ui.cheatsheet.firstreport</property>
@@ -77,10 +77,10 @@
     </page-setup>
     <body>
         <grid id="685">
-            <property name="height">4.28125in</property>
+            <property name="height">4.427083333333333in</property>
             <column id="686"/>
             <row id="689">
-                <property name="height">1.8020833333333333in</property>
+                <property name="height">1.9479166666666667in</property>
                 <cell id="690">
                     <grid name="Banner and Label" id="844" extends="premises.Banner and Label">
                         <overridden-values>
@@ -117,7 +117,18 @@
                             <ref-entry baseId="854" id="859"/>
                             <ref-entry baseId="855" name="NewLabel3" id="860"/>
                             <ref-entry baseId="856" id="861"/>
-                            <ref-entry baseId="857" name="NewData5" id="862"/>
+                            <ref-entry baseId="857" name="NewData5" id="862">
+                                <property name="resultSetColumn">uri</property>
+                                <list-property name="boundDataColumns">
+                                    <structure>
+                                        <property name="name">uri</property>
+                                        <text-property name="displayName">Uri</text-property>
+                                        <expression name="expression" type="javascript">dataSetRow["url_string"]</expression>
+                                        <property name="dataType">javaObject</property>
+                                        <property name="allowExport">true</property>
+                                    </structure>
+                                </list-property>
+                            </ref-entry>
                         </overridden-values>
                     </grid>
                 </cell>

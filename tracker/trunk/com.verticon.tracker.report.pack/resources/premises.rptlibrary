@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<library xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 3.7.1.v20110905 Build &lt;3.7.1.v20110913-1734></property>
+<library xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.2.v20120213 Build &lt;3.7.2.v20120214-1408></property>
     <property name="units">in</property>
     <property name="theme">defaultTheme</property>
     <parameters>
@@ -638,9 +638,17 @@ resourceName = row["@self"].getObject().getOcd().getName()
             <property name="type">http://www.verticon.com/tracker/0.4.2/premises#//Event</property>
         </oda-data-set>
         <oda-data-set extensionID="org.eclipse.emf.oda.ecore.dataSet" name="Premises" id="858">
+            <list-property name="computedColumns">
+                <structure>
+                    <property name="name">url_string</property>
+                    <expression name="expression">row["uri"].toString()</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
             <list-property name="columnHints">
                 <structure>
                     <property name="columnName">@self</property>
+                    <property name="analysis">measure</property>
                     <text-property name="displayName">@self</text-property>
                     <text-property name="heading">@self</text-property>
                 </structure>
@@ -658,21 +666,25 @@ resourceName = row["@self"].getObject().getOcd().getName()
                 </structure>
                 <structure>
                     <property name="columnName">animals</property>
+                    <property name="analysis">measure</property>
                     <text-property name="displayName">Animals</text-property>
                     <text-property name="heading">Animals</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">unAppliedTags</property>
+                    <property name="analysis">measure</property>
                     <text-property name="displayName">Un Applied Tags</text-property>
                     <text-property name="heading">Un Applied Tags</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">uri</property>
+                    <property name="analysis">measure</property>
                     <text-property name="displayName">Uri</text-property>
                     <text-property name="heading">Uri</text-property>
                 </structure>
                 <structure>
                     <property name="columnName">policy</property>
+                    <property name="analysis">measure</property>
                     <text-property name="displayName">Policy</text-property>
                     <text-property name="heading">Policy</text-property>
                 </structure>
@@ -705,6 +717,12 @@ resourceName = row["@self"].getObject().getOcd().getName()
                     <property name="analysis">attribute</property>
                     <text-property name="displayName">Address</text-property>
                     <text-property name="heading">Address</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">location</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">Location</text-property>
+                    <text-property name="heading">Location</text-property>
                 </structure>
             </list-property>
             <list-property name="parameters">
@@ -780,6 +798,16 @@ resourceName = row["@self"].getObject().getOcd().getName()
                     <structure>
                         <property name="position">12</property>
                         <property name="name">address</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">location</property>
+                        <property name="dataType">javaObject</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">url_string</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -869,6 +897,13 @@ resourceName = row["@self"].getObject().getOcd().getName()
                     <property name="nativeName">address</property>
                     <property name="dataType">string</property>
                     <property name="nativeDataType">50</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">location</property>
+                    <property name="nativeName">location</property>
+                    <property name="dataType">javaObject</property>
+                    <property name="nativeDataType">42</property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[self]]></xml-property>
