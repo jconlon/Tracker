@@ -51,42 +51,28 @@ import com.verticon.tracker.irouter.common.Utils;
  * @author jconlon
  * 
  */
-public class OhausProxy implements Callable<Void> {
+public class OhausPollingProxyExperiment implements Callable<Void> {
 
 	/**
 	 * slf4j Logger
 	 */
-	protected final Logger log;
+	final Logger log = LoggerFactory
+			.getLogger(OhausPollingProxyExperiment.class);
 
 
 	private final OhausProducer ohausProducer;
-	protected final double minimumWeightThreshold;
+	private final double minimumWeightThreshold;
 	private final String uri;
 	private final long responseDelay;
 	private final int responseRetries;
 	private final String pid;
 	private double minimumWeightThresholdInKiloGrams;
 	private final double scaleError;
-	protected boolean enabled = true;
+	private boolean enabled = true;
+	private final double RESET_THRESHOLD = 0;
+	private final int pollDelay = 250;// TODO make a parameter in the config
 
 	private MeasurementUnit measurementUnit;
-
-	protected enum Command {
-		STOP_SENDING("0P%13%%10%"), //
-		PRINT_UNIT("PU%13%%10%"), //
-		STABLE_PRINT("SP%13%%10%"), //
-		EVERY_SECOND_PRINT("1P%13%%10%"), //
-		POLL("IP%13%%10%");
-		final String ascii;
-
-		private Command(String ascii) {
-			this.ascii = ascii;
-		}
-
-		String fromAscii() {
-			return ascii != null ? Utils.fromAscii(ascii) : null;
-		}
-	}
 
 	/**
 	 * Manages a connection to a balance. Continuously reads from a balance and
@@ -94,9 +80,8 @@ public class OhausProxy implements Callable<Void> {
 	 * 
 	 * @param ohausProducer
 	 */
-	public OhausProxy(OhausProducer ohausProducer) {
+	public OhausPollingProxyExperiment(OhausProducer ohausProducer) {
 		super();
-		log = LoggerFactory.getLogger(this.getClass());
 		this.ohausProducer = ohausProducer;
 		Map<String, Object> config = ohausProducer.getConfig();
 		uri = getURI(config);
@@ -144,22 +129,21 @@ public class OhausProxy implements Callable<Void> {
 				log.debug(bundleMarker, "{} connected.", this);
 				ohausProducer.getStatusMonitor().setConnectStatus(true);
 				sendInitializationCommands(out, in);
-				// long lastRead = System.currentTimeMillis();
+				long lastRead = System.currentTimeMillis();
+				poll(out, in);
 				while (!Thread.currentThread().isInterrupted()) {
-
 					String line;
 					while ((in.ready()) && (line = in.readLine()) != null) {
-						// long previousRead = lastRead;
-						// long start = System.currentTimeMillis();
+						long previousRead = lastRead;
+						long start = System.currentTimeMillis();
 						handle(line);
-						// lastRead = System.currentTimeMillis();
-						// log.info(bundleMarker,
-						// "Elapsed time for read={} between reads={}",
-						// lastRead - start, lastRead - previousRead);
-						// TimeUnit.MILLISECONDS.sleep(2);
-						afterRead(out, in);
+						lastRead = System.currentTimeMillis();
+						log.info(bundleMarker,
+								"Elapsed time for read={} between reads={}",
+								lastRead - start, lastRead - previousRead);
+						TimeUnit.MILLISECONDS.sleep(pollDelay);
+						poll(out, in);
 					}
-
 				}
 				swallowExcetionsDuringClose = false;
 				log.debug(bundleMarker, "{} closing connection", this);
@@ -199,45 +183,20 @@ public class OhausProxy implements Callable<Void> {
 		return null;
 	}
 
-	/**
-	 * Called after reading and processing a response from the scale. For
-	 * utilization by subclasses.
-	 * 
-	 * @param out
-	 * @param in
-	 * @throws InterruptedException
-	 * @throws IOException
-	 */
-	protected void afterRead(Writer out, BufferedReader in) throws IOException,
-			InterruptedException {
-
-	}
-
 	private void sendInitializationCommands(Writer out, BufferedReader in)
 			throws IOException, InterruptedException {
 		send(Command.STOP_SENDING, out, in);
 		MeasurementUnit measurementUnit = getUnit(out, in);
 		minimumWeightThresholdInKiloGrams = measurementUnit
 				.convertToKilograms(minimumWeightThreshold);
+
+		log.debug(
+				bundleMarker,
+				"Ohaus scale is configured for {} with a minimumWeightThreshold of {}",
+				measurementUnit, minimumWeightThreshold);
+		// send(Command.STABLE_PRINT, out, in);
+		// send(Command.EVERY_SECOND_PRINT, out, in);
 		this.measurementUnit = measurementUnit;
-		log.debug(bundleMarker, "Ohaus scale is configured for {}",
-				measurementUnit);
-		sendInitializeScalePrintCommands(out, in);
-
-	}
-
-	/**
-	 * Sends setup commands to the scale for how to print.
-	 * 
-	 * @param out
-	 * @param in
-	 * @throws IOException
-	 * @throws InterruptedException
-	 */
-	protected void sendInitializeScalePrintCommands(Writer out,
-			BufferedReader in) throws IOException, InterruptedException {
-		send(Command.STABLE_PRINT, out, in);
-		send(Command.EVERY_SECOND_PRINT, out, in);
 	}
 
 	private void send(Command commandType, Writer out, BufferedReader in)
@@ -297,12 +256,34 @@ public class OhausProxy implements Callable<Void> {
 
 	}
 
-	protected void handle(String response)
+	private void poll(Writer out, BufferedReader in)
+			throws IOException, InterruptedException {
+		log.debug(bundleMarker, "{} Sending  POLL command={}", this,
+				Command.POLL.ascii);
+		out.write(Command.POLL.fromAscii());
+		out.flush();
+
+	}
+
+	private void handle(String rawresponse)
 			throws InterruptedException, IOException {
-		if (response == null) {
+		if (rawresponse == null) {
 			throw new IOException("End of Stream");
 		}
-		
+		boolean isUnstable = rawresponse.contains("?");
+
+		String response = rawresponse.substring(0, 8);// TODO Use REGEX
+		log.info("Handling response={}", response);
+		if (isUnstable) {
+			if (isReset(Double.parseDouble(response))) {
+				if (!enabled) {
+					enabled = true;
+					log.info("Reset at {}", response);
+				}
+			}
+			return;
+		}
+
 		Measurement measurement = createWeight(response);
 		if (measurement != null) {
 			log.info(bundleMarker, "Weight: {} {}", new Object[] { response,
@@ -325,19 +306,20 @@ public class OhausProxy implements Callable<Void> {
 		return response.startsWith("OK");
 	}
 
-	private boolean exceedsThreshold(double kiloGrams) {
+	boolean exceedsThreshold(double kiloGrams) {
 		return kiloGrams > minimumWeightThresholdInKiloGrams;
 	}
 
-	private Measurement createWeight(String response) {
+	Measurement createWeight(String response) {
 		if (response == null) {
 			return null;
 		}
-		Double kiloGrams = null;
+
+		double kiloGrams;
 		try {
 
 			kiloGrams = measurementUnit.convertToKiloGrams(response);
-			if (kiloGrams == 0 || kiloGrams < 0) {
+			if (isReset(kiloGrams)) {
 				if (!enabled) {
 				enabled = true;
 					log.info("Reset");
@@ -368,5 +350,9 @@ public class OhausProxy implements Callable<Void> {
 				System.currentTimeMillis());
 
 		return measurement;
+	}
+
+	private boolean isReset(double value) {
+		return value == RESET_THRESHOLD || value < minimumWeightThreshold;
 	}
 }

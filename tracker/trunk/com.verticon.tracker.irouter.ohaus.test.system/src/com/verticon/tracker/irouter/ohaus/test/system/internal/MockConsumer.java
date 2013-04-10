@@ -8,6 +8,7 @@ import static com.verticon.tracker.irouter.ohaus.test.system.internal.Configurat
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.osgi.service.wireadmin.Consumer;
+import org.osgi.service.wireadmin.Envelope;
 import org.osgi.service.wireadmin.Wire;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,7 +38,13 @@ public class MockConsumer implements Consumer {
 	public void updated(Wire wire, Object value) {
 		receivedObject = value;
 		counter.incrementAndGet();
-		logger.debug(bundleMarker, "Received {}", value);
+		if (value instanceof Envelope) {
+			Envelope env = (Envelope) value;
+			logger.debug(bundleMarker, "Received envelope scope={} value = {}",
+					env.getScope(), env.getValue());
+		} else {
+			logger.warn(bundleMarker, "Received unknown value = {}", value);
+		}
 
 	}
 

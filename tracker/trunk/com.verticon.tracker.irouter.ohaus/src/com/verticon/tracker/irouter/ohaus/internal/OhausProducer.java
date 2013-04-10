@@ -7,6 +7,7 @@ import static com.verticon.tracker.irouter.ohaus.ConfigKey.getConnectionRetrySec
 import static com.verticon.tracker.irouter.ohaus.ConfigKey.getScope;
 import static com.verticon.tracker.irouter.ohaus.ConfigKey.getServicePid;
 import static com.verticon.tracker.irouter.ohaus.ConfigKey.getURI;
+import static com.verticon.tracker.irouter.ohaus.ConfigKey.isPollingEnabled;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_CONSUMER_PID;
 
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
@@ -76,7 +78,7 @@ public class OhausProducer implements Monitorable, Producer {
 	private static ListeningExecutorService exec = MoreExecutors
 			.listeningDecorator(Executors.newCachedThreadPool());
 
-	private volatile OhausProxy proxy;
+	private volatile Callable<Void> proxy;
 
 	private volatile AbstractCheckedFuture<Void, IOException> lfuture = null;
 
@@ -198,7 +200,12 @@ public class OhausProducer implements Monitorable, Producer {
 	void activate(Map<String, Object> config) throws IOException {
 		logger.debug(bundleMarker, "Activating");
 		this.config = config;
-		proxy = new OhausProxy(this);
+		if (isPollingEnabled(config)) {
+			proxy = new OhausPollingProxy(this);
+		} else {
+			proxy = new OhausProxy(this);
+		}
+
 		logger.debug(bundleMarker, "{}: Initial Proxy submit.", this);
 		lfuture = new IOFuture(exec.submit(proxy));
 		lfuture.addListener(monitoringListener, exec);
