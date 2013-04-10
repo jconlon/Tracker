@@ -20,7 +20,8 @@ public enum ConfigKey {
 	SERVICE_PID("service.pid"), //
 	FACTORY_PID("com.verticon.tracker.irouter.ohaus"), //
 	SCALE_ERROR("scale.error"), //
-	WIRING_GROUP("tracker.wiring.group.name");
+	WIRING_GROUP("tracker.wiring.group.name"), //
+	MILLIS_DELAY_BETWEEN_POLLS("poll.delay.millis");
 
 	private String key;
 
@@ -53,6 +54,7 @@ public enum ConfigKey {
 				.get(RESPONSE_DELAY_MILLIS.getKey())) : 50l;
 	}
 
+
 	public static Integer getResponseRetriesBeforeAbort(
 			Map<String, Object> config) {
 		return config.get(RESPONSE_RETRIES_BEFORE_ABORT.getKey()) != null ? getConfigurationInteger(config
@@ -83,7 +85,15 @@ public enum ConfigKey {
 				.get(CONNECTION_RETRY_SECONDS.getKey())) : 10l;
 	}
 
+	public static Long getPollMillisDelay(Map<String, Object> config) {
+		return config.get(MILLIS_DELAY_BETWEEN_POLLS.getKey()) != null ? getConfigurationLong(config
+				.get(MILLIS_DELAY_BETWEEN_POLLS.getKey())) : 250l;
+	}
 
+	public static boolean isPollingEnabled(Map<String, Object> config) {
+		return config.get(MILLIS_DELAY_BETWEEN_POLLS.getKey()) != null ? getConfigurationLong(config
+				.get(MILLIS_DELAY_BETWEEN_POLLS.getKey())) > 0 : false;
+	}
 
 	public void configure(Dictionary<String, Object> config, Object value) {
 		config.put(key, value);

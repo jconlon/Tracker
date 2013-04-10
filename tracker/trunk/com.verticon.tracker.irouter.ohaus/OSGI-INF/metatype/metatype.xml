@@ -52,6 +52,13 @@
     	required="false" 
         description="Name to label node in the iRouter Monitor View graphics."
         default="Ohaus Proxy"/> 
+        
+       
+    <AD name="Polling delay interval in milliseconds" id= "poll.delay.millis"
+    	required="true" 
+    	type="Long" 
+    	default="0"
+    	description="When set to a positive number this is the delay in milliseconds between processing a response from the scale and requesting another response. If set to a non positive number the scale will be set to print every 1 second and this proxy will passively listen."/>
    
     <AD name="Description"  id="description"                                  
     	type="String"                           

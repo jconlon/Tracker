@@ -11,11 +11,12 @@
 
 package com.verticon.tracker.irouter.ohaus.test.system.internal;
 
-import static com.verticon.tracker.irouter.ohaus.ConfigKey.RESPONSE_DELAY_MILLIS;
 import static com.verticon.tracker.irouter.ohaus.ConfigKey.CONNECTION_URI;
 import static com.verticon.tracker.irouter.ohaus.ConfigKey.FACTORY_PID;
+import static com.verticon.tracker.irouter.ohaus.ConfigKey.MILLIS_DELAY_BETWEEN_POLLS;
 import static com.verticon.tracker.irouter.ohaus.ConfigKey.MINIMUM_WEIGHT_THRESHOLD;
 import static com.verticon.tracker.irouter.ohaus.ConfigKey.PRODUCER_SCOPE;
+import static com.verticon.tracker.irouter.ohaus.ConfigKey.RESPONSE_DELAY_MILLIS;
 import static com.verticon.tracker.irouter.ohaus.ConfigKey.WIRING_GROUP;
 
 import java.io.IOException;
@@ -36,7 +37,11 @@ import org.slf4j.MarkerFactory;
  * 
  */
 public class Configurator {
-	private static final int DELAY_IN_MILLIS = 20;
+	private static final Long DELAY_IN_MILLIS = 20l;
+
+	// To actively poll set this to a positive number
+	// private static final Long POLL_DELAY_IN_MILLIS = 0l;
+	private static final Long POLL_DELAY_IN_MILLIS = 100l;
 	private static final String portName = "/dev/ttyUSB0";
 	private static final String baudRate = "9600";
 	private static final String dataBits = "8";
@@ -51,6 +56,7 @@ public class Configurator {
 	public static final Marker bundleMarker = MarkerFactory
 			.getMarker(PLUGIN_ID);
 	private static final String OHAUS_WEIGHT = "ohaus.weight";
+
 
 	static {
 		Configurator.bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
@@ -109,9 +115,9 @@ public class Configurator {
 		WIRING_GROUP.configure(config, "test");
 		CONNECTION_URI.configure(config, getCommURI());
 		MINIMUM_WEIGHT_THRESHOLD.configure(config, .1);
-		RESPONSE_DELAY_MILLIS.configure(config, new Long(DELAY_IN_MILLIS));
+		RESPONSE_DELAY_MILLIS.configure(config, DELAY_IN_MILLIS);
 		PRODUCER_SCOPE.configure(config, new String[] { OHAUS_WEIGHT });
-
+		MILLIS_DELAY_BETWEEN_POLLS.configure(config, POLL_DELAY_IN_MILLIS);
 		return config;
 	}
 	

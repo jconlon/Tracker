@@ -87,7 +87,7 @@
   </logger>
   
   <logger name="com.verticon.birt">
-    <level value="WARN"/>
+    <level value="INFO"/>
   </logger>
   
    <logger name="com.verticon.tracker.store">
@@ -102,10 +102,6 @@
    <logger name="com.verticon.tracker.irouter.premises.event">
     <level value="WARN"/>
   </logger> 
-  
-  <logger name="com.verticon.tracker.irouter.ohaus">
-    <level value="INFO"/>
-  </logger>
   
   <logger name="com.verticon.tracker.connector.comm">
     <level value="WARN"/>
@@ -176,9 +172,6 @@
   
    <logger name="com.verticon.tracker.irouter.gps">
     <level value="WARN"/>
-    <!--  
-    <appender-ref ref="STDOUT"/>
-    -->
   </logger>
   
   <logger name="com.verticon.tracker.reader.bluetooth">
@@ -223,7 +216,6 @@
   
   <logger name="com.verticon.tracker.irouter.wireadmin">
     <level value="INFO"/>
-    <appender-ref ref="STDOUT"/>
   </logger>
   
   <logger name="com.verticon.tracker.irouter.gateway">
@@ -234,30 +226,50 @@
     <level value="WARN"/>
   </logger>
   
-  <logger name="com.verticon.mongo.emf.json.query">
+   <logger name="com.verticon.mongo.emf.json.query">
     <level value="INFO"/>
   </logger>
   
-   <logger name="aggregated" level="INFO">
+   <logger name="com.verticon.tracker.irouter.ohaus">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.irouter.eventadmin.gateway">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.irouter.measurement.trigger">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="org.eclipse.xtext">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.osgi.useradmin">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.mongo">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.store.mongo.test.system.internal">
+    <level value="INFO"/>
+    <appender-ref ref="STDOUT"/>
+  </logger>
+  
+  <logger name="aggregated" level="INFO">
     <appender-ref ref="AGGREGATED"/>
-   
   </logger>
   
   <logger name="transaction" level="INFO">
     <appender-ref ref="TRANSACTION"/>
-  
-  </logger>
-  
-  <logger name="org.eclipse.xtext">
-    <level value="WARN"/>
-    <appender-ref ref="STDOUT"/>
   </logger>
   
   <root>
     <level value="WARN"/>
-    
     <appender-ref ref="multiplex"/>
-   
     <!--  
      <appender-ref ref="STDOUT"/>
      <appender-ref ref="RollingFile"/>

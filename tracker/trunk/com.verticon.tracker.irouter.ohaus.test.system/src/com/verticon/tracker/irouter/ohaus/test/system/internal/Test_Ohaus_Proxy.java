@@ -189,11 +189,14 @@ public class Test_Ohaus_Proxy extends TestCase {
 	@Test
 	public void testPause() throws InterruptedException {
 		// TimeUnit.SECONDS.sleep(100);
-		long sleep = 3;
-		logger.debug(bundleMarker, "Sleeping for {} minutes", sleep);
-		TimeUnit.MINUTES.sleep(sleep);
+		long sleep = 50;
+		logger.debug(bundleMarker, "Sleeping for {} seconds", sleep);
+		TimeUnit.SECONDS.sleep(sleep);
 		assertThat("Consumer must have received one or more weights",
 				consumer.getCount(), is(greaterThan(0)));
+		logger.info(bundleMarker,
+				"Measurement TotalCount={} average time for each measurement={}",
+				consumer.getCount(), sleep / consumer.getCount());
 //		assertThat("Result must not be null.", eo, is(notNullValue()));
 //		assertThat("Result must not be empty.", eo.isEmpty(), is(false));
 //		assertThat("Result must be one tag", eo.size(), is(5));
