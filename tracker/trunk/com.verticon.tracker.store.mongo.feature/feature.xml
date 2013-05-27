@@ -2,9 +2,9 @@
 <feature
       id="com.verticon.tracker.store.mongo"
       label="%featureName"
-      version="1.2.0.qualifier"
+      version="2.0.0.qualifier"
       provider-name="%providerName"
-      plugin="com.verticon.tracker.store.mongo">
+      plugin="com.verticon.tracker.store.mongodb">
 
    <description>
       %description
@@ -24,15 +24,21 @@
    </url>
 
    <requires>
-      <import feature="com.verticon.mongo.emf.json.query" version="1.0.0.qualifier"/>
+      <import plugin="com.google.guava"/>
+      <import plugin="org.mongodb.mongo-java-driver"/>
+      <import plugin="com.verticon.location.core.model"/>
+      <import plugin="com.verticon.mongo"/>
+      <import plugin="com.verticon.osgi.metatype.core.model"/>
+      <import plugin="com.verticon.osgi.useradmin.authenticator"/>
+      <import plugin="com.verticon.tracker"/>
+      <import plugin="com.verticon.tracker.irouter.premises.common"/>
+      <import plugin="org.eclipse.emf.common"/>
+      <import plugin="org.eclipse.emf.gwt.ecore"/>
+      <import plugin="org.eclipse.osgi.services"/>
+      <import plugin="com.verticon.osgi.monitor"/>
+      <import plugin="slf4j.api"/>
+      <import plugin="org.eclipse.emf.ecore.xmi"/>
    </requires>
-
-   <plugin
-         id="com.verticon.tracker.store.mongo"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
    <plugin
          id="com.verticon.tracker.store.mongo.doc"
@@ -41,14 +47,14 @@
          version="0.0.0"/>
 
    <plugin
-         id="org.eclipse.emf.compare.diff"
+         id="com.verticon.tracker.store.mongodb"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.emf.compare.match"
+         id="com.verticon.mongo.emf.transform"
          download-size="0"
          install-size="0"
          version="0.0.0"
