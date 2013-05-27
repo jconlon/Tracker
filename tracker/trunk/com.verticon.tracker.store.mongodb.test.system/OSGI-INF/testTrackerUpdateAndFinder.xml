@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="com.verticon.tracker.store.mongodb.test.system">
+   <implementation 
+    class="com.verticon.tracker.store.mongodb.test.system.Test_TrackerUpdateAndFind"/>
+   <reference bind="setMongoClientProvider" cardinality="1..1" interface="com.verticon.mongo.IMongoClientProvider" name="MongoClientProvider" policy="static" unbind="unsetMongoClientProvider"/>
+   <reference bind="setTrackerUpdate" cardinality="1..1" interface="com.verticon.tracker.store.ITrackerUpdate" name="ITrackerUpdate" policy="static" unbind="unsetTrackerUpdate"/>
+   <reference bind="setTrackerFind" cardinality="1..1" interface="com.verticon.tracker.store.ITrackerFind" name="ITrackerFind" policy="static" unbind="unsetTrackerFind"/>
+   
+   <reference bind="setFunctionProvider" cardinality="1..1" interface="com.verticon.mongo.emf.transform.IFunctionProvider" name="IFunctionProvider" policy="static" unbind="unsetFunctionProvider"/>
+</scr:component>

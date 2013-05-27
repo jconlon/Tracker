@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="com.verticon.tracker.store.mongodb.test.trackerstore.system">
+   <implementation 
+    class="com.verticon.tracker.store.mongodb.test.system.Test_TrackerStore"/>
+    <reference bind="setTrackerStore" cardinality="1..1" interface="com.verticon.tracker.store.ITrackerStore" name="ITrackerStore" policy="static"/>
+    <reference bind="setMockAuthenticatorController" cardinality="1..1" interface="com.verticon.tracker.store.mongodb.test.system.IMockAuthenticatorController" name="IMockAuthenticatorController" policy="static"/>
+    <reference bind="setMongoClientProvider" cardinality="1..1" interface="com.verticon.mongo.IMongoClientProvider" name="MongoClientProvider" policy="static" unbind="unsetMongoClientProvider"/>
+</scr:component>
