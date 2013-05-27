@@ -18,7 +18,7 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.startsWith;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -49,7 +49,6 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
-import com.mongodb.Mongo;
 import com.mongodb.MongoException;
 import com.verticon.location.Location;
 import com.verticon.osgi.metatype.MetatypePackage;
@@ -57,6 +56,7 @@ import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.store.ITrackerStore;
+import com.verticon.tracker.store.ITrackerUpdate;
 import com.verticon.tracker.store.mongo.test.system.Member;
 import com.verticon.tracker.store.mongo.test.system.TestUtils;
 import com.verticon.tracker.store.mongo.test.system.Variables;
@@ -159,7 +159,7 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 
 	DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd");
 
-	static ITrackerStore getTrackerStore() throws InterruptedException {
+	static ITrackerUpdate getTrackerStore() throws InterruptedException {
 		startUpGate.await();// wait for startUp to finish
 		return store;
 	}
@@ -293,8 +293,8 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 
 	public void testRemoveMembersUpdate() throws UnknownHostException,
 			MongoException {
-		Mongo m = new Mongo();
-		DB db = m.getDB("tracker");
+
+		DB db = Configuator.getTrackerDB();
 		assertNotNull(db);
 		removeLastModificationTimesOnAllResources(db);
 	}
@@ -688,12 +688,15 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 		// Tracker shows 72 animals, shell says 73 Tags (023 tag is in the shell
 		// but not in tracker)
 
+		// Events go beyond the dates because the animals are the ones that are
+		// targeted. They then most likely have dates beyond the range
+		assertThat("Premises must have all events for all animals", premises
+				.eventHistory().size(), is(422));
 	}
 
 	public void testQuery_DB_driver_4_11() throws Exception,
 			UnknownHostException, MongoException {
-		Mongo m = new Mongo();
-		DB db = m.getDB("tracker");
+		DB db = Configuator.getTrackerDB();
 		assertNotNull(db);
 		Date fromDate = dfm.parse(DATE_4_11);
 		Date toDate = dfm.parse(DATE_4_12);
@@ -771,12 +774,16 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 		// end},pid: 'urn:pin:003ALKM'}} })
 		// All animals that generated events within the time period at the given
 		// premises
+
+		// Events go beyond the dates because the animals are the ones that are
+		// targeted. They then most likely have dates beyond the range
+		assertThat("Premises must have all events for all animals", premises
+				.eventHistory().size(), is(218));
 	}
 
 	public void testQuery_DB_driver_4_12() throws Exception,
 			UnknownHostException, MongoException {
-		Mongo m = new Mongo();
-		DB db = m.getDB("tracker");
+		DB db = Configuator.getTrackerDB();
 		assertNotNull(db);
 
 		Date fromDate = dfm.parse(DATE_4_12);
@@ -824,13 +831,15 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 				is(notNullValue()));
 		assertThat("Premises must have 94 animalsl", premises.getAnimals()
 				.size(), is(94));
-
+		// Events go beyond the dates because the animals are the ones that are
+		// targeted. They then most likely have dates beyond the range
+		assertThat("Premises must have all events for all animals", premises
+				.eventHistory().size(), is(571));
 	}
 
 	public void testQuery_DB_driver_5_16() throws Exception,
 			UnknownHostException, MongoException {
-		Mongo m = new Mongo();
-		DB db = m.getDB("tracker");
+		DB db = Configuator.getTrackerDB();
 		assertNotNull(db);
 
 		Date fromDate = dfm.parse(DATE_5_16);
@@ -878,7 +887,10 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 				is(notNullValue()));
 		assertThat("Premises must have 123 animalsl", premises.getAnimals()
 				.size(), is(123));
-
+		// Events go beyond the dates because the animals are the ones that are
+		// targeted. They then most likely have dates beyond the range
+		assertThat("Premises must have all events for all animals", premises
+				.eventHistory().size(), is(737));
 	}
 
 	public void testRetrievePremises_9_10() throws Exception {
@@ -894,6 +906,10 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 				is(notNullValue()));
 		assertThat("Premises must have 213 animals", premises.getAnimals()
 				.size(), is(213));
+		// Events go beyond the dates because the animals are the ones that are
+		// targeted. They then most likely have dates beyond the range
+		assertThat("Premises must have all events for all animals", premises
+				.eventHistory().size(), is(1494));
 	}
 
 	public void testSavePremises_9_10() throws ParseException, IOException {
@@ -915,7 +931,10 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 				is(notNullValue()));
 		assertThat("Premises must have 180 animalsl", premises.getAnimals()
 				.size(), is(180));
-
+		// Events go beyond the dates because the animals are the ones that are
+		// targeted. They then most likely have dates beyond the range
+		assertThat("Premises must have all events for all animals", premises
+				.eventHistory().size(), is(1259));
 	}
 
 	public void testSavePremises_9_14() throws Exception, IOException {
@@ -937,7 +956,10 @@ public class Test_TrackerStore_2_Updates extends TestCase {
 				is(notNullValue()));
 		assertThat("Premises must have 35 animalsl", premises.getAnimals()
 				.size(), is(35));
-
+		// Events go beyond the dates because the animals are the ones that are
+		// targeted. They then most likely have dates beyond the range
+		assertThat("Premises must have all events for all animals", premises
+				.eventHistory().size(), is(245));
 	}
 
 	public void testSavePremises_9_15() throws Exception, IOException {

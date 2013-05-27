@@ -44,6 +44,7 @@ import com.mongodb.MongoException;
 import com.verticon.osgi.metatype.MetatypePackage;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.store.ValidationException;
 import com.verticon.tracker.store.mongo.test.system.internal.Configuator;
 
 public class TestUtils {
@@ -113,8 +114,6 @@ public class TestUtils {
 //	}
 	
 	public static int eventCount(DB db, String uri) {
-		
-
 		int count = 0;
 		BasicDBObject query = new BasicDBObject("events.pid", uri);
 
@@ -229,8 +228,6 @@ public class TestUtils {
 	}
 
 	public static void clearDB(DB db) {
-		// db.getCollection(AdminPackage.Literals.ADMIN.getName()).remove(
-		// new BasicDBObject());
 		db.getCollection(TrackerPackage.Literals.ANIMAL.getName()).remove(
 				new BasicDBObject());
 		db.getCollection(TrackerPackage.Literals.TAG.getName()).remove(
@@ -240,10 +237,7 @@ public class TestUtils {
 		db.getCollection(TrackerPackage.Literals.PREMISES.getName()).remove(
 				new BasicDBObject());
 		db.getCollection("Updates").remove(new BasicDBObject());
-//		db.getCollection(KmlPackage.eINSTANCE.getContainer().getName()).remove(
-//				new BasicDBObject());
-//		db.getCollection(KmlPackage.eINSTANCE.getPlacemark().getName()).remove(
-//				new BasicDBObject());
+
 		removeLastModificationTimesOnAllResources(db);
 	}
 	
@@ -252,12 +246,22 @@ public class TestUtils {
 		clearDB(db);
 	}
 
-//	static String getCoordinates(Point point) {
-//		StringBuffer buff = new StringBuffer();
-//		for (String s : point.getCoordinates()) {
-//		   buff.append(s.trim());
-//		}
-//		String coordinates = buff.toString();
-//		return coordinates;
-//	}
+
+	public static boolean validateObject(EObject eObject)
+			throws ValidationException {
+		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject);
+		if (diagnostic.getSeverity() == Diagnostic.ERROR
+				|| diagnostic.getSeverity() == Diagnostic.WARNING) {
+			for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
+				switch (childDiagnostic.getSeverity()) {
+				case Diagnostic.ERROR:
+				case Diagnostic.WARNING:
+					throw new ValidationException(eObject,
+							childDiagnostic.getMessage());
+				}
+			}
+		}
+		return true;
+	}
+
 }

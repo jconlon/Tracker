@@ -40,8 +40,8 @@ import com.verticon.tracker.ReplacedTag;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.irouter.premises.common.api.EventCreationException;
-import com.verticon.tracker.irouter.premises.common.api.IOCDFinder;
 import com.verticon.tracker.irouter.premises.common.api.PremisesIRouterUtils;
+import com.verticon.tracker.store.IOCDFinder;
 
 public class MongoConsumer implements Consumer {
 

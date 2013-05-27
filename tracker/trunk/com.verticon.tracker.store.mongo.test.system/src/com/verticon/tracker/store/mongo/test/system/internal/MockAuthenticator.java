@@ -68,4 +68,9 @@ public class MockAuthenticator implements Authenticator,
 
 		return result;
 	}
+
+	@Override
+	public String uri() {
+		return "localhost";
+	}
 }

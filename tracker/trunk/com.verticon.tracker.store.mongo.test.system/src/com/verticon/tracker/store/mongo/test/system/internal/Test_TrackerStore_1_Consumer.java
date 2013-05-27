@@ -50,7 +50,7 @@ import com.verticon.tracker.ReplacedTag;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.WeighIn;
-import com.verticon.tracker.store.ITrackerStore;
+import com.verticon.tracker.store.ITrackerFind;
 import com.verticon.tracker.store.mongo.test.system.Variables;
 
 /**
@@ -90,7 +90,7 @@ public class Test_TrackerStore_1_Consumer extends TestCase {
 	/**
 	 * Injected service
 	 */
-	private static ITrackerStore store;
+	private static ITrackerFind store;
 
 	/**
 	 * 

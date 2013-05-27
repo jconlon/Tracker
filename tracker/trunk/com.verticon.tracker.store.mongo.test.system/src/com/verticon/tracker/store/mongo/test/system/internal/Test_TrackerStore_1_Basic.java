@@ -35,11 +35,9 @@ import java.util.concurrent.TimeUnit;
 
 import junit.framework.TestCase;
 
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.Diagnostician;
 import org.json.MongoQueryStandaloneSetupGenerated;
 import org.junit.Test;
 import org.osgi.framework.BundleContext;
@@ -54,9 +52,8 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
-import com.mongodb.Mongo;
+import com.mongodb.MongoClientURI;
 import com.mongodb.MongoException;
-import com.mongodb.MongoURI;
 import com.verticon.location.Location;
 import com.verticon.osgi.metatype.MetatypePackage;
 import com.verticon.osgi.metatype.OCD;
@@ -69,6 +66,7 @@ import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
+import com.verticon.tracker.store.ITrackerFind;
 import com.verticon.tracker.store.ITrackerStore;
 import com.verticon.tracker.store.ValidationException;
 import com.verticon.tracker.store.mongo.test.system.IMockAuthenticatorController;
@@ -204,7 +202,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 
 	static final String PIN = "urn:pin:H89234X";
 
-	static ITrackerStore getTrackerStore() throws InterruptedException {
+	static ITrackerFind getTrackerStore() throws InterruptedException {
 		startUpGate.await();// wait for startUp to finish
 		return store;
 	}
@@ -311,8 +309,8 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	}
 
 	@Test
-	public void testMongo() throws UnknownHostException {
-		MongoURI uri = Configuator.getMongoURI();
+	public void testMongo_JavaDriver() throws UnknownHostException {
+		MongoClientURI uri = Configuator.getMongoURI();
 		List<String> hosts = uri.getHosts();
 		assertThat("One host", hosts.size(), is(1));
 
@@ -337,6 +335,8 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	public void testClearMongoDB() throws UnknownHostException, MongoException,
 			InterruptedException {
 		TestUtils.clearTrackerDB();
+		logger.info(bundleMarker,
+				"Removed objects in TrackerDB. (Indexes kept)");
 		// monitorable
 		// .resetStatusVariable(Variables.MONGO_ADMIN_LOADED.statusVarID);
 
@@ -475,6 +475,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	 * Insure Premises registration fails with a null.
 	 */
 	@Test
+
 	public void testRegister_NullAgrument() {
 
 		try {
@@ -489,8 +490,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	}
 
 	/**
-	 * TODO Validating EObjects with com.verticon.tracker.util.TrackerValidator
-	 * Remove? should this be moved?
+	 * TODO MOVE
 	 * 
 	 * @throws InterruptedException
 	 */
@@ -507,7 +507,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	}
 
 	/**
-	 * TODO Validating EObjects. Remove? Test local validation method
+	 * TODO MOVE
 	 * 
 	 * @throws ValidationException
 	 */
@@ -517,7 +517,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		premises.setUri("jc://www.verticon");
 
 		try {
-			validateObject(premises);
+			TestUtils.validateObject(premises);
 			fail("Validation must throw an exception.");
 		} catch (Exception e) {
 			// expected
@@ -530,44 +530,20 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		animal.getTags().add(tag);
 
 		try {
-			validateObject(animal);
+			TestUtils.validateObject(animal);
 			fail("Validation must throw an exception.");
 		} catch (Exception e) {
 			// expected
 		}
 		premises.setUri("normal");
-		assertThat("Premises must validate.", validateObject(premises),
+		assertThat("Premises must validate.", TestUtils.validateObject(premises),
 				is(true));
 		animal.activeTag().setId("good");
-		assertThat("Animal must validate.", validateObject(animal), is(true));
+		assertThat("Animal must validate.", TestUtils.validateObject(animal), is(true));
 	}
 
 	/**
-	 * TODO Validating EObjects. Remove?
-	 * 
-	 * @param eObject
-	 * @return
-	 * @throws ValidationException
-	 */
-	private static boolean validateObject(EObject eObject)
-			throws ValidationException {
-		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject);
-		if (diagnostic.getSeverity() == Diagnostic.ERROR
-				|| diagnostic.getSeverity() == Diagnostic.WARNING) {
-			for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
-				switch (childDiagnostic.getSeverity()) {
-				case Diagnostic.ERROR:
-				case Diagnostic.WARNING:
-					throw new ValidationException(eObject,
-							childDiagnostic.getMessage());
-				}
-			}
-		}
-		return true;
-	}
-
-	/**
-	 * Test registering invalid premises
+	 * Test authorization and set it
 	 */
 	@Test
 	public void testRegister_Authorization() {
@@ -665,10 +641,16 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	 * Registers a valid Premises with urn:pin:H89234X
 	 * 
 	 * @throws IOException
+	 * @throws InterruptedException 
 	 */
 	@Test
-	public void testRegister_ValidPremises() throws IOException {
+	public void testRegister_ValidPremises() throws IOException, InterruptedException {
 		logger.debug(bundleMarker, "starting testRegister");
+		// Set the mock user
+				mockAuthenticatorController.setAuthenticatedUser(true);
+		mockAuthenticatorController.setRoles(Arrays.asList(Member.ONE.uri,
+				Member.TWO.uri, Member.THREE.uri, TRACKER_STORE_REGISTRANT,
+				TRACKER_STORE_BI));
 		Resource resource = getXMIResource(DOC_PREMISES, "");
 		Premises premises = (Premises) resource.getContents().get(0);
 		assertThat("URI must be urn:pin:H89234X", premises.getUri(), is(Member.ONE.uri));
@@ -699,8 +681,9 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		URI premisesURI = premises.eResource().getURI();
 		URI firstAnimalURI = premises.getAnimals().get(0).eResource().getURI();
 
-
+		logger.info(bundleMarker, "Registering {}", premises);
 		store.register(premises);
+		logger.info(bundleMarker, "Registered {}", premises);
 
 		assertThat("Must not have changed the uri of the location", location
 				.eResource().getURI(), is(locationURI));
@@ -720,6 +703,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 
 		assertThat("Premises must have 7 animalsl", premises.getAnimals()
 				.size(), is(7));
+		TimeUnit.SECONDS.sleep(4);
 	}
 
 	@Test
@@ -736,7 +720,8 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 		URI firstAnimalURI = premises.getAnimals().get(0).eResource().getURI();
 
 		// Now add the animals from the premises
-		int totalAnimalsProcessed = store.recordAnimals(premises);
+		int totalAnimalsProcessed = store.recordAnimals(premises)
+				.getAnimalsAdded();
 
 		assertThat("Must have processed 7 animals.", totalAnimalsProcessed,
 				is(7));
@@ -807,6 +792,9 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 				is(notNullValue()));
 		assertThat("Premises URI is null - " + premises, premises.getUri(),
 				is(notNullValue()));
+		assertThat("Premises URI is wrong ", premises.eResource().getURI()
+				.toString(),
+				is(startsWith("mongodb://localhost/tracker/Premises")));
 		assertThat("Premises must have 0 animalsl", premises.getAnimals()
 				.size(), is(0));
 
@@ -980,14 +968,15 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	}
 
 	/*
+	 * 
 	 * In the shell var start = new Date(2010, 3, 1); var end = new Date(2011,
 	 * 5, 1); db.Tag.find( {'events.dateTime': {$gte: start, $lt: end}});
 	 */
 	@Test
 	public void testQuery_DB_driver_BetweenDates() throws UnknownHostException,
 			MongoException, ParseException {
-		Mongo m = new Mongo();
-		DB db = m.getDB("tracker");
+
+		DB db = Configuator.getTrackerDB();
 		assertNotNull(db);
 		DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd");
 		Date fromDate = dfm.parse(FROMDATE);
@@ -1002,8 +991,7 @@ public class Test_TrackerStore_1_Basic extends TestCase {
 	@Test
 	public void testQuery_DB_driver_BetweenDates2() throws ParseException,
 			UnknownHostException, MongoException {
-		Mongo m = new Mongo();
-		DB db = m.getDB("tracker");
+		DB db = Configuator.getTrackerDB();
 		assertNotNull(db);
 		DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd");
 		Date fromDate = dfm.parse(FROMDATE);

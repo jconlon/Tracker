@@ -34,7 +34,7 @@ public class AllTests extends TestSuite {
 	 * @generated
 	 */
 	public static Test suite() {
-		TestSuite suite = new AllTests("mongo Tests");
+		TestSuite suite = new AllTests("TrackerStore Mongo System Tests");
 		suite.addTestSuite(Test_TrackerStore_1_Basic.class);
 		suite.addTestSuite(Test_TrackerStore_1_Consumer.class);
 //		suite.addTestSuite(Test_TrackerStore_1_RecordAnimals.class);

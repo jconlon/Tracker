@@ -27,13 +27,13 @@ import org.osgi.service.monitor.StatusVariable;
  */
 public enum StatusAndConfigVariables {
 	MONGO_URI("connection.uri", "consumer.Connection_URI", false,
-			"The Univeral Resource Identifier (URI) specifying the connection to the MongoDB."),
+			"The Univeral Resource Identifier (URI) specifying the connection to the Utils."),
 	//
 	PREMISES_URI("tracker.premises.uri", "consumer.Premises_URI", false,
 			"The Univeral Resource Identifier of the Tracker Premises."),
 	//
 	STATUS(null, "consumer.Connection_Status", false,
-			"Status of the MongoDB connection."),
+			"Status of the Utils connection."),
 	//
 	LAST_UPDATE_TIME(null, "consumer.Last_Recording", false,
 			"Last time Premises Animal histories were recorded."),

@@ -50,7 +50,7 @@ public class MockProducer implements Producer, IController {
 	@Override
 	public void consumersConnected(Wire[] wires) {
 		this.wires = wires;
-		logger.info(bundleMarker, "{} Consumers connected",
+		logger.debug(bundleMarker, "{} Consumers connected",
 		// wires!=null?Arrays.toString(wires):0);
 				wires != null ? wires.length : 0);
 	}
