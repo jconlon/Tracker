@@ -33,7 +33,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.MongoException;
 import com.mongodb.WriteResult;
-import com.verticon.mongo.MongoDBCollectionProvider;
+import com.verticon.mongo.IMongoClientProvider;
 import com.verticon.osgi.useradmin.impl.RoleChangedEvent;
 import com.verticon.osgi.useradmin.impl.RoleCreatedEvent;
 import com.verticon.osgi.useradmin.impl.RoleRemovedEvent;
@@ -67,7 +67,7 @@ public class UserAdminComponent extends UserAdminImpl implements UserAdmin {
 	protected Logger logger = LoggerFactory
 			.getLogger(UserAdminComponent.class);
 
-	private final List<UserAdminListener> listeners = new CopyOnWriteArrayList<UserAdminListener>();
+	private final List<UserAdminListener> listeners;
 
 	private static final String TOPIC_BASE = "org/osgi/service/useradmin/UserAdmin/";
 	private ExecutorService exec = null;
@@ -77,7 +77,14 @@ public class UserAdminComponent extends UserAdminImpl implements UserAdmin {
 	private ComponentContext componentContext;
 
 	public UserAdminComponent() {
+		this(new CopyOnWriteArrayList<UserAdminListener>(), null);
+	}
+
+	public UserAdminComponent(List<UserAdminListener> listeners,
+			EventAdmin eventAdmin) {
 		super();
+		this.listeners = listeners;
+		this.eventAdmin = eventAdmin;
 	}
 
 	@Subscribe
@@ -120,7 +127,7 @@ public class UserAdminComponent extends UserAdminImpl implements UserAdmin {
 		this.componentContext = context;
 		logger.debug(bundleMarker, "activating ");
 		exec = Executors.newSingleThreadExecutor();
-		MongoUtils.ensureIndexes(collection);
+		MongoUtils.ensureIndexes(getCollection());
 		this.eventBus.register(this);
 		eventDispatcher = new EventDispatcher();
 		exec.submit(eventDispatcher);
@@ -132,6 +139,7 @@ public class UserAdminComponent extends UserAdminImpl implements UserAdmin {
 	 * @param config
 	 *            contains properties for this instance.
 	 */
+	@Override
 	void deactivate() {
 		logger.debug(bundleMarker, "deactivating");
 		this.eventBus.unregister(this);
@@ -145,6 +153,7 @@ public class UserAdminComponent extends UserAdminImpl implements UserAdmin {
 		exec.shutdown();
 		exec = null;
 		eventDispatcher = null;
+		super.deactivate();
 	}
 
 	/**
@@ -188,11 +197,10 @@ public class UserAdminComponent extends UserAdminImpl implements UserAdmin {
 	/**
 	 * Declaratives Services injection.
 	 * 
-	 * @param mongoDBCollectionProvider
+	 * @param iMongoClientProvider
 	 */
-	void setMongoDBCollectionProvider(
-			MongoDBCollectionProvider mongoDBCollectionProvider) {
-		this.collection = mongoDBCollectionProvider.getCollection();
+	void setMongoClientProvider(IMongoClientProvider iMongoClientProvider) {
+		this.iMongoClientProvider = iMongoClientProvider;
 	}
 
 	/**
@@ -200,9 +208,12 @@ public class UserAdminComponent extends UserAdminImpl implements UserAdmin {
 	 * 
 	 * @param mongoDBCollectionProvider
 	 */
-	void unsetMongoDBCollectionProvider(
-			MongoDBCollectionProvider mongoDBCollectionProvider) {
-		this.collection = null;
+	void unsetMongoClientProvider(IMongoClientProvider iMongoClientProvider) {
+		this.iMongoClientProvider = null;
+	}
+
+	String uri() {
+		return this.iMongoClientProvider.uri();
 	}
 
 	/**
@@ -220,7 +231,7 @@ public class UserAdminComponent extends UserAdminImpl implements UserAdmin {
 
 			DBObject update = serializer.serializeUpdate(changedRole);
 
-			WriteResult result = collection.update(query, update,
+			WriteResult result = getCollection().update(query, update,
 					false /* upsert */, false /* multi */);
 
 			if (result.getLastError() != null) {

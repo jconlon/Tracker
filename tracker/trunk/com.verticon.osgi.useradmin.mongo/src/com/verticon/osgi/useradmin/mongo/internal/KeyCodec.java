@@ -18,9 +18,9 @@ package com.verticon.osgi.useradmin.mongo.internal;
 
 /**
  * Provides a small utility class for encoding/decoding keys used directly in
- * MongoDB.
+ * Utils.
  * <p>
- * MongoDB does not allow keys to have '.' and '$' (amongst others?) in their
+ * Utils does not allow keys to have '.' and '$' (amongst others?) in their
  * name, so we need to ensure that those characters are somehow encoded.
  * </p>
  * 

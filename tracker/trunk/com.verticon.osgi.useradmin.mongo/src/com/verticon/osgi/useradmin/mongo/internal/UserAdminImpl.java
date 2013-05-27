@@ -12,7 +12,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.osgi.framework.Filter;
 import org.osgi.framework.FrameworkUtil;
@@ -40,20 +43,26 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.WriteConcern;
 import com.mongodb.WriteResult;
+import com.verticon.mongo.IMongoClientProvider;
 import com.verticon.osgi.useradmin.impl.RoleCreatedEvent;
 import com.verticon.osgi.useradmin.impl.RoleRemovedEvent;
 
 public abstract class UserAdminImpl implements UserAdmin {
+	private static final int CACHE_SIZE = 50;
+	private static final int CACHE_EXPIRE_AFTER_TIME = 10;// Minutes
+	private final AtomicBoolean inCleanUp = new AtomicBoolean();
+	protected final String DEFAULT_COLLECTION_NAME = "admin";
 
-	protected DBCollection collection;
-	protected final Serializer serializer;
-	protected final EventBus eventBus = new EventBus();
 	/**
 	 * slf4j Logger
 	 */
 	protected Logger logger = LoggerFactory.getLogger(UserAdminImpl.class);
-
-
+	protected IMongoClientProvider iMongoClientProvider;
+	// protected String dbName = DEFAULT_DB_NAME;
+	protected final Serializer serializer;
+	protected final EventBus eventBus = new EventBus();
+	private final ScheduledExecutorService executor = Executors
+			.newScheduledThreadPool(1);;
 	/**
 	 * @return the eventBus
 	 */
@@ -99,11 +108,15 @@ public abstract class UserAdminImpl implements UserAdmin {
 	// Role cache
 	protected final LoadingCache<String, Optional<Role>> roleCache = CacheBuilder
 			.newBuilder()
-			.maximumSize(1000).expireAfterWrite(10, TimeUnit.MINUTES)
+.maximumSize(CACHE_SIZE)
+			.expireAfterWrite(CACHE_EXPIRE_AFTER_TIME, TimeUnit.MINUTES)
 			.removalListener(cacheRemovalListener)
 			.build(new CacheLoader<String, Optional<Role>>() {
 				@Override
 				public Optional<Role> load(String key) {
+					if (inCleanUp.compareAndSet(false, true)) {
+						scheduleCleanUp();
+					}
 					return findRole(key);
 				}
 			});
@@ -111,11 +124,14 @@ public abstract class UserAdminImpl implements UserAdmin {
 
 	// Roles cache
 	protected final LoadingCache<User, Optional<Set<String>>> rolesCache = CacheBuilder
-			.newBuilder().maximumSize(1000)
-			.expireAfterWrite(10, TimeUnit.MINUTES)
+			.newBuilder().maximumSize(CACHE_SIZE)
+			.expireAfterWrite(CACHE_EXPIRE_AFTER_TIME, TimeUnit.MINUTES)
 			.build(new CacheLoader<User, Optional<Set<String>>>() {
 				@Override
 				public Optional<Set<String>> load(User key) {
+					if (inCleanUp.compareAndSet(false, true)) {
+						scheduleCleanUp();
+					}
 					return findRoles(key);
 				}
 			});
@@ -134,10 +150,10 @@ public abstract class UserAdminImpl implements UserAdmin {
 		Role result = null;
 		BasicDBObject dbObject = new BasicDBObject(NAME, name).append(TYPE,
 				type);
-
-		DBObject existing = collection.findOne(dbObject);
+		DBCollection coll = getCollection();
+		DBObject existing = coll.findOne(dbObject);
 		if (existing == null) {
-			WriteResult wr = collection.insert(dbObject,
+			WriteResult wr = coll.insert(dbObject,
 					WriteConcern.FSYNC_SAFE);
 			if (wr.getLastError() != null) {
 				wr.getLastError().throwOnError();
@@ -167,13 +183,14 @@ public abstract class UserAdminImpl implements UserAdmin {
 	@Override
 	public boolean removeRole(String name) {
 		checkPermissions();
+		DBCollection coll = getCollection();
 		Role role = getRole(name);
 		if (role == null) {
 			return false;
 		}
 
 		DBObject q = MongoUtils.getGroupsQuery(name);
-		DBCursor cursor = collection.find(q);
+		DBCursor cursor = coll.find(q);
 		while (cursor.hasNext()) {
 			DBObject dbObject = cursor.next();
 			Group group = (Group) serializer.deserialize(dbObject);
@@ -182,7 +199,7 @@ public abstract class UserAdminImpl implements UserAdmin {
 
 		// Now remove the object
 		q = new BasicDBObject(NAME, name);
-		WriteResult wr = collection.remove(q);
+		WriteResult wr = coll.remove(q);
 		if (wr.getLastError() != null) {
 			wr.getLastError().throwOnError();
 		}
@@ -212,7 +229,7 @@ public abstract class UserAdminImpl implements UserAdmin {
 
 	/**
 	 * Warning this method is very inefficient as it reads all the documents
-	 * from the collection before it filters them out.
+	 * from the iMongoClientProvider before it filters them out.
 	 * 
 	 * @param filterValue
 	 *            (currently blank)
@@ -233,7 +250,7 @@ public abstract class UserAdminImpl implements UserAdmin {
 			filter = FrameworkUtil.createFilter(filterValue);
 		}
 		DBObject query = MongoUtils.createQueryFromFilter(filterValue);
-		DBCursor cursor = collection.find(query);
+		DBCursor cursor = getCollection().find(query);
 		try {
 			while (cursor.hasNext()) {
 				Role role = serializer.deserialize(cursor.next());
@@ -253,7 +270,7 @@ public abstract class UserAdminImpl implements UserAdmin {
 		User result = null;
 		BasicDBObject query = new BasicDBObject(TYPE, Role.USER)
 				.append(key, value);
-		DBObject dbObject = collection.findOne(query);
+		DBObject dbObject = getCollection().findOne(query);
 		if (dbObject != null) {
 			result = (User) serializer.deserialize(dbObject);
 		}
@@ -268,34 +285,16 @@ public abstract class UserAdminImpl implements UserAdmin {
 
 	}
 
-
-	/**
-	 * @return the collection
-	 */
-	DBCollection getCollection() {
-		return collection;
-	}
-
-	/**
-	 * @param collection
-	 *            the collection to set
-	 */
-	void setCollection(DBCollection collection) {
-		this.collection = collection;
-	}
-
-	/**
-	 * @param collection
-	 *            the collection to set
-	 */
-	void unsetCollection(DBCollection collection) {
-		this.collection = null;
+	protected DBCollection getCollection() {
+		return iMongoClientProvider.getMongoClient()
+				.getDB(iMongoClientProvider.getDatabaseName())
+				.getCollection(DEFAULT_COLLECTION_NAME);
 	}
 
 	private Optional<Role> findRole(String name) {
 		Optional<Role> result = Optional.absent();
 		BasicDBObject query = new BasicDBObject(NAME, name);
-		DBObject dbObject = collection.findOne(query);
+		DBObject dbObject = getCollection().findOne(query);
 		if (dbObject != null) {
 			Role role = serializer.deserialize(dbObject);
 			result = Optional.of(role);
@@ -352,7 +351,7 @@ public abstract class UserAdminImpl implements UserAdmin {
 		LinkedList<Group> results = newLinkedList();
 		DBObject q = MongoUtils.getGroupsQuery(name);
 
-		DBCursor cursor = collection.find(q);
+		DBCursor cursor = getCollection().find(q);
 		while (cursor.hasNext()) {
 			DBObject dbObject = cursor.next();
 			Group group = (Group) serializer.deserialize(dbObject);
@@ -375,5 +374,43 @@ public abstract class UserAdminImpl implements UserAdmin {
 			securityManager.checkPermission(new UserAdminPermission(
 					UserAdminPermission.ADMIN, null));
 		}
+	}
+
+	private void scheduleCleanUp() {
+		logger.debug(bundleMarker,
+				"Scheduling cleanup to execute in {} minute.",
+				CACHE_EXPIRE_AFTER_TIME);
+		executor.schedule(cleanUpTask, CACHE_EXPIRE_AFTER_TIME,
+				TimeUnit.MINUTES);
+	}
+
+	private final Runnable cleanUpTask = new Runnable() {
+		@Override
+		public void run() {
+			rolesCache.cleanUp();
+			roleCache.cleanUp();
+			long roleCacheAfter = roleCache.size();
+			long rolesCacheAfter = rolesCache.size();
+			if (roleCacheAfter < 1 && rolesCacheAfter < 1) {
+				logger.debug(bundleMarker,
+						"No entries in cache finished cleaning up.");
+				inCleanUp.set(false);
+			} else {
+				logger.debug(
+						bundleMarker,
+						"{} entries still in roleCache and {} entries in rolesCache after cleanup, rescheduling cleanup task to execute in {} minute.",
+						new Object[] { roleCacheAfter, rolesCache,
+								CACHE_EXPIRE_AFTER_TIME });
+				executor.schedule(this, CACHE_EXPIRE_AFTER_TIME,
+						TimeUnit.MINUTES);
+			}
+
+		}
+	};
+
+	void deactivate() {
+		executor.shutdownNow();
+		rolesCache.invalidateAll();
+		roleCache.invalidateAll();
 	}
 }

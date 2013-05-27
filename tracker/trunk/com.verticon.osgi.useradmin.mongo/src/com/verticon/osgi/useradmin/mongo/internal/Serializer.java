@@ -196,7 +196,7 @@ public class Serializer {
 	 * @return a member instance, never <code>null</code>.
 	 * @throws MongoException
 	 *             in case the requested member was not found (or any other
-	 *             MongoDB exception).
+	 *             Utils exception).
 	 */
 	private final Role findExistingMember(String name) {
 		Role result = userAdminImpl.getRole(name);
