@@ -50,6 +50,14 @@
     </encoder>
   </appender>
   
+   <appender name="METRICS" class="ch.qos.logback.core.FileAppender">
+    <append>true</append>
+    <file>${user.home}/performance_report.csv</file>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss},%m%n</pattern>
+    </encoder>
+  </appender>
+  
  <appender name="STDOUT"
     class="ch.qos.logback.core.ConsoleAppender">
     <layout class="ch.qos.logback.classic.PatternLayout">
@@ -90,9 +98,14 @@
     <level value="INFO"/>
   </logger>
   
-   <logger name="com.verticon.tracker.store">
+   <logger name="com.verticon.tracker.store.mongodb">
+    <level value="ERROR"/>
+  </logger> 
+  
+  <logger name="com.verticon.tracker.store.mongodb.test.system">
     <level value="INFO"/>
-  </logger>     
+  </logger>
+      
    <logger name="com.verticon.tracker.store.mongo.test.system.internal">
     <level value="INFO"/>
   </logger>
@@ -215,7 +228,7 @@
   </logger>
   
   <logger name="com.verticon.tracker.irouter.wireadmin">
-    <level value="INFO"/>
+    <level value="ERROR"/>
   </logger>
   
   <logger name="com.verticon.tracker.irouter.gateway">
@@ -250,13 +263,48 @@
     <level value="INFO"/>
   </logger>
   
+  <logger name="com.verticon.mongo.emf.test.system">
+    <level value="DEBUG"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.update.mongo.test.system">
+    <level value="DEBUG"/>
+  </logger>
+  
   <logger name="com.verticon.mongo">
     <level value="INFO"/>
   </logger>
-  
+ 
   <logger name="com.verticon.tracker.store.mongo.test.system.internal">
     <level value="INFO"/>
     <appender-ref ref="STDOUT"/>
+  </logger>
+  
+  
+  <logger name="com.verticon.mongo.emf.transform.internal">
+    <level value="INFO"/>
+  </logger>
+  
+ 
+  <logger name="com.verticon.tracker.store.mongodb.internal.OCDFind">
+    <level value="INFO"/>
+  </logger>
+  
+  
+  
+   <logger name="com.verticon.osgi.useradmin.mongo.internal.UserAdminImpl">
+    <level value="INFO"/>
+  </logger>
+  
+  <!-- Logger for metrics reporting -->
+  <logger name="com.verticon.tracker.store.mongodb.test.system.Metrics">
+    <level value="INFO"/>
+    <appender-ref ref="METRICS"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.store.mongodb.test.system.Configurator">
+    <level value="INFO"/>
+    <appender-ref ref="METRICS"/>
   </logger>
   
   <logger name="aggregated" level="INFO">
@@ -269,13 +317,14 @@
   
   <root>
     <level value="WARN"/>
-    <appender-ref ref="multiplex"/>
+   
     <!--  
+     <appender-ref ref="multiplex"/>
      <appender-ref ref="STDOUT"/>
      <appender-ref ref="RollingFile"/>
     -->
   </root>
   
-  <!--  <consolePlugin /> -->	
+  <consolePlugin /> 
  
 </configuration>
