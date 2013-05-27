@@ -1,19 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
 
-  <OCD name="MongoDB Collection Provider" id="com.verticon.mongo"
-       description="A MongoDB collection provider." >
+  <OCD name="MongoDB Client Provider" id="com.verticon.mongo"
+       description="A MongoDB client provider." >
 
-    <AD name="MongoDB Server Name"  id="server" 
-    	required="true" 
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" 
+    	required="false" 
     	type="String" 
-    	default="localhost:27017"
-        description="Name of the MongoDB Server Host and Port.)"/>
-   
-   <AD name="MongoDB Database Name" id="dbname" 
+    	default="No wires"
+        description="This optional attribute has no functionality other than to visualize and document this service in the iRouter Monitor."/>
+    
+    <AD name="Location" id="external.location" 
+    	required="false" 
+    	type="String" 
+    	default="MongoDB on Local Host"
+		description="Phsical Location of the MongoDB Server." />
+   	
+    <AD name="Description" id="external.description" 
+    	required="false" 
+    	type="String" 
+    	default="Description of device or service."
+    	description="Description of the MongoDB Service."/>
+    	
+    <AD name="MongoDB Server" id="external.connection.uri" 
+     	type="String" 
+     	required="true" 
+        default="localhost:27017" 
+        description="Semicolon separated list of MongoDB Server names and ports. Example tuna:27001;tuna:27002;tuna:27003"/> 
+        
+    <AD name="MongoDB Database Name" id="dbname" 
  		type="String"
  		required="true" 
- 		default="ua_repo"
+ 		default="tracker"
 		description="Name of the MongoDB database to use." />
  
     <AD name="MongoDB User Name" id="username" 
@@ -26,12 +44,19 @@
     	required="false"                                  
     	type="String"                           
     	description="Password for the MongoDB user."/>
-    
-    
-	<AD name="MongoDB Collection" id="collection" 
+    	
+      <AD name="Type" id="external.service.type" 
     	type="String" 
-         description="Name of the MongoDB Collection"
-         default="useradmin"/> 
+    	required="true"
+        default="gateway"
+        description="The type of external device or service. This optional attribute has no functionality other than to visualize and document this service in the iRouter Monitor.">
+		<Option label="Gateway Service" value="gateway"/>
+	</AD>
+	
+	<AD name="Component container label"  id="tracker.monitor.label" 
+  	 	 type="String" 
+         description="Name to label the node in the iRouter Monitor View graphics. This optional attribute has no functionality other than to visualize and document this service in the iRouter Monitor."
+         default="MongoDB"/> 
   
   </OCD>
   
