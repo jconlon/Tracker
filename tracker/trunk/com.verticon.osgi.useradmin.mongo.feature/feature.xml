@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.osgi.useradmin.mongo"
       label="%featureName"
-      version="1.0.0.qualifier"
+      version="2.0.0.qualifier"
       provider-name="%providerName"
       plugin="com.verticon.osgi.useradmin.mongo">
 
@@ -24,19 +24,15 @@
    </url>
 
    <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="com.mongodb"/>
-      <import plugin="org.eclipse.osgi.services"/>
+      <import plugin="com.google.guava"/>
+      <import plugin="org.mongodb.mongo-java-driver"/>
+      <import plugin="com.verticon.osgi.useradmin.authenticator"/>
       <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.eclipse.osgi.services"/>
+      <import plugin="slf4j.api"/>
       <import feature="com.google.support.runtime" version="11.1.0.qualifier"/>
+      <import plugin="com.verticon.mongo"/>
    </requires>
-
-   <plugin
-         id="com.verticon.mongo"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
 
    <plugin
          id="com.verticon.osgi.useradmin.mongo"

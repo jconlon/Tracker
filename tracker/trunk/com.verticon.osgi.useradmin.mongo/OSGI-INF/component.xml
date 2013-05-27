@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" enabled="true" immediate="true" name="com.verticon.osgi.useradmin.mongo">
-   <implementation class="com.verticon.osgi.useradmin.mongo.internal.UserAdminComponent"/>
-   <reference bind="setMongoDBCollectionProvider" cardinality="1..1" interface="com.verticon.mongo.MongoDBCollectionProvider" name="MongoDBCollectionProvider" policy="static" target="(collection=useradmin)" unbind="unsetMongoDBCollectionProvider"/>
+   <implementation class="com.verticon.osgi.useradmin.mongo.internal.Component"/>
+   <reference bind="setMongoClientProvider" cardinality="1..n" interface="com.verticon.mongo.IMongoClientProvider" name="MongoClientProvider" policy="dynamic" unbind="unsetMongoClientProvider"/>
    <reference bind="addUserAdminListener" cardinality="0..n" interface="org.osgi.service.useradmin.UserAdminListener" name="UserAdminListener" policy="dynamic" unbind="removeUserAdminListener"/>
    <service>
-      <provide interface="org.osgi.service.useradmin.UserAdmin"/>
+      <provide interface="com.verticon.osgi.useradmin.authenticator.UserAdminProvider"/>
    </service>
    <reference bind="setEventAdmin" cardinality="1..1" interface="org.osgi.service.event.EventAdmin" name="EventAdmin" policy="static" unbind="unsetEventAdmin"/>
 </scr:component>

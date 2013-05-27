@@ -42,7 +42,7 @@ public class MongoUtils {
 	/**
 	 * TODO Ensure indexes on the collections
 	 * 
-	 * @param collection
+	 * @param iMongoClientProvider
 	 * @throws UnknownHostException
 	 */
 	static void ensureIndexes(DBCollection collection) {
