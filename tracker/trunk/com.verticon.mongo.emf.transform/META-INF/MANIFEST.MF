@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: EMF MongoDB Transformer
+Bundle-SymbolicName: com.verticon.mongo.emf.transform
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Service-Component: OSGI-INF/*.xml
+Import-Package: com.google.common.base;version="11.0.1",
+ com.google.common.cache;version="11.0.1",
+ com.google.common.collect;version="11.0.1",
+ com.mongodb;version="2.11.1.RELEASE",
+ org.bson.types;version="2.11.1.RELEASE",
+ org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.emf.ecore.resource.impl,
+ org.eclipse.emf.ecore.util,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.emf.ecore.xmi.impl,
+ org.slf4j;version="1.7.5"
+Export-Package: com.verticon.mongo.emf.transform
+Bundle-ActivationPolicy: lazy

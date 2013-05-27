@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="com.verticon.mongo.emf.transform.test.system.test2">
+   <implementation 
+    class="com.verticon.mongo.emf.transform.test.system.Test_Mongo_EMF_FunctionProvider"/>
+   <reference bind="setFunctionProvider" cardinality="1..1" interface="com.verticon.mongo.emf.transform.IFunctionProvider" name="IFunctionProvider" policy="static" unbind="unsetFunctionProvider"/>
+   <reference bind="setMongoClientProvider" cardinality="1..1" interface="com.verticon.mongo.IMongoClientProvider" name="MongoClientProvider" policy="static" target="(mongoClientProvider=remote)" unbind="unsetMongoClientProvider"/>
+</scr:component>
