@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="MongoDB Tracker Store" id="com.verticon.tracker.store.mongodb"
+       description="A MongoDB client provider." >
+    
+    <AD name="MongoDB Server" id="connection.uri" 
+     	type="String" 
+     	required="true" 
+        default="localhost:27017" 
+        description="Semicolon separated list of MongoDB Server names and ports. Example tuna:27001;tuna:27002;tuna:27003"/> 
+        
+    <AD name="MongoDB Database Name" id="dbname" 
+ 		type="String"
+ 		required="true" 
+ 		default="tracker"
+		description="Name of the MongoDB database to use." />
+ 
+    <AD name="MongoDB User Name" id="username" 
+     	type="String" 
+     	required="false" 
+        description="Optional name of the MongoDB User."/> 
+   
+    <AD name="MongoDB User Password"                 
+    	id="password" 
+    	required="false"                                  
+    	type="String"                           
+    	description="Password for the MongoDB user."/>
+    	
+     <AD name="Wiring group name"  id="tracker.wiring.group.name" 
+    	required="true" 
+    	type="String" 
+    	default="none"
+        description="Name of the group of iRouter components that will be wired together. (If no iRouter functionality is required this value is ignored.)"/>
+   
+   <AD name="Consumable scopes" id="wireadmin.consumer.scope" 
+ 		type="String"
+ 		required="true" 
+ 		default="premises.animal,animal.weight"
+		cardinality="5" 
+		description="Comma delimited list of scope names for consumed animal, measurement, and position products. (If no iRouter functionality is required this value is ignored.)" />
+ 
+    
+    <AD name="Premises URI" id="tracker.premises.uri" 
+    	type="String"
+    	required="true" 
+    	description="Universal Resource Identifier(URI) of the Tracker Premises.  This is the Premises URI that will be used for saving consumed iRouter Animal, Tag and Event products."/> 
+    	
+	<AD name="Type" id="premises.animal.default" 
+    	type="Integer" 
+        default="6"
+        description="The default type of animal to add as a new animal, for saving consumed iRouter event products where there is not already a prexisting animal.">
+    	<Option label="BOVINE_BEEF" value="6"/>
+		<Option label="BOVINE_BISON" value="8"/>
+		<Option label="BOVINE_DAIRY" value="9"/>
+		<Option label="CAPRINE" value="26"/>
+		<Option label="EQUINE" value="25"/>
+		<Option label="OVINE" value="7"/>
+		<Option label="SWINE" value="24"/>	
+	</AD>
+    	
+	<AD name="Component container label"  id="tracker.monitor.label" 
+  	 	 type="String" 
+         description="Name to label the node in the iRouter Monitor View graphics. This optional attribute has no functionality other than to visualize and document this service in the iRouter Monitor."
+         default="MongoDB"/> 
+  
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.store.mongodb" bundle="*">
+		<Object ocdref="com.verticon.tracker.store.mongodb"/>
+  </Designate>
+  
+  
+</metatype:MetaData>
