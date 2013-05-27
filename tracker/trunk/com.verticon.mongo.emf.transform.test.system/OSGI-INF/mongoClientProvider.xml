@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
+    name="com.verticon.mongo.emf.transform.test.system.mongoclientprovider">
+   <implementation 
+    class="com.verticon.mongo.emf.transform.test.system.MongoClientProviderForTest"/>
+   <service>
+      <provide interface="com.verticon.mongo.IMongoClientProvider"/>
+   </service>
+   <property name="mongoClientProvider" type="String" value="local"/>
+   
+   
+</scr:component>
