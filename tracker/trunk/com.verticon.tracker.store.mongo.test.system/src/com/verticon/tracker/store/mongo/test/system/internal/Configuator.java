@@ -36,8 +36,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.mongodb.DB;
-import com.mongodb.Mongo;
-import com.mongodb.MongoURI;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.store.mongo.test.system.Member;
 import com.verticon.tracker.store.mongo.test.system.Variables;
@@ -65,32 +65,31 @@ public class Configuator {
     
 
 	private static Properties localProps = null;
+	private static MongoClient mongoClient = null;
+	private static MongoClientURI mongoURI = null;
+	private static DB trackerDB = null;
 
-
-	public static DB getTrackerDB() throws UnknownHostException {
-		MongoURI mongoURI = getMongoURI();
-		Mongo mongo = mongoURI.connect();
-		DB result = mongo.getDB("tracker");
-		String userName = mongoURI.getUsername();
-		if (userName != null && !result.isAuthenticated()) {
-			result.authenticate(userName, mongoURI.getPassword());
-		}
-		return result;
+	void activate() throws UnknownHostException {
+		mongoURI = getMongoURI();
+		mongoClient = new MongoClient(mongoURI);
+		trackerDB = mongoClient.getDB("tracker");
 	}
 
-	public void setConfigurationAdmin(ConfigurationAdmin configAdmin)
+	void deactivate() {
+		if (mongoClient != null) {
+			mongoClient.close();
+			mongoClient = null;
+		}
+		mongoURI = null;
+		trackerDB = null;
+
+	}
+
+	void setConfigurationAdmin(ConfigurationAdmin configAdmin)
 			throws IOException {
 		logger.debug(bundleMarker, "Setting ConfigurationAdmin");
 		deleteConfigurations(configAdmin);
-//		addMembersCollection();
-		// Configure the monitor
-		// Configuration config = configAdmin
-		// .createFactoryConfiguration(MONITOR_FACTORY_PID.getKey());
-		// Dictionary<String, Object> props = configureMonitor();
-		// config.update(props);
-		// logger.debug(bundleMarker, "Created Configuration Monitor {}",
-		// config.getPid());
-		
+
 		// Configure the first test class
 		Configuration config;
 		if (isMonitored()) {
@@ -118,19 +117,30 @@ public class Configuator {
 				config.getPid());
 	}
 
-	public void unsetConfigurationAdmin(ConfigurationAdmin configAdmin)
+	void unsetConfigurationAdmin(ConfigurationAdmin configAdmin)
 			throws IOException {
 		logger.debug(bundleMarker, "UnSetting ConfigurationAdmin");
 		deleteConfigurations(configAdmin);
 
 	}
 
-	public static MongoURI getMongoURI() {
-		if (localProps == null) {
-			loadLocalProps();
+	public static DB getTrackerDB() throws UnknownHostException {
+		String userName = mongoURI.getUsername();
+		if (userName != null && !trackerDB.isAuthenticated()) {
+			trackerDB.authenticate(userName, mongoURI.getPassword());
 		}
+		return trackerDB;
+	}
 
-		return new MongoURI((String) localProps.get("mongourl"));
+	static MongoClientURI getMongoURI() {
+		if (mongoURI == null) {
+			if (localProps == null) {
+				loadLocalProps();
+			}
+
+			mongoURI = new MongoClientURI((String) localProps.get("mongourl"));
+		}
+		return mongoURI;
 	}
 
 	private static boolean isMonitored() {
@@ -204,11 +214,12 @@ public class Configuator {
 		Dictionary<String, Object> props = new Hashtable<String, Object>();
 		configureConnection(props);
 		props.put(PROVIDED_COLLECTION.configID, "useradmin");
-		props.put("com.verticon.tracker.mongo.test","testTwo");
+		props.put("com.verticon.tracker.mongo.test", "testTwo");
 		props.put(Variables.DEFAULT_ANIMAL.configID, TrackerPackage.SWINE);
 		props.put("tracker.wiring.group.name", "test2");
 		props.put(Variables.PREMISES_URI.configID, Member.THREE.uri);
-		props.put(WireConstants.WIREADMIN_CONSUMER_SCOPE, new String[]{TAG_SCOPE});
+		props.put(WireConstants.WIREADMIN_CONSUMER_SCOPE,
+				new String[] { TAG_SCOPE });
 		props.put("enableConsole", Boolean.TRUE);
 		props.put("output.directory.name", "/tmp/trackerStore2");
 		return props;
@@ -217,7 +228,7 @@ public class Configuator {
 
 
 	private static void configureConnection(Dictionary<String, Object> props) {
-		MongoURI mongoURI = getMongoURI();
+		MongoClientURI mongoURI = getMongoURI();
 		if (isNullOrEmpty(mongoURI.getUsername())
 				|| mongoURI.getPassword().length < 1) {
 

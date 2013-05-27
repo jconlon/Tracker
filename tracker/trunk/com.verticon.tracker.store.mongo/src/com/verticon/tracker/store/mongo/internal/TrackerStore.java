@@ -12,6 +12,7 @@ package com.verticon.tracker.store.mongo.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Lists.newLinkedList;
 import static com.verticon.tracker.store.mongo.internal.Element.ANIMAL;
 import static com.verticon.tracker.store.mongo.internal.Element.PREMISES;
 import static com.verticon.tracker.store.mongo.internal.Element.TAG;
@@ -64,11 +65,12 @@ import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.store.ITrackerStore;
+import com.verticon.tracker.store.IUpdateStats;
 import com.verticon.tracker.store.StoreAccessException;
 
 /**
  * TrackerStrore for saves and queries Agriculture Location and Animal event
- * histories to and from a MongoDB database.
+ * histories to and from a Utils database.
  * 
  * Saving premises is only done at registration time and for updates. Don't
  * bother with incremental changes just save the whole thing.
@@ -199,6 +201,7 @@ public class TrackerStore implements ITrackerStore {
 		BasicDBObject dateMatch = new BasicDBObject();
 		dateMatch.put("dateTime", new BasicDBObject(QueryOperators.GTE,
 				fromDate).append(QueryOperators.LT, toDate));
+		// {dateTime:{$gte:fromDate,$lt:toDate}}
 
 		BasicDBObject elementMatch = new BasicDBObject();
 		elementMatch.put("$elemMatch", dateMatch.append("pid", uri));
@@ -292,10 +295,18 @@ public class TrackerStore implements ITrackerStore {
 	}
 
 	@Override
-	public int recordAnimals(Premises premises) throws IOException {
+	public IUpdateStats recordAnimals(Premises premises) throws IOException {
 		checkNotNull(premises, "Premises must not be null.");
 		validateObject(premises);
-		if (!premises.getUri().equals(premisesURI)) {
+		String uri = premises.getUri();
+		List<Animal> animals = premises.getAnimals();
+		return record(uri, animals);
+	}
+
+	@Override
+	public IUpdateStats record(String uri, List<Animal> animals)
+			throws IOException {
+		if (!uri.equals(premisesURI)) {
 			throw new StoreAccessException(
 					"Attempt to save animals from a premises with a foriegn uri.");
 		}
@@ -304,17 +315,16 @@ public class TrackerStore implements ITrackerStore {
 				StatusAndConfigVariables.TOTAL_ANIMALS_PROCESSED.statusVarID)
 				.getInteger();
 
-		logger.debug(bundleMarker, "Recording {} animals", premises
-				.getAnimals().size());
+		logger.debug(bundleMarker, "Recording {} animals", animals.size());
 		List<Animal> animalsToProcess = Utils.filterAnimalsToRecord(
-				premises.getAnimals(), getLastUpdate(premisesURI, db));
+animals,
+				getLastUpdate(premisesURI, db));
 
 		for (Animal animal : animalsToProcess) {
 			recordAnimal(animal);
 		}
 		if (!animalsToProcess.isEmpty()) {
-			Date mostCurrentEvent = Utils.findMostCurrentEvent(premises
-					.eventHistory());
+			Date mostCurrentEvent = findMostCurrentEvent(animals);
 			Utils.setLastUpdate(db, mostCurrentEvent, statusMonitor,
 					premisesURI);
 			statusMonitor.addTotalAnimalsProcessed(animalsToProcess.size());
@@ -322,8 +332,10 @@ public class TrackerStore implements ITrackerStore {
 		int finish = statusMonitor.getStatusVariable(
 				StatusAndConfigVariables.TOTAL_ANIMALS_PROCESSED.statusVarID)
 				.getInteger();
-		return finish - start;
+		return new UpdateStats(finish - start, 0, 0);
 	}
+
+
 
 	@Override
 	public Premises retrievePremises(String uri) throws IOException {
@@ -652,6 +664,28 @@ public class TrackerStore implements ITrackerStore {
 	}
 
 	
+	/**
+	 * 
+	 * @return the most current event associated with this animal
+	 */
+	private static Date findMostCurrentEvent(Iterable<Animal> animals) {
+		List<Event> eventsByDate = newLinkedList();
+		for (Animal animal : animals) {
+			eventsByDate.addAll(animal.eventHistory());
+		}
+		// Sort events according to date
+		return findMostCurrentEvent(eventsByDate);
+	}
+
+	private static Date findMostCurrentEvent(List<Event> eventsByDate) {
+		Collections.sort(eventsByDate, new Comparator<Event>() {
+			@Override
+			public int compare(Event event1, Event event2) {
+				return event2.getDateTime().compareTo(event1.getDateTime());
+			}
+		});
+		return eventsByDate.get(0).getDateTime();
+	}
 
 
 }

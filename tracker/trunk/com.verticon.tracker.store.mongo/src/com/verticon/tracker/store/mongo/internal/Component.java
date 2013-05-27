@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
@@ -40,7 +41,6 @@ import com.google.common.base.Strings;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.MongoException;
-import com.verticon.mongo.MongoDBCollectionProvider;
 import com.verticon.mongo.emf.api.IResourceSetFactory;
 import com.verticon.mongo.emf.api.SingleMongoLocator;
 import com.verticon.osgi.useradmin.authenticator.Authenticator;
@@ -48,6 +48,7 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.store.ITrackerStore;
+import com.verticon.tracker.store.IUpdateStats;
 import com.verticon.tracker.store.StoreLogonException;
 
 /**
@@ -72,8 +73,7 @@ import com.verticon.tracker.store.StoreLogonException;
  * @author jconlon
  * 
  */
-public class Component implements ITrackerStore, Consumer, Monitorable,
-		MongoDBCollectionProvider {
+public class Component implements ITrackerStore, Consumer, Monitorable {
 
 	/**
 	 * slf4j Logger
@@ -90,6 +90,7 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 	private Authenticator authenticator;
 
 
+
 	// Created from configuration
 	protected final SingleMongoLocator mongoLocator;
 	private DBCollection providedCollection;
@@ -100,6 +101,7 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 		this.trackerStore = new TrackerStore(statusMonitor, tagConsumer);
 		this.mongoLocator = new SingleMongoLocator();
 	}
+
 
 	/*
 	 * (non-Javadoc)
@@ -189,12 +191,18 @@ public class Component implements ITrackerStore, Consumer, Monitorable,
 	 * @see com.verticon.tracker.store.ITrackerStore#recordAnimals(com.verticon.tracker.Premises)
 	 */
 	@Override
-	public int recordAnimals(Premises premises) throws IOException {
+	public IUpdateStats recordAnimals(Premises premises) throws IOException {
 		checkHasRole(premises);
 		return trackerStore.recordAnimals(premises);
 
 	}
 
+	@Override
+	public IUpdateStats record(String uri, List<Animal> animals)
+			throws IOException {
+		checkHasRole(uri);
+		return trackerStore.record(uri, animals);
+	}
 
 	/**
 	 * Authenticated users can retrieve animals.
@@ -520,10 +528,8 @@ String.format(
 		return (String) config.get(PROVIDED_COLLECTION.configID);
 	}
 
-	@Override
-	public DBCollection getCollection() {
-		return providedCollection;
-	}
+
+
 
 
 }

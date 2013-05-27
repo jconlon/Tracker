@@ -18,9 +18,9 @@ public enum Member {
 	//
 	THREE("urn:pin:003ALKM", "mudshark");
 
-	// in kilograms
+
 	public final String uri;
-	// in meters
+
 	@SuppressWarnings("unused")
 	private final String password;
 

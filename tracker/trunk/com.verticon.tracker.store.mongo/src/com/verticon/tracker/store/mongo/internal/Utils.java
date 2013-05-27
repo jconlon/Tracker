@@ -12,6 +12,7 @@
 package com.verticon.tracker.store.mongo.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Strings.isNullOrEmpty;
 import static com.google.common.collect.Collections2.transform;
 import static com.google.common.collect.Sets.newHashSet;
 import static com.verticon.tracker.store.mongo.internal.StatusAndConfigVariables.LAST_UPDATE_TIME;
@@ -32,7 +33,9 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -70,6 +73,8 @@ public class Utils {
 	static {
 		Utils.bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
 	}
+	
+	
 
 	static void validateObject(EObject eObject) throws ValidationException {
 		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject);
@@ -103,7 +108,8 @@ public class Utils {
 	 * 
 	 * @generated
 	 */
-	static List<Event> filterEvents(List<Event> eventHistory, Date update) {
+	private static List<Event> filterEvents(List<Event> eventHistory,
+			Date update) {
 		List<Event> result = null;
 		if (update == null) {
 			result = eventHistory;
@@ -145,6 +151,7 @@ public class Utils {
 		List<Event> eventsByDate = new LinkedList<Event>(events);
 		// Sort events according to date
 		Collections.sort(eventsByDate, new Comparator<Event>() {
+			@Override
 			public int compare(Event event1, Event event2) {
 				return event2.getDateTime().compareTo(event1.getDateTime());
 			}
@@ -163,6 +170,7 @@ public class Utils {
 	private static final Comparator<Tag> OLD_TO_NEW_TAG_COMPARATOR = Collections
 			.reverseOrder(Utils.NEW_TO_OLD_TAG_COMPARATOR);
 	static final Comparator<Tag> NEW_TO_OLD_TAG_COMPARATOR = new Comparator<Tag>() {
+		@Override
 		public int compare(Tag a, Tag b) {
 			Date d1 = findMostCurrentEvent(a.getEvents());
 			Date d2 = findMostCurrentEvent(b.getEvents());
@@ -207,15 +215,56 @@ public class Utils {
 	
 	static void setLastUpdate(DB db, Date date, MongoStatusMonitor statusMonitor, String premisesURI) {
 			DBCollection collection = db.getCollection(UPDATES_COL_NAME);
-			DBObject searchQuery = new BasicDBObject(URI, premisesURI);
-			BasicDBObject newValues = new BasicDBObject("update", date);
-			BasicDBObject set = new BasicDBObject("$set", newValues);
-			collection.update(searchQuery, set,true,false);//create it if it does not exist
+			setUpdate(date, premisesURI, collection);
 			
 			statusMonitor.setLastUpdate(date.getTime());
 			statusMonitor.update(statusMonitor
 					.getStatusVariable(LAST_UPDATE_TIME.statusVarID));
 		}
+
+	static void setUpdate(Date date, String premisesURI,
+			DBCollection collection) {
+		DBObject searchQuery = new BasicDBObject(URI, premisesURI);
+		BasicDBObject newValues = new BasicDBObject("update", date);
+		BasicDBObject set = new BasicDBObject("$set", newValues);
+		collection.update(searchQuery, set,true,false);//create it if it does not exist
+	}
+
+	/**
+	 * Pass only animals with new events after the update date and the PID is
+	 * empty
+	 * 
+	 * @author jconlon
+	 * 
+	 */
+	static class AnimalsWithNewAndUnpublishedEvents implements
+			Predicate<Animal> {
+		private final Date update;
+
+		AnimalsWithNewAndUnpublishedEvents(Date update) {
+			super();
+			this.update = update;
+		}
+
+		@Override
+		public boolean apply(Animal animal) {
+			return animal.getLastEventDateTime().after(update)
+					&& Iterables.any(animal.activeTag().getEvents(),
+							unpublishedEvents);
+		}
+	}
+
+	/**
+	 * Pass only events with an empty PID
+	 */
+	static Predicate<Event> unpublishedEvents = new Predicate<Event>() {
+		@Override
+		public boolean apply(Event event) {
+			return isNullOrEmpty(event.getPid());
+		}
+	};
+
+	
 
 	static List<Animal> filterAnimalsToRecord(List<Animal> animalsToUpdate,
 			Date update) {
@@ -265,6 +314,37 @@ public class Utils {
 	}
 
 	/**
+	 * static List<Animal> filterAnimalsToRecord(List<Animal> animalsToUpdate,
+	 * Date update) { List<Animal> result = null; if (update == null) { result =
+	 * animalsToUpdate; } else { if (!animalsToUpdate.isEmpty()) {
+	 * CollectionFilter<Animal> animalsProducer = new
+	 * CollectionFilter<Animal>();
+	 * animalsProducer.addFilter(createAnimalFilterCriteria(update)); result =
+	 * new ArrayList<Animal>( animalsProducer.filterCopy(animalsToUpdate));
+	 * 
+	 * } else { result = animalsToUpdate; }
+	 * 
+	 * } return result; }
+	 * 
+	 * static FilterCriteria<Animal> createAnimalFilterCriteria(final Date
+	 * update) {
+	 * 
+	 * return new FilterCriteria<Animal>() {
+	 * 
+	 * @Override public boolean passes(Animal animal) { if
+	 *           (animal.getLastEventDateTime().after(update)) { return true; }
+	 *           return false;
+	 * 
+	 *           }
+	 * 
+	 *           }; }
+	 * 
+	 *           static Tag getTag(Animal animal, String id) {
+	 *           checkNotNull(animal); checkNotNull(id); for (Tag tag :
+	 *           animal.getTags()) { if (tag.getId().equals(id)) { return tag; }
+	 *           } return null; }
+	 * 
+	 *           /**
 	 * @param uri
 	 * @param password
 	 * @return
@@ -380,6 +460,14 @@ public class Utils {
 		}
 	
 	}
+	
+	// enum AnimalUpdate{FULL,PARTIAL};
+	//
+	// class AnimalUpdateSpec{
+	// final Animal animal;
+	// final AnimalUpdate spec;
+	//
+	// }
 	
 //	 static void ensureGeoLocationIndex(DB db){
 //		DBCollection coll = db.getCollection(Element.TAG.getCollectionName());
