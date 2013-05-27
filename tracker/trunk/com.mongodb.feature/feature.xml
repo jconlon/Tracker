@@ -2,7 +2,7 @@
 <feature
       id="com.mongodb"
       label="%featureName"
-      version="2.7.2.qualifier"
+      version="2.11.1.qualifier"
       provider-name="%providerName"
       plugin="com.mongodb.branding">
 
@@ -24,16 +24,23 @@
    </url>
 
    <plugin
-         id="com.mongodb"
+         id="com.mongodb.branding"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="org.mongodb.mongo-java-driver"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="com.mongodb.branding"
+         id="com.verticon.mongo"
          download-size="0"
          install-size="0"
-         version="0.0.0"/>
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>
