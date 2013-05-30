@@ -28,7 +28,6 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.ecore.ENamedElement;
@@ -72,8 +71,6 @@ import org.eclipse.ocl.expressions.OCLExpression;
 import org.eclipse.ocl.helper.ConstraintKind;
 import org.eclipse.ocl.helper.OCLHelper;
 import org.eclipse.ocl.types.TupleType;
-import org.eclipse.ocl.uml.UMLEnvironmentFactory;
-import org.eclipse.ocl.uml.util.OCLUMLUtil;
 import org.eclipse.ocl.util.Tuple;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
@@ -95,8 +92,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.console.IConsoleConstants;
 import org.eclipse.ui.console.actions.ClearOutputAction;
 import org.eclipse.ui.part.Page;
-import org.eclipse.uml2.uml.NamedElement;
-import org.eclipse.uml2.uml.UMLFactory;
 import org.osgi.framework.Bundle;
 
 
@@ -268,18 +263,18 @@ public class OCLConsolePage
 		metamodelAction.addAction(ecore);
         metamodelActions.put(TargetMetamodel.Ecore, ecore);
         
-        Bundle umlBundle = Platform.getBundle("org.eclipse.uml2.uml"); //$NON-NLS-1$
-        if ((umlBundle != null) && isAvailable(umlBundle)) {
-    		IAction uml = new UMLMetamodelAction();
-            img = getImage(UMLFactory.eINSTANCE.createModel());
-            if (img != null) {
-                uml.setImageDescriptor(img);
-            }
-            
-    		metamodelMenu.add(uml);
-            metamodelAction.addAction(uml);
-            metamodelActions.put(TargetMetamodel.UML, uml);
-        }
+//        Bundle umlBundle = Platform.getBundle("org.eclipse.uml2.uml"); //$NON-NLS-1$
+//        if ((umlBundle != null) && isAvailable(umlBundle)) {
+//    		IAction uml = new UMLMetamodelAction();
+//            img = getImage(UMLFactory.eINSTANCE.createModel());
+//            if (img != null) {
+//                uml.setImageDescriptor(img);
+//            }
+//            
+//    		metamodelMenu.add(uml);
+//            metamodelAction.addAction(uml);
+//            metamodelActions.put(TargetMetamodel.UML, uml);
+//        }
     }
 	
     /**
@@ -487,7 +482,6 @@ public class OCLConsolePage
 	 * 
 	 * @see #print(Object, Color, boolean)
 	 */
-	@SuppressWarnings("unchecked")
 	String toString(Object object) {
 		if (object instanceof EObject) {
 			EObject eObject = (EObject) object;
@@ -816,70 +810,70 @@ public class OCLConsolePage
 	    }
 	}
     
-    private class UMLMetamodelAction extends Action {
-        private final String tip;
-        
-        /**
-         * Initializes me.
-         */
-        UMLMetamodelAction() {
-            super(OCLInterpreterMessages.console_metamodel_uml);
-            
-            tip = OCLInterpreterMessages.console_metamodel_umlTip;
-        }
-        
-        @Override
-        public int getStyle() {
-            return AS_RADIO_BUTTON;
-        }
-        
-        @Override
-        public String getToolTipText() {
-            return tip;
-        }
-        
-        @Override
-        public void run() {
-            oclFactory = new UMLOCLFactory();
-            document.setOCLFactory(oclFactory);
-        }
-    }
-    
-    private class UMLOCLFactory implements IOCLFactory<Object> {
-        public TargetMetamodel getTargetMetamodel() {
-            return TargetMetamodel.UML;
-        }
-        
-        @SuppressWarnings("unchecked")
-        public OCL<?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?> createOCL() {
-            return OCL.newInstance(
-                new UMLEnvironmentFactory(
-                    new DelegatingPackageRegistry(
-                            context.eResource().getResourceSet().getPackageRegistry(),
-                            EPackage.Registry.INSTANCE),
-                    context.eResource().getResourceSet()));
-        }
-        
-        @SuppressWarnings("unchecked")
-        public OCL<?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?> createOCL(Resource res) {
-            return OCL.newInstance(
-                new UMLEnvironmentFactory(
-                    new DelegatingPackageRegistry(
-                            context.eResource().getResourceSet().getPackageRegistry(),
-                            EPackage.Registry.INSTANCE),
-                    context.eResource().getResourceSet()),
-                res);
-        }
-        
-        public Object getContextClassifier(EObject object) {
-            return OCLUMLUtil.getClassifier(context.eClass(),
-                context.eResource().getResourceSet());
-        }
-        
-        public String getName(Object modelElement) {
-            return ((NamedElement) modelElement).getName();
-        }
-    }
+//    private class UMLMetamodelAction extends Action {
+//        private final String tip;
+//        
+//        /**
+//         * Initializes me.
+//         */
+//        UMLMetamodelAction() {
+//            super(OCLInterpreterMessages.console_metamodel_uml);
+//            
+//            tip = OCLInterpreterMessages.console_metamodel_umlTip;
+//        }
+//        
+//        @Override
+//        public int getStyle() {
+//            return AS_RADIO_BUTTON;
+//        }
+//        
+//        @Override
+//        public String getToolTipText() {
+//            return tip;
+//        }
+//        
+//        @Override
+//        public void run() {
+//            oclFactory = new UMLOCLFactory();
+//            document.setOCLFactory(oclFactory);
+//        }
+//    }
+//    
+//    private class UMLOCLFactory implements IOCLFactory<Object> {
+//        public TargetMetamodel getTargetMetamodel() {
+//            return TargetMetamodel.UML;
+//        }
+//        
+//        @SuppressWarnings("unchecked")
+//        public OCL<?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?> createOCL() {
+//            return OCL.newInstance(
+//                new UMLEnvironmentFactory(
+//                    new DelegatingPackageRegistry(
+//                            context.eResource().getResourceSet().getPackageRegistry(),
+//                            EPackage.Registry.INSTANCE),
+//                    context.eResource().getResourceSet()));
+//        }
+//        
+//        @SuppressWarnings("unchecked")
+//        public OCL<?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?> createOCL(Resource res) {
+//            return OCL.newInstance(
+//                new UMLEnvironmentFactory(
+//                    new DelegatingPackageRegistry(
+//                            context.eResource().getResourceSet().getPackageRegistry(),
+//                            EPackage.Registry.INSTANCE),
+//                    context.eResource().getResourceSet()),
+//                res);
+//        }
+//        
+//        public Object getContextClassifier(EObject object) {
+//            return OCLUMLUtil.getClassifier(context.eClass(),
+//                context.eResource().getResourceSet());
+//        }
+//        
+//        public String getName(Object modelElement) {
+//            return ((NamedElement) modelElement).getName();
+//        }
+//    }
     
     private class ModelingLevelAction extends Action {
         private final ModelingLevel level;
