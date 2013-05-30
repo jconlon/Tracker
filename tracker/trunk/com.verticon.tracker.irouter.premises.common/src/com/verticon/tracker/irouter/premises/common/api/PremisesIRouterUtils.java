@@ -30,6 +30,8 @@ import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.WeightMeasurementUnit;
+import com.verticon.tracker.store.IOCDFind;
+import com.verticon.tracker.store.IOCDFinder;
 
 public class PremisesIRouterUtils {
 	private final static String PLUGIN_ID = "com.verticon.tracker.irouter.premises.common";
@@ -83,10 +85,12 @@ public class PremisesIRouterUtils {
 	/**
 	 * Create a GenericEvent from the transaction
 	 * 
+	 * @deprecated
 	 * @param envelope
 	 * @return GenericEvent
 	 * @throws EventCreationException
 	 */
+	@Deprecated
 	public static GenericEvent createGenericEventFromMeasurementEnvelope(IOCDFinder ocdFinder, Envelope envelope) throws EventCreationException{
 		if(!(envelope.getValue() instanceof Measurement)){
 			throw new EventCreationException("Envelope contained a "+envelope.getValue()+" but it must contain a Measurement");
@@ -106,24 +110,30 @@ public class PremisesIRouterUtils {
 		return createGenericEvent( measurement, ocd);
 	}
 	
-	public static class TagOCDFinder implements IOCDFinder{
-		private final String scope;
-		private final Tag tag;
-		
-		public TagOCDFinder(String scope, Tag tag) throws EventCreationException {
-			super();
-			if(!canBeIn( tag,scope)){
-				throw new EventCreationException(
-						"There is a policy preventing event inclusion on OcdId: "+scope);
-			}
-			this.scope = scope;
-			this.tag = tag;
+	public static GenericEvent createGenericEventFromMeasurementEnvelope(
+			IOCDFind ocdFinder, Envelope envelope)
+			throws EventCreationException {
+		if (!(envelope.getValue() instanceof Measurement)) {
+			throw new EventCreationException("Envelope contained a "
+					+ envelope.getValue()
+					+ " but it must contain a Measurement");
+		}
+		Measurement measurement = (Measurement) envelope.getValue();
+
+		// Must have an OCD for this ocdId
+		OCD ocd = ocdFinder.find(envelope.getScope());
+		if (ocd == null) {
+			throw new EventCreationException("Failed to import " + envelope
+					+ " because could not find the OcdId: "
+					+ envelope.getScope());
+		}
+		if (ocd.getAD().size() < 3) {
+			throw new EventCreationException("Failed to import " + envelope
+					+ " because ocd contains only " + ocd.getAD().size()
+					+ " attributes");
 		}
 
-		@Override
-		public OCD find() {
-			return tag.findOCD(scope);
-		}
+		return createGenericEvent(measurement, ocd);
 	}
 	
 	
@@ -184,14 +194,17 @@ public class PremisesIRouterUtils {
 	}
 
 	/**
-	 * Can create three types of events
-	 * WeighIn, Position, GenericEvent
+	 * Can create three types of events WeighIn, Position, GenericEvent
+	 * 
+	 * @deprecated
 	 * @param ocdFinder
 	 * @param envelope
 	 * @return Event
 	 * @throws EventCreationException
 	 */
-	public static Event createEvent(IOCDFinder ocdFinder, Envelope envelope) throws EventCreationException{
+	@Deprecated
+	public static Event createEvent(IOCDFinder ocdFinder, Envelope envelope)
+			throws EventCreationException {
 		if(WEIGHIN_EVENT_SCOPE.equals(envelope.getScope())){
 			return createWeighInEvent(envelope);
 		}else if(envelope.getValue() instanceof Position){
@@ -206,6 +219,19 @@ public class PremisesIRouterUtils {
 		}
 	}
 	
+	public static Event createEvent(IOCDFind ocdFind, Envelope envelope)
+			throws EventCreationException {
+		if (WEIGHIN_EVENT_SCOPE.equals(envelope.getScope())) {
+			return createWeighInEvent(envelope);
+		} else if (envelope.getValue() instanceof Position) {
+			return createPositionEvent((Position) envelope.getValue());
+		} else if (envelope.getValue() instanceof Measurement) {
+			return createGenericEventFromMeasurementEnvelope(ocdFind, envelope);
+		} else {
+			return null;
+		}
+	}
+
 	/**
 	 * 
 	 * @param envelopes
