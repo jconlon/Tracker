@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: MongoEMF System Test
 Bundle-SymbolicName: com.verticon.tracker.store.mongodb.test.system
-Bundle-Version: 0.1.0.qualifier
+Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Verticon, Inc.
 Require-Bundle: org.junit,
  com.yammer.metrics.core;bundle-version="3.0.0"
