@@ -58,10 +58,11 @@ import com.verticon.tracker.store.IUpdateStats;
 import com.yammer.metrics.Timer;
 
 /**
- * Advanced testing of periodic updating and retrieval functionality of the the 
- * com.verticon.tracker.store.mongo component and its primary class TrackerStore.  
- * The c.v.t.store.mongo.TrackerStore provides Tracker Desktop
- * users the functionality to save and retrieve Tracker elements to/from a MongoDB.
+ * Advanced testing of periodic updating and retrieval functionality of the the
+ * com.verticon.tracker.store.mongo component and its primary class
+ * TrackerStore. The c.v.t.store.mongo.TrackerStore provides Tracker Desktop
+ * users the functionality to save and retrieve Tracker elements to/from a
+ * MongoDB.
  * 
  * Depends on Declarative service to inject the following services;
  * <ol>
@@ -72,21 +73,18 @@ import com.yammer.metrics.Timer;
  * This system test uses both JUnit Plugin framework and a Declarative Services
  * specification to inject the ITrackerStore. Use of both of these frameworks
  * require synchronization of the initialization of the injected services and
- * the test setup. To accomplish this a CountDownLatch is used.
- * Pizza Amore
+ * the test setup. To accomplish this a CountDownLatch is used. Pizza Amore
  * 
  * @author jconlon
  * 
  */
 public class Test_TrackerStore_Updates extends TestCase {
 
-
 	/**
 	 * slf4j Logger
 	 */
 	private final Logger logger = LoggerFactory
 			.getLogger(Test_TrackerStore_Updates.class);
-
 
 	/**
 	 * To synchronize the DS and JUnit initializations, this latch will wait for
@@ -266,8 +264,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 
 	public void testRemoveMembersUpdate() throws UnknownHostException,
 			MongoException {
-		removeLastModificationTimesOnAllResources(getCollection(
-				UPDATES_COLLECTION));
+		removeLastModificationTimesOnAllResources(getCollection(UPDATES_COLLECTION));
 		// // Set the mock user
 		// mockAuthenticatorController.setAuthenticatedUser(true);
 		// mockAuthenticatorController.setRoles(Arrays.asList(
@@ -275,38 +272,33 @@ public class Test_TrackerStore_Updates extends TestCase {
 		// TRACKER_STORE_REGISTRANT, TRACKER_STORE_BI));
 	}
 
-
-
 	public void testRegister() throws IOException {
 		logger.debug(bundleMarker, "starting testRegister");
 		Resource resource = getXMIResource(DOC_PREMISES_4_11, "updateTests");
-		Premises premises  = (Premises) resource.getContents().get(0);
-		
+		Premises premises = (Premises) resource.getContents().get(0);
+
 		assertThat("URI must be " + PREMISES_URI_003ALKMN, premises.getUri(),
 				is(PREMISES_URI_003ALKMN));
-		
+
 		assertThat("Premises must have 72 animalsl", premises.getAnimals()
 				.size(), is(72));
 		assertThat("Premises not enough events",
 				premises.eventHistory().size(), is(289));
-		
+
 		Location location = premises.getLocation();
 
-		assertThat("Logitude is -90.887591",location.getLongitude(),
+		assertThat("Logitude is -90.887591", location.getLongitude(),
 				is(-90.887591));
-		
-		assertThat("Latitude is 43.565265",location.getLatitude(),
+
+		assertThat("Latitude is 43.565265", location.getLatitude(),
 				is(43.565265));
-		
-		assertThat("Altitude is 0.1",location.getAltitude(),
-				is(0.1));
-	
-		
+
+		assertThat("Altitude is 0.1", location.getAltitude(), is(0.1));
+
 		register(premises);
 
 		Premises retrievedPremises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN,
-				null, null);
+				PREMISES_URI_003ALKMN, null, null);
 		assertThat("Retrieved Premises must not be null.", retrievedPremises,
 				is(notNullValue()));
 		assertThat("Premises eventHistory must be empty", retrievedPremises
@@ -340,8 +332,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 				premises.getAnimals().get(0).eResource().getURI(),
 				is(firstAnimalURI));
 
-		assertThat(
-"Must have processed all 72 animals.",
+		assertThat("Must have processed all 72 animals.",
 				stats.getAnimalsProcessed(), is(premises.getAnimals().size()));
 
 		assertThat(
@@ -361,7 +352,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 				is(tags));
 		assertThat("Must have added same  events.", stats.getEventsAdded(),
 				is(289));
-		
+
 		countEvents(289);
 	}
 
@@ -393,8 +384,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 				premises.getAnimals().get(0).eResource().getURI(),
 				is(firstAnimalURI));
 
-		assertThat(
-				"Must have processed 109 -72 = 37 animals. ",
+		assertThat("Must have processed 109 -72 = 37 animals. ",
 				stats.getAnimalsProcessed(), is(37));
 
 		assertThat(
@@ -406,8 +396,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 				stats.getAnimalsAdded(), is(37));
 
 		assertThat("Must have added all the tags plus one.",
-				stats.getTagsAdded(),
-				is(38));
+				stats.getTagsAdded(), is(38));
 		assertThat("Must have added 438  events.", stats.getEventsAdded(),
 				is(438 - 289));
 
@@ -422,7 +411,6 @@ public class Test_TrackerStore_Updates extends TestCase {
 	 */
 	public void testRecord_5_16() throws IOException {
 
-
 		Resource resource = getXMIResource(DOC_PREMISES_5_16, "updateTests");
 		Premises premises = (Premises) resource.getContents().get(0);
 		assertThat("Premises must have 203 animalsl", premises.getAnimals()
@@ -435,7 +423,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 
 		// Now add the animals from the premises
 		IUpdateStats stats = recordAnimals(premises);
-		
+
 		assertThat("Must not have changed the uri of the premises", premises
 				.eResource().getURI(), is(premisesURI));
 		assertThat("Premises must still have 203 animalsl", premises
@@ -444,8 +432,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 				premises.getAnimals().get(0).eResource().getURI(),
 				is(firstAnimalURI));
 
-		assertThat(
-				"Must have processed 203 - 109 = 94 animals. ",
+		assertThat("Must have processed 203 - 109 = 94 animals. ",
 				stats.getAnimalsProcessed(), is(203 - 109));
 
 		assertThat(
@@ -460,8 +447,6 @@ public class Test_TrackerStore_Updates extends TestCase {
 		countEvents(814);
 
 	}
-
-
 
 	/**
 	 * 203 existing + 123
@@ -481,7 +466,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 
 		// Now add the animals from the premises
 		IUpdateStats stats = recordAnimals(premises);
-		
+
 		assertThat("Must not have changed the uri of the premises", premises
 				.eResource().getURI(), is(premisesURI));
 		assertThat("Premises must still have 326 animalsl", premises
@@ -490,8 +475,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 				premises.getAnimals().get(0).eResource().getURI(),
 				is(firstAnimalURI));
 
-		assertThat(
-				"Must have processed 326 - 203 = 123 animals. ",
+		assertThat("Must have processed 326 - 203 = 123 animals. ",
 				stats.getAnimalsProcessed(), is(123));
 
 		assertThat(
@@ -509,7 +493,6 @@ public class Test_TrackerStore_Updates extends TestCase {
 
 	public void testRecord_9_10() throws IOException, InterruptedException {
 
-
 		Resource resource = getXMIResource(DOC_PREMISES_9_10, "updateTests");
 		Premises premises = (Premises) resource.getContents().get(0);
 		assertThat("Premises must have 326 animalsl", premises.getAnimals()
@@ -522,7 +505,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 
 		// Now add the animals from the premises
 		IUpdateStats stats = recordAnimals(premises);
-		
+
 		assertThat("Must not have changed the uri of the premises", premises
 				.eResource().getURI(), is(premisesURI));
 		assertThat("Premises must still have 326 animalsl", premises
@@ -554,7 +537,6 @@ public class Test_TrackerStore_Updates extends TestCase {
 
 	public void testRecord_9_14() throws IOException {
 
-
 		Resource resource = getXMIResource(DOC_PREMISES_9_14, "updateTests");
 		Premises premises = (Premises) resource.getContents().get(0);
 		assertThat("Premises must have 326 animalsl", premises.getAnimals()
@@ -567,7 +549,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 
 		// Now add the animals from the premises
 		IUpdateStats stats = recordAnimals(premises);
-		
+
 		assertThat("Must not have changed the uri of the premises", premises
 				.eResource().getURI(), is(premisesURI));
 		assertThat("Premises must still have 326 animalsl", premises
@@ -575,7 +557,6 @@ public class Test_TrackerStore_Updates extends TestCase {
 		assertThat("Must not have changed the uri of the first animal",
 				premises.getAnimals().get(0).eResource().getURI(),
 				is(firstAnimalURI));
-
 
 		assertThat(
 				"Must have processed out of 326 previous animals 180 animals. ",
@@ -594,7 +575,6 @@ public class Test_TrackerStore_Updates extends TestCase {
 
 	public void testRecord_9_15() throws IOException {
 
-
 		Resource resource = getXMIResource(DOC_PREMISES_9_15, "updateTests");
 		Premises premises = (Premises) resource.getContents().get(0);
 		assertThat("Premises must have 326 animalsl", premises.getAnimals()
@@ -607,7 +587,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 
 		// Now add the animals from the premises
 		IUpdateStats stats = recordAnimals(premises);
-		
+
 		assertThat("Must not have changed the uri of the premises", premises
 				.eResource().getURI(), is(premisesURI));
 		assertThat("Premises must still have 326 animalsl", premises
@@ -636,9 +616,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 		logger.debug(bundleMarker,
 				"starting testRetrievePremisesFromUpdateLocation");
 		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN,
-				DATE_4_11,
-				DATE_4_12);
+				PREMISES_URI_003ALKMN, DATE_4_11, DATE_4_12);
 		assertThat("Could not retrieve the premises", premises,
 				is(notNullValue()));
 		// assertThat("Not a valid premises", TestUtils.isValidObject(premises),
@@ -658,14 +636,11 @@ public class Test_TrackerStore_Updates extends TestCase {
 
 	}
 
-
 	public void testRetrievePremises_4_12() throws IOException {
 		logger.debug(bundleMarker,
 				"starting testRetrievePremisesFromUpdateLocation");
 		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN,
-				DATE_4_12,
-				DATE_4_13);
+				PREMISES_URI_003ALKMN, DATE_4_12, DATE_4_13);
 		assertThat("Could not retrieve the premises", premises,
 				is(notNullValue()));
 		// assertThat("Not a valid premises", TestUtils.isValidObject(premises),
@@ -680,15 +655,11 @@ public class Test_TrackerStore_Updates extends TestCase {
 				.eventHistory().size(), is(218));
 	}
 
-
-
 	public void testRetrievePremises_5_16() throws Exception {
 		logger.debug(bundleMarker,
 				"starting testRetrievePremisesFromUpdateLocation");
 		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN,
-				DATE_5_16,
-				DATE_5_17);
+				PREMISES_URI_003ALKMN, DATE_5_16, DATE_5_17);
 		assertThat("Could not retrieve the premises", premises,
 				is(notNullValue()));
 		// assertThat("Not a valid premises", TestUtils.isValidObject(premises),
@@ -703,15 +674,11 @@ public class Test_TrackerStore_Updates extends TestCase {
 				.eventHistory().size(), is(571));
 	}
 
-
-
 	public void testRetrievePremises_5_17() throws Exception {
 		logger.debug(bundleMarker,
 				"starting testRetrievePremisesFromUpdateLocation");
 		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN,
-				DATE_5_17,
-				DATE_5_18);
+				PREMISES_URI_003ALKMN, DATE_5_17, DATE_5_18);
 		assertThat("Could not retrieve the premises", premises,
 				is(notNullValue()));
 		// assertThat("Not a valid premises", TestUtils.isValidObject(premises),
@@ -731,9 +698,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 		logger.debug(bundleMarker,
 				"starting testRetrievePremisesFromUpdateLocation");
 		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN,
-				DATE_9_10,
-				DATE_9_11);
+				PREMISES_URI_003ALKMN, DATE_9_10, DATE_9_11);
 		assertThat("Could not retrieve the premises", premises,
 				is(notNullValue()));
 		// assertThat("Not a valid premises", TestUtils.isValidObject(premises),
@@ -750,9 +715,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 
 	public void testSavePremises_9_10() throws ParseException, IOException {
 		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN,
-				DATE_9_10,
-				DATE_9_11);
+				PREMISES_URI_003ALKMN, DATE_9_10, DATE_9_11);
 		saveXMIResource("out_9_10.premises", premises);
 	}
 
@@ -760,9 +723,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 		logger.debug(bundleMarker,
 				"starting testRetrievePremisesFromUpdateLocation");
 		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN,
-				DATE_9_14,
-				DATE_9_15);
+				PREMISES_URI_003ALKMN, DATE_9_14, DATE_9_15);
 		assertThat("Could not retrieve the premises", premises,
 				is(notNullValue()));
 		// assertThat("Not a valid premises", TestUtils.isValidObject(premises),
@@ -779,9 +740,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 
 	public void testSavePremises_9_14() throws Exception, IOException {
 		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN,
-				DATE_9_14,
-				DATE_9_15);
+				PREMISES_URI_003ALKMN, DATE_9_14, DATE_9_15);
 		saveXMIResource("out_9_14.premises", premises);
 	}
 
@@ -789,9 +748,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 		logger.debug(bundleMarker,
 				"starting testRetrievePremisesFromUpdateLocation");
 		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN,
-				DATE_9_15,
-				DATE_9_16);
+				PREMISES_URI_003ALKMN, DATE_9_15, DATE_9_16);
 		assertThat("Could not retrieve the premises", premises,
 				is(notNullValue()));
 		// assertThat("Not a valid premises", TestUtils.isValidObject(premises),
@@ -809,12 +766,10 @@ public class Test_TrackerStore_Updates extends TestCase {
 
 	public void testSavePremises_9_15() throws Exception, IOException {
 		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN,
-				DATE_9_15,
-				DATE_9_16);
+				PREMISES_URI_003ALKMN, DATE_9_15, DATE_9_16);
 		saveXMIResource("out_9_15.premises", premises);
 	}
-	
+
 	// /**
 	// * "{'events.loc' :[45, 45]}"
 	// */
@@ -828,7 +783,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 	// assertThat("Result must be one tag", eo.size(), is(1));
 	// assertThat("Result must be a Tag",eo.get(0), is(instanceOf(Tag.class)));
 	// }
-	
+
 	// /**
 	// *
 	// * -90" (W) long
@@ -848,9 +803,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 	// assertThat("Result must be two tags", eo.size(), is(2));
 	// assertThat("Result must be a Tag",eo.get(0), is(instanceOf(Tag.class)));
 	// }
-	
-	
-	
+
 	// /**
 	// * "{'loc' :[45, 45]}"
 	// */
@@ -866,7 +819,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 	// assertThat("Result must be a Premises",eo.get(0),
 	// is(instanceOf(Premises.class)));
 	// }
-	
+
 	// /**
 	// *
 	// * -90" (W) long
@@ -887,7 +840,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 	// assertThat("Result must be a Premises",eo.get(0),
 	// is(instanceOf(Premises.class)));
 	// }
-	
+
 	// public void testRetrieve_Premise_containing_Point() throws IOException{
 	// logger.debug(bundleMarker,
 	// "starting testRetrieve_Premise_containing_Point");
@@ -906,7 +859,7 @@ public class Test_TrackerStore_Updates extends TestCase {
 	//
 	//
 	// }
-	
+
 	private void countEvents(int count) throws UnknownHostException {
 
 		int events = eventCount(getCollection(TAG_COLLECTION),
@@ -923,19 +876,16 @@ public class Test_TrackerStore_Updates extends TestCase {
 	private void removeDocsFromCollections() throws InterruptedException {
 		// // TimeUnit.SECONDS.sleep(1);
 		DBObject find = new BasicDBObject();
-		DBCollection coll = getCollection(
-				Configurator.ANIMAL_COLLECTION);
+		DBCollection coll = getCollection(Configurator.ANIMAL_COLLECTION);
 		coll.remove(find);
-		coll = getCollection(
-				Configurator.PREMISES_COLLECTION);
+		coll = getCollection(Configurator.PREMISES_COLLECTION);
 		coll.remove(find);
 		// coll = getCollection(Configurator.DB_NAME,
 		// Configurator.OCD_COLLECTION);
 		// coll.remove(find);
 		coll = getCollection(Configurator.TAG_COLLECTION);
 		coll.remove(find);
-		coll = getCollection(
-				Configurator.UPDATES_COLLECTION);
+		coll = getCollection(Configurator.UPDATES_COLLECTION);
 		coll.remove(find);
 		initializedCollections = true;
 	}

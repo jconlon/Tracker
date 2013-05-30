@@ -80,21 +80,13 @@ public class Test_TrackerStore extends TestCase {
 
 	private static final int NUMBER_OF_ITERATIONS = 1;
 
-
-
 	private static final String TAG_ID_1 = "1234567890";
 
 	private static final String TAG_ID_WITH_GENERIC_EVENT = "840456789012341";
 
-	private static final String FILE_TMP_OUT_PREMISES1 = "/tmp/out1.premises";
-
-	private static final String FILE_TMP_OUT_PREMISES2 = "/tmp/out2.premises";
-
 	private static final String TAG_ID_WITH_SIRE_AND_DAM = "840456789012343";
 
 	static final String DOC_PREMISES = "example.premises";
-
-
 
 	/**
 	 * slf4j Logger
@@ -144,7 +136,6 @@ public class Test_TrackerStore extends TestCase {
 	static IMongoClientProvider iMongoClientProvider;
 	static IMockAuthenticatorController mockAuthenticatorController;
 
-
 	/**
 	 * Injected by ds
 	 * 
@@ -164,8 +155,6 @@ public class Test_TrackerStore extends TestCase {
 		logger.debug(bundleMarker, "DS injecting the trackerStore");
 		Test_TrackerStore.trackerStore = null;
 	}
-
-
 
 	/**
 	 * @param iMongoClientProvider
@@ -189,7 +178,6 @@ public class Test_TrackerStore extends TestCase {
 			IMockAuthenticatorController mockAuthenticatorController) {
 		Test_TrackerStore.mockAuthenticatorController = mockAuthenticatorController;
 	}
-
 
 	/**
 	 * 
@@ -232,9 +220,6 @@ public class Test_TrackerStore extends TestCase {
 		Metrics.deactivate();
 	}
 
-
-
-
 	@Test
 	public void test_TrackerUpdate_RegisterPremises_withSimpleDocument()
 			throws IOException {
@@ -256,15 +241,13 @@ public class Test_TrackerStore extends TestCase {
 	}
 
 	/**
-	 * TODO move this to perf
 	 * 
 	 * @throws IOException
 	 * @throws InterruptedException
 	 */
 	@Test
 	public void test_TrackerUpdate__RegisterMultiplePremises()
-			throws IOException,
-			InterruptedException {
+			throws IOException, InterruptedException {
 		logger.debug(bundleMarker, "starting testRegister");
 
 		Resource resource = getXMIResource(DOC_PREMISES, "");
@@ -299,11 +282,9 @@ public class Test_TrackerStore extends TestCase {
 						+ stats.getExceptions(), stats.getExceptions().size(),
 				is(0));
 
-		assertThat("Must have added 1 animals.", stats.getAnimalsAdded(),
-				is(1));
+		assertThat("Must have added 1 animals.", stats.getAnimalsAdded(), is(1));
 		assertThat("Incorrect number of tags", stats.getTagsAdded(), is(1));
-		assertThat("Incorrect number of events", stats.getTagsAdded(),
-				is(1));
+		assertThat("Incorrect number of events", stats.getTagsAdded(), is(1));
 
 		DBCollection coll = getCollection(UPDATES_COLLECTION);
 		assertThat("Must have only 1 Updates",
@@ -347,15 +328,13 @@ public class Test_TrackerStore extends TestCase {
 		assertThat("Premises should have no unassignedTags", premises
 				.getUnAppliedTags().size(), is(0));
 
-
 	}
 
 	@Test
 	public void test_TrackerFind_RetrievePremises_WithLocation()
 			throws IOException {
 
-		Premises premises = trackerStore
-				.retrievePremises(PREMISES_URI_H89234X);
+		Premises premises = trackerStore.retrievePremises(PREMISES_URI_H89234X);
 
 		assertThat("Premises should not be null", premises, is(notNullValue()));
 		assertThat("Not a valid premises", isValidObject(premises), is(true));
@@ -368,13 +347,11 @@ public class Test_TrackerStore extends TestCase {
 
 	}
 
-
 	@Test
-	public void test_TrackerFind_RetrievePremises_Dates()
-			throws IOException {
+	public void test_TrackerFind_RetrievePremises_Dates() throws IOException {
 
-		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_H89234X, FROMDATE, TODATE);
+		Premises premises = trackerStore.retrievePremises(PREMISES_URI_H89234X,
+				FROMDATE, TODATE);
 		assertThat("Could not retrieve the premises", premises,
 				is(notNullValue()));
 		assertThat("Not a valid premises", isValidObject(premises), is(true));
@@ -411,8 +388,7 @@ public class Test_TrackerStore extends TestCase {
 	 * @throws IOException
 	 */
 	@Test
-	public void test_TrackerFind_RetrievePremises_Point()
-			throws IOException {
+	public void test_TrackerFind_RetrievePremises_Point() throws IOException {
 		ITrackerFind.LongLatPoint point = new ITrackerFind.LongLatPoint(
 				"-77.037852,38.898556,0");
 		// position.setLatitude(38.898556);
@@ -420,7 +396,7 @@ public class Test_TrackerStore extends TestCase {
 		Premises premises = trackerStore.retrievePremises(point);
 
 		assertThat("Premises should not be null", premises, is(notNullValue()));
-		
+
 		assertThat("Premises should have uri", premises.getUri(),
 				is(PREMISES_URI));
 		assertThat("Premises should have name", premises.getName(),
@@ -472,7 +448,6 @@ public class Test_TrackerStore extends TestCase {
 				.getUnAppliedTags().size(), is(0));
 	}
 
-
 	public void test_TrackerFind_RetrieveAnimal() throws IOException {
 		Animal animal = trackerStore.retrieveAnimal(TAG_ID_1);
 
@@ -492,8 +467,6 @@ public class Test_TrackerStore extends TestCase {
 				event.getEventCode(), is(13));
 
 	}
-
-
 
 	public void test_TrackerFind_RetrieveAnimal_WITH_GENERIC_EVENT()
 			throws IOException {
@@ -543,14 +516,11 @@ public class Test_TrackerStore extends TestCase {
 				is(TAG_ID_WITH_SIRE_AND_DAM));
 	}
 
-
 	// @Test
 	// public void test_Wait() throws InterruptedException {
 	// TimeUnit.SECONDS.sleep(2);
 	// logger.debug("done");
 	// }
-
-
 
 	static Premises createPremises() {
 		Premises premises = TrackerFactory.eINSTANCE.createPremises();
@@ -586,7 +556,6 @@ public class Test_TrackerStore extends TestCase {
 		return db.getCollection(name);
 	}
 
-
 	private void register(Premises premises) throws IOException {
 
 		final Timer.Context context = Metrics.registrationTimer.time();
@@ -612,18 +581,15 @@ public class Test_TrackerStore extends TestCase {
 	private void removeDocsFromCollections() throws InterruptedException {
 		// TimeUnit.SECONDS.sleep(1);
 		DBObject find = new BasicDBObject();
-		DBCollection coll = getCollection(
-				Configurator.ANIMAL_COLLECTION);
+		DBCollection coll = getCollection(Configurator.ANIMAL_COLLECTION);
 		coll.remove(find);
-		coll = getCollection(
-				Configurator.PREMISES_COLLECTION);
+		coll = getCollection(Configurator.PREMISES_COLLECTION);
 		coll.remove(find);
 		coll = getCollection(Configurator.OCD_COLLECTION);
 		coll.remove(find);
 		coll = getCollection(Configurator.TAG_COLLECTION);
 		coll.remove(find);
-		coll = getCollection(
-				Configurator.UPDATES_COLLECTION);
+		coll = getCollection(Configurator.UPDATES_COLLECTION);
 		coll.remove(find);
 		initializedCollections = true;
 	}

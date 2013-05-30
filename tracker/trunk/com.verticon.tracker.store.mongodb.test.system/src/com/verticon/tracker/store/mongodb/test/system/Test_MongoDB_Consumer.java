@@ -83,19 +83,14 @@ public class Test_MongoDB_Consumer extends TestCase {
 	private static final String AIN_2 = "tag2";
 	private static final String AIN_3 = "tag3";
 
-	private static final String PIN = "urn:pin:H89234X";
-
 	private static final String ANIMAL_SCOPE = "premises.animal";
 	private static final String TAG_SCOPE = "premises.tag";
 	private static final String ANIMAL_WEIGHT_SCOPE = "animal.weight";
 	private static final String POSITION_SCOPE = "gps.position";
 	private static final String METTLER_WEIGHT_SCOPE = "mettler.weight";
 
-	private static final String PREMISES_URI = "consumer.Premises_URI";
 	//
 	private static final String STATUS = "consumer.Connection_Status";
-	//
-	private static final String LAST_UPDATE_TIME = "consumer.Last_Product";
 	//
 	private static final String TAGS_ADDED = "consumer.Tags_Added";
 	//
@@ -106,8 +101,6 @@ public class Test_MongoDB_Consumer extends TestCase {
 	private static final String ANIMALS_PROCESSED = "consumer.Animals_Processed";
 	//
 	private static final String PRODUCTS_CONSUMED = "consumer.Products_Consumed";
-	//
-	private static final String PRODUCERS_CONNECTED = "consumer.Producers_Connected";
 	private static final String EXCEPTIONS = "consumer.Exception_Count";
 
 	/**
@@ -234,6 +227,7 @@ public class Test_MongoDB_Consumer extends TestCase {
 				monitorable.getStatusVariable(STATUS).getString(),
 				is(startsWith("Activated ")));
 	}
+
 	public void testConsumer_Animal_Sighting_ForNewAnimal()
 			throws InterruptedException {
 		assertThat("Controller must have wires", controller.hasWires(),
@@ -251,7 +245,6 @@ public class Test_MongoDB_Consumer extends TestCase {
 
 		assertThat("Controller must have sent the envelope",
 				controller.sentCount(), is(1));
-
 
 		assertThat("Wrong number of products consumed.", monitorable
 				.getStatusVariable(PRODUCTS_CONSUMED).getInteger(), is(1));
@@ -305,8 +298,6 @@ public class Test_MongoDB_Consumer extends TestCase {
 		assertThat("Wrong number of animals added.", monitorable
 				.getStatusVariable(ANIMALS_ADDED).getInteger(), is(1));
 
-
-
 		Animal animal = trackerFind.retrieveAnimal(AIN_1);
 		assertThat("Animal should not be null", animal, is(notNullValue()));
 		assertThat("There must be one tag", animal.getTags().size(), is(1));
@@ -345,7 +336,6 @@ public class Test_MongoDB_Consumer extends TestCase {
 		assertThat("Wrong number of animals added.", monitorable
 				.getStatusVariable(ANIMALS_ADDED).getInteger(), is(0));
 
-
 		Animal animal = trackerFind.retrieveAnimal(AIN_1);
 		assertThat("Animal should not be null", animal, is(notNullValue()));
 		assertThat("Animal must be a Bison", animal,
@@ -354,7 +344,6 @@ public class Test_MongoDB_Consumer extends TestCase {
 		assertThat("There must be one tag", animal.getTags().size(), is(1));
 		assertThat("There must be two events", animal.eventHistory().size(),
 				is(2));
-
 
 	}
 
@@ -389,8 +378,7 @@ public class Test_MongoDB_Consumer extends TestCase {
 
 		Animal animal = trackerFind.retrieveAnimal(AIN_2);
 		assertThat("Animal should not be null", animal, is(notNullValue()));
-		assertThat("There should be two tags", animal.getTags()
-				.size(), is(2));
+		assertThat("There should be two tags", animal.getTags().size(), is(2));
 		assertThat("Animal must be a Bison", animal,
 				is(instanceOf(BovineBison.class)));
 
@@ -400,13 +388,10 @@ public class Test_MongoDB_Consumer extends TestCase {
 		assertThat("Old tag should still be persisted.",
 				trackerFind.retrieveAnimal(AIN_1), is(notNullValue()));
 
-
 		assertThat("Animal should NOT have a container", animal.eContainer(),
 				is(nullValue()));
 
 	}
-
-
 
 	public void testConsumer_Tag_ExistingEventsl() throws InterruptedException {
 		assertThat("Controller must be connected to the consumer.",
@@ -425,7 +410,6 @@ public class Test_MongoDB_Consumer extends TestCase {
 				is(0));
 		assertThat("Must have not added as a new animal.", monitorable
 				.getStatusVariable(ANIMALS_ADDED).getInteger(), is(0));
-
 
 	}
 
@@ -478,7 +462,6 @@ public class Test_MongoDB_Consumer extends TestCase {
 	 * @throws InterruptedException
 	 */
 	public void testConsumer_Position() throws InterruptedException {
-
 
 		Measurement lat = new Measurement(Math.toRadians(45), .1, Unit.rad,
 				new Date().getTime());
@@ -552,7 +535,6 @@ public class Test_MongoDB_Consumer extends TestCase {
 		assertThat("Must have added NO animals.", monitorable
 				.getStatusVariable(ANIMALS_ADDED).getInteger(), is(0));
 
-
 		Animal animal = trackerFind.retrieveAnimal(AIN_2);
 		assertThat("Animal should not be null", animal, is(notNullValue()));
 		assertThat("There must be two tag", animal.getTags().size(), is(2));
@@ -578,7 +560,6 @@ public class Test_MongoDB_Consumer extends TestCase {
 		assertThat("BW is wrong", precision, is("0.1"));
 
 	}
-
 
 	// public void testRetrieveRoute() {
 	// Agriculture agri = trackerFind.retrieveRoute(FIRST_ANIMAL_ID);

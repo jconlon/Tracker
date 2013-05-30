@@ -4,8 +4,6 @@ import java.util.List;
 
 public interface IMockAuthenticatorController {
 
-
-
 	public abstract void setRoles(List<String> roles);
 
 	/**

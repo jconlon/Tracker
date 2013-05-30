@@ -10,9 +10,9 @@
  *******************************************************************************/
 package com.verticon.tracker.store.mongodb.test.system;
 
-
 public interface IController {
 	void send(Object object);
+
 	boolean hasWires();
 
 	int sentCount();
