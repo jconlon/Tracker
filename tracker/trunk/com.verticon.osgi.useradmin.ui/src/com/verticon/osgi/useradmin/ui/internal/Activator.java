@@ -2,16 +2,22 @@ package com.verticon.osgi.useradmin.ui.internal;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.util.Arrays;
+
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 import org.osgi.service.useradmin.User;
 import org.osgi.service.useradmin.UserAdmin;
 import org.osgi.util.tracker.ServiceTracker;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import com.verticon.osgi.useradmin.authenticator.Authenticator;
+import com.verticon.osgi.useradmin.authenticator.UserAdminProvider;
 import com.verticon.osgi.useradmin.authenticator.UserStateChangeListener;
-import com.verticon.osgi.useradmin.authenticator.Utils;
+import com.verticon.osgi.useradmin.ui.Utils;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -24,7 +30,7 @@ public class Activator extends AbstractUIPlugin {
 	// The shared instance
 	private static Activator plugin;
 	
-	private ServiceTracker<UserAdmin, UserAdmin> userAdminTracker;
+	private ServiceTracker<UserAdminProvider, UserAdminProvider> userAdminProviderTracker;
 	private ServiceTracker<UserStateChangeListener, UserStateChangeListener> userStateChangeListeners;
 
 	private final AuthenticatorImpl authenticator = new AuthenticatorImpl();
@@ -43,16 +49,13 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		userAdminTracker = new ServiceTracker<UserAdmin, UserAdmin>(context,
-				UserAdmin.class, null);
-		userAdminTracker.open();
+		userAdminProviderTracker = new ServiceTracker<UserAdminProvider, UserAdminProvider>(
+				context, UserAdminProvider.class, null);
+		userAdminProviderTracker.open();
 		userStateChangeListeners = new ServiceTracker<UserStateChangeListener, UserStateChangeListener>(
 				context, UserStateChangeListener.class, null);
 		userStateChangeListeners.open();
 		context.registerService(Authenticator.class, authenticator, null);
-		// context.registerService(UserAdminListener.class, authenticator,
-		// null);
-
 	}
 
 
@@ -87,8 +90,21 @@ public class Activator extends AbstractUIPlugin {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
 
-	UserAdmin getUserAdmin() {
-		return userAdminTracker.getService();
+	// UserAdmin getUserAdmin() {
+	// return userAdminProviderTracker.getService();
+	// }
+
+	UserAdmin getUserAdmin(String uri) {
+		UserAdmin result = null;
+		for (ServiceReference<UserAdminProvider> sr : userAdminProviderTracker
+				.getServiceReferences()) {
+			UserAdminProvider provider = userAdminProviderTracker.getService(sr);
+			result = provider.get(uri);
+			if (result != null) {
+				break;
+			}
+		}
+		return result;
 	}
 
 	UserStateChangeListener[] getUserStateChangeListeners() {
@@ -104,16 +120,18 @@ public class Activator extends AbstractUIPlugin {
 		return authenticator.hasRole(role);
 	}
 
-	void authenticate(String userName, String pass) throws Exception {
-		authenticator.authenticate(userName, pass);
+	void authenticate(String userName, String pass, String uri)
+			throws Exception {
+		authenticator.authenticate(userName, pass, uri);
 	}
 
 	void removeAuthorization() {
 		authenticator.setAuthorization(null);
 	}
 
-	void changePassword(String password, String newPassword) throws Exception {
-		UserAdmin userAdmin = getUserAdmin();
+	void changePassword(String password, String newPassword)
+			throws Exception {
+		UserAdmin userAdmin = getUserAdmin(authenticator.uri());
 		checkNotNull(userAdmin,
 				"Illegal State: Failed to find the UserAdmin Service.");
 		checkNotNull(authenticator.getAuthorization(),
@@ -127,4 +145,26 @@ public class Activator extends AbstractUIPlugin {
 		}
 		Utils.resetPassword(user, newPassword);
 	}
+
+	boolean hasService() {
+		return userAdminProviderTracker.getService() != null;
+	}
+
+	Iterable<String> userAdminURIs() {
+		Iterable<Iterable<String>> allUris = Iterables.transform(
+				Arrays.asList(userAdminProviderTracker.getServiceReferences()),
+				userAdminToURIs);
+		return Iterables.concat(allUris);
+	}
+
+	private final Function<ServiceReference<UserAdminProvider>, Iterable<String>> userAdminToURIs = new Function<ServiceReference<UserAdminProvider>, Iterable<String>>() {
+		
+		@Override
+		public Iterable<String> apply(ServiceReference<UserAdminProvider> sr) {
+			UserAdminProvider provider = userAdminProviderTracker.getService(sr);
+			return provider.getURIs();
+		}
+	};
+
+
 }

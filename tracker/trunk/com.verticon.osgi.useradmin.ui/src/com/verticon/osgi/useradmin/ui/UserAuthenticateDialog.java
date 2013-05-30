@@ -26,15 +26,18 @@ public class UserAuthenticateDialog extends TitleAreaDialog {
 	private String password;
 	private Button addButton;
 
-	public UserAuthenticateDialog(Shell parentShell) {
+	private final String uri;
+
+	public UserAuthenticateDialog(Shell parentShell, String uri) {
 		super(parentShell);
+		this.uri = uri;
 	}
 
 	@Override
 	public void create() {
 		super.create();
 		// Set the title
-		setTitle("User Authentication");
+		setTitle("User Authentication for UserAdmin Service: " + uri);
 		// Set the message
 		setMessage("Enter Username and Password", IMessageProvider.INFORMATION);
 

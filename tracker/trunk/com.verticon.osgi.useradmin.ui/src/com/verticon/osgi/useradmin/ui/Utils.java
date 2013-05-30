@@ -1,4 +1,4 @@
-package com.verticon.osgi.useradmin.authenticator;
+package com.verticon.osgi.useradmin.ui;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Strings.isNullOrEmpty;
@@ -37,13 +37,19 @@ public class Utils {
 	 * @param authorization
 	 *            of a user
 	 * @param target
-	 *            role
+	 *            role. A role that is null is always associated with the user
 	 * @param userAdmin
 	 *            service to use
 	 * @return true if an association exists
 	 */
 	final public static boolean isAssociatedWith(Authorization authorization,
 			Role target, UserAdmin userAdmin) {
+		if (target == null) {
+			return true;// a null target is one that is always associated
+		}
+		checkNotNull(authorization, "Authorization parameter is null.");
+
+		checkNotNull(userAdmin, "UserAdmin paramter is null.");
 		// Is there a hasRole relationship?
 		if (authorization.hasRole(target.getName())) {
 			return true;

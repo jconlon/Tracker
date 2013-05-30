@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: UserAdmin User Interfaces
 Bundle-SymbolicName: com.verticon.osgi.useradmin.ui; singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.1.0.qualifier
 Bundle-Activator: com.verticon.osgi.useradmin.ui.internal.Activator
 Bundle-Vendor: Verticon, Inc
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
@@ -16,11 +16,13 @@ Import-Package: com.google.common.base;version="10.0.1",
  org.eclipse.core.runtime;version="3.4.0",
  org.eclipse.jface.dialogs,
  org.eclipse.jface.resource,
+ org.eclipse.jface.viewers,
  org.eclipse.jface.window,
  org.eclipse.swt,
  org.eclipse.swt.events,
  org.eclipse.swt.layout,
  org.eclipse.swt.widgets,
+ org.eclipse.ui.dialogs,
  org.eclipse.ui.handlers,
  org.eclipse.ui.plugin,
  org.osgi.framework;version="1.7.0",

@@ -13,6 +13,7 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import com.verticon.osgi.useradmin.authenticator.Authenticator;
+import com.verticon.osgi.useradmin.authenticator.UserAdminProvider;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -35,8 +36,7 @@ public class Activator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static Activator plugin;
-
-	private ServiceTracker<UserAdmin, UserAdmin> userAdminTracker;
+	private ServiceTracker<UserAdminProvider, UserAdminProvider> userAdminProviderTracker;
 	private ServiceTracker<Authenticator, Authenticator> authenticatorAdminTracker;
 
 	/**
@@ -58,9 +58,9 @@ public class Activator extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 
-		userAdminTracker = new ServiceTracker(context,
-				UserAdmin.class.getName(), null);
-		userAdminTracker.open();
+		userAdminProviderTracker = new ServiceTracker(context,
+				UserAdminProvider.class.getName(), null);
+		userAdminProviderTracker.open();
 
 		authenticatorAdminTracker = new ServiceTracker(context,
 				Authenticator.class.getName(), null);
@@ -115,7 +115,13 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	UserAdmin getUserAdmin() {
-		return userAdminTracker.getService();
+		UserAdmin result = null;
+		Authenticator authenticator = authenticatorAdminTracker.getService();
+		if (authenticator != null && authenticator.uri() != null) {
+			result = userAdminProviderTracker.getService() != null ? userAdminProviderTracker
+					.getService().get(authenticator.uri()) : null;
+		}
+		return result;
 	}
 
 	boolean isUserAdmininistrator() {

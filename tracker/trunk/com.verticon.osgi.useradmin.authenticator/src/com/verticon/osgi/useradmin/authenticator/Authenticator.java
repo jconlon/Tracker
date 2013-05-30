@@ -56,4 +56,18 @@ public interface Authenticator {
 	 * @return all the role names in an immutableSet
 	 */
 	Set<String> roles();
+
+	/**
+	 * Identifier for this Authenticator
+	 * 
+	 * @return uri
+	 */
+	String uri();
+
+	/**
+	 * 
+	 * @return collection of all the users associations
+	 */
+	Set<String> associates();
+
 }
