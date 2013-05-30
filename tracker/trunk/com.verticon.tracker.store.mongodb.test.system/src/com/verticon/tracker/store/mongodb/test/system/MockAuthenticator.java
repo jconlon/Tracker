@@ -13,7 +13,6 @@ public class MockAuthenticator implements Authenticator,
 	private boolean isAuthenticatedUser = false;
 	private List<String> roles = null;
 
-
 	@Override
 	public boolean isAuthenticatedUser() {
 		return isAuthenticatedUser;
@@ -23,8 +22,6 @@ public class MockAuthenticator implements Authenticator,
 	public boolean hasRole(String role) {
 		return roles != null && roles.contains(role);
 	}
-
-
 
 	/*
 	 * (non-Javadoc)
@@ -71,5 +68,10 @@ public class MockAuthenticator implements Authenticator,
 	@Override
 	public String uri() {
 		return "localhost";
+	}
+
+	@Override
+	public Set<String> associates() {
+		throw new UnsupportedOperationException("Not implemented.");
 	}
 }

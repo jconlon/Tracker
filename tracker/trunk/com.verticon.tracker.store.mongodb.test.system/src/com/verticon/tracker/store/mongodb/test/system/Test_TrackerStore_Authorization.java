@@ -68,25 +68,7 @@ import com.verticon.tracker.store.ITrackerStore;
  */
 public class Test_TrackerStore_Authorization extends TestCase {
 
-	private static final int NUMBER_OF_ITERATIONS = 1;
-
-
-
-	private static final String TAG_ID_1 = "1234567890";
-
-	private static final String TAG_ID_WITH_GENERIC_EVENT = "840456789012341";
-
-	private static final String FILE_TMP_OUT_PREMISES1 = "/tmp/out1.premises";
-
-	private static final String FILE_TMP_OUT_PREMISES2 = "/tmp/out2.premises";
-
-	private static final String TAG_ID_WITH_SIRE_AND_DAM = "840456789012343";
-
-
-
 	static final String DOC_PREMISES = "example.premises";
-
-
 
 	/**
 	 * slf4j Logger
@@ -114,7 +96,6 @@ public class Test_TrackerStore_Authorization extends TestCase {
 	static IMongoClientProvider iMongoClientProvider;
 	static IMockAuthenticatorController mockAuthenticatorController;
 
-
 	/**
 	 * Injected by ds
 	 * 
@@ -134,8 +115,6 @@ public class Test_TrackerStore_Authorization extends TestCase {
 		logger.debug(bundleMarker, "DS injecting the trackerStore");
 		Test_TrackerStore_Authorization.trackerStore = null;
 	}
-
-
 
 	/**
 	 * @param iMongoClientProvider
@@ -159,7 +138,6 @@ public class Test_TrackerStore_Authorization extends TestCase {
 			IMockAuthenticatorController mockAuthenticatorController) {
 		Test_TrackerStore_Authorization.mockAuthenticatorController = mockAuthenticatorController;
 	}
-
 
 	/**
 	 * 
@@ -198,8 +176,6 @@ public class Test_TrackerStore_Authorization extends TestCase {
 	void deactivate() {
 
 	}
-
-
 
 	/**
 	 * Test authorization and set it
@@ -261,8 +237,7 @@ public class Test_TrackerStore_Authorization extends TestCase {
 		// Set the mock roles
 		mockAuthenticatorController.setRoles(Arrays.asList(
 				PREMISES_URI_H89234X, PREMISES_URI_003ALKMN, PREMISES_URI,
-				TRACKER_STORE_REGISTRANT,
-				TRACKER_STORE_BI));
+				TRACKER_STORE_REGISTRANT, TRACKER_STORE_BI));
 	}
 
 	@Test
@@ -279,11 +254,6 @@ public class Test_TrackerStore_Authorization extends TestCase {
 		coll.remove(find);
 		coll = getCollection(UPDATES_COLLECTION);
 		coll.remove(find);
-	}
-
-	@Test
-	public void testInsureIndexes() {
-
 	}
 
 	private DBCollection getCollection(String name) {

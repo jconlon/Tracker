@@ -76,8 +76,7 @@ public class Configurator {
 	/**
 	 * slf4j Marker to keep track of bundle
 	 */
-	static final Marker bundleMarker = MarkerFactory
-			.getMarker(PLUGIN_ID);
+	static final Marker bundleMarker = MarkerFactory.getMarker(PLUGIN_ID);
 
 	static {
 		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
@@ -89,14 +88,12 @@ public class Configurator {
 	private final Logger logger = LoggerFactory.getLogger(Configurator.class);
 
 	static final String PREMISES_URI_H89234X = "urn:pin:H89234X";
-	
+
 	static final String PREMISES_URI_003ALKMN = "urn:pin:003ALKM";
 
 	static final String PREMISES_URI = "jc:www.verticon";
 
 	static final String ANIMAL_COLLECTION = "Animal";
-
-	// static final String DB_NAME = "test";
 
 	static final String OCD_COLLECTION = "OCD";
 
@@ -118,10 +115,6 @@ public class Configurator {
 
 	static final String TAG_ID_WITH_SIRE_AND_DAM = "840456789012343";
 
-	private static final String FACTORY_PID_MONGO_CLIENT_PROVIDER = "com.verticon.mongo";
-
-	private static final String FACTORY_PID_CONSUMER = "com.verticon.tracker.store.mongodb.consumer";
-
 	private static final String FACTORY_PID_TRACKERSTORE = "com.verticon.tracker.store.mongodb";
 
 	private static final String UNITTEST_PROPERTIES = "private/localhost.properties";
@@ -136,7 +129,6 @@ public class Configurator {
 	// "private/mongolabs.properties";
 
 	private static Properties localProps = new Properties();
-
 
 	public Configurator() {
 		super();
@@ -240,8 +232,7 @@ public class Configurator {
 
 	}
 
-	static boolean validateObject(EObject eObject)
-			throws ValidationException {
+	static boolean validateObject(EObject eObject) throws ValidationException {
 		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject);
 		if (diagnostic.getSeverity() == Diagnostic.ERROR
 				|| diagnostic.getSeverity() == Diagnostic.WARNING) {
@@ -343,7 +334,6 @@ public class Configurator {
 	//
 	// return count;
 	// }
-
 
 	static boolean isValidObject(EObject eObject) {
 		EcoreUtil.resolveAll(eObject);

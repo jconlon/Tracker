@@ -10,18 +10,14 @@
  *******************************************************************************/
 package com.verticon.tracker.store.mongodb.test.system;
 
-
 import java.util.concurrent.TimeUnit;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
-
-
-
 public class AllTests extends TestSuite {
-	
+
 	public static final String copyright = "Copyright 2013 Verticon, Inc. All Rights Reserved.";
 
 	/**
@@ -36,8 +32,8 @@ public class AllTests extends TestSuite {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static Test suite() {
@@ -53,12 +49,12 @@ public class AllTests extends TestSuite {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public AllTests(String name) {
 		super(name);
 	}
 
-} //TrackerTests
+} // TrackerTests

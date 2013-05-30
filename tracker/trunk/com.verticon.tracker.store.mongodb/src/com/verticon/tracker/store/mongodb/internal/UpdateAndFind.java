@@ -1,5 +1,6 @@
 package com.verticon.tracker.store.mongodb.internal;
 
+import static com.google.common.collect.Maps.newHashMap;
 import static com.verticon.tracker.store.mongodb.internal.Utils.ANIMAL;
 import static com.verticon.tracker.store.mongodb.internal.Utils.ID_KEY;
 import static com.verticon.tracker.store.mongodb.internal.Utils.PREMISES;
@@ -11,6 +12,8 @@ import static com.verticon.tracker.store.mongodb.internal.Utils.createResourceWi
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -24,6 +27,7 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+import com.mongodb.QueryOperators;
 import com.verticon.mongo.IMongoClientProvider;
 import com.verticon.mongo.emf.transform.IFunctionProvider;
 import com.verticon.osgi.metatype.OCD;
@@ -47,6 +51,8 @@ public class UpdateAndFind implements ITrackerUpdate, ITrackerFind,
 
 	private final OCDFind oCDFind = new OCDFind(this);
 
+	private final PremisesFind premisesFind = new PremisesFind(this);
+
 
 
 	@Override
@@ -59,13 +65,12 @@ public class UpdateAndFind implements ITrackerUpdate, ITrackerFind,
 		dbObject.put(ID_KEY, premises.getUri());
 		coll.update(new BasicDBObject(PREMISES_URI, premises.getUri()),
 				dbObject, true, false);
-
+		premisesFind.invalidate(premises.getUri());
 
 	}
 
 	@Override
 	public IUpdateStats recordAnimals(Premises premises) throws IOException {
-		
 		return animalRecorder.record(premises);
 	}
 
@@ -82,20 +87,10 @@ public class UpdateAndFind implements ITrackerUpdate, ITrackerFind,
 
 	@Override
 	public Premises retrievePremises(String premisesUri) throws IOException {
-
-		Resource resource = createResourceWithEmptyURI();
-		DBCollection coll = getCollection(PREMISES);
-		DBObject dbObject = coll.findOne(new BasicDBObject(PREMISES_URI,
-				premisesUri));
-
-		if (dbObject == null) {
-			return null;
-		}
-		Function<DBObject, EObject> builder = functionProvider
-				.getDBObjectToEObjectFunction(coll, resource);
-
-		return (Premises) EcoreUtil.copy(builder.apply(dbObject));
+		return premisesFind.find(premisesUri);
 	}
+
+
 
 	@Override
 	public Premises retrievePremises(String premisesUri, String fromDate,
@@ -159,6 +154,28 @@ public class UpdateAndFind implements ITrackerUpdate, ITrackerFind,
 		return iMongoClientProvider.uri();
 	}
 
+	@Override
+	public Map<String, String> getPremisesNames(Set<String> uris) {
+		Map<String, String> result = newHashMap();
+		DBCollection coll = getCollection(PREMISES);
+
+		BasicDBObject q = new BasicDBObject();
+		q.put(ID_KEY, new BasicDBObject(QueryOperators.IN, uris));
+
+		DBObject f = new BasicDBObject("name", 1);
+
+		DBCursor cursor = coll.find(q, f);
+		String uri;
+		String name;
+		for (DBObject dbObject : cursor) {
+			uri = (String) dbObject.get(ID_KEY);
+			name = (String) dbObject.get("name");
+			result.put(uri, name);
+		}
+
+		return result;
+	}
+
 	void activate() {
 		this.eToDB = functionProvider.getEObjectToDBObjectFunction();
 		this.animalRecorder = new AnimalRecorder(this);
@@ -171,6 +188,7 @@ public class UpdateAndFind implements ITrackerUpdate, ITrackerFind,
 		this.eToDB = null;
 		this.animalRecorder = null;
 		this.oCDFind.deactivate();
+		this.premisesFind.deactivate();
 	}
 
 	// DS injectors
@@ -231,6 +249,7 @@ public class UpdateAndFind implements ITrackerUpdate, ITrackerFind,
 		coll.ensureIndex(new BasicDBObject("uri", 1));
 
 	}
+
 
 
 }

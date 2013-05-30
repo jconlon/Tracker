@@ -12,13 +12,14 @@
 
 package com.verticon.tracker.store.mongodb.test.system;
 
-import static com.google.common.collect.Maps.newHashMap;
+import static com.google.common.collect.Sets.newHashSet;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.ANIMAL_COLLECTION;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.DOC_PREMISES;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.FILE_TMP_OUT_PREMISES2;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.OCD_COLLECTION;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.PREMISES_COLLECTION;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.PREMISES_URI;
+import static com.verticon.tracker.store.mongodb.test.system.Configurator.PREMISES_URI_003ALKMN;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.PREMISES_URI_H89234X;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.TAG_COLLECTION;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.TAG_ID_1;
@@ -42,13 +43,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 
 import junit.framework.TestCase;
 
 import org.bson.types.ObjectId;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -110,10 +111,8 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 
 	private static final int NUMBER_OF_ITERATIONS = 100;
 
-
 	private static final String DATE_2010_03_01 = "2010-03-01";
 	private static final String DATE_2011_05_01 = "2011-05-01";
-
 
 	/**
 	 * slf4j Logger
@@ -134,13 +133,9 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 	 */
 	private static final CountDownLatch startUpGate = new CountDownLatch(1);
 
-
 	// Registration elapsed time in milliseconds and invocations per second.
 	// private final Timer responses =
 	// metricsRegistry.timer(RequestHandler.class, "responses");
-
-
-
 
 	private static boolean initializedCollections = false;
 	/**
@@ -275,18 +270,15 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 	private void removeDocsFromCollections() throws InterruptedException {
 		// TimeUnit.SECONDS.sleep(1);
 		DBObject find = new BasicDBObject();
-		DBCollection coll = getCollection(
-				Configurator.ANIMAL_COLLECTION);
+		DBCollection coll = getCollection(Configurator.ANIMAL_COLLECTION);
 		coll.remove(find);
-		coll = getCollection(
-				Configurator.PREMISES_COLLECTION);
+		coll = getCollection(Configurator.PREMISES_COLLECTION);
 		coll.remove(find);
 		coll = getCollection(Configurator.OCD_COLLECTION);
 		coll.remove(find);
 		coll = getCollection(Configurator.TAG_COLLECTION);
 		coll.remove(find);
-		coll = getCollection(
-				Configurator.UPDATES_COLLECTION);
+		coll = getCollection(Configurator.UPDATES_COLLECTION);
 		coll.remove(find);
 		initializedCollections = true;
 	}
@@ -297,8 +289,7 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 		DBCollection coll = getCollection(ANIMAL_COLLECTION);
 
 		assertThat("No index for Animal tags attribute",
-				hasIndexedIDAttribute(coll, "tags_1"),
-				is(true));
+				hasIndexedIDAttribute(coll, "tags_1"), is(true));
 		assertThat("Must have 0 animals", coll.find().count(), is(0));
 
 		// TAGs on the events.pid and a geo index on the position event
@@ -308,8 +299,7 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 				hasIndexedIDAttribute(coll, "events.pid_1"), is(true));
 
 		assertThat("No geo index for Tag events.loc",
-				hasIndexedIDAttribute(coll, "events.loc_2d"),
-				is(true));
+				hasIndexedIDAttribute(coll, "events.loc_2d"), is(true));
 		assertThat("Must be 0 tags", coll.find().count(), is(0));
 
 		// Premises geo index on the location
@@ -322,7 +312,6 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 
 		// OCDs
 		coll = getCollection(OCD_COLLECTION);
-
 
 		assertThat("Must have only 0 OCD", coll.find().count(), is(0));
 
@@ -348,16 +337,9 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 		logger.debug("done");
 	}
 
-	/**
-	 * TODO move this to perf
-	 * 
-	 * @throws IOException
-	 * @throws InterruptedException
-	 */
 	@Test
 	public void test_TrackerUpdate__RegisterMultiplePremises()
-			throws IOException,
-			InterruptedException {
+			throws IOException, InterruptedException {
 		logger.debug(bundleMarker, "starting testRegister");
 
 		Resource resource = getXMIResource(DOC_PREMISES, "");
@@ -394,8 +376,7 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 				is(0));
 
 		assertThat("Incorrect number of animals added",
-				stats.getAnimalsAdded(),
-				is(1));
+				stats.getAnimalsAdded(), is(1));
 		assertThat("Incorrect number of tags", stats.getTagsAdded(), is(1));
 		assertThat("Incorrect number of events", stats.getEventsAdded(), is(2));
 
@@ -422,13 +403,11 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 				is(0));
 
 		assertThat("Incorrect number of animals added",
-				stats.getAnimalsAdded(),
- is(0));
+				stats.getAnimalsAdded(), is(0));
 		assertThat("Incorrect number of tags", stats.getTagsAdded(), is(1));
 		assertThat("Incorrect number of events", stats.getEventsAdded(), is(1));
 		saveXMIResource("simple.premises", premises);
 	}
-
 
 	@Test
 	public void test_TrackerUpdate_recordAnimals() throws IOException,
@@ -438,7 +417,6 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 		Premises premises = (Premises) resource.getContents().get(0);
 
 		IUpdateStats stats = recordAnimals(premises);
-	
 
 		assertThat("Incorrect number of animals processed. ",
 				stats.getAnimalsProcessed(), is(7));
@@ -468,7 +446,6 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 		assertThat("Premises should have no unassignedTags", premises
 				.getUnAppliedTags().size(), is(0));
 
-
 	}
 
 	@Test
@@ -491,15 +468,13 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 		assertThat("Premises should have 3 events", premises.eventHistory()
 				.size(), is(3));
 
-
 	}
 
 	@Test
 	public void test_TrackerFind_RetrievePremises_WithLocation()
 			throws IOException {
 
-		Premises premises = trackerFind
-				.retrievePremises(PREMISES_URI_H89234X);
+		Premises premises = trackerFind.retrievePremises(PREMISES_URI_H89234X);
 
 		assertThat("Premises should not be null", premises, is(notNullValue()));
 		assertThat("Premises should have name", premises.getName(),
@@ -511,13 +486,11 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 
 	}
 
-
 	@Test
-	public void test_TrackerFind_RetrievePremises_Dates()
-			throws IOException {
+	public void test_TrackerFind_RetrievePremises_Dates() throws IOException {
 
-		Premises premises = trackerFind.retrievePremises(
-				PREMISES_URI_H89234X, DATE_2010_03_01, DATE_2011_05_01);
+		Premises premises = trackerFind.retrievePremises(PREMISES_URI_H89234X,
+				DATE_2010_03_01, DATE_2011_05_01);
 		assertThat("Could not retrieve the premises", premises,
 				is(notNullValue()));
 		// assertThat("Not a valid premises", TestUtils.isValidObject(premises),
@@ -537,8 +510,9 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 			logger.debug(bundleMarker, "Animal {} ", animal.getId());
 		}
 
-		assertThat("First animal was not found between " + DATE_2010_03_01 + " and "
-				+ DATE_2011_05_01, firstAnimal.getId(), is("840456789012341"));
+		assertThat("First animal was not found between " + DATE_2010_03_01
+				+ " and " + DATE_2011_05_01, firstAnimal.getId(),
+				is("840456789012341"));
 		assertThat("First animal must have 8 events.", firstAnimal
 				.eventHistory().size(), is(8));
 		for (Event event : firstAnimal.eventHistory()) {
@@ -555,8 +529,7 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 	 * @throws IOException
 	 */
 	@Test
-	public void test_TrackerFind_RetrievePremises_Point()
-			throws IOException {
+	public void test_TrackerFind_RetrievePremises_Point() throws IOException {
 		ITrackerFind.LongLatPoint point = new ITrackerFind.LongLatPoint(
 				"-77.037852,38.898556,0");
 		// position.setLatitude(38.898556);
@@ -564,7 +537,7 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 		Premises premises = trackerFind.retrievePremises(point);
 
 		assertThat("Premises should not be null", premises, is(notNullValue()));
-		
+
 		assertThat("Premises should have uri", premises.getUri(),
 				is(PREMISES_URI));
 		assertThat("Premises should have name", premises.getName(),
@@ -574,8 +547,6 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 		assertThat("Premises should have no unassignedTags", premises
 				.getUnAppliedTags().size(), is(0));
 	}
-
-
 
 	@Test
 	public void test_TrackerFind_RetrievePremises_Point2() throws IOException {
@@ -601,8 +572,8 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 			throws IOException {
 		ITrackerFind.LongLatPoint point = new ITrackerFind.LongLatPoint(
 				"-90.95048182270057,43.47622307339506,0");
-		Premises premises = trackerFind.retrievePremises(point, DATE_2010_03_01,
-				DATE_2011_05_01);
+		Premises premises = trackerFind.retrievePremises(point,
+				DATE_2010_03_01, DATE_2011_05_01);
 
 		assertThat("Premises should not be null", premises, is(notNullValue()));
 		assertThat("Premises should have uri", premises.getUri(),
@@ -622,8 +593,7 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		URI uri = URI.createURI("file:" + FILE_TMP_OUT_PREMISES2);
 		Resource resource = resourceSet.createResource(uri);
-		DBCollection coll = getCollection(
-				Configurator.TAG_COLLECTION);
+		DBCollection coll = getCollection(Configurator.TAG_COLLECTION);
 
 		DBObject q = new BasicDBObject("_id", "840456789012341");
 		DBObject dbObject = coll.findOne(q);
@@ -647,8 +617,8 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 		assertThat("Tag must have 8 events.", tag.getEvents().size(), is(8));
 		for (Event event : tag.getEvents()) {
 			logger.debug(bundleMarker, "Event pid= {} ", event.getPid());
-			assertThat("Event must have pid set.  " + event,
-					event.getPid(), is(notNullValue()));
+			assertThat("Event must have pid set.  " + event, event.getPid(),
+					is(notNullValue()));
 		}
 
 	}
@@ -659,8 +629,7 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		URI uri = URI.createURI("");
 		Resource resource = resourceSet.createResource(uri);
-		DBCollection coll = getCollection(
-				Configurator.OCD_COLLECTION);
+		DBCollection coll = getCollection(Configurator.OCD_COLLECTION);
 		DBObject q = new BasicDBObject("_id", "mettler.weight");
 		DBObject dbObject = coll.findOne(q);
 
@@ -675,7 +644,6 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 
 		assertThat("OCD dbObject should have a 4 AD", adList.size(), is(4));
 
-		Map<String, EClass> eClassCache = newHashMap();
 		Function<DBObject, EObject> builder = functionProvider
 				.getDBObjectToEObjectFunction(coll, resource);
 
@@ -686,7 +654,6 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 		assertThat("OCD should have an icon", ocd.getIcon(), is(notNullValue()));
 	}
 
-
 	public void test_Raw_Find_Animal() throws IOException {
 		File file = new File(FILE_TMP_OUT_PREMISES2);
 		file.delete();
@@ -695,8 +662,7 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 		Resource resource = resourceSet.createResource(uri);
 
 		// Find a tag first
-		DBCollection coll = getCollection(
-				Configurator.ANIMAL_COLLECTION);
+		DBCollection coll = getCollection(Configurator.ANIMAL_COLLECTION);
 		DBObject q = new BasicDBObject("tags", TAG_ID_1);
 		DBObject animalDbObject = coll.findOne(q);
 		assertThat("Animal should not be null", animalDbObject,
@@ -731,7 +697,6 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 		assertThat("Event should have pid set ", event.getPid(),
 				is(notNullValue()));
 
-
 		assertThat("Resource should have Animal in it.", resource.getContents()
 				.size(), is(1));
 		assertThat("Animal should have a resource.", animal.eResource(),
@@ -758,8 +723,7 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 		assertThat("Tag should have an event", tag.getEvents().size(), is(1));
 
 		Event event = tag.getEvents().get(0);
-		assertThat("Event should be  is an Died ",
- event.getEventCode(), is(11));
+		assertThat("Event should be  is an Died ", event.getEventCode(), is(11));
 
 	}
 
@@ -771,14 +735,12 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 		DBObject q = new BasicDBObject("tags", TAG_ID_WITH_GENERIC_EVENT);
 
 		// Find the animal
-		DBCollection coll = getCollection(
-				Configurator.ANIMAL_COLLECTION);
+		DBCollection coll = getCollection(Configurator.ANIMAL_COLLECTION);
 
 		DBObject animalDbObject = coll.findOne(q);
 		assertThat("Animal should not be null", animalDbObject,
 				is(notNullValue()));
 
-		Map<String, EClass> eClassCache = newHashMap();
 		Function<DBObject, EObject> builder = functionProvider
 				.getDBObjectToEObjectFunction(coll, resource);
 
@@ -796,8 +758,7 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 
 		Event event = tag.getEvents().get(0);
 		assertThat("Event should be  is a TagAppliend EventCode 2",
-				event.getEventCode(),
-				is(2));
+				event.getEventCode(), is(2));
 
 		event = tag.getEvents().get(7);
 		assertThat("Event should be  is a GenericEvent EventCode 200",
@@ -807,8 +768,7 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 		OCD ocd = ge.getOcd();
 		assertThat("OCD should not be null", ocd, is(notNullValue()));
 		String id = ocd.getID();
-		assertThat("OCD id should be mettler.weight", id,
-				is("mettler.weight"));
+		assertThat("OCD id should be mettler.weight", id, is("mettler.weight"));
 		assertThat("OCD must have 4 ADs", ocd.getAD().size(), is(4));
 
 	}
@@ -861,13 +821,20 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 				is(TAG_ID_WITH_SIRE_AND_DAM));
 	}
 
+	@Test
+	public void test_getPremisesNames() throws InterruptedException {
+		Set<String> uris = newHashSet(PREMISES_URI_H89234X,
+				PREMISES_URI_003ALKMN, PREMISES_URI);
+		Map<String, String> nameMap = trackerFind.getPremisesNames(uris);
+		assertThat("Should have 2 entries", nameMap.size(), is(2));
+		String name = nameMap.get(PREMISES_URI);
+		assertThat("Should not be null", name, is(notNullValue()));
+		assertThat("Should be", name, is("Jack Condor"));
 
-	// @Test
-	// public void test_Wait() throws InterruptedException {
-	// // TimeUnit.SECONDS.sleep(2);
-	// logger.debug("done");
-	// }
-
+		name = nameMap.get(PREMISES_URI_H89234X);
+		assertThat("Should not be null", name, is(notNullValue()));
+		assertThat("Should be", name, is("East Farm"));
+	}
 
 	private Animal createAnimal() {
 		Tag tag = TrackerFactory.eINSTANCE.createTag();
@@ -885,7 +852,6 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 		DB db = mongoClient.getDB(iMongoClientProvider.getDatabaseName());
 		return db.getCollection(name);
 	}
-
 
 	private void register(Premises premises) throws IOException {
 

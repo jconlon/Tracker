@@ -11,6 +11,7 @@ import static com.verticon.tracker.store.mongodb.internal.Utils.validateObject;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -347,6 +348,11 @@ public class Component implements IMongoClientProvider, ITrackerStore,
 			throw new SecurityException(String.format(
 					"User has no role authority to access %s premises.", uri));
 		}
+	}
+
+	@Override
+	public Map<String, String> getPremisesNames(Set<String> uris) {
+		return trackerUpdate.getPremisesNames(uris);
 	}
 
 }
