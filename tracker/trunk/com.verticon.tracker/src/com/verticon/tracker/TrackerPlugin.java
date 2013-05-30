@@ -28,6 +28,7 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import com.verticon.location.service.ILocationService;
+import com.verticon.tracker.store.ITrackerFind;
 import com.verticon.tracker.store.ITrackerStore;
 
 /**
@@ -124,7 +125,7 @@ public class TrackerPlugin extends Plugin {
 		Animal result = null;
 		List<ITrackerStore> trackerStores = getTrackerStores();
 		if (trackerStores != null) {
-			for (ITrackerStore iTrackerStore : trackerStores) {
+			for (ITrackerFind iTrackerStore : trackerStores) {
 				result = iTrackerStore.retrieveAnimal(uri);
 				if (result != null) {
 					break;
