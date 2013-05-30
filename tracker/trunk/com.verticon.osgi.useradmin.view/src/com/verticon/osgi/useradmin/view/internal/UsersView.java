@@ -46,8 +46,8 @@ import org.slf4j.LoggerFactory;
 
 import com.verticon.osgi.useradmin.authenticator.UserState;
 import com.verticon.osgi.useradmin.authenticator.UserStateChangeListener;
-import com.verticon.osgi.useradmin.authenticator.Utils;
 import com.verticon.osgi.useradmin.ui.AdminResetPasswordDialog;
+import com.verticon.osgi.useradmin.ui.Utils;
 import com.verticon.osgi.useradmin.view.internal.UsersContentProvider.PropertiesNode;
 
 /**

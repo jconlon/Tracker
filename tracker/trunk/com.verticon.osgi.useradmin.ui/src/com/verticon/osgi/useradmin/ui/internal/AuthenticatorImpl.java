@@ -11,16 +11,16 @@ import org.osgi.service.useradmin.User;
 import org.osgi.service.useradmin.UserAdmin;
 
 import com.verticon.osgi.useradmin.authenticator.Authenticator;
+import com.verticon.osgi.useradmin.authenticator.AuthenticatorUtils;
 import com.verticon.osgi.useradmin.authenticator.UserState;
 import com.verticon.osgi.useradmin.authenticator.UserStateChangeListener;
-import com.verticon.osgi.useradmin.authenticator.Utils;
+import com.verticon.osgi.useradmin.ui.Utils;
+//import com.verticon.osgi.useradmin.ui.Utils;
 
-public class AuthenticatorImpl implements Authenticator {// , UserAdminListener
-															// {
+public class AuthenticatorImpl implements Authenticator {
 
 	private Authorization authorization = null;
-
-	// private Set<String> cachedRoles = null;
+	private String uri = null;
 
 	@Override
 	public boolean isAuthenticatedUser() {
@@ -64,18 +64,23 @@ public class AuthenticatorImpl implements Authenticator {// , UserAdminListener
 
 	}
 
-	boolean authenticate(String userName, String pass) throws Exception {
-		UserAdmin userAdmin = Activator.getDefault().getUserAdmin();
+	boolean authenticate(String userName, String pass, String uri)
+			throws Exception {
+		checkNotNull(uri, "Parameter uri can not be null.");
+		UserAdmin userAdmin = Activator.getDefault().getUserAdmin(uri);
 		checkNotNull(userAdmin, "Failed to find the UserAdmin Service.");
 		User user = getUser(userName, pass, userAdmin);// userAdmin.getRole(userName);
 		if (user != null) {
 			setAuthorization(userAdmin.getAuthorization(user));
+			this.uri = uri;
 		} else {
 			setAuthorization(null); // not authenticated
+			this.uri = null;
 		}
 
 		return authorization != null;
 	}
+
 
 
 	private User getUser(String userName, String password, UserAdmin userAdmin)
@@ -97,7 +102,7 @@ public class AuthenticatorImpl implements Authenticator {// , UserAdminListener
 		if ( hasRole(role) ){
 			return true;
 		}
-		UserAdmin userAdmin = Activator.getDefault().getUserAdmin();
+		UserAdmin userAdmin = Activator.getDefault().getUserAdmin(uri);
 		Role target = userAdmin.getRole(role);
 		
 		return Utils.isAssociatedWith(authorization, target, userAdmin);
@@ -105,28 +110,25 @@ public class AuthenticatorImpl implements Authenticator {// , UserAdminListener
 
 	@Override
 	public Set<String> roles() {
-		// if (cachedRoles == null) {
-		//
-		// if (authorization != null) {
-		// cachedRoles = ImmutableSet.copyOf(authorization.getRoles());
-		// } else {
-		// cachedRoles = Collections.emptySet();
-		// }
-		// }
-		//
-		// return cachedRoles;
 		return newHashSet(authorization.getRoles());
 
 	}
 
-	// @Override
-	// public void roleChanged(UserAdminEvent event) {
-	// String role = event.getRole().getName();
-	// // if (cachedRoles != null && hasRole(role)) {
-	// cachedRoles = null;
-	// System.out.printf("Changed a role: %s %n", role);
-	// // }
-	//
-	// }
+	@Override
+	public String uri() {
+		return uri;
+	}
+
+	/**
+	 * Recursively find all the associates of this user.
+	 */
+	@Override
+	public Set<String> associates() {
+		UserAdmin userAdmin = Activator.getDefault().getUserAdmin(uri);
+		return AuthenticatorUtils.getAssociates(userAdmin, authorization);
+	}
+
+
+
 
 }

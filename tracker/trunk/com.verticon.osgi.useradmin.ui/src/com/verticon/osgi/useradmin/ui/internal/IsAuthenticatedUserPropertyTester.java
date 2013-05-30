@@ -48,7 +48,7 @@ public class IsAuthenticatedUserPropertyTester extends PropertyTester {
 			return !Activator.getDefault().isAuthenticatedUser();
 		}
 		if (PROPERTY_HAS_USERADMIN_SERVICE.equals(property)) {
-			return Activator.getDefault().getUserAdmin() != null;
+			return Activator.getDefault().hasService();
 		}
 		return false;
 		
