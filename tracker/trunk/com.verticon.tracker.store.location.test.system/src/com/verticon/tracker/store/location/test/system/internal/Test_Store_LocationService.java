@@ -1,19 +1,24 @@
 package com.verticon.tracker.store.location.test.system.internal;
 
 import static com.verticon.tracker.store.TrackerStoreUtils.registerPremises;
-import static com.verticon.tracker.store.mongo.test.system.TestUtils.clearTrackerDB;
-import static com.verticon.tracker.store.mongo.test.system.TestUtils.getXMIResource;
+import static com.verticon.tracker.store.location.test.system.internal.Configuator.PREMISES_URI_H89234X;
+import static com.verticon.tracker.store.location.test.system.internal.Configuator.URN_PIN_003CZKO;
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertThat;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.json.MongoQueryStandaloneSetupGenerated;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -23,6 +28,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
+import com.google.common.base.Strings;
 import com.verticon.location.Location;
 import com.verticon.location.service.ILocationService;
 import com.verticon.tracker.Animal;
@@ -31,8 +37,6 @@ import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.Position;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.store.ITrackerStore;
-import com.verticon.tracker.store.mongo.test.system.IMockAuthenticatorController;
-import com.verticon.tracker.store.mongo.test.system.Member;
 
 /**
  * Run TrackerStore Test System to populate MongoDB
@@ -83,7 +87,8 @@ public class Test_Store_LocationService {
 	 */
 	static ITrackerStore trackerStore;
 	static ILocationService locationService;
-	static IMockAuthenticatorController mockAuthenticatorController;
+
+	// static IMockAuthenticatorController mockAuthenticatorController;
 
 	/**
 	 * @param locationService
@@ -104,11 +109,6 @@ public class Test_Store_LocationService {
 		Test_Store_LocationService.trackerStore = trackerStore;
 	}
 
-	void setMockAuthenticatorController(
-			IMockAuthenticatorController mockAuthenticatorController) {
-		Test_Store_LocationService.mockAuthenticatorController = mockAuthenticatorController;
-	}
-
 	/**
 	 * On activation of this component this method is called.
 	 * 
@@ -119,7 +119,7 @@ public class Test_Store_LocationService {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		clearTrackerDB();
+		Configuator.cleanDatabase();
 	}
 
 	/**
@@ -135,17 +135,18 @@ public class Test_Store_LocationService {
 		startUpGate.await();// wait for startUp to finish
 		// System.out.println(this + ": startup and setUp finished.");
 
-		// Setup the Mongo JSON query environment
-		new MongoQueryStandaloneSetupGenerated()
-				.createInjectorAndDoEMFRegistration();
-
-		// Set the mock user
-		mockAuthenticatorController.setAuthenticatedUser(true);
+		// // Set the mock user
+		// mockAuthenticatorController.setAuthenticatedUser(true);
 
 	}
 
 	@After
 	public void tearDown() throws Exception {
+	}
+
+	@Test
+	public void testWait() throws InterruptedException {
+		TimeUnit.SECONDS.sleep(1);
 	}
 
 	@Test
@@ -156,7 +157,7 @@ public class Test_Store_LocationService {
 				DOC_PREMISES, "");
 		Premises premises = (Premises) resource.getContents().get(0);
 		assertThat("URI must be urn:pin:H89234X", premises.getUri(),
-				is(Member.ONE.uri));
+				is(PREMISES_URI_H89234X));
 		assertThat("Premises must have 8 animalsl", premises.getAnimals()
 				.size(), is(8));
 		assertThat("Premises not enough events",
@@ -177,7 +178,7 @@ public class Test_Store_LocationService {
 		logger.debug(
 				bundleMarker,
 				"First event Date={}; DateKey={}; DateTime={}",
-				new String[] { premises.eventHistory().get(0).getDate(),
+				new Object[] { premises.eventHistory().get(0).getDate(),
 						premises.eventHistory().get(0).getDateKey(),
 						premises.eventHistory().get(0).getDateTime().toString() });
 
@@ -187,15 +188,15 @@ public class Test_Store_LocationService {
 
 	@Test
 	public final void test_LocationService_Address_from_URI() {
-		String result = locationService.address(Member.ONE.uri);
-		assertThat("Must have address for " + Member.ONE.uri, result,
+		String result = locationService.address(PREMISES_URI_H89234X);
+		assertThat("Must have address for " + PREMISES_URI_H89234X, result,
 				is("E6055 Cina Rd. Viroqua, WI 54665"));
 	}
 
 	@Test
 	public final void test_LocationService_Name_from_URI() {
-		String result = locationService.name(Member.ONE.uri);
-		assertThat("Must have name for " + Member.ONE.uri, result,
+		String result = locationService.name(PREMISES_URI_H89234X);
+		assertThat("Must have name for " + PREMISES_URI_H89234X, result,
 				is("East Farm"));
 	}
 
@@ -209,7 +210,7 @@ public class Test_Store_LocationService {
 
 	@Test
 	public final void test_LocationService_Locations_In_URI() {
-		Set<String> result = locationService.locationsIn(Member.ONE.uri);
+		Set<String> result = locationService.locationsIn(PREMISES_URI_H89234X);
 		assertThat("Must have address", result.size(), is(5));
 		// for (String string : result) {
 		// System.out.println(string);
@@ -425,6 +426,44 @@ public class Test_Store_LocationService {
 		// For the animal
 		assertThat("Animal has a urn for location", animal.getLocation(),
 				is("Dwyer"));
+	}
+
+	@Test
+	public void test_getAssociations() {
+
+		Map<String, String> map = locationService.getAssociates("peter");
+		assertThat("Name map is not null", map, is(notNullValue()));
+		assertThat("Map has two entries", map.size(), is(2));
+
+		assertThat("Map has a premises name", map.get(PREMISES_URI_H89234X),
+				is("East Farm"));
+
+		assertThat("Map has a premises name", map.get(URN_PIN_003CZKO),
+				is("Seelow"));
+
+	}
+
+	static Resource getXMIResource(String fileName, String segment) {
+		String pluginID = "com.verticon.tracker.store.mongodb.test.system";
+		return getXMIResource(pluginID, fileName, segment);
+	}
+
+	static Resource getXMIResource(String pluginID, String fileName,
+			String segment) {
+		URI uri = URI.createPlatformPluginURI(pluginID, true);
+
+		if (Strings.isNullOrEmpty(segment)) {
+			uri = uri.appendSegments(new String[] { "resources", fileName });
+		} else {
+			uri = uri.appendSegments(new String[] { "resources", segment,
+					fileName });
+		}
+
+		ResourceSet resourceSet = new ResourceSetImpl();
+		Resource resource = resourceSet.getResource(uri, true);
+		assertThat(resource, is(notNullValue()));
+		assertThat(resource.getContents().size(), is(1));
+		return resource;
 	}
 
 }
