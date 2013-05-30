@@ -55,8 +55,16 @@ public interface ILocationService {
 	Set<String> locationsIn(String targetId);
 	
 	/**
-	 * @param the object id
-	 * @return id to name map of all the associates of the object
+	 * Map of all the names of associates. The map is keyed by uri and the name
+	 * of the associate is the value.
+	 * 
+	 * This is currently used during the manual specification of a movedIn or a
+	 * movedOut event to give the end user a pick list of all the possible
+	 * destinations or sources for animals.
+	 * 
+	 * @param the
+	 *            object id
+	 * @return id to name map of all the associates of the object.
 	 */
 	Map<String,String> getAssociates(String id);
 
