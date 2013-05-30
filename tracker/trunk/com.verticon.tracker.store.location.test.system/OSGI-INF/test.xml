@@ -4,6 +4,5 @@
    <implementation 
     class="com.verticon.tracker.store.location.test.system.internal.Test_Store_LocationService"/>
    <reference bind="setTrackerStore" cardinality="1..1" interface="com.verticon.tracker.store.ITrackerStore" name="ITrackerStore" policy="static" target="(com.verticon.tracker.mongo.test=testOne)"/>
-   <reference bind="setLocationService" cardinality="1..1" interface="com.verticon.location.service.ILocationService" name="ILocationService" policy="static"/>
-   <reference bind="setMockAuthenticatorController" cardinality="1..1" interface="com.verticon.tracker.store.mongo.test.system.IMockAuthenticatorController" name="IMockAuthenticatorController" policy="static"/>
+   <reference bind="setLocationService" cardinality="1..1" interface="com.verticon.location.service.ILocationService" name="ILocationService" policy="static"/>y="static"/>
 </scr:component>

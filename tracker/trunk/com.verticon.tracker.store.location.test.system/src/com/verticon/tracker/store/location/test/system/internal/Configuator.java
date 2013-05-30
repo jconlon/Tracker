@@ -11,86 +11,75 @@
 
 package com.verticon.tracker.store.location.test.system.internal;
 
-import static com.verticon.tracker.store.mongo.test.system.Member.ONE;
-import static com.verticon.tracker.store.mongo.test.system.Variables.PREMISES_URI;
-
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.Dictionary;
 import java.util.Hashtable;
-import java.util.Properties;
 
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.wireadmin.WireConstants;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBObject;
+import com.mongodb.MongoClient;
 import com.verticon.tracker.TrackerPackage;
-import com.verticon.tracker.store.mongo.test.system.Member;
-import com.verticon.tracker.store.mongo.test.system.Variables;
 
 /**
  * @author jconlon
  * 
  */
 public class Configuator {
-	private static final String FACTORY_PID = "com.verticon.tracker.store.mongo";
-	static final String MONGO_LOCALHOST = "mongodb://localhost";
-    
-	static final String ANIMAL_SCOPE = "premises.animald";
-	static final String TAG_SCOPE = "premises.tag";
-	static final String ANIMAL_WEIGHT_SCOPE = "animal.weight";
-    static final String POSITION_SCOPE = "gps.position";
-    static final String METTLER_WEIGHT_SCOPE = "mettler.weight";
-    
+	private static final String TEST_TRACKERSTORE_LOCATION = "test_trackerstore_location";
+	private static final String FACTORY_PID = "com.verticon.tracker.store.mongodb";
+	static final String PREMISES_URI_H89234X = "urn:pin:H89234X";
+	private static final String ANIMAL_COLLECTION = "Animal";
+	static final String URN_PIN_003CZKO = "urn:pin:003CZKO";
 
+	private static final String TAG_COLLECTION = "Tag";
+
+	private static final String PREMISES_COLLECTION = "Premises";
+
+	private static final String UPDATES_COLLECTION = "Updates";
 
 	public void setConfigurationAdmin(ConfigurationAdmin configAdmin)
 			throws IOException {
-		// Configure the first instance
-		Configuration config = configAdmin.createFactoryConfiguration(FACTORY_PID);
-		Dictionary<String, Object> props = configure1();
-		config.update(props);
-		
-//		//The second
-//		config = configAdmin.createFactoryConfiguration(FACTORY_PID);
-//		props = configure2();
-//		config.update(props);
-	}
 
-	private static Dictionary<String, Object> configure1() {
+		// Configure the IMongoClientProvider
+		Configuration config = configAdmin
+				.createFactoryConfiguration(FACTORY_PID);
 		Dictionary<String, Object> props = new Hashtable<String, Object>();
-		//MongoConnection related variables
-		props.put(Variables.MONGO_URI.configID, MONGO_LOCALHOST);
-		
-		//Provided 
-		props.put("com.verticon.tracker.mongo.test","testOne");
-		props.put(Variables.DEFAULT_ANIMAL.configID, TrackerPackage.BOVINE_BISON);
+		props.put("iMongoClientProvider", "remote");
+		props.put("dbname", TEST_TRACKERSTORE_LOCATION);
+		props.put("com.verticon.tracker.mongo.test", "testOne");
+
 		props.put("tracker.wiring.group.name", "test");
-		props.put(PREMISES_URI.configID, ONE.uri);
-		// Prevent the connection of Mongo Authenticator to the TrackerStore
-		props.put("collection", "DONOT CONNECT TO THIS");
-		props.put(WireConstants.WIREADMIN_CONSUMER_SCOPE, new String[]{
-				TAG_SCOPE,//Tags ->Tags
-				ANIMAL_WEIGHT_SCOPE, //Measurements ->WeighIn
-				POSITION_SCOPE,//Positions -> Positions
-				METTLER_WEIGHT_SCOPE,//Measurement -> GenericEvents
-				ANIMAL_SCOPE//Animals -> Animals
-				});
-		return props;
-	}
-	
-	@SuppressWarnings("unused")
-	private static Dictionary<Object, Object> configure2() {
-		Dictionary<Object, Object> props = new Properties();
-		// Prevent the connection of Mongo Authenticator to the TrackerStore
-		props.put("collection", "DONOT CONNECT TO THIS");
-		props.put(Variables.MONGO_URI.configID, MONGO_LOCALHOST);
-		props.put("com.verticon.tracker.mongo.test","testTwo");
-		props.put(Variables.DEFAULT_ANIMAL.configID, TrackerPackage.SWINE);
-		props.put("tracker.wiring.group.name", "test2");
-		props.put(Variables.PREMISES_URI.configID, Member.THREE.uri);
-		props.put(WireConstants.WIREADMIN_CONSUMER_SCOPE, new String[]{TAG_SCOPE});
-		return props;
+		props.put("tracker.premises.uri", PREMISES_URI_H89234X);
+		props.put("premises.animal.default", TrackerPackage.BOVINE_BISON);
+		// wireadmin.consumer.scope
+		props.put(WireConstants.WIREADMIN_CONSUMER_SCOPE, new String[] {
+				"animal.weight", "premises.tag", "gps.position",
+				"mettler.weight", "premises.animal" });
+		// take all defaults
+		config.update(props);
 	}
 
+	static void cleanDatabase() throws UnknownHostException {
+		MongoClient mongoClient = new MongoClient();
+		DB db = mongoClient.getDB(TEST_TRACKERSTORE_LOCATION);
+		DBObject find = new BasicDBObject();
+		DBCollection coll = db.getCollection(ANIMAL_COLLECTION);
+		coll.remove(find);
+		coll = db.getCollection(PREMISES_COLLECTION);
+		coll.remove(find);
+		// coll = getCollection(KEY_MONGODB_DBNAME, OCD_COLLECTION);
+		// coll.remove(find);
+		coll = db.getCollection(TAG_COLLECTION);
+		coll.remove(find);
+		coll = db.getCollection(UPDATES_COLLECTION);
+		coll.remove(find);
+	}
 
 }
