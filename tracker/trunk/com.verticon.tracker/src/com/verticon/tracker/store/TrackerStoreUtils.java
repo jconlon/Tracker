@@ -60,7 +60,7 @@ public class TrackerStoreUtils {
 			.getLogger(TrackerStoreUtils.class);
 	
 	
-	public static int registerPremises(File file, ITrackerStore trackerStore)
+	public static int registerPremises(File file, ITrackerUpdate trackerStore)
 			throws IOException {
 		int count = 0;
 		List<String> lines = null;
@@ -248,7 +248,7 @@ public class TrackerStoreUtils {
 	 
 	
 	public static void retrieveAndImportPremises(String pin,
-			ITrackerStore trackerStore, URI uri, String fromDate, String toDate) throws IOException {
+			ITrackerFind trackerStore, URI uri, String fromDate, String toDate) throws IOException {
 		Premises premises = trackerStore.retrievePremises(pin, fromDate, toDate);
 		if(premises==null){
 			throw new IOException("Could not find premises with pin: "+pin);
@@ -300,7 +300,7 @@ public class TrackerStoreUtils {
 
 	// "Pin""Name""Phone""Email""Street""City""State""zipCode""latitude""longitude"
 	private static void buildPremises(String[] headers, String[] line,
-			ITrackerStore trackerStore) {
+			ITrackerUpdate trackerStore) {
 		if (line == null || line.length == 0) {
 			logger.warn(bundleMarker, "blank line skipped");
 			return;
