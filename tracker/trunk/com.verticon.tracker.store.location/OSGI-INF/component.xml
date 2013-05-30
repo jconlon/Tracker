@@ -5,4 +5,5 @@
       <provide interface="com.verticon.location.service.ILocationServiceProvider"/>
    </service>
    <reference bind="setTrackerStore" cardinality="1..n" interface="com.verticon.tracker.store.ITrackerStore" name="ITrackerStore" policy="dynamic" unbind="unsetTrackerStore"/>
+   <reference bind="setAuthenticator" cardinality="1..1" interface="com.verticon.osgi.useradmin.authenticator.Authenticator" name="Authenticator" policy="static" unbind="unsetAuthenticator"/>
 </scr:component>

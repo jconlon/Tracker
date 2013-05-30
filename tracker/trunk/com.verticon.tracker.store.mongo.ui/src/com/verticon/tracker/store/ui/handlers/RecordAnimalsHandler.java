@@ -18,16 +18,13 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.viewers.LabelProvider;
-import org.eclipse.jface.window.Window;
-import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.Premises;
-import com.verticon.tracker.store.ITrackerStore;
-import com.verticon.tracker.store.StoreAccessException;
+import com.verticon.tracker.store.ITrackerUpdate;
+import com.verticon.tracker.store.IUpdateStats;
 import com.verticon.tracker.store.ui.Activator;
 
 /**
@@ -44,63 +41,39 @@ public class RecordAnimalsHandler extends AbstractHandler {
 	private final Logger logger = LoggerFactory
 			.getLogger(RecordAnimalsHandler.class);
 
-
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		ISelection selection = HandlerUtil.getActiveMenuSelection(event);
 		if (selection instanceof IStructuredSelection) {
 			Premises premises = (Premises) ((IStructuredSelection) selection)
 					.getFirstElement();
 			String uri = premises.getUri();
-			LabelProvider lp = new LabelProvider(){
 
-				/* (non-Javadoc)
-				 * @see org.eclipse.jface.viewers.LabelProvider#getText(java.lang.Object)
-				 */
-				@Override
-				public String getText(Object element) {
-					ITrackerStore trackerStore = (ITrackerStore)element;
-					return trackerStore.uri();
-				}
-				
-			};
-			ITrackerStore store =null;
+			ITrackerUpdate store = Activator.getDefault()
+					.getTrackerStoreService();
+			;
 			try {
-				ITrackerStore[] stores = Activator.getDefault().getTrackerStoreServices(uri);
-				if(stores==null || stores.length==0){
-					throw new StoreAccessException(
-							"Can't find the service to record anaimal life data and event histories for a premises. Make sure a TrackerStore is configured and your administrator has you as the publisher.");
-				}
 
-				ElementListSelectionDialog dialog = 
-						new ElementListSelectionDialog(HandlerUtil.getActiveShell(event), lp);
-				dialog.setElements(stores);
-				dialog.setAllowDuplicates(false);
-				dialog.setMultipleSelection(false);
-				dialog.setMessage("Choose the TrackerStore URI");
-				dialog.setTitle("Register Premises");
-				// User pressed cancel
-				if (dialog.open() != Window.OK) {
-					return false;
+				if (store == null) {
+					throw new Exception(
+							"Unable to find ITrackerStore service. Make sure you created a MongoTracker Store factory configuration with "
+									+ uri + " as the Premises uri.");
 				}
-				Object[] result = dialog.getResult(); 
-			    store = (ITrackerStore) result[0];
-			    
-//				ITrackerStore store = Activator.getDefault().getStore(uri);
-				if(store==null){
-					throw new Exception("Unable to find ITrackerStore service. Make sure you created a MongoTracker Store factory configuration with "+uri+" as the Premises uri.");
-				}
-				int processedAnimals = store.recordAnimals(premises);
+				IUpdateStats processedAnimals = store.recordAnimals(premises);
 				MessageDialog.openConfirm(HandlerUtil.getActiveShell(event),
-						"Animal LifeData and EventHistory Loader", "Saved events from "+processedAnimals+" animals contained in premises: " + uri
+						"Animal LifeData and EventHistory Loader",
+						processedAnimals + " contained in premises: " + uri
 								+ " to MongoDB.");
 			} catch (Exception e) {
 				MessageDialog.openError(HandlerUtil.getActiveShell(event),
 						"Failed to Save animals from premises: " + uri
 								+ " to MongoDB.", e.getMessage());
-				logger.error(bundleMarker, "Failed to Save animals from premises: " + uri
-						+ " to MongoDB.",e);
-				throw new ExecutionException("Failed to Save animals from premises: " + uri
-						+ " to MongoDB.",e);
+				logger.error(bundleMarker,
+						"Failed to Save animals from premises: " + uri
+								+ " to MongoDB.", e);
+				throw new ExecutionException(
+						"Failed to Save animals from premises: " + uri
+								+ " to MongoDB.", e);
 			}
 
 		}

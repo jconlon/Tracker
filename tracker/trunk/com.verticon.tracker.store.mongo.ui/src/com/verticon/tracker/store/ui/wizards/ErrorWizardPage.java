@@ -9,7 +9,6 @@ import org.eclipse.swt.widgets.Label;
 public class ErrorWizardPage extends WizardPage {
 	private Composite container;
 
-
 	protected ErrorWizardPage(String title, String errorMessage,
 			String description) {
 		super("Illegal State");

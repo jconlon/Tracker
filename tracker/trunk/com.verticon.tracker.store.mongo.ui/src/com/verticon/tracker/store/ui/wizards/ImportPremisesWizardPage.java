@@ -32,35 +32,41 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 
+import com.verticon.tracker.store.ITrackerFind;
 import com.verticon.tracker.store.ITrackerStore;
 import com.verticon.tracker.store.TrackerStoreUtils;
+import com.verticon.tracker.store.ui.Activator;
 import com.verticon.ui.dialogs.DateDialog;
 
-
 public class ImportPremisesWizardPage extends WizardNewFileCreationPage {
-	
-	
+
 	private Text premisesID;
 	private Text fromDate;
 	private Text toDate;
 
-	public ImportPremisesWizardPage(String pageName, IStructuredSelection selection) {
+	public ImportPremisesWizardPage(String pageName,
+			IStructuredSelection selection) {
 		super(pageName, selection);
-		setTitle(pageName); //NON-NLS-1
-		setDescription("Imports a Premises from the TrackerStore into the workspace."); //NON-NLS-1
+		setTitle(pageName); // NON-NLS-1
+		setDescription("Imports a Premises from the TrackerStore into the workspace."); // NON-NLS-1
 		setFileExtension("premises");
 		setFileName("importedPremises");
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.dialogs.WizardNewFileCreationPage#createAdvancedControls(org.eclipse.swt.widgets.Composite)
-	 */	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.dialogs.WizardNewFileCreationPage#createAdvancedControls
+	 * (org.eclipse.swt.widgets.Composite)
+	 */
+	@Override
 	protected void createAdvancedControls(Composite parent) {
 		final Composite premisesSelectionArea = new Composite(parent, SWT.NONE);
 		GridData fileSelectionData = new GridData(GridData.GRAB_HORIZONTAL
 				| GridData.FILL_HORIZONTAL);
 		premisesSelectionArea.setLayoutData(fileSelectionData);
-		
+
 		GridLayout fileSelectionLayout = new GridLayout();
 		fileSelectionLayout.numColumns = 3;
 		fileSelectionLayout.makeColumnsEqualWidth = false;
@@ -72,77 +78,81 @@ public class ImportPremisesWizardPage extends WizardNewFileCreationPage {
 		Label label = new Label(premisesSelectionArea, SWT.LEFT);
 		label.setText("Enter the Premises identification number, begining and ending dates of the animal events");
 		label.setLayoutData(gridData);
-		
-		//Pin
+
+		// Pin
 		label = new Label(premisesSelectionArea, SWT.LEFT);
 		label.setText("pin:");
 		label.setToolTipText("Premises Identification Number");
-		premisesID = new Text(premisesSelectionArea, SWT.SINGLE |SWT.BORDER);
+		premisesID = new Text(premisesSelectionArea, SWT.SINGLE | SWT.BORDER);
 		gridData = new GridData();
 		gridData.horizontalAlignment = GridData.FILL;
 		gridData.grabExcessHorizontalSpace = true;
-		gridData.horizontalSpan=2;
+		gridData.horizontalSpan = 2;
 		premisesID.setLayoutData(gridData);
-		premisesID.addModifyListener(new ModifyListener(){
+		premisesID.addModifyListener(new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent e) {
 				updatePageComplete();
 			}
 		});
-		
-		//From date
+
+		// From date
 		label = new Label(premisesSelectionArea, SWT.LEFT);
 		label.setText("begining date:");
 		label.setToolTipText("Begining of the animal event history timespan");
-		fromDate = new Text(premisesSelectionArea, SWT.SINGLE |SWT.BORDER);
-	    Button button = new Button(premisesSelectionArea, SWT.PUSH);
-	    button.setText("set");
-	    button.addSelectionListener(new SelectionListener() {
+		fromDate = new Text(premisesSelectionArea, SWT.SINGLE | SWT.BORDER);
+		Button button = new Button(premisesSelectionArea, SWT.PUSH);
+		button.setText("set");
+		button.addSelectionListener(new SelectionListener() {
 
-	        public void widgetSelected(SelectionEvent event) {
-	        	callDateDialog(fromDate);
-	        }
+			@Override
+			public void widgetSelected(SelectionEvent event) {
+				callDateDialog(fromDate);
+			}
 
-	        public void widgetDefaultSelected(SelectionEvent event) {
-	        	callDateDialog(fromDate);
-	        }
+			@Override
+			public void widgetDefaultSelected(SelectionEvent event) {
+				callDateDialog(fromDate);
+			}
 
-			
-	      });
+		});
 		gridData = new GridData();
 		gridData.horizontalAlignment = GridData.FILL;
 		gridData.grabExcessHorizontalSpace = true;
 		fromDate.setLayoutData(gridData);
-		fromDate.addModifyListener(new ModifyListener(){
+		fromDate.addModifyListener(new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent e) {
 				updatePageComplete();
 			}
 		});
-		
-		
-		//To date
+
+		// To date
 		label = new Label(premisesSelectionArea, SWT.LEFT);
 		label.setText("ending date:");
 		label.setToolTipText("End of the animal event history timespan");
-		toDate = new Text(premisesSelectionArea, SWT.SINGLE |SWT.BORDER);
+		toDate = new Text(premisesSelectionArea, SWT.SINGLE | SWT.BORDER);
 		Button button2 = new Button(premisesSelectionArea, SWT.PUSH);
 		button2.setText("set");
 		button2.addSelectionListener(new SelectionListener() {
 
+			@Override
 			public void widgetSelected(SelectionEvent event) {
 				callDateDialog(toDate);
 			}
 
+			@Override
 			public void widgetDefaultSelected(SelectionEvent event) {
 				callDateDialog(toDate);
 			}
-
 
 		});
 		gridData = new GridData();
 		gridData.horizontalAlignment = GridData.FILL;
 		gridData.grabExcessHorizontalSpace = true;
 		toDate.setLayoutData(gridData);
-		toDate.addModifyListener(new ModifyListener(){
+		toDate.addModifyListener(new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent e) {
 				updatePageComplete();
 			}
@@ -151,62 +161,74 @@ public class ImportPremisesWizardPage extends WizardNewFileCreationPage {
 		premisesSelectionArea.moveAbove(null);
 
 	}
-	
+
 	private void callDateDialog(Text text) {
-		DateDialog dateDialog = new DateDialog(getShell(),ITrackerStore.DATE_PATTERN);
+		DateDialog dateDialog = new DateDialog(getShell(),
+				ITrackerStore.DATE_PATTERN);
 		if (dateDialog.open() == Window.OK) {
 			text.setText(dateDialog.getDateTime());
 
 		}
 	}
-	
-	 /* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.ui.dialogs.WizardNewFileCreationPage#createLinkTarget()
 	 */
+	@Override
 	protected void createLinkTarget() {
 	}
-	
-	URI createImportedResource() throws IOException{
+
+	URI createImportedResource() throws IOException {
 		String pin = premisesID.getText();
-		ITrackerStore trackerStore = ((ImportPremisesWizard) getWizard()).getTrackerStore();
+		ITrackerFind trackerStore = Activator.getDefault()
+				.getTrackerStoreService();
 		URI uri = createURI();
-		TrackerStoreUtils.retrieveAndImportPremises(pin, trackerStore, uri, fromDate.getText(), toDate.getText());
+		TrackerStoreUtils.retrieveAndImportPremises(pin, trackerStore, uri,
+				fromDate.getText(), toDate.getText());
 		return uri;
 	}
-
-	
 
 	private URI createURI() {
 		IPath containerPath = getContainerFullPath();
 		IPath newFilePath = containerPath.append(getFileName());
 		IFile newFileHandle = createFileHandle(newFilePath);
-        //return the raw file location
-        String raw = newFileHandle.getLocationURI().getRawPath();
+		// return the raw file location
+		String raw = newFileHandle.getLocationURI().getRawPath();
 		URI uri = URI.createFileURI(raw);
 		return uri;
 	}
 
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.eclipse.ui.dialogs.WizardNewFileCreationPage#getNewFileLabel()
 	 */
+	@Override
 	protected String getNewFileLabel() {
-		return "New File Name:"; //NON-NLS-1
+		return "New File Name:"; // NON-NLS-1
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.dialogs.WizardNewFileCreationPage#validateLinkedResource()
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.dialogs.WizardNewFileCreationPage#validateLinkedResource()
 	 */
+	@Override
 	protected IStatus validateLinkedResource() {
-		return new Status(IStatus.OK, "com.verticon.tracker.store.ui", IStatus.OK, "", null); //NON-NLS-1 //NON-NLS-2
+		return new Status(IStatus.OK, "com.verticon.tracker.store.ui",
+				IStatus.OK, "", null); // NON-NLS-1 //NON-NLS-2
 	}
-	
-	String getPremisesID(){
+
+	String getPremisesID() {
 		return premisesID.getText();
 	}
-	
-	private void updatePageComplete(){
+
+	private void updatePageComplete() {
 		setPageComplete(false);
-		setPageComplete(getPremisesID()!=null&& createURI()!=null && !createURI().isEmpty());
+		setPageComplete(getPremisesID() != null && createURI() != null
+				&& !createURI().isEmpty());
 	}
 }

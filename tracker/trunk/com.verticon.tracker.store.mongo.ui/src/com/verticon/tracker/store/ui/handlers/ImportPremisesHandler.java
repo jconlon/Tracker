@@ -15,7 +15,7 @@ public class ImportPremisesHandler extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		if (!Activator.getDefault().hasTrackerStoreService(null)) {
+		if (!Activator.getDefault().hasTrackerStoreService()) {
 			MessageDialog
 					.openError(HandlerUtil.getActiveShell(event),
 							"Import Premises from Tracker Store",
@@ -31,9 +31,9 @@ public class ImportPremisesHandler extends AbstractHandler {
 		}
 
 		ImportPremisesWizard wizard = new ImportPremisesWizard();
-		wizard.init(
-				HandlerUtil.getActiveWorkbenchWindowChecked(event).getWorkbench(),  
-				(IStructuredSelection)HandlerUtil.getActiveMenuSelection(event));
+		wizard.init(HandlerUtil.getActiveWorkbenchWindowChecked(event)
+				.getWorkbench(), (IStructuredSelection) HandlerUtil
+				.getActiveMenuSelection(event));
 		WizardDialog dialog = new WizardDialog(
 				HandlerUtil.getActiveShellChecked(event), wizard);
 		dialog.open();

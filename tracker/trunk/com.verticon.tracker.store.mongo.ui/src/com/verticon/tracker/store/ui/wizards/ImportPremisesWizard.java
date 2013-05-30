@@ -18,15 +18,11 @@ import org.eclipse.ui.IImportWizard;
 import org.eclipse.ui.IWorkbench;
 
 import com.google.common.base.Strings;
-import com.verticon.tracker.store.ITrackerStore;
 import com.verticon.tracker.store.ui.Activator;
 
 public class ImportPremisesWizard extends Wizard implements IImportWizard {
 
-	ImportPremisesWizardPage mainPage;
-	SelectTrackerStorePage trackerStorePage;
-
-	private ITrackerStore trackerStore = null;
+	private ImportPremisesWizardPage mainPage;
 
 	public ImportPremisesWizard() {
 		super();
@@ -50,7 +46,8 @@ public class ImportPremisesWizard extends Wizard implements IImportWizard {
 		}
 		MessageDialog.openInformation(getShell(), "Imported Premises",
 				"Imported premises " + mainPage.getPremisesID() + " from "
-						+ trackerStore.uri() + " to " + uri);
+						+ Activator.getDefault().getTrackerStoreService().uri()
+						+ " to " + uri);
 		return true;
 	}
 
@@ -64,7 +61,7 @@ public class ImportPremisesWizard extends Wizard implements IImportWizard {
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		setWindowTitle("TrackerStore Premises Import Wizard"); // NON-NLS-1
 		setNeedsProgressMonitor(true);
-		trackerStorePage = new SelectTrackerStorePage();
+		// trackerStorePage = new SelectTrackerStorePage();
 		mainPage = new ImportPremisesWizardPage("Import Premises", selection); // NON-NLS-1
 	}
 
@@ -76,7 +73,7 @@ public class ImportPremisesWizard extends Wizard implements IImportWizard {
 	@Override
 	public void addPages() {
 		super.addPages();
-		if (!Activator.getDefault().hasTrackerStoreService(null)) {
+		if (!Activator.getDefault().hasTrackerStoreService()) {
 			addPage(new ErrorWizardPage(
 					"Import Premises",
 					"Can't import premises - No Tracker Store Service",
@@ -87,18 +84,10 @@ public class ImportPremisesWizard extends Wizard implements IImportWizard {
 					"Can't import premises - You are not signed on",
 					"Can't import premises! You are not an authenticated user. Please Sign On and try again."));
 		} else {
-		addPage(trackerStorePage);
-		addPage(mainPage);
+			// addPage(trackerStorePage);
+			addPage(mainPage);
 		}
 
-	}
-
-	void setTrackerStore(ITrackerStore trackerStore) {
-		this.trackerStore = trackerStore;
-	}
-
-	ITrackerStore getTrackerStore() {
-		return trackerStore;
 	}
 
 	/*
@@ -108,8 +97,7 @@ public class ImportPremisesWizard extends Wizard implements IImportWizard {
 	 */
 	@Override
 	public boolean canFinish() {
-		return trackerStore != null
-				&& !Strings.isNullOrEmpty(mainPage.getPremisesID())
+		return !Strings.isNullOrEmpty(mainPage.getPremisesID())
 				&& mainPage.getFileName() != null;
 	}
 
