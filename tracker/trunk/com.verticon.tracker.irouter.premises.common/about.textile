@@ -1,6 +1,6 @@
 h1=. iRouter Premises Common Producers
 
-com.verticon.tracker.irouter.premises.common Version 0.1.0
+com.verticon.tracker.irouter.premises.common Version 0.2.0
 
 {toc:style=disc|minLevel=2|maxLevel=3}
 
