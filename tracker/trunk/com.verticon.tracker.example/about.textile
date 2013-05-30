@@ -145,8 +145,8 @@ h3(. Run Premises Reports from a project in the Workspace
 # Copy the @report.properties@ file from the @reports/report.properties@ in this example project to this directory
 # Open the file and edit the line to @rp_premises_doc = platform:/resource/com.verticon.tracker.example/example.premises@ 
 # Open the _Report Design_ perspective.  This will start the web server and send a test report to it. 
-# Make sure the _Resource Explorer_ view is showing. If not show it:  _Windows_ } _Show View_ | _Report Design_ | _Resource Explorer_.
-# Make sure that the @report.properties@ file is opened in an editor.  This will open the insure that the Shared Resources are showing in the _Resource Explorer_.
+# Make sure the _Resource Explorer_ view is showing. If not show it:  _Windows_ | _Show View_ | _Report Design_ | _Resource Explorer_.
+# Make sure that the @report.properties@ file is opened in an editor.  This will insure that the Shared Resources are showing in the _Resource Explorer_.
 # Copy the reports you want from the @reports@ directory in the _Resource Explorer_ to the @reports@ directory of you project.
 # Optionally modify one or more of the reports for new functionality. __To keep the location independent functionality use the datasets or the data sources from the @premises.rptlibrary@ deployted to the BIRT resources directory__.
 # From the __Navigator View__ select the rptdesign file you wish to run, right click to get the popup menu and select the __Report and Run Report__ menu item.
@@ -154,7 +154,7 @@ h3(. Run Premises Reports from a project in the Workspace
 
 h3(. Accessing Reports from a Browser
 
-Reports can also be launched from a browser with a parameterized URL that specifies the hostname of the running BIRT Web Server, the report file path and the premises document to use as a datasource.  This is a convienent way to use reports loaded from report packs.
+Reports can also be launched from a browser with a parameterized URL that specifies the hostname of the running BIRT Web Server, the report file path and the premises document to use as a DataSource.  This is a convenient way to use reports loaded from report packs.
 
 The easiest way to run these reports is to create a HTML document that embeds these parameterized URLs. The following section is an example of how to do this. [4]
 
