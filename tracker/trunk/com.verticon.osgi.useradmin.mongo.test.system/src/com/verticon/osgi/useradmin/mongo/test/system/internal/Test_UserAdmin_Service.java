@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 import java.util.Dictionary;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 
 import org.junit.After;
@@ -22,8 +23,12 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
+import com.google.common.collect.Iterables;
+import com.verticon.osgi.useradmin.authenticator.AuthenticatorUtils;
+import com.verticon.osgi.useradmin.authenticator.UserAdminProvider;
+
 /**
- * Run TrackerStore Test System to populate MongoDB
+ * Run TrackerStore Test System to populate Utils
  * 
  * @author jconlon
  * 
@@ -85,11 +90,11 @@ public class Test_UserAdmin_Service {
 	 */
 
 	static UserAdmin userAdmin;
+	static UserAdminProvider userAdminProvider;
 
-
-	public void setUserAdminService(UserAdmin userAdminService) {
-		logger.debug(bundleMarker, "DS injecting the userAdmin");
-		Test_UserAdmin_Service.userAdmin = userAdminService;
+	public void setUserAdminProviderService(UserAdminProvider userAdminProvider) {
+		logger.debug(bundleMarker, "DS injecting the userAdminProvider");
+		Test_UserAdmin_Service.userAdminProvider = userAdminProvider;
 	}
 
 	/**
@@ -118,15 +123,37 @@ public class Test_UserAdmin_Service {
 		startUpGate.await();// wait for startUp to finish
 		// System.out.println(this + ": startup and setUp finished.");
 
-		// Need to wait to set up or we can get ahead of MongoDB w
-		// TimeUnit.SECONDS.sleep(1);
+		// Need to wait to set up or we can get ahead of Utils w
+		// TimeUnit.SECONDS.sleep(10);
+		if (userAdminProvider.getURIs().iterator().hasNext()) {
+			String uri = userAdminProvider.getURIs().iterator().next();
+			userAdmin = userAdminProvider.get(uri);
+		}
 	}
 
 	@After
 	public void tearDown() throws Exception {
 	}
 
+	@Test
+	public final void test_UserAdminProvider() {
+		assertThat("UserAdminProvider must not be null.", userAdminProvider,
+				is(notNullValue()));
+		assertThat("UserAdminProvider getURIs must not be null.",
+				userAdminProvider.getURIs(), is(notNullValue()));
 
+		assertThat("UserAdminProvider getURIs must be one.",
+				Iterables.size(userAdminProvider.getURIs()), is(1));
+
+		String uri = Iterables.get(userAdminProvider.getURIs(), 0);
+		assertThat("UserAdminProvider uri must not be null.", uri,
+				is(notNullValue()));
+		assertThat("UserAdminProvider uri must be localhost:8888/tracker", uri,
+				is("localhost:27017/test_useradmin"));
+
+		assertThat("UserAdmin must not be null.", userAdmin, is(notNullValue()));
+
+	}
 
 	@Test
 	public final void test_Cleanup() {
@@ -419,6 +446,16 @@ public class Test_UserAdmin_Service {
 
 		assertThat("Peter is in eastfarm", checkUsers(eastFarm, peter),
 				is(true));
+
+	}
+
+	@Test
+	public final void test_AuthenticatorUtils() {
+		User peter = (User) userAdmin.getRole(PETER);
+
+		Set<String> associates = AuthenticatorUtils.getAssociates(userAdmin,
+				userAdmin.getAuthorization(peter));
+		assertThat("Peter has associates", associates.size(), is(5));
 
 	}
 

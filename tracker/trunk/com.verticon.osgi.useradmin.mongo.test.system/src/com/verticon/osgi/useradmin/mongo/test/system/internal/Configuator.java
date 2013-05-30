@@ -35,30 +35,10 @@ public class Configuator {//implements MongoDBCollectionProvider {
 				.createFactoryConfiguration(FACTORY_PID);
 		Dictionary<String, Object> props = new Hashtable<String, Object>();
 		props.put("com.verticon.osgi.useradmin.test", "testOne");
-		props.put("collection", "useradmin");
+		props.put("dbname", "test_useradmin");
 
 		config.update(props);
 	}
-
-
-//	@Override
-//	public DBCollection getCollection() {
-//		DBCollection result = null;
-//		Mongo client;
-//		try {
-//			client = new Mongo();
-//			DB db = client.getDB("ua_repo");
-//			result = db.getCollection("useradmin");
-//		} catch (UnknownHostException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (MongoException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//
-//		return result;
-//	}
 
 
 }
