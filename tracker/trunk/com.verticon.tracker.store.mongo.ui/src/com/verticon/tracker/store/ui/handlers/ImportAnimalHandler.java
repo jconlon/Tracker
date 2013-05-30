@@ -14,9 +14,9 @@ public class ImportAnimalHandler extends AbstractHandler {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		ImportAnimalWizard wizard = new ImportAnimalWizard();
-		wizard.init(
-				HandlerUtil.getActiveWorkbenchWindowChecked(event).getWorkbench(),  
-				(IStructuredSelection)HandlerUtil.getActiveMenuSelection(event));
+		wizard.init(HandlerUtil.getActiveWorkbenchWindowChecked(event)
+				.getWorkbench(), (IStructuredSelection) HandlerUtil
+				.getActiveMenuSelection(event));
 		WizardDialog dialog = new WizardDialog(
 				HandlerUtil.getActiveShellChecked(event), wizard);
 		dialog.open();

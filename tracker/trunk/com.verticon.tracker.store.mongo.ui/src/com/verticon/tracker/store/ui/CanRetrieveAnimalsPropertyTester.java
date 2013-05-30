@@ -14,7 +14,6 @@ import org.eclipse.core.expressions.PropertyTester;
 
 public class CanRetrieveAnimalsPropertyTester extends PropertyTester {
 
-
 	/**
 	 * 
 	 * Tests if user is an authenticated user.
@@ -44,7 +43,7 @@ public class CanRetrieveAnimalsPropertyTester extends PropertyTester {
 			Object expectedValue) {
 
 		return Activator.getDefault().isAuthenticatedUser();
-		
+
 	}
 
 }

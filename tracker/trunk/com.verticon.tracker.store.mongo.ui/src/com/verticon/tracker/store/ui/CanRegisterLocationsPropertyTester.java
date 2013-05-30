@@ -16,7 +16,6 @@ import org.eclipse.core.expressions.PropertyTester;
 
 public class CanRegisterLocationsPropertyTester extends PropertyTester {
 
-	
 	private static final String CAN_REGISTER_PREMISES = "canRegisterPremises";
 
 	/**
@@ -49,9 +48,8 @@ public class CanRegisterLocationsPropertyTester extends PropertyTester {
 			Object expectedValue) {
 		boolean result = false;
 		if (CAN_REGISTER_PREMISES.equals(property)) {
-			result = Activator.getDefault().hasRole(
-TRACKER_STORE_REGISTRANT)
-					&& Activator.getDefault().hasTrackerStoreService(null);
+			result = Activator.getDefault().hasRole(TRACKER_STORE_REGISTRANT)
+					&& Activator.getDefault().hasTrackerStoreService();
 		}
 		return result;
 	}

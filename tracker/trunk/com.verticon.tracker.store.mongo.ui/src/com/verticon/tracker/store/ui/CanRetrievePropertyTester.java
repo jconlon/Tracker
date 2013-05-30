@@ -14,7 +14,6 @@ import org.eclipse.core.expressions.PropertyTester;
 
 public class CanRetrievePropertyTester extends PropertyTester {
 
-
 	private static final String CAN_RETRIEVE_ANIMALS = "canRetrieveAnimals";
 	private static final String CAN_RETRIEVE_PREMISES = "canRetrievePremises";
 

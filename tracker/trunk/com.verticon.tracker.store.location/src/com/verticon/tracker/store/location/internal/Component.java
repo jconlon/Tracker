@@ -14,8 +14,10 @@ import org.slf4j.MarkerFactory;
 
 import com.verticon.location.Area;
 import com.verticon.location.service.ILocationServiceProvider;
+import com.verticon.osgi.useradmin.authenticator.Authenticator;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.store.ITrackerStore;
+import com.verticon.tracker.store.ITrackerUpdate;
 
 /**
  * LocationServiceProvider that uses one or more ITrackerStore services as back-end 
@@ -42,13 +44,13 @@ public class Component implements ILocationServiceProvider {
 	 * Entries injected by Declarative Services.
 	 */
 	private final List<ITrackerStore> trackerStores = new CopyOnWriteArrayList<ITrackerStore>();
-	
+	private Authenticator authenticator;
 
-	public void activate() {
+	void activate() {
 		logger.debug(bundleMarker, "Activated", this);
 	}
 
-	public void deactivate() {
+	void deactivate() {
 		logger.debug(bundleMarker, "Deactivated", this);
 	}
 
@@ -56,7 +58,7 @@ public class Component implements ILocationServiceProvider {
 	 * @param trackerStore
 	 *            the trackerStore to set
 	 */
-	public void setTrackerStore(ITrackerStore trackerStore) {
+	void setTrackerStore(ITrackerStore trackerStore) {
 		trackerStores.add( trackerStore);
 	}
 
@@ -64,8 +66,16 @@ public class Component implements ILocationServiceProvider {
 	 * @param trackerStore
 	 *            the trackerStore to unset
 	 */
-	public void unsetTrackerStore(ITrackerStore trackerStore) {
+	void unsetTrackerStore(ITrackerUpdate trackerStore) {
 		trackerStores.remove( trackerStore);
+	}
+
+	void setAuthenticator(Authenticator authenticator) {
+		this.authenticator = authenticator;
+	}
+
+	void unsetAuthenticator(Authenticator authenticator) {
+		this.authenticator = null;
 	}
 
 	@Override
@@ -157,39 +167,49 @@ public class Component implements ILocationServiceProvider {
 	 */
 	@Override
 	public Map<String, String> getAssociates(String id) {
-		throw new UnsupportedOperationException();
+		Set<String> associatesURIs = new HashSet<String>(
+				authenticator.associates());
+		ITrackerStore trackerStore = getTrackerStore();
+		if (trackerStore != null) {
+			return trackerStore.getPremisesNames(associatesURIs);
+		}
+		return null;
 	}
 	
 	
 	@Override
 	public boolean canHandle(Object target) {
-		if(target instanceof String){
+		if (Map.class.equals(target)) {
+			return !trackerStores.isEmpty();
+		} else if (target instanceof String) {
 			return !trackerStores.isEmpty();
 		}
 		return false;
 	}
 	
 	private Premises retrievePremises(String targetUri) throws IOException{
-		Premises result = null;
-		for (ITrackerStore trackerStore : trackerStores) {
-			result = trackerStore.retrievePremises(targetUri);
-			if(result!=null){
-				break;
-			}
+		ITrackerStore trackerStore = getTrackerStore();
+		if (trackerStore != null) {
+			return trackerStore.retrievePremises(targetUri);
 		}
-		
-		return result;
+		return null;
 	}
 	
 	private Premises retrievePremises(ITrackerStore.LongLatPoint point) throws IOException{
-		Premises result = null;
+		ITrackerStore trackerStore = getTrackerStore();
+		if (trackerStore != null) {
+			return trackerStore.retrievePremises(point);
+		}
+		return null;
+	}
+
+	private ITrackerStore getTrackerStore() {
 		for (ITrackerStore trackerStore : trackerStores) {
-			result = trackerStore.retrievePremises(point);
-			if(result!=null){
-				break;
+			if (trackerStore.uri().equals(authenticator.uri())) {
+				return trackerStore;
 			}
 		}
-		
-		return result;
+		return null;
 	}
+
 }

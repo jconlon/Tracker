@@ -10,16 +10,9 @@
  *******************************************************************************/
 package com.verticon.tracker.store.ui;
 
-import static com.google.common.collect.Lists.newArrayList;
-
-import java.util.Collections;
-import java.util.List;
-
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
-import org.osgi.framework.InvalidSyntaxException;
-import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
@@ -38,7 +31,7 @@ public class Activator extends AbstractUIPlugin {
 	/**
 	 * slf4j Marker to keep track of bundle
 	 */
-    public static final Marker bundleMarker = MarkerFactory
+	public static final Marker bundleMarker = MarkerFactory
 			.getMarker(PLUGIN_ID);
 
 	static {
@@ -47,14 +40,10 @@ public class Activator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static Activator plugin;
-	
-
 
 	private ServiceTracker<Authenticator, Authenticator> authenticatorTracker;
 
-
-
-	private BundleContext context;
+	private ServiceTracker<ITrackerStore, ITrackerStore> storeTracker;
 
 	/**
 	 * The constructor
@@ -73,11 +62,13 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		this.context = context;
 		authenticatorTracker = new ServiceTracker<Authenticator, Authenticator>(
-				context,
-				Authenticator.class.getName(), null);
+				context, Authenticator.class.getName(), null);
 		authenticatorTracker.open();
+		storeTracker = new ServiceTracker<ITrackerStore, ITrackerStore>(
+				context, ITrackerStore.class.getName(), null);
+		storeTracker.open();
+
 	}
 
 	/*
@@ -91,7 +82,7 @@ public class Activator extends AbstractUIPlugin {
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
-		this.context = null;
+		authenticatorTracker.close();
 	}
 
 	/**
@@ -115,49 +106,21 @@ public class Activator extends AbstractUIPlugin {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
 
-	/**
-	 * 
-	 * @return true if there is at least one service available to the user
-	 */
-	public boolean hasTrackerStoreService(String uri){
-		boolean result = false;
-		try {
-			result = getTrackerStoreServices(uri).length!=0;
-		} catch (InvalidSyntaxException e) {
-			
+	public ITrackerStore getTrackerStoreService() {
+		ITrackerStore result = null;
+		String userAdminURI = getUserAdminURI();
+		if (!Strings.isNullOrEmpty(userAdminURI)) {
+			for (ITrackerStore store : storeTracker
+					.getServices(new ITrackerStore[0])) {
+				if (userAdminURI.equals(store.uri())) {
+					result = store;
+					break;
+				}
+			}
 		}
 		return result;
-	}
 
-	/**
-	 * 
-	 * @param uri value for created filter property tracker.premises.uri
-	 * @return ITrackerStore services 
-	 * @throws InvalidSyntaxException
-	 */
-	public ITrackerStore[] getTrackerStoreServices(String uri) throws InvalidSyntaxException {
-		String filter = null;
-		List<ITrackerStore> result = null;
-		if(!Strings.isNullOrEmpty(uri)){
-			filter = new StringBuilder().append("(tracker.premises.uri=")
-				.append(uri).append(')').toString();
-		}
-		// Register directly with the service
-		ServiceReference<?>[] references = context.getServiceReferences(
-				ITrackerStore.class.getName(), filter);
-
-		if (references != null){
-			result = newArrayList();
-			for (ServiceReference<?> serviceReference : references) {
-				
-				result.add((ITrackerStore) context.getService(serviceReference));
-			}
-		}else{
-			result = Collections.emptyList();
-		}
-		return result.toArray(new ITrackerStore[result.size()]);
 	}
-	
 
 	public boolean hasRole(String name) {
 		return authenticatorTracker.getService() != null ? authenticatorTracker
@@ -169,53 +132,16 @@ public class Activator extends AbstractUIPlugin {
 				.getService().isAuthenticatedUser() : false;
 	}
 
-	// /**
-	// *
-	// * @return true if there is at least one service available to the admin
-	// user
-	// */
-	// public boolean hasTrackerStoreAdminService(){
-	// boolean result = false;
-	// try {
-	// result = getTrackerStoreAdminServices().length!=0;
-	// } catch (InvalidSyntaxException e) {
-	//
-	// }
-	// return result;
-	// }
-	//
-	//
-	// /**
-	// * @deprecated use
-	// * @return ITrackerStoreAdmin
-	// */
-	// @Deprecated
-	// public ITrackerStoreAdmin getLoader() {
-	// // Register directly with the service
-	// ServiceReference<ITrackerStoreAdmin> reference = context
-	// .getServiceReference(ITrackerStoreAdmin.class);
-	//
-	// return reference!=null?context.getService(reference):null;
-	// }
-	//
-	// public ITrackerStoreAdmin[] getTrackerStoreAdminServices() throws
-	// InvalidSyntaxException {
-	// List<ITrackerStoreAdmin> result = null;
-	// ServiceReference<?>[] references = context.getServiceReferences(
-	// ITrackerStoreAdmin.class.getName(), null);
-	// if (references != null){
-	// result = newArrayList();
-	// ITrackerStoreAdmin trackerStoreAdmin = null;
-	// for (ServiceReference<?> serviceReference : references) {
-	// trackerStoreAdmin = (ITrackerStoreAdmin)
-	// context.getService(serviceReference);
-	// if(trackerStoreAdmin.isCurrentUserAdmin()){
-	// result.add(trackerStoreAdmin);
-	// }
-	// }
-	// }else{
-	// result = Collections.emptyList();
-	// }
-	// return result.toArray(new ITrackerStoreAdmin[result.size()]);
-	// }
+	public String getUserAdminURI() {
+		return authenticatorTracker.getService().uri();
+	}
+
+	/**
+	 * 
+	 * @return true if there is at least one service available to the admin user
+	 */
+	public boolean hasTrackerStoreService() {
+		return getTrackerStoreService() != null;
+	}
+
 }
