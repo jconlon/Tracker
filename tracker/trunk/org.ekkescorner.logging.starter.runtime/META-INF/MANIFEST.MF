@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Logging Starter Runtime
 Bundle-SymbolicName: org.ekkescorner.logging.starter.runtime
-Bundle-Version: 0.8.0.qualifier
+Bundle-Version: 0.9.0.qualifier
 Bundle-Activator: org.ekkescorner.logging.starter.runtime.internal.Activator
 Bundle-Vendor: Ekkehard Gentz ekkescorner.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
