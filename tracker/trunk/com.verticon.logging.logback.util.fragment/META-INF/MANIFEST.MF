@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Logback Fragment
+Bundle-SymbolicName: com.verticon.logging.logback.util.fragment
+Bundle-Version: 1.0.0.qualifier
+Fragment-Host: ch.qos.logback.classic;bundle-version="1.0.11"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: org.ekkescorner.logging.core,
+ org.slf4j;version="1.7.5"
