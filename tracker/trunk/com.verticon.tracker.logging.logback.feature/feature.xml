@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.logging.logback"
       label="Logback Logging Service"
-      version="0.3.1.qualifier"
+      version="0.4.0.qualifier"
       provider-name="Verticon, Inc."
       plugin="com.verticon.tracker.logging.logback">
 
@@ -108,28 +108,35 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
          unpack="false"/>
 
    <plugin
-         id="org.slf4j.api"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.slf4j.jcl"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.slf4j.log4j"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="com.verticon.tracker.logging.logback"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="jcl.over.slf4j"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="log4j.over.slf4j"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="slf4j.api"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="jul.to.slf4j"
          download-size="0"
          install-size="0"
          version="0.0.0"
