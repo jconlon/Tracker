@@ -10,6 +10,7 @@
  *******************************************************************************/
 package com.verticon.location.service.internal;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,7 +37,7 @@ public class Component implements ILocationService {
 	 */
 	private final Logger logger = LoggerFactory.getLogger(Component.class);
 
-	private List<ILocationServiceProvider> serviceProviders = new CopyOnWriteArrayList<ILocationServiceProvider>();
+	private final List<ILocationServiceProvider> serviceProviders = new CopyOnWriteArrayList<ILocationServiceProvider>();
 
 	public void activate() {
 		logger.debug(bundleMarker, "Activated");
@@ -125,11 +126,10 @@ public class Component implements ILocationService {
 	public Map<String, String> getAssociates(String id) {
 		Map<String,String> result = null;
 		if (!serviceProviders.isEmpty()) {
+			result = new HashMap<String, String>();
 			for (ILocationServiceProvider iLocationServiceProvider : serviceProviders) {
 				if (iLocationServiceProvider.canHandle(Map.class)) {
-					result = iLocationServiceProvider.getAssociates(id);
-					if (result != null)
-						break;
+					result.putAll(iLocationServiceProvider.getAssociates(id));
 				}
 			}
 		}
