@@ -7,7 +7,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Service-Component: OSGI-INF/*.xml
 Export-Package: com.verticon.mongo
 Import-Package: com.google.common.base;version="11.0.1",
- com.mongodb,
+ com.mongodb;version="2.11.1.RELEASE",
  org.osgi.service.monitor;version="1.0.0",
  org.slf4j;version="1.5.11"
 Bundle-ActivationPolicy: lazy
