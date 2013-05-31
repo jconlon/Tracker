@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.8"?>
 
-<target name="eclipse38-platform-sdk-0_1_0" sequenceNumber="138">
+<target name="eclipse38-platform-sdk-0_1_0" sequenceNumber="141">
 <locations>
 <location path="/opt/mongo-2.11.1" type="Directory"/>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
@@ -320,5 +320,8 @@
 </location>
 <location path="/opt/Eclipse/mdt-ocl-CoreSDK-core-4.0.1/eclipse" type="Directory"/>
 <location path="/opt/ApacheWebConsole" type="Directory"/>
+<location path="/opt/Eclipse/metrics/eclipse" type="Directory"/>
+<location path="/opt/slf4j-1.7.5" type="Directory"/>
+<location path="/opt/logback-1.0.11" type="Directory"/>
 </locations>
 </target>
