@@ -63,7 +63,8 @@ public class AnimalFinder {
 		DBObject animalDbObject = coll.findOne(q);
 
 		if (animalDbObject == null) {
-			throw new IllegalStateException("Tag recorded but animal is not!");
+			return null;// throw new
+						// IllegalStateException("Tag recorded but animal is not!");
 		}
 
 		// Transform the animal

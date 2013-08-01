@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" configuration-policy="require" enabled="true" immediate="true" name="com.verticon.tracker.store.mongodb">
-   <implementation class="com.verticon.tracker.store.mongodb.internal.Component"/>  
+   <implementation class="com.verticon.tracker.store.mongodb.internal.MongoDBTrackerStore"/>  
   <service>
       <provide interface="com.verticon.tracker.store.ITrackerStore"/>
       <provide interface="org.osgi.service.wireadmin.Consumer"/>
@@ -8,6 +8,7 @@
       <provide interface="com.verticon.mongo.IMongoClientProvider"/>
       <provide interface="com.verticon.tracker.store.ITrackerFind"/>
       <provide interface="com.verticon.tracker.store.ITrackerUpdate"/>
+      <provide interface="org.osgi.service.wireadmin.Producer"/>
    </service>
   <reference bind="setFunctionProvider" cardinality="1..1" interface="com.verticon.mongo.emf.transform.IFunctionProvider" name="IFunctionProvider" policy="static"/>
   <reference bind="setMonitorListener" cardinality="1..1" interface="org.osgi.service.monitor.MonitorListener" name="MonitorListener" policy="static" unbind="unsetMonitorListener"/>

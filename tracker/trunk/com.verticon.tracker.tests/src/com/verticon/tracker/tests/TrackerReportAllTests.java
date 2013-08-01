@@ -61,6 +61,7 @@ public class TrackerReportAllTests extends TestSuite {
 		suite.addTestSuite(CalendarDateDurationTest.class);
 		suite.addTestSuite(CheckEmailTest.class);
 		suite.addTestSuite(CheckISO7064Mod37_36Test.class);
+		suite.addTestSuite(QueryTest.class);
 				
 		return suite;
 	}

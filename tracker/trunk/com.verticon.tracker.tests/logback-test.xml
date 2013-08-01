@@ -99,16 +99,13 @@
   </logger>
   
    <logger name="com.verticon.tracker.store.mongodb">
-    <level value="ERROR"/>
+    <level value="DEBUG"/>
   </logger> 
   
   <logger name="com.verticon.tracker.store.mongodb.test.system">
-    <level value="INFO"/>
+    <level value="DEBUG"/>
   </logger>
       
-   <logger name="com.verticon.tracker.store.mongo.test.system.internal">
-    <level value="INFO"/>
-  </logger>
    <logger name="com.verticon.tracker.store.mongo.internal.MongoStatusMonitor">
     <level value="INFO"/>
   </logger>   
@@ -228,7 +225,7 @@
   </logger>
   
   <logger name="com.verticon.tracker.irouter.wireadmin">
-    <level value="ERROR"/>
+    <level value="DEBUG"/>
   </logger>
   
   <logger name="com.verticon.tracker.irouter.gateway">
@@ -274,11 +271,6 @@
   <logger name="com.verticon.mongo">
     <level value="INFO"/>
   </logger>
- 
-  <logger name="com.verticon.tracker.store.mongo.test.system.internal">
-    <level value="INFO"/>
-    <appender-ref ref="STDOUT"/>
-  </logger>
   
   
   <logger name="com.verticon.mongo.emf.transform.internal">
@@ -290,22 +282,36 @@
     <level value="INFO"/>
   </logger>
   
+  <logger name="com.verticon.tracker.store.mongodb">
+    <level value="DEBUG"/>
+  </logger>
   
+  <logger name="com.verticon.tracker.irouter.mqtt">
+    <level value="DEBUG"/>
+  </logger>
   
-   <logger name="com.verticon.osgi.useradmin.mongo.internal.UserAdminImpl">
+  <logger name="com.verticon.tracker.store.mqtt">
+    <level value="DEBUG"/>
+  </logger>
+  
+  <logger name="com.verticon.osgi.useradmin.mongo.internal.UserAdminImpl">
     <level value="INFO"/>
   </logger>
   
   <!-- Logger for metrics reporting -->
   <logger name="com.verticon.tracker.store.mongodb.test.system.Metrics">
-    <level value="INFO"/>
+    <level value="WARN"/>
     <appender-ref ref="METRICS"/>
   </logger>
   
   <logger name="com.verticon.tracker.store.mongodb.test.system.Configurator">
     <level value="INFO"/>
-    <appender-ref ref="METRICS"/>
   </logger>
+  
+  <logger name="com.verticon.tracker.store.mongodb.internal.UpdateAndFind">
+    <level value="DEBUG"/>
+  </logger>
+  
   
   <logger name="aggregated" level="INFO">
     <appender-ref ref="AGGREGATED"/>

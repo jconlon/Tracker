@@ -2,11 +2,11 @@
 <premises:Premises xmi:version="2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:premises="http://www.verticon.com/tracker/0.4.2/premises" uri="jc:www.verticon" name="Jack Condor">
   <animals xmi:type="premises:Swine" id="abcd">
     <tags id="1234567890">
-      <events xmi:type="premises:AnimalMissing" dateTime="2013-05-28T21:05:12.586-0500" pid="jc:www.verticon"/>
-      <events xmi:type="premises:Position" dateTime="2013-05-28T21:05:12.586-0500" pid="jc:www.verticon"/>
+      <events xmi:type="premises:AnimalMissing" dateTime="2013-07-31T19:15:42.780-0500" pid="jc:www.verticon"/>
+      <events xmi:type="premises:Position" dateTime="2013-07-31T19:15:42.780-0500" pid="jc:www.verticon"/>
     </tags>
     <tags id="abcd">
-      <events xmi:type="premises:Died" dateTime="2013-05-28T21:05:12.712-0500" pid="jc:www.verticon"/>
+      <events xmi:type="premises:Died" dateTime="2013-07-31T19:15:42.880-0500" pid="jc:www.verticon"/>
     </tags>
   </animals>
   <location name="bobos" description="Test location" street="77 Sunset Strip" city="Hollywood" state="CA" postalCode="54665" longitude="-77.037852" latitude="38.898556" altitude="0.0"/>

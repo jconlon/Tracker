@@ -1,17 +1,21 @@
 package com.verticon.tracker.store.mongodb.internal;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.verticon.osgi.useradmin.authenticator.Authenticator.TRACKER_STORE_REGISTRANT;
+import static com.verticon.tracker.store.TrackerStoreUtils.validateObject;
 import static com.verticon.tracker.store.mongodb.internal.StatusAndConfigVariables.getDBName;
 import static com.verticon.tracker.store.mongodb.internal.StatusAndConfigVariables.getPassword;
 import static com.verticon.tracker.store.mongodb.internal.StatusAndConfigVariables.getServerNames;
 import static com.verticon.tracker.store.mongodb.internal.StatusAndConfigVariables.getUserName;
-import static com.verticon.tracker.store.mongodb.internal.Utils.validateObject;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -20,8 +24,11 @@ import org.osgi.service.monitor.MonitorListener;
 import org.osgi.service.monitor.Monitorable;
 import org.osgi.service.monitor.StatusVariable;
 import org.osgi.service.wireadmin.Consumer;
+import org.osgi.service.wireadmin.Envelope;
+import org.osgi.service.wireadmin.Producer;
 import org.osgi.service.wireadmin.Wire;
 
+import com.google.common.collect.Iterables;
 import com.mongodb.MongoClient;
 import com.verticon.mongo.IMongoClientProvider;
 import com.verticon.mongo.MongoClientBuilder;
@@ -32,7 +39,9 @@ import com.verticon.tracker.Animal;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.store.ITrackerStore;
 import com.verticon.tracker.store.IUpdateStats;
-import com.verticon.tracker.store.mongodb.internal.consumer.MongoDBConsumer;
+import com.verticon.tracker.store.mongodb.internal.irouter.MongoDBConsumer;
+import com.verticon.tracker.store.mongodb.internal.irouter.MongoDBProducer;
+import com.verticon.tracker.store.mongodb.internal.irouter.ProductHandler;
 
 /**
  * TrackerStore with a MongoDB backend. Depends on an Authenticator,
@@ -41,17 +50,19 @@ import com.verticon.tracker.store.mongodb.internal.consumer.MongoDBConsumer;
  * @author jconlon
  * 
  */
-public class Component implements IMongoClientProvider, ITrackerStore,
-		Consumer, Monitorable {
+public class MongoDBTrackerStore implements IMongoClientProvider, ITrackerStore,
+		Consumer, Monitorable, Producer {
 
 	private MongoClientProvider mongoClientProvider;
 	private final Monitor monitor = new Monitor();
-	private final UpdateAndFind trackerUpdate = new UpdateAndFind();
-
-
+	private final UpdateAndFind trackerUpdate = new UpdateAndFind(this);
+	private final LinkedBlockingQueue<Envelope> queryQueue = new LinkedBlockingQueue<Envelope>();
+	private final MongoDBProducer mongoDBProducer = new MongoDBProducer(
+			queryQueue, trackerUpdate, monitor);
 	private final MongoDBConsumer mongoDBConsumer = new MongoDBConsumer(
-			trackerUpdate, monitor);
+			monitor, new ProductHandler(monitor, trackerUpdate, queryQueue));
 	private Authenticator authenticator;
+	private ExecutorService exec = null;
 
 
 	@Override
@@ -235,9 +246,15 @@ public class Component implements IMongoClientProvider, ITrackerStore,
 				.dbName(getDBName(config)).serverNames(getServerNames(config))
 				.userName(getUserName(config)).password(getPassword(config))
 				.build();
+		Iterable<String> scopes = StatusAndConfigVariables
+				.getProducerScopes(config);
+		mongoDBProducer.setScope(Iterables.get(scopes, 0));
 		trackerUpdate.setMongoClientProvider(mongoClientProvider);
 		trackerUpdate.activate();
 		mongoDBConsumer.activate(config);
+		exec = Executors.newSingleThreadExecutor();
+		exec.submit(mongoDBProducer);
+
 	}
 
 	void deactivate() {
@@ -245,6 +262,9 @@ public class Component implements IMongoClientProvider, ITrackerStore,
 		trackerUpdate.unsetMongoClientProvider(mongoClientProvider);
 		trackerUpdate.deactivate();
 		mongoDBConsumer.deactivate();
+		exec.shutdownNow();
+		exec = null;
+		mongoDBProducer.setScope(null);
 	}
 
 	/**
@@ -320,7 +340,7 @@ public class Component implements IMongoClientProvider, ITrackerStore,
 	 * Members of the <B>TrackerRegisterPremises</B> group can register
 	 * premises.
 	 */
-	private void checkForRegistratonMembership() {
+	void checkForRegistratonMembership() {
 		checkAuthenticated();
 		if (!authenticator.hasRole(TRACKER_STORE_REGISTRANT)) {
 			throw new SecurityException(
@@ -353,6 +373,35 @@ public class Component implements IMongoClientProvider, ITrackerStore,
 	@Override
 	public Map<String, String> getPremisesNames(Set<String> uris) {
 		return trackerUpdate.getPremisesNames(uris);
+	}
+
+	@Override
+	public String query(String query) {
+		checkNotNull(query, "Query argument must not be null.");
+		checkArgument(query.startsWith("{aggregate"),
+				"Only aggregation commands are supported.");
+		checkAuthenticated();
+		return trackerUpdate.query(query);
+	}
+
+	@Override
+	public Object polled(Wire wire) {
+		return mongoDBProducer.polled(wire);
+	}
+
+	@Override
+	public void consumersConnected(Wire[] wires) {
+		mongoDBProducer.consumersConnected(wires);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "MongoDBTrackerStore [uri()=" + uri() + "]";
 	}
 
 }

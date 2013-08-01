@@ -10,9 +10,15 @@
  *******************************************************************************/
 package com.verticon.tracker.store.mongodb.internal;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import com.google.common.base.Splitter;
+import com.google.common.collect.Iterables;
 
 /**
  * StatusAndConfigVar
@@ -53,8 +59,11 @@ public enum StatusAndConfigVariables {
 	STATUS(null, "consumer.Connection_Status", false,
 			"Status of the Utils connection.", null),
 	//
-	LAST_PRODUCT_TIME(null, "consumer.Last_Product", false,
+	LAST_CONSUMED_TIME(null, "consumer.Last_Consumed", false,
 			"Last time an iRouter product was consumed.", null),
+	//
+	LAST_PRODUCED_TIME(null, "producer.Last_Produced", false,
+			"Last time an iRouter product was produced.", null),
 	//
 	LAST_RECORD_TIME(null, "consumer.Last_Record", false,
 			"Last time animals were recorded.", null),
@@ -75,15 +84,15 @@ public enum StatusAndConfigVariables {
 			"Total number of iRouter products consumed by this component.",
 			null),
 	//
+	PRODUCTS_PRODUCED(null, "producer.Products_Produced", false,
+			"Total number of iRouter products produced by this component.",
+			null),
+	//
 	PRODUCERS_CONNECTED(null, "consumer.Producers_Connected", true,
 			"Number of Producers connected to this component.", null),
 	//
-	CONNECTION_URI(
-			"connection.uri",
-			"consumer.Connection_URI",
-			false,
-			"Host and port of the MongoDB service. (This optional attribute has no functionality other than to visualize the connection to a MongoDB Client Provider.)",
-			null),
+	CONSUMERS_CONNECTED(null, "producer.Consumers_Connected", true,
+			"Number of Consumers connected to this component.", null),
 	//
 	EXCEPTIONS(
 			null,
@@ -93,7 +102,10 @@ public enum StatusAndConfigVariables {
 			null),
 	//
 	PREMISES_REGISTERED(null, "consumer.Premises_Registered", false,
-			"Total number of premises registered.", null);
+			"Total number of premises registered.", null),
+
+	PRODUCER_SCOPES("wireadmin.producer.scope", null, false,
+			"Producer Scope names", "agriculture.premises.response");
 	//
 	public final String configID;
 	public final String statusVarID;
@@ -176,6 +188,16 @@ public enum StatusAndConfigVariables {
 				DEFAULT_MONGODB_DBNAME);
 	}
 
+	public static Iterable<String> getProducerScopes(
+			Map<String, Object> properties) {
+		String[] scopes = getPropertyArray(properties,
+				PRODUCER_SCOPES.configID, PRODUCER_SCOPES.defaultValue);
+		if (scopes == null | scopes.length == 0) {
+			throw new NullPointerException("No Producer Scopes configured.");
+		}
+		return Arrays.asList(scopes);
+	}
+
 	/**
 	 * Returns the value for the given key from the given properties.
 	 * 
@@ -200,6 +222,23 @@ public enum StatusAndConfigVariables {
 			Object value = properties.get(key);
 			if (value != null && (value instanceof String)) {
 				result = (String) value;
+			}
+		}
+		return result;
+	}
+
+	private static String[] getPropertyArray(Map<String, Object> properties,
+			String key, String defaultValue) {
+		String[] result = null;
+		if (!isNullOrEmpty(defaultValue)) {
+			result = Iterables.toArray(Splitter.on(',').split(defaultValue),
+					String.class);
+		}
+
+		if (properties != null) {
+			Object value = properties.get(key);
+			if (value != null && (value instanceof String[])) {
+				result = (String[]) value;
 			}
 		}
 		return result;

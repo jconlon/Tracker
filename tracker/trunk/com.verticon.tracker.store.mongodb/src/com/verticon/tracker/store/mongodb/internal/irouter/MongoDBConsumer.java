@@ -1,4 +1,6 @@
-package com.verticon.tracker.store.mongodb.internal.consumer;
+package com.verticon.tracker.store.mongodb.internal.irouter;
+
+import static com.verticon.tracker.store.mongodb.internal.Utils.bundleMarker;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -9,30 +11,19 @@ import org.osgi.service.monitor.StatusVariable;
 import org.osgi.service.wireadmin.Consumer;
 import org.osgi.service.wireadmin.Envelope;
 import org.osgi.service.wireadmin.Wire;
-import org.osgi.service.wireadmin.WireConstants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.Marker;
-import org.slf4j.MarkerFactory;
 
 import com.verticon.osgi.useradmin.authenticator.Authenticator;
 import com.verticon.tracker.Animal;
+import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.store.mongodb.internal.Monitor;
 import com.verticon.tracker.store.mongodb.internal.StatusAndConfigVariables;
-import com.verticon.tracker.store.mongodb.internal.UpdateAndFind;
 
 public class MongoDBConsumer implements Monitorable, Consumer {
 
-	private static final String PLUGIN_ID = "com.verticon.tracker.store.mongodb.consumer";
-	/**
-	 * slf4j Marker to keep track of bundle
-	 */
-	static final Marker bundleMarker = MarkerFactory.getMarker(PLUGIN_ID);
 
-	static {
-		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
-	}
 
 	/**
 	 * slf4j Logger
@@ -44,11 +35,12 @@ public class MongoDBConsumer implements Monitorable, Consumer {
 	private final ProductHandler productHandler;
 	
 	
-	public MongoDBConsumer(UpdateAndFind trackerUpdate, Monitor monitor) {
+	public MongoDBConsumer(Monitor monitor,
+			ProductHandler productHandler) {
 		super();
 
 		this.monitor = monitor;
-		this.productHandler = new ProductHandler(monitor, trackerUpdate);
+		this.productHandler = productHandler;
 	}
 
 	@Override
@@ -85,18 +77,20 @@ public class MongoDBConsumer implements Monitorable, Consumer {
 			Envelope envelope = (Envelope) in;
 			logger.debug(
 					bundleMarker,
-					"Wire scope={} pid={} updated with object id={}, value={}",
+					"Received envelope on wire scope={}, with envelope id={}, value type ={}",
 					new Object[] {
 							Arrays.toString(wire.getScope()),
-							wire.getProperties().get(
-									WireConstants.WIREADMIN_PID),
-							envelope.getIdentification(), envelope.getValue() });
+							envelope.getIdentification(),
+							envelope.getValue().getClass().getName() });
 			if (envelope.getValue() != null) {
 				if (envelope.getValue() instanceof Tag) {
 					productHandler.handle((Tag) envelope.getValue());
 				} else if (envelope.getValue() instanceof Animal) {
 					Animal animal = (Animal) envelope.getValue();
 					productHandler.handle(animal);
+				} else if (envelope.getValue() instanceof Premises) {
+					Premises premises = (Premises) envelope.getValue();
+					productHandler.register(premises, null, null);
 				} else {
 					productHandler.handle(envelope);
 				}

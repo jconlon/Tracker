@@ -98,6 +98,8 @@ public interface ITrackerFind {
 	 */
 	public abstract Map<String, String> getPremisesNames(Set<String> uris);
 
+	String query(String query) throws IOException;
+
 	class LongLatPoint {
 		final String coordinates;
 		final String longLat;
@@ -116,10 +118,6 @@ public interface ITrackerFind {
 			double lat = Double.parseDouble(s[1]);
 			this.array = new double[] { lon, lat };
 
-		}
-
-		public String getLongLat() {
-			return longLat;
 		}
 
 		/*

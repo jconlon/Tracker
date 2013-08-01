@@ -16,15 +16,24 @@ import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.CoreMatchers.startsWith;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.nullValue;
-import static org.junit.Assert.assertThat;
 
+import java.io.IOException;
 import java.util.Date;
+import java.util.List;
+import java.util.Map.Entry;
+import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.EMap;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.monitor.Monitorable;
@@ -36,15 +45,19 @@ import org.osgi.util.position.Position;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.collect.Iterables;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.BovineBison;
 import com.verticon.tracker.Caprine;
 import com.verticon.tracker.GenericEvent;
+import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.store.ITrackerFind;
+import com.verticon.tracker.store.Query;
+import com.verticon.tracker.store.TrackerStoreUtils;
 
 /**
  * iRouter testing of the com.verticon.tracker.store.mongo component and its
@@ -72,13 +85,14 @@ import com.verticon.tracker.store.ITrackerFind;
  * @author jconlon
  * 
  */
-public class Test_MongoDB_Consumer extends TestCase {
+public class Test_MongoDB_ProducerConsumer extends TestCase implements
+		IConsumerListener {
 
 	/**
 	 * slf4j Logger
 	 */
 	private final Logger logger = LoggerFactory
-			.getLogger(Test_MongoDB_Consumer.class);
+			.getLogger(Test_MongoDB_ProducerConsumer.class);
 	private static final String AIN_1 = "tag1";
 	private static final String AIN_2 = "tag2";
 	private static final String AIN_3 = "tag3";
@@ -103,11 +117,14 @@ public class Test_MongoDB_Consumer extends TestCase {
 	private static final String PRODUCTS_CONSUMED = "consumer.Products_Consumed";
 	private static final String EXCEPTIONS = "consumer.Exception_Count";
 
+	private static final CyclicBarrier mockProductConsumedBarrier = new CyclicBarrier(
+			2);
+
 	/**
 	 * Injected service
 	 */
 	private static ITrackerFind trackerFind;
-	private static IController controller;
+	private static IProducerConsumer producerConsumer;
 	private static Monitorable monitorable;
 	/**
 	 * This class is a JUnit class and a DS component. There needs to be a
@@ -134,7 +151,7 @@ public class Test_MongoDB_Consumer extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		startUpGate.await();// wait for startUp to finish
-		controller.clearSendCount();
+		producerConsumer.clearSendCount();
 		resetStatus();
 	}
 
@@ -171,12 +188,12 @@ public class Test_MongoDB_Consumer extends TestCase {
 	 */
 	void setTrackerFind(ITrackerFind trackerFind) {
 		logger.debug(bundleMarker, "DS injecting the trackerStore");
-		Test_MongoDB_Consumer.trackerFind = trackerFind;
+		Test_MongoDB_ProducerConsumer.trackerFind = trackerFind;
 	}
 
 	void unsetTrackerFind(ITrackerFind trackerFind) {
 		logger.debug(bundleMarker, "DS injecting the trackerStore");
-		Test_MongoDB_Consumer.trackerFind = null;
+		Test_MongoDB_ProducerConsumer.trackerFind = null;
 	}
 
 	/**
@@ -186,7 +203,7 @@ public class Test_MongoDB_Consumer extends TestCase {
 	 */
 	void setMonitorable(Monitorable monitorable) {
 		logger.debug(bundleMarker, "DS injecting the monitorable");
-		Test_MongoDB_Consumer.monitorable = monitorable;
+		Test_MongoDB_ProducerConsumer.monitorable = monitorable;
 	}
 
 	/**
@@ -196,27 +213,29 @@ public class Test_MongoDB_Consumer extends TestCase {
 	 */
 	void unsetMonitorable(Monitorable monitorable) {
 		logger.debug(bundleMarker, "DS injecting the monitorable");
-		Test_MongoDB_Consumer.monitorable = null;
+		Test_MongoDB_ProducerConsumer.monitorable = null;
 	}
 
 	/**
 	 * Injected by ds
 	 * 
-	 * @param controller
+	 * @param producerConsumer
 	 */
-	void setController(IController controller) {
-		logger.debug(bundleMarker, "DS injecting the controller");
-		Test_MongoDB_Consumer.controller = controller;
+	void setController(IProducerConsumer producerConsumer) {
+		logger.debug(bundleMarker, "DS injecting the producerConsumer");
+		Test_MongoDB_ProducerConsumer.producerConsumer = producerConsumer;
+		producerConsumer.setListener(this);
 	}
 
 	/**
 	 * Injected by ds
 	 * 
-	 * @param controller
+	 * @param producerConsumer
 	 */
-	void unsetController(IController controller) {
-		logger.debug(bundleMarker, "DS injecting the controller");
-		Test_MongoDB_Consumer.controller = null;
+	void unsetController(IProducerConsumer producerConsumer) {
+		logger.debug(bundleMarker, "DS injecting the producerConsumer");
+		Test_MongoDB_ProducerConsumer.producerConsumer = null;
+		producerConsumer.setListener(null);
 	}
 
 	public void testStatus() {
@@ -230,7 +249,7 @@ public class Test_MongoDB_Consumer extends TestCase {
 
 	public void testConsumer_Animal_Sighting_ForNewAnimal()
 			throws InterruptedException {
-		assertThat("Controller must have wires", controller.hasWires(),
+		assertThat("Controller must have wires", producerConsumer.hasWires(),
 				is(true));
 
 		Tag tag = TrackerFactory.eINSTANCE.createTag();
@@ -241,10 +260,10 @@ public class Test_MongoDB_Consumer extends TestCase {
 
 		Envelope envelope = new BasicEnvelope(animalNew, AIN_1, ANIMAL_SCOPE);
 
-		controller.send(envelope);
+		producerConsumer.send(envelope);
 
 		assertThat("Controller must have sent the envelope",
-				controller.sentCount(), is(1));
+				producerConsumer.sentCount(), is(1));
 
 		assertThat("Wrong number of products consumed.", monitorable
 				.getStatusVariable(PRODUCTS_CONSUMED).getInteger(), is(1));
@@ -272,17 +291,17 @@ public class Test_MongoDB_Consumer extends TestCase {
 
 	public void testConsumer_Tag_Sighting_ForNewAnimal()
 			throws InterruptedException {
-		assertThat("Controller must have wires", controller.hasWires(),
+		assertThat("Controller must have wires", producerConsumer.hasWires(),
 				is(true));
 
 		Tag tag = TrackerFactory.eINSTANCE.createTag();
 		tag.setId(AIN_1);
 		tag.getEvents().add(TrackerFactory.eINSTANCE.createSighting());
 		Envelope envelope = new BasicEnvelope(tag, AIN_1, TAG_SCOPE);
-		controller.send(envelope);
+		producerConsumer.send(envelope);
 
 		assertThat("Controller must have sent the envelope",
-				controller.sentCount(), is(1));
+				producerConsumer.sentCount(), is(1));
 
 		assertThat("Wrong number of products consumed.", monitorable
 				.getStatusVariable(PRODUCTS_CONSUMED).getInteger(), is(1));
@@ -310,17 +329,17 @@ public class Test_MongoDB_Consumer extends TestCase {
 
 	public void testConsumer_Tag_Position_ForExistingAnimal()
 			throws InterruptedException {
-		assertThat("Controller must have wires", controller.hasWires(),
+		assertThat("Controller must have wires", producerConsumer.hasWires(),
 				is(true));
 
 		Tag tag = TrackerFactory.eINSTANCE.createTag();
 		tag.setId(AIN_1);
 		tag.getEvents().add(TrackerFactory.eINSTANCE.createPosition());
 		Envelope envelope = new BasicEnvelope(tag, AIN_1, TAG_SCOPE);
-		controller.send(envelope);// should find the tag and add an event
+		producerConsumer.send(envelope);// should find the tag and add an event
 
 		assertThat("Controller must have sent the envelope",
-				controller.sentCount(), is(1));
+				producerConsumer.sentCount(), is(1));
 
 		assertThat("Wrong number of products consumed.", monitorable
 				.getStatusVariable(PRODUCTS_CONSUMED).getInteger(), is(1));
@@ -349,7 +368,7 @@ public class Test_MongoDB_Consumer extends TestCase {
 
 	public void testConsumer_Tag_ReplaceTag() throws InterruptedException {
 		assertThat("Controller must be connected to the consumer.",
-				controller.hasWires(), is(true));
+				producerConsumer.hasWires(), is(true));
 
 		Tag tag = TrackerFactory.eINSTANCE.createTag();
 		tag.setId(AIN_2);
@@ -359,7 +378,7 @@ public class Test_MongoDB_Consumer extends TestCase {
 		rt.setOldTag(tagOld);
 		tag.getEvents().add(rt);
 		Envelope envelope = new BasicEnvelope(tag, AIN_2, TAG_SCOPE);
-		controller.send(envelope);
+		producerConsumer.send(envelope);
 
 		assertThat("Must have processed one animal after the reset.",
 				monitorable.getStatusVariable(ANIMALS_PROCESSED).getInteger(),
@@ -374,7 +393,7 @@ public class Test_MongoDB_Consumer extends TestCase {
 	public void testConsumer_RetrieveOldAnimalWithTwoTags()
 			throws InterruptedException {
 		assertThat("Controller must be connected to the consumer.",
-				controller.hasWires(), is(true));
+				producerConsumer.hasWires(), is(true));
 
 		Animal animal = trackerFind.retrieveAnimal(AIN_2);
 		assertThat("Animal should not be null", animal, is(notNullValue()));
@@ -393,9 +412,9 @@ public class Test_MongoDB_Consumer extends TestCase {
 
 	}
 
-	public void testConsumer_Tag_ExistingEventsl() throws InterruptedException {
+	public void testConsumer_Tag_ExistingEvents() throws InterruptedException {
 		assertThat("Controller must be connected to the consumer.",
-				controller.hasWires(), is(true));
+				producerConsumer.hasWires(), is(true));
 
 		Animal animal = trackerFind.retrieveAnimal(AIN_2);
 		assertThat("Animal must not be null", animal, is(notNullValue()));
@@ -404,7 +423,7 @@ public class Test_MongoDB_Consumer extends TestCase {
 		Tag tag = animal.activeTag();
 		tag = EcoreUtil.copy(tag);
 		Envelope envelope = new BasicEnvelope(tag, AIN_2, TAG_SCOPE);
-		controller.send(envelope);
+		producerConsumer.send(envelope);
 		assertThat("Must have NOT processed an animal after the reset.",
 				monitorable.getStatusVariable(ANIMALS_PROCESSED).getInteger(),
 				is(0));
@@ -419,7 +438,7 @@ public class Test_MongoDB_Consumer extends TestCase {
 	 * Measurement Envelopes with scopes of animal.weight will be added as
 	 * WeighIn events
 	 * 
-	 * @throws InterruptedException
+	 * @throws InterruptedExceptionnull
 	 */
 	public void testConsumer_Measurement_WeighIn() throws InterruptedException {
 
@@ -427,10 +446,10 @@ public class Test_MongoDB_Consumer extends TestCase {
 				new Date().getTime());
 		Envelope envelope = new BasicEnvelope(value, AIN_2, ANIMAL_WEIGHT_SCOPE);
 
-		assertThat("Controller must have wires", controller.hasWires(),
+		assertThat("Controller must have wires", producerConsumer.hasWires(),
 				is(true));
 
-		controller.send(envelope);
+		producerConsumer.send(envelope);
 
 		assertThat("Must have added NO animals.", monitorable
 				.getStatusVariable(ANIMALS_ADDED).getInteger(), is(0));
@@ -471,10 +490,10 @@ public class Test_MongoDB_Consumer extends TestCase {
 
 		Envelope envelope = new BasicEnvelope(position, AIN_2, POSITION_SCOPE);
 
-		assertThat("Controller must have wires", controller.hasWires(),
+		assertThat("Controller must have wires", producerConsumer.hasWires(),
 				is(true));
 
-		controller.send(envelope);
+		producerConsumer.send(envelope);
 
 		assertThat("Must have added NO animals.", monitorable
 				.getStatusVariable(ANIMALS_ADDED).getInteger(), is(0));
@@ -516,10 +535,10 @@ public class Test_MongoDB_Consumer extends TestCase {
 		Envelope envelope = new BasicEnvelope(value, AIN_2,
 				METTLER_WEIGHT_SCOPE);
 
-		assertThat("Controller must have wires", controller.hasWires(),
+		assertThat("Controller must have wires", producerConsumer.hasWires(),
 				is(true));
 
-		controller.send(envelope);
+		producerConsumer.send(envelope);
 
 		assertThat("Wrong number of products consumed.", monitorable
 				.getStatusVariable(PRODUCTS_CONSUMED).getInteger(), is(1));
@@ -561,16 +580,101 @@ public class Test_MongoDB_Consumer extends TestCase {
 
 	}
 
-	// public void testRetrieveRoute() {
-	// Agriculture agri = trackerFind.retrieveRoute(FIRST_ANIMAL_ID);
-	// assertThat("Could not retrieve the route", agri, is(notNullValue()));
-	// }
-	//
-	// public void testRetrieveHerd() {
-	// Date in = null;
-	// Date out = null;
-	// Premises agri = trackerFind.retrieveHerd(in, out);
-	// }
+	public void testConsumer_Retrieve_Premises() throws InterruptedException,
+			IOException, BrokenBarrierException {
+
+		String pin = "urn:pin:003ALKM";
+		// Query for a premises
+		Envelope envelope = new BasicEnvelope(
+Query.RETRIEVE_PREMISES_TEMPLATE
+				.replace(pin).getBytes(),
+				"Agriculture/Premises/" + pin + "/Query",
+				"agriculture.premises.query");
+		producerConsumer.send(envelope);
+
+		logger.debug(bundleMarker, "Waiting for product");
+		try {
+			mockProductConsumedBarrier.await(3, TimeUnit.SECONDS);
+		} catch (TimeoutException e) {
+			fail("Timed out wait for product.");
+		}
+
+		assertThat("Must have one message", producerConsumer
+				.getConsumedProducts().size(), is(1));
+		Entry<String, Object> productEntry = Iterables.get(producerConsumer
+				.getConsumedProducts().entrySet(), 0);
+		String scopes = productEntry.getKey();
+		assertThat("Wrong scopes for received message", scopes,
+				is("[agriculture.premises.response]"));
+
+		envelope = (Envelope) productEntry.getValue();
+		assertEquals("Wrong id for consumed", 
+ "Agriculture/Premises/" + pin
+				+ "/Response", envelope.getIdentification());
+
+		byte[] payload = (byte[]) envelope.getValue();
+
+		List<EObject> eobList = TrackerStoreUtils.toEObject(payload);
+		assertThat("Must have one value", eobList.size(), is(1));
+		EObject eob = Iterables.get(eobList, 0);
+
+		// String value = new String(payload);
+		assertThat("Must have a Premises", eob, is(instanceOf(Premises.class)));
+		Premises premises = (Premises) eob;
+		assertThat("Wrong uri", premises.getUri(), is(pin));
+
+	}
+
+	/**
+	 * Query for ain 840003002956353
+	 * 
+	 * @throws InterruptedException
+	 * @throws IOException
+	 * @throws BrokenBarrierException
+	 */
+	public void testConsumer_Retrieve_Animal() throws InterruptedException,
+			IOException, BrokenBarrierException {
+		String ain = "840003002956353";
+		String pin = "urn:pin:003ALKM";
+		// Query for a premises
+		Envelope envelope = new BasicEnvelope(
+				Query.RETRIEVE_ANIMAL_TEMPLATE.replace(ain),
+				"Agriculture/Premises/" + pin + "/Query",
+				"agriculture.premises.query");
+		producerConsumer.send(envelope);
+
+		logger.debug(bundleMarker, "Waiting for product");
+		try {
+			mockProductConsumedBarrier.await(3, TimeUnit.SECONDS);
+		} catch (TimeoutException e) {
+			fail("Timed out wait for product.");
+		}
+
+		assertThat("Must have one message", producerConsumer
+				.getConsumedProducts().size(), is(1));
+		Entry<String, Object> productEntry = Iterables.get(producerConsumer
+				.getConsumedProducts().entrySet(), 0);
+		String scopes = productEntry.getKey();
+		assertThat("Wrong scopes for received message", scopes,
+				is("[agriculture.premises.response]"));
+
+		envelope = (Envelope) productEntry.getValue();
+		assertEquals("Wrong id for consumed", "Agriculture/Premises/" + pin
+				+ "/Response", envelope.getIdentification());
+
+		byte[] payload = (byte[]) envelope.getValue();
+		assertThat("Payload must not be empty", payload, is(notNullValue()));
+		assertThat("Payload must contain bytes.", payload.length,
+				is(greaterThan(10)));
+		List<EObject> eobList = TrackerStoreUtils.toEObject(payload);
+		assertThat("Must have one value", eobList.size(), is(1));
+		EObject eob = Iterables.get(eobList, 0);
+
+		assertThat("Must have a Animal", eob, is(instanceOf(Animal.class)));
+		Animal animal = (Animal) eob;
+		assertThat("Wrong uri", animal.activeTag().getId(), is(ain));
+
+	}
 
 	private void resetStatus() {
 		monitorable.resetStatusVariable(ANIMALS_ADDED);
@@ -578,6 +682,17 @@ public class Test_MongoDB_Consumer extends TestCase {
 		monitorable.resetStatusVariable(ANIMALS_PROCESSED);
 		monitorable.resetStatusVariable(TAGS_ADDED);
 		monitorable.resetStatusVariable(EVENTS_ADDED);
+
+	}
+
+	@Override
+	public void productConsumed() {
+		logger.debug(bundleMarker, "Product consumed by MockConsumer");
+		try {
+			mockProductConsumedBarrier.await();
+		} catch (Exception e) {
+			logger.error(bundleMarker, "Barrier problem.", e);
+		}
 
 	}
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="com.verticon.tracker.store.mongodb.test.consumer.system">
    <implementation 
-    class="com.verticon.tracker.store.mongodb.test.system.Test_MongoDB_Consumer"/>
+    class="com.verticon.tracker.store.mongodb.test.system.Test_MongoDB_ProducerConsumer"/>
    <reference bind="setMonitorable" cardinality="1..1" interface="org.osgi.service.monitor.Monitorable" name="Monitorable" policy="static" target="(tracker.wiring.group.name=test)" unbind="unsetMonitorable"/>
-   <reference bind="setController" cardinality="1..1" interface="com.verticon.tracker.store.mongodb.test.system.IController" name="IController" policy="static" unbind="unsetController"/>
+   <reference bind="setController" cardinality="1..1" interface="com.verticon.tracker.store.mongodb.test.system.IProducerConsumer" name="IController" policy="static" unbind="unsetController"/>
    <reference bind="setTrackerFind" cardinality="1..1" interface="com.verticon.tracker.store.ITrackerFind" name="ITrackerFind" policy="static" unbind="unsetTrackerFind"/>
    
 </scr:component>

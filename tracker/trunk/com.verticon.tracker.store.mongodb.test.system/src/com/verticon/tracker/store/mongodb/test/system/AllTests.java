@@ -43,7 +43,7 @@ public class AllTests extends TestSuite {
 
 		suite.addTestSuite(Test_TrackerStore.class);
 		suite.addTestSuite(Test_TrackerStore_Updates.class);
-		suite.addTestSuite(Test_MongoDB_Consumer.class);
+		suite.addTestSuite(Test_MongoDB_ProducerConsumer.class);
 		suite.addTestSuite(WaitTest.class);
 		return suite;
 	}

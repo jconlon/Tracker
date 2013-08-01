@@ -10,10 +10,14 @@
  *******************************************************************************/
 package com.verticon.tracker.store.mongodb.test.system;
 
+import static com.google.common.collect.Maps.newHashMap;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.bundleMarker;
 
+import java.util.Arrays;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.osgi.service.wireadmin.Consumer;
 import org.osgi.service.wireadmin.Producer;
 import org.osgi.service.wireadmin.Wire;
 import org.slf4j.Logger;
@@ -25,15 +29,16 @@ import org.slf4j.LoggerFactory;
  * @author jconlon
  * 
  */
-public class MockProducer implements Producer, IController {
+public class MockProducerConsumer implements Producer, Consumer, IProducerConsumer {
 
 	/**
 	 * slf4j Logger
 	 */
-	private final Logger logger = LoggerFactory.getLogger(MockProducer.class);
+	private final Logger logger = LoggerFactory.getLogger(MockProducerConsumer.class);
 
 	private Wire[] wires = null;
-
+	private final Map<String, Object> consumedProducts = newHashMap();
+	private IConsumerListener listener;
 	private final AtomicInteger sentCount = new AtomicInteger();
 
 	/*
@@ -43,7 +48,7 @@ public class MockProducer implements Producer, IController {
 	 */
 	@Override
 	public String toString() {
-		return "MockProducer []";
+		return "MockProducerConsumer []";
 	}
 
 	@Override
@@ -72,7 +77,7 @@ public class MockProducer implements Producer, IController {
 		}
 		for (Wire wire : wires) {
 			logger.debug(bundleMarker, "Sending {} to wirescope={}", value,
-					wire.getScope());
+					Arrays.toString(wire.getScope()));
 			wire.update(value);
 			sentCount.incrementAndGet();
 		}
@@ -92,6 +97,35 @@ public class MockProducer implements Producer, IController {
 	public void clearSendCount() {
 		sentCount.set(0);
 
+	}
+
+	@Override
+	public void updated(Wire wire, Object value) {
+		logger.debug(bundleMarker, "Updated {}", value);
+		String scopes = Arrays.toString(wire.getScope());
+		consumedProducts.put(scopes, value);
+		if (listener != null) {
+			listener.productConsumed();
+		} else {
+			logger.error(bundleMarker, "No listener");
+		}
+	}
+
+	@Override
+	public void producersConnected(Wire[] wires) {
+		logger.debug(bundleMarker,
+				"{} producers connected to the mock consumer.",
+				wires != null ? wires.length : 0);
+	}
+
+	@Override
+	public void setListener(IConsumerListener listener) {
+		this.listener = listener;
+	}
+
+	@Override
+	public Map<String, Object> getConsumedProducts() {
+		return consumedProducts;
 	}
 
 }
