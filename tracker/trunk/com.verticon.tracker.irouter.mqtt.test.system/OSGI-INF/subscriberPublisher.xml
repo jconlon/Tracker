@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
+   name="com.verticon.tracker.irouter.mqtt.test.system.subscriberPublisher">
+   <implementation 
+    class="com.verticon.tracker.irouter.mqtt.test.system.MockSubscriberPublisher"/>
+   <service>
+      <provide interface="com.verticon.tracker.irouter.mqtt.test.system.ISubscriberPublisher"/>
+   </service>
+</scr:component>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" configuration-policy="require" enabled="true" immediate="true" name="com.verticon.tracker.store.mqtt">
+   <implementation class="com.verticon.tracker.store.mqtt.internal.MQTTTrackerStore"/>  
+  <service>
+      <provide interface="com.verticon.tracker.store.ITrackerStore"/>
+      <provide interface="org.osgi.service.wireadmin.Consumer"/>
+      <provide interface="org.osgi.service.monitor.Monitorable"/>
+      <provide interface="com.verticon.tracker.store.ITrackerFind"/>
+      <provide interface="com.verticon.tracker.store.ITrackerUpdate"/>
+   </service>
+  <reference bind="setMonitorListener" cardinality="1..1" interface="org.osgi.service.monitor.MonitorListener" name="MonitorListener" policy="static" unbind="unsetMonitorListener"/>
+  <property name="store" type="String" value="mqtt"/>
+   </scr:component>
