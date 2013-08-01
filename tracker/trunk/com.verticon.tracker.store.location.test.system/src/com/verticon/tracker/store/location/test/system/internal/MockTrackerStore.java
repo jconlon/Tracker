@@ -75,4 +75,10 @@ public class MockTrackerStore implements ITrackerStore {
 		return null;
 	}
 
+	@Override
+	public String query(String query) throws IOException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

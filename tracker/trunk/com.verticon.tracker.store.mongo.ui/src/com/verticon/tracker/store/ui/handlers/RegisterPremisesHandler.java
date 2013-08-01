@@ -18,14 +18,18 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.dialogs.ElementListSelectionDialog;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.collect.Iterables;
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.store.ITrackerStore;
 import com.verticon.tracker.store.ITrackerUpdate;
-import com.verticon.tracker.store.StoreAccessException;
 import com.verticon.tracker.store.ui.Activator;
 
 /**
@@ -63,20 +67,14 @@ public class RegisterPremisesHandler extends AbstractHandler {
 					.getFirstElement();
 			String uri = premises.getUri();
 
-			ITrackerUpdate store = Activator.getDefault()
-					.getTrackerStoreService();
 
+			ITrackerUpdate store = chooseOneTrackerStore(event);
+			if (store == null) {
+				return false;
+			}
 			try {
-
-				if (store == null) {
-					throw new StoreAccessException(
-							"Can't find the service to register a premises. Make sure a TrackerStore is configured and you are the administrator.");
-				}
-
 				Shell shell = HandlerUtil.getActiveShell(event);
-
 				store.register(premises);
-
 				MessageDialog.openConfirm(shell, "Confirm",
 						"Registered premises " + uri + " on " + store.uri());
 			} catch (Exception e) {
@@ -93,5 +91,37 @@ public class RegisterPremisesHandler extends AbstractHandler {
 		}
 		return null;
 
+	}
+
+	ITrackerUpdate chooseOneTrackerStore(ExecutionEvent event) {
+		Iterable<ITrackerStore> availableStores = Activator.getDefault()
+				.getAvailableTrackerStores();
+		// Prompt for one of these
+		if (Iterables.isEmpty(availableStores)) {
+			MessageDialog.openError(HandlerUtil.getActiveShell(event),
+					"No TrackerStores",
+					"Failed to find any ITrackerStore services.");
+			return null;
+		}
+		if (Iterables.size(availableStores) == 1) {
+			return Iterables.get(availableStores, 0);
+		}
+
+		Shell shell = HandlerUtil.getActiveShell(event);
+		ElementListSelectionDialog dialog = new ElementListSelectionDialog(
+				shell, new LabelProvider());
+		dialog.setElements(Iterables.toArray(availableStores,
+				ITrackerStore.class));
+		dialog.setAllowDuplicates(false);
+		dialog.setMultipleSelection(false);
+		dialog.setMessage("Choose the URI of the UserAdmin implementation.");
+		dialog.setTitle("Choose UserAdmin Implementation");
+		// User pressed cancel
+		if (dialog.open() != Window.OK) {
+			return null;
+		}
+		Object[] result = dialog.getResult();
+		ITrackerUpdate store = (ITrackerStore) result[0];
+		return store;
 	}
 }

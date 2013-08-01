@@ -115,7 +115,7 @@ public class Configurator {
 
 	static final String TAG_ID_WITH_SIRE_AND_DAM = "840456789012343";
 
-	private static final String FACTORY_PID_TRACKERSTORE = "com.verticon.tracker.store.mongodb";
+	private static final String TRACKERSTORE_FACTORY_PID = "com.verticon.tracker.store.mongodb";
 
 	private static final String UNITTEST_PROPERTIES = "private/localhost.properties";
 
@@ -139,10 +139,13 @@ public class Configurator {
 			throws IOException {
 		logger.debug(bundleMarker, "Setting ConfigurationAdmin");
 		deleteConfigurations(configAdmin);
+		configure_trackerStoreMongoDB(configAdmin);
+	}
 
-		// Configure the IMongoClientProvider
+	void configure_trackerStoreMongoDB(ConfigurationAdmin configAdmin)
+			throws IOException {
 		Configuration config = configAdmin
-				.createFactoryConfiguration(FACTORY_PID_TRACKERSTORE);
+				.createFactoryConfiguration(TRACKERSTORE_FACTORY_PID);
 		Dictionary<String, Object> props = new Hashtable<String, Object>();
 		props.put("iMongoClientProvider", "remote");
 		if (localProps.get("dbname") != null) {
@@ -161,29 +164,21 @@ public class Configurator {
 		if (localProps.get("username") != null) {
 			props.put("username", localProps.get("username"));
 		}
-		// take all defaults
-		// config.update(props);
-		// logger.debug(bundleMarker,
-		// "Created Configuration for IMongoClientProvider {}",
-		// config.getPid());
-		//
-		// // Configure the MongoDB Consumer
-		// config =
-		// configAdmin.createFactoryConfiguration(FACTORY_PID_CONSUMER);
-		// props = new Hashtable<String, Object>();
+
 		props.put("tracker.wiring.group.name", "test");
 		props.put("tracker.premises.uri", PREMISES_URI_H89234X);
 		props.put("premises.animal.default", TrackerPackage.BOVINE_BISON);
-		// wireadmin.consumer.scope
 		props.put(WireConstants.WIREADMIN_CONSUMER_SCOPE, new String[] {
 				"animal.weight", "premises.tag", "gps.position",
-				"mettler.weight", "premises.animal" });
-		// take all defaults
+				"mettler.weight", "premises.animal",
+				"agriculture.premises.query" });
+		props.put(WireConstants.WIREADMIN_PRODUCER_SCOPE,
+				new String[] { "agriculture.premises.response" });
+
 		config.update(props);
 		logger.debug(bundleMarker,
 				"Created Configuration for IMongoClientProvider {}",
 				config.getPid());
-
 	}
 
 	void unsetConfigurationAdmin(ConfigurationAdmin configAdmin)

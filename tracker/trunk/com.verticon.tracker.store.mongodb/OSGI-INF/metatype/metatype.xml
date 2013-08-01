@@ -36,11 +36,17 @@
    <AD name="Consumable scopes" id="wireadmin.consumer.scope" 
  		type="String"
  		required="true" 
- 		default="premises.animal,animal.weight"
+ 		default="premises.animal,animal.weight,agriculture.premises.query,agriculture.premises.register.emf,agriculture.premises.events.emf"
 		cardinality="5" 
 		description="Comma delimited list of scope names for consumed animal, measurement, and position products. (If no iRouter functionality is required this value is ignored.)" />
  
-    
+    <AD name="Producer scope" id="wireadmin.producer.scope" 
+    	type="String"
+		cardinality="1"
+		required="true"
+		default="agriculture.premises.response"
+		description="The producer scope to send the query response. (Use full scope names)" />
+		
     <AD name="Premises URI" id="tracker.premises.uri" 
     	type="String"
     	required="true" 

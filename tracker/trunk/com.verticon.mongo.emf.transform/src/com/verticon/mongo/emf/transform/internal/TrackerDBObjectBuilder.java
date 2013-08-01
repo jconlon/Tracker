@@ -11,6 +11,7 @@
 
 package com.verticon.mongo.emf.transform.internal;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -163,8 +164,11 @@ class TrackerDBObjectBuilder extends DBObjectBuilder {
 				// For Animal.sire or Animal.dam just point to the _id on the
 				// Tag
 				EObject targetObject = (EObject) eObject.eGet(reference, false);
-				dbObject.put(reference.getName(), EcoreUtil
-						.getURI(targetObject).fragment());
+				URI uri1 = targetObject.eResource().getURI();
+				String rName = reference.getName();
+				URI uri = EcoreUtil.getURI(targetObject);
+				String frag = uri.fragment();
+				dbObject.put(rName, frag);
 
 			} else if (!reference.isTransient() && eObject.eIsSet(reference)) {
 				// Handle all others normally

@@ -34,6 +34,9 @@ public interface ITrackerStore extends ITrackerUpdate, ITrackerFind {
 	 */
 	EList<EObject> query(EClass eClass, String query);
 	
+
+
+	@Override
 	String uri();
 	
 

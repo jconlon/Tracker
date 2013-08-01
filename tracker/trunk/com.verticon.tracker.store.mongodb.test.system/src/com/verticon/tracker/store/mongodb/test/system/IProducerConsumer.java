@@ -10,7 +10,9 @@
  *******************************************************************************/
 package com.verticon.tracker.store.mongodb.test.system;
 
-public interface IController {
+import java.util.Map;
+
+public interface IProducerConsumer {
 	void send(Object object);
 
 	boolean hasWires();
@@ -18,4 +20,8 @@ public interface IController {
 	int sentCount();
 
 	void clearSendCount();
+
+	Map<String, Object> getConsumedProducts();
+
+	void setListener(IConsumerListener listener);
 }

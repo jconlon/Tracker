@@ -1,19 +1,30 @@
 package com.verticon.tracker.store;
 
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.collect.Maps.newHashMap;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +32,12 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Function;
+import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
+import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import com.google.common.io.Files;
 import com.verticon.location.Location;
 import com.verticon.location.LocationFactory;
@@ -34,6 +50,7 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerFactory;
+import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.TrackerPlugin;
 import com.verticon.tracker.util.TrackerUtils;
 
@@ -228,7 +245,7 @@ public class TrackerStoreUtils {
 						((GenericEvent)event).setOcd(ocdMap.get(ocd.getName()));
 					}else{
 						//Create an ocd in the parent
-						ocdCopied = EcoreUtil.copy(ocd);
+					ocdCopied = EcoreUtil.copy(ocd);
 						metadata.getOCD().add(ocdCopied);
 						((GenericEvent)event).setOcd(ocdCopied);
 						ocdMap.put(ocd.getName(), ocdCopied);
@@ -347,5 +364,217 @@ public class TrackerStoreUtils {
 					"Failed while building premises " + map.get("name"), e);
 		}
 
+	}
+
+	public static void validateObject(EObject eObject) throws ValidationException {
+		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject);
+		if (diagnostic.getSeverity() == Diagnostic.ERROR
+				|| diagnostic.getSeverity() == Diagnostic.WARNING) {
+			for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
+				switch (childDiagnostic.getSeverity()) {
+				case Diagnostic.ERROR:
+				case Diagnostic.WARNING:
+					throw new ValidationException(eObject,
+							childDiagnostic.getMessage());
+				}
+			}
+	
+		}
+	
+	}
+
+	public static Integer getConfigurationInteger(Object o) {
+		Integer result = null;
+		if(o instanceof Integer){
+			result = (Integer) o;
+		}else if (o instanceof String){
+			result = Integer.parseInt((String) o);
+		}
+		return result;
+	}
+
+	public static EClass getAnimalEClass(Integer key) {
+		switch (key) {
+		case TrackerPackage.BOVINE_BEEF:
+			return TrackerPackage.eINSTANCE.getBovineBeef();
+		case TrackerPackage.BOVINE_BISON:
+			return TrackerPackage.eINSTANCE.getBovineBeef();
+		case TrackerPackage.BOVINE_DAIRY:
+			return TrackerPackage.eINSTANCE.getBovineBeef();
+		case TrackerPackage.CAPRINE:
+			return TrackerPackage.eINSTANCE.getBovineBeef();
+		case TrackerPackage.EQUINE:
+			return TrackerPackage.eINSTANCE.getEquine();
+		case TrackerPackage.OVINE:
+			return TrackerPackage.eINSTANCE.getOvine();
+		case TrackerPackage.SWINE:
+			return TrackerPackage.eINSTANCE.getSwine();
+		default:
+			throw new IllegalArgumentException("unknown animal id: " + key);
+		}
+	
+	}
+
+	/**
+	 * Pass only animals with new events after the update date and the PID is
+	 * empty
+	 * 
+	 * @author jconlon
+	 * 
+	 */
+	public static class AnimalsWithNewAndUnpublishedEvents implements
+			Predicate<Animal> {
+		private final Date update;
+
+		public AnimalsWithNewAndUnpublishedEvents(Date update) {
+			super();
+			this.update = update;
+		}
+
+		@Override
+		public boolean apply(Animal animal) {
+
+			return (update == null || animal.getLastEventDateTime().after(
+					update));
+		}
+	}
+
+	public static final Optional<Animal> getAnimal(byte[] payload)
+			throws IOException {
+		if (payload.length != 0) {
+			List<EObject> eos = toEObject(payload);
+			if (eos.size() == 1) {
+				if (eos.get(0) instanceof Animal) {
+					return Optional.of((Animal) eos.get(0));
+				}
+			}
+		}
+		return Optional.absent();
+	}
+
+	public static final byte[] toPayload(EObject eObject) throws IOException {
+		Resource resource = new BinaryResourceImpl();
+		resource.getContents().add(eObject);
+		ByteArrayOutputStream ba = new ByteArrayOutputStream();
+		resource.save(ba, null);
+		return ba.toByteArray();
+	}
+
+	public static final byte[] toPayload(Collection<? extends EObject> eObjects)
+			throws IOException {
+		Resource resource = new BinaryResourceImpl();
+		resource.getContents().addAll(eObjects);
+		ByteArrayOutputStream ba = new ByteArrayOutputStream();
+		resource.save(ba, null);
+		return ba.toByteArray();
+	}
+
+
+	public static final List<EObject> toEObject(byte[] payload)
+			throws IOException {
+		checkNotNull(payload);
+		checkArgument(payload.length > 0,
+				"Payload must be greater than 0 bytes");
+		ByteArrayInputStream ba = new ByteArrayInputStream(payload);
+		Resource resource = new BinaryResourceImpl();
+		File f = File.createTempFile("emf", ".binary");
+		resource.setURI(URI.createFileURI(f.toString()));
+		resource.load(ba, null);
+		return resource.getContents();
+	}
+
+	public static final Premises toPremises(Object object) throws IOException {
+		checkArgument((object instanceof byte[]), "Payload must be a byte[]");
+		byte[] payload = (byte[]) object;
+		List<EObject> eol = toEObject(payload);
+		if (eol == null || eol.isEmpty()) {
+			return null;
+		}
+		// if (eol.size() != 1) {
+		// throw new IOException(
+		// "There must be only one EObject in the payload. Found "
+		// + eol.size() + " objects.");
+		// }
+
+		if (eol.get(0) instanceof Premises) {
+			return (Premises) eol.get(0);
+		}
+		throw new IOException(
+				"There must be only an EObject in the payload. Found a "
+						+ eol.get(0).getClass().getName() + " object instead.");
+
+	}
+	
+	public static String mapToJSON(Map<String, String> map) {
+		return mapToJSon.apply(map);
+	}
+
+	public static Map<String, String> jSONToMap(String json) {
+		return jsonToMap.apply(json);
+	}
+
+	private static JSONToMap jsonToMap = new JSONToMap();
+	private static MapToJSON mapToJSon = new MapToJSON();
+
+	private static class MapToJSON implements
+			Function<Map<String, String>, String> {
+		
+		@Override
+		public String apply(Map<String, String> map) {
+			StringBuilder result = new StringBuilder();
+			result.append('{');
+			for (Entry<String, String> entry : map.entrySet()) {
+				result.append("'").append(entry.getKey()).append("' : '")
+						.append(entry.getValue()).append("',");
+			}
+			result.replace(result.length() - 1, result.length(), "}");
+
+			return result.toString();
+		}
+	}
+
+	private static class JSONToMap implements
+			Function<String, Map<String, String>> {
+		@Override
+		public Map<String, String> apply(String string) {
+			String json = string.replace("{", "").replace("}", "");
+			Iterable<String> ss = Splitter.on(',').trimResults()
+					.omitEmptyStrings().split(json);
+			Map<String, String> result = newHashMap();
+			String key, value;
+			for (String string2 : ss) {
+				// TODO use a reg expression to parse something like:
+				// 'urn:pin:H89234X' : 'East Farm'
+				Iterable<String> s = Splitter.on("' : '").trimResults()
+						.omitEmptyStrings().split(string2);
+				key = Iterables.get(s, 0).replace("'", "");
+				value = Iterables.get(s, 1).replace("'", "");
+				result.put(key, value);
+			}
+
+			return result;
+		}
+	}
+
+	public static Animal createDefaultAnimal(Integer key) {
+		switch (key) {
+		case TrackerPackage.BOVINE_BEEF:
+			return TrackerFactory.eINSTANCE.createBovineBeef();
+		case TrackerPackage.BOVINE_BISON:
+			return TrackerFactory.eINSTANCE.createBovineBison();
+		case TrackerPackage.BOVINE_DAIRY:
+			return TrackerFactory.eINSTANCE.createBovineDairy();
+		case TrackerPackage.CAPRINE:
+			return TrackerFactory.eINSTANCE.createCaprine();
+		case TrackerPackage.EQUINE:
+			return TrackerFactory.eINSTANCE.createEquine();
+		case TrackerPackage.OVINE:
+			return TrackerFactory.eINSTANCE.createOvine();
+		case TrackerPackage.SWINE:
+			return TrackerFactory.eINSTANCE.createSwine();
+		default:
+			throw new IllegalArgumentException("unknown animal id: " + key);
+		}
+	
 	}
 }

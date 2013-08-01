@@ -18,11 +18,14 @@ public class Monitor implements Monitorable {
 	private Map<String, Object> config;
 	private MonitorListener monitorListener;
 	private String status = "NOT Connected";
-	private final AtomicLong lastProduct = new AtomicLong(0);
+	private final AtomicLong lastConsumedProduct = new AtomicLong(0);
+	private final AtomicLong lastProducedProduct = new AtomicLong(0);
 	private final AtomicLong lastRecord = new AtomicLong(0);
 	private final AtomicInteger producersConnected = new AtomicInteger(0);
+	private final AtomicInteger consumersConnected = new AtomicInteger(0);
 	private final AtomicLong lastConnectRequest = new AtomicLong(0);
 	private final AtomicInteger totalProductsConsumed = new AtomicInteger(0);
+	private final AtomicInteger totalProductsProduced = new AtomicInteger(0);
 	private final AtomicInteger totalAnimalsProcessed = new AtomicInteger(0);
 	private final AtomicInteger totalAnimalsAdded = new AtomicInteger(0);
 	private final AtomicInteger totalEventsAdded = new AtomicInteger(0);
@@ -47,27 +50,28 @@ public class Monitor implements Monitorable {
 					(String) config.get(var.configID));
 
 		case DEFAULT_ANIMAL:
-			Integer key = com.verticon.tracker.store.mongodb.internal.Utils.getConfigurationInteger(config
+			Integer key = com.verticon.tracker.store.TrackerStoreUtils.getConfigurationInteger(config
 					.get(var.configID));
-			String name = com.verticon.tracker.store.mongodb.internal.Utils.getAnimalEClass(key).getName();
+			String name = com.verticon.tracker.store.TrackerStoreUtils.getAnimalEClass(key).getName();
 			return new StatusVariable(id, StatusVariable.TYPE_STRING, name);
 
 		case STATUS:
 			return new StatusVariable(id, StatusVariable.TYPE_STRING, status);
 
-		case LAST_PRODUCT_TIME:
-			String ds = lastProduct.get() == 0 ? "None" : new Date(
-					lastProduct.get()).toString();
+		case LAST_CONSUMED_TIME:
+			String ds = lastConsumedProduct.get() == 0 ? "None" : new Date(
+					lastConsumedProduct.get()).toString();
+			return new StatusVariable(id, StatusVariable.TYPE_STRING, ds);
+
+		case LAST_PRODUCED_TIME:
+			ds = lastProducedProduct.get() == 0 ? "None" : new Date(
+					lastProducedProduct.get()).toString();
 			return new StatusVariable(id, StatusVariable.TYPE_STRING, ds);
 
 		case LAST_RECORD_TIME:
 			ds = lastRecord.get() == 0 ? "None" : new Date(lastRecord.get())
 					.toString();
 			return new StatusVariable(id, StatusVariable.TYPE_STRING, ds);
-
-		case CONNECTION_URI:
-			return new StatusVariable(id, StatusVariable.TYPE_STRING,
-					(String) config.get(var.configID));
 
 		case PRODUCERS_CONNECTED:
 			return new StatusVariable(id, StatusVariable.CM_GAUGE,
@@ -77,6 +81,9 @@ public class Monitor implements Monitorable {
 			return new StatusVariable(id, StatusVariable.CM_CC,
 					totalProductsConsumed.get());
 
+		case PRODUCTS_PRODUCED:
+			return new StatusVariable(id, StatusVariable.CM_CC,
+					totalProductsProduced.get());
 		case PREMISES_REGISTERED:
 			return new StatusVariable(id, StatusVariable.CM_CC,
 					totalPremesisRegistered.get());
@@ -111,6 +118,10 @@ public class Monitor implements Monitorable {
 			ds = lastConnectRequest.get() == 0 ? "None" : new Date(
 					lastConnectRequest.get()).toString();
 			return new StatusVariable(id, StatusVariable.TYPE_STRING, ds);
+
+		case CONSUMERS_CONNECTED:
+			return new StatusVariable(id, StatusVariable.CM_GAUGE,
+					consumersConnected.get());
 
 		default:
 			break;
@@ -190,9 +201,15 @@ public class Monitor implements Monitorable {
 
 	// /Setables for the vars
 	public void incrementTotalProductsConsumed() {
-		lastProduct.set(System.currentTimeMillis());
+		lastConsumedProduct.set(System.currentTimeMillis());
 		totalProductsConsumed.getAndIncrement();
 		status="";
+	}
+
+	public void incrementTotalProductsProduced() {
+		lastProducedProduct.set(System.currentTimeMillis());
+		totalProductsProduced.getAndIncrement();
+		status = "";
 	}
 
 	public void incrementTotalPremisesRegisted() {
@@ -201,6 +218,10 @@ public class Monitor implements Monitorable {
 
 	public void setProducersConnected(int count) {
 		producersConnected.set(count);
+	}
+
+	public void setConsumersConnected(int count) {
+		consumersConnected.set(count);
 	}
 
 	private void setStatus(String status) {

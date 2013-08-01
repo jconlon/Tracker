@@ -41,6 +41,7 @@ import java.net.UnknownHostException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -48,6 +49,7 @@ import java.util.concurrent.CountDownLatch;
 
 import junit.framework.TestCase;
 
+import org.bson.BSONObject;
 import org.bson.types.ObjectId;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -65,6 +67,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
+import com.mongodb.util.JSON;
 import com.verticon.mongo.IMongoClientProvider;
 import com.verticon.mongo.emf.transform.IFunctionProvider;
 import com.verticon.osgi.metatype.AD;
@@ -80,6 +83,8 @@ import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.store.ITrackerFind;
 import com.verticon.tracker.store.ITrackerUpdate;
 import com.verticon.tracker.store.IUpdateStats;
+import com.verticon.tracker.store.Query;
+import com.verticon.tracker.store.UpdateStats;
 import com.yammer.metrics.Timer;
 
 /**
@@ -418,6 +423,7 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 
 		IUpdateStats stats = recordAnimals(premises);
 
+
 		assertThat("Incorrect number of animals processed. ",
 				stats.getAnimalsProcessed(), is(7));
 
@@ -431,6 +437,30 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 		assertThat("Incorrect number of tags", stats.getTagsAdded(), is(7));
 		assertThat("Incorrect number of events", stats.getEventsAdded(),
 				is(premises.eventHistory().size()));
+
+		UpdateStats updateStats = (UpdateStats) stats;
+		updateStats.addException(new IOException("First exception test."));
+		updateStats.addException(new IllegalArgumentException(
+				"Second exception test."));
+		BSONObject bsonStatus = (BSONObject) ((BSONObject) JSON
+				.parse(updateStats.toString())).get("UpdateStats");
+		// System.out.println();
+		// System.out.println(stats);
+		assertThat("Incorrect number of animals processed. ",
+				(Integer) bsonStatus.get("animalsProcessed"), is(7));
+
+		assertThat("Incorrect number of animals",
+				(Integer) bsonStatus.get("animalsAdded"), is(7));
+		assertThat("Incorrect number of tags",
+				(Integer) bsonStatus.get("tagsAdded"), is(7));
+		assertThat("Incorrect number of events",
+				(Integer) bsonStatus.get("eventsAdded"),
+				is(premises.eventHistory().size()));
+
+		List<?> exceptions = (List<?>) bsonStatus.get("exceptions");
+		assertThat(
+				"Must have 2 exceptions. But got these: "
+						+ stats.getExceptions(), exceptions.size(), is(2));
 	}
 
 	@Test
@@ -835,6 +865,31 @@ public class Test_TrackerUpdateAndFind extends TestCase {
 		assertThat("Should not be null", name, is(notNullValue()));
 		assertThat("Should be", name, is("East Farm"));
 	}
+
+	@Test
+	public void test_Query() throws IOException {
+		String result = trackerFind.query(Query.LAST_PUB_QUERY_TEMPLATE
+				.replace("jc:www.verticon"));
+		assertThat("Result must not be null.", result, is(notNullValue()));
+		BSONObject response = (BSONObject) JSON.parse(result);
+		logger.debug(bundleMarker, "Response is: {}", result);
+		List<?> list = (List<?>) response.get("result");
+		assertThat("Result list must be one", list.size(), is(1));
+		assertThat("Wrong type", ((BSONObject) list.get(0)).get("update"),
+				is(instanceOf(Date.class)));
+
+		// Try with a empty result
+		result = trackerFind.query(Query.LAST_PUB_QUERY_TEMPLATE
+				.replace("notThere"));
+
+		assertThat("Result must not be null.", result, is(notNullValue()));
+		response = (BSONObject) JSON.parse(result);
+		logger.debug(bundleMarker, "Response is: {}", result);
+		list = (List<?>) response.get("result");
+		assertThat("Result list must be empty", list.size(), is(0));
+
+	}
+
 
 	private Animal createAnimal() {
 		Tag tag = TrackerFactory.eINSTANCE.createTag();

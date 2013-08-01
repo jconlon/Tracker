@@ -50,6 +50,8 @@ public class CanRegisterLocationsPropertyTester extends PropertyTester {
 		if (CAN_REGISTER_PREMISES.equals(property)) {
 			result = Activator.getDefault().hasRole(TRACKER_STORE_REGISTRANT)
 					&& Activator.getDefault().hasTrackerStoreService();
+			result = result
+					|| Activator.getDefault().hasMQTTTrackerStoreService();
 		}
 		return result;
 	}

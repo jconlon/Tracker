@@ -9,8 +9,10 @@ import static com.verticon.tracker.store.mongodb.internal.Utils.bundleMarker;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import org.bson.BSONObject;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +26,9 @@ import com.mongodb.DBObject;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.Tag;
+import com.verticon.tracker.store.UpdateStats;
+
+//import com.mongodb.DBObject;
 
 public class AnimalUpdate {
 
@@ -43,11 +48,11 @@ public class AnimalUpdate {
 	private final List<Tag> tags = newArrayList();
 	private final Multimap<String, Event> eventsToRecord = ArrayListMultimap
 			.create();
-	private final List<DBObject> persistedTags = newArrayList();
+	private final List<Map<String, ?>> persistedTags = newArrayList();
 
 	private State state = State.ANIMAL;
 	private UpdateException exception = null;
-	private DBObject animalDBObject = null;
+	private BSONObject animalDBObject = null;
 
 	public AnimalUpdate(Animal animal, Date date, String premiseURI) {
 		this.animal = animal;
@@ -104,7 +109,7 @@ public class AnimalUpdate {
 		return state;
 	}
 
-	void addPersistedTag(DBObject dbo) {
+	void addPersistedTag(Map<String, ?> dbo) {
 		persistedTags.add(dbo);
 	}
 

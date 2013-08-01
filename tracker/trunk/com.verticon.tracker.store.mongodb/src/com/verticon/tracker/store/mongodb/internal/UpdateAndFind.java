@@ -7,6 +7,7 @@ import static com.verticon.tracker.store.mongodb.internal.Utils.PREMISES;
 import static com.verticon.tracker.store.mongodb.internal.Utils.PREMISES_URI;
 import static com.verticon.tracker.store.mongodb.internal.Utils.TAG;
 import static com.verticon.tracker.store.mongodb.internal.Utils.UPDATES;
+import static com.verticon.tracker.store.mongodb.internal.Utils.bundleMarker;
 import static com.verticon.tracker.store.mongodb.internal.Utils.createResourceWithEmptyURI;
 
 import java.io.IOException;
@@ -18,9 +19,12 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Function;
 import com.mongodb.BasicDBObject;
+import com.mongodb.CommandResult;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -28,6 +32,7 @@ import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import com.mongodb.QueryOperators;
+import com.mongodb.util.JSON;
 import com.verticon.mongo.IMongoClientProvider;
 import com.verticon.mongo.emf.transform.IFunctionProvider;
 import com.verticon.osgi.metatype.OCD;
@@ -41,6 +46,11 @@ import com.verticon.tracker.store.IUpdateStats;
 public class UpdateAndFind implements ITrackerUpdate, ITrackerFind,
  IOCDFind {
 
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory.getLogger(UpdateAndFind.class);
+
 	// DS Injected dependencies
 	private IMongoClientProvider iMongoClientProvider;
 	private IFunctionProvider functionProvider;
@@ -52,8 +62,12 @@ public class UpdateAndFind implements ITrackerUpdate, ITrackerFind,
 	private final OCDFind oCDFind = new OCDFind(this);
 
 	private final PremisesFind premisesFind = new PremisesFind(this);
+	private final MongoDBTrackerStore mongoDBTrackerStore;
 
-
+	UpdateAndFind(MongoDBTrackerStore mongoDBTrackerStore) {
+		super();
+		this.mongoDBTrackerStore = mongoDBTrackerStore;
+	}
 
 	@Override
 	public void register(Premises premises) throws IOException {
@@ -125,6 +139,8 @@ public class UpdateAndFind implements ITrackerUpdate, ITrackerFind,
 		DBCursor cursor = coll.find(query).limit(1);
 		DBObject dbObject = cursor.next();
 		if (dbObject == null) {
+			logger.debug(bundleMarker,
+					"Failed to find premises with query: {}", query);
 			return null;
 		}
 		Function<DBObject, EObject> builder = functionProvider
@@ -176,6 +192,10 @@ public class UpdateAndFind implements ITrackerUpdate, ITrackerFind,
 		return result;
 	}
 
+	public void checkForRegistratonMembership() {
+		mongoDBTrackerStore.checkForRegistratonMembership();
+	}
+
 	void activate() {
 		this.eToDB = functionProvider.getEObjectToDBObjectFunction();
 		this.animalRecorder = new AnimalRecorder(this);
@@ -222,6 +242,27 @@ public class UpdateAndFind implements ITrackerUpdate, ITrackerFind,
 		return functionProvider;
 	}
 
+	/**
+	 * Executes a command on the database. Only aggregation commands are
+	 * supported.
+	 * 
+	 * @TODO This needs to be constrained to meet RoleBase Access of the user.
+	 * @param query
+	 * @return results
+	 */
+	@Override
+	public String query(String query) {
+		DBObject cmd = (DBObject) JSON.parse(query);
+
+		MongoClient mongoClient = iMongoClientProvider.getMongoClient();
+		DB db = mongoClient.getDB(iMongoClientProvider.getDatabaseName());
+
+		CommandResult cr = db.command(cmd);
+
+		String result = cr.toString();
+		logger.debug(bundleMarker, "Query: {}, Response: {}", cmd, result);
+		return result;
+	}
 
 	/**
 	 * Ensure secondary indexes Premises geo location.loc Animal tags (an array

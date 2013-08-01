@@ -18,7 +18,9 @@ import static com.verticon.mongo.emf.transform.test.system.Configuator.bundleMar
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.instanceOf;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.UnknownHostException;
@@ -28,10 +30,13 @@ import java.util.concurrent.CountDownLatch;
 
 import junit.framework.TestCase;
 
+import org.bson.BasicBSONDecoder;
+import org.bson.BasicBSONEncoder;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -47,6 +52,7 @@ import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.util.JSONCallback;
 import com.verticon.mongo.IMongoClientProvider;
 import com.verticon.mongo.emf.transform.IFunctionProvider;
 import com.verticon.osgi.metatype.OCD;
@@ -57,6 +63,7 @@ import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
+import com.verticon.tracker.util.TrackerResourceImpl;
 
 /**
  * 
@@ -103,6 +110,8 @@ public class Test_Mongo_EMF_FunctionProvider extends TestCase {
 	private static final String TAG_ID_WITH_GENERIC_EVENT = "840456789012341";
 
 	private static final String FILE_TMP_OUT_PREMISES1 = "/tmp/out1.premises";
+
+	private static final String FILE_TMP_OUT_PREMISES1_BINARY = "/tmp/out1.binary";
 
 	private static final String FILE_TMP_OUT_PREMISES2 = "/tmp/out2.premises";
 
@@ -259,6 +268,90 @@ public class Test_Mongo_EMF_FunctionProvider extends TestCase {
 	}
 
 	@Test
+	public void test_Premises_Transform_Encode() throws UnknownHostException {
+		Premises premisesIn = createPremises();
+		premisesIn.setName("Jack Condor");
+		// Transform to DBObject
+		Function<EObject, DBObject> eTod = functionProvider
+				.getEObjectToDBObjectFunction();
+		DBObject dbObjectOut = eTod.apply(premisesIn);
+		// Encode
+		byte[] out = new BasicBSONEncoder().encode(dbObjectOut);
+		assertThat("Should be 74 bytes", out.length, is(74));
+
+		// Decode
+		JSONCallback callback = new JSONCallback();
+		int n = new BasicBSONDecoder().decode(out, callback);
+		assertThat(String.format(
+				"n = %s and number of bytes = %s should be equal", n,
+				out.length), n, is(out.length));
+		DBObject dbObject = (DBObject) callback.get();
+		// Transform to EObject
+		ResourceSet resourceSet = new ResourceSetImpl();
+		Resource resource = resourceSet.createResource(URI.createURI(""));
+		Function<DBObject, EObject> builder = functionProvider
+				.getDBObjectToEObjectFunction(null, resource);
+		Premises premisesOut = (Premises) builder.apply(dbObject);
+
+		assertThat("Premises should not be null", premisesOut,
+				is(notNullValue()));
+		assertThat("Premises should have name", premisesOut.getName(),
+				is("Jack Condor"));
+		assertThat("Resource should have premises in it.", resource
+				.getContents().size(), is(1));
+		assertThat("Premises should have a resource.", premisesOut.eResource(),
+				is(notNullValue()));
+
+	}
+
+	@Test
+	public void test_Premises_Transform_Encode2() throws IOException,
+			InterruptedException {
+		logger.debug(bundleMarker, "starting testRegister");
+
+		Resource resource = getXMIResource(DOC_PREMISES, "");
+		Premises premisesIn = (Premises) resource.getContents().get(0);
+		premisesIn.getUnAppliedTags().clear();
+		int animalCount = premisesIn.getAnimals().size();
+
+		// Transform to DBObject
+		Function<EObject, DBObject> eTod = functionProvider
+				.getEObjectToDBObjectFunction();
+		DBObject dbObjectOut = eTod.apply(premisesIn);
+		// Encode
+		byte[] out = new BasicBSONEncoder().encode(dbObjectOut);
+		// assertThat("Should be 74 bytes", out.length, is(74));
+		System.out.printf("%nSize of BSON binary encoded premises with %s events = %s%n",
+				premisesIn.eventHistory().size(), out.length);
+		// Decode
+		JSONCallback callback = new JSONCallback();
+		int n = new BasicBSONDecoder().decode(out, callback);
+		assertThat(String.format(
+				"n = %s and number of bytes = %s should be equal", n,
+				out.length), n, is(out.length));
+		DBObject dbObject = (DBObject) callback.get();
+		// Transform to EObject
+
+		ResourceSet resourceSet = getResourceSet();
+		resource = resourceSet.createResource(URI
+				.createURI("premisesOut.binary"));
+		Function<DBObject, EObject> builder = functionProvider
+				.getDBObjectToEObjectFunction(null, resource);
+		Premises premisesOut = (Premises) builder.apply(dbObject);
+		assertThat(
+				String.format(
+						"animalsOut = %s and number of Animals in = %s should be equal",
+						premisesOut.getAnimals().size(), animalCount),
+				premisesOut.getAnimals().size(), is(animalCount));
+
+		ByteArrayOutputStream ba = new ByteArrayOutputStream();
+		resource.save(ba, null);
+		System.out.printf("Size of EMF binary serialization = %s%n",
+				ba.toByteArray().length);
+
+	}
+
+	@Test
 	public void test_Animal_Transform() throws UnknownHostException {
 		Animal animalIn = createAnimal();
 		assertThat("Animal should have id", animalIn.getId(), is(TAG_ID_1));
@@ -342,14 +435,17 @@ public class Test_Mongo_EMF_FunctionProvider extends TestCase {
 	}
 
 
-
 	@Test
 	public void testPremises_Read() throws IOException {
 		File file = new File(FILE_TMP_OUT_PREMISES1);
 		file.delete();
-		ResourceSet resourceSet = new ResourceSetImpl();
+		ResourceSet resourceSet = getResourceSet();
+
 		URI uri = URI.createURI("file:" + FILE_TMP_OUT_PREMISES1);
 		Resource resource = resourceSet.createResource(uri);
+		assertThat("Resource should be text", resource,
+				is(instanceOf(TrackerResourceImpl.class)));
+
 		DBCollection coll = getCollection(DB_NAME, PREMISES_COLLECTION);
 		DBObject dbObject = coll
 				.findOne(new BasicDBObject("uri", PREMISES_URI));
@@ -366,9 +462,59 @@ public class Test_Mongo_EMF_FunctionProvider extends TestCase {
 				.getContents().size(), is(1));
 		assertThat("Premises should have a resource.", premises.eResource(),
 				is(notNullValue()));
-
+		ByteArrayOutputStream ba = new ByteArrayOutputStream();
+		resource.save(ba, null);
+		System.out.printf("Size of text conversion = %s%n",
+				ba.toByteArray().length);
 		resource.save(null);
 		assertThat("Did not save the resource", file.exists(), is(true));
+	}
+	@Test
+	public void testPremises_Read_Binary() throws IOException {
+		File file = new File(FILE_TMP_OUT_PREMISES1_BINARY);
+		file.delete();
+		ResourceSet resourceSet = getResourceSet();
+		
+
+		URI uri = URI.createURI("file:" + FILE_TMP_OUT_PREMISES1_BINARY);
+		Resource resource = resourceSet.createResource(uri);
+		assertThat("Resource should be binary", resource,
+				is(instanceOf(BinaryResourceImpl.class)));
+
+		DBCollection coll = getCollection(DB_NAME, PREMISES_COLLECTION);
+		DBObject dbObject = coll
+				.findOne(new BasicDBObject("uri", PREMISES_URI));
+
+		Function<DBObject, EObject> builder = functionProvider
+				.getDBObjectToEObjectFunction(coll, resource);
+
+		Premises premises = (Premises) builder.apply(dbObject);
+
+		assertThat("Premises should not be null", premises, is(notNullValue()));
+		assertThat("Premises should have name", premises.getName(),
+				is("Jack Condor"));
+		assertThat("Resource should have premises in it.", resource
+				.getContents().size(), is(1));
+		assertThat("Premises should have a resource.", premises.eResource(),
+				is(notNullValue()));
+		ByteArrayOutputStream ba = new ByteArrayOutputStream();
+		resource.save(ba,null);
+		System.out.printf("Size of binary conversion = %s%n",
+				ba.toByteArray().length);
+		resource.save(null);
+		assertThat("Did not save the resource", file.exists(), is(true));
+	}
+
+	ResourceSet getResourceSet() {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
+				.put("binary", new Resource.Factory() {
+					@Override
+					public Resource createResource(URI uri) {
+						return new BinaryResourceImpl(uri);
+					}
+				});
+		return resourceSet;
 	}
 
 	@Test

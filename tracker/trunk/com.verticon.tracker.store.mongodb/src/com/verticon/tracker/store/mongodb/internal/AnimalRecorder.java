@@ -10,6 +10,7 @@ import static com.verticon.tracker.store.mongodb.internal.Utils.OCD;
 import static com.verticon.tracker.store.mongodb.internal.Utils.PREMISES_URI;
 import static com.verticon.tracker.store.mongodb.internal.Utils.TAG;
 import static com.verticon.tracker.store.mongodb.internal.Utils.UPDATES;
+import static java.util.Collections.emptyList;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -42,6 +43,8 @@ import com.verticon.tracker.ReplacedTag;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.store.IUpdateStats;
 import com.verticon.tracker.store.StoreLogonException;
+import com.verticon.tracker.store.TrackerStoreUtils;
+import com.verticon.tracker.store.UpdateStats;
 
 public class AnimalRecorder {
 
@@ -82,7 +85,8 @@ public class AnimalRecorder {
 		Date lastUpdate = getLastUpdate(uri);
 		// Get all the animals that need to be processed
 		Iterable<Animal> animalsWithNewAndUnpublishedEvents = Iterables.filter(
-				animals, new Utils.AnimalsWithNewAndUnpublishedEvents(
+				animals,
+				new TrackerStoreUtils.AnimalsWithNewAndUnpublishedEvents(
 						lastUpdate));
 
 		if (Iterables.isEmpty(animalsWithNewAndUnpublishedEvents)) {
@@ -181,7 +185,7 @@ public class AnimalRecorder {
 		DBCursor cursor = coll.find(q, f);
 		for (DBObject dbObject : cursor) {
 			AnimalUpdate animalUpdate = updateMap.get(dbObject.get(ID_KEY));
-			animalUpdate.addPersistedTag(dbObject);
+			animalUpdate.addPersistedTag(dbObject.toMap());
 		}
 	}
 
@@ -319,6 +323,15 @@ public class AnimalRecorder {
 
 		Iterable<Event> ges = Iterables.filter(events,
 				Predicates.instanceOf(GenericEvent.class));
+		// If the generic events cannot find a reference to the OCD
+		// because for example the ocd reference is broken
+		// filter these out.
+		if (!Iterables.isEmpty(ges)) {
+			GenericEvent res = (GenericEvent) Iterables.get(ges, 0);
+			if (res.getOcd() == null || res.getOcd().getID() == null) {
+				return emptyList();
+			}
+		}
 		return Iterables.transform(ges, Utils.eventToOCD);
 	}
 

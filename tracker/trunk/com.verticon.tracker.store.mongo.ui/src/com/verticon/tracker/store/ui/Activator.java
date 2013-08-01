@@ -10,14 +10,24 @@
  *******************************************************************************/
 package com.verticon.tracker.store.ui;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
+import static com.google.common.collect.Lists.newArrayList;
+
+import java.util.Arrays;
+import java.util.List;
+
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
+import com.google.common.base.Function;
+import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
+import com.google.common.collect.Iterables;
 import com.verticon.osgi.useradmin.authenticator.Authenticator;
 import com.verticon.tracker.store.ITrackerStore;
 
@@ -121,6 +131,42 @@ public class Activator extends AbstractUIPlugin {
 		return result;
 
 	}
+	
+	public boolean hasMQTTTrackerStoreService() {
+		return getMQTTTrackerStoreService() != null;
+	}
+
+	/**
+	 * @deprecated
+	 * @return mqttTrackerStore
+	 */
+	@Deprecated
+	public ITrackerStore getMQTTTrackerStoreService() {
+		for (ServiceReference<ITrackerStore> serviceReference : storeTracker.getServiceReferences()) {
+			String factoryPid = (String)serviceReference.getProperty("service.factoryPid");
+			if(isNullOrEmpty(factoryPid)){
+				continue;
+			}else if(factoryPid.equals("com.verticon.tracker.store.mqtt")){
+				return this.storeTracker.getService(serviceReference);
+			}
+		}
+		return null;
+	}
+
+	public Iterable<ITrackerStore> getAvailableTrackerStores() {
+		Iterable<ServiceReference<ITrackerStore>> refs = Iterables.filter(
+				Arrays.asList(storeTracker.getServiceReferences()),
+				mqttTrackerStoresRefs);
+		Iterable<ITrackerStore> mqttStores = Iterables.transform(refs,
+				toMqttTrackerStore);
+		List<ITrackerStore> results = newArrayList(mqttStores);
+		ITrackerStore store = getTrackerStoreService();
+		if (store != null) {
+			results.add(getTrackerStoreService());
+		}
+		return results;
+	}
+
 
 	public boolean hasRole(String name) {
 		return authenticatorTracker.getService() != null ? authenticatorTracker
@@ -143,5 +189,28 @@ public class Activator extends AbstractUIPlugin {
 	public boolean hasTrackerStoreService() {
 		return getTrackerStoreService() != null;
 	}
+
+	private static final Predicate<ServiceReference<ITrackerStore>> mqttTrackerStoresRefs = new Predicate<ServiceReference<ITrackerStore>>() {
+		@Override
+		public boolean apply(ServiceReference<ITrackerStore> serviceReference) {
+			String factoryPid = (String) serviceReference
+					.getProperty("service.factoryPid");
+			if (isNullOrEmpty(factoryPid)) {
+				return false;
+			} else if (factoryPid.equals("com.verticon.tracker.store.mqtt")) {
+				return true;
+			}
+			return false;
+		}
+	};
+
+	private final Function<ServiceReference<ITrackerStore>, ITrackerStore> toMqttTrackerStore = new Function<ServiceReference<ITrackerStore>, ITrackerStore>() {
+		@Override
+		public ITrackerStore apply(
+				ServiceReference<ITrackerStore> serviceReference) {
+			return storeTracker.getService(serviceReference);
+		}
+	};
+
 
 }

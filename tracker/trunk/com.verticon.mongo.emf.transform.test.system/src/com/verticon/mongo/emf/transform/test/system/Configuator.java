@@ -58,7 +58,7 @@ public class Configuator {
 				.createFactoryConfiguration(FACTORY_PID);
 
 		Dictionary<String, Object> props = new Hashtable<String, Object>();
-		props.put("iMongoClientProvider", "remote");
+		props.put("mongoClientProvider", "remote");
 		// take all defaults
 		config.update(props);
 		logger.debug(bundleMarker,

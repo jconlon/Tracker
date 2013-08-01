@@ -1,6 +1,6 @@
 h1=. Tracker Mongo Store
 
-com.verticon.tracker.store.mongo Version 2.0.0
+com.verticon.tracker.store.mongo Version 2.0.1
 
 {toc:style=disc|minLevel=2|maxLevel=3}
 

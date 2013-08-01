@@ -2,7 +2,7 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
    name="com.verticon.tracker.store.mongodb.test.system.mock.producer">
    <implementation 
-    class="com.verticon.tracker.store.mongodb.test.system.MockProducer"/>
+    class="com.verticon.tracker.store.mongodb.test.system.MockProducerConsumer"/>
    <property name="tracker.wiring.group.name" type="String" value="test"/>
    <property name="wireadmin.producer.scope">
     premises.tag
@@ -10,11 +10,16 @@ animal.weight
 gps.position
 mettler.weight
 premises.animal
+agriculture.premises.query
+   </property>
+   <property name="wireadmin.consumer.scope">
+    agriculture.premises.response
    </property>
    <property name="service.pid" type="String" value="mongo.test.mockProducer"/>
    <service>
       <provide interface="org.osgi.service.wireadmin.Producer"/>
-      <provide interface="com.verticon.tracker.store.mongodb.test.system.IController"/>
+      <provide interface="com.verticon.tracker.store.mongodb.test.system.IProducerConsumer"/>
+      <provide interface="org.osgi.service.wireadmin.Consumer"/>
    </service>
    <property name="com.verticon.tracker.mongo.test" type="String" value="testOne"/>
 </scr:component>
