@@ -1,6 +1,5 @@
 package com.verticon.tracker.irouter.wireadmin.internal;
 
-import static com.verticon.tracker.irouter.common.TrackerConstants.TRACKER_WIRE_GROUP_NAME;
 import static com.verticon.tracker.irouter.wireadmin.internal.Component.bundleMarker;
 import static org.osgi.framework.Constants.SERVICE_PID;
 import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_CONSUMER_SCOPE;
@@ -8,7 +7,6 @@ import static org.osgi.service.wireadmin.WireConstants.WIREADMIN_PRODUCER_SCOPE;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Hashtable;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -141,14 +139,26 @@ public class GroupConnector {
     		
     	}
     	String[] consumerScope = (String[]) properties.get(WIREADMIN_CONSUMER_SCOPE);
+    	if(consumerScope==null){
+			logger.error(bundleMarker,
+					"Could not find a consumer scope for {}",
+					consumerPid);
+    		return;
+    	}
     	//Find a Producer that intersects with this scope
     	for (Map.Entry<String,Map<String, ?>> producerEntry : producers.entrySet()) {
     		//Does a wire already connect to this producer
     		String producerPid = 
     			(String) producerEntry.getValue().get(SERVICE_PID);
     		WireParameters wireParameters = new WireParameters(producerPid, consumerPid, group);
-    		
-    		
+			String[] producerScope = (String[]) producerEntry.getValue().get(
+					WIREADMIN_PRODUCER_SCOPE);
+			if (producerScope == null) {
+				logger.error(bundleMarker,
+						"Could not find a producer scope configuration for {}",
+						producerPid);
+				continue;
+			}
     		String[] wireScope = scopeIntersection(consumerScope, 
     				(String[]) producerEntry.getValue().get(WIREADMIN_PRODUCER_SCOPE));
     		
@@ -185,7 +195,7 @@ public class GroupConnector {
 		Set<String> one = new HashSet<String>(Arrays.asList(array1));
 		Set<String> two = new HashSet<String>(Arrays.asList(array2));
 		one.retainAll(two);
-		return (String[]) one.toArray(new String[0]);
+		return one.toArray(new String[0]);
 	}
 	
 }
