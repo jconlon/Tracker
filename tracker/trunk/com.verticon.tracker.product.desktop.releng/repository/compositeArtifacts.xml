@@ -4,7 +4,7 @@
   <properties size='1'>
     <property name='p2.timestamp' value='1270076671954'/>
   </properties>
-  <children size='24'>
+  <children size='25'>
     <child location='product-desktop.beta.01'/>
     <child location='features-desktop.beta.01'/>
     <child location='features-desktop.beta.01.v20100409'/>
@@ -29,5 +29,6 @@
     <child location='features-useradmin.beta.10'/>
     <child location='features-desktop.trigger.view.10'/>
     <child location='features-mongo.optimization.10'/>
+    <child location='features-cloud.prototype.deployment.2.0'/>
   </children>
 </repository>
