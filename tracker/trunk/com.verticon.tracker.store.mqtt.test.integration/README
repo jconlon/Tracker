@@ -1,0 +1,21 @@
+# Tests a frontend:
+#    com.verticon.tracker.store.mqtt
+# to a MQTT broker
+# 
+# and a backend consiting of a 
+#    com.verticon.tracker.irouter.mqtt
+#    com.verticon.tracker.store.mongodb
+# to a MongoDB
+
+
+
+Change to
+# Tests a frontend:
+#    com.verticon.tracker.store.irouter
+#    com.verticon.tracker.irouter.bridge.mqtt
+# to a MQTT broker
+# 	 
+# and a backend consiting of a 
+$    com.verticon.tracker.irouter.bridge.mqtt
+#    com.verticon.irouter.mongodb
+# to a MongoDB

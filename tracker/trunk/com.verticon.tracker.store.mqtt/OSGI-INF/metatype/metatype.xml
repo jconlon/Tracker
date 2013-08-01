@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="MQTT Tracker Store" id="com.verticon.tracker.store.mqtt"
+       description="A TrackerStore implemented on the Message Queue Telemetry Transport." >
+    
+    <AD name="MQTT URI" id="connection.uri" 
+     	type="String" 
+     	required="true" 
+        default="tcp://m2m.eclipse.org:1883" 
+        description="Protocol, server name and port for the MQTT server."/> 
+        
+    <AD name="MQTT User Name" id="username" 
+     	type="String" 
+     	required="false" 
+        description="Optional name of the MQTT User."/> 
+   
+    <AD name="MQTT User Password"                 
+    	id="password" 
+    	required="false"                                  
+    	type="String"                           
+    	description="Password for the MQTT user."/>
+    	
+    <AD name="Wiring group name"  id="tracker.wiring.group.name" 
+    	required="true" 
+    	type="String" 
+    	default="none"
+        description="Name of the group of iRouter components that will be wired together. (If no iRouter functionality is required this value is ignored.)"/>
+   
+    <AD name="Consumable scopes" id="wireadmin.consumer.scope" 
+ 		type="String"
+ 		required="true" 
+ 		default="premises.animal,animal.weight"
+		cardinality="5" 
+		description="Comma delimited list of scope names for consumed animal, measurement, and position products. (If no iRouter functionality is required this value is ignored.)" />
+ 
+    <AD name="Premises URI" id="tracker.premises.uri" 
+    	type="String"
+    	required="true" 
+    	description="Universal Resource Identifier(URI) of the Tracker Premises.  This is the Premises URI that will be used for saving consumed iRouter Animal, Tag and Event products."/> 
+    	
+	<AD name="Type" id="premises.animal.default" 
+    	type="Integer" 
+        default="6"
+        description="The default type of animal to add as a new animal, for saving consumed iRouter event products where there is not already a prexisting animal.">
+    	<Option label="BOVINE_BEEF" value="6"/>
+		<Option label="BOVINE_BISON" value="8"/>
+		<Option label="BOVINE_DAIRY" value="9"/>
+		<Option label="CAPRINE" value="26"/>
+		<Option label="EQUINE" value="25"/>
+		<Option label="OVINE" value="7"/>
+		<Option label="SWINE" value="24"/>	
+	</AD>
+    	
+	<AD name="Component container label"  id="tracker.monitor.label" 
+  	 	 type="String" 
+         description="Name to label the node in the iRouter Monitor View graphics. This optional attribute has no functionality other than to visualize and document this service in the iRouter Monitor."
+         default="MQTT"/> 
+  
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.store.mqtt" bundle="*">
+		<Object ocdref="com.verticon.tracker.store.mqtt"/>
+  </Designate>
+  
+  
+</metatype:MetaData>

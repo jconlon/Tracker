@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+
+  <OCD name="iRouter MQTT Bridge" id="com.verticon.tracker.irouter.mqtt"
+       description="A bridge that routes messages between a MQTT server and the iRouter." >
+    
+    <AD name="MQTT URI" id="connection.uri" 
+     	type="String" 
+     	required="true" 
+        default="tcp://m2m.eclipse.org:1883" 
+        description="Protocol, server name and port for the MQTT server."/> 
+    
+    <AD name="MQTT ClientID" id="mqtt.clientid" 
+    	type="String"
+    	required="true" 
+    	description="MQTT Client Identification."/> 	
+    	
+    <AD name="MQTT User Name" id="username" 
+     	type="String" 
+     	required="false" 
+        description="Optional name of the MQTT User."/> 
+   
+    <AD name="MQTT User Password"                 
+    	id="password" 
+    	required="false"                                  
+    	type="String"                           
+    	description="Password for the MQTT user."/>
+    	
+   <AD name="Wiring group name"  id="tracker.wiring.group.name" 
+    	required="true" 
+    	type="String" 
+    	default="none"
+        description="Name of the group of iRouter components that will be wired together. (If no iRouter functionality is required this value is ignored.)"/>
+   
+   <AD name="MQTT subscriber topics" id="mqtt.subscriber.topics" 
+ 		type="String"
+ 		required="true" 
+ 		default="Agriculture/Premises/+/Query,Agriculture/Premises/+/Events/EMF,Agriculture/Premises/+/Register/EMF"
+		cardinality="5" 
+		description="Comma delimited list of scope names for products. These scope names will be mapped from subscriber names." />
+ 
+   <AD name="Producer scopes" id="wireadmin.producer.scope" 
+ 		type="String"
+ 		required="true" 
+ 		default="agriculture.premises.query,agriculture.premises.events.emf,agriculture.premises.register.emf"
+		cardinality="5" 
+		description="Comma delimited list of scope names for products. These scope names will be mapped from subscriber topic names." />
+ 
+   <AD name="Consumable scope" id="wireadmin.consumer.scope" 
+    	required="true" 
+    	type="String"
+    	default="agriculture.premises.response"
+		cardinality="3" 
+		description="The consumable scopes carrying payloads for publishing to MQTT. Scope identification determines publishing topic. (Use full scope names)" />
+ 	
+	<AD name="Component container label"  id="tracker.monitor.label" 
+  	 	 type="String" 
+         description="Name to label the node in the iRouter Monitor View graphics. This optional attribute has no functionality other than to visualize and document this service in the iRouter Monitor."
+         default="MQTT iRouter Bridge"/> 
+ 
+  </OCD>
+  
+  <Designate pid="com.verticon.tracker.irouter.mqtt" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.mqtt"/>
+  </Designate>
+  
+  
+</metatype:MetaData>
