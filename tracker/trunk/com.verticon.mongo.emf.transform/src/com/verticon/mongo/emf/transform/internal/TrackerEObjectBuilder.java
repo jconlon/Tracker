@@ -190,6 +190,11 @@ class TrackerEObjectBuilder extends EObjectBuilder {
 			Resource resource, EObject eObject, EReference reference) {
 
 		EClass eClass = eObject.eClass();
+		if (reference.getName().equals("dam")) {
+			// ignore
+		} else if (reference.getName().equals("sire")) {
+			// ignore
+		} else
 		// For GenericEvent objects reintroduce a class and a reference
 		if (Reference.GENERIC_EVENT_OCD.is(eClass, reference)) {
 
