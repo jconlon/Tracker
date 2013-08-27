@@ -313,6 +313,16 @@ public class Test_Mongo_EMF_FunctionProvider extends TestCase {
 		Premises premisesIn = (Premises) resource.getContents().get(0);
 		premisesIn.getUnAppliedTags().clear();
 		int animalCount = premisesIn.getAnimals().size();
+		// Insure that there are animals with sires/dames
+		boolean hasSireOrDame = false;
+		for (Animal animal : premisesIn.getAnimals()) {
+			if (animal.getSire() != null || animal.getDam() != null) {
+				hasSireOrDame = true;
+				break;
+			}
+		}
+
+		assertThat(hasSireOrDame, is(true));
 
 		// Transform to DBObject
 		Function<EObject, DBObject> eTod = functionProvider
@@ -349,6 +359,15 @@ public class Test_Mongo_EMF_FunctionProvider extends TestCase {
 		System.out.printf("Size of EMF binary serialization = %s%n",
 				ba.toByteArray().length);
 
+		hasSireOrDame = false;
+		for (Animal animal : premisesOut.getAnimals()) {
+			if (animal.getSire() != null || animal.getDam() != null) {
+				hasSireOrDame = true;
+				break;
+			}
+		}
+
+		assertThat(hasSireOrDame, is(false));
 	}
 
 	@Test
