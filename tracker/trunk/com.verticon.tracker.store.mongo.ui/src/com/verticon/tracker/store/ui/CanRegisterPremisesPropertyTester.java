@@ -14,7 +14,7 @@ import static com.verticon.osgi.useradmin.authenticator.Authenticator.TRACKER_ST
 
 import org.eclipse.core.expressions.PropertyTester;
 
-public class CanRegisterLocationsPropertyTester extends PropertyTester {
+public class CanRegisterPremisesPropertyTester extends PropertyTester {
 
 	private static final String CAN_REGISTER_PREMISES = "canRegisterPremises";
 

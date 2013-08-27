@@ -1,7 +1,9 @@
 package com.verticon.tracker.store.ui.wizards;
 
+
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -12,15 +14,16 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.osgi.framework.InvalidSyntaxException;
 
+import com.google.common.collect.Iterables;
 import com.verticon.tracker.store.ITrackerStore;
 import com.verticon.tracker.store.StoreAccessException;
+import com.verticon.tracker.store.ui.Activator;
 
 /**
- * @deprecated
+ * 
  * @author jconlon
  * 
  */
-@Deprecated
 public class SelectTrackerStorePage extends WizardPage {
 
 	private ListViewer listViewer;
@@ -64,18 +67,22 @@ public class SelectTrackerStorePage extends WizardPage {
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
-				// IStructuredSelection selection = (IStructuredSelection)
-				// event.getSelection();
-				// ITrackerStore trackerStore = (ITrackerStore)
-				// selection.getFirstElement();
-				// if(getWizard() instanceof ImportAnimalWizard){
-				// ((ImportAnimalWizard)
-				// getWizard()).setTrackerStore(trackerStore);
-				// }else if(getWizard() instanceof ImportPremisesWizard){
-				// ((ImportPremisesWizard)
-				// getWizard()).setTrackerStore(trackerStore);
-				// }
-				// updatePageComplete();
+				IStructuredSelection selection = (IStructuredSelection) event
+						.getSelection();
+				ITrackerStore trackerStore = (ITrackerStore) selection
+						.getFirstElement();
+				if (getWizard() instanceof ImportAnimalWizard) {
+					((ImportAnimalWizard) getWizard())
+							.setTrackerStore(trackerStore);
+				} else if (getWizard() instanceof ImportPremisesWizard) {
+					((ImportPremisesWizard) getWizard())
+							.setTrackerStore(trackerStore);
+				}
+				if (trackerStore == null) {
+					setPageComplete(false);
+				} else {
+					setPageComplete(true);
+				}
 
 			}
 		});
@@ -94,6 +101,9 @@ public class SelectTrackerStorePage extends WizardPage {
 	private void initContents() throws StoreAccessException,
 			InvalidSyntaxException {
 		setPageComplete(false);
+		listViewer.setInput(Iterables.toArray(Activator.getDefault()
+				.getAvailableTrackerStores(), ITrackerStore.class));
 	}
+
 
 }

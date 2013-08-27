@@ -65,6 +65,8 @@ public class CanPublishAnimalsPropertyTester extends PropertyTester {
 				// premises
 				result = Activator.getDefault().hasTrackerStoreService()
 						&& Activator.getDefault().hasRole(uri);
+				result = result
+						|| Activator.getDefault().hasMQTTTrackerStoreService();
 			}
 		}
 

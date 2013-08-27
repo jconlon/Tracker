@@ -12,7 +12,7 @@
             type="java.lang.Object">
       </propertyTester>
       <propertyTester
-            class="com.verticon.tracker.store.ui.CanRegisterLocationsPropertyTester"
+            class="com.verticon.tracker.store.ui.CanRegisterPremisesPropertyTester"
             id="com.verticon.tracker.store.ui.propertyTester.hasRegister"
             namespace="com.verticon.tracker.store.ui"
             properties="canRegisterPremises"
@@ -35,24 +35,23 @@
    </extension>
    
    <extension
-         point="org.eclipse.ui.commands">
-      
-     
+         point="org.eclipse.ui.commands"> 
       <command
             name="Register Premises to TrackerStore"
             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
             id="com.verticon.tracker.store.ui.commands.registerPremisesCommand">
+      </command>
+       <command
+            name="Register Multiple Premises to TrackerStore"
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            id="com.verticon.tracker.store.ui.commands.registerMultiplePremisesCommand">
       </command>
       <command
             name="Record Animal History to TrackerStore"
             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
             id="com.verticon.tracker.store.ui.commands.recordAnimalsCommand">
       </command>
-      <command
-            name="Register Premises"
-            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
-            id="com.verticon.tracker.store.ui.commands.register.premises.csv.command">
-      </command>
+     
       <command
             name="Import Animal from TrackerStore"
             categoryId="com.verticon.tracker.editor.commands.Tracker.category"
@@ -81,7 +80,7 @@
       </handler>
      
        <handler
-            commandId="com.verticon.tracker.store.ui.commands.register.premises.csv.command"
+            commandId="com.verticon.tracker.store.ui.commands.registerMultiplePremisesCommand"
             class="com.verticon.tracker.store.ui.handlers.RegisterPremisesFromCSVHandler">
       </handler>
       
@@ -119,7 +118,7 @@
       </key>
      
        <key
-            commandId="com.verticon.tracker.store.ui.commands.register.premises.csv.command"
+            commandId="com.verticon.tracker.store.ui.commands.registerMultiplePremisesCommand"
             contextId="org.eclipse.ui.contexts.window"
             sequence="M1+2"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
@@ -152,7 +151,7 @@
  				 "Pin","Name","Phone","Email","Street","City","State","zipCode","latitude","longitude"
                -->
              <command
-                     commandId="com.verticon.tracker.store.ui.commands.register.premises.csv.command"
+                     commandId="com.verticon.tracker.store.ui.commands.registerMultiplePremisesCommand"
                      icon="icons/etool16/import_wiz.gif"
                      style="push">
                <visibleWhen>
@@ -240,7 +239,6 @@
 	            </visibleWhen>
            </command>
               
-           <!-- Premises --> 
            
            <!-- Record Animal life data and event histories -->
            <command

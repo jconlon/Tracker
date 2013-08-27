@@ -41,7 +41,9 @@ public class HasTrackerStoreServicePropertyTester extends PropertyTester {
 	@Override
 	public boolean test(Object receiver, String property, Object[] args,
 			Object expectedValue) {
-		return Activator.getDefault().hasTrackerStoreService();
+		boolean result = Activator.getDefault().hasTrackerStoreService();
+		result = result || Activator.getDefault().hasMQTTTrackerStoreService();
+		return result;
 
 	}
 

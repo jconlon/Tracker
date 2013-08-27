@@ -317,7 +317,7 @@ public class TrackerStoreUtils {
 
 	// "Pin""Name""Phone""Email""Street""City""State""zipCode""latitude""longitude"
 	private static void buildPremises(String[] headers, String[] line,
-			ITrackerUpdate trackerStore) {
+			ITrackerUpdate trackerStore) throws IOException {
 		if (line == null || line.length == 0) {
 			logger.warn(bundleMarker, "blank line skipped");
 			return;
@@ -359,9 +359,10 @@ public class TrackerStoreUtils {
 		premises.setLocation(location);
 		try {
 			trackerStore.register(premises);
-		} catch (Exception e) {
+		} catch (IOException e) {
 			logger.error(bundleMarker,
-					"Failed while building premises " + map.get("name"), e);
+					"Failed to register premises " + map.get("name"), e);
+			throw e;
 		}
 
 	}

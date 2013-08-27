@@ -86,11 +86,15 @@ public class AnimalRecord {
 				new TrackerStoreUtils.AnimalsWithNewAndUnpublishedEvents(
 						lastUpdate));
 		if (Iterables.isEmpty(animalsWithNewAndUnpublishedEvents)) {
+			String message = String
+					.format("There are no new animal events since last publish date: %s",
+							lastUpdate);
 			logger.debug(
 					bundleMarker,
-					"There are no new animal events since last publish date: {}",
-					lastUpdate);
-			return new UpdateStats();
+ message);
+			UpdateStats result = new UpdateStats();
+			result.setComment(message);
+			return result;
 		}
 
 		try {
@@ -187,7 +191,7 @@ public class AnimalRecord {
 			String response = new String(responseMessage.getPayload());
 			logger.debug(bundleMarker,
 					"Record Animals Response payload was {}", response);
-			UpdateStats result = new UpdateStats(response);
+			IUpdateStats result = new UpdateStats(response);
 			if (result.getExceptions().isEmpty()) {
 				for (Animal animal : premises.getAnimals()) {
 					animalFind.invalidateCacheEntry(animal);

@@ -93,7 +93,7 @@ public class RegisterPremisesHandler extends AbstractHandler {
 
 	}
 
-	ITrackerUpdate chooseOneTrackerStore(ExecutionEvent event) {
+	static ITrackerStore chooseOneTrackerStore(ExecutionEvent event) {
 		Iterable<ITrackerStore> availableStores = Activator.getDefault()
 				.getAvailableTrackerStores();
 		// Prompt for one of these
@@ -121,7 +121,7 @@ public class RegisterPremisesHandler extends AbstractHandler {
 			return null;
 		}
 		Object[] result = dialog.getResult();
-		ITrackerUpdate store = (ITrackerStore) result[0];
+		ITrackerStore store = (ITrackerStore) result[0];
 		return store;
 	}
 }

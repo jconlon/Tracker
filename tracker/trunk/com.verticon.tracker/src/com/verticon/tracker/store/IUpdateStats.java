@@ -19,8 +19,25 @@ public interface IUpdateStats {
 	 */
 	public int getTagsAdded();
 
+	/**
+	 * 
+	 * @return exceptions encountered
+	 */
 	public Collection<Exception> getExceptions();
 
+	/**
+	 * 
+	 * @return number of animals processed
+	 */
 	public int getAnimalsProcessed();
+
+	/**
+	 * 
+	 * @return pretty string describing the stats
+	 */
+	public String prettyPrint();
+
+	public abstract String serializeExceptions();
+
 
 }

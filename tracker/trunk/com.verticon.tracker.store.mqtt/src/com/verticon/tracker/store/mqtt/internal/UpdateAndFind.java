@@ -67,15 +67,19 @@ public class UpdateAndFind implements ITrackerUpdate, ITrackerFind {
 			token.waitForCompletion();
 			MqttMessage responseMessage = receiveQueue.poll(
 					waitSecondsForResponse, TimeUnit.SECONDS);
+			if (responseMessage == null) {
+				throw new IOException(
+						"Registration request failed. There was no response to the registration request. ");
+			}
 			if (responseMessage.getPayload() == null) {
 				throw new IOException(
-						"Record Animals Response payload was null. ");
+						"Registration request failed. The response to the registration request was empty null.");
 			}
 			String response = new String(responseMessage.getPayload());
 			if (response.equals("OK")) {
 				return;
 			}
-			throw new IOException(response);
+			throw new IOException("Registration request failed. " + response);
 
 		} catch (MqttException e) {
 			logger.error(bundleMarker, "Failed to register premises "

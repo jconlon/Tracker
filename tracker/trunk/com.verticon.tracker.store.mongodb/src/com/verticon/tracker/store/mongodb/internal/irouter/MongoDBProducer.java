@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Optional;
+import com.verticon.osgi.useradmin.authenticator.Authenticator;
 import com.verticon.tracker.store.ITrackerFind;
 import com.verticon.tracker.store.Query;
 import com.verticon.tracker.store.mongodb.internal.Monitor;
@@ -34,6 +35,8 @@ public class MongoDBProducer implements Producer, Callable<Void> {
 	private final Monitor monitor;
 
 	private String scope;
+
+	private Authenticator authenticator;
 
 	public MongoDBProducer(LinkedBlockingQueue<Envelope> queryQueue,
 			ITrackerFind trackerFind, Monitor monitor) {
@@ -109,11 +112,17 @@ public class MongoDBProducer implements Producer, Callable<Void> {
 			throw new IllegalArgumentException(
 					"Value is not a String or a String as a byte[]");
 		}
+
 		// checkArgument(value instanceof byte[],
 		// "Envelope value is not a byte array");
 
 		String topic = (String) id;
 		String outboundTopic = topic.replace("Query", "Response");
+		String accessProblem = checkAccess();
+		if (accessProblem != null) {
+			produce(outboundTopic, accessProblem.getBytes());
+			return;
+		}
 		logger.debug(bundleMarker, "Handling query={} from topic={}, ", query,
 				topic);
 		try {
@@ -138,6 +147,16 @@ public class MongoDBProducer implements Producer, Callable<Void> {
 		}
 	}
 
+	private String checkAccess() {
+		boolean allowed = authenticator != null
+				&& authenticator.isAuthenticatedUser();
+		if (!allowed) {
+			return "User is not authenticated.";
+		}
+
+		return null;
+	}
+
 	private void produce(String topic, byte[] payload) {
 		if (wires == null) {
 			logger.error(bundleMarker, "Cant send value to topic={}, No wires",
@@ -153,6 +172,10 @@ public class MongoDBProducer implements Producer, Callable<Void> {
 			}
 			monitor.incrementTotalProductsProduced();
 		}
+	}
+
+	public void setAuthenticator(Authenticator authenticator) {
+		this.authenticator = authenticator;
 	}
 
 }

@@ -25,7 +25,6 @@ import org.slf4j.LoggerFactory;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.store.ITrackerUpdate;
 import com.verticon.tracker.store.IUpdateStats;
-import com.verticon.tracker.store.ui.Activator;
 
 /**
  * Uses the ITrackerStore to save Animal information to MongoDB.
@@ -49,31 +48,39 @@ public class RecordAnimalsHandler extends AbstractHandler {
 					.getFirstElement();
 			String uri = premises.getUri();
 
-			ITrackerUpdate store = Activator.getDefault()
-					.getTrackerStoreService();
-			;
+			ITrackerUpdate store = RegisterPremisesHandler
+					.chooseOneTrackerStore(event);
+			if (store == null) {
+				return false;
+			}
 			try {
-
-				if (store == null) {
-					throw new Exception(
-							"Unable to find ITrackerStore service. Make sure you created a MongoTracker Store factory configuration with "
-									+ uri + " as the Premises uri.");
-				}
 				IUpdateStats processedAnimals = store.recordAnimals(premises);
+				if(!processedAnimals.getExceptions().isEmpty()) {
+					MessageDialog.openError(HandlerUtil.getActiveShell(event),
+							"Animal LifeData and EventHistory Loader Results",
+							processedAnimals.prettyPrint()
+									+ " From premises: " + uri
+									+ " to TrackerStore " + store.uri()
+									+ " With errors: "
+									+ processedAnimals.serializeExceptions());
+				}else {
 				MessageDialog.openConfirm(HandlerUtil.getActiveShell(event),
-						"Animal LifeData and EventHistory Loader",
-						processedAnimals + " contained in premises: " + uri
-								+ " to MongoDB.");
+							"Animal LifeData and EventHistory Loader Results",
+							processedAnimals.prettyPrint()
+								+ " From premises: " + uri
+								+ " to TrackerStore " + store.uri());
+				}
 			} catch (Exception e) {
 				MessageDialog.openError(HandlerUtil.getActiveShell(event),
-						"Failed to Save animals from premises: " + uri
-								+ " to MongoDB.", e.getMessage());
+						"Failed to Record animals from premises: " + uri
+								+ " to TrackerStore " + store.uri(),
+						e.getLocalizedMessage());
 				logger.error(bundleMarker,
-						"Failed to Save animals from premises: " + uri
-								+ " to MongoDB.", e);
+						"Failed to Record animals from premises: " + uri
+								+ " to TrackerStore " + store.uri(), e);
 				throw new ExecutionException(
-						"Failed to Save animals from premises: " + uri
-								+ " to MongoDB.", e);
+						"Failed to Record animals from premises: " + uri
+								+ " to TrackerStore " + store.uri(), e);
 			}
 
 		}

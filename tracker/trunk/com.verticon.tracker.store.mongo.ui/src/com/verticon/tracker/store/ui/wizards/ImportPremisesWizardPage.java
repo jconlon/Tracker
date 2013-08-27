@@ -32,10 +32,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 
-import com.verticon.tracker.store.ITrackerFind;
 import com.verticon.tracker.store.ITrackerStore;
 import com.verticon.tracker.store.TrackerStoreUtils;
-import com.verticon.tracker.store.ui.Activator;
 import com.verticon.ui.dialogs.DateDialog;
 
 public class ImportPremisesWizardPage extends WizardNewFileCreationPage {
@@ -182,16 +180,21 @@ public class ImportPremisesWizardPage extends WizardNewFileCreationPage {
 
 	URI createImportedResource() throws IOException {
 		String pin = premisesID.getText();
-		ITrackerFind trackerStore = Activator.getDefault()
-				.getTrackerStoreService();
+		// ITrackerFind trackerStore = Activator.getDefault()
+		// .getTrackerStoreService();
+		ImportPremisesWizard mywiz = (ImportPremisesWizard) this.getWizard();
 		URI uri = createURI();
-		TrackerStoreUtils.retrieveAndImportPremises(pin, trackerStore, uri,
+		TrackerStoreUtils.retrieveAndImportPremises(pin,
+				mywiz.getTrackerStore(), uri,
 				fromDate.getText(), toDate.getText());
 		return uri;
 	}
 
 	private URI createURI() {
 		IPath containerPath = getContainerFullPath();
+		if (containerPath == null) {
+			return null;
+		}
 		IPath newFilePath = containerPath.append(getFileName());
 		IFile newFileHandle = createFileHandle(newFilePath);
 		// return the raw file location
@@ -218,12 +221,13 @@ public class ImportPremisesWizardPage extends WizardNewFileCreationPage {
 	 */
 	@Override
 	protected IStatus validateLinkedResource() {
+		updatePageComplete();
 		return new Status(IStatus.OK, "com.verticon.tracker.store.ui",
 				IStatus.OK, "", null); // NON-NLS-1 //NON-NLS-2
 	}
 
 	String getPremisesID() {
-		return premisesID.getText();
+		return premisesID != null ? premisesID.getText() : null;
 	}
 
 	private void updatePageComplete() {
@@ -231,4 +235,18 @@ public class ImportPremisesWizardPage extends WizardNewFileCreationPage {
 		setPageComplete(getPremisesID() != null && createURI() != null
 				&& !createURI().isEmpty());
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.eclipse.ui.dialogs.WizardNewFileCreationPage#setContainerFullPath
+	 * (org.eclipse.core.runtime.IPath)
+	 */
+	@Override
+	public void setContainerFullPath(IPath path) {
+		super.setContainerFullPath(path);
+		updatePageComplete();
+	}
+
 }
