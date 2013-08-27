@@ -137,10 +137,9 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	/**
-	 * @deprecated
+	 * 
 	 * @return mqttTrackerStore
 	 */
-	@Deprecated
 	public ITrackerStore getMQTTTrackerStoreService() {
 		for (ServiceReference<ITrackerStore> serviceReference : storeTracker.getServiceReferences()) {
 			String factoryPid = (String)serviceReference.getProperty("service.factoryPid");

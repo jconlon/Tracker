@@ -18,11 +18,13 @@ import org.eclipse.ui.IImportWizard;
 import org.eclipse.ui.IWorkbench;
 
 import com.google.common.base.Strings;
-import com.verticon.tracker.store.ui.Activator;
+import com.verticon.tracker.store.ITrackerStore;
 
 public class ImportPremisesWizard extends Wizard implements IImportWizard {
 
 	private ImportPremisesWizardPage mainPage;
+	private SelectTrackerStorePage trackerStorePage;
+	private ITrackerStore trackerStore;
 
 	public ImportPremisesWizard() {
 		super();
@@ -46,7 +48,7 @@ public class ImportPremisesWizard extends Wizard implements IImportWizard {
 		}
 		MessageDialog.openInformation(getShell(), "Imported Premises",
 				"Imported premises " + mainPage.getPremisesID() + " from "
-						+ Activator.getDefault().getTrackerStoreService().uri()
+						+ trackerStore.uri()
 						+ " to " + uri);
 		return true;
 	}
@@ -61,7 +63,7 @@ public class ImportPremisesWizard extends Wizard implements IImportWizard {
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		setWindowTitle("TrackerStore Premises Import Wizard"); // NON-NLS-1
 		setNeedsProgressMonitor(true);
-		// trackerStorePage = new SelectTrackerStorePage();
+		trackerStorePage = new SelectTrackerStorePage();
 		mainPage = new ImportPremisesWizardPage("Import Premises", selection); // NON-NLS-1
 	}
 
@@ -73,20 +75,20 @@ public class ImportPremisesWizard extends Wizard implements IImportWizard {
 	@Override
 	public void addPages() {
 		super.addPages();
-		if (!Activator.getDefault().hasTrackerStoreService()) {
-			addPage(new ErrorWizardPage(
-					"Import Premises",
-					"Can't import premises - No Tracker Store Service",
-					"Can't import premises! There is no active Tracker Store Service. Please Configure one and try again."));
-		} else if (!Activator.getDefault().isAuthenticatedUser()) {
-			addPage(new ErrorWizardPage(
-					"Import Premises",
-					"Can't import premises - You are not signed on",
-					"Can't import premises! You are not an authenticated user. Please Sign On and try again."));
-		} else {
-			// addPage(trackerStorePage);
-			addPage(mainPage);
-		}
+		// if (!Activator.getDefault().hasTrackerStoreService()) {
+		// addPage(new ErrorWizardPage(
+		// "Import Premises",
+		// "Can't import premises - No Tracker Store Service",
+		// "Can't import premises! There is no active Tracker Store Service. Please Configure one and try again."));
+		// } else if (!Activator.getDefault().isAuthenticatedUser()) {
+		// addPage(new ErrorWizardPage(
+		// "Import Premises",
+		// "Can't import premises - You are not signed on",
+		// "Can't import premises! You are not an authenticated user. Please Sign On and try again."));
+		// } else {
+		addPage(trackerStorePage);
+		addPage(mainPage);
+		// }
 
 	}
 
@@ -98,7 +100,16 @@ public class ImportPremisesWizard extends Wizard implements IImportWizard {
 	@Override
 	public boolean canFinish() {
 		return !Strings.isNullOrEmpty(mainPage.getPremisesID())
-				&& mainPage.getFileName() != null;
+				&& mainPage.getFileName() != null && mainPage.isPageComplete();
+	}
+
+	ITrackerStore getTrackerStore() {
+		return trackerStore;
+	}
+
+	void setTrackerStore(ITrackerStore trackerStore) {
+		this.trackerStore = trackerStore;
+
 	}
 
 }

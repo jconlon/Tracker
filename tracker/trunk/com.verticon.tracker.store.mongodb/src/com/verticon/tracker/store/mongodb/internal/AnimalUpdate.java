@@ -28,8 +28,6 @@ import com.verticon.tracker.Event;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.store.UpdateStats;
 
-//import com.mongodb.DBObject;
-
 public class AnimalUpdate {
 
 	enum State {

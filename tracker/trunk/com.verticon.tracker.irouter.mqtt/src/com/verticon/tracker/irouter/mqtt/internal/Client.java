@@ -105,6 +105,7 @@ public class Client implements MqttCallback {
 			throw new IOException(
 					"Topics and scopes must be contain the same number of names.");
 		}
+		client.setCallback(this);
 		int size = Iterables.size(topics);
 		String topic, scope;
 		for (int i = 0; i < size; i++) {
@@ -112,13 +113,13 @@ public class Client implements MqttCallback {
 			scope = Iterables.get(scopes, i);
 			SubscriberToProducer sToP = new SubscriberToProducer(scope, monitor);
 			subcribersToProducers.put(topic, sToP);
-			try {
-				subscribe(topic, sToP);
-			} catch (MqttException e) {
-				logger.error(bundleMarker, "Failed to subscribe to topic: "
-						+ topic, e);
-				throw new IOException(e);
-			}
+		}
+		try {
+			subscribe(topics);
+		} catch (MqttException e) {
+			logger.error(bundleMarker, "Failed to subscribe to topics: "
+					+ topics, e);
+			throw new IOException(e);
 		}
 	}
 
@@ -139,6 +140,44 @@ public class Client implements MqttCallback {
 		conOpt = null;
 	}
 	
+	private void subscribe(Iterable<String> topicFilters) throws MqttException {
+
+		String[] topics = Iterables.toArray(topicFilters, String.class);
+		int[] qos = new int[topics.length];
+
+		for (int i = 0; i < qos.length; i++) {
+			qos[i] = 2;
+		}
+
+		client.subscribe(topics, qos, null, new IMqttActionListener() {
+
+			@Override
+			public void onSuccess(IMqttToken asyncActionToken) {
+				logger.debug(bundleMarker, "Subscribed to topics: {}",
+						Arrays.toString(asyncActionToken.getTopics()));
+			}
+
+			@Override
+			public void onFailure(IMqttToken asyncActionToken,
+					Throwable exception) {
+				logger.error(bundleMarker, "Failed to subscribe to topics: {}",
+						Arrays.toString(asyncActionToken.getTopics()));
+			}
+
+		});
+		logger.debug("Subscribed to topics: {}", topicFilters.toString());
+	}
+
+	// client.subscribe(topicFilter, 2, context, new IMqttActionListener() {
+	//
+	// }
+	/**
+	 * @deprecated
+	 * @param topicFilter
+	 * @param context
+	 * @throws MqttException
+	 */
+	@Deprecated
 	private void subscribe(String topicFilter, Object context)
 			throws MqttException {
 		client.subscribe(topicFilter, 2, context, new IMqttActionListener() {

@@ -10,6 +10,7 @@ import static com.verticon.tracker.store.mongodb.internal.Utils.OCD;
 import static com.verticon.tracker.store.mongodb.internal.Utils.PREMISES_URI;
 import static com.verticon.tracker.store.mongodb.internal.Utils.TAG;
 import static com.verticon.tracker.store.mongodb.internal.Utils.UPDATES;
+import static com.verticon.tracker.store.mongodb.internal.Utils.bundleMarker;
 import static java.util.Collections.emptyList;
 
 import java.util.Collections;
@@ -22,6 +23,8 @@ import java.util.Set;
 import org.bson.types.ObjectId;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
@@ -47,6 +50,10 @@ import com.verticon.tracker.store.TrackerStoreUtils;
 import com.verticon.tracker.store.UpdateStats;
 
 public class AnimalRecorder {
+	/**
+	 * slf4j Logger
+	 */
+	private final Logger logger = LoggerFactory.getLogger(AnimalRecorder.class);
 
 	private static final String $SET = "$set";
 	private static final String UPDATE_KEY = "update";
@@ -83,6 +90,7 @@ public class AnimalRecorder {
 			throws StoreLogonException {
 		// Find out the latest update
 		Date lastUpdate = getLastUpdate(uri);
+		logger.debug(bundleMarker, "Last Animal recording {}", lastUpdate);
 		// Get all the animals that need to be processed
 		Iterable<Animal> animalsWithNewAndUnpublishedEvents = Iterables.filter(
 				animals,
@@ -90,7 +98,13 @@ public class AnimalRecorder {
 						lastUpdate));
 
 		if (Iterables.isEmpty(animalsWithNewAndUnpublishedEvents)) {
-			return new UpdateStats();
+			String message = String
+					.format("There are no new animal events since last publish date: %s",
+							lastUpdate);
+			logger.debug(bundleMarker, message);
+			UpdateStats result = new UpdateStats();
+			result.setComment(message);
+			return result;
 		}
 
 		List<AnimalUpdate> allUpdates = newArrayList(Iterables.transform(

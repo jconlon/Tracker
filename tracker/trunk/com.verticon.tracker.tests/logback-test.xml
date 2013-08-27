@@ -289,7 +289,7 @@
   <logger name="com.verticon.tracker.irouter.mqtt">
     <level value="DEBUG"/>
   </logger>
-  
+    
   <logger name="com.verticon.tracker.store.mqtt">
     <level value="DEBUG"/>
   </logger>
@@ -312,6 +312,9 @@
     <level value="DEBUG"/>
   </logger>
   
+  <logger name="com.verticon.osgi.useradmin.view.internal">
+  <level value="DEBUG"/>
+  </logger>
   
   <logger name="aggregated" level="INFO">
     <appender-ref ref="AGGREGATED"/>

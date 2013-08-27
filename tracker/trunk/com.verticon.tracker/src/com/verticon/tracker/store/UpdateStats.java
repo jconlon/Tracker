@@ -23,6 +23,15 @@ public class UpdateStats implements IUpdateStats {
 	private int animalsAdded;
 	private int tagsAdded;
 	private int eventsAdded;
+	private String comment;
+
+	/**
+	 * @param comment
+	 *            the comment to set
+	 */
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 
 	private final Collection<Exception> exceptions = newArrayList();
 
@@ -145,6 +154,23 @@ public class UpdateStats implements IUpdateStats {
 				+ serializeExceptions()
 				+ "}}";
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.verticon.tracker.store.IUpdateStats#prettyPrint()
+	 */
+	@Override
+	public String prettyPrint() {
+		if (!isNullOrEmpty(comment)) {
+			return comment;
+		}
+		String formattedString = String
+				.format("Animals Processed : %d; Animals added: %d; Tags added: %d; Events added: %d",
+						animalsProcessed, animalsAdded, tagsAdded, eventsAdded);
+		return formattedString;
+	}
+
 	@Override
 	public int getAnimalsProcessed() {
 		return animalsProcessed;
@@ -155,7 +181,8 @@ public class UpdateStats implements IUpdateStats {
 		return exceptions;
 	}
 
-	private String serializeExceptions() {
+	@Override
+	public String serializeExceptions() {
 		StringBuilder builder = new StringBuilder();
 		builder.append('[');
 		for (Iterator<Exception> iterator = exceptions.iterator(); iterator

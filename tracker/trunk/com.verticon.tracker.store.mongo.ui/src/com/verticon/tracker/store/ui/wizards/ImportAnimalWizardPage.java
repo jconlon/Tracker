@@ -28,9 +28,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 
-import com.verticon.tracker.store.ITrackerStore;
 import com.verticon.tracker.store.TrackerStoreUtils;
-import com.verticon.tracker.store.ui.Activator;
 
 public class ImportAnimalWizardPage extends WizardNewFileCreationPage {
 
@@ -100,16 +98,20 @@ public class ImportAnimalWizardPage extends WizardNewFileCreationPage {
 
 	URI createImportedResource() throws IOException {
 		String ain = animalID.getText();
-		ITrackerStore trackerStore = Activator.getDefault()
-				.getTrackerStoreService();
+		// ITrackerStore trackerStore = Activator.getDefault()
+		// .getTrackerStoreService();
+		ImportAnimalWizard mywiz = (ImportAnimalWizard) this.getWizard();
 		URI uri = createURI();
-		TrackerStoreUtils
-				.retrieveAndSaveContainedAnimal(ain, trackerStore, uri);
+		TrackerStoreUtils.retrieveAndSaveContainedAnimal(ain,
+				mywiz.getTrackerStore(), uri);
 		return uri;
 	}
 
 	private URI createURI() {
 		IPath containerPath = getContainerFullPath();
+		if (containerPath == null) {
+			return null;
+		}
 		IPath newFilePath = containerPath.append(getFileName());
 		IFile newFileHandle = createFileHandle(newFilePath);
 		// return the raw file location
@@ -141,7 +143,7 @@ public class ImportAnimalWizardPage extends WizardNewFileCreationPage {
 	}
 
 	String getAnimalID() {
-		return animalID.getText();
+		return animalID != null ? animalID.getText() : null;
 	}
 
 	private void updatePageComplete() {

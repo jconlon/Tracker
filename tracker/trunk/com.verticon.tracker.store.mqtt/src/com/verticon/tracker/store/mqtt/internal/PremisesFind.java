@@ -9,6 +9,7 @@ import static com.verticon.tracker.store.Query.RETRIEVE_PREMISES_WITH_POINT_TEMP
 import static com.verticon.tracker.store.TrackerStoreUtils.jSONToMap;
 import static com.verticon.tracker.store.mqtt.internal.MQTTTrackerStore.bundleMarker;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -195,7 +196,7 @@ public class PremisesFind {
 		String query = RETRIEVE_PREMISES_WITH_DATES_TEMPLATE.replace(
 				premisesUri, fromDate, toDate);
 		Premises premises = null;
-		MqttMessage responseMessage;
+		MqttMessage responseMessage = null;
 		try {
 			receiveQueue.clear();
 			client.publish(client.getQueryTopic(), 2, query.getBytes());
@@ -206,6 +207,13 @@ public class PremisesFind {
 			premises = TrackerStoreUtils.toPremises(responseMessage
 					.getPayload());
 
+		} catch (IOException e) {
+			if (responseMessage != null && responseMessage.getPayload() != null) {
+				throw new IllegalStateException(new String(
+						responseMessage.getPayload()));
+			}
+			logger.error(bundleMarker, "Unable to retreive premises "
+					+ premisesUri, e);
 		} catch (Exception e) {
 			logger.error(bundleMarker, "Unable to retreive premises "
 					+ premisesUri, e);

@@ -105,7 +105,11 @@ public enum Query {
 			 eObject = find.retrievePremises(get(query)[0]);
 			 break;
 		case RETRIEVE_PREMISES_WITH_DATES_TEMPLATE:
-			 eObject = find.retrievePremises(get(query)[0],get(query)[1],get(query)[2]);
+			String[] tokens = get(query);
+			String uri = tokens[0];
+			String in = tokens.length > 1 ? tokens[1] : null;
+			String out = tokens.length > 2 ? tokens[2] : null;
+			eObject = find.retrievePremises(uri, in, out);
 			 break;
 		case RETRIEVE_ANIMAL_TEMPLATE:
 			 eObject = find.retrieveAnimal(get(query)[0]);

@@ -294,6 +294,7 @@ public class MongoDBTrackerStore implements IMongoClientProvider, ITrackerStore,
 	void setAuthenticator(Authenticator authenticator) {
 		this.authenticator = authenticator;
 		mongoDBConsumer.setAuthenticator(authenticator);
+		mongoDBProducer.setAuthenticator(authenticator);
 	}
 
 	/**
@@ -304,7 +305,8 @@ public class MongoDBTrackerStore implements IMongoClientProvider, ITrackerStore,
 	 */
 	void unsetAuthenticator(Authenticator authenticator) {
 		this.authenticator = null;
-		mongoDBConsumer.setAuthenticator(authenticator);
+		mongoDBConsumer.setAuthenticator(null);
+		mongoDBProducer.setAuthenticator(null);
 	}
 
 	/**

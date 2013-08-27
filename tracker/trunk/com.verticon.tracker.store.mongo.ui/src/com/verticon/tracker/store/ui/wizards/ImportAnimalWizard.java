@@ -17,12 +17,13 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IImportWizard;
 import org.eclipse.ui.IWorkbench;
 
-import com.google.common.base.Strings;
-import com.verticon.tracker.store.ui.Activator;
+import com.verticon.tracker.store.ITrackerStore;
 
 public class ImportAnimalWizard extends Wizard implements IImportWizard {
 
 	private ImportAnimalWizardPage mainPage;
+	private SelectTrackerStorePage trackerStorePage;
+	private ITrackerStore trackerStore;
 
 	public ImportAnimalWizard() {
 		super();
@@ -46,7 +47,7 @@ public class ImportAnimalWizard extends Wizard implements IImportWizard {
 		}
 		MessageDialog.openInformation(getShell(), "Imported Animal",
 				"Imported " + mainPage.getAnimalID() + " from "
-						+ Activator.getDefault().getTrackerStoreService().uri()
+						+ trackerStore.uri()
 						+ " to " + uri);
 		return true;
 	}
@@ -61,7 +62,7 @@ public class ImportAnimalWizard extends Wizard implements IImportWizard {
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		setWindowTitle("TrackerStore Animal Import Wizard"); // NON-NLS-1
 		setNeedsProgressMonitor(true);
-		// trackerStorePage = new SelectTrackerStorePage();
+		trackerStorePage = new SelectTrackerStorePage();
 		mainPage = new ImportAnimalWizardPage("Import Animal", selection); // NON-NLS-1
 	}
 
@@ -73,19 +74,21 @@ public class ImportAnimalWizard extends Wizard implements IImportWizard {
 	@Override
 	public void addPages() {
 		super.addPages();
-		if (!Activator.getDefault().hasTrackerStoreService()) {
-			addPage(new ErrorWizardPage(
-					"Import Animal",
-					"Can't import animal - No Tracker Store Service!",
-					"Can't import animal! There is no active Tracker Store Service. Please go to the Configure menu, and configure a Tracker Store and try again."));
-		} else if (!Activator.getDefault().isAuthenticatedUser()) {
-			addPage(new ErrorWizardPage(
-					"Import Animal",
-					"Can't import animal - You are not an authenticated user!",
-					"Can't import animal! You are not signed on as an authenticated user. Please go to the User menu, sign on and try again."));
-		} else {
-			addPage(mainPage);
-		}
+		// if (!Activator.getDefault().hasTrackerStoreService()) {
+		// addPage(new ErrorWizardPage(
+		// "Import Animal",
+		// "Can't import animal - No Tracker Store Service!",
+		// "Can't import animal! There is no active Tracker Store Service. Please go to the Configure menu, and configure a Tracker Store and try again."));
+		// } else if (!Activator.getDefault().isAuthenticatedUser()) {
+		// addPage(new ErrorWizardPage(
+		// "Import Animal",
+		// "Can't import animal - You are not an authenticated user!",
+		// "Can't import animal! You are not signed on as an authenticated user. Please go to the User menu, sign on and try again."));
+		// } else {
+		// addPage(mainPage);
+		// }
+		addPage(trackerStorePage);
+		addPage(mainPage);
 	}
 
 	/*
@@ -95,8 +98,15 @@ public class ImportAnimalWizard extends Wizard implements IImportWizard {
 	 */
 	@Override
 	public boolean canFinish() {
-		return !Strings.isNullOrEmpty(mainPage.getAnimalID())
-				&& mainPage.getFileName() != null;
+		return mainPage.isPageComplete();
+	}
+
+	void setTrackerStore(ITrackerStore trackerStore) {
+		this.trackerStore = trackerStore;
+	}
+
+	ITrackerStore getTrackerStore() {
+		return trackerStore;
 	}
 
 }

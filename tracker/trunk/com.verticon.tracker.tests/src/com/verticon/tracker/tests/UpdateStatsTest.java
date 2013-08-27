@@ -8,12 +8,13 @@ import java.io.IOException;
 
 import junit.framework.TestCase;
 
+import com.verticon.tracker.store.IUpdateStats;
 import com.verticon.tracker.store.UpdateStats;
 
 public class UpdateStatsTest extends TestCase {
 
 	private static final UpdateStats UPDATESTATS;
-	private UpdateStats instance;
+	private IUpdateStats instance;
 
 	static {
 		UPDATESTATS = new UpdateStats();

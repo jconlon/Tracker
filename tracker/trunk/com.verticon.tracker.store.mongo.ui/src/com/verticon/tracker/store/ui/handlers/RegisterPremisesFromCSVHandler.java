@@ -27,7 +27,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.verticon.tracker.store.ITrackerUpdate;
-import com.verticon.tracker.store.ui.Activator;
 
 /**
  * Uses the ITrackerStore to register premises information from a csv file to
@@ -51,24 +50,26 @@ public class RegisterPremisesFromCSVHandler extends AbstractHandler {
 		ISelection selection = HandlerUtil.getActiveMenuSelection(event);
 		File file = getSelectedResource(selection);
 
-		ITrackerUpdate store = null;
+		ITrackerUpdate store = RegisterPremisesHandler
+				.chooseOneTrackerStore(event);
+		if (store == null) {
+			return false;
+		}
 		try {
-
-			store = Activator.getDefault().getTrackerStoreService();
-
 			int registrations = registerPremises(file, store);
 			MessageDialog.openConfirm(HandlerUtil.getActiveShell(event),
 					"Premises Registration from CSV", "Registered "
 							+ registrations + " premises on TrackerStore "
 							+ store.uri());
 		} catch (Exception e) {
+			String id = store != null ? store.uri() : "";
 			MessageDialog.openError(HandlerUtil.getActiveShell(event),
-					"Failed to register premises on " + store.uri(),
+					"Failed to register premises on " + id,
 					e.getMessage());
-			logger.error(bundleMarker, "Failed to register premises on "
-					+ store.uri(), e);
-			throw new ExecutionException("Failed to register premises on "
-					+ store.uri(), e);
+			logger.error(bundleMarker, "Failed to register premises on " + id,
+					e);
+			throw new ExecutionException(
+					"Failed to register premises on " + id, e);
 		}
 
 		return null;

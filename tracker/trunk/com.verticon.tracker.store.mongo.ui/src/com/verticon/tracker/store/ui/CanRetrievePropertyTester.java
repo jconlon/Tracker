@@ -54,6 +54,8 @@ public class CanRetrievePropertyTester extends PropertyTester {
 		} else if (CAN_RETRIEVE_ANIMALS.equals(property)) {
 			results = Activator.getDefault().isAuthenticatedUser();
 		}
+		results = results
+				|| Activator.getDefault().hasMQTTTrackerStoreService();
 		return results;
 	}
 
