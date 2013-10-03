@@ -27,6 +27,7 @@ import java.net.UnknownHostException;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import junit.framework.TestCase;
 
@@ -218,15 +219,18 @@ public class Test_Mongo_EMF_FunctionProvider extends TestCase {
 	 */
 	void activate() {
 		startUpGate.countDown();
-
+		try {
+			removeDocsFromCollections();
+		} catch (InterruptedException e) {
+			this.fail("Failed to remove docs");
+		}
 	}
 
 	void deactivate() {
 
 	}
 
-	@Test
-	public void testRemoveDocsFromCollections() throws InterruptedException {
+	private void removeDocsFromCollections() throws InterruptedException {
 		// TimeUnit.SECONDS.sleep(1);
 		DBCollection coll = getCollection(DB_NAME, ANIMAL_COLLECTION);
 		DBObject find = new BasicDBObject();
@@ -372,7 +376,7 @@ public class Test_Mongo_EMF_FunctionProvider extends TestCase {
 
 	@Test
 	public void test_Animal_Transform() throws UnknownHostException {
-		Animal animalIn = createAnimal();
+		Animal animalIn = createAnimal(null);
 		assertThat("Animal should have id", animalIn.getId(), is(TAG_ID_1));
 		animalIn.getTags().clear();
 		assertThat("Animal should have No id", animalIn.getId(), is(""));
@@ -427,11 +431,7 @@ public class Test_Mongo_EMF_FunctionProvider extends TestCase {
 		logger.debug("done");
 	}
 
-	@Test
-	public void test_Animal_Upsert() throws UnknownHostException {
-		Animal animal = createAnimal();
-		upsert(animal);
-	}
+
 
 
 
@@ -537,7 +537,15 @@ public class Test_Mongo_EMF_FunctionProvider extends TestCase {
 	}
 
 	@Test
-	public void testAnimal_Read1() throws IOException {
+	public void testAnimal_UpdsertAndRead1() throws IOException {
+		Animal animal = createAnimal(null);
+		upsert(animal);
+
+		try {
+			TimeUnit.SECONDS.sleep(1);
+		} catch (InterruptedException e) {
+
+		}
 		File file = new File(FILE_TMP_OUT_PREMISES2);
 		file.delete();
 		ResourceSet resourceSet = new ResourceSetImpl();
@@ -553,7 +561,7 @@ public class Test_Mongo_EMF_FunctionProvider extends TestCase {
 		Function<DBObject, EObject> builder = functionProvider
 				.getDBObjectToEObjectFunction(coll, resource);
 
-		Animal animal = (Animal) builder.apply(dbObject);
+		animal = (Animal) builder.apply(dbObject);
 
 		assertThat("Animal should not be null", animal, is(notNullValue()));
 		assertThat("Animal should have id", animal.getId(), is(TAG_ID_1));
@@ -580,7 +588,7 @@ public class Test_Mongo_EMF_FunctionProvider extends TestCase {
 	}
 
 	@Test
-	public void test_Tag_Upsert() throws UnknownHostException {
+	public void test_Tag_UpsertAndRead() throws UnknownHostException {
 		DBCollection coll = getCollection(DB_NAME, TAG_COLLECTION);
 
 		Tag tag1 = TrackerFactory.eINSTANCE.createTag();
@@ -601,15 +609,13 @@ public class Test_Mongo_EMF_FunctionProvider extends TestCase {
 			dbObject.put("animal", "xxx");
 		}
 		coll.insert(dbList);
-	}
 
-	public void testTag_Read() throws IOException {
 		File file = new File(FILE_TMP_OUT_PREMISES2);
 		file.delete();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		URI uri = URI.createURI("file:" + FILE_TMP_OUT_PREMISES2);
 		Resource resource = resourceSet.createResource(uri);
-		DBCollection coll = getCollection(DB_NAME, TAG_COLLECTION);
+		coll = getCollection(DB_NAME, TAG_COLLECTION);
 		DBObject q = new BasicDBObject("_id", "13");
 		DBObject dbObject = coll.findOne(q);
 
@@ -682,11 +688,6 @@ public class Test_Mongo_EMF_FunctionProvider extends TestCase {
 
 	}
 
-	@Test
-	public void test_Wait() throws InterruptedException {
-		// TimeUnit.SECONDS.sleep(2);
-		logger.debug("done");
-	}
 
 	private void upsert(Premises premises) {
 			Function<EObject, DBObject> eTod = functionProvider
@@ -755,12 +756,16 @@ public class Test_Mongo_EMF_FunctionProvider extends TestCase {
 		return premises;
 	}
 
-	private Animal createAnimal() {
+	private Animal createAnimal(String id) {
 		Tag tag = TrackerFactory.eINSTANCE.createTag();
 		tag.getEvents().add(TrackerFactory.eINSTANCE.createAnimalMissing());
 		Animal animal = TrackerFactory.eINSTANCE.createSwine();
 		animal.getTags().add(tag);
-		animal.activeTag().setId(TAG_ID_1);
+		if (id == null) {
+			animal.activeTag().setId(TAG_ID_1);
+		} else {
+			animal.activeTag().setId(id);
+		}
 		return animal;
 	}
 
