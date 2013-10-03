@@ -6,9 +6,9 @@ Bundle-Version: 0.1.0
 Bundle-Vendor: Verticon, Inc.
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: com.verticon.tracker.editor;bundle-version="0.3.4",
- org.junit4;bundle-version="4.3.1",
  ch.qos.logback.classic;bundle-version="0.9.18",
- ch.qos.logback.core;bundle-version="0.9.18"
+ ch.qos.logback.core;bundle-version="0.9.18",
+ org.junit;bundle-version="4.11.0"
 Import-Package: com.verticon.osgi.metatype,
  com.verticon.tracker;version="0.1.0",
  com.verticon.tracker.edit.provider;version="0.1.0",
