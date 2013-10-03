@@ -6,4 +6,3 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Verticon, Inc.
 Fragment-Host: com.verticon.tracker.irouter.monitor.view;bundle-version="0.1.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Require-Bundle: org.junit4;bundle-version="4.8.1"
