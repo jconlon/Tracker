@@ -16,7 +16,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.ocl.ecore,
  com.verticon.tracker.fair.transaction.editor;bundle-version="0.1.1",
  com.verticon.tracker.fair.poi,
- org.junit4;bundle-version="4.3.1"
+ org.junit;bundle-version="4.11.0"
 Bundle-ActivationPolicy: lazy
 Import-Package: com.verticon.tracker.edit.provider;version="0.1.0",
  com.verticon.tracker.fair.edit.provider,
