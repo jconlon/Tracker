@@ -6,8 +6,7 @@ Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: Verticon, Inc.
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: com.verticon.tracker.ocl.query;bundle-version="0.1.4",
- com.verticon.tracker.ocl.query.viewer;bundle-version="0.1.6",
- org.junit4;bundle-version="4.5.0"
+ com.verticon.tracker.ocl.query.viewer;bundle-version="0.1.6"
 Import-Package: com.verticon.tracker;version="0.1.0",
  org.eclipse.emf.common.notify,
  org.eclipse.emf.common.util,
