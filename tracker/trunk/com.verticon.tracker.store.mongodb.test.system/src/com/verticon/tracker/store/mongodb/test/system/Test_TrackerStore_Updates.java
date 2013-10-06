@@ -22,7 +22,6 @@ import static com.verticon.tracker.store.mongodb.test.system.Configurator.bundle
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.eventCount;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.getXMIResource;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.removeLastModificationTimesOnAllResources;
-import static com.verticon.tracker.store.mongodb.test.system.Configurator.saveXMIResource;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -30,7 +29,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
@@ -43,11 +41,6 @@ import org.osgi.framework.BundleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import com.verticon.location.Location;
 import com.verticon.mongo.IMongoClientProvider;
@@ -117,19 +110,6 @@ public class Test_TrackerStore_Updates extends TestCase {
 	private static final String DOC_PREMISES_9_10 = "9-10-2008-test.data.premises";
 	private static final String DOC_PREMISES_9_14 = "9-14-2008-test.data.premises";
 	private static final String DOC_PREMISES_9_15 = "9-15-2008-test.data.premises";
-	private static final String DATE_4_11 = "2008-04-11";
-	private static final String DATE_4_12 = "2008-04-12";
-	private static final String DATE_4_13 = "2008-04-13";
-
-	private static final String DATE_5_16 = "2008-05-16";
-	private static final String DATE_5_17 = "2008-05-17";
-	private static final String DATE_5_18 = "2008-05-18";
-
-	private static final String DATE_9_10 = "2008-09-10";
-	private static final String DATE_9_11 = "2008-09-11";
-	private static final String DATE_9_14 = "2008-09-14";
-	private static final String DATE_9_15 = "2008-09-15";
-	private static final String DATE_9_16 = "2008-09-16";
 
 	DateFormat dfm = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -189,7 +169,8 @@ public class Test_TrackerStore_Updates extends TestCase {
 		super.setUp();
 		startUpGate.await();// wait for startUp to finish
 		if (!initializedCollections) {
-			removeDocsFromCollections();
+			initializedCollections = Test_TrackerUpdateAndFind
+					.removeDocsFromCollections(false);
 			// insureIndexes();
 			register_Authorization();
 		}
@@ -230,41 +211,10 @@ public class Test_TrackerStore_Updates extends TestCase {
 		Metrics.deactivate();
 	}
 
-	// public void testMongoDB_InitialStateOfCollections()
-	// throws UnknownHostException, MongoException {
-	//
-	// // Animals
-	// DBCollection coll = getCollection(KEY_MONGODB_DBNAME, ANIMAL_COLLECTION);
-	//
-	//
-	// assertThat("Must have 8 animals", coll.find().count(), is(8));
-	//
-	// // TAGs
-	// coll = getCollection(KEY_MONGODB_DBNAME, TAG_COLLECTION);
-	//
-	//
-	// assertThat("Must be 8 tags", coll.find().count(), is(8));
-	//
-	// // Premises
-	// coll = getCollection(KEY_MONGODB_DBNAME, PREMISES_COLLECTION);
-	//
-	//
-	// assertThat("Must have only one Premises saved", coll.find().count(),
-	// is(3));
-	//
-	// // OCDs
-	// coll = getCollection(KEY_MONGODB_DBNAME, OCD_COLLECTION);
-	// assertThat("Must have only 1 OCD", coll.find().count(), is(1));
-	//
-	// // Updates
-	// coll = getCollection(KEY_MONGODB_DBNAME, UPDATES_COLLECTION);
-	// assertThat("Must have only 2 Updates", coll.find().count(), is(2));
-	//
-	// }
-
 	public void testRemoveMembersUpdate() throws UnknownHostException,
 			MongoException {
-		removeLastModificationTimesOnAllResources(getCollection(UPDATES_COLLECTION));
+		removeLastModificationTimesOnAllResources(Test_TrackerUpdateAndFind
+				.getCollection(UPDATES_COLLECTION));
 		// // Set the mock user
 		// mockAuthenticatorController.setAuthenticatedUser(true);
 		// mockAuthenticatorController.setRoles(Arrays.asList(
@@ -612,282 +562,12 @@ public class Test_TrackerStore_Updates extends TestCase {
 
 	}
 
-	public void testRetrievePremises_4_11() throws IOException {
-		logger.debug(bundleMarker,
-				"starting testRetrievePremisesFromUpdateLocation");
-		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN, DATE_4_11, DATE_4_12);
-		assertThat("Could not retrieve the premises", premises,
-				is(notNullValue()));
-		// assertThat("Not a valid premises", TestUtils.isValidObject(premises),
-		// is(true));
-		assertThat("Premises with uri " + PREMISES_URI_003ALKMN, premises,
-				is(notNullValue()));
-		assertThat("Premises must have 72 animals", premises.getAnimals()
-				.size(), is(72));
-		// Tracker shows 72 animals, shell says 73 Tags (023 tag is in the shell
-		// but not in tracker)
-		saveXMIResource("out_4_11.premises", premises);
-
-		// Events go beyond the dates because the animals are the ones that are
-		// targeted. They then most likely have dates beyond the range
-		assertThat("Premises must have all events for all animals", premises
-				.eventHistory().size(), is(422));
-
-	}
-
-	public void testRetrievePremises_4_12() throws IOException {
-		logger.debug(bundleMarker,
-				"starting testRetrievePremisesFromUpdateLocation");
-		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN, DATE_4_12, DATE_4_13);
-		assertThat("Could not retrieve the premises", premises,
-				is(notNullValue()));
-		// assertThat("Not a valid premises", TestUtils.isValidObject(premises),
-		// is(true));
-		assertThat("Premises with uri " + PREMISES_URI_003ALKMN, premises,
-				is(notNullValue()));
-		assertThat("Premises must have 37 animalsl", premises.getAnimals()
-				.size(), is(37));
-		// Events go beyond the dates because the animals are the ones that are
-		// targeted. They then most likely have dates beyond the range
-		assertThat("Premises must have all events for all animals", premises
-				.eventHistory().size(), is(218));
-	}
-
-	public void testRetrievePremises_5_16() throws Exception {
-		logger.debug(bundleMarker,
-				"starting testRetrievePremisesFromUpdateLocation");
-		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN, DATE_5_16, DATE_5_17);
-		assertThat("Could not retrieve the premises", premises,
-				is(notNullValue()));
-		// assertThat("Not a valid premises", TestUtils.isValidObject(premises),
-		// is(true));
-		assertThat("Premises with uri " + PREMISES_URI_003ALKMN, premises,
-				is(notNullValue()));
-		assertThat("Premises must have 94 animalsl", premises.getAnimals()
-				.size(), is(94));
-		// Events go beyond the dates because the animals are the ones that are
-		// targeted. They then most likely have dates beyond the range
-		assertThat("Premises must have all events for all animals", premises
-				.eventHistory().size(), is(571));
-	}
-
-	public void testRetrievePremises_5_17() throws Exception {
-		logger.debug(bundleMarker,
-				"starting testRetrievePremisesFromUpdateLocation");
-		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN, DATE_5_17, DATE_5_18);
-		assertThat("Could not retrieve the premises", premises,
-				is(notNullValue()));
-		// assertThat("Not a valid premises", TestUtils.isValidObject(premises),
-		// is(true));
-		assertThat("Premises with uri " + PREMISES_URI_003ALKMN, premises,
-				is(notNullValue()));
-		assertThat("Premises must have 123 animalsl", premises.getAnimals()
-				.size(), is(123));
-		// Events go beyond the dates because the animals are the ones that are
-		// targeted. They then most likely have dates beyond the range
-		assertThat("Premises must have all events for all animals", premises
-				.eventHistory().size(), is(737));
-
-	}
-
-	public void testRetrievePremises_9_10() throws Exception {
-		logger.debug(bundleMarker,
-				"starting testRetrievePremisesFromUpdateLocation");
-		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN, DATE_9_10, DATE_9_11);
-		assertThat("Could not retrieve the premises", premises,
-				is(notNullValue()));
-		// assertThat("Not a valid premises", TestUtils.isValidObject(premises),
-		// is(true));
-		assertThat("Premises with uri " + PREMISES_URI_003ALKMN, premises,
-				is(notNullValue()));
-		assertThat("Premises must have 213 animals", premises.getAnimals()
-				.size(), is(213));
-		// Events go beyond the dates because the animals are the ones that are
-		// targeted. They then most likely have dates beyond the range
-		assertThat("Premises must have all events for all animals", premises
-				.eventHistory().size(), is(1494));
-	}
-
-	public void testSavePremises_9_10() throws ParseException, IOException {
-		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN, DATE_9_10, DATE_9_11);
-		saveXMIResource("out_9_10.premises", premises);
-	}
-
-	public void testRetrievePremises_9_14() throws Exception {
-		logger.debug(bundleMarker,
-				"starting testRetrievePremisesFromUpdateLocation");
-		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN, DATE_9_14, DATE_9_15);
-		assertThat("Could not retrieve the premises", premises,
-				is(notNullValue()));
-		// assertThat("Not a valid premises", TestUtils.isValidObject(premises),
-		// is(true));
-		assertThat("Premises with uri " + PREMISES_URI_003ALKMN, premises,
-				is(notNullValue()));
-		assertThat("Premises must have 180 animalsl", premises.getAnimals()
-				.size(), is(180));
-		// Events go beyond the dates because the animals are the ones that are
-		// targeted. They then most likely have dates beyond the range
-		assertThat("Premises must have all events for all animals", premises
-				.eventHistory().size(), is(1259));
-	}
-
-	public void testSavePremises_9_14() throws Exception, IOException {
-		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN, DATE_9_14, DATE_9_15);
-		saveXMIResource("out_9_14.premises", premises);
-	}
-
-	public void testRetrievePremises_9_15() throws Exception {
-		logger.debug(bundleMarker,
-				"starting testRetrievePremisesFromUpdateLocation");
-		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN, DATE_9_15, DATE_9_16);
-		assertThat("Could not retrieve the premises", premises,
-				is(notNullValue()));
-		// assertThat("Not a valid premises", TestUtils.isValidObject(premises),
-		// is(true));
-		assertThat("Premises with uri " + PREMISES_URI_003ALKMN, premises,
-				is(notNullValue()));
-		assertThat("Premises must have 35 animalsl", premises.getAnimals()
-				.size(), is(35));
-		// Events go beyond the dates because the animals are the ones that are
-		// targeted. They then most likely have dates beyond the range
-		assertThat("Premises must have all events for all animals", premises
-				.eventHistory().size(), is(245));
-
-	}
-
-	public void testSavePremises_9_15() throws Exception, IOException {
-		Premises premises = trackerStore.retrievePremises(
-				PREMISES_URI_003ALKMN, DATE_9_15, DATE_9_16);
-		saveXMIResource("out_9_15.premises", premises);
-	}
-
-	// /**
-	// * "{'events.loc' :[45, 45]}"
-	// */
-	// @Test
-	// public void testGeoLocations_Tag_Specific(){
-	// String query = "{'events.loc' :[45, 45]}";
-	// List<EObject> eo = trackerStore.query(TrackerPackage.Literals.TAG,
-	// query);
-	// assertThat("Result must not be null.", eo, is(notNullValue()));
-	// assertThat("Result must not be empty.",eo.isEmpty(), is(false));
-	// assertThat("Result must be one tag", eo.size(), is(1));
-	// assertThat("Result must be a Tag",eo.get(0), is(instanceOf(Tag.class)));
-	// }
-
-	// /**
-	// *
-	// * -90" (W) long
-	// * 43" (N) lat
-	// *
-	// * Will need special index
-	// * db.Tag.ensureIndex( { 'events.loc' : "2d" } )
-	// *
-	// * Watch out the lat long needs to have decimal points
-	// */
-	// public void testGeoLocation_Tag_Near(){
-	// String query = "{'events.loc' : {$near : [-90.0, 43.0]}}";
-	// List<EObject> eo = trackerStore.query(TrackerPackage.Literals.TAG,
-	// query);
-	// assertThat("Result must not be null.", eo, is(notNullValue()));
-	// assertThat("Result must not be empty.",eo.isEmpty(), is(false));
-	// assertThat("Result must be two tags", eo.size(), is(2));
-	// assertThat("Result must be a Tag",eo.get(0), is(instanceOf(Tag.class)));
-	// }
-
-	// /**
-	// * "{'loc' :[45, 45]}"
-	// */
-	// @Test
-	// public void testGeoLocations_Premises_Specific(){
-	// String query =
-	// "{'location.loc' :[-90.95674265545253, 43.47493314332049]}";
-	// List<EObject> eo = trackerStore.query(TrackerPackage.Literals.PREMISES,
-	// query);
-	// assertThat("Result must not be null.", eo, is(notNullValue()));
-	// assertThat("Result must not be empty.",eo.isEmpty(), is(false));
-	// assertThat("Result must be one premises", eo.size(), is(1));
-	// assertThat("Result must be a Premises",eo.get(0),
-	// is(instanceOf(Premises.class)));
-	// }
-
-	// /**
-	// *
-	// * -90" (W) long
-	// * 43" (N) lat
-	// *
-	// * Will need special index
-	// * db.Tag.ensureIndex( { 'events.loc' : "2d" } )
-	// *
-	// * Watch out the lat long needs to have decimal points
-	// */
-	// public void testGeoLocation_Premises_Near(){
-	// String query = "{'location.loc' : {$near : [-90.0, 43.0]}}";
-	// List<EObject> eo = trackerStore.query(TrackerPackage.Literals.PREMISES,
-	// query);
-	// assertThat("Result must not be null.", eo, is(notNullValue()));
-	// assertThat("Result must not be empty.",eo.isEmpty(), is(false));
-	// assertThat("Result must be two premises", eo.size(), is(2));
-	// assertThat("Result must be a Premises",eo.get(0),
-	// is(instanceOf(Premises.class)));
-	// }
-
-	// public void testRetrieve_Premise_containing_Point() throws IOException{
-	// logger.debug(bundleMarker,
-	// "starting testRetrieve_Premise_containing_Point");
-	//
-	// Premises premises = trackerStore.retrievePremises(
-	// new
-	// ITrackerStore.LongLatPoint("-90.95048182270057,43.47622307339506,0"));
-	// assertThat("Could not retrieve the premises", premises,
-	// is(notNullValue()));
-	// // assertThat("Not a valid premises", TestUtils.isValidObject(premises),
-	// // is(true));
-	// assertThat("Must be Premises with uri " + PREMISES_URI_H89234X,
-	// premises.getUri(), is(PREMISES_URI_H89234X));
-	// assertThat("Premises must have 0 animalsl", premises.getAnimals()
-	// .size(), is(0));
-	//
-	//
-	// }
-
 	private void countEvents(int count) throws UnknownHostException {
 
-		int events = eventCount(getCollection(TAG_COLLECTION),
+		int events = eventCount(
+				Test_TrackerUpdateAndFind.getCollection(TAG_COLLECTION),
 				PREMISES_URI_003ALKMN);
 		assertThat(events, is(count));
-	}
-
-	private DBCollection getCollection(String name) {
-		MongoClient mongoClient = iMongoClientProvider.getMongoClient();
-		DB db = mongoClient.getDB(iMongoClientProvider.getDatabaseName());
-		return db.getCollection(name);
-	}
-
-	private void removeDocsFromCollections() throws InterruptedException {
-		// // TimeUnit.SECONDS.sleep(1);
-		DBObject find = new BasicDBObject();
-		DBCollection coll = getCollection(Configurator.ANIMAL_COLLECTION);
-		coll.remove(find);
-		coll = getCollection(Configurator.PREMISES_COLLECTION);
-		coll.remove(find);
-		// coll = getCollection(Configurator.DB_NAME,
-		// Configurator.OCD_COLLECTION);
-		// coll.remove(find);
-		coll = getCollection(Configurator.TAG_COLLECTION);
-		coll.remove(find);
-		coll = getCollection(Configurator.UPDATES_COLLECTION);
-		coll.remove(find);
-		initializedCollections = true;
 	}
 
 	private void register_Authorization() {

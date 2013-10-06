@@ -14,13 +14,9 @@ package com.verticon.tracker.store.mongodb.test.system;
 
 import static com.verticon.osgi.useradmin.authenticator.Authenticator.TRACKER_STORE_BI;
 import static com.verticon.osgi.useradmin.authenticator.Authenticator.TRACKER_STORE_REGISTRANT;
-import static com.verticon.tracker.store.mongodb.test.system.Configurator.ANIMAL_COLLECTION;
-import static com.verticon.tracker.store.mongodb.test.system.Configurator.PREMISES_COLLECTION;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.PREMISES_URI;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.PREMISES_URI_003ALKMN;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.PREMISES_URI_H89234X;
-import static com.verticon.tracker.store.mongodb.test.system.Configurator.TAG_COLLECTION;
-import static com.verticon.tracker.store.mongodb.test.system.Configurator.UPDATES_COLLECTION;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.bundleMarker;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.getXMIResource;
 import static org.hamcrest.CoreMatchers.is;
@@ -28,7 +24,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 import junit.framework.TestCase;
 
@@ -37,11 +32,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import com.mongodb.DBObject;
-import com.mongodb.MongoClient;
 import com.verticon.mongo.IMongoClientProvider;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.store.ITrackerStore;
@@ -75,6 +65,8 @@ public class Test_TrackerStore_Authorization extends TestCase {
 	 */
 	private final Logger logger = LoggerFactory
 			.getLogger(Test_TrackerStore_Authorization.class);
+
+	private boolean initializedCollections;
 
 	/**
 	 * This class is a JUnit class and a DS component. There needs to be a
@@ -151,7 +143,10 @@ public class Test_TrackerStore_Authorization extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		startUpGate.await();// wait for startUp to finish
-
+		if (!initializedCollections) {
+			initializedCollections = Test_TrackerUpdateAndFind
+					.removeDocsFromCollections(true);
+		}
 	}
 
 	/*
@@ -169,8 +164,7 @@ public class Test_TrackerStore_Authorization extends TestCase {
 	 * 
 	 */
 	void activate() {
-		startUpGate.countDown();
-
+			startUpGate.countDown();
 	}
 
 	void deactivate() {
@@ -238,27 +232,5 @@ public class Test_TrackerStore_Authorization extends TestCase {
 		mockAuthenticatorController.setRoles(Arrays.asList(
 				PREMISES_URI_H89234X, PREMISES_URI_003ALKMN, PREMISES_URI,
 				TRACKER_STORE_REGISTRANT, TRACKER_STORE_BI));
-	}
-
-	@Test
-	public void testRemoveDocsFromCollections() throws InterruptedException {
-		TimeUnit.SECONDS.sleep(1);
-		DBObject find = new BasicDBObject();
-		DBCollection coll = getCollection(ANIMAL_COLLECTION);
-		coll.remove(find);
-		coll = getCollection(PREMISES_COLLECTION);
-		coll.remove(find);
-		// coll = getCollection(KEY_MONGODB_DBNAME, OCD_COLLECTION);
-		// coll.remove(find);
-		coll = getCollection(TAG_COLLECTION);
-		coll.remove(find);
-		coll = getCollection(UPDATES_COLLECTION);
-		coll.remove(find);
-	}
-
-	private DBCollection getCollection(String name) {
-		MongoClient mongoClient = iMongoClientProvider.getMongoClient();
-		DB db = mongoClient.getDB(iMongoClientProvider.getDatabaseName());
-		return db.getCollection(name);
 	}
 }

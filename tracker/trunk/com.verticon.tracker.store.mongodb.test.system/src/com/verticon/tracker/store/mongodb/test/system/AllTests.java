@@ -40,9 +40,13 @@ public class AllTests extends TestSuite {
 		TestSuite suite = new AllTests("TrackerStore Mongodb System Tests");
 		suite.addTestSuite(Test_TrackerStore_Authorization.class);
 		suite.addTestSuite(Test_TrackerUpdateAndFind.class);
+		suite.addTestSuite(Test_TrackerFind.class);
 
 		suite.addTestSuite(Test_TrackerStore.class);
+		suite.addTestSuite(Test_TrackerStore_Find.class);
 		suite.addTestSuite(Test_TrackerStore_Updates.class);
+		suite.addTestSuite(Test_TrackerStore_Updates_Find.class);
+
 		suite.addTestSuite(Test_MongoDB_ProducerConsumer.class);
 		suite.addTestSuite(WaitTest.class);
 		return suite;

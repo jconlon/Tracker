@@ -13,15 +13,11 @@
 package com.verticon.tracker.store.mongodb.test.system;
 
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.PREMISES_URI;
-import static com.verticon.tracker.store.mongodb.test.system.Configurator.PREMISES_URI_H89234X;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.UPDATES_COLLECTION;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.bundleMarker;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.getXMIResource;
-import static com.verticon.tracker.store.mongodb.test.system.Configurator.isValidObject;
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
 
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
@@ -42,16 +38,10 @@ import com.mongodb.MongoClient;
 import com.verticon.location.Location;
 import com.verticon.location.LocationFactory;
 import com.verticon.mongo.IMongoClientProvider;
-import com.verticon.osgi.metatype.Icon;
-import com.verticon.osgi.metatype.OCD;
 import com.verticon.tracker.Animal;
-import com.verticon.tracker.AnimalType;
-import com.verticon.tracker.Event;
-import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
-import com.verticon.tracker.store.ITrackerFind;
 import com.verticon.tracker.store.ITrackerStore;
 import com.verticon.tracker.store.IUpdateStats;
 import com.yammer.metrics.Timer;
@@ -82,10 +72,6 @@ public class Test_TrackerStore extends TestCase {
 
 	private static final String TAG_ID_1 = "1234567890";
 
-	private static final String TAG_ID_WITH_GENERIC_EVENT = "840456789012341";
-
-	private static final String TAG_ID_WITH_SIRE_AND_DAM = "840456789012343";
-
 	static final String DOC_PREMISES = "example.premises";
 
 	/**
@@ -106,27 +92,6 @@ public class Test_TrackerStore extends TestCase {
 	 * latch lets subsequent calls through.
 	 */
 	private static final CountDownLatch startUpGate = new CountDownLatch(1);
-	// private static final MetricRegistry metricsRegistry = new MetricRegistry(
-	// "MongoEMFMinimum");
-	//
-	// // Registration elapsed time in milliseconds and invocations per second.
-	// // private final Timer responses =
-	// // metricsRegistry.timer(RequestHandler.class, "responses");
-	//
-	// private static final Timer registrationTimer =
-	// metricsRegistry.timer(name(
-	// Test_TrackerStore.class, PREMISES_COLLECTION,
-	// "registration"));
-	// static final Timer recordTimer = metricsRegistry.timer(name(
-	// Test_TrackerStore.class, "Animal", "record"));
-	//
-	// private static final Slf4jReporter reporter = Slf4jReporter
-	// .forRegistry(metricsRegistry)
-	// .outputTo(
-	// LoggerFactory
-	// .getLogger("com.verticon.tracker.store.mongodb.test.system.Test_TrackerStore"))
-	// .convertRatesTo(TimeUnit.SECONDS)
-	// .convertDurationsTo(TimeUnit.MILLISECONDS).build();
 
 	private static boolean initializedCollections = false;
 	/**
@@ -313,214 +278,6 @@ public class Test_TrackerStore extends TestCase {
 				is(premises.eventHistory().size()));
 
 	}
-
-	@Test
-	public void test_TrackerFind_RetrievePremises() throws IOException {
-
-		Premises premises = trackerStore.retrievePremises(PREMISES_URI);
-
-		assertThat("Premises should not be null", premises, is(notNullValue()));
-		assertThat("Not a valid premises", isValidObject(premises), is(true));
-		assertThat("Premises should have name", premises.getName(),
-				is("Jack Condor"));
-		assertThat("Premises should have no Animals", premises.getAnimals()
-				.size(), is(0));
-		assertThat("Premises should have no unassignedTags", premises
-				.getUnAppliedTags().size(), is(0));
-
-	}
-
-	@Test
-	public void test_TrackerFind_RetrievePremises_WithLocation()
-			throws IOException {
-
-		Premises premises = trackerStore.retrievePremises(PREMISES_URI_H89234X);
-
-		assertThat("Premises should not be null", premises, is(notNullValue()));
-		assertThat("Not a valid premises", isValidObject(premises), is(true));
-		assertThat("Premises should have name", premises.getName(),
-				is("East Farm"));
-		assertThat("Premises should have no Animals", premises.getAnimals()
-				.size(), is(0));
-		assertThat("Premises should have no unassignedTags", premises
-				.getUnAppliedTags().size(), is(0));
-
-	}
-
-	@Test
-	public void test_TrackerFind_RetrievePremises_Dates() throws IOException {
-
-		Premises premises = trackerStore.retrievePremises(PREMISES_URI_H89234X,
-				FROMDATE, TODATE);
-		assertThat("Could not retrieve the premises", premises,
-				is(notNullValue()));
-		assertThat("Not a valid premises", isValidObject(premises), is(true));
-		assertThat("Premises with uri " + PREMISES_URI_H89234X, premises,
-				is(notNullValue()));
-		assertThat("Premises URI must not be null.", premises.getUri(),
-				is(notNullValue()));
-		assertThat("Premises must have 5 animalsl", premises.getAnimals()
-				.size(), is(5));
-
-		Animal firstAnimal = premises.getAnimals().get(0);
-		String id = "";
-		for (Animal animal : premises.getAnimals()) {
-			assertThat(animal.getId(), is(greaterThan(id)));
-			id = animal.getId();
-			logger.debug(bundleMarker, "Animal {} ", animal.getId());
-		}
-
-		assertThat("First animal was not found between " + FROMDATE + " and "
-				+ TODATE, firstAnimal.getId(), is("840456789012341"));
-		assertThat("First animal must have 8 events.", firstAnimal
-				.eventHistory().size(), is(8));
-		for (Event event : firstAnimal.eventHistory()) {
-			logger.debug(bundleMarker, "Event {} ", event);
-			assertThat("First animal events must have pid set. " + event,
-					event.getPid(), is(PREMISES_URI_H89234X));
-		}
-	}
-
-	/**
-	 * db.Premises.find( { "location.loc" : { $near :
-	 * [-90.95048182270057,43.47622307339506,0 ] , $maxDistance : 1 } } )
-	 * 
-	 * @throws IOException
-	 */
-	@Test
-	public void test_TrackerFind_RetrievePremises_Point() throws IOException {
-		ITrackerFind.LongLatPoint point = new ITrackerFind.LongLatPoint(
-				"-77.037852,38.898556,0");
-		// position.setLatitude(38.898556);
-		// position.setLongitude(-77.037852);
-		Premises premises = trackerStore.retrievePremises(point);
-
-		assertThat("Premises should not be null", premises, is(notNullValue()));
-
-		assertThat("Premises should have uri", premises.getUri(),
-				is(PREMISES_URI));
-		assertThat("Premises should have name", premises.getName(),
-				is("Jack Condor"));
-		assertThat("Premises should have no Animals", premises.getAnimals()
-				.size(), is(0));
-		assertThat("Premises should have no unassignedTags", premises
-				.getUnAppliedTags().size(), is(0));
-	}
-
-	private static final String FROMDATE = "2010-03-01";
-	private static final String TODATE = "2011-05-01";
-
-	@Test
-	public void test_TrackerFind_RetrievePremises_Point2() throws IOException {
-		ITrackerFind.LongLatPoint point = new ITrackerFind.LongLatPoint(
-				"-90.95048182270057,43.47622307339506,0");
-		// List<String> pointList = point.toList();
-		// assertThat(pointList.get(0), is(-90.95048182270057));
-		Premises premises = trackerStore.retrievePremises(point);
-
-		assertThat("Premises should not be null", premises, is(notNullValue()));
-		assertThat("Premises should have uri", premises.getUri(),
-				is(PREMISES_URI_H89234X));
-		assertThat("Premises should have name", premises.getName(),
-				is("East Farm"));
-		assertThat("Premises should have 0 Animals", premises.getAnimals()
-				.size(), is(0));
-		assertThat("Premises should have no unassignedTags", premises
-				.getUnAppliedTags().size(), is(0));
-	}
-
-	@Test
-	public void test_TrackerFind_RetrievePremises_Point_Dates()
-			throws IOException {
-		ITrackerFind.LongLatPoint point = new ITrackerFind.LongLatPoint(
-				"-90.95048182270057,43.47622307339506,0");
-		Premises premises = trackerStore.retrievePremises(point, FROMDATE,
-				TODATE);
-
-		assertThat("Premises should not be null", premises, is(notNullValue()));
-		assertThat("Premises should have uri", premises.getUri(),
-				is(PREMISES_URI_H89234X));
-		assertThat("Premises should have name", premises.getName(),
-				is("East Farm"));
-		assertThat("Premises should have 5 Animals", premises.getAnimals()
-				.size(), is(5));
-		assertThat("Premises should have no unassignedTags", premises
-				.getUnAppliedTags().size(), is(0));
-	}
-
-	public void test_TrackerFind_RetrieveAnimal() throws IOException {
-		Animal animal = trackerStore.retrieveAnimal(TAG_ID_1);
-
-		assertThat("Animal should not be null", animal, is(notNullValue()));
-
-		assertThat("Animal should be a swine", animal.getType(),
-				is(AnimalType.SWINE));
-
-		assertThat("Animal should have one tag", animal.getTags().size(), is(1));
-		assertThat("Animal should have id", animal.getId(), is(TAG_ID_1));
-
-		Tag tag = animal.activeTag();
-		assertThat("Tag should have an event", tag.getEvents().size(), is(2));
-
-		Event event = tag.getEvents().get(0);
-		assertThat("Event should be  is an AnimalMissing ",
-				event.getEventCode(), is(13));
-
-	}
-
-	public void test_TrackerFind_RetrieveAnimal_WITH_GENERIC_EVENT()
-			throws IOException {
-		Animal animal = trackerStore.retrieveAnimal(TAG_ID_WITH_GENERIC_EVENT);
-
-		assertThat("Animal should not be null", animal, is(notNullValue()));
-		assertThat("Animal should have id", animal.getId(),
-				is(TAG_ID_WITH_GENERIC_EVENT));
-		assertThat("Animal should be a beef", animal.getType(),
-				is(AnimalType.BOVINE_BEEF));
-		assertThat("Animal should have 1 tag", animal.getTags().size(), is(1));
-
-		Tag tag = animal.activeTag();
-		assertThat("Tag should have 8 events", tag.getEvents().size(), is(8));
-
-		Event event = tag.getEvents().get(0);
-		assertThat("Event should be  is a TagAppliend EventCode 2",
-				event.getEventCode(), is(2));
-
-		event = tag.getEvents().get(7);
-		assertThat("Event should be  is a GenericEvent EventCode 200",
-				event.getEventCode(), is(200));
-		GenericEvent ge = (GenericEvent) event;
-		assertThat("Generic Event should not be null", ge, is(notNullValue()));
-		OCD ocd = ge.getOcd();
-		assertThat("OCD should not be null", ocd, is(notNullValue()));
-		String id = ocd.getID();
-		assertThat("OCD id should be mettler.weight", id, is("mettler.weight"));
-		// The icon resource is stored raw there needs to be one at the location
-		Icon icon = ocd.getIcon();
-		assertThat("OCD icon should not be null", icon, is(notNullValue()));
-		assertThat("OCD icon resource should not be null", icon.getResource(),
-				is("platform:/resource/com.verticon.tracker.example/blood.gif"));
-		assertThat("OCD must have 4 ADs", ocd.getAD().size(), is(4));
-	}
-
-	@Test
-	public void testAnimal_Read_With_SireAndDam() {
-		Animal animal = trackerStore.retrieveAnimal(TAG_ID_WITH_SIRE_AND_DAM);
-
-		assertThat("Animal should not be null", animal, is(notNullValue()));
-
-		assertThat("Animal should be a beef", animal.getType(),
-				is(AnimalType.BOVINE_BEEF));
-		assertThat("Animal should have 1 tag", animal.getTags().size(), is(1));
-		assertThat("Animal should have id", animal.getId(),
-				is(TAG_ID_WITH_SIRE_AND_DAM));
-	}
-
-	// @Test
-	// public void test_Wait() throws InterruptedException {
-	// TimeUnit.SECONDS.sleep(2);
-	// logger.debug("done");
-	// }
 
 	static Premises createPremises() {
 		Premises premises = TrackerFactory.eINSTANCE.createPremises();
