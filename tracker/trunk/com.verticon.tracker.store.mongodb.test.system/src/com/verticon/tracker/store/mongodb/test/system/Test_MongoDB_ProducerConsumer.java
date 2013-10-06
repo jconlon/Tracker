@@ -238,19 +238,19 @@ public class Test_MongoDB_ProducerConsumer extends TestCase implements
 		producerConsumer.setListener(null);
 	}
 
-	public void testStatus() {
+	public void testConsumer()
+			throws InterruptedException, BrokenBarrierException, IOException {
+		logger.debug(bundleMarker, "Animal_Sighting_ForNewAnimal");
+
+		assertThat("Controller must have wires", producerConsumer.hasWires(),
+				is(true));
+
 		assertThat("Must have a status", monitorable.getStatusVariable(STATUS)
 				.getString(), is(notNullValue()));
 
 		assertThat("Must be Activated  status",
 				monitorable.getStatusVariable(STATUS).getString(),
 				is(startsWith("Activated ")));
-	}
-
-	public void testConsumer_Animal_Sighting_ForNewAnimal()
-			throws InterruptedException {
-		assertThat("Controller must have wires", producerConsumer.hasWires(),
-				is(true));
 
 		Tag tag = TrackerFactory.eINSTANCE.createTag();
 		tag.setId(AIN_3);
@@ -287,17 +287,19 @@ public class Test_MongoDB_ProducerConsumer extends TestCase implements
 		assertThat("Animal must be a Caprine", animal,
 				is(instanceOf(Caprine.class)));
 
-	}
 
-	public void testConsumer_Tag_Sighting_ForNewAnimal()
-			throws InterruptedException {
+		//
+		logger.debug(bundleMarker, "Tag_Sighting_ForNewAnimal");
+		producerConsumer.clearSendCount();
+		resetStatus();
+
 		assertThat("Controller must have wires", producerConsumer.hasWires(),
 				is(true));
 
-		Tag tag = TrackerFactory.eINSTANCE.createTag();
+		tag = TrackerFactory.eINSTANCE.createTag();
 		tag.setId(AIN_1);
 		tag.getEvents().add(TrackerFactory.eINSTANCE.createSighting());
-		Envelope envelope = new BasicEnvelope(tag, AIN_1, TAG_SCOPE);
+		envelope = new BasicEnvelope(tag, AIN_1, TAG_SCOPE);
 		producerConsumer.send(envelope);
 
 		assertThat("Controller must have sent the envelope",
@@ -317,7 +319,7 @@ public class Test_MongoDB_ProducerConsumer extends TestCase implements
 		assertThat("Wrong number of animals added.", monitorable
 				.getStatusVariable(ANIMALS_ADDED).getInteger(), is(1));
 
-		Animal animal = trackerFind.retrieveAnimal(AIN_1);
+		animal = trackerFind.retrieveAnimal(AIN_1);
 		assertThat("Animal should not be null", animal, is(notNullValue()));
 		assertThat("There must be one tag", animal.getTags().size(), is(1));
 		assertThat("There must be one event", animal.eventHistory().size(),
@@ -325,17 +327,19 @@ public class Test_MongoDB_ProducerConsumer extends TestCase implements
 		assertThat("Animal must be a Bison", animal,
 				is(instanceOf(BovineBison.class)));
 
-	}
 
-	public void testConsumer_Tag_Position_ForExistingAnimal()
-			throws InterruptedException {
+		//
+		logger.debug(bundleMarker, "Tag_Position_ForExistingAnimal");
+		producerConsumer.clearSendCount();
+		resetStatus();
+
 		assertThat("Controller must have wires", producerConsumer.hasWires(),
 				is(true));
 
-		Tag tag = TrackerFactory.eINSTANCE.createTag();
+		tag = TrackerFactory.eINSTANCE.createTag();
 		tag.setId(AIN_1);
 		tag.getEvents().add(TrackerFactory.eINSTANCE.createPosition());
-		Envelope envelope = new BasicEnvelope(tag, AIN_1, TAG_SCOPE);
+		envelope = new BasicEnvelope(tag, AIN_1, TAG_SCOPE);
 		producerConsumer.send(envelope);// should find the tag and add an event
 
 		assertThat("Controller must have sent the envelope",
@@ -355,7 +359,7 @@ public class Test_MongoDB_ProducerConsumer extends TestCase implements
 		assertThat("Wrong number of animals added.", monitorable
 				.getStatusVariable(ANIMALS_ADDED).getInteger(), is(0));
 
-		Animal animal = trackerFind.retrieveAnimal(AIN_1);
+		animal = trackerFind.retrieveAnimal(AIN_1);
 		assertThat("Animal should not be null", animal, is(notNullValue()));
 		assertThat("Animal must be a Bison", animal,
 				is(instanceOf(BovineBison.class)));
@@ -364,20 +368,23 @@ public class Test_MongoDB_ProducerConsumer extends TestCase implements
 		assertThat("There must be two events", animal.eventHistory().size(),
 				is(2));
 
-	}
 
-	public void testConsumer_Tag_ReplaceTag() throws InterruptedException {
+		//
+		logger.debug(bundleMarker, "Tag_ReplaceTag");
+		producerConsumer.clearSendCount();
+		resetStatus();
+
 		assertThat("Controller must be connected to the consumer.",
 				producerConsumer.hasWires(), is(true));
 
-		Tag tag = TrackerFactory.eINSTANCE.createTag();
+		tag = TrackerFactory.eINSTANCE.createTag();
 		tag.setId(AIN_2);
 		ReplacedTag rt = TrackerFactory.eINSTANCE.createReplacedTag();
 		Tag tagOld = TrackerFactory.eINSTANCE.createTag();
 		tagOld.setId(AIN_1);
 		rt.setOldTag(tagOld);
 		tag.getEvents().add(rt);
-		Envelope envelope = new BasicEnvelope(tag, AIN_2, TAG_SCOPE);
+		envelope = new BasicEnvelope(tag, AIN_2, TAG_SCOPE);
 		producerConsumer.send(envelope);
 
 		assertThat("Must have processed one animal after the reset.",
@@ -388,14 +395,15 @@ public class Test_MongoDB_ProducerConsumer extends TestCase implements
 		assertThat("Must have updated an existing animal.", monitorable
 				.getStatusVariable(PRODUCTS_CONSUMED).getInteger(), is(1));
 
-	}
 
-	public void testConsumer_RetrieveOldAnimalWithTwoTags()
-			throws InterruptedException {
+		//
+		logger.debug(bundleMarker, "RetrieveOldAnimalWithTwoTags");
+		producerConsumer.clearSendCount();
+		resetStatus();
 		assertThat("Controller must be connected to the consumer.",
 				producerConsumer.hasWires(), is(true));
 
-		Animal animal = trackerFind.retrieveAnimal(AIN_2);
+		animal = trackerFind.retrieveAnimal(AIN_2);
 		assertThat("Animal should not be null", animal, is(notNullValue()));
 		assertThat("There should be two tags", animal.getTags().size(), is(2));
 		assertThat("Animal must be a Bison", animal,
@@ -410,19 +418,21 @@ public class Test_MongoDB_ProducerConsumer extends TestCase implements
 		assertThat("Animal should NOT have a container", animal.eContainer(),
 				is(nullValue()));
 
-	}
 
-	public void testConsumer_Tag_ExistingEvents() throws InterruptedException {
+		//
+		logger.debug(bundleMarker, "Tag_ExistingEvents");
+		producerConsumer.clearSendCount();
+		resetStatus();
 		assertThat("Controller must be connected to the consumer.",
 				producerConsumer.hasWires(), is(true));
 
-		Animal animal = trackerFind.retrieveAnimal(AIN_2);
+		animal = trackerFind.retrieveAnimal(AIN_2);
 		assertThat("Animal must not be null", animal, is(notNullValue()));
 		assertThat("Animal must have 2 tags", animal.getTags().size(), is(2));
 		// Retrieve the tag and copy it
-		Tag tag = animal.activeTag();
+		tag = animal.activeTag();
 		tag = EcoreUtil.copy(tag);
-		Envelope envelope = new BasicEnvelope(tag, AIN_2, TAG_SCOPE);
+		envelope = new BasicEnvelope(tag, AIN_2, TAG_SCOPE);
 		producerConsumer.send(envelope);
 		assertThat("Must have NOT processed an animal after the reset.",
 				monitorable.getStatusVariable(ANIMALS_PROCESSED).getInteger(),
@@ -430,21 +440,20 @@ public class Test_MongoDB_ProducerConsumer extends TestCase implements
 		assertThat("Must have not added as a new animal.", monitorable
 				.getStatusVariable(ANIMALS_ADDED).getInteger(), is(0));
 
-	}
-
-	// Envelope tests follow
-
-	/**
-	 * Measurement Envelopes with scopes of animal.weight will be added as
-	 * WeighIn events
-	 * 
-	 * @throws InterruptedExceptionnull
-	 */
-	public void testConsumer_Measurement_WeighIn() throws InterruptedException {
+		// // Envelope tests follow
+		//
+		/*
+		 * Measurement Envelopes with scopes of animal.weight will be added as
+		 * WeighIn events
+		 */
+		//
+		logger.debug(bundleMarker, "Measurement_WeighIn");
+		producerConsumer.clearSendCount();
+		resetStatus();
 
 		Measurement value = new Measurement(100, .1, Unit.kg,
 				new Date().getTime());
-		Envelope envelope = new BasicEnvelope(value, AIN_2, ANIMAL_WEIGHT_SCOPE);
+		envelope = new BasicEnvelope(value, AIN_2, ANIMAL_WEIGHT_SCOPE);
 
 		assertThat("Controller must have wires", producerConsumer.hasWires(),
 				is(true));
@@ -459,7 +468,7 @@ public class Test_MongoDB_ProducerConsumer extends TestCase implements
 		assertThat("Must have processed one animal.", monitorable
 				.getStatusVariable(ANIMALS_PROCESSED).getInteger(), is(1));
 
-		Animal animal = trackerFind.retrieveAnimal(AIN_2);
+		animal = trackerFind.retrieveAnimal(AIN_2);
 		assertThat("Animal should not be null", animal, is(notNullValue()));
 		assertThat("There must be two tag", animal.getTags().size(), is(2));
 		assertThat("There must be four events", animal.eventHistory().size(),
@@ -472,15 +481,15 @@ public class Test_MongoDB_ProducerConsumer extends TestCase implements
 		WeighIn wi = (WeighIn) animal.eventHistory().get(3);
 		assertThat("Weight must be 100", wi.getWeight(), is(100d));
 
-	}
+		/*
+		 * Position Envelopes are sent as Position events Envelope scope is
+		 * gps.position
+		 */
+		//
+		logger.debug(bundleMarker, "Consumer_Position");
 
-	/**
-	 * Position Envelopes are sent as Position events Envelope scope is
-	 * gps.position
-	 * 
-	 * @throws InterruptedException
-	 */
-	public void testConsumer_Position() throws InterruptedException {
+		producerConsumer.clearSendCount();
+		resetStatus();
 
 		Measurement lat = new Measurement(Math.toRadians(45), .1, Unit.rad,
 				new Date().getTime());
@@ -488,7 +497,7 @@ public class Test_MongoDB_ProducerConsumer extends TestCase implements
 				new Date().getTime());
 		Position position = new Position(lat, longi, null, null, null);
 
-		Envelope envelope = new BasicEnvelope(position, AIN_2, POSITION_SCOPE);
+		envelope = new BasicEnvelope(position, AIN_2, POSITION_SCOPE);
 
 		assertThat("Controller must have wires", producerConsumer.hasWires(),
 				is(true));
@@ -503,7 +512,7 @@ public class Test_MongoDB_ProducerConsumer extends TestCase implements
 		assertThat("Must have processed one animal.", monitorable
 				.getStatusVariable(ANIMALS_PROCESSED).getInteger(), is(1));
 
-		Animal animal = trackerFind.retrieveAnimal(AIN_2);
+		animal = trackerFind.retrieveAnimal(AIN_2);
 		assertThat("Animal should not be null", animal, is(notNullValue()));
 		assertThat("There must be two tag", animal.getTags().size(), is(2));
 		assertThat("There must be five events", animal.eventHistory().size(),
@@ -518,27 +527,27 @@ public class Test_MongoDB_ProducerConsumer extends TestCase implements
 		double degrees = 45;// Math.toDegrees(44);
 		assertThat("Latitude must be 45", posi.getLatitude(), is(degrees));
 
-	}
+		/*
+		 * Measurements Envelopes are sent as GenericEvent events with scope
+		 * equal to the id of the OCD. Must already have a OCD loaded in the OCD
+		 * collection for this to pass
+		 */
+		//
+		logger.debug(bundleMarker, "Measurement_GenericEvent");
 
-	/**
-	 * Measurements Envelopes are sent as GenericEvent events with scope equal
-	 * to the id of the OCD
-	 * 
-	 * @throws InterruptedException
-	 */
-	public void testConsumer_Measurement_GenericEvent()
-			throws InterruptedException {
+		producerConsumer.clearSendCount();
 		resetStatus();
 
-		Measurement value = new Measurement(100, .1, Unit.kg,
+		value = new Measurement(100, .1, Unit.kg,
 				new Date().getTime());
-		Envelope envelope = new BasicEnvelope(value, AIN_2,
+		envelope = new BasicEnvelope(value, AIN_2,
 				METTLER_WEIGHT_SCOPE);
 
 		assertThat("Controller must have wires", producerConsumer.hasWires(),
 				is(true));
 
 		producerConsumer.send(envelope);
+		TimeUnit.SECONDS.sleep(2);
 
 		assertThat("Wrong number of products consumed.", monitorable
 				.getStatusVariable(PRODUCTS_CONSUMED).getInteger(), is(1));
@@ -554,7 +563,7 @@ public class Test_MongoDB_ProducerConsumer extends TestCase implements
 		assertThat("Must have added NO animals.", monitorable
 				.getStatusVariable(ANIMALS_ADDED).getInteger(), is(0));
 
-		Animal animal = trackerFind.retrieveAnimal(AIN_2);
+		animal = trackerFind.retrieveAnimal(AIN_2);
 		assertThat("Animal should not be null", animal, is(notNullValue()));
 		assertThat("There must be two tag", animal.getTags().size(), is(2));
 		assertThat("There must be six events", animal.eventHistory().size(),
@@ -578,14 +587,14 @@ public class Test_MongoDB_ProducerConsumer extends TestCase implements
 		assertThat("No bw attribute", precision, is(notNullValue()));
 		assertThat("BW is wrong", precision, is("0.1"));
 
-	}
-
-	public void testConsumer_Retrieve_Premises() throws InterruptedException,
-			IOException, BrokenBarrierException {
+		//
+		logger.debug(bundleMarker, "Retrieve_Premises");
+		producerConsumer.clearSendCount();
+		resetStatus();
 
 		String pin = "urn:pin:003ALKM";
 		// Query for a premises
-		Envelope envelope = new BasicEnvelope(
+		envelope = new BasicEnvelope(
 Query.RETRIEVE_PREMISES_TEMPLATE
 				.replace(pin).getBytes(),
 				"Agriculture/Premises/" + pin + "/Query",
@@ -623,21 +632,19 @@ Query.RETRIEVE_PREMISES_TEMPLATE
 		Premises premises = (Premises) eob;
 		assertThat("Wrong uri", premises.getUri(), is(pin));
 
-	}
+		/*
+		 * Query for ain 840003002956353
+		 */
+		//
+		logger.debug(bundleMarker, "Retrieve_Animal");
 
-	/**
-	 * Query for ain 840003002956353
-	 * 
-	 * @throws InterruptedException
-	 * @throws IOException
-	 * @throws BrokenBarrierException
-	 */
-	public void testConsumer_Retrieve_Animal() throws InterruptedException,
-			IOException, BrokenBarrierException {
+		producerConsumer.clearSendCount();
+		resetStatus();
+
 		String ain = "840003002956353";
-		String pin = "urn:pin:003ALKM";
+		pin = "urn:pin:003ALKM";
 		// Query for a premises
-		Envelope envelope = new BasicEnvelope(
+		envelope = new BasicEnvelope(
 				Query.RETRIEVE_ANIMAL_TEMPLATE.replace(ain),
 				"Agriculture/Premises/" + pin + "/Query",
 				"agriculture.premises.query");
@@ -652,9 +659,9 @@ Query.RETRIEVE_PREMISES_TEMPLATE
 
 		assertThat("Must have one message", producerConsumer
 				.getConsumedProducts().size(), is(1));
-		Entry<String, Object> productEntry = Iterables.get(producerConsumer
+		productEntry = Iterables.get(producerConsumer
 				.getConsumedProducts().entrySet(), 0);
-		String scopes = productEntry.getKey();
+		scopes = productEntry.getKey();
 		assertThat("Wrong scopes for received message", scopes,
 				is("[agriculture.premises.response]"));
 
@@ -662,16 +669,16 @@ Query.RETRIEVE_PREMISES_TEMPLATE
 		assertEquals("Wrong id for consumed", "Agriculture/Premises/" + pin
 				+ "/Response", envelope.getIdentification());
 
-		byte[] payload = (byte[]) envelope.getValue();
+		payload = (byte[]) envelope.getValue();
 		assertThat("Payload must not be empty", payload, is(notNullValue()));
 		assertThat("Payload must contain bytes.", payload.length,
 				is(greaterThan(10)));
-		List<EObject> eobList = TrackerStoreUtils.toEObject(payload);
+		eobList = TrackerStoreUtils.toEObject(payload);
 		assertThat("Must have one value", eobList.size(), is(1));
-		EObject eob = Iterables.get(eobList, 0);
+		eob = Iterables.get(eobList, 0);
 
 		assertThat("Must have a Animal", eob, is(instanceOf(Animal.class)));
-		Animal animal = (Animal) eob;
+		animal = (Animal) eob;
 		assertThat("Wrong uri", animal.activeTag().getId(), is(ain));
 
 	}
