@@ -18,13 +18,19 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentSkipListSet;
 
-import org.eclipse.birt.report.designer.ui.ReportPlugin;
+//import org.eclipse.birt.report.designer.ui.ReportPlugin;
 import org.eclipse.birt.report.designer.ui.util.ExceptionUtil;
 import org.eclipse.birt.report.viewer.ViewerPlugin;
 import org.eclipse.birt.report.viewer.utilities.WebViewer;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.swt.widgets.Display;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleEvent;
@@ -49,6 +55,8 @@ public class ReportLoader implements BundleListener {
 	private static final String START_WEBSERVER_SYSTEM_PROPERTY = "start.webserver";
 
 	private static final String REPORT_PACK = ".report.pack";
+	private static final String RESOURCE_PREFERENCE = "org.eclipse.birt.report.designer.ui.preferences.resourcestore"; //$NON-NLS-1$
+
 
 	/**
 	 * slf4j Logger
@@ -61,6 +69,7 @@ public class ReportLoader implements BundleListener {
 	@SuppressWarnings("static-access")
 	private static final String VIEWER_PLUGIN_ID = ViewerPlugin.getDefault().PLUGIN_ID;
 	private static final String REPORT_UI_PLUGIN_ID = "org.eclipse.birt.report.designer.ui"; //$NON-NLS-1$
+
 	private final Set<String> startedBundles = new ConcurrentSkipListSet<String>();
 	private final BundleContext context;
 
@@ -115,7 +124,7 @@ public class ReportLoader implements BundleListener {
 			logger.debug(bundleMarker, "{}: Found BIRT PLUGIN {} was started",
 					this, VIEWER_PLUGIN_ID);
 			if (startedBundles.size() == 2) {
-				initializeResourceLoadingAndStartup();
+				initialize();
 				return true;
 			}
 		} else if (bundle.getHeaders().get(Constants.BUNDLE_SYMBOLICNAME)
@@ -125,25 +134,52 @@ public class ReportLoader implements BundleListener {
 			logger.debug(bundleMarker, "{}: Found BIRT PLUGIN {} was started",
 					this, REPORT_UI_PLUGIN_ID);
 			if (startedBundles.size() == 2) {
-				initializeResourceLoadingAndStartup();
+				initialize();
 				return true;
 			}
 		}
 		return false;
 	}
 
-	private void initializeResourceLoadingAndStartup() {
-		String wp = System.getProperty(BIRT_VIEWER_ROOT_PATH);
-		loadWebServerResources(wp);
-		ReportPlugin rplugin = ReportPlugin.getDefault();// This will load the
-															// ReportPlugin and
-															// set the resources
-		IPreferenceStore ps = rplugin.getPreferenceStore();
-		setUserResourcePreference(wp, ps);
+	private void initialize() {
+		Job job = new Job("LoadBIRTViewer") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				return initializeResourceLoadingAndStartup();
+
+			}
+
+		};
+
+		// Start the Job
+
+		job.schedule();
+
+	}
+
+	private IStatus initializeResourceLoadingAndStartup() {
+		logger.debug(bundleMarker, "Initializing");
 		try {
+			String wp = System.getProperty(BIRT_VIEWER_ROOT_PATH);
+			loadWebServerResources(wp);
+			IEclipsePreferences preferences = InstanceScope.INSTANCE
+					.getNode(REPORT_UI_PLUGIN_ID);
+
+			// ReportPlugin rplugin = ReportPlugin.getDefault();// This will
+			// load
+			// // the
+			// // ReportPlugin and
+			// // set the resources
+
+			// IPreferenceStore ps = rplugin.getPreferenceStore();
+			setUserResourcePreference(wp, preferences);
 			startWebAppServer();
-		} catch (CoreException e) {
+			logger.debug(bundleMarker, "Initialized");
+			return Status.OK_STATUS;
+		} catch (Exception e) {
 			logger.error(bundleMarker, this + ": Failed to start server", e);
+			return new Status(Status.ERROR, ReportLoaderActivator.PLUGIN_ID,
+					"Failed to start server", e);
 		}
 	}
 
@@ -342,10 +378,10 @@ public class ReportLoader implements BundleListener {
 
 	}
 
-	private void setUserResourcePreference(String wp, IPreferenceStore ps) {
+	private void setUserResourcePreference(String wp, IEclipsePreferences ps) {
 		if (wp != null) {
-			String presistedResourceFolder = ps
-					.getString(ReportPlugin.RESOURCE_PREFERENCE);
+			String presistedResourceFolder = ps.get(
+RESOURCE_PREFERENCE, null);
 			if (presistedResourceFolder == null
 					|| !wp.equals(presistedResourceFolder)) {
 				logger.info(bundleMarker,
@@ -353,7 +389,8 @@ public class ReportLoader implements BundleListener {
 								this,
 								presistedResourceFolder == null ? "null"
 										: presistedResourceFolder, wp });
-				ps.setValue(ReportPlugin.RESOURCE_PREFERENCE, wp);
+
+				ps.put(RESOURCE_PREFERENCE, wp);
 			} else {
 				logger.info(bundleMarker,
 						"{}: User resource folder preference already set to {} ",
@@ -375,16 +412,30 @@ public class ReportLoader implements BundleListener {
 			// Instead mimic what happens when
 			// org.eclipse.birt.report.designer.ui.ide.navigator.RunReportAction
 			// is invoked and call the test report in the base directory.
-			String url = "test.rptdesign";
-			try {
-				Map<String, String> options = new HashMap<String, String>();
+			final String url = "test.rptdesign";
+
+				final Map<String, String> options = new HashMap<String, String>();
 				options.put(WebViewer.FORMAT_KEY, WebViewer.HTML);
-				WebViewer.display(url, options);
-			} catch (Exception e) {
-				ExceptionUtil.handle(e);
-				return;
+			Display.getDefault().asyncExec(new Runnable() {
+
+					/*
+					 * (non-Javadoc)
+					 * 
+					 * @see java.lang.Runnable#run()
+					 */
+					@Override
+					public void run() {
+					try {
+						WebViewer.display(url, options);
+					} catch (Exception e) {
+						ExceptionUtil.handle(e);
+						return;
+					}
+					}
+				});
+
 			}
 		}
-	}
+
 
 }

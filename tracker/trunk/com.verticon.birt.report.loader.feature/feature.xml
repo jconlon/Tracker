@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.birt.report.loader"
       label="%featureName"
-      version="0.1.2.qualifier"
+      version="0.3.1.qualifier"
       provider-name="%providerName"
       plugin="com.verticon.birt.report.loader">
 
