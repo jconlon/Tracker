@@ -92,6 +92,7 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 		fillContextMenu(menuMgr);
 
 		menuMgr.addMenuListener(new IMenuListener() {
+			@Override
 			public void menuAboutToShow(IMenuManager manager) {
 				MonitorView.this.fillContextMenu(manager);
 
@@ -115,6 +116,7 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 	private void fillToolBar() {
 		IActionBars bars = getViewSite().getActionBars();
 		bars.getMenuManager().add(showConnectionLabels);
+		bars.getMenuManager().add(refresh);
 		bars.getMenuManager().add(new Separator());
 		bars.getMenuManager().add(toolbarZoomContributionViewItem);
 
@@ -142,8 +144,7 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 	 */
 	private void fillContextMenu(IMenuManager manager) {
 		manager.add(new Separator());
-		manager.add(layoutControl);
-		manager.add(new Separator());
+		manager.add(showConnectionLabels);
 		manager.add(refresh);
 		manager.add(new Separator());
 		manager.add(contextZoomContributionViewItem);
@@ -157,6 +158,7 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 		
 
 		refresh = new Action() {
+			@Override
 			public void run() {
 				block.getViewer().refresh(true);
 			}
@@ -172,6 +174,7 @@ public class MonitorView extends ViewPart implements IZoomableWorkbenchPart {
 
 		showConnectionLabels = new Action("Hide Wire Names",
 				Action.AS_CHECK_BOX) {
+			@Override
 			public void run() {
 				block.setShowWireLabels(!this.isChecked());
 				block.getViewer().refresh(true);
