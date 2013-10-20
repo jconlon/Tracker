@@ -15,7 +15,7 @@
          </property>
           <property
                 name="aboutText"
-                value="Tracker Livestock Business Intelligence Toolkit&#x0A;Version: {0}&#x0A;Build id: {1}&#x0A;&#x0A;(c) Copyright Verticon, Inc. 2012.  All rights reserved. &#x0A;&#x0A;Visit http://tracker.verticon.com/index.html&#x0A;&#x0A;Tracker is powered by Eclipse technology and includes Eclipse plugins that can be installed and&#x0A;used with other Eclipse (3.8.1) based offerings."/>
+                value="Tracker Livestock Business Intelligence Toolkit&#x0A;Version: {0}&#x0A;Build id: {1}&#x0A;&#x0A;(c) Copyright Verticon, Inc. 2013.  All rights reserved. &#x0A;&#x0A;Visit http://tracker.verticon.com/index.html&#x0A;&#x0A;Tracker is powered by Eclipse technology and includes Eclipse plugins that can be installed and&#x0A;used with other Eclipse (4.3) based offerings."/>
         
          <property
                name="aboutImage"
