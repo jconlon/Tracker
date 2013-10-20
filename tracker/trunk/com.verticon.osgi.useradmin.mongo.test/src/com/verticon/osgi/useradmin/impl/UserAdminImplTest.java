@@ -1,10 +1,10 @@
 package com.verticon.osgi.useradmin.impl;
 
 import static com.google.common.collect.Maps.newHashMap;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
-import static org.hamcrest.Matchers.nullValue;
 
 import java.util.Dictionary;
 import java.util.Map;

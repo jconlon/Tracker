@@ -22,11 +22,10 @@ import static com.verticon.tracker.store.mongodb.test.system.Configurator.TAG_ID
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.TAG_ID_WITH_SIRE_AND_DAM;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.bundleMarker;
 import static com.verticon.tracker.store.mongodb.test.system.Configurator.saveXMIResource;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.instanceOf;
 
 import java.io.File;
 import java.io.IOException;
@@ -202,7 +201,7 @@ public class Test_TrackerFind extends TestCase {
 		Animal firstAnimal = premises.getAnimals().get(0);
 		String id = "";
 		for (Animal animal : premises.getAnimals()) {
-			assertThat(animal.getId(), is(greaterThan(id)));
+			assertThat(true, is(animal.getId().compareTo(id) > 0));
 			id = animal.getId();
 			logger.debug(bundleMarker, "Animal {} ", animal.getId());
 		}

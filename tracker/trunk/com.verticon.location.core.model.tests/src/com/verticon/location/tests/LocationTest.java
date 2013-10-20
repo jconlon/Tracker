@@ -4,7 +4,7 @@
 package com.verticon.location.tests;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.Matchers.nullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.Assert.assertThat;
 import junit.framework.TestCase;
 import junit.textui.TestRunner;
