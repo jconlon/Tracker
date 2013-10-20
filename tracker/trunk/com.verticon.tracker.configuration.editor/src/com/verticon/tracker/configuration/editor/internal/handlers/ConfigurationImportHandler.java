@@ -39,7 +39,8 @@ import com.verticon.osgi.metatype.MetaData;
 import com.verticon.osgi.metatype.MetatypePackage;
 import com.verticon.osgi.metatype.OCD;
 import com.verticon.osgi.metatype.util.MetatypeResourceFactoryImpl;
-import com.verticon.tracker.configuration.ConfigAdminResourceFactoryImpl;
+import com.verticon.tracker.configuration.editor.internal.Activator;
+import com.verticon.tracker.configuration.editor.internal.ConfigurationAdminEditor;
 
 /**
  * @author jconlon
@@ -225,22 +226,10 @@ public class ConfigurationImportHandler extends AbstractHandler {
 	}
 
 	private static Resource loadCurrentConfig() throws IOException {
+		ConfigurationAdminEditor.register();
 		ResourceSet resourceSet = new ResourceSetImpl();
-
-		// Register the appropriate resource factory to handle all file
-		// extensions.
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
-				.put(Resource.Factory.Registry.DEFAULT_EXTENSION,
-						new MetatypeResourceFactoryImpl());
-
-		resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().put(
-				"config", new ConfigAdminResourceFactoryImpl());
-		// Register the package to ensure it is available during loading.
-		resourceSet.getPackageRegistry().put(MetatypePackage.eNS_URI,
-				MetatypePackage.eINSTANCE);
-
-		URI uri = URI.createURI("config://tracker.verticon.com/test");
-		Resource currentConfigResource = resourceSet.createResource(uri);
+		Resource currentConfigResource = resourceSet
+				.createResource(Activator.TEST_URI);
 
 		currentConfigResource.load(null);
 		return currentConfigResource;

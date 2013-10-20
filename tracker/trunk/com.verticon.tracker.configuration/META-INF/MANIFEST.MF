@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tracker Configuration
-Bundle-SymbolicName: com.verticon.tracker.configuration
-Bundle-Version: 1.1.0.qualifier
+Bundle-SymbolicName: com.verticon.tracker.configuration;singleton:=true
+Bundle-Version: 1.1.1.qualifier
 Bundle-Vendor: Verticon, Inc.
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: com.google.common.base;version="10.0.1",
