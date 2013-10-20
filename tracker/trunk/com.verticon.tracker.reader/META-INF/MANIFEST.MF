@@ -2,13 +2,14 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tracker Tag Reader
 Bundle-SymbolicName: com.verticon.tracker.reader;singleton:=true
-Bundle-Version: 0.3.2.qualifier
+Bundle-Version: 0.3.3.qualifier
 Bundle-Activator: com.verticon.tracker.reader.ReaderPlugin
 Bundle-Vendor: Verticon, Inc.
 Bundle-ActivationPolicy: lazy
 Import-Package: com.verticon.tracker;version="[0.1.0,2.0.0)",
  com.verticon.tracker.editor.presentation;version="[0.1.0,2.0.0)",
  com.verticon.tracker.editor.util;version="[0.1.0,2.0.0)",
+ javax.microedition.io,
  org.osgi.service.event;version="1.1.0",
  org.osgi.service.io;version="1.0.0",
  org.slf4j;version="1.5.11"
