@@ -1,4 +1,4 @@
-<project name="Create Mirrors" default="create-mirror-juno-ocl" basedir=".">
+<project name="Create Mirrors" default="create-mirror-emf-client" basedir=".">
 
 	<property name="mirrors.dir" value="/opt/Eclipse/mirrors/"/>
 
@@ -37,6 +37,24 @@
 			</p2.mirror>
 	</target>
 	
+	<target name="create-mirror-gef-kepler">
+		   	    
+				<p2.mirror source="http://download.eclipse.org/tools/gef/updates/releases" destination="${mirrors.dir}gef-kepler">
+					<iu id="org.eclipse.draw2d.feature.group" />
+					<iu id="org.eclipse.draw2d.sdk.feature.group" />
+					<iu id="org.eclipse.draw2d.source.feature.group" />
+					<iu id="org.eclipse.gef.feature.group" />
+					<iu id="org.eclipse.gef.all.feature.group" />
+					<iu id="org.eclipse.gef.examples.feature.group" />
+					<iu id="org.eclipse.gef.examples.source.feature.group" />
+					<iu id="org.eclipse.gef.sdk.feature.group" />
+					<iu id="org.eclipse.gef.source.feature.group" />
+					<iu id="org.eclipse.zest.feature.group" />
+					<iu id="org.eclipse.zest.sdk.feature.group" />
+					<iu id="org.eclipse.zest.source.feature.group" />
+					
+				</p2.mirror>
+		</target>
 	<target name="create-mirror-tmf">
 			   	    
 					<p2.mirror source="http://download.eclipse.org/modeling/tmf/updates" destination="${mirrors.dir}tmf">
@@ -79,7 +97,7 @@
 					
 				</p2.mirror>
 	</target>
-	
+	                       
 	<target name="create-mirror-birt-3.7">
 					<p2.mirror source="http://download.eclipse.org/birt/update-site/3.7" destination="${mirrors.dir}birt-3.7">
 						<iu id="org.eclipse.birt.chart.doc.isv.feature.group" />
@@ -100,7 +118,52 @@
 						<iu id="org.eclipse.birt.integration.wtp.feature.group" />
 					</p2.mirror>
 		</target>
+	<!--Birt from the birt site is Not working-->
+	<target name="create-mirror-birt-4.3-broke">
+					<p2.mirror source="http://download.eclipse.org/birt/update-site/4.3" destination="${mirrors.dir}birt-4_3">
+						<iu id="org.eclipse.birt.chart.doc.isv.feature.group" />
+						<iu id="org.eclipse.birt.chart.source.feature.group" />
+						<iu id="org.eclipse.birt.chart.feature.group" />
+						<iu id="org.eclipse.birt.chart.cshelp.feature.group" />
+						<iu id="org.eclipse.birt.osgi.runtime.sdk.feature.group" />
+						<iu id="org.eclipse.birt.chart.osgi.runtime.sdk.feature.group" />
+						<iu id="org.eclipse.birt.doc.feature.group" />
+						<iu id="org.eclipse.birt.cshelp.feature.group" />
+						<iu id="org.eclipse.birt.example.feature.group" />
+						<iu id="org.eclipse.birt.source.feature.group" />
+						<iu id="org.eclipse.birt.feature.group" />
+						<iu id="org.eclipse.birt.doc.isv.feature.group" />
+						<iu id="org.eclipse.birt.chart.integration.wtp.feature.group" />
+						<iu id="org.eclipse.birt.chart.integration.wtp.source.feature.group" />
+						<iu id="org.eclipse.birt.integration.wtp.source.feature.group" />
+						<iu id="org.eclipse.birt.integration.wtp.feature.group" />
+						
+					</p2.mirror>
+		</target>
 	
+	<!--Birt from maintenance also broke-->
+	<!--iu id="org.eclipse.birt.doc.isv.feature.group" /-->
+		<target name="create-mirror-birt-4.3-maintenance">
+						<p2.mirror source="http://download.eclipse.org/releases/maintenance" destination="${mirrors.dir}birt-4_3">
+							<!--iu id="org.eclipse.birt.chart.doc.isv.feature.group" /-->
+							<!--iu id="org.eclipse.birt.chart.source.feature.group" /-->
+							<iu id="org.eclipse.birt.chart.feature.group" />
+							<iu id="org.eclipse.birt.chart.cshelp.feature.group" />
+							<iu id="org.eclipse.birt.osgi.runtime.sdk.feature.group" />
+							<iu id="org.eclipse.birt.chart.osgi.runtime.sdk.feature.group" />
+							<iu id="org.eclipse.birt.doc.feature.group" />
+							<iu id="org.eclipse.birt.cshelp.feature.group" />
+							<iu id="org.eclipse.birt.doc.isv.feature.group" />
+							<iu id="org.eclipse.birt.example.feature.group" />
+							<iu id="org.eclipse.birt.source.feature.group" />
+							<iu id="org.eclipse.birt.feature.group" />
+							<iu id="org.eclipse.birt.chart.integration.wtp.feature.group" />
+							<iu id="org.eclipse.birt.chart.integration.wtp.source.feature.group" />
+							<iu id="org.eclipse.birt.integration.wtp.source.feature.group" />
+							<iu id="org.eclipse.birt.integration.wtp.feature.group" />
+							
+						</p2.mirror>
+			</target>
 	<!-- Currently not used. Suspect this is broken with gz content, as discussed by Nick Bolt. -->
 	<target name="create-mirror-juno-emf-xsd">
 				<p2.mirror source="http://download.eclipse.org/releases/juno" destination="${mirrors.dir}juno-emf-xsd">
@@ -149,6 +212,54 @@
 				</p2.mirror>
 	</target>
 	
+	<!-- Currently not used. Suspect this is broken with gz content, as discussed by Nick Bolt. -->
+		<target name="create-mirror-kepler-emf-xsd">
+					<p2.mirror source="http://download.eclipse.org/releases/kepler" destination="${mirrors.dir}kepler-emf-xsd">
+						<iu id="org.eclipse.emf.ecore.feature.group"/>
+						<iu id="org.eclipse.emf.feature.group"/>
+						<iu id="org.eclipse.emf.sdk.feature.group"/>
+						<iu id="org.eclipse.emf.codegen.feature.group" />
+						<iu id="org.eclipse.emf.codegen.ui.feature.group" />
+						<iu id="org.eclipse.emf.common.feature.group" />
+						<iu id="org.eclipse.emf.common.ui.feature.group" />
+						<iu id="org.eclipse.emf.databinding.feature.group" />
+						<iu id="org.eclipse.emf.doc.feature.group" />
+						<iu id="org.eclipse.emf.codegen.ecore.feature.group" />
+						<iu id="org.eclipse.emf.codegen.ecore.ui.feature.group" />
+						<iu id="org.eclipse.emf.ecore.edit.feature.group" />
+						<!--iu id="org.eclipse.emf.gwt.ecore.edit.feature.group" /-->
+						<iu id="org.eclipse.emf.mapping.ecore.feature.group" />
+						<iu id="org.eclipse.emf.mapping.ecore.editor.feature.group" />
+						<iu id="org.eclipse.emf.edit.feature.group" />
+						<iu id="org.eclipse.emf.databinding.edit.feature.group" />
+						<!--iu id="org.eclipse.emf.gwt.edit.feature.group" /-->
+						<iu id="org.eclipse.emf.edit.ui.feature.group" />
+						<!--iu id="org.eclipse.emf.gwt.edit.ui.feature.group" /-->
+						<!--iu id="org.eclipse.emf.examples.feature.group" /-->
+						<!--iu id="org.eclipse.emf.gwt.ecore.feature.group" />
+						<iu id="org.eclipse.emf.gwt.common.feature.group" />
+						<iu id="org.eclipse.emf.gwt.feature.group" />
+						<iu id="org.eclipse.emf.gwt.sdk.feature.group" /-->
+						<iu id="org.eclipse.emf.mapping.feature.group" />
+						<iu id="org.eclipse.emf.mapping.ui.feature.group" />
+						<iu id="org.eclipse.emf.converter.feature.group" />
+						<iu id="org.eclipse.emf.oda.feature.group" />
+						<iu id="org.eclipse.emf.oda.sdk.feature.group" />
+						<iu id="org.eclipse.emf.oda.ecore.feature.group" />
+						<iu id="org.eclipse.emf.oda.ecore.ui.feature.group" />
+						<iu id="org.eclipse.emf.ecore.editor.feature.group" />
+						<!--iu id="org.eclipse.emf.all.feature.group" /-->
+						<iu id="org.eclipse.xsd.feature.group" />
+						<iu id="org.eclipse.xsd.sdk.feature.group" />
+						<iu id="org.eclipse.xsd.doc.feature.group" />
+						<iu id="org.eclipse.xsd.ecore.converter.feature.group" />
+						<iu id="org.eclipse.xsd.edit.feature.group" />
+						<iu id="org.eclipse.xsd.mapping.feature.group" />
+						<iu id="org.eclipse.xsd.mapping.editor.feature.group" />
+						<iu id="org.eclipse.xsd.editor.feature.group" />
+					</p2.mirror>
+		</target>
+	
 	<target name="create-mirror-juno-equinox">  	    
 			<p2.mirror source="http://download.eclipse.org/releases/juno" destination="${mirrors.dir}juno-equinox">
 				<iu id="org.eclipse.equinox.sdk.feature.group" />
@@ -178,6 +289,14 @@
 				<iu id="org.eclipse.datatools.sdk.feature.feature.group"/>
 			</p2.mirror>
 		</target>
+	
+	<target name="create-mirror-kepler-datatools">
+		   	    
+				<p2.mirror source="http://download.eclipse.org/releases/kepler" destination="${mirrors.dir}kepler-datatools">	
+					<iu id="org.eclipse.datatools.enablement.sdk.feature.feature.group"/>
+					<iu id="org.eclipse.datatools.sdk.feature.feature.group"/>
+				</p2.mirror>
+			</target>
 	
 	<target name="create-mirror-restlet">   	    
 		<p2.mirror source="http://p2.restlet.org/2.1" destination="${mirrors.dir}restlet">	
@@ -217,6 +336,29 @@
 						<iu id="com.google.guava.sdk.feature.feature.group"/>
 					</p2.mirror>
 		</target>
+
+	
+	<!-- Used for EMF Client-->
+		<target name="create-mirror-emf-client">
+					<p2.mirror source="http://download.eclipse.org/emfclient/releases/102" destination="${mirrors.dir}emf-client">
+						<!--iu id="org.eclipse.emf.ecp.sdk.feature.feature.group"/-->
+						<iu id="org.eclipse.emf.ecp.feature.feature.group" />
+						<iu id="org.eclipse.emf.ecp.e3.feature.feature.group" />
+						<iu id="org.eclipse.emf.ecp.emfstore.feature.feature.group" />
+						<iu id="org.eclipse.emf.ecp.workspace.feature.feature.group"/>
+						<iu id="org.eclipse.emf.ecp.validation.feature.feature.group" />
+						<iu id="org.eclipse.emf.ecp.license.feature.feature.group" />
+						<iu id="org.eclipse.emf.ecp.cdo.feature.feature.group" />
+					</p2.mirror>
+		</target>
+	
+	<!-- Keplar -->
+	<target name= "create-mirror-keplar-pde">
+		<p2.mirror source="http://download.eclipse.org/releases/kepler" destination="${mirrors.dir}kepler-pde">
+								<iu id="org.eclipse.rcp.sdk.id" />
+							</p2.mirror>
+	</target>
+			
 	
 	<!-- Default but Currently not used -->
 	<target name="create-mirror-juno-ocl">

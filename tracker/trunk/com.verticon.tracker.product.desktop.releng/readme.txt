@@ -3,7 +3,7 @@ This project is a releng builder for the com.verticon.tracker.product.desktop pr
 =======================================
 Notes
 
-1) Most recent build used Indigo 3.8.1 
+1) Most recent build used Kepler 4.3.1
 
 2) This build requires the deltapack.  By default it looks beside the eclipse install for "deltapack/eclipse/*".  
    If your deltapack is located elsewhere, set the "deltapack" property or edit the buildProduct.xml file.  The
