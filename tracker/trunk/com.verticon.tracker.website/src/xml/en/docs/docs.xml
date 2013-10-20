@@ -57,6 +57,16 @@
 						<entry>Device Simulator Reference</entry>
 						<entry>Overview with focus on installation and configuration</entry>
 					</row>
+					<row>
+						<entry>
+							<ulink
+								url="http://tracker.verticon.com/Tracker/documentation/TrackerCloud_datasheet.pdf">
+								TrackerCloud_datasheet.pdf
+							</ulink>
+						</entry>
+						<entry>Tracker Cloud DataSheet</entry>
+						<entry>Tracker Cloud Product DataSheet - Goals, Benefits and Features</entry>
+					</row>
 				</tbody>
 			</tgroup>
 		</table>

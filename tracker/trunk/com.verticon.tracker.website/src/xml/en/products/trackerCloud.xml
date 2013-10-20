@@ -12,7 +12,7 @@
  	<itemizedlist mark='opencircle'>
  	
 			<listitem>
-				<para>'Big data' document store for high capacity storage;</para>
+				<para>'Big data' solution for Animal Livestock Information Storage;</para>
 			</listitem>
 			<listitem >
 				<para>Cloud service hosted for ubiquitous access;</para>
@@ -26,7 +26,6 @@
 			<listitem>
 				<para>Animal life and event history storage</para>
 			</listitem>
-			
 			<listitem>
 				<para>Information reporting;</para>
 			</listitem>
@@ -35,6 +34,14 @@
 			</listitem>
 			
 	</itemizedlist>
+    </para>
+    
+    <para>
+     Download the 
+    <ulink
+								url="http://tracker.verticon.com/Tracker/documentation/TrackerCloud_datasheet.pdf">
+								TrackerCloud_datasheet.pdf
+							</ulink> to see use case solutions, benefits and features of the Tracker Cloud.
     </para>
     
 

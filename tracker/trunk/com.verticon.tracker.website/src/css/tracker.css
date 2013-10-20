@@ -12,7 +12,7 @@
 /* imports Phenix style.
 ----------------------------------------------- */
 
-@import url(phenix/main.css);
+@import url("phenix/main.css");
 
 /*
 #header div#title { background: url(../img/logo.gif) top left no-repeat; }
@@ -24,6 +24,7 @@
         }
 
 #header div#title a:hover { border-bottom: 0px; }
+
 #header div#title a {
         text-indent: 0px;
         display: block;
@@ -36,16 +37,10 @@
 	font-size: 150%;
 	color: #fff;
         }
-/*
-#header div#title {
-	margin-top: 23px;
-        }
-*/
 
-#footer {
-        background: #fff;
+#footer{background: #fff;
 	color: #789;
-	}
+}
 
 #footer div#footitems {
         background: #fff;
@@ -133,7 +128,7 @@
 .site-search .google a span { visibility: hidden; }
 .site-search .google a { text-decoration: none; background-image: none;	} 
 .site-search .google { 
-	background: #fff url(../img/google.gif) top right no-repeat;
+	background: #fff url("../img/google.gif") top right no-repeat;
 	text-align: right;
 	}
 
