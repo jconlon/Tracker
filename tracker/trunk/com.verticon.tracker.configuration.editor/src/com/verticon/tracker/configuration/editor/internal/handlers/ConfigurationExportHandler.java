@@ -26,9 +26,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.handlers.HandlerUtil;
 
-import com.verticon.osgi.metatype.MetatypePackage;
-import com.verticon.osgi.metatype.util.MetatypeResourceFactoryImpl;
-import com.verticon.tracker.configuration.ConfigAdminResourceFactoryImpl;
+import com.verticon.tracker.configuration.editor.internal.Activator;
+import com.verticon.tracker.configuration.editor.internal.ConfigurationAdminEditor;
 
 public class ConfigurationExportHandler extends AbstractHandler {
 
@@ -59,25 +58,10 @@ public class ConfigurationExportHandler extends AbstractHandler {
 	}
 
 	private void export(String file) throws IOException {
+		ConfigurationAdminEditor.register();
 		ResourceSet resourceSet = new ResourceSetImpl();
-
-		// Register the appropriate resource factory to handle all file
-		// extensions.
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
-				.put(Resource.Factory.Registry.DEFAULT_EXTENSION,
-						new MetatypeResourceFactoryImpl());
-
-		resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().put(
-				"config", new ConfigAdminResourceFactoryImpl());
-		// Register the package to ensure it is available during loading.
-		resourceSet.getPackageRegistry().put(MetatypePackage.eNS_URI,
-				MetatypePackage.eINSTANCE);
-
-		URI uri = URI.createURI("config://tracker.verticon.com/test");
-		Resource resource = resourceSet.createResource(uri);
-
+		Resource resource = resourceSet.createResource(Activator.TEST_URI);
 		resource.load(null);
-
 		URI export = URI.createFileURI(file);
 		resource.setURI(export);
 		resource.save(null);
