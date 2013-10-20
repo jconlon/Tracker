@@ -11,10 +11,10 @@ instructions.configure = \
     addRepository(location:http${#58}//www.rxtx.org/eclipse,type:1,name:RXTX Deprecated,enabled:false);\
     addRepository(location:http${#58}//download.eclipse.org/datatools/updates,type:0,name:Eclipse Datatools,enabled:true);\
     addRepository(location:http${#58}//download.eclipse.org/datatools/updates,type:1,name:Eclipse Datatools,enabled:true);\
-    addRepository(location:http${#58}//download.eclipse.org/releases/juno,type:0,name:Eclipse Juno Release,enabled:true);\
-    addRepository(location:http${#58}//download.eclipse.org/releases/juno,type:1,name:Eclipse Juno Release,enabled:true);\
-    addRepository(location:http${#58}//download.eclipse.org/birt/update-site/3.7,type:0,name:Eclipse BIRT 3.7 Release,enabled:true);\
-	addRepository(location:http${#58}//download.eclipse.org/birt/update-site/3.7,type:1,name:Eclipse BIRT 3.7 Release,enabled:true);\
+    addRepository(location:http${#58}//download.eclipse.org/releases/kepler,type:0,name:Eclipse Kepler Release,enabled:true);\
+    addRepository(location:http${#58}//download.eclipse.org/releases/kepler,type:1,name:Eclipse Kepler Release,enabled:true);\
+    addRepository(location:http${#58}//download.eclipse.org/birt/update-site/4.3,type:0,name:Eclipse BIRT 4.3 Release,enabled:true);\
+	addRepository(location:http${#58}//download.eclipse.org/birt/update-site/4.3,type:1,name:Eclipse BIRT 4.3 Release,enabled:true);\
 	addRepository(location:http${#58}//download.eclipse.org/modeling/mdt/ocl/updates/maintenance,type:0,name:MDT OCL Maintenance,enabled:true);\
 	addRepository(location:http${#58}//download.eclipse.org/modeling/mdt/ocl/updates/maintenance,type:1,name:MDT OCL Maintenance,enabled:true);\
 	addRepository(location:http${#58}//download.eclipse.org/modeling/emf/emf/updates/,type:0,name:Modeling Maintenance,enabled:true);\
