@@ -114,6 +114,12 @@ public class Activator extends AbstractUIPlugin {
 				imageDescriptorFromPlugin(PLUGIN_ID, SharedImages.ROLE_ICON));
 	}
 
+	/**
+	 * Finds the authenticator and its uri. If there is no authenticator or no
+	 * uri returns null.
+	 * 
+	 * @return UserAdmin based on the authenticator's uri.
+	 */
 	UserAdmin getUserAdmin() {
 		UserAdmin result = null;
 		Authenticator authenticator = authenticatorAdminTracker.getService();

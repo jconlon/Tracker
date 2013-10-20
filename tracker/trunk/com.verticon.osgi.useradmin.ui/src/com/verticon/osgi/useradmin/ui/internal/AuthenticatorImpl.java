@@ -69,13 +69,13 @@ public class AuthenticatorImpl implements Authenticator {
 		checkNotNull(uri, "Parameter uri can not be null.");
 		UserAdmin userAdmin = Activator.getDefault().getUserAdmin(uri);
 		checkNotNull(userAdmin, "Failed to find the UserAdmin Service.");
+		this.uri = uri;
 		User user = getUser(userName, pass, userAdmin);// userAdmin.getRole(userName);
+
 		if (user != null) {
 			setAuthorization(userAdmin.getAuthorization(user));
-			this.uri = uri;
 		} else {
 			setAuthorization(null); // not authenticated
-			this.uri = null;
 		}
 
 		return authorization != null;
