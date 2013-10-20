@@ -22,7 +22,7 @@ public class ReportLoaderActivator implements BundleActivator {
 	/**
 	 * Identify the plugin to the logger
 	 */
-	private final static String PLUGIN_ID = "com.verticon.birt.report.loader";
+	final static String PLUGIN_ID = "com.verticon.birt.report.loader";
 	/**
 	 * slf4j Marker to keep track of bundle
 	 */
@@ -53,6 +53,7 @@ public class ReportLoaderActivator implements BundleActivator {
 	 * org.osgi.framework.BundleActivator#start(org.osgi.framework.BundleContext
 	 * )
 	 */
+	@Override
 	public void start(BundleContext bundleContext) throws Exception {
 		logger.debug(bundleMarker,"{}: Started", 
 				this);
@@ -76,6 +77,7 @@ public class ReportLoaderActivator implements BundleActivator {
 	 * @see
 	 * org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
+	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
 		if(bl!=null){
 			context.removeBundleListener(bl);
