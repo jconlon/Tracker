@@ -316,6 +316,10 @@
   <level value="DEBUG"/>
   </logger>
   
+  <logger name="com.verticon.birt.report.loader">
+   <level value="DEBUG"/>
+  </logger>
+  
   <logger name="aggregated" level="INFO">
     <appender-ref ref="AGGREGATED"/>
   </logger>
@@ -326,9 +330,9 @@
   
   <root>
     <level value="WARN"/>
-   
+   <appender-ref ref="multiplex"/>
     <!--  
-     <appender-ref ref="multiplex"/>
+     
      <appender-ref ref="STDOUT"/>
      <appender-ref ref="RollingFile"/>
     -->
