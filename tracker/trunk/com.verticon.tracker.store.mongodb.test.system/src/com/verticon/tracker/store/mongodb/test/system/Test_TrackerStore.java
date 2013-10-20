@@ -92,7 +92,7 @@ public class Test_TrackerStore extends TestCase {
 	 * latch lets subsequent calls through.
 	 */
 	private static final CountDownLatch startUpGate = new CountDownLatch(1);
-
+	
 	private static boolean initializedCollections = false;
 	/**
 	 * Injected services

@@ -19,7 +19,6 @@ import static com.verticon.tracker.store.mongodb.test.system.Configurator.isVali
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
 
 import java.io.IOException;
 
@@ -148,7 +147,7 @@ public class Test_TrackerStore_Find extends TestCase {
 		Animal firstAnimal = premises.getAnimals().get(0);
 		String id = "";
 		for (Animal animal : premises.getAnimals()) {
-			assertThat(animal.getId(), is(greaterThan(id)));
+			assertThat(true, is(animal.getId().compareTo(id) > 0));
 			id = animal.getId();
 			logger.debug(bundleMarker, "Animal {} ", animal.getId());
 		}

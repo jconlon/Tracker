@@ -15,10 +15,9 @@ import static com.verticon.tracker.store.mongodb.test.system.Configurator.bundle
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.CoreMatchers.startsWith;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.greaterThan;
-import static org.hamcrest.Matchers.nullValue;
 
 import java.io.IOException;
 import java.util.Date;
@@ -35,6 +34,7 @@ import junit.framework.TestCase;
 import org.eclipse.emf.common.util.EMap;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.hamcrest.CoreMatchers;
 import org.osgi.framework.BundleContext;
 import org.osgi.service.monitor.Monitorable;
 import org.osgi.service.wireadmin.BasicEnvelope;
@@ -671,8 +671,8 @@ Query.RETRIEVE_PREMISES_TEMPLATE
 
 		payload = (byte[]) envelope.getValue();
 		assertThat("Payload must not be empty", payload, is(notNullValue()));
-		assertThat("Payload must contain bytes.", payload.length,
-				is(greaterThan(10)));
+		assertThat("Payload must contain bytes.", true,
+				is(CoreMatchers.is(payload.length > 10)));
 		eobList = TrackerStoreUtils.toEObject(payload);
 		assertThat("Must have one value", eobList.size(), is(1));
 		eob = Iterables.get(eobList, 0);
