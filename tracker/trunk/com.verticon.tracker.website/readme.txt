@@ -20,7 +20,7 @@ For Product releases:
    com.verticon.tracker.documentation readme.txt instructions.
     
 1. Note it is not necessary to manually edit the file names in the downloads page to match the 
-   real product archives as this is taken care of by the script referring to an properties file
+   real product archives as this is taken care of by the script referring to a properties file
    in the com.verticon.tracker.product.desktop.releng that was created during the product build. 
 
 2. Run Buckminster: deploy.to.local.repo.dir - to move all artifacts 
