@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.birt"
       label="%featureName"
-      version="1.0.0.qualifier"
+      version="2.0.0.qualifier"
       provider-name="%providerName">
 
    <description>
@@ -22,16 +22,14 @@
    </url>
 
    <requires>
-      <import feature="org.eclipse.birt.chart" version="3.7.2" match="compatible"/>
-      <import feature="org.eclipse.birt.cshelp" version="3.7.2" match="compatible"/>
-      <import feature="org.eclipse.birt.doc" version="3.7.2" match="compatible"/>
-      <import feature="org.eclipse.birt.report.designer.editor.xml.wtp" version="3.7.2" match="compatible"/>
-      <import feature="org.eclipse.emf.oda.ecore" version="1.1.0" match="compatible"/>
-      <import feature="org.eclipse.emf.oda.ecore.ui" version="1.1.0" match="compatible"/>
+      <import feature="org.eclipse.birt.chart" version="3.7.2" match="greaterOrEqual"/>
+      <import feature="org.eclipse.birt.cshelp" version="3.7.2" match="greaterOrEqual"/>
+      <import feature="org.eclipse.birt.doc" version="3.7.2" match="greaterOrEqual"/>
+      <import feature="org.eclipse.birt.report.designer.editor.xml.wtp" version="3.7.2" match="greaterOrEqual"/>
       <import feature="org.eclipse.ocl.all" version="4.0.1" match="compatible"/>
-      <import feature="org.eclipse.birt.chart.cshelp" version="3.7.2" match="compatible"/>
-      <import feature="org.eclipse.birt" version="3.7.2" match="compatible"/>
-      <import feature="org.eclipse.birt.example" version="3.7.2" match="compatible"/>
+      <import feature="org.eclipse.birt.chart.cshelp" version="3.7.2" match="greaterOrEqual"/>
+      <import feature="org.eclipse.birt" version="3.7.2" match="greaterOrEqual"/>
+      <import feature="org.eclipse.birt.example" version="3.7.2" match="greaterOrEqual"/>
    </requires>
 
 </feature>
