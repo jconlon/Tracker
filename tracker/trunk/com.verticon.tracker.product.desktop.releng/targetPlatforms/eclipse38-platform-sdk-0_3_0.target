@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?>
+
+<target name="eclipse38-platform-sdk-0_3_0" sequenceNumber="143">
+<locations>
+<location path="/opt/Eclipse/equinox-SDK-3.8.1/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/emf-query-SDK-1.6.0/eclipse" type="Directory"/>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.draw2d.feature.group" version="3.8.1.201208200205"/>
+<unit id="org.eclipse.draw2d.sdk.feature.group" version="3.8.1.201208200205"/>
+<unit id="org.eclipse.draw2d.source.feature.group" version="3.8.1.201208200205"/>
+<unit id="org.eclipse.gef.feature.group" version="3.8.1.201208200205"/>
+<unit id="org.eclipse.gef.all.feature.group" version="3.8.1.201208200205"/>
+<unit id="org.eclipse.gef.examples.feature.group" version="3.8.1.201208200205"/>
+<unit id="org.eclipse.gef.examples.source.feature.group" version="3.8.1.201208200205"/>
+<unit id="org.eclipse.gef.sdk.feature.group" version="3.8.1.201208200205"/>
+<unit id="org.eclipse.gef.source.feature.group" version="3.8.1.201208200205"/>
+<unit id="org.eclipse.zest.feature.group" version="1.4.1.201208200205"/>
+<unit id="org.eclipse.zest.sdk.feature.group" version="1.4.1.201208200205"/>
+<unit id="org.eclipse.zest.source.feature.group" version="1.4.1.201208200205"/>
+<repository location="file:/opt/Eclipse/mirrors/gef/"/>
+</location>
+<location path="/opt/logback-1.0.11" type="Directory"/>
+<location path="/opt/Eclipse/xtext-unittesting/eclipse" type="Directory"/>
+<location path="/opt/mongo-2.11.1" type="Directory"/>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.acceleo.feature.group" version="3.3.1.v20120831-0923"/>
+<unit id="org.eclipse.acceleo.doc.feature.group" version="3.3.1.v20120831-0923"/>
+<unit id="org.eclipse.acceleo.examples.feature.group" version="3.3.1.v20120831-0923"/>
+<unit id="org.eclipse.acceleo.runtime.feature.group" version="3.3.1.v20120831-0923"/>
+<unit id="org.eclipse.acceleo.sdk.feature.group" version="3.3.1.v20120831-0923"/>
+<unit id="org.eclipse.acceleo.ui.capabilities.feature.group" version="3.3.1.v20120831-0923"/>
+<unit id="org.eclipse.acceleo.source.feature.group" version="3.3.1.v20120831-0923"/>
+<repository location="file:/opt/Eclipse/mirrors/juno-acceleo/"/>
+</location>
+<location path="/opt/Eclipse/eclipse-SDK-3.8.1/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/emf-validation-SDK-1.6.0/eclipse" type="Directory"/>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.equinox.p2.extras.feature.feature.group" version="1.1.0.v20120524-0542-7A6FEcDiVOTg1Q_HuZrEuBty3dqr"/>
+<unit id="org.eclipse.equinox.server.core.feature.group" version="1.2.0.v20120522-1841-7K7VFO1F7RZHQZI4_c8StnvFB"/>
+<unit id="org.eclipse.core.runtime.feature.feature.group" version="1.1.0.v20120521-2346-7H7NFHlBpeIm_Y1_WXrenz0P9ad9"/>
+<unit id="org.eclipse.equinox.executable.feature.group" version="3.6.0.v20120522-1813-7P7OG2BFLWUl7UmbVUO9iCm"/>
+<unit id="org.eclipse.equinox.compendium.sdk.feature.group" version="3.8.0.v20120522-1841-7X7eGb7FPGjtJjv1kjS_NdG"/>
+<unit id="org.eclipse.equinox.core.feature.feature.group" version="1.1.0.v20120522-1841-7K7XFMTF7RZHQZI4_c8S-nnFB"/>
+<unit id="org.eclipse.equinox.core.sdk.feature.group" version="3.8.0.v20120522-1813-85FAcGbFFoYTldJrUNk3a52oHJ"/>
+<unit id="org.eclipse.equinox.p2.core.feature.feature.group" version="1.1.0.v20120524-0542-8297FncFWmE7h4Asx2cpqz-T38"/>
+<unit id="org.eclipse.equinox.p2.discovery.feature.feature.group" version="1.0.100.v20120524-0542-4-Bh9oB58A5N9L28PCQ"/>
+<unit id="org.eclipse.equinox.p2.rcp.feature.feature.group" version="1.1.0.v20120524-0542-785EoBqNKNYz-GX2sUgCaBty3dqr"/>
+<unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.8.0.v20120524-0542-9N89H_oGMMn84Qsz0iIohu4jLeQD"/>
+<unit id="org.eclipse.equinox.serverside.sdk.feature.group" version="3.8.0.v20120522-1841-9Q7dFszFYGis9uZsz0QodZP4fL9p"/>
+<unit id="org.eclipse.equinox.sdk.feature.group" version="3.8.0.v20120522-1841-7M7fA78g5_y-g-jtHxcd5k8q8lFR"/>
+<unit id="org.eclipse.equinox.weaving.sdk.feature.group" version="1.0.200.v20120522-1841-79-FKsEVVFNVFsVk7O6G6"/>
+<unit id="org.eclipse.equinox.server.jetty.feature.group" version="1.1.0.v20120522-1841-8077C0F8NcJTbL1ab47MJ5"/>
+<unit id="org.eclipse.equinox.server.p2.feature.group" version="1.2.0.v20120522-1841-7z7_FfoFTy21Yu4Ykq_engx38"/>
+<unit id="org.eclipse.equinox.server.servletbridge.feature.group" version="1.0.101.v20120522-1841-42F9w9oB58B5KBB2ADHO"/>
+<repository location="file:/opt/Eclipse/mirrors/juno-equinox/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.graphiti.feature.feature.group" version="0.9.1.v20120919-0732"/>
+<unit id="org.eclipse.graphiti.feature.examples.feature.group" version="0.9.1.v20120919-0732"/>
+<unit id="org.eclipse.graphiti.export.feature.feature.group" version="0.9.1.v20120919-0732"/>
+<unit id="org.eclipse.graphiti.sdk.feature.feature.group" version="0.9.1.v20120919-0732"/>
+<unit id="org.eclipse.graphiti.sdk.plus.feature.feature.group" version="0.9.1.v20120919-0732"/>
+<unit id="org.eclipse.graphiti.feature.tools.feature.group" version="0.9.1.v20120919-0732"/>
+<repository location="file:/opt/Eclipse/org.eclipse.graphiti.site_0.9.1/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.test.feature.group" version="3.5.100.v20120528-1717-7R7dBhBgLiCViQnG8ITHM73701A1"/>
+<repository location="file:/opt/Eclipse/eclipse-test-framework-3.8.1/"/>
+</location>
+<location path="/opt/Eclipse/mdt-ocl-CoreSDK-core-4.0.1/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/apache-commons" type="Directory"/>
+<location path="/opt/Eclipse/google-guava-11.01" type="Directory"/>
+<location path="/opt/Eclipse/eclipse-3.8.1-delta-pack/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/emf-transaction-SDK-1.6.0/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/swtbot/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/mongoemf-0.7.0/eclipse" type="Directory"/>
+<location path="/opt/slf4j-1.7.5" type="Directory"/>
+<location path="/opt/Eclipse/monitoradmin" type="Directory"/>
+<location path="/opt/logback-0.9.19" type="Directory"/>
+<location path="/opt/Eclipse/emf-xsd-SDK-2.8.1/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/mdt-uml2-SDK-4.0.1/eclipse" type="Directory"/>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.xpand.source.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xpand.examples.source.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xpand.incremental.source.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xpand.ui.source.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xtend.source.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xtend.dependencies.source.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xtend.typesystem.emf.source.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xtend.ui.source.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xtend.typesystem.uml2.source.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xtend.typesystem.xsd.source.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xpand.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xpand.doc.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xpand.examples.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xpand.incremental.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xpand.sdk.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xpand.ui.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xtend.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xtend.dependencies.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xtend.typesystem.emf.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xtend.ui.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xtend.typesystem.uml2.feature.group" version="1.2.1.v201206110941"/>
+<unit id="org.eclipse.xtend.typesystem.xsd.feature.group" version="1.2.1.v201206110941"/>
+<repository location="file:/opt/Eclipse/mirrors/juno-expand/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.birt.chart.feature.group" version="3.7.2.v20120213-7r9e7PFQCnvKZ5oAdlXE5"/>
+<unit id="org.eclipse.birt.chart.osgi.runtime.feature.group" version="3.7.2.v20120213-80AC7VFYeMBkrPeWt3Pbd"/>
+<unit id="org.eclipse.birt.chart.osgi.runtime.sdk.feature.group" version="3.7.2.v20120213-777D3855DGCYKbkOMo2dp29e4z0r"/>
+<unit id="org.eclipse.birt.osgi.runtime.feature.group" version="3.7.2.v20120213-9qE58eG3Z7DT4ZrES6NZX"/>
+<unit id="org.eclipse.birt.osgi.runtime.sdk.feature.group" version="3.7.2.v20120213-777D386vH9DhL7e9QKLh0vkCyimU"/>
+<unit id="org.eclipse.birt.feature.group" version="3.7.2.v20120213-BDF9E9bGTzuHh03p2c0AWvmC3Ltk"/>
+<unit id="org.eclipse.birt.chart.cshelp.feature.group" version="3.7.2.v20120213-4617w31231324"/>
+<unit id="org.eclipse.birt.chart.osgi.runtime.source.feature.group" version="3.7.2.v20120213-80AC7VFYeMBkrPeWt3Pbd"/>
+<unit id="org.eclipse.birt.chart.source.feature.group" version="3.7.2.v20120213-7r9e7PFQCnvKZ5oAdlXE5"/>
+<unit id="org.eclipse.birt.chart.integration.wtp.feature.group" version="3.7.2.v20120214-1408-4617w3123132502519"/>
+<unit id="org.eclipse.birt.chart.integration.wtp.source.feature.group" version="3.7.2.v20120214-1408-4617w3123132502519"/>
+<unit id="org.eclipse.birt.cshelp.feature.group" version="3.7.2.v20120213-4617w31231324"/>
+<unit id="org.eclipse.birt.doc.feature.group" version="3.7.2.v20120213-4617w31231324"/>
+<unit id="org.eclipse.birt.example.feature.group" version="3.7.2.v20120213-7M7l7DDZRDKRDRKY"/>
+<unit id="org.eclipse.birt.doc.isv.feature.group" version="3.7.2.v20120213-4617w31231324"/>
+<unit id="org.eclipse.birt.chart.doc.isv.feature.group" version="3.7.2.v20120213-4617w31231324"/>
+<unit id="org.eclipse.birt.report.designer.editor.xml.wtp.feature.group" version="3.7.2.v20120213-809u7bFT0z0-TlB2KsjN7w"/>
+<unit id="org.eclipse.birt.osgi.runtime.source.feature.group" version="3.7.2.v20120213-9qE58eG3Z7DT4ZrES6NZX"/>
+<unit id="org.eclipse.birt.source.feature.group" version="3.7.2.v20120213-BDF9E9bGTzuHh03p2c0AWvmC3Ltk"/>
+<unit id="org.eclipse.birt.integration.wtp.feature.group" version="3.7.2.v20120214-1408-4617w3123132502519"/>
+<unit id="org.eclipse.birt.integration.wtp.source.feature.group" version="3.7.2.v20120214-1408-4617w3123132502519"/>
+<repository location="file:/opt/Eclipse/mirrors/birt-3.7/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.jst.jsf.apache.trinidad.tagsupport_sdk.feature.feature.group" version="2.2.201.v201208241503-53DH8-5DCCz-E6979C9779EF8x42342A463725"/>
+<unit id="org.eclipse.jst.ws.axis2tools_sdk.feature.feature.group" version="1.1.200.v201103022333-31DF84D2JJ3JbWIQJJgZcNCZmE_SELEEfQTLxIk"/>
+<unit id="org.eclipse.jst.ws.cxf_sdk.feature.feature.group" version="1.1.0.v201201312103-31-84MADKL-LEPpeuvRPoM1OtSNU8q5uI6fAm4wB"/>
+<unit id="org.eclipse.jpt.common_sdk.feature.feature.group" version="1.2.1.v201208222210-33183B6EpIIGKChJIHOKDBlG8CG8dGGGGC8"/>
+<unit id="org.eclipse.jpt.common.eclipselink_sdk.feature.feature.group" version="1.2.1.v201208222210-3318084CxAEAC8OBA9DB79t84684K888864"/>
+<unit id="org.eclipse.jpt.dbws.eclipselink_sdk.feature.feature.group" version="1.1.101.v201208222210-31A984EAIGoNhSGMPFoRmRHZ4UsXCIMDnIbI1LJG"/>
+<unit id="org.eclipse.jpt.jaxb.eclipselink_sdk.feature.feature.group" version="1.2.1.v201208222210-35184CAF8ErOEJODnJZRGSGLpPAFKAlIQI7FB874"/>
+<unit id="org.eclipse.jpt.jpa.eclipselink_sdk.feature.feature.group" version="3.2.1.v201208222210-773184RANCBQCWdMUaLKp0nEcmPgiIRZKBRtT5TW"/>
+<unit id="org.eclipse.jpt.jaxb_sdk.feature.feature.group" version="1.2.1.v201208222210-33182BDFFnQCGKCgIHNOOLBlG8CG8dGGGGC8"/>
+<unit id="org.eclipse.jpt.jpadiagrameditor_sdk.feature.feature.group" version="1.1.1.v201208222210-311815EmErMADGAQEFGCLqApC69C6NCEAA86"/>
+<unit id="org.eclipse.jpt.jpa_sdk.feature.feature.group" version="3.2.1.v201208222210-773184XAODjQGGtUesSt7dz-hHkTRyQbqRjfVdXa"/>
+<unit id="org.eclipse.jst.common.fproj.enablement.jdt.sdk.feature.group" version="3.4.0.v201108231500-777FF8O9tKENOGLHOGSFW6I7E77"/>
+<unit id="org.eclipse.wst.common.fproj.sdk.feature.group" version="3.4.0.v201202292300-787JFEcApOGSJY_1ME_MS64A4C8C"/>
+<unit id="org.eclipse.jst.web_sdk.feature.feature.group" version="3.4.1.v201208231800-7B7D399ZLT_kGImU5QkSiFW2q_jXuxJUTx9IAnDz"/>
+<unit id="org.eclipse.wst.xml_sdk.feature.feature.group" version="3.4.1.v201208170345-7A7B28DXJVWtbFXCC7jZWXrlnMm49AfXc5I7eh8q"/>
+<unit id="org.eclipse.wst.jsdt_sdk.feature.feature.group" version="1.4.1.v201208171701-47E390QCKMlILWE6WkscGq4x_Zz0D8tSfrTz-grf"/>
+<unit id="org.eclipse.jsf_sdk.feature.feature.group" version="3.4.1.v201208241503-7777184JANKEuKGNoObiWyrQoLA8AKhMXhNii5Y7"/>
+<unit id="org.eclipse.jst.ws.jaxws.dom_sdk.feature.feature.group" version="1.0.200.v201109042201-4-DF8z8KFTG0LNJRDiAXGbJjBlG8CC8V9QFL9L"/>
+<unit id="org.eclipse.jst.ws.jaxws_sdk.feature.feature.group" version="1.2.0.v201204151854-44-90NCHNCDLLUuYbbV5cIkz-a69OdKTaLrU6UqY"/>
+<unit id="org.eclipse.jst.enterprise_sdk.feature.feature.group" version="3.4.0.v201107072300-7777-84gANMPAIbP8ZP3_4JXAWDbz-K60EaDTABs"/>
+<unit id="org.eclipse.jst.server_adapters.ext.sdk.feature.feature.group" version="3.3.200.v20120830_2320-775A984CALKOHHgz-FKqKlUYPa_bKDdOCEnCkLPG"/>
+<unit id="org.eclipse.jst.server_adapters.sdk.feature.feature.group" version="3.3.100.v20111026_1755-773DF8-5DBCz-B5Cf5D9Dc78ID8x42342739b366"/>
+<unit id="org.eclipse.jst.server_sdk.feature.feature.group" version="3.4.0.v20120503_1042-7777-84FABKKz-D1rgF9HHVlLMag9YePsL9DGM_C"/>
+<unit id="org.eclipse.jst.webpageeditor_sdk.feature.feature.group" version="2.3.8.v201208241503-557F81BGMErMAFFDWHJFTLZApC69C6UCI9L6F"/>
+<unit id="org.eclipse.wst.server_adapters.sdk.feature.feature.group" version="3.2.102.v20120823_1714-773DH826IE0DvKBmPGUNTtCYNRBlG8BM9RESm9HB"/>
+<unit id="org.eclipse.wst.web_sdk.feature.feature.group" version="3.4.1.v201208170345-7E7I8d8SxfvIHHPPz-62mA1dEMBnpk46b3Em5e84"/>
+<unit id="org.eclipse.wst.xsl_sdk.feature.feature.group" version="1.1.200.v201111021744-65DF99nM-NoPidF5A0GfLz0o6L1VfSnKlYwbLpDq"/>
+<repository location="file:/opt/Eclipse/wtp4x-repo-R-3.4.1/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.compare.mpatch.feature.group" version="1.3.1.v20120605-0748"/>
+<unit id="org.eclipse.emf.compare.doc.feature.group" version="1.3.1.v20120605-0748"/>
+<unit id="org.eclipse.emf.compare.feature.group" version="1.3.1.v20120605-0748"/>
+<unit id="org.eclipse.emf.compare.sdk.feature.group" version="1.3.1.v20120605-0748"/>
+<unit id="org.eclipse.emf.compare.ui.capabilities.feature.group" version="1.3.1.v20120605-0748"/>
+<unit id="org.eclipse.emf.compare.sysml.feature.group" version="1.3.1.v20120605-0748"/>
+<unit id="org.eclipse.emf.compare.diagram.ecoretools.feature.group" version="1.3.1.v20120605-0748"/>
+<unit id="org.eclipse.emf.compare.team.subversive.feature.group" version="1.3.1.v20120605-0748"/>
+<unit id="org.eclipse.emf.compare.diagram.papyrus.feature.group" version="1.3.1.v20120605-0748"/>
+<unit id="org.eclipse.emf.compare.diagram.gmf.feature.group" version="1.3.1.v20120605-0748"/>
+<unit id="org.eclipse.emf.compare.uml2.feature.group" version="1.3.1.v20120605-0748"/>
+<repository location="file:/opt/Eclipse/emf-compare-update-1.3.1/"/>
+</location>
+<location path="/opt/Eclipse/metrics/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/dtp-skd_1.10.1/eclipse" type="Directory"/>
+<location path="/opt/hamcrest-1.3.0/plugins" type="Directory"/>
+<location path="/opt/Eclipse/mdt-ocl-SDK-tools-4.0.1/eclipse" type="Directory"/>
+<location path="/opt/ApacheWebConsole" type="Directory"/>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="gnu.io.rxtx.feature.group" version="2.1.7.4_v20071016-7B57e7UAXMAAqGAGf"/>
+<unit id="gnu.io.rxtx.sdk.feature.group" version="2.1.7.4_v20071016-417C7DP1Bh_eEaQJBrHBHg"/>
+<repository location="file:/opt/Eclipse/mirrors/rxtx/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.xsd.sdk.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.oda.sdk.feature.group" version="1.2.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.9.0.v20130610-0406"/>
+<repository location="file:/opt/Eclipse/mirrors/kepler-emf-xsd/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.equinox.p2.extras.feature.feature.group" version="1.1.0.v20120524-0542-7A6FEcDiVOTg1Q_HuZrEuBty3dqr"/>
+<unit id="org.eclipse.datatools.connectivity.feature.feature.group" version="1.10.1.v201208161415-7C7h94Et1axpCXkXlTa6fgHd9vA"/>
+<unit id="org.eclipse.datatools.connectivity.doc.user.feature.group" version="1.10.1.v201208161415-37D-7733L3D753L7BBF"/>
+<unit id="org.eclipse.datatools.connectivity.feature.source.feature.group" version="1.10.1.v201208161415-7C7h94Et1axpCXkXlTa6fgHd9vA"/>
+<unit id="org.eclipse.datatools.enablement.feature.feature.group" version="1.10.1.v201208161415-7J9Q7FBWxeNcZB5LWgyhH7patz0v"/>
+<unit id="org.eclipse.datatools.enablement.sdk.feature.feature.group" version="1.10.1.v201208161415-7I9e7GFE9JgB7ngIxQtPITxSGQER"/>
+<unit id="org.eclipse.datatools.enablement.apache.derby.feature.feature.group" version="1.10.1.v201208161415-77798gBmKDQ2MoTULxcy9IIQ"/>
+<unit id="org.eclipse.datatools.enablement.apache.derby.feature.source.feature.group" version="1.10.1.v201208161415-77798gBmKDQ2MoTULxcy9IIQ"/>
+<unit id="org.eclipse.datatools.enablement.hsqldb.feature.feature.group" version="1.10.1.v201208161415-67E1AqGBM7KfNUHxJR9IIQ"/>
+<unit id="org.eclipse.datatools.enablement.hsqldb.feature.source.feature.group" version="1.10.1.v201208161415-67E1AqGBM7KfNUHxJR9IIQ"/>
+<unit id="org.eclipse.datatools.enablement.jdbc.feature.feature.group" version="1.10.1.v201208161415-4-29oB5895RAE8HHP"/>
+<unit id="org.eclipse.datatools.enablement.jdbc.feature.source.feature.group" version="1.10.1.v201208161415-4-29oB5895RAE8HHP"/>
+<unit id="org.eclipse.datatools.enablement.mysql.feature.feature.group" version="1.10.1.v201208161415-5477AkF7AK7_AMENEA"/>
+<unit id="org.eclipse.datatools.enablement.mysql.feature.source.feature.group" version="1.10.1.v201208161415-5477AkF7AK7_AMENEA"/>
+<unit id="org.eclipse.datatools.enablement.oda.designer.feature.feature.group" version="1.10.1.v201208161415-3368s7356485C59AB"/>
+<unit id="org.eclipse.datatools.enablement.oda.designer.feature.source.feature.group" version="1.10.1.v201208161415-3368s7356485C59AB"/>
+<unit id="org.eclipse.datatools.enablement.oda.feature.feature.group" version="1.10.1.v201208161415-7A7T7CDZRDKHF_HnGjOX"/>
+<unit id="org.eclipse.datatools.enablement.oda.feature.source.feature.group" version="1.10.1.v201208161415-7A7T7CDZRDKHF_HnGjOX"/>
+<unit id="org.eclipse.datatools.enablement.feature.source.feature.group" version="1.10.1.v201208161415-7J9Q7FBWxeNcZB5LWgyhH7patz0v"/>
+<unit id="org.eclipse.datatools.sdk.feature.feature.group" version="1.10.1.v201208161415-7PAO7MFEpPZ56X3j7z0oZGcDIWFs"/>
+<unit id="org.eclipse.datatools.intro.feature.group" version="1.10.1.v201208161415-26-7w312116392911"/>
+<unit id="org.eclipse.datatools.enablement.jdt.feature.feature.group" version="1.10.1.v201208161415-2-07w312218332612"/>
+<unit id="org.eclipse.datatools.enablement.jdt.feature.source.feature.group" version="1.10.1.v201208161415-2-07w312218332612"/>
+<unit id="org.eclipse.datatools.modelbase.feature.feature.group" version="1.10.1.v201208161415-7707FCcNBHLCgLUEdUb"/>
+<unit id="org.eclipse.datatools.modelbase.feature.source.feature.group" version="1.10.1.v201208161415-7707FCcNBHLCgLUEdUb"/>
+<unit id="org.eclipse.datatools.connectivity.oda.designer.feature.feature.group" version="1.10.1.v201208161415-4127w312312232267"/>
+<unit id="org.eclipse.datatools.connectivity.oda.designer.core.feature.feature.group" version="1.10.1.v201208161415-7B7C7NCcNBGUBnIZDaUY"/>
+<unit id="org.eclipse.datatools.connectivity.oda.designer.core.feature.source.feature.group" version="1.10.1.v201208161415-7B7C7NCcNBGUBnIZDaUY"/>
+<unit id="org.eclipse.datatools.connectivity.oda.designer.feature.source.feature.group" version="1.10.1.v201208161415-4127w312312232267"/>
+<unit id="org.eclipse.datatools.connectivity.oda.feature.feature.group" version="1.10.1.v201208161415-7H7C7TCcNBHLCnH_EYOb"/>
+<unit id="org.eclipse.datatools.connectivity.oda.feature.source.feature.group" version="1.10.1.v201208161415-7H7C7TCcNBHLCnH_EYOb"/>
+<unit id="org.eclipse.datatools.sqltools.doc.user.feature.group" version="1.10.1.v201208161415-37D-7733L3D753L7BBF"/>
+<unit id="org.eclipse.datatools.sqldevtools.feature.feature.group" version="1.10.1.v201208161415-7N8B7JFDsn5iz-Aex68NyGpC_AgL"/>
+<unit id="org.eclipse.datatools.sqldevtools.data.feature.source.feature.group" version="1.10.1.v201208161415-645BgJ9EDBTHPAhQU"/>
+<unit id="org.eclipse.datatools.sqldevtools.data.feature.feature.group" version="1.10.1.v201208161415-645BgJ9EDBTHPAhQU"/>
+<unit id="org.eclipse.datatools.sqldevtools.ddl.feature.feature.group" version="1.10.1.v201208161415-279078B089G8S_IRUJz-XnN2at"/>
+<unit id="org.eclipse.datatools.sqldevtools.ddl.feature.source.feature.group" version="1.10.1.v201208161415-279078B089G8S_IRUJz-XnN2at"/>
+<unit id="org.eclipse.datatools.sqldevtools.ddlgen.feature.feature.group" version="1.10.1.v201208161415-7A-78F7RZHQTIyWmM1_s"/>
+<unit id="org.eclipse.datatools.sqldevtools.ddlgen.feature.source.feature.group" version="1.10.1.v201208161415-7A-78F7RZHQTIyWmM1_s"/>
+<unit id="org.eclipse.datatools.sqldevtools.results.feature.feature.group" version="1.10.1.v201208161415-57B79AkF7BD7SGC9ZEH"/>
+<unit id="org.eclipse.datatools.sqldevtools.results.feature.source.feature.group" version="1.10.1.v201208161415-57B79AkF7BD7SGC9ZEH"/>
+<unit id="org.eclipse.datatools.sqldevtools.feature.source.feature.group" version="1.10.1.v201208161415-7N8B7JFDsn5iz-Aex68NyGpC_AgL"/>
+<unit id="org.eclipse.datatools.sqldevtools.parsers.feature.feature.group" version="1.10.1.v201208161415-623BgJ9EE9ZJRDZLA"/>
+<unit id="org.eclipse.datatools.sqldevtools.parsers.feature.source.feature.group" version="1.10.1.v201208161415-623BgJ9EE9ZJRDZLA"/>
+<unit id="org.eclipse.datatools.sqldevtools.sqlbuilder.feature.feature.group" version="1.10.1.v201208161415-79-78EVVFNQGpRkHz0Sm"/>
+<unit id="org.eclipse.datatools.sqldevtools.sqlbuilder.feature.source.feature.group" version="1.10.1.v201208161415-79-78EVVFNQGpRkHz0Sm"/>
+<unit id="org.eclipse.datatools.sqldevtools.schemaobjecteditor.feature.feature.group" version="1.10.1.v201208161415-4208375LG5BJ93413"/>
+<unit id="org.eclipse.datatools.common.doc.user.feature.group" version="1.10.1.v201208161415-26-311A16321A3557"/>
+<unit id="org.eclipse.datatools.doc.user.feature.group" version="1.10.1.v201208161415-47C08w95FFAK89FHEC7"/>
+<repository location="file:/opt/Eclipse/mirrors/juno-datatools/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.xtext.xtend2.sdk.feature.group" version="2.3.1.v201208210947"/>
+<unit id="org.eclipse.xtext.xbase.source.feature.group" version="2.3.1.v201208210947"/>
+<unit id="org.eclipse.xtext.examples.source.feature.group" version="2.3.1.v201208210947"/>
+<unit id="org.eclipse.xtext.runtime.source.feature.group" version="2.3.1.v201208210947"/>
+<unit id="org.eclipse.xtext.ui.source.feature.group" version="2.3.1.v201208210947"/>
+<unit id="org.eclipse.xtext.xtext.ui.source.feature.group" version="2.3.1.v201208210947"/>
+<unit id="org.eclipse.xtext.xbase.feature.group" version="2.3.1.v201208210947"/>
+<unit id="org.eclipse.xtend.m2e.feature.group" version="2.3.1.v201208210947"/>
+<unit id="org.eclipse.xtend.sdk.feature.group" version="2.3.1.v201208210947"/>
+<unit id="org.eclipse.xtext.docs.feature.group" version="2.3.1.v201208210947"/>
+<unit id="org.eclipse.xtext.examples.feature.group" version="2.3.1.v201208210947"/>
+<unit id="org.eclipse.xtext.runtime.feature.group" version="2.3.1.v201208210947"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.3.1.v201208210947"/>
+<unit id="org.eclipse.xtext.ui.feature.group" version="2.3.1.v201208210947"/>
+<unit id="org.eclipse.xtext.xtext.ui.feature.group" version="2.3.1.v201208210947"/>
+<repository location="file:/opt/Eclipse/mirrors/tmf/"/>
+</location>
+<location path="/opt/Eclipse/mdt-ocl-examles-tools-4.0.1/eclipse" type="Directory"/>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="slicer" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.mwe2.language.sdk.feature.group" version="2.3.0.v201206120758"/>
+<unit id="org.eclipse.emf.mwe2.runtime.sdk.feature.group" version="2.3.0.v201206110920"/>
+<unit id="org.eclipse.emf.mwe.core.feature.group" version="1.2.1.v201206110920"/>
+<unit id="org.eclipse.emf.mwe.doc.feature.group" version="1.2.1.v201206110920"/>
+<unit id="org.eclipse.emf.mwe.sdk.feature.group" version="1.2.1.v201206110920"/>
+<unit id="org.eclipse.emf.mwe.ui.feature.group" version="1.2.1.v201206110920"/>
+<unit id="org.eclipse.emf.mwe2.language.sdk.source.feature.group" version="2.3.0.v201206120758"/>
+<unit id="org.eclipse.emf.mwe2.runtime.sdk.source.feature.group" version="2.3.0.v201206110920"/>
+<unit id="org.eclipse.emf.mwe.core.source.feature.group" version="1.2.1.v201206110920"/>
+<unit id="org.eclipse.emf.mwe.ui.source.feature.group" version="1.2.1.v201206110920"/>
+<unit id="org.eclipse.xtext.runtime.feature.group" version="2.3.1.v201208210947"/>
+<unit id="org.eclipse.xtext.ui.feature.group" version="2.3.1.v201208210947"/>
+<repository location="file:/opt/Eclipse/mirrors/juno-mwe/"/>
+</location>
+<location path="/opt/Eclipse/apache/eclipse" type="Directory"/>
+<location path="/opt/orbit-org.slf4j-1.5.11" type="Directory"/>
+<location path="/opt/easymock" type="Directory"/>
+<location path="/opt/ekkesCornerLogging/eclipse-target" type="Directory"/>
+<location path="/opt/Eclipse/google-inject" type="Directory"/>
+</locations>
+</target>

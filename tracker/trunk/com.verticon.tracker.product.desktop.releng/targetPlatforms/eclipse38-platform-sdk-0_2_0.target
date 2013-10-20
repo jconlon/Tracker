@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.8"?>
 
-<target name="eclipse38-platform-sdk-0_1_0" sequenceNumber="139">
+<target name="eclipse38-platform-sdk-0_2_0" sequenceNumber="139">
 <locations>
 <location path="/opt/logback-0.9.19" type="Directory"/>
 <location path="/opt/Eclipse/swtbot/eclipse" type="Directory"/>
