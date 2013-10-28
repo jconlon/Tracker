@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="../../../ivystylesheet.xml"?>
+
+<ivy-module version="1.0">
+    <info organisation="verticon" module="react2c" revision="0.9.14" status="integration" publication="20051004091743">
+      <license name="BSD" url="http://www.opensource.org/licenses/bsd-license.php"/>
+      <ivyauthor name="Verticon, Inc." url="http://www.verticon.com"/>
+      <repository name="verticon" url="http://www.verticon.com/component/repository/" pattern="[organisation]/[module]/[type]s/ivy-[revision].xml" ivys="true" artifacts="true"/>
+        <description homepage="http://www.verticon.com/component/react2c/">
+              <p>React2 Client is a graphic client interface for viewing the movement of
+                 people and objects. The React2 Client is a distributed mult-user application
+                 that connects to remote a React2 Event Management Server. It supports
+                 business specific processing of movement events using an embedded
+                 Mandarax Rules Engine infrastructure.
+                 The React2 Client is offered in four configurations.
+              </p>
+               <ol>
+                <li>The default configuration is a set of core React2 components
+                    and their dependencies.  Use this configuration when
+                    <em>programing</em> operational applications for deployment.
+                    </li>
+                <li>The nano configuration is used at build time for testing and
+                    as runtime convenience for system engineers. It offers
+                    Inversion of Control <em>IOC</em> container components that
+                    can be used at deployment time to wire React2c components with
+                    other value added components.  If you are programing value added
+                    components or using a different IOC container you can ignore this.
+                    Use this, the default configuration, and added value components
+                    when <em>configuring</em> operational applications for deployment.</li>
+                <li>The downLoadServlet configuration is a build time necessity and a runtime
+                    convenience. It offers a Java Network Launch Protocol <em>(JNLP)</em>
+                    Deployment servlet for multi-user distribution of Java GUI applications.
+                    Use this, the default, and the nano configurations for <em>building</em>
+                    deployable Web applications.</li>
+                <li>The example1 configuration is a set of example artifacts used to
+                    build and <em>demonstrate</em> an example React2c.
+                    Use this, the default, and the nano configurations
+                    to configure an example standalone React2c application. </li>
+                <li>The <em>exampleWar</em> is a fully functional React2 JNLP
+                    deployment server packaged as a Web Archive.
+                    Use it to <em>demonstrate</em> a JNLP deployment server offering multiple
+                    users an example React2c application.
+                    </li>
+               </ol>
+       </description>
+    </info>
+
+    <configurations>
+      <conf name="default" description="React2c components and all core component dependencies."/>
+      <conf name="nano" description="Container component dependencies."/>
+      <conf name="downLoadServlet" description="JNLP Download Servlet."/>
+      <conf name="example1" description="React2c components, all core component dependencies and                          artifacts for the first example application."/>
+      <conf name="exampleWar" description="React2c components, all core component dependencies and                          artifacts for the first example application encapsulated in a war."/>
+    </configurations>
+
+    <publications>
+      <artifact name="react2c" type="jar" conf="default"/>
+      <artifact name="react2cExample1" type="bsh" conf="example1"/>
+      <artifact name="react2cExample1" type="png" conf="example1"/>
+      <artifact name="react2cExample1" type="run" conf="example1"/>
+      <artifact name="react2cExample1" type="html" conf="example1"/>
+      <artifact name="react2c" type="war" conf="exampleWar"/>
+    </publications>
+
+
+    <dependencies>
+
+        <dependency org="verticon" name="react2i" rev="0.5" conf="default->server"/>
+        <dependency org="apache" name="commons-cli" rev="1.0" conf="default->default"/>
+        <dependency org="piccolo" name="piccolo" rev="1.1" conf="default->default"/>
+        <dependency org="asm" name="asm" rev="2.0" conf="default->default"/>
+        <dependency org="jmdns" name="jmdns" rev="1.0-rc2" conf="default->default"/>
+
+
+        <dependency org="sun" name="jnlpDownloadServlet" rev="1.5.0" conf="default->default;downLoadServlet->downLoadServlet"/>
+
+
+        <dependency org="bsh" name="bsh" rev="2.0b1" conf="nano->default"/>
+        <dependency org="nanocontainer" name="nanocontainer" rev="1.0-RC-2" conf="nano->default"/>
+        <dependency org="picocontainer" name="picocontainer" rev="1.2-RC-1" conf="nano->default"/>
+
+
+
+    </dependencies>
+</ivy-module>

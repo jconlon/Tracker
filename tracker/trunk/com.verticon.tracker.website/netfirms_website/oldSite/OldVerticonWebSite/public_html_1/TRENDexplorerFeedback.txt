@@ -1,0 +1,8 @@
+To:marketing@verticon.com
+From: [required-email]
+Subject: TRENDexplorer Feedback Form Response [required-subject]
+                                        
+Name:	[required-name]
+E-mail address:	[required-email]
+Subject:	[required-subject]
+Feedback:	[required-message]

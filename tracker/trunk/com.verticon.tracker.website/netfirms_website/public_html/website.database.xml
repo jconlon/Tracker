@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+
+<!DOCTYPE targetset
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<targetset>
+
+   <document targetdoc="home" baseuri="index.html">
+      <div element="webpage" href="#home" number="" targetptr="home">
+         <ttl>Tracker</ttl>
+         <xreftext>Tracker</xreftext>
+         <div element="section" href="#keyfeatures" number="" targetptr="keyfeatures">
+            <ttl>Key Benefits</ttl>
+            <xreftext>the section called “Key Benefits”</xreftext>
+         </div>
+         <div element="section" href="#whatsnew" number="" targetptr="whatsnew">
+            <ttl>What's New?</ttl>
+            <xreftext>the section called “What's New?”</xreftext>
+         </div>
+      </div>
+   </document>
+
+   <document targetdoc="about" baseuri="index.html" dir="about/">
+      <div element="webpage" href="#about" number="" targetptr="about">
+         <ttl>About</ttl>
+         <xreftext>About</xreftext>
+         <div element="section" href="#aboutVerticon" number="" targetptr="aboutVerticon">
+            <ttl>Verticon</ttl>
+            <xreftext>the section called “Verticon”</xreftext>
+         </div>
+         <div element="section" href="#valueProp" number="" targetptr="valueProp">
+            <ttl>Value Proposition</ttl>
+            <xreftext>the section called “Value Proposition”</xreftext>
+         </div>
+         <div element="section" href="#mission" number="" targetptr="mission">
+            <ttl>Mission</ttl>
+            <xreftext>the section called “Mission”</xreftext>
+         </div>
+      </div>
+   </document>
+
+   <document targetdoc="contact" baseuri="contact.html" dir="about/">
+      <div element="webpage" href="#contact" number="" targetptr="contact">
+         <ttl>Contact Us</ttl>
+         <xreftext>Contact Us</xreftext>
+         <obj element="sidebar" href="#also" number="" targetptr="also">
+            <ttl>Reach Us</ttl>
+            <xreftext>Reach Us</xreftext>
+         </obj>
+      </div>
+   </document>
+
+   <document targetdoc="aboutWebsite" baseuri="aboutWebsite.html" dir="about/">
+      <div element="webpage" href="#aboutWebsite" number="" targetptr="aboutWebsite">
+         <ttl>About the Website</ttl>
+         <xreftext>About the Website</xreftext>
+         <div element="section" href="#colophon" number="" targetptr="colophon">
+            <ttl>Colophon</ttl>
+            <xreftext>the section called “Colophon”</xreftext>
+         </div>
+         <div element="section" href="#license" number="" targetptr="license">
+            <ttl>Copyright</ttl>
+            <xreftext>the section called “Copyright”</xreftext>
+         </div>
+      </div>
+   </document>
+
+   <document targetdoc="license" baseuri="license.html" dir="about/">
+      <div element="webpage" href="#license" number="" targetptr="license">
+         <ttl>Licensing</ttl>
+         <xreftext>Licensing</xreftext>
+         <div element="section" href="#epl" number="" targetptr="epl">
+            <ttl>Copyright</ttl>
+            <xreftext>the section called “Copyright”</xreftext>
+         </div>
+         <obj element="sidebar" href="#eclipseLegal" number="" targetptr="eclipseLegal">
+            <ttl>Eclipse Foundation</ttl>
+            <xreftext>Eclipse Foundation</xreftext>
+         </obj>
+      </div>
+   </document>
+
+   <document targetdoc="products" baseuri="index.html" dir="products/">
+      <div element="webpage" href="#products" number="" targetptr="products">
+         <ttl>Products</ttl>
+         <xreftext>Products</xreftext>
+         <div element="section" href="#productLine" number="" targetptr="productLine">
+            <ttl>Tracker Product Line</ttl>
+            <xreftext>the section called “Tracker Product Line”</xreftext>
+         </div>
+      </div>
+   </document>
+
+   <document targetdoc="trackerPro" baseuri="trackerPro.html" dir="products/">
+      <div element="webpage" href="#trackerPro" number="" targetptr="trackerPro">
+         <ttl>Tracker Pro - Business Intelligence Toolkit</ttl>
+         <xreftext>Tracker Pro - Business Intelligence Toolkit</xreftext>
+         <div element="section" href="#businessIntelligenceToolkit" number="" targetptr="businessIntelligenceToolkit">
+            <ttl>Tracker Business Intelligence Toolkit</ttl>
+            <xreftext>the section called “Tracker Business Intelligence Toolkit”</xreftext>
+         </div>
+         <div element="section" href="#businessIntelligenceFeatures" number="" targetptr="businessIntelligenceFeatures">
+            <ttl>Tracker Business Intelligence Features</ttl>
+            <xreftext>the section called “Tracker Business Intelligence Features”</xreftext>
+         </div>
+         <div element="section" href="#businessSolutions" number="" targetptr="businessSolutions">
+            <ttl>Tracker Business Intelligence Solutions</ttl>
+            <xreftext>the section called “Tracker Business Intelligence Solutions”</xreftext>
+         </div>
+      </div>
+   </document>
+
+   <document targetdoc="trackerLite" baseuri="trackerLite.html" dir="products/">
+      <div element="webpage" href="#trackerLite" number="" targetptr="trackerLite">
+         <ttl>Tracker Lite - Smartphone Application</ttl>
+         <xreftext>Tracker Lite - Smartphone Application</xreftext>
+         <div element="section" href="#trackerLiteFeatures" number="" targetptr="trackerLiteFeatures">
+            <ttl>Tracker Lite Features</ttl>
+            <xreftext>the section called “Tracker Lite Features”</xreftext>
+         </div>
+      </div>
+   </document>
+
+   <document targetdoc="trackerCloud" baseuri="trackerCloud.html" dir="products/">
+      <div element="webpage" href="#trackerCloud" number="" targetptr="trackerCloud">
+         <ttl>Tracker Cloud - Network Store</ttl>
+         <xreftext>Tracker Cloud - Network Store</xreftext>
+         <div element="section" href="#store_overview" number="" targetptr="store_overview">
+            <ttl>Overview </ttl>
+            <xreftext>the section called “Overview ”</xreftext>
+         </div>
+      </div>
+   </document>
+
+   <document targetdoc="iRouter" baseuri="iRouter.html" dir="products/">
+      <div element="webpage" href="#iRouter" number="" targetptr="iRouter">
+         <ttl>iRouter - Information Router Appliance</ttl>
+         <xreftext>iRouter - Information Router Appliance</xreftext>
+         <div element="section" href="#businessIntelligenceFeatures" number="" targetptr="businessIntelligenceFeatures">
+            <ttl>iRouter Standards</ttl>
+            <xreftext>the section called “iRouter Standards”</xreftext>
+         </div>
+      </div>
+   </document>
+
+   <document targetdoc="downloads" baseuri="index.html" dir="downloads/">
+      <div element="webpage" href="#downloads" number="" targetptr="downloads">
+         <ttl>Downloads</ttl>
+         <xreftext>Downloads</xreftext>
+         <div element="section" href="#d15e15" number="">
+            <ttl>Tracker BI Toolkit</ttl>
+            <xreftext>the section called “Tracker BI Toolkit”</xreftext>
+            <obj element="table" href="#ex.calstable" number="1">
+               <ttl>@release.title@</ttl>
+               <xreftext>Table 1, “@release.title@”</xreftext>
+            </obj>
+         </div>
+         <div element="section" href="#d15e154" number="">
+            <ttl>Tracker Update Repositories</ttl>
+            <xreftext>the section called “Tracker Update Repositories”</xreftext>
+            <obj element="table" href="#ex.calstable" number="2">
+               <ttl>Note: These urls are just for reference. They will be
+				configured in
+				your down loaded product.</ttl>
+               <xreftext>Table 2, “Note: These urls are just for reference. They will be
+				configured in
+				your down loaded product.”</xreftext>
+            </obj>
+         </div>
+         <div element="section" href="#d15e198" number="">
+            <ttl>Tracker Example Projects</ttl>
+            <xreftext>the section called “Tracker Example Projects”</xreftext>
+            <obj element="table" href="#ex.calstable" number="3">
+               <ttl>Example Tracker Projects</ttl>
+               <xreftext>Table 3, “Example Tracker Projects”</xreftext>
+            </obj>
+         </div>
+         <div element="section" href="#d15e267" number="">
+            <ttl>Tracker Device Simulator</ttl>
+            <xreftext>the section called “Tracker Device Simulator”</xreftext>
+            <obj element="table" href="#ex.calstable" number="4">
+               <ttl>Tool for simulating physical sensor and actuator devices</ttl>
+               <xreftext>Table 4, “Tool for simulating physical sensor and actuator devices”</xreftext>
+            </obj>
+         </div>
+         <obj element="sidebar" href="#prerequisites" number="" targetptr="prerequisites">
+            <ttl>???TITLE???</ttl>
+            <xreftext>???TITLE???</xreftext>
+         </obj>
+      </div>
+   </document>
+
+   <document targetdoc="docs" baseuri="index.html" dir="docs/">
+      <div element="webpage" href="#docs" number="" targetptr="docs">
+         <ttl>Documentation</ttl>
+         <xreftext>Documentation</xreftext>
+         <div element="section" href="#userGuide" number="" targetptr="userGuide">
+            <ttl>User Guides and Reference Documents</ttl>
+            <xreftext>the section called “User Guides and Reference Documents”</xreftext>
+            <obj element="table" href="#tracker.docs.guides.table" number="1">
+               <ttl>For end-users, administrators, and analysts</ttl>
+               <xreftext>Table 1, “For end-users, administrators, and analysts”</xreftext>
+            </obj>
+         </div>
+         <div element="section" href="#d16e97" number="">
+            <ttl>Other Documentation</ttl>
+            <xreftext>the section called “Other Documentation”</xreftext>
+            <obj element="table" href="#tracker.docs.models.table" number="2">
+               <ttl>Tracker MetaModel Diagrams and References</ttl>
+               <xreftext>Table 2, “Tracker MetaModel Diagrams and References”</xreftext>
+            </obj>
+         </div>
+      </div>
+   </document>
+
+   <document targetdoc="faqs" baseuri="faqs.html" dir="docs/">
+      <div element="webpage" href="#faqs" number="" targetptr="faqs">
+         <ttl>Frequently Asked Questions</ttl>
+         <xreftext>Frequently Asked Questions</xreftext>
+         <div element="qandaset" href="#d17e14" number="">
+            <ttl>???TITLE???</ttl>
+            <xreftext>???TITLE???</xreftext>
+            <div element="qandaentry" href="#d17e20" number="">
+               <ttl>Question</ttl>
+               <xreftext>Q: 1.1</xreftext>
+            </div>
+            <div element="qandaentry" href="#d17e35" number="">
+               <ttl>Question</ttl>
+               <xreftext>Q: 1.2</xreftext>
+            </div>
+            <div element="qandaentry" href="#d17e63" number="">
+               <ttl>Question</ttl>
+               <xreftext>Q: 2.1</xreftext>
+            </div>
+            <div element="qandaentry" href="#d17e78" number="">
+               <ttl>Question</ttl>
+               <xreftext>Q: 2.2</xreftext>
+            </div>
+            <div element="qandaentry" href="#d17e98" number="">
+               <ttl>Question</ttl>
+               <xreftext>Q: 3.1</xreftext>
+            </div>
+            <div element="qandaentry" href="#d17e134" number="">
+               <ttl>Question</ttl>
+               <xreftext>Q: 3.2</xreftext>
+            </div>
+            <div element="qandaentry" href="#d17e149" number="">
+               <ttl>Question</ttl>
+               <xreftext>Q: 3.3</xreftext>
+            </div>
+            <div element="qandaentry" href="#d17e169" number="">
+               <ttl>Question</ttl>
+               <xreftext>Q: 4.1</xreftext>
+            </div>
+            <div element="qandaentry" href="#d17e189" number="">
+               <ttl>Question</ttl>
+               <xreftext>Q: 5.1</xreftext>
+            </div>
+            <div element="qandaentry" href="#d17e204" number="">
+               <ttl>Question</ttl>
+               <xreftext>Q: 5.2</xreftext>
+            </div>
+         </div>
+      </div>
+   </document>
+
+   <document targetdoc="goals" baseuri="goals.html" dir="docs/">
+      <div element="webpage" href="#goals" number="" targetptr="goals">
+         <ttl>Design Goals</ttl>
+         <xreftext>Design Goals</xreftext>
+         <div element="section" href="#frameworkOverview_goals" number="" targetptr="frameworkOverview_goals">
+            <ttl>Project Goals</ttl>
+            <xreftext>the section called “Project Goals”</xreftext>
+         </div>
+         <div element="section" href="#d18e49" number="">
+            <ttl>Methodology</ttl>
+            <xreftext>the section called “Methodology”</xreftext>
+         </div>
+         <div element="section" href="#businessObjects" number="" targetptr="businessObjects">
+            <ttl>Direction</ttl>
+            <xreftext>the section called “Direction”</xreftext>
+         </div>
+      </div>
+   </document>
+
+   <document targetdoc="project" baseuri="index.html" dir="project/">
+      <div element="webpage" href="#project" number="" targetptr="project">
+         <ttl>Project</ttl>
+         <xreftext>Project</xreftext>
+         <div element="section" href="#wikiSite" number="" targetptr="wikiSite">
+            <ttl>Tracker Project Management Wiki</ttl>
+            <xreftext>the section called “Tracker Project Management Wiki”</xreftext>
+         </div>
+         <div element="section" href="#issues" number="" targetptr="issues">
+            <ttl>Issues Tracking</ttl>
+            <xreftext>the section called “Issues Tracking”</xreftext>
+         </div>
+         <div element="section" href="#svn" number="" targetptr="svn">
+            <ttl>Code Control</ttl>
+            <xreftext>the section called “Code Control”</xreftext>
+         </div>
+      </div>
+   </document>
+
+   <document targetdoc="sitemap" baseuri="sitemap.html">
+      <div element="webpage" href="#sitemap" number="" targetptr="sitemap">
+         <ttl>Sitemap</ttl>
+         <xreftext>Sitemap</xreftext>
+      </div>
+   </document>
+
+   <document targetdoc="search" baseuri="index.html" dir="search/">
+      <div element="webpage" href="#search" number="" targetptr="search">
+         <ttl>Search</ttl>
+         <xreftext>Search</xreftext>
+         <obj element="form" href="#searchForm" number="" targetptr="searchForm">
+            <ttl>???TITLE???</ttl>
+            <xreftext>???</xreftext>
+         </obj>
+         <obj element="input" href="#searchSite" number="" targetptr="searchSite">
+            <ttl>???TITLE???</ttl>
+            <xreftext>???</xreftext>
+         </obj>
+         <obj element="input" href="#searchText" number="" targetptr="searchText">
+            <ttl>???TITLE???</ttl>
+            <xreftext>???</xreftext>
+         </obj>
+         <obj element="input" href="#searchSubmit" number="" targetptr="searchSubmit">
+            <ttl>???TITLE???</ttl>
+            <xreftext>???</xreftext>
+         </obj>
+      </div>
+   </document>
+</targetset>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="../../../ivystylesheet.xml"?>
+
+<ivy-module version="1.0">
+    <info organisation="verticon" module="react2" revision="1.2" status="integration" publication="20050630210822"/>
+
+    <configurations>
+      <conf name="default" description="React2 Core Logic"/>
+      <conf name="nano" description="Picocontainer and Nanocontainer dependencies."/>
+      <conf name="service" description="Server deployment using Java Service Wrapper and log4j." extends="default,nano"/>
+      <conf name="scripts" description="Server deployment using Java Service Wrapper and log4j."/>
+      <conf name="binaries" description="Server deployment using Java Service Wrapper and log4j."/>
+    </configurations>
+
+    <publications>
+      <artifact name="react2" type="jar" conf="default"/>
+    </publications>
+
+
+    <dependencies>
+
+        <dependency org="verticon" name="concurrent" rev="2.1" conf="default->default"/>
+        <dependency org="verticon" name="vi-ldap" rev="1.0" conf="default->default"/>
+        <dependency org="verticon" name="common" rev="1.1" conf="default->default"/>
+        <dependency org="apache" name="commons-logging" rev="1.0.4" conf="default->default"/>
+        <dependency org="apache" name="commons-jxpath" rev="1.2" conf="default->default"/>
+        <dependency org="apache" name="commons-collections" rev="3.1" conf="default->default"/>
+        <dependency org="apache" name="commons-beanutils" rev="1.7.0" conf="default->default"/>
+
+
+        <dependency org="bsh" name="bsh" rev="2.0b1" conf="nano->default"/>
+        <dependency org="nanocontainer" name="nanocontainer" rev="1.0-beta-5-SNAPSHOT" conf="nano->default"/>
+        <dependency org="picocontainer" name="picocontainer" rev="1.2-SNAPSHOT" conf="nano->default"/>
+
+
+        <dependency org="apache" name="log4j" rev="1.2.8" conf="service->default"/>
+        <dependency org="tanuki" name="wrapper-linux" rev="3.1.2" conf="service->default;scripts->scripts;binaries->binaries;service->libraries"/>
+        <dependency org="tanuki" name="wrapper-win" rev="3.1.2" conf="service->default;scripts->scripts;binaries->binaries;service->libraries"/>
+    </dependencies>
+</ivy-module>

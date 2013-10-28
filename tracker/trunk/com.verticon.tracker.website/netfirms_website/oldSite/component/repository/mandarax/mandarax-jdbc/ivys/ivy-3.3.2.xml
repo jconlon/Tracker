@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="../../../ivystylesheet.xml"?>
+
+<ivy-module version="1.0">
+    <info organisation="mandarax" module="mandarax-jdbc" revision="3.3.2" status="integration" publication="20051003124954">
+      <license name="LGPL" url="http://www.gnu.org/copyleft/lesser.html"/>
+      <ivyauthor name="Verticon, Inc." url="http://www.verticon.com"/>
+      <repository name="verticon" url="http://www.verticon.com/repository/" pattern="[organisation]/[module]/[type]s/ivy-[revision].xml" ivys="true" artifacts="true"/>
+        <description homepage="http://mandarax.sourceforge.net/">
+        Mandarax Inference Engine is encapsulated witnin a SQL accessible Server
+        and offered as three configurations.
+      </description>
+    </info>
+
+   <configurations>
+      <conf name="server" description="Server side core components and dependencies."/>
+      <conf name="integrated-server" description="Complete Server side support. War file includes all server side dependencies."/>
+      <conf name="client" description="Client side support components."/>
+   </configurations>
+
+   <publications>
+      <artifact name="mandarax-jdbc" type="jar" conf="server"/>
+      <artifact name="mandarax-jdbc-tests" type="jar" conf="server"/>
+      <artifact name="mandarax-jdbc-client" type="jar" conf="client"/>
+      <artifact name="mandarax-jdbc-server" type="war" conf="integrated-server"/>
+  </publications>
+
+  <dependencies>
+
+      <dependency org="mandarax" name="mandarax" rev="3.4" conf="server->default"/>
+      <dependency org="jdom" name="jdom" rev="1.0" conf="server->default"/>
+      <dependency org="apache" name="commons-collections" rev="3.1" conf="server->default"/>
+      <dependency org="apache" name="commons-logging" rev="1.0.4" conf="server,client->default"/>
+      <dependency org="apache" name="commons-httpclient" rev="2.0.1" conf="client->default"/>
+  </dependencies>
+</ivy-module>

@@ -1,0 +1,74 @@
+<webpage id="trackerCloud">
+  <config param="rcsdate" value="$Date: 2009-08-19 20:26:08 -0500 (Wed, 19 Aug 2009) $"/>
+  <head>
+    <title>Tracker Cloud - Network Store</title>
+    <summary>
+    Network document store and just-in-time retrieval service.
+    </summary>
+    <keywords>Tracker, Business Intelligence, Eclipse, OSGi</keywords>
+  </head>
+    <para>
+  	Tracker Cloud is a 
+ 	<itemizedlist mark='opencircle'>
+ 	
+			<listitem>
+				<para>'Big data' document store for high capacity storage;</para>
+			</listitem>
+			<listitem >
+				<para>Cloud service hosted for ubiquitous access;</para>
+			</listitem>
+			<listitem>
+				<para>Service provider for users of Tracker Pro Desktop and Tracker Lite products;</para>
+			</listitem>
+			<listitem>
+				<para>Livestock Premises registration service;</para>
+			</listitem>
+			<listitem>
+				<para>Animal life and event history storage</para>
+			</listitem>
+			
+			<listitem>
+				<para>Information reporting;</para>
+			</listitem>
+			<listitem>
+				<para>Access controls for storage and retrieval.</para>
+			</listitem>
+			
+	</itemizedlist>
+    </para>
+    
+
+	<section id="store_overview">
+		
+		<title>Overview </title>
+		
+		<para>MongoDB<footnote>
+			<para>
+		<ulink url="http://www.mongodb.org/"><citetitle>MongoDB</citetitle></ulink> (from "humongous") is a scalable, high-performance, open source NoSQL 
+			database.
+			</para>
+		</footnote> TrackerStore and Location Service<footnote><para>MongoDB TrackerStore and Location Service is an implementation of two
+		Premises Editor services: <itemizedlist>
+			<listitem><para><emphasis>TrackerStore</emphasis></para></listitem>
+			<listitem><para><emphasis>Location</emphasis>.</para></listitem>
+			</itemizedlist>See the Services section of the Premises Editor documentation for a detailed description of
+		the TrackerStore and Location Service functionality. </para></footnote> is a new generation <emphasis>Big Data</emphasis> storage solution for 
+		livestock market exchanges, livestock producers, livestock infrastructure providers 
+		and government animal health regulators who require:
+		<itemizedlist mark="bullet">
+          <listitem><para>a highly scalable, reliable and easy to maintain information repository for recording high volumes of animal 
+		life and history event information<footnote>
+		  	<para>MongoDB has the ability to scale data storage to 100s of TERA BYTES and the capabilities for creating high degrees of redundancy.</para></footnote>;</para></listitem>
+          <listitem><para>a facility to register and record Livestock Premises geolocation details;</para></listitem>
+          <listitem><para>the functionality for tracing animal movements within and between livestock premises;</para></listitem>
+          <listitem><para>stored information accessible by state of the art business intelligence analysis and reporting tools;</para></listitem>
+          <listitem><para>multi-user access controls to segregate information;</para></listitem>
+          <listitem><para>support for iRouter client background services and appliances;</para></listitem>
+          <listitem><para>an information exchange facility for sharing information between collaborating business 
+          partners.</para></listitem>
+        </itemizedlist>
+	      </para>
+	      
+	 </section>  
+  
+</webpage>

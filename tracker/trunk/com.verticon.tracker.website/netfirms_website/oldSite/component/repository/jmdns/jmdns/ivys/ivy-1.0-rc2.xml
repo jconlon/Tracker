@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="../../../ivystylesheet.xml"?>
+
+<ivy-module version="1.0">
+    <info organisation="jmdns" module="jmdns" revision="1.0-rc2" status="integration" publication="20051003121947">
+      <license name="LGPL" url="http://www.gnu.org/copyleft/lesser.html"/>
+      <ivyauthor name="Verticon, Inc." url="http://www.verticon.com"/>
+      <repository name="verticon" url="http://www.verticon.com/repository/" pattern="[organisation]/[module]/[type]s/ivy-[revision].xml" ivys="true" artifacts="true"/>
+        <description homepage="http://jmdns.sourceforge.net/">
+              <p>JmDNS is a java implementation of the IETF draft RFP multicast
+                 extensions for DNS. This project contains the needed elements
+                 for service discovery and service registration. It is compatible
+                 with the Apple Rendezvous service.
+                 The JmDNS package is offered as a default configuration.
+              </p>
+       </description>
+    </info>
+</ivy-module>

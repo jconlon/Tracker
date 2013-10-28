@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="../../../ivystylesheet.xml"?>
+
+<ivy-module version="1.0">
+    <info organisation="verticon" module="react2" revision="1.3" status="integration" publication="20051004092228">
+      <license name="BSD" url="http://www.opensource.org/licenses/bsd-license.php"/>
+      <ivyauthor name="Verticon, Inc." url="http://www.verticon.com"/>
+      <repository name="verticon" url="http://www.verticon.com/component/repository/" pattern="[organisation]/[module]/[type]s/ivy-[revision].xml" ivys="true" artifacts="true"/>
+        <description homepage="http://www.verticon.com/component/react2/">
+              <p>React2 Server is a Java<sup>tm</sup>
+         based business object server and supporting logic for modeling People,
+         Moving Objects, and Locations.   The React2 Server is the core component
+         in the React2 Enterprise Event Management suite of applications. </p>
+       </description>
+    </info>
+
+    <configurations>
+      <conf name="default" description="React2 Core Logic"/>
+      <conf name="nano" description="Picocontainer and Nanocontainer dependencies."/>
+
+    </configurations>
+
+    <publications>
+      <artifact name="react2" type="jar" conf="default"/>
+    </publications>
+
+
+    <dependencies>
+
+        <dependency org="verticon" name="concurrent" rev="2.1" conf="default->default"/>
+        <dependency org="verticon" name="vi-ldap" rev="1.0" conf="default->default"/>
+        <dependency org="verticon" name="common" rev="1.1" conf="default->default"/>
+        <dependency org="apache" name="commons-logging" rev="1.0.4" conf="default->default"/>
+        <dependency org="apache" name="commons-jxpath" rev="1.2" conf="default->default"/>
+        <dependency org="apache" name="commons-collections" rev="3.1" conf="default->default"/>
+        <dependency org="apache" name="commons-beanutils" rev="1.7.0" conf="default->default"/>
+
+
+        <dependency org="bsh" name="bsh" rev="2.0b1" conf="nano->default"/>
+        <dependency org="nanocontainer" name="nanocontainer" rev="1.0-RC-2" conf="nano->default"/>
+        <dependency org="picocontainer" name="picocontainer" rev="1.2-RC-1" conf="nano->default"/>
+
+
+    </dependencies>
+</ivy-module>

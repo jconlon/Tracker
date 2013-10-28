@@ -1,0 +1,93 @@
+<webpage id="trackerPro">
+  <config param="rcsdate" value="$Date: 2009-08-19 20:26:08 -0500 (Wed, 19 Aug 2009) $"/>
+  <head>
+    <title>Tracker Pro - Business Intelligence Toolkit</title>
+    <summary>
+    Tracker Business Intelligence Toolkit for the professional livestock business analyst.
+    </summary>
+    <keywords>Tracker, Business Intelligence, Eclipse, OSGi</keywords>
+  </head>
+  <para>
+    Tracker Professional is a 
+    <ulink url="http://en.wikipedia.org/wiki/Business_intelligence">Business Intelligence</ulink> 
+    (<acronym>BI</acronym>) Toolkit and suite of BI feature
+    solutions for animal agriculture professionals. These <acronym>BI</acronym> features
+    provide historical, current, and predictive views of animal agriculture business operations.
+  </para>
+
+ 
+  <section id="businessIntelligenceToolkit">
+    <title>Tracker Business Intelligence Toolkit</title>
+    <para>
+	Tracker <acronym>BI</acronym> Toolkit is an 
+	<ulink url="http://www.eclipse.org/">Eclipse</ulink> based <emphasis>network aware rich client 
+	platform</emphasis> that can be installed with one or more <acronym>BI</acronym> features.
+	</para>
+  </section>  
+  
+  <section id="businessIntelligenceFeatures">
+    <title>Tracker Business Intelligence Features</title>
+    <para>
+  	Tracker <acronym>BI</acronym> Features are used by <emphasis>Animal Agriculture producers</emphasis>, 
+  	<emphasis>infrastructure providers</emphasis> and <emphasis>process control auditors</emphasis> to 
+ 	<itemizedlist mark='opencircle'>
+			<listitem>
+				<para>Document;</para>
+			</listitem>
+			<listitem >
+				<para>Manage;</para>
+			</listitem>
+			<listitem>
+				<para>Analyze;</para>
+			</listitem>
+			<listitem>
+				<para>Report;</para>
+			</listitem>
+			<listitem>
+				<para>and Inter-exchange business information.</para>
+			</listitem>
+	</itemizedlist>
+    </para>
+    </section>
+
+    <section id="businessSolutions">
+    <title>Tracker Business Intelligence Solutions</title>
+	<para>
+	Tracker <acronym>BI</acronym> Features are cost effective solutions for;
+	<itemizedlist mark='opencircle'>
+			<listitem>
+				<para>recording animal event histories;</para>
+			</listitem>
+			<listitem>
+				<para>importing and exporting data;</para>
+			</listitem>
+			<listitem>
+				<para>mapping premises geolocations;</para>
+			</listitem>
+			<listitem>
+				<para>resolving trace back, trace forward and geolocation queries;</para>
+			</listitem>
+			<listitem>
+				<para>interfacing with RFID readers, sensors and actuators;</para>
+			</listitem>
+			<listitem >
+				<para>maintaining production efficiency;</para>
+			</listitem>
+			<listitem>
+				<para>improving herd quality;</para>
+			</listitem>
+			<listitem>
+				<para>documenting process controls;</para>
+			</listitem>
+			<listitem>
+				<para>recording animal movements;</para>
+			</listitem>
+			<listitem>
+				<para>and sharing animal history information.</para>
+			</listitem>
+	</itemizedlist>
+	</para>
+	<para>To learn more go to <olink targetdoc="docs">Documentation page</olink> and download the Tracker User Guide.</para>
+	</section>
+  
+</webpage>

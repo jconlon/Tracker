@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="../../../ivystylesheet.xml"?>
+
+<ivy-module version="1.0">
+    <info organisation="sun" module="jnlpDownloadServlet" revision="1.5.0" status="integration" publication="20051003142113">
+      <license name="Sun Java" url="http://java.sun.com/j2se/1.5.0/docs/relnotes/license.html"/>
+      <ivyauthor name="Verticon, Inc." url="http://www.verticon.com"/>
+      <repository name="verticon" url="http://www.verticon.com/repository/" pattern="[organisation]/[module]/[type]s/ivy-[revision].xml" ivys="true" artifacts="true"/>
+        <description homepage="http://java.sun.com/products/javawebstart/docs/downloadservletguide.html">
+        Components for building Java Network Launch Protocol <em>(JNLP)</em>
+        Deployment Service infrastructure.
+      </description>
+    </info>
+
+    <configurations>
+      <conf name="default" description="Default libraries for accessing JNLP client side services."/>
+      <conf name="downLoadServlet" description="JNLP Download Servlet. Add this to the WEB-INF/lib/ directory of your web archive."/>
+      <conf name="jarDiff" description="jarDiff libraries for JNLP"/>
+    </configurations>
+
+   <publications>
+      <artifact name="jnlp" type="jar" conf="default"/>
+      <artifact name="jardiff" type="jar" conf="jarDiff"/>
+      <artifact name="jnlp-servlet" type="jar" conf="downLoadServlet"/>
+  </publications>
+
+</ivy-module>

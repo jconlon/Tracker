@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="../../../ivystylesheet.xml"?>
+
+<ivy-module version="1.0">
+    <info organisation="verticon" module="concurrent" revision="2.1" status="integration" publication="20051004092740">
+      <license name="BSD" url="http://www.opensource.org/licenses/bsd-license.php"/>
+      <ivyauthor name="Verticon, Inc." url="http://www.verticon.com"/>
+      <repository name="verticon" url="http://www.verticon.com/component/repository/" pattern="[organisation]/[module]/[type]s/ivy-[revision].xml" ivys="true" artifacts="true"/>
+        <description homepage="http://www.verticon.com/component/concurrent2/">
+              Supplemental classes for java.util.concurrent.
+       </description>
+    </info>
+
+    <dependencies>
+        <dependency org="apache" name="commons-logging" rev="1.0.4"/>
+        <dependency org="verticon" name="common" rev="1.1"/>
+    </dependencies>
+</ivy-module>
