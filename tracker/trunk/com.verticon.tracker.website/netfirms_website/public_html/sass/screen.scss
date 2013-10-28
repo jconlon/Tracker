@@ -1,0 +1,117 @@
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+
+//@import "compass/reset";
+@import "normalize.css";
+@import "foundation.css";
+
+
+//colors:
+$black: #000;
+$white: #fff;
+$dk-grey: #626262;
+
+hr.access {
+    display: none;
+}
+
+html body {
+	 background: url("../img/page-bg.gif") 0 0 repeat-x;
+	 line-height: 1.5em;
+	 //font-family: Arial,"Helvetica Neue","Helvetica",Helvetica,sans-serif
+	// margin: 0 auto;
+}
+// #wrapper {
+// 	height: 100%;
+// }
+a:link, a:visited {
+	color: $dk-grey;
+
+}
+ul {
+	margin-left: 1em;
+}
+#header {
+	
+	background: $black;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	.skipNav {
+	    position: absolute;
+	    left: -999px;
+	    width: 990px;
+	}
+	a:link, a:visited {
+		color: $white;
+	}
+	img {
+		margin-top: 7px;
+	}
+}
+
+#menu {
+
+	ul {
+		margin-top: 24px;
+		float: right;
+		li {
+			
+			display: inline-block;
+		}
+	}
+	a:link, a:visited {
+		color: $white;
+		padding: 0 1.5em 0 1em;
+		background: url("../img/bullet.png") 0 5px no-repeat;
+	}	
+}
+#headitems { //this needs to be moved out of the html (into footer?)
+	display:none;
+}
+.banner {
+	width: 100%;
+}
+#breadcrumb ul {
+	list-style-type: none;
+	margin-left: 0;
+	li {
+		display: inline;
+		span {
+			padding-right: 7px;
+		}		
+	}
+}
+#pagebody {
+	margin-bottom: 2em;
+	min-height: 380px;
+}
+#sidebar {
+	margin-top: 2em;
+}
+.footer-wrap{
+	background: #000;
+}
+#footer {
+	background: #000;
+	color: #fff;
+	min-height: 200px;
+	padding: 1em 0;
+	a:link, a:visited {
+		color: #fff;
+	}
+
+}
+#footitems {
+	//padding-top: 1em;
+	padding-bottom: 1em;
+	font-size: .9em;
+}
+.vbar {
+	margin: 0 1em;
+}
+.footer-content {
+	margin: 1em 0;
+	font-size: .9em;
+}

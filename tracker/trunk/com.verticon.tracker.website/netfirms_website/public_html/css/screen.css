@@ -1,0 +1,134 @@
+@import url(normalize.css);
+@import url(foundation.css);
+/* Welcome to Compass.
+ * In this file you should write your main styles. (or centralize your imports)
+ * Import this file using the following HTML or equivalent:
+ * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
+/* line 16, ../sass/screen.scss */
+hr.access {
+  display: none;
+}
+
+/* line 20, ../sass/screen.scss */
+html body {
+  background: url("../img/page-bg.gif") 0 0 repeat-x;
+  line-height: 1.5em;
+}
+
+/* line 29, ../sass/screen.scss */
+a:link, a:visited {
+  color: #626262;
+  text-decoration: underline;
+}
+
+/* line 33, ../sass/screen.scss */
+ul {
+  margin-left: 1em;
+}
+
+/* line 36, ../sass/screen.scss */
+#header {
+  background: black;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+/* line 41, ../sass/screen.scss */
+#header .skipNav {
+  position: absolute;
+  left: -999px;
+  width: 990px;
+}
+/* line 46, ../sass/screen.scss */
+#header a:link, #header a:visited {
+  color: white;
+}
+/* line 49, ../sass/screen.scss */
+#header img {
+  margin-top: 7px;
+}
+
+/* line 56, ../sass/screen.scss */
+#menu ul {
+  margin-top: 24px;
+  float: right;
+}
+/* line 59, ../sass/screen.scss */
+#menu ul li {
+  display: inline-block;
+}
+/* line 64, ../sass/screen.scss */
+#menu a:link, #menu a:visited {
+  color: white;
+  padding: 0 1.5em 0 1em;
+  background: url("../img/bullet.png") 0 5px no-repeat;
+  text-decoration: none;
+}
+
+/* line 71, ../sass/screen.scss */
+#headitems {
+  display: none;
+}
+
+/* line 74, ../sass/screen.scss */
+.banner {
+  width: 100%;
+}
+
+/* line 77, ../sass/screen.scss */
+#breadcrumb ul {
+  list-style-type: none;
+  margin-left: 0;
+}
+/* line 80, ../sass/screen.scss */
+#breadcrumb ul li {
+  display: inline;
+}
+/* line 82, ../sass/screen.scss */
+#breadcrumb ul li span {
+  padding-right: 7px;
+}
+
+/* line 87, ../sass/screen.scss */
+#pagebody {
+  margin-bottom: 2em;
+  min-height: 380px;
+}
+
+/* line 91, ../sass/screen.scss */
+#sidebar {
+  margin-top: 2em;
+}
+
+/* line 94, ../sass/screen.scss */
+.footer-wrap {
+  background: #000;
+}
+
+/* line 97, ../sass/screen.scss */
+#footer {
+  background: #000;
+  color: #fff;
+  min-height: 200px;
+  padding: 1em 0;
+}
+/* line 102, ../sass/screen.scss */
+#footer a:link, #footer a:visited {
+  color: #fff;
+}
+
+/* line 107, ../sass/screen.scss */
+#footitems {
+  padding-bottom: 1em;
+  font-size: .9em;
+}
+
+/* line 112, ../sass/screen.scss */
+.vbar {
+  margin: 0 1em;
+}
+
+/* line 115, ../sass/screen.scss */
+.footer-content {
+  margin: 1em 0;
+  font-size: .9em;
+}

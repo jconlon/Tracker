@@ -1,0 +1,21 @@
+<ivyconf>
+    <!-- Local web based repository for development and testing. -->
+    <properties file="${ivy.conf.dir}/ivyconf-file.properties" />
+    <conf defaultResolver="localChain" checkUpToDate="false" />
+    <resolvers>
+       <chain name="localChain" returnFirst="false">
+           <url name="internal">
+               <ivy pattern="http://solarpc:demo1@verticon.com/component/repository/[organisation]/[module]/[type]s/ivy-[revision].xml"/>
+               <artifact pattern="http://solarpc:demo1@verticon.com/component/repository/[organisation]/[module]/[type]s/[artifact]-[revision].[ext]"/>
+          </url>
+          <ivyrep name="ivyrep"/>
+       </chain>
+       <ibiblio name="ibiblio" pattern="[organisation]/jars/[module]-[revision].[ext]"/>
+    </resolvers>
+    <modules>
+      <module organisation="verticon" name=".*" resolver="internal" />
+      <module organisation="mandarax" name=".*" resolver="internal" />
+      <module organisation="geronimo-spec" name=".*" resolver="ibiblio" />
+      <module organisation="tomcat" name=".*" resolver="ibiblio" />
+    </modules>
+</ivyconf>

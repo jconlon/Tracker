@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml-stylesheet type="text/xsl" href="../../../ivystylesheet.xml"?>
+
+<ivy-module version="1.0">
+    <info organisation="verticon" module="jettyHelper" revision="0.1" status="integration" publication="20050729140505"/>
+    <configurations>
+      <conf name="httpServer" description="Lightweight HTTP server."/>
+      <conf name="appServer" description="Lightweight Web App server."/>
+    </configurations>
+
+  <publications>
+      <artifact name="jettyHelper" type="jar" conf="httpServer,appServer"/>
+      <artifact name="httpServer" type="run" conf="httpServer"/>
+      <artifact name="appServer" type="run" conf="appServer"/>
+  </publications>
+
+
+  <dependencies>
+      <dependency org="mortbay" name="jetty" rev="5.1.4" conf="httpServer->default,http;appServer->default,jetty"/>
+  </dependencies>
+</ivy-module>
