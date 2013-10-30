@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <category
+          id="com.verticon.tracker.editor.Wizard.category.ID"
+          name="Tracker"/>
+      <wizard
+            id="org.usaha.ecvi.presentation.EcviModelWizardID"
+            name="%_UI_EcviModelWizard_label"
+            class="org.usaha.ecvi.presentation.EcviModelWizard"
+            category="com.verticon.tracker.editor.Wizard.category.ID"
+            icon="icons/full/obj16/EcviModelFile.gif">
+         <description>%_UI_EcviModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated ecvi -->
+      <editor
+            id="org.usaha.ecvi.presentation.EcviEditorID"
+            name="%_UI_EcviEditor_label"
+            icon="icons/full/obj16/EcviModelFile.gif"
+            extensions="ecvi"
+            class="org.usaha.ecvi.presentation.EcviEditor"
+            contributorClass="org.usaha.ecvi.presentation.EcviActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>
