@@ -80,14 +80,14 @@ used with other Eclipse (4.3) based offerings.
       <feature id="org.eclipse.equinox.p2.rcp.feature"/>
       <feature id="org.eclipse.rcp"/>
       <feature id="org.eclipse.equinox.p2.extras.feature"/>
-      <feature id="com.verticon.agriculture.editor" version="1.0.0.qualifier"/>
+      <feature id="com.verticon.agriculture.editor"/>
       <feature id="com.verticon.birt.report.engine.emitter.kml"/>
-      <feature id="com.verticon.birt.report.engine.generator" version="1.0.0.qualifier"/>
+      <feature id="com.verticon.birt.report.engine.generator"/>
       <feature id="com.verticon.birt.report.loader"/>
-      <feature id="com.verticon.geography.editor" version="0.1.5.qualifier"/>
-      <feature id="com.verticon.location.core.model" version="0.1.0.qualifier"/>
+      <feature id="com.verticon.geography.editor"/>
+      <feature id="com.verticon.location.core.model"/>
       <feature id="com.verticon.location.service"/>
-      <feature id="com.verticon.osgi.metatype.core.model.editor" version="0.2.3.qualifier"/>
+      <feature id="com.verticon.osgi.metatype.core.model.editor"/>
       <feature id="com.verticon.tracker.birt"/>
       <feature id="com.verticon.tracker.editor"/>
       <feature id="com.verticon.tracker.export.wlic"/>
@@ -95,12 +95,12 @@ used with other Eclipse (4.3) based offerings.
       <feature id="com.verticon.tracker.fair.poi"/>
       <feature id="com.verticon.tracker.fair.report.pack"/>
       <feature id="com.verticon.tracker.irouter"/>
-      <feature id="com.verticon.tracker.irouter.bwcontrol" version="0.2.1.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.bwcontrol"/>
       <feature id="com.verticon.tracker.irouter.gps"/>
-      <feature id="com.verticon.tracker.irouter.gps.ui" version="1.0.0.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.gps.ui"/>
       <feature id="com.verticon.tracker.irouter.mettler"/>
       <feature id="com.verticon.tracker.irouter.premises.common"/>
-      <feature id="com.verticon.tracker.irouter.premises.gateway" version="0.1.6.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.premises.gateway"/>
       <feature id="com.verticon.tracker.irouter.trutest"/>
       <feature id="com.verticon.tracker.logging.logback"/>
       <feature id="com.verticon.tracker.ocl.query"/>
@@ -250,18 +250,18 @@ used with other Eclipse (4.3) based offerings.
       <feature id="org.eclipse.emf.doc.source"/>
       <feature id="org.eclipse.emf.databinding.edit.source"/>
       <feature id="org.eclipse.emf.edit.ui.source"/>
-      <feature id="org.eclipselabs.mongo.emf.core.feature" version="0.7.0.201207021221"/>
+      <feature id="org.eclipselabs.mongo.emf.core.feature"/>
       <feature id="org.eclipse.datatools.common.doc.user"/>
       <feature id="org.eclipse.datatools.connectivity.doc.user"/>
       <feature id="org.eclipse.datatools.intro"/>
       <feature id="org.eclipse.birt.chart.integration.wtp"/>
-      <feature id="com.verticon.osgi.useradmin.mongo" version="2.0.0.qualifier"/>
+      <feature id="com.verticon.osgi.useradmin.mongo"/>
       <feature id="com.verticon.tracker.connector"/>
-      <feature id="com.verticon.tracker.irouter.eventadmin.gateway" version="1.0.1.qualifier"/>
-      <feature id="com.verticon.tracker.irouter.measurement.trigger.file" version="2.0.0.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.eventadmin.gateway"/>
+      <feature id="com.verticon.tracker.irouter.measurement.trigger.file"/>
       <feature id="com.verticon.tracker.irouter.ohaus"/>
-      <feature id="com.verticon.tracker.store.mqtt" version="1.1.0.qualifier"/>
-      <feature id="com.verticon.tracker.trigger.view" version="1.1.1.qualifier"/>
+      <feature id="com.verticon.tracker.store.mqtt"/>
+      <feature id="com.verticon.tracker.trigger.view"/>
       <feature id="com.verticon.osgi.useradmin.ui"/>
       <feature id="org.eclipse.e4.rcp"/>
       <feature id="org.eclipse.wst.ws_wsdl15.feature"/>
@@ -283,11 +283,17 @@ used with other Eclipse (4.3) based offerings.
       <feature id="org.eclipse.wst.web_userdoc.feature"/>
       <feature id="org.eclipse.jst.enterprise_ui.feature"/>
       <feature id="org.eclipse.wst.ws_ui.feature"/>
-      <feature id="org.usaha.ecvi" version="0.1.0.qualifier"/>
-      <feature id="org.eclipse.emf.oda.sdk" version="1.2.0.v20130610-0406"/>
+      <feature id="org.eclipse.emf.oda.sdk"/>
       <feature id="org.eclipse.emf.oda.ecore.ui.source"/>
       <feature id="org.eclipse.emf.oda.source"/>
       <feature id="org.eclipse.emf.oda.ecore.source"/>
+      <feature id="org.eclipse.emf.ecp.feature"/>
+      <feature id="org.eclipse.emf.ecp.license.feature"/>
+      <feature id="org.eclipse.emf.ecp.validation.feature"/>
+      <feature id="org.eclipse.emf.ecp.workspace.feature"/>
+      <feature id="org.eclipse.emf.ecp.e3.feature"/>
+      <feature id="org.eclipse.net4j.util"/>
+      <feature id="org.usaha.ecvi"/>
    </features>
 
    <configurations>
