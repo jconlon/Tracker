@@ -141,12 +141,17 @@ public class Activator extends AbstractUIPlugin {
 	 * @return mqttTrackerStore
 	 */
 	public ITrackerStore getMQTTTrackerStoreService() {
-		for (ServiceReference<ITrackerStore> serviceReference : storeTracker.getServiceReferences()) {
-			String factoryPid = (String)serviceReference.getProperty("service.factoryPid");
-			if(isNullOrEmpty(factoryPid)){
-				continue;
-			}else if(factoryPid.equals("com.verticon.tracker.store.mqtt")){
-				return this.storeTracker.getService(serviceReference);
+		if (storeTracker != null && storeTracker.getServiceReferences() != null
+				&& storeTracker.getServiceReferences().length > 0) {
+			for (ServiceReference<ITrackerStore> serviceReference : storeTracker
+					.getServiceReferences()) {
+				String factoryPid = (String) serviceReference
+						.getProperty("service.factoryPid");
+				if (isNullOrEmpty(factoryPid)) {
+					continue;
+				} else if (factoryPid.equals("com.verticon.tracker.store.mqtt")) {
+					return this.storeTracker.getService(serviceReference);
+				}
 			}
 		}
 		return null;
