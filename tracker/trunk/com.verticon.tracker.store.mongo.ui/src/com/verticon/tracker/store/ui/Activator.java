@@ -141,6 +141,7 @@ public class Activator extends AbstractUIPlugin {
 	 * @return mqttTrackerStore
 	 */
 	public ITrackerStore getMQTTTrackerStoreService() {
+		// Check for null before iteration on storeTracker
 		if (storeTracker != null && storeTracker.getServiceReferences() != null
 				&& storeTracker.getServiceReferences().length > 0) {
 			for (ServiceReference<ITrackerStore> serviceReference : storeTracker
