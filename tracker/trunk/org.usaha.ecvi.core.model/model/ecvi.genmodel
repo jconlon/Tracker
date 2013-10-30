@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.usaha.ecvi.core.model/src" modelPluginID="org.usaha.ecvi.core.model"
+    modelName="Ecvi" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.xsd.ecore.importer" complianceLevel="5.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>../../usaha_committee/ecvi.xsd</foreignModel>
+  <genPackages prefix="Ecvi" basePackage="org.usaha" resource="XML" disposableProviderFactory="true"
+      ecorePackage="ecvi.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ecvi.ecore#//DocType">
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//DocType/ScannedPaperCVI"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//DocType/ScannedTestChart"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//DocType/PDFCVI"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//DocType/PDFTestChart"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//DocType/Other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ecvi.ecore#//ISO3166Country">
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//ISO3166Country/USA"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ecvi.ecore#//MovementPurpose">
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//MovementPurpose/show"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//MovementPurpose/race"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//MovementPurpose/rodeo"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//MovementPurpose/sale"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//MovementPurpose/pet"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//MovementPurpose/breeding"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//MovementPurpose/feeding"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//MovementPurpose/grazing"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//MovementPurpose/training"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//MovementPurpose/slaughter"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//MovementPurpose/medicalTreatment"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//MovementPurpose/other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ecvi.ecore#//PhoneDevice">
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//PhoneDevice/Unknown"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//PhoneDevice/Landline"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//PhoneDevice/Cellphone"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//PhoneDevice/Fax"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ecvi.ecore#//ProgramStatusName">
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//ProgramStatusName/BovineTuberculosis"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//ProgramStatusName/BrucellosisState"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//ProgramStatusName/BrucellosisHerd"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ecvi.ecore#//ProgramStatusValue">
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//ProgramStatusValue/Free"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//ProgramStatusValue/ModifiedAccredited"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//ProgramStatusValue/ModifiedAdvancedAccredited"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//ProgramStatusValue/Other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ecvi.ecore#//ResultName">
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//ResultName/RESULT"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//ResultName/COMMENT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ecvi.ecore#//Sex">
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//Sex/Female"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//Sex/Male"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//Sex/GenderUnknown"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//Sex/SpayedFemale"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//Sex/NeuteredMale"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//Sex/TrueHermaphrodite"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//Sex/Other"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ecvi.ecore#//SpeciesCode">
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//SpeciesCode/UNK"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//SpeciesCode/BOV"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//SpeciesCode/CAP"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//SpeciesCode/CER"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//SpeciesCode/EQU"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//SpeciesCode/OVI"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//SpeciesCode/POR"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ecvi.ecore#//TagType">
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//TagType/UN"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//TagType/AIN"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//TagType/AMID"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//TagType/BRAND"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//TagType/BRANDIMAGE"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//TagType/BT"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//TagType/IMP"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//TagType/MGT"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//TagType/N840RFID"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//TagType/NUES8"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//TagType/NUES9"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//TagType/OFORID"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//TagType/OTH"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//TagType/NAME"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//TagType/SGFLID"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//TagType/NPIN"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//TagType/TAT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="ecvi.ecore#//UsState">
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/AA"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/AE"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/AK"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/AL"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/AP"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/AR"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/AS"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/AZ"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/CA"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/CO"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/CT"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/DC"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/DE"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/FL"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/FM"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/GA"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/GU"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/HI"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/IA"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/ID"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/IL"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/IN"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/KS"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/KY"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/LA"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/MA"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/MD"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/ME"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/MH"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/MI"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/MN"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/MO"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/MP"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/MS"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/MT"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/NC"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/ND"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/NE"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/NH"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/NJ"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/NM"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/NV"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/NY"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/OH"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/OK"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/OR"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/PA"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/PR"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/PW"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/RI"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/SC"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/SD"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/TN"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/TX"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/UT"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/VA"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/VI"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/VT"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/WA"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/WI"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/WV"/>
+      <genEnumLiterals ecoreEnumLiteral="ecvi.ecore#//UsState/WY"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="ecvi.ecore#//AddressLine1"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//AddressLine2"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//Age"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//AnimalSexDetail"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//AttachementComment"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//Breed"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//County"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//CviNumber"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//DocTypeObject"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//EntryPermitNumber"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//FileName"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//GroupLotDescription"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//GroupLotSexDetail"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//ISO3166CountryObject"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//Latitude"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//Longitude"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//MimeType"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//MovementPurposeObject"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//PhoneDeviceObject"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//PhoneNumber"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//PhoneNumComment"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//PhoneNumNumber"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//PremId"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//ProgramStatusNameObject"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//ProgramStatusValueObject"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//ResultNameObject"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//SexObject"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//SpeciesCodeObject"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//TagTypeObject"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//Town"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//UsStateObject"/>
+    <genDataTypes ecoreDataType="ecvi.ecore#//ZipCode"/>
+    <genClasses ecoreClass="ecvi.ecore#//Accession">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Accession/laboratory"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Accession/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Accession/infieldTest"/>
+    </genClasses>
+    <genClasses ecoreClass="ecvi.ecore#//Accessions">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Accessions/accession"/>
+    </genClasses>
+    <genClasses ecoreClass="ecvi.ecore#//Address">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Address/line1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Address/line2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Address/town"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Address/county"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Address/state"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Address/zIP"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Address/country"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Address/geoPoint"/>
+    </genClasses>
+    <genClasses ecoreClass="ecvi.ecore#//Animal">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Animal/animalTag"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Animal/test"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Animal/age"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Animal/breed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Animal/inspectionDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Animal/sex"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Animal/sexDetail"/>
+    </genClasses>
+    <genClasses ecoreClass="ecvi.ecore#//AnimalTag">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//AnimalTag/brandImage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//AnimalTag/number"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//AnimalTag/type"/>
+    </genClasses>
+    <genClasses ecoreClass="ecvi.ecore#//Attachement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Attachement/payload"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Attachement/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Attachement/docType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Attachement/filename"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Attachement/mimeType"/>
+    </genClasses>
+    <genClasses ecoreClass="ecvi.ecore#//Contact">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Contact/premId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Contact/premName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Contact/address"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Contact/person"/>
+    </genClasses>
+    <genClasses ecoreClass="ecvi.ecore#//DocumentRoot">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//DocumentRoot/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ecvi.ecore#//DocumentRoot/xMLNSPrefixMap"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ecvi.ecore#//DocumentRoot/xSISchemaLocation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//DocumentRoot/eCVI"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference ecvi.ecore#//DocumentRoot/programStatusType"/>
+    </genClasses>
+    <genClasses ecoreClass="ecvi.ecore#//Ecvi">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Ecvi/veterinarian"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Ecvi/movementPurposes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Ecvi/origin"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Ecvi/destination"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Ecvi/consignor"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Ecvi/consignee"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Ecvi/accessions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ecvi.ecore#//Ecvi/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ecvi.ecore#//Ecvi/animal"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ecvi.ecore#//Ecvi/group1"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ecvi.ecore#//Ecvi/groupLot"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Ecvi/attachment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Ecvi/cviNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Ecvi/entryPermitNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Ecvi/expirationDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Ecvi/issueDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Ecvi/shipmentDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Ecvi/speciesCode"/>
+    </genClasses>
+    <genClasses ecoreClass="ecvi.ecore#//GeoPoint">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//GeoPoint/lat"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//GeoPoint/lng"/>
+    </genClasses>
+    <genClasses ecoreClass="ecvi.ecore#//GroupLot">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//GroupLot/age"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//GroupLot/breed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//GroupLot/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//GroupLot/quantity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//GroupLot/sex"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//GroupLot/sexDetail"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//GroupLot/species"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//GroupLot/unit"/>
+    </genClasses>
+    <genClasses ecoreClass="ecvi.ecore#//Laboratory">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Laboratory/labName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Laboratory/premId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Laboratory/address"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Laboratory/accessionDate"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Laboratory/accessionNumber"/>
+    </genClasses>
+    <genClasses ecoreClass="ecvi.ecore#//MovementPurposes">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//MovementPurposes/movementPurpose"/>
+    </genClasses>
+    <genClasses ecoreClass="ecvi.ecore#//Person">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Person/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Person/phone"/>
+    </genClasses>
+    <genClasses ecoreClass="ecvi.ecore#//PhoneNum">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//PhoneNum/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//PhoneNum/number"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//PhoneNum/type"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="ecvi.ecore#//Premises">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Premises/premId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Premises/premName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Premises/address"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Premises/programStatusType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Premises/person"/>
+    </genClasses>
+    <genClasses ecoreClass="ecvi.ecore#//ProgramStatus">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//ProgramStatus/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//ProgramStatus/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//ProgramStatus/valueOther"/>
+    </genClasses>
+    <genClasses ecoreClass="ecvi.ecore#//ResultValue">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//ResultValue/resultInteger"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//ResultValue/resultString"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//ResultValue/resultFloat"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//ResultValue/resultName"/>
+    </genClasses>
+    <genClasses ecoreClass="ecvi.ecore#//Test">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Test/result"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Test/idref"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Test/testCode"/>
+    </genClasses>
+    <genClasses ecoreClass="ecvi.ecore#//Veterinarian">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Veterinarian/person"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Veterinarian/address"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Veterinarian/licenseIssueState"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Veterinarian/licenseNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Veterinarian/nationalAccreditationNumber"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
