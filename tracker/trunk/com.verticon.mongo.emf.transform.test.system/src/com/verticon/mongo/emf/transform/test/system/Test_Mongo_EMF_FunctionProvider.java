@@ -222,7 +222,7 @@ public class Test_Mongo_EMF_FunctionProvider extends TestCase {
 		try {
 			removeDocsFromCollections();
 		} catch (InterruptedException e) {
-			this.fail("Failed to remove docs");
+			Test_Mongo_EMF_FunctionProvider.fail("Failed to remove docs");
 		}
 	}
 
