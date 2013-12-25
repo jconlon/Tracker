@@ -2,7 +2,7 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="com.verticon.tracker.store.mqtt.test.trackerstoreauthorization.system">
    <implementation 
     class="com.verticon.tracker.irouter.mqtt.test.system.Test_IRouterMQTT_1"/>
-   <reference bind="setProducerConsumer" cardinality="1..1" interface="com.verticon.tracker.irouter.mqtt.test.system.IProducerConsumer" name="IProducerConsumer" policy="static" unbind="unsetProducerConsumer"/>
-    <reference bind="setSubscriberPublisher" cardinality="1..1" interface="com.verticon.tracker.irouter.mqtt.test.system.ISubscriberPublisher" name="ISubscriberPublisher" policy="static" unbind="unsetSubscriberPublisher"/>
+   <reference bind="setProducerConsumer" cardinality="1..1" interface="com.verticon.tracker.irouter.test.utilities.IProducerConsumer" name="IProducerConsumer" policy="static" unbind="unsetProducerConsumer"/>
+    <reference bind="setSubscriberPublisher" cardinality="1..1" interface="com.verticon.mqtt.test.utilities.ISubscriberPublisher" name="ISubscriberPublisher" policy="static" unbind="unsetSubscriberPublisher"/>
     
 </scr:component>

@@ -19,8 +19,10 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.TimeUnit;
@@ -32,12 +34,17 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
 import org.junit.Test;
+import org.osgi.service.wireadmin.BasicEnvelope;
 import org.osgi.service.wireadmin.Envelope;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Iterables;
+import com.verticon.mqtt.test.utilities.ISubscriberListener;
+import com.verticon.mqtt.test.utilities.ISubscriberPublisher;
 import com.verticon.tracker.irouter.mqtt.Utils;
+import com.verticon.tracker.irouter.test.utilities.IConsumerListener;
+import com.verticon.tracker.irouter.test.utilities.IProducerConsumer;
 
 /**
  * 
@@ -63,8 +70,9 @@ public class Test_IRouterMQTT_1 extends TestCase implements
 		ISubscriberListener, IConsumerListener {
 
 	static final String DOC_PREMISES = "example.premises";
-	private static final String TAG_ID_2 = "abcd";
+	// private static final String TAG_ID_2 = "abcd";
 	static final String TAG_ID_1 = "1234567890";
+	private static final Map<String, MqttMessage> messages = new ConcurrentHashMap<String, MqttMessage>();
 
 	/**
 	 * slf4j Logger
@@ -141,6 +149,8 @@ public class Test_IRouterMQTT_1 extends TestCase implements
 	protected void setUp() throws Exception {
 		super.setUp();
 		startUpGate.await();// wait for startUp to finish
+
+		mockSubscriberMessageReceivedBarrier.reset();
 	}
 
 	/*
@@ -187,7 +197,7 @@ public class Test_IRouterMQTT_1 extends TestCase implements
 	/**
 	 * Send a payload to the MockProducerConsumer which will update the consumer
 	 * side of the Component. The component will publish it to MQTT which will
-	 * be received by the MockSubscriberPublisher
+	 * be received by the SubscriberPublisher
 	 * 
 	 * @throws IOException
 	 * @throws InterruptedException
@@ -200,20 +210,27 @@ public class Test_IRouterMQTT_1 extends TestCase implements
 		logger.debug(bundleMarker, "Start test_iRouterToMqtt");
 		// Have the mock producer create a product that will be consumed
 		// by the MqttBridgeComponent Consumer then published
-		producerConsumer.produce("agriculture.premises.response",
+		// Envelope envelope = new BasicEnvelope(payload, topic, scope);
+		// producerConsumer.produce("agriculture.premises.response",
+		// "Agriculture/Premises/" + PREMISES_URI_H89234X + "/Response",
+		// "Hi There".getBytes());
+		Envelope envelope = new BasicEnvelope("Hi There".getBytes(),
 				"Agriculture/Premises/" + PREMISES_URI_H89234X + "/Response",
-				"Hi There".getBytes());
+				"agriculture.premises.response");
+		producerConsumer.send(envelope);
 
 		logger.debug(bundleMarker, "Waiting for message");
 		try {
 			mockSubscriberMessageReceivedBarrier.await(3, TimeUnit.SECONDS);
+			logger.debug(bundleMarker, "Message ready.");
 		} catch (TimeoutException e) {
-			fail("Timed out wait for message.");
+			fail("Timed out wait for message. Check that the MQTT server is accessible. See configuration in private/localhost.properties.");
 		}
 
-		assertThat("Must have one message", subscriberPublisher.messages().size(), is(1));
-		Entry<String, MqttMessage> messageEntry = Iterables.get(subscriberPublisher
-				.messages().entrySet(), 0);
+
+		assertThat("Must have one message", messages.size(), is(1));
+		Entry<String, MqttMessage> messageEntry = Iterables.get(
+				messages.entrySet(), 0);
 		String topicName = messageEntry.getKey();
 		assertThat(
 				"Wrong topicName for received message",
@@ -253,7 +270,7 @@ public class Test_IRouterMQTT_1 extends TestCase implements
 	 * <td>Agriculture/Premises/+/Query</td>
 	 * </tr>
 	 * <tr>
-	 * <td>MockSubscriberPublisher</td>
+	 * <td>SubscriberPublisher</td>
 	 * <td></td>
 	 * <td></td>
 	 * <td>Agriculture/Premises/+/Response</td>
@@ -308,13 +325,32 @@ public class Test_IRouterMQTT_1 extends TestCase implements
 
 
 	@Override
-	public void messageArrived() {
-		logger.debug(bundleMarker, "Message arrived in MockSubscriber");
-		try {
-			mockSubscriberMessageReceivedBarrier.await();
-		} catch (Exception e) {
-			logger.error(bundleMarker, "Barrier problem.", e);
+	public void messageArrived(String topic, MqttMessage message) {
+
+		if (topic.endsWith("Query")) {
+			logger.info(bundleMarker,
+					"Ignoring Query that arrived on topic {}", topic);
+			return;
+		} else if (topic.endsWith("/Response")) {
+			messages.put(topic, message);
+			logger.info(bundleMarker,
+					"Message arrived from MockSubscriber on topic {}, messages in map {}",
+					topic, messages.size());
+
+			logger.debug(bundleMarker,
+					"Entering mockSubscriberMessageReceivedBarrier");
+			try {
+				mockSubscriberMessageReceivedBarrier.await();
+			} catch (Exception e) {
+				logger.error(bundleMarker, "Barrier problem.", e);
+			}
+		} else {
+			logger.info(bundleMarker,
+					"Ignoring Message arrived from MockSubscriber on topic {}",
+					topic);
+
 		}
+
 
 	}
 

@@ -2,7 +2,7 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
    name="com.verticon.tracker.irouter.mqtt.test.system.mock.producerConsumer">
    <implementation 
-    class="com.verticon.tracker.irouter.mqtt.test.system.MockProducerConsumer"/>
+    class="com.verticon.tracker.irouter.test.utilities.MockProducerConsumer"/>
     <property name="tracker.wiring.group.name" type="String" value="test"/>
    <property name="wireadmin.producer.scope">
 agriculture.premises.response
@@ -14,6 +14,6 @@ agriculture.premises.query
    <service>
       <provide interface="org.osgi.service.wireadmin.Producer"/>
       <provide interface="org.osgi.service.wireadmin.Consumer"/>
-      <provide interface="com.verticon.tracker.irouter.mqtt.test.system.IProducerConsumer"/>
+      <provide interface="com.verticon.tracker.irouter.test.utilities.IProducerConsumer"/>
    </service>
 </scr:component>
