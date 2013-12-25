@@ -243,6 +243,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Date getDateTime() {
 		return dateTime;
 	}
@@ -252,6 +253,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setDateTime(Date newDateTime) {
 		Date oldDateTime = dateTime;
 		dateTime = newDateTime;
@@ -264,6 +266,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public abstract int getEventCode();
 
 	/**
@@ -271,6 +274,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isElectronicallyRead() {
 		return electronicallyRead;
 	}
@@ -280,6 +284,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setElectronicallyRead(boolean newElectronicallyRead) {
 		boolean oldElectronicallyRead = electronicallyRead;
 		electronicallyRead = newElectronicallyRead;
@@ -292,6 +297,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isCorrection() {
 		return correction;
 	}
@@ -301,6 +307,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCorrection(boolean newCorrection) {
 		boolean oldCorrection = correction;
 		correction = newCorrection;
@@ -313,6 +320,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getComments() {
 		return comments;
 	}
@@ -322,6 +330,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setComments(String newComments) {
 		String oldComments = comments;
 		comments = newComments;
@@ -336,6 +345,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Tag getTag() {
 		if (eContainerFeatureID() != TrackerPackage.EVENT__TAG) return null;
 		return (Tag)eContainer();
@@ -366,6 +376,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTag(Tag newTag) {
 		if (newTag != eInternalContainer() || (eContainerFeatureID() != TrackerPackage.EVENT__TAG && newTag != null)) {
 			if (EcoreUtil.isAncestor(this, newTag))
@@ -387,6 +398,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public String getId() {
 		return getTag()!=null?getTag().getId():"";
 	}
@@ -396,6 +408,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	@SuppressWarnings("deprecation")
 	public String getDate() {
 		if(dateTime==null){
@@ -410,6 +423,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public String getDateKey() {
 		return getDate()+'|'+getId();
 	}
@@ -419,6 +433,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public String getPid() {
 		return pid;
 	}
@@ -428,6 +443,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPid(String newPid) {
 		String oldPid = pid;
 		pid = newPid;
@@ -445,6 +461,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public String getPublisherName() {
 		if(resolvedPublisherName!=null){
 			return resolvedPublisherName;
@@ -454,7 +471,8 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 			//Has a tag parent
 			if(eContainer().eContainer()!=null){
 				//Has an animal grandParent
-				if(eContainer().eContainer().eContainer()!=null){
+				if (eContainer().eContainer().eContainer() != null
+						&& eContainer().eContainer().eContainer() instanceof Premises) {
 					//Has an premises great-grandParent
 					Premises premises = (Premises)eContainer().eContainer().eContainer();
 					if(pid==null || pid.equals(premises.getUri())){
@@ -472,6 +490,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Event dateEvent(EventType type, String name) {
 		Event result = null;
 				if(!dateEvents().isEmpty() && type!=null){
@@ -492,6 +511,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Event> dateEvents() {
 		//Get all the days events
 		if(getTag()!=null && getDate()!=null){
@@ -519,6 +539,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public String values() {
 		int last = toString().indexOf('(', toString().indexOf('(')+1);
 		return last!=-1?
@@ -533,6 +554,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public String findPublisherName() {
 		String oldPublisherName = getPublisherName();
 		resolvedPublisherName=null;
