@@ -45,7 +45,8 @@ import org.slf4j.MarkerFactory;
  * @author jconlon
  * 
  */
-public class Configurator {
+public class Configurator implements
+		com.verticon.mqtt.test.utilities.IMqttConfigurator {
 
 	static String PLUGIN_ID = "com.verticon.tracker.irouter.mqtt.test.system";
 
@@ -62,6 +63,8 @@ public class Configurator {
 	 * slf4j Logger
 	 */
 	private final Logger logger = LoggerFactory.getLogger(Configurator.class);
+
+	private final String TOPIC = "Agriculture/Premises/+/Response";// "AgriculturePremises/+/+/EMF";
 
 	static final String PREMISES_URI_H89234X = "urn:pin:H89234X";
 
@@ -231,5 +234,15 @@ public class Configurator {
 		} catch (Exception e1) {
 			throw new IllegalStateException(e1);
 		}
+	}
+
+	@Override
+	public String getURL() {
+		return localProps.getProperty("connection.uri");
+	}
+
+	@Override
+	public String getTopic() {
+		return TOPIC;
 	}
 }

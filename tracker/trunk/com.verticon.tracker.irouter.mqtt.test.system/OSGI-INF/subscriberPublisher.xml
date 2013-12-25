@@ -2,8 +2,9 @@
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
    name="com.verticon.tracker.irouter.mqtt.test.system.subscriberPublisher">
    <implementation 
-    class="com.verticon.tracker.irouter.mqtt.test.system.MockSubscriberPublisher"/>
+    class="com.verticon.mqtt.test.utilities.SubscriberPublisher"/>
    <service>
-      <provide interface="com.verticon.tracker.irouter.mqtt.test.system.ISubscriberPublisher"/>
+      <provide interface="com.verticon.mqtt.test.utilities.ISubscriberPublisher"/>
    </service>
-</scr:component>
+   <reference bind="setMqttConfigurator" cardinality="1..1" interface="com.verticon.mqtt.test.utilities.IMqttConfigurator" name="IMqttConfigurator" policy="static" unbind="unsetMqttConfigurator"/>
+ </scr:component>

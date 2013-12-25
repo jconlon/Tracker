@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: iRouter MQTT System Test
 Bundle-SymbolicName: com.verticon.tracker.irouter.mqtt.test.system
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 2.0.0.qualifier
 Bundle-Vendor: VERTICON
 Service-Component: OSGI-INF/*.xml
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
@@ -10,7 +10,9 @@ Bundle-ActivationPolicy: lazy
 Require-Bundle: org.junit;bundle-version="3.8.2"
 Import-Package: com.google.common.base;version="11.0.1",
  com.google.common.collect;version="11.0.1",
+ com.verticon.mqtt.test.utilities,
  com.verticon.tracker.irouter.mqtt,
+ com.verticon.tracker.irouter.test.utilities,
  org.eclipse.core.runtime;version="3.4.0",
  org.eclipse.paho.client.mqttv3,
  org.eclipse.paho.client.mqttv3.persist,
