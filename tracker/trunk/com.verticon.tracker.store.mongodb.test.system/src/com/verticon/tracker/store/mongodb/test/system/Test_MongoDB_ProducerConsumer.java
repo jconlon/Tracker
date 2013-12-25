@@ -55,6 +55,8 @@ import com.verticon.tracker.ReplacedTag;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.WeighIn;
+import com.verticon.tracker.irouter.test.utilities.IConsumerListener;
+import com.verticon.tracker.irouter.test.utilities.IProducerConsumer;
 import com.verticon.tracker.store.ITrackerFind;
 import com.verticon.tracker.store.Query;
 import com.verticon.tracker.store.TrackerStoreUtils;
@@ -224,6 +226,7 @@ public class Test_MongoDB_ProducerConsumer extends TestCase implements
 	void setController(IProducerConsumer producerConsumer) {
 		logger.debug(bundleMarker, "DS injecting the producerConsumer");
 		Test_MongoDB_ProducerConsumer.producerConsumer = producerConsumer;
+		producerConsumer.setName(Configurator.PLUGIN_ID);
 		producerConsumer.setListener(this);
 	}
 
