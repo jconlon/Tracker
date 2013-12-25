@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: iRouter Test Utilities
+Bundle-SymbolicName: com.verticon.tracker.irouter.test.utilities
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: com.verticon.tracker.irouter.test.utilities
+Import-Package: org.osgi.service.wireadmin;version="1.0.1",
+ org.slf4j;version="1.7.2"
