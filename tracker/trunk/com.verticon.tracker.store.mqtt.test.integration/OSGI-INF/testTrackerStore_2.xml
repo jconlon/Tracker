@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="com.verticon.tracker.store.mqtt.test.trackerstoreauthorization.integration">
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="com.verticon.tracker.store.mqtt.test.trackerstoreauthorization.integration_2">
    <implementation 
-    class="com.verticon.tracker.store.mqtt.test.integration.Test_TrackerStore_1"/>
+    class="com.verticon.tracker.store.mqtt.test.integration.Test_TrackerStore_2"/>
     <reference bind="setTrackerStore" cardinality="1..1" interface="com.verticon.tracker.store.ITrackerStore" name="ITrackerStore" policy="static" target="(test=com.verticon.tracker.store.mqtt)" unbind="unsetTrackerStore"/>
     <reference bind="setSubscriber" cardinality="1..1" interface="com.verticon.mqtt.test.utilities.ISubscriberPublisher" name="ISubscriber" policy="static" unbind="unsetSubscriber"/>
     

@@ -50,16 +50,14 @@ import com.mongodb.MongoClient;
  */
 public class Test_SetUp extends TestCase {
 
-	static final String DOC_PREMISES = "example.premises";
-
 	private MongoClient mongoClient = null;
 	private DB database = null;
 
 	/**
 	 * slf4j Logger
 	 */
+	@SuppressWarnings("unused")
 	private final Logger logger = LoggerFactory.getLogger(Test_SetUp.class);
-
 
 	/**
 	 * 
@@ -92,10 +90,6 @@ public class Test_SetUp extends TestCase {
 		mongoClient = null;
 	}
 
-
-
-	
-
 	@Test
 	public void testRemoveDocsFromCollections() throws InterruptedException {
 		TimeUnit.SECONDS.sleep(1);
@@ -116,7 +110,5 @@ public class Test_SetUp extends TestCase {
 				"uri", "12345");
 		coll.insert(dbo);
 	}
-
-
 
 }

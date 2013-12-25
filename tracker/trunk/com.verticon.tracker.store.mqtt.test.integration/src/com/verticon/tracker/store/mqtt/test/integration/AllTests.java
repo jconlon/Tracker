@@ -37,6 +37,7 @@ public class AllTests extends TestSuite {
 		TestSuite suite = new AllTests("TrackerStore MQTT System Tests");
 		suite.addTestSuite(Test_SetUp.class);
 		suite.addTestSuite(Test_TrackerStore_1.class);
+		suite.addTestSuite(Test_TrackerStore_2.class);
 		return suite;
 	}
 

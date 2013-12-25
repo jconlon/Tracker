@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: MQTT Integration Test
 Bundle-SymbolicName: com.verticon.tracker.store.mqtt.test.integration
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 2.0.0.qualifier
 Bundle-Vendor: VERTICON
 Service-Component: OSGI-INF/*.xml
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
@@ -13,6 +13,7 @@ Import-Package: com.google.common.base;version="11.0.1",
  com.mongodb;version="2.11.1.RELEASE",
  com.mongodb.util;version="2.11.1.RELEASE",
  com.verticon.location;version="1.0.0",
+ com.verticon.mqtt.test.utilities,
  com.verticon.osgi.useradmin.authenticator,
  com.verticon.tracker;version="1.0.0",
  com.verticon.tracker.store;version="1.0.0",

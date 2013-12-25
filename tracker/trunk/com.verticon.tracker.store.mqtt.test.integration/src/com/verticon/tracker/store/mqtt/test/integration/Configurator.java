@@ -41,6 +41,7 @@ import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
 import com.google.common.base.Strings;
+import com.verticon.mqtt.test.utilities.IMqttConfigurator;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerPackage;
 
@@ -58,7 +59,7 @@ import com.verticon.tracker.TrackerPackage;
  * @author jconlon
  * 
  */
-public class Configurator {
+public class Configurator implements IMqttConfigurator {
 
 	private static final String BACKEND_MQTT_CLIENTID = "verticon.com";
 	private static final String FRONTEND_WIRING_GROUP = "test";
@@ -79,6 +80,8 @@ public class Configurator {
 	 * slf4j Logger
 	 */
 	private final Logger logger = LoggerFactory.getLogger(Configurator.class);
+
+	private final String TOPIC = "Agriculture/Premises/#";
 
 	static final String PREMISES_URI_H89234X = "urn:pin:H89234X";
 
@@ -280,8 +283,7 @@ public class Configurator {
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error(bundleMarker, "Failed to delete configurations", e);
 		}
 	}
 
@@ -349,5 +351,15 @@ public class Configurator {
 		} catch (Exception e1) {
 			throw new IllegalStateException(e1);
 		}
+	}
+
+	@Override
+	public String getURL() {
+		return localProps.getProperty("connection.uri");
+	}
+
+	@Override
+	public String getTopic() {
+		return TOPIC;
 	}
 }
