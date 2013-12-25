@@ -4,6 +4,9 @@
    <implementation 
     class="com.verticon.tracker.store.mqtt.test.system.Configurator"/>
    <reference bind="setConfigurationAdmin" cardinality="1..1" interface="org.osgi.service.cm.ConfigurationAdmin" name="ConfigurationAdmin" policy="static" unbind="unsetConfigurationAdmin"/>
+   <service>
+      <provide interface="com.verticon.mqtt.test.utilities.IMqttConfigurator"/>
+   </service>
    
    
 </scr:component>
