@@ -3,6 +3,6 @@
    <implementation 
     class="com.verticon.tracker.store.mqtt.test.system.Test_TrackerStore_1"/>
     <reference bind="setTrackerStore" cardinality="1..1" interface="com.verticon.tracker.store.ITrackerStore" name="ITrackerStore" policy="static"/>
-    <reference bind="setSubscriber" cardinality="1..1" interface="com.verticon.tracker.store.mqtt.test.system.ISubscriber" name="ISubscriber" policy="static" unbind="unsetSubscriber"/>
+    <reference bind="setSubscriber" cardinality="1..1" interface="com.verticon.mqtt.test.utilities.ISubscriberPublisher" name="ISubscriberPublisher" policy="static" unbind="unsetSubscriber"/>
     
 </scr:component>
