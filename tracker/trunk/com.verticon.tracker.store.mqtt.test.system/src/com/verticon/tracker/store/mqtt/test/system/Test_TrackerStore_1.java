@@ -25,8 +25,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 import java.util.concurrent.TimeUnit;
@@ -38,22 +40,29 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.MqttPersistenceException;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.common.collect.Iterables;
+import com.verticon.mqtt.test.utilities.ISubscriberListener;
+import com.verticon.mqtt.test.utilities.ISubscriberPublisher;
 import com.verticon.osgi.metatype.OCD;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Event;
 import com.verticon.tracker.GenericEvent;
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.Tag;
+import com.verticon.tracker.TrackerFactory;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.store.ITrackerStore;
 import com.verticon.tracker.store.IUpdateStats;
 import com.verticon.tracker.store.TrackerStoreUtils;
+import com.verticon.tracker.store.UpdateStats;
 
 /**
  * 
@@ -79,9 +88,9 @@ public class Test_TrackerStore_1 extends TestCase implements
 		ISubscriberListener {
 
 	static final String DOC_PREMISES = "example.premises";
-	private static final String TAG_ID_2 = "abcd";
+	// private static final String TAG_ID_2 = "abcd";
 	static final String TAG_ID_1 = "1234567890";
-
+	private static final Map<String, MqttMessage> messages = new ConcurrentHashMap<String, MqttMessage>();
 	/**
 	 * slf4j Logger
 	 */
@@ -100,19 +109,15 @@ public class Test_TrackerStore_1 extends TestCase implements
 	 * latch lets subsequent calls through.
 	 */
 	private static final CountDownLatch startUpGate = new CountDownLatch(1);
-
-	// private static final CountDownLatch messageReceivedGate = new
-	// CountDownLatch(
-	// 1);
-
 	private static final CyclicBarrier messageReceivedBarrier = new CyclicBarrier(
 			2);
+
 
 	/**
 	 * Injected services
 	 */
 	static ITrackerStore trackerStore;
-	static ISubscriber subscriber;
+	static ISubscriberPublisher subscriber;
 
 	/**
 	 * Injected by ds
@@ -132,12 +137,12 @@ public class Test_TrackerStore_1 extends TestCase implements
 		Test_TrackerStore_1.trackerStore = null;
 	}
 
-	void setSubscriber(ISubscriber subscriber) {
+	void setSubscriber(ISubscriberPublisher subscriber) {
 		Test_TrackerStore_1.subscriber = subscriber;
 		subscriber.setListener(this);
 	}
 
-	void unsetSubscriber(ISubscriber subscriber) {
+	void unsetSubscriber(ISubscriberPublisher subscriber) {
 		logger.debug(bundleMarker, "DS removing the subscriber");
 		subscriber.setListener(null);
 		Test_TrackerStore_1.subscriber = null;
@@ -210,9 +215,8 @@ public class Test_TrackerStore_1 extends TestCase implements
 			fail("Timed out wait for message.");
 		}
 
-		assertThat("Must have one message", subscriber.messages().size(), is(1));
-		Entry<String, MqttMessage> messageEntry = Iterables.get(subscriber
-				.messages().entrySet(), 0);
+		assertThat("Must have one message", messages.size(), is(1));
+		Entry<String, MqttMessage> messageEntry = Iterables.get(messages.entrySet(), 0);
 		String topicName = messageEntry.getKey();
 		MqttMessage message = messageEntry.getValue();
 		byte[] payload = message.getPayload();
@@ -331,8 +335,75 @@ public class Test_TrackerStore_1 extends TestCase implements
 	}
 
 	@Override
-	public void messageArrived() {
+	public void messageArrived(String topic, MqttMessage message) {
 		logger.debug(bundleMarker, "Message arrived in testcase");
+		if (topic.endsWith("Query")) {
+			logger.info(bundleMarker, "Query arrived on topic {}", topic);
+			handleQuery(topic, message);
+		} else if (topic.endsWith("Response")) {
+			logger.info(bundleMarker, "Ignoring topic {}", topic);
+		} else if (topic.endsWith("Events/EMF")) {
+			try {
+				handleEventRecording(topic);
+			
+			} catch (Exception e) {
+				logger.error(bundleMarker, "Could not handle event",e);
+			}
+		} else if (topic.endsWith("Register/EMF")) {
+			try {
+				handleRegistration(topic, message);
+			} catch (Exception e) {
+				logger.error(bundleMarker, "Could not handle registration",e);
+			}
+		} else {
+			logger.warn(bundleMarker, "Unknown topic {}", topic);
+			return;
+		}
+
+	}
+
+	private void handleQuery(String topic, MqttMessage message) {
+		String query = new String(message.getPayload());
+
+		byte[] payload;
+		try {
+			if (query.startsWith("{trackerStore")) {
+				payload = handleTrackerStoreQuery(topic, query);
+			} else if (query.startsWith("{aggregate")) {
+				logger.debug(bundleMarker, "Handling update query: " + query);
+				String response = "{'result' : [{"
+						+ "'update' :  {$date : '2010-10-08T22:36:39.046Z'}"// ISODate('2012-10-08T22:36:39.046Z')"//
+																			// '2012-10-08T22:36:39.046Z'"//
+						+ "}],'ok' : 1}";
+				payload = response.getBytes();
+			} else {
+				logger.error(bundleMarker, "Unknown query {}", query);
+				return;
+			}
+			String responseTopic = topic.replace("Query", "Response");
+			subscriber.publish(responseTopic, payload);
+		} catch (Exception e) {
+			logger.error(bundleMarker, "Failed to handle query " + query, e);
+
+		}
+
+	}
+
+	private byte[] handleTrackerStoreQuery(String topic, String query)
+			throws IOException {
+		logger.debug(bundleMarker, "Handling trackerStore query: " + query);
+		Animal animal = createAnimal();
+		return TrackerStoreUtils.toPayload(animal);
+
+	}
+
+	private void handleRegistration(String topic, MqttMessage message)
+			throws MqttPersistenceException, MqttException {
+		logger.info(bundleMarker, "Registration arrived on topic {}", topic);
+		String responseTopic = topic.replace("Register/EMF", "Response");
+		subscriber.publish(responseTopic, "OK".getBytes());
+
+		messages.put(topic, message);
 		try {
 			messageReceivedBarrier.await();
 		} catch (Exception e) {
@@ -341,11 +412,34 @@ public class Test_TrackerStore_1 extends TestCase implements
 
 	}
 
+	private void handleEventRecording(String topic)
+			throws MqttPersistenceException, MqttException {
+		String responseTopic = topic.replace("Events/EMF", "Response");
+		UpdateStats us = new UpdateStats();
+		us.animalsAdded(3);
+		byte[] payload = us.toString().getBytes();
+
+		subscriber.publish(responseTopic, payload);
+	}
+
 	private final List<EObject> toEObject(byte[] payload) throws IOException {
 		ByteArrayInputStream ba = new ByteArrayInputStream(payload);
 		Resource resource = new BinaryResourceImpl();
 		resource.load(ba, null);
 		return resource.getContents();
 	}
+
+	private Animal createAnimal() {
+		Tag tag = TrackerFactory.eINSTANCE.createTag();
+		tag.getEvents().add(TrackerFactory.eINSTANCE.createAnimalMissing());
+
+		tag.getEvents().add(TrackerFactory.eINSTANCE.createPosition());
+		Animal animal = TrackerFactory.eINSTANCE.createSwine();
+		animal.getTags().add(tag);
+		animal.activeTag().setId(Test_TrackerStore_1.TAG_ID_1);
+		return animal;
+	}
+
+
 
 }
