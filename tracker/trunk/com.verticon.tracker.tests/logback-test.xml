@@ -225,7 +225,7 @@
   </logger>
   
   <logger name="com.verticon.tracker.irouter.wireadmin">
-    <level value="DEBUG"/>
+    <level value="WARN"/>
   </logger>
   
   <logger name="com.verticon.tracker.irouter.gateway">
@@ -318,6 +318,10 @@
   
   <logger name="com.verticon.birt.report.loader">
    <level value="DEBUG"/>
+  </logger>
+  
+  <logger name="org.usaha.ecvi.store">
+  <level value="DEBUG"/>
   </logger>
   
   <logger name="aggregated" level="INFO">
