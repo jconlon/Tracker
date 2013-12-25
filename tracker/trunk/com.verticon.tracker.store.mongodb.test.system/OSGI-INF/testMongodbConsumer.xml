@@ -3,7 +3,7 @@
    <implementation 
     class="com.verticon.tracker.store.mongodb.test.system.Test_MongoDB_ProducerConsumer"/>
    <reference bind="setMonitorable" cardinality="1..1" interface="org.osgi.service.monitor.Monitorable" name="Monitorable" policy="static" target="(tracker.wiring.group.name=test)" unbind="unsetMonitorable"/>
-   <reference bind="setController" cardinality="1..1" interface="com.verticon.tracker.store.mongodb.test.system.IProducerConsumer" name="IController" policy="static" unbind="unsetController"/>
+   <reference bind="setController" cardinality="1..1" interface="com.verticon.tracker.irouter.test.utilities.IProducerConsumer" name="IController" policy="static" unbind="unsetController"/>
    <reference bind="setTrackerFind" cardinality="1..1" interface="com.verticon.tracker.store.ITrackerFind" name="ITrackerFind" policy="static" unbind="unsetTrackerFind"/>
    
 </scr:component>
