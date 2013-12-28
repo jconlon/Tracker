@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ECVIStore User Interface
+Bundle-SymbolicName: org.usaha.ecvi.store.ui;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: Verticon, Inc.
+Bundle-Activator: org.usaha.ecvi.store.ui.Activator
+Require-Bundle: org.eclipse.core.runtime;bundle-version="3.9.0",
+ org.eclipse.ui;bundle-version="3.105.0",
+ org.eclipse.core.expressions;bundle-version="3.4.500"
+Import-Package: com.google.common.base;version="11.0.2",
+ com.google.common.collect;version="11.0.2",
+ org.slf4j;version="1.7.2",
+ org.usaha.ecvi,
+ org.usaha.ecvi.store

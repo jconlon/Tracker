@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.core.expressions.propertyTesters">
+      <propertyTester
+            class="org.usaha.ecvi.store.ui.CanStoreEcviPropertyTester"
+            id="org.usaha.ecvi.store.ui.propertyTester.canStoreEcvi"
+            namespace="org.usaha.ecvi.store.ui"
+            properties="canStoreEcvi"
+            type="java.lang.Object">
+      </propertyTester>
+     
+   </extension>
+
+   <extension
+         point="org.eclipse.ui.commands"> 
+      <command
+            name="Record Ecvi to EcviStore"
+            categoryId="com.verticon.tracker.editor.commands.Tracker.category"
+            id="org.usaha.ecvi.store.ui.commands.recordEcviCommand">
+      </command>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            commandId="org.usaha.ecvi.store.ui.commands.recordEcviCommand"
+            class="org.usaha.ecvi.store.ui.handlers.StoreEcvisHandler">
+      </handler>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.menus">
+     
+      <menuContribution
+             allPopups="false"
+            locationURI="popup:org.usaha.ecvi.core.model.editor.menus.popupany">
+           
+           <!-- Record Ecvi -->
+           <command
+                  commandId="org.usaha.ecvi.store.ui.commands.recordEcviCommand"
+                   style="push">
+                 
+               <visibleWhen>
+                    <and>
+                         <with variable="selection">
+		                  <iterate
+                          ifEmpty="false"
+                          operator="or">
+      						 <instanceof value="org.usaha.ecvi.Ecvi"/>
+    					  </iterate>
+    					 </with>
+    					 
+    					 <!-- 
+    			        	Restrict to show only if the there is a IEcviStore service
+              			-->
+    					 <test forcePluginActivation="true"
+                   			 property="org.usaha.ecvi.store.ui.canStoreEcvi">
+              			</test>
+              		
+    			     </and>
+               </visibleWhen>
+           </command> 
+       
+      </menuContribution>
+   </extension>
+</plugin>

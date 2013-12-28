@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.usaha.ecvi.store"
+      label="%featureName"
+      version="1.0.0.qualifier"
+      provider-name="%providerName"
+      plugin="org.usaha.ecvi.store">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      %license
+   </license>
+
+   <url>
+      <update label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
+      <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
+   </url>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime" version="3.9.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui" version="3.105.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.expressions" version="3.4.500" match="greaterOrEqual"/>
+      <import plugin="com.google.guava"/>
+      <import plugin="slf4j.api"/>
+      <import plugin="org.usaha.ecvi.core.model"/>
+   </requires>
+
+   <plugin
+         id="org.usaha.ecvi.store.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.usaha.ecvi.store"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
