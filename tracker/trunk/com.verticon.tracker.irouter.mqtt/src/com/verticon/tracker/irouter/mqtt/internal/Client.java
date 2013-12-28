@@ -168,36 +168,6 @@ public class Client implements MqttCallback {
 		logger.debug("Subscribed to topics: {}", topicFilters.toString());
 	}
 
-	// client.subscribe(topicFilter, 2, context, new IMqttActionListener() {
-	//
-	// }
-	/**
-	 * @deprecated
-	 * @param topicFilter
-	 * @param context
-	 * @throws MqttException
-	 */
-	@Deprecated
-	private void subscribe(String topicFilter, Object context)
-			throws MqttException {
-		client.subscribe(topicFilter, 2, context, new IMqttActionListener() {
-
-			@Override
-			public void onSuccess(IMqttToken asyncActionToken) {
-				logger.debug(bundleMarker, "Subscribed to topics: {}",
-						Arrays.toString(asyncActionToken.getTopics()));
-			}
-
-			@Override
-			public void onFailure(IMqttToken asyncActionToken,
-					Throwable exception) {
-				logger.error(bundleMarker, "Failed to subscribe to topics: {}",
-						Arrays.toString(asyncActionToken.getTopics()));
-			}
-
-		});
-	}
-
 	/**
 	 * Constructs an instance of the sample client wrapper
 	 * 
