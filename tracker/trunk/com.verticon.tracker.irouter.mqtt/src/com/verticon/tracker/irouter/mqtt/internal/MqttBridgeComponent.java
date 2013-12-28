@@ -8,8 +8,6 @@ import org.osgi.service.monitor.StatusVariable;
 import org.osgi.service.wireadmin.Consumer;
 import org.osgi.service.wireadmin.Producer;
 import org.osgi.service.wireadmin.Wire;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
@@ -20,16 +18,13 @@ public class MqttBridgeComponent implements Monitorable, Consumer, Producer {
 	/**
 	 * slf4j Marker to keep track of bundle
 	 */
-	static final Marker bundleMarker = MarkerFactory.getMarker(PLUGIN_ID);
+	static final Marker bundleMarker = MarkerFactory
+			.getMarker(PLUGIN_ID);
 
 	static {
 		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
 	}
 
-	/**
-	 * slf4j Logger
-	 */
-	private final Logger logger = LoggerFactory.getLogger(MqttBridgeComponent.class);
 	private final Monitor monitor = new Monitor();
 	private final Client client = new Client(monitor);
 	private final ConsumerToPublisher consumerToPublisher = new ConsumerToPublisher(

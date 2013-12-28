@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Mongodb
+Bundle-Name: iRouter MQTT
 Bundle-SymbolicName: com.verticon.tracker.irouter.mqtt
 Bundle-Version: 1.1.0.qualifier
 Bundle-Vendor: Verticon, Inc.
