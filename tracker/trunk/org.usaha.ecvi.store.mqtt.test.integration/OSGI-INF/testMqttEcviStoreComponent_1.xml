@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="org.usaha.ecvi.store.mqtt.test.integration">
+   <implementation 
+    class="org.usaha.ecvi.store.mqtt.test.integration.Test_MqttEcviStoreComponent_1"/>
+    <reference bind="setEcviStore" cardinality="1..1" interface="org.usaha.ecvi.store.IEcviStore" name="IEcviStore" policy="static" unbind="unsetEcviStore"/>
+    <reference bind="setMongoClientProvider" cardinality="1..1" interface="com.verticon.mongo.IMongoClientProvider" name="IMongoClientProvider" policy="static" unbind="unsetMongoClientProvider"/>
+    
+</scr:component>

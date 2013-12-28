@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
+    name="org.usaha.ecvi.store.mqtt.test.integration.configurator">
+   <implementation 
+    class="org.usaha.ecvi.store.mqtt.test.integration.Configurator"/>
+   <reference bind="setConfigurationAdmin" cardinality="1..1" interface="org.osgi.service.cm.ConfigurationAdmin" name="ConfigurationAdmin" policy="static" unbind="unsetConfigurationAdmin"/>
+   <service>
+      <provide interface="com.verticon.mqtt.test.utilities.IMqttConfigurator"/>
+   </service>
+   
+   
+</scr:component>
