@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Ecvi Store
+Bundle-SymbolicName: org.usaha.ecvi.store
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Verticon, Inc.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -1,0 +1,36 @@
+h1=. Ecvi Store
+
+org.usaha.ecvi.store Version 1.0.0
+
+{toc:style=disc|minLevel=2|maxLevel=3}
+
+
+h2. Introduction
+
+Ecvi Store is a set of data access models and utilities that support implementations of the EcviStore specification for document storage services.
+
+**Note: the USAHA ecvi is a developing standard and is undergoing continual change and is not production ready at this time.**
+
+See "USAHA data standards committee":https://github.com/tracefirst/usaha_committee for details.
+
+
+
+h2. Powered by Eclipse Technology
+
+Verticon's Mongo Store offering is powered by Eclipse technology and includes Eclipse plug-ins that
+can be installed and used with other Eclipse-based offerings.
+	
+h2. License
+
+Verticon, Inc. makes available all content in this plug-in (&quot;Content&quot;).  Unless otherwise 
+indicated below, the Content is provided to you under the terms and conditions of the
+Eclipse Public License version 1.0 (&quot;EPL 1&quot;).  A copy of the EPL 1 is available 
+at <a href="http://www.eclipse.org/legal/epl-v10.html">http://www.eclipse.org/legal/epl-v10.html</a>.
+For purposes of the EPL, &quot;Program&quot; will mean the Content.
+
+If you did not receive this Content directly from the Verticon,Inc., the Content is 
+being redistributed by another party (&quot;Redistributor&quot;) and different terms and conditions may
+apply to your use of any object code in the Content.  Check the Redistributor's license that was 
+provided with the Content.  If no such license exists, contact the Redistributor.  Unless otherwise
+indicated below, the terms and conditions of the EPL 1 still apply to any source code in the Content
+and such source code may be obtained at <a href="http://tracker.verticon.com/index.html">http://tracker.verticon.com/index.html</a>.</p>
