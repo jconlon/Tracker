@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" configuration-policy="require" enabled="true" immediate="true" name="org.usaha.ecvi.store.mongodb.irouter">
+   <implementation class="org.usaha.ecvi.store.mongodb.internal.irouter.EcviMongoIRouterComponent"/>
+   <service>
+      <provide interface="org.osgi.service.wireadmin.Consumer"/>
+      <provide interface="org.osgi.service.monitor.Monitorable"/>
+      <provide interface="org.osgi.service.wireadmin.Producer"/>
+   </service>  
+  <reference bind="setEcviStore" cardinality="1..1" interface="org.usaha.ecvi.store.IEcviStore" name="IEcviStore" policy="static" target="(component.name=org.usaha.ecvi.store.mongodb)" unbind="unsetEcviStore"/>
+  <reference bind="setMonitorListener" cardinality="1..1" interface="org.osgi.service.monitor.MonitorListener" name="MonitorListener" policy="static" unbind="unsetMonitorListener"/>
+   </scr:component>

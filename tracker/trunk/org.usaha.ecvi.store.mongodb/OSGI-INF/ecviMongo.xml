@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" enabled="true" immediate="true" name="org.usaha.ecvi.store.mongodb">
+   <implementation class="org.usaha.ecvi.store.mongodb.internal.EcviMongoComponent"/>  
+  <service>
+      <provide interface="org.usaha.ecvi.store.IEcviStore"/>
+   </service>
+  <reference bind="setFunctionProvider" cardinality="1..1" interface="com.verticon.mongo.emf.transform.IFunctionProvider" name="IFunctionProvider" policy="static"/>
+  <reference bind="setMongoClientProvider" cardinality="1..n" interface="com.verticon.mongo.IMongoClientProvider" name="IMongoClientProvider" policy="static" unbind="unsetMongoClientProvider"/>
+   </scr:component>
