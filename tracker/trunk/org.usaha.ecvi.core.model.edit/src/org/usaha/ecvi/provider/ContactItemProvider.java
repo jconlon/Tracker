@@ -20,18 +20,18 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.usaha.ecvi.Contact;
 import org.usaha.ecvi.Ecvi;
 import org.usaha.ecvi.EcviFactory;
 import org.usaha.ecvi.EcviPackage;
-import org.usaha.ecvi.Premises;
 
 /**
- * This is the item provider adapter for a {@link org.usaha.ecvi.Premises} object.
+ * This is the item provider adapter for a {@link org.usaha.ecvi.Contact} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class PremisesItemProvider
+public class ContactItemProvider
 	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
@@ -45,7 +45,7 @@ public class PremisesItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PremisesItemProvider(AdapterFactory adapterFactory) {
+	public ContactItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -62,13 +62,9 @@ public class PremisesItemProvider
 
 			addPremIdPropertyDescriptor(object);
 			addPremNamePropertyDescriptor(object);
-			addAddressPropertyDescriptor(object);
-			addPersonPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
-
-	
 
 	/**
 	 * This adds a property descriptor for the Prem Id feature.
@@ -81,9 +77,9 @@ public class PremisesItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Premises_premId_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Premises_premId_feature", "_UI_Premises_type"),
-				 EcviPackage.Literals.PREMISES__PREM_ID,
+				 getString("_UI_Contact_premId_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Contact_premId_feature", "_UI_Contact_type"),
+				 EcviPackage.Literals.CONTACT__PREM_ID,
 				 true,
 				 false,
 				 false,
@@ -103,57 +99,13 @@ public class PremisesItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Premises_premName_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Premises_premName_feature", "_UI_Premises_type"),
-				 EcviPackage.Literals.PREMISES__PREM_NAME,
+				 getString("_UI_Contact_premName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Contact_premName_feature", "_UI_Contact_type"),
+				 EcviPackage.Literals.CONTACT__PREM_NAME,
 				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Address feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAddressPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Premises_address_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Premises_address_feature", "_UI_Premises_type"),
-				 EcviPackage.Literals.PREMISES__ADDRESS,
-				 true,
-				 false,
-				 false,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Person feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addPersonPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Premises_person_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Premises_person_feature", "_UI_Premises_type"),
-				 EcviPackage.Literals.PREMISES__PERSON,
-				 true,
-				 false,
-				 false,
-				 null,
 				 null,
 				 null));
 	}
@@ -170,9 +122,8 @@ public class PremisesItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(EcviPackage.Literals.PREMISES__ADDRESS);
-			childrenFeatures.add(EcviPackage.Literals.PREMISES__PROGRAM_STATUS);
-			childrenFeatures.add(EcviPackage.Literals.PREMISES__PERSON);
+			childrenFeatures.add(EcviPackage.Literals.CONTACT__ADDRESS);
+			childrenFeatures.add(EcviPackage.Literals.CONTACT__PERSON);
 		}
 		return childrenFeatures;
 	}
@@ -191,32 +142,6 @@ public class PremisesItemProvider
 	}
 
 	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc
-	 * --> Give different label based on if it is a PremisesSource or a
-	 * PremisesDestination <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	@Override
-	public String getText(Object object) {
-		String label = ((Premises)object).getPremName();
-		Premises premises = (Premises) object;
-		Object container = premises.eContainer();
-		String containerName = getString("_UI_Premises_type");
-		if (container != null && container instanceof Ecvi) {
-			Ecvi ecvi = (Ecvi) container;
-			if (premises.equals(ecvi.getDestination())) {
-				containerName = "Destination";
-			} else if (premises.equals(ecvi.getOrigin())) {
-				containerName = "Origin";
-			}
-
-		}
-		return label == null || label.length() == 0 ? containerName
- : label;
-	}
-	
-	/**
 	 * Override to give different images based on if it is a PremisesSource or a
 	 * PremisesDestination
 	 * 
@@ -227,23 +152,54 @@ public class PremisesItemProvider
 	 */
 	@Override
 	public Object getImage(Object object) {
-		Premises premises = (Premises) object;
-		Object container = premises.eContainer();
+		Contact contact = (Contact) object;
+		Object container = contact.eContainer();
 		if (container != null && container instanceof Ecvi) {
-			Ecvi ecvi = (Ecvi)container;
-			if(premises.equals(ecvi.getDestination())) {
-				return overlayImage(object,
-					getResourceLocator().getImage("full/obj16/MovedIn.gif"));
-			}else 
-				if(premises.equals(ecvi.getOrigin())) {
-					return overlayImage(object,
-						getResourceLocator().getImage("full/obj16/MovedOut.gif"));
+			Ecvi ecvi = (Ecvi) container;
+			if (contact.equals(ecvi.getConsignee())) {
+				return overlayImage(
+						object,
+						getResourceLocator().getImage(
+								"full/obj16/Consignee.gif"));
+			} else if (contact.equals(ecvi.getConsignor())) {
+				return overlayImage(
+						object,
+						getResourceLocator().getImage(
+								"full/obj16/Consignor.gif"));
 			}
-		} 
-		
+		}
+
 		return overlayImage(object,
 				getResourceLocator().getImage("full/obj16/Premises.gif"));
 	}
+
+
+	/**
+	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * --> Give different label based on if it is a Consignee or a Consignor
+	 * <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	@Override
+	public String getText(Object object) {
+		String label = ((Contact)object).getPremName();
+		Contact contact = (Contact) object;
+		Object container = contact.eContainer();
+		String containerName = getString("_UI_Contact_type");
+		if (container != null && container instanceof Ecvi) {
+			Ecvi ecvi = (Ecvi) container;
+			if (contact.equals(ecvi.getConsignee())) {
+				containerName = "Consignee";
+			} else if (contact.equals(ecvi.getConsignor())) {
+				containerName = "Consignor";
+			}
+
+		}
+		return label == null || label.length() == 0 ? containerName : label;
+
+	}
+
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -256,14 +212,13 @@ public class PremisesItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Premises.class)) {
-			case EcviPackage.PREMISES__PREM_ID:
-			case EcviPackage.PREMISES__PREM_NAME:
+		switch (notification.getFeatureID(Contact.class)) {
+			case EcviPackage.CONTACT__PREM_ID:
+			case EcviPackage.CONTACT__PREM_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case EcviPackage.PREMISES__ADDRESS:
-			case EcviPackage.PREMISES__PROGRAM_STATUS:
-			case EcviPackage.PREMISES__PERSON:
+			case EcviPackage.CONTACT__ADDRESS:
+			case EcviPackage.CONTACT__PERSON:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -283,17 +238,12 @@ public class PremisesItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(EcviPackage.Literals.PREMISES__ADDRESS,
+				(EcviPackage.Literals.CONTACT__ADDRESS,
 				 EcviFactory.eINSTANCE.createAddress()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(EcviPackage.Literals.PREMISES__PROGRAM_STATUS,
-				 EcviFactory.eINSTANCE.createProgramStatus()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(EcviPackage.Literals.PREMISES__PERSON,
+				(EcviPackage.Literals.CONTACT__PERSON,
 				 EcviFactory.eINSTANCE.createPerson()));
 	}
 
