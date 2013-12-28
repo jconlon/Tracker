@@ -201,7 +201,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Address/state"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Address/zIP"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Address/country"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Address/geoPoint"/>
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Address/geoPoint"/>
     </genClasses>
     <genClasses ecoreClass="ecvi.ecore#//Animal">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Animal/animalTag"/>
@@ -235,7 +235,6 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ecvi.ecore#//DocumentRoot/xMLNSPrefixMap"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ecvi.ecore#//DocumentRoot/xSISchemaLocation"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//DocumentRoot/eCVI"/>
-      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference ecvi.ecore#//DocumentRoot/programStatusType"/>
     </genClasses>
     <genClasses ecoreClass="ecvi.ecore#//Ecvi">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Ecvi/veterinarian"/>
@@ -245,10 +244,11 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Ecvi/consignor"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Ecvi/consignee"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Ecvi/accessions"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ecvi.ecore#//Ecvi/group"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ecvi.ecore#//Ecvi/animal"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute ecvi.ecore#//Ecvi/group1"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference ecvi.ecore#//Ecvi/groupLot"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Ecvi/group"/>
+      <genFeatures property="None" children="true" createChild="true" propertyDescription=""
+          ecoreFeature="ecore:EReference ecvi.ecore#//Ecvi/animal"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Ecvi/group1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Ecvi/groupLot"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Ecvi/attachment"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Ecvi/cviNumber"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Ecvi/entryPermitNumber"/>
@@ -283,7 +283,7 @@
     </genClasses>
     <genClasses ecoreClass="ecvi.ecore#//Person">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Person/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Person/phone"/>
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Person/phone"/>
     </genClasses>
     <genClasses ecoreClass="ecvi.ecore#//PhoneNum">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//PhoneNum/comment"/>
@@ -293,9 +293,9 @@
     <genClasses image="false" ecoreClass="ecvi.ecore#//Premises">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Premises/premId"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//Premises/premName"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Premises/address"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Premises/programStatusType"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Premises/person"/>
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Premises/address"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Premises/programStatus"/>
+      <genFeatures children="true" createChild="true" ecoreFeature="ecore:EReference ecvi.ecore#//Premises/person"/>
     </genClasses>
     <genClasses ecoreClass="ecvi.ecore#//ProgramStatus">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecvi.ecore#//ProgramStatus/name"/>
