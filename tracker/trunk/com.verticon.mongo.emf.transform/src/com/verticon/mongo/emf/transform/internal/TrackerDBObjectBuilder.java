@@ -11,12 +11,18 @@
 
 package com.verticon.mongo.emf.transform.internal;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.FeatureMap;
 
 import com.google.common.collect.ImmutableList;
 import com.mongodb.BasicDBObject;
@@ -43,17 +49,57 @@ class TrackerDBObjectBuilder extends DBObjectBuilder {
 	static final String CLASSURI_OPTION = "http://www.osgi.org/xmlns/metatype/v1.1.0#//Option";
 	static final String CLASSURI_ICON = "http://www.osgi.org/xmlns/metatype/v1.1.0#//Icon";
 
+	// USAHA ECVI
+	private static final String CLASSURI_ECVI = "http://www.usaha.org/xmlns/ecvi#//Ecvi";
+	// private static final String CLASSURI_ANIMAL =
+	// "http://www.usaha.org/xmlns/ecvi#//Animal";
+	// private static final String CLASSURI_ANIMAL_TAG =
+	// "http://www.usaha.org/xmlns/ecvi#//AnimalTag";
+	// private static final String CLASSURI_TEST =
+	// "http://www.usaha.org/xmlns/ecvi#//Test";
+	// private static final String CLASSURI_GROUPLOT =
+	// "http://www.usaha.org/xmlns/ecvi#//GroupLot";
+	// private static final String CLASSURI_VETERINARIAN =
+	// "http://www.usaha.org/xmlns/ecvi#//Veterinarian";
+	// private static final String CLASSURI_MOVEMENTPURPOSE =
+	// "http://www.usaha.org/xmlns/ecvi#//MovementPurposes";
+	// private static final String CLASSURI_ECVI_PREMISES =
+	// "http://www.usaha.org/xmlns/ecvi#//Premises";
+	// private static final String CLASSURI_ECVI_ADDRESS =
+	// "http://www.usaha.org/xmlns/ecvi#//Address";
+	// private static final String CLASSURI_GEOPOINT =
+	// "http://www.usaha.org/xmlns/ecvi#//GeoPoint";
+	// private static final String CLASSURI_ASSENSIONS =
+	// "http://www.usaha.org/xmlns/ecvi#//Accessions";
+	// private static final String CLASSURI_ASSENSION =
+	// "http://www.usaha.org/xmlns/ecvi#//Accession";
+	// private static final String CLASSURI_LAB =
+	// "http://www.usaha.org/xmlns/ecvi#//Laboratory";
+	// private static final String CLASSURI_CONTACT =
+	// "http://www.usaha.org/xmlns/ecvi#//Contact";
+	// private static final String CLASSURI_PERSON =
+	// "http://www.usaha.org/xmlns/ecvi#//Person";
+	// private static final String CLASSURI_ATTACHMENT =
+	// "http://www.usaha.org/xmlns/ecvi#//Attachment";
 	/**
 	 * All the Mongo DBObject will have this stripped out of the class to just
 	 * show the class name
 	 */
 	static final String PREMISES_NAMESPACE = "http://www.verticon.com/tracker/0.4.2/premises#//";
+	private static final String ECVI_NAMESPACE = "http://www.usaha.org/xmlns/ecvi#//";
 
-	static final ImmutableList<String> IGNORED_URIS = ImmutableList.of(
-			CLASSURI_LOCATION,
-			CLASSURI_AREA,
-			CLASSURI_PREMISES_TAG, CLASSURI_STRING_TO_STRING_MAP, CLASSURI_AD,
-			CLASSURI_OPTION, CLASSURI_ICON);
+	private static final ImmutableList<String> IGNORED_URIS = ImmutableList.of(
+			CLASSURI_LOCATION, CLASSURI_AREA, CLASSURI_PREMISES_TAG,
+			CLASSURI_STRING_TO_STRING_MAP, CLASSURI_AD, CLASSURI_OPTION,
+			CLASSURI_ICON //
+			// ECVI
+			// CLASSURI_ECVI, CLASSURI_ANIMAL, CLASSURI_ANIMAL_TAG,
+			// CLASSURI_TEST, CLASSURI_GROUPLOT, CLASSURI_VETERINARIAN,
+			// CLASSURI_MOVEMENTPURPOSE, CLASSURI_ECVI_PREMISES,
+			// CLASSURI_ECVI_ADDRESS, CLASSURI_GEOPOINT, CLASSURI_ASSENSION,
+			// CLASSURI_ASSENSIONS, CLASSURI_LAB, CLASSURI_CONTACT,
+			// CLASSURI_PERSON, CLASSURI_ATTACHMENT
+			);
 
 	static final ImmutableList<String> ANIMAL_CLASS_NAMES = ImmutableList.of(
 			"BovineBeef", "BovineBison", "BovineDairy", "Caprine", "Ovine",
@@ -96,8 +142,10 @@ class TrackerDBObjectBuilder extends DBObjectBuilder {
 		// Many class names in the Premises namespace are redundant and
 		// should be ignored. Others should just be shortened.
 		// Shorten the eClassString attribute for those that are not ignored.
-		if (!IGNORED_URIS.contains(eClassString)) {
+		if (!IGNORED_URIS.contains(eClassString)
+				&& !eClassString.startsWith(ECVI_NAMESPACE)) {
 			eClassString = eClassString.replace(PREMISES_NAMESPACE, "");
+			// eClassString = eClassString.replace(ECVI_NAMESPACE, "");
 			dbObject.put(Constants.ECLASS_KEY, eClassString);
 		}
 
@@ -132,6 +180,22 @@ class TrackerDBObjectBuilder extends DBObjectBuilder {
 				// and dont create an iD attribute
 				Object value = eObject.eGet(attribute);
 				dbObject.put(Constants.ID_KEY, value);
+				continue;
+			}
+			if (CLASSURI_ECVI.equals(EcoreUtil.getURI(eClass).toString())
+					&& attribute.getName().equals("group")) {
+				// For Ecvi documents the featureMap group contains
+				// Animals
+				buildFlatFeatureMap(dbObject, attribute,
+						eObject.eGet(attribute), "animals");
+				continue;
+			}
+			if (CLASSURI_ECVI.equals(EcoreUtil.getURI(eClass).toString())
+					&& attribute.getName().equals("group1")) {
+				// For Ecvi documents the featureMap group contains
+				// Animals
+				buildFlatFeatureMap(dbObject, attribute,
+						eObject.eGet(attribute), "groupLots");
 				continue;
 			}
 			if (!attribute.isTransient()
@@ -241,5 +305,55 @@ class TrackerDBObjectBuilder extends DBObjectBuilder {
 			return eClass.getName().equals(className)
 					&& reference.getName().equals(referenceName);
 		}
+	}
+
+	/**
+	 * Serializes a feature map from the attribute value. Feature maps of
+	 * references are delegated to buildReferencedObject to build the referenced
+	 * object.
+	 * 
+	 * @param dbObject
+	 *            the MongoDB object being built
+	 * @param attribute
+	 *            the emf attribute being serialized
+	 * @param value
+	 *            the feature map
+	 * @param name
+	 *            to save the array
+	 */
+	private void buildFlatFeatureMap(DBObject dbObject, EAttribute attribute,
+			Object value, String arrayName) {
+		FeatureMap.Internal featureMap = (FeatureMap.Internal) value;
+		Iterator<FeatureMap.Entry> iterator = featureMap.basicIterator();
+		ArrayList<DBObject> dbFeatureMap = new ArrayList<DBObject>();
+
+		while (iterator.hasNext()) {
+			DBObject dbEntry = new BasicDBObject();
+			FeatureMap.Entry entry = iterator.next();
+			EStructuralFeature feature = entry.getEStructuralFeature();
+			// dbEntry.put("key", EcoreUtil.getURI(feature).toString());
+
+			if (feature instanceof EAttribute) {
+				EDataType eDataType = ((EAttribute) feature)
+						.getEAttributeType();
+
+				if (!Constants.isNativeType(eDataType)) {
+					dbEntry.put(
+							"value",
+							convertEMFValueToMongoDBValue(eDataType,
+									entry.getValue()));
+				} else {
+					dbEntry.put("value", entry.getValue());
+				}
+			} else {
+				dbFeatureMap.add(
+						buildReferencedObject((EReference) feature,
+								(EObject) entry.getValue()));
+				continue;
+			}
+			dbFeatureMap.add(dbEntry);
+		}
+
+		dbObject.put(arrayName, dbFeatureMap);
 	}
 }
