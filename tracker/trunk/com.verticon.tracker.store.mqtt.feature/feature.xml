@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.store.mqtt"
       label="%featureName"
-      version="1.1.0.qualifier"
+      version="2.0.0.qualifier"
       provider-name="%providerName"
       plugin="com.verticon.tracker.store.mqtt">
 
@@ -25,33 +25,22 @@
 
    <requires>
       <import plugin="com.google.guava"/>
-      <import plugin="com.verticon.osgi.monitor"/>
-      <import plugin="org.eclipse.osgi.services"/>
-      <import plugin="slf4j.api"/>
       <import plugin="org.mongodb.mongo-java-driver"/>
       <import plugin="com.verticon.osgi.metatype.core.model"/>
       <import plugin="com.verticon.tracker"/>
+      <import feature="com.verticon.tracker.irouter.mqtt" version="1.0.0.qualifier"/>
       <import plugin="org.eclipse.emf.common"/>
-      <import plugin="org.eclipse.emf.gwt.ecore"/>
-      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.eclipse.emf.ecore"/>
+      <import plugin="com.verticon.osgi.monitor"/>
+      <import plugin="org.eclipse.osgi.services"/>
+      <import plugin="slf4j.api"/>
+      <import feature="com.verticon.tracker.irouter.mqtt" version="1.0.0.qualifier"/>
+      <import feature="com.verticon.tracker.irouter.mqtt" version="1.0.0.qualifier"/>
+      <import plugin="org.eclipse.paho.client.mqttv3"/>
    </requires>
 
    <plugin
-         id="com.verticon.tracker.irouter.mqtt"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="com.verticon.tracker.store.mqtt"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipse.paho.client.mqttv3"
          download-size="0"
          install-size="0"
          version="0.0.0"

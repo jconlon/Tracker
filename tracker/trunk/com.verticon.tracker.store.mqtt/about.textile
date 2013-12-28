@@ -1,16 +1,17 @@
-h1=. MQTT TrackerStore and iRouter Bridge
+h1=. Tracker Store Mqtt
 
-com.verticon.tracker.store.mqtt Version 1.0.0
+com.verticon.tracker.store.mqtt Version 2.0.0
 
 {toc:style=disc|minLevel=2|maxLevel=3}
 
 
 h2. Introduction
 
-MQTT TrackerStore is a TrackerStore implementation that uses the Message Queue Telemetry Transport (MQTT) Protocol to access Tracker Cloud based TrackerStore document repositories. 
+Tracker Store Mqtt is a TrackerStore implementation that uses the Message Queue Telemetry Transport (MQTT) Protocol to access Tracker Cloud based TrackerStore document repositories. 
 
-The iRouter Bridge is a Message translator and bridge between MQTT and the Tracker iRouter framework. It is used by Tracker Cloud servers to map MQTT messages to the backend TrackerStore implementations.
+This feature includes an iRouter Bridge which is a Message translator and bridge between MQTT and the Tracker iRouter framework. It is used by Tracker Cloud servers to map MQTT messages to the backend TrackerStore implementations.
 
+For more details see: "Verticon iRouter":http://verticon.com/products/iRouter.html
 
 h2. iRouter Support
 
