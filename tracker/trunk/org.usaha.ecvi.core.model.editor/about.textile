@@ -1,14 +1,17 @@
-h1=. Electronic Certificate of Veterinarian Inspection
+h1=. Ecvi Document Editor
 
-org.usaha.ecvi Version 1.0.1
+org.usaha.ecvi Version 1.1.0
 
 {toc:style=disc|minLevel=2|maxLevel=3}
 
 
 h2. Introduction
 
-Implementation of the US Animal Health Association, USAHA, Electronic CVI interchange, eCVI schema as an Eclipse Feature component containing EMF Model, Edit and Editor plugins. **Note: the USAHA ecvi is a developing standard and is undergoing continual change and is not production ready at this time.**
+Implementation of the US Animal Health Association, USAHA, Electronic CVI interchange, eCVI schema as an Eclipse Feature component containing EMF Model, Edit and Editor plugins. 
 
+**Note: the USAHA ecvi is a developing standard and is undergoing continual change and is not production ready at this time.**
+
+See "USAHA data standards committee":https://github.com/tracefirst/usaha_committee for details.
 
 h2. Powered by Eclipse Technology
 
