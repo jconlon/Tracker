@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ECVI MongoDB System Test
+Bundle-SymbolicName: org.usaha.ecvi.store.mongodb.test.system
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.junit
+Service-Component: OSGI-INF/*.xml
+Import-Package: com.google.common.base;version="11.0.2",
+ com.google.common.collect;version="11.0.2",
+ com.mongodb;version="2.11.1.RELEASE",
+ com.verticon.mongo,
+ com.verticon.tracker.irouter.test.utilities,
+ org.eclipse.core.runtime;version="3.4.0",
+ org.eclipse.emf.common.util,
+ org.eclipse.emf.ecore.resource,
+ org.eclipse.emf.ecore.resource.impl,
+ org.osgi.framework;version="1.7.0",
+ org.osgi.service.cm;version="1.4.0",
+ org.osgi.service.monitor;version="1.0.0",
+ org.osgi.service.wireadmin;version="1.0.1",
+ org.slf4j;version="1.7.2",
+ org.usaha.ecvi,
+ org.usaha.ecvi.store
+Bundle-ActivationPolicy: lazy

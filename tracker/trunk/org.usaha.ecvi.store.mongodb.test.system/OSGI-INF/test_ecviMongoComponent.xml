@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="org.usaha.ecvi.store.mongodb.test.system.test.EcviMongoComponent">
+   <implementation 
+    class="org.usaha.ecvi.store.mongodb.test.system.Test_EcviStore"/>
+   <reference bind="setMongoClientProvider" cardinality="1..1" interface="com.verticon.mongo.IMongoClientProvider" name="MongoClientProvider" policy="static" target="(mongoClientProvider=local)" unbind="unsetMongoClientProvider"/>
+
+   <reference bind="setEcviStore" cardinality="1..1" interface="org.usaha.ecvi.store.IEcviStore" name="IEcviStore" policy="static" unbind="unsetEcviStore"/></scr:component>

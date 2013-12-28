@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
+   name="org.usaha.ecvi.store.mongodb.test.system.mock.producer">
+   <implementation 
+    class="com.verticon.tracker.irouter.test.utilities.MockProducerConsumer"/>
+   <property name="tracker.wiring.group.name" type="String" value="test"/>
+   <property name="wireadmin.producer.scope">
+agriculture.ecvi
+   </property>
+   <property name="wireadmin.consumer.scope">
+    agriculture.ecvi.response
+   </property>
+   <property name="service.pid" type="String" value="mongo.test.mockProducer"/>
+   <service>
+      <provide interface="org.osgi.service.wireadmin.Producer"/>
+      <provide interface="com.verticon.tracker.irouter.test.utilities.IProducerConsumer"/>
+      <provide interface="org.osgi.service.wireadmin.Consumer"/>
+   </service>
+</scr:component>

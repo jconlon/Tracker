@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:eCVI CviNumber="" EntryPermitNumber="" ExpirationDate="2001-01-01" IssueDate="2001-01-01" ShipmentDate="2001-01-01" SpeciesCode="UNK" xmlns:p="http://www.usaha.org/xmlns/ecvi" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.usaha.org/xmlns/ecvi ../../usaha_committee/ecvi.xsd ">
+  <p:Veterinarian LicenseIssueState="AA" LicenseNumber="" NationalAccreditationNumber="">
+    <p:Person>
+      <p:Name>p:Name</p:Name>
+    </p:Person>
+    <p:Address>
+      <p:Line1>p:Line1</p:Line1>
+      <p:Town>p:Town</p:Town>
+      <p:State>AA</p:State>
+      <p:ZIP>p:ZIP</p:ZIP>
+    </p:Address>
+  </p:Veterinarian>
+  <p:MovementPurposes>
+    <p:MovementPurpose>show</p:MovementPurpose>
+  </p:MovementPurposes>
+  <p:Origin>
+    <p:PremId>p:PremId</p:PremId>
+    <p:PremName>p:PremName</p:PremName>
+    <p:Address>
+      <p:Line1>p:Line1</p:Line1>
+      <p:Town>p:Town</p:Town>
+      <p:State>AA</p:State>
+      <p:ZIP>p:ZIP</p:ZIP>
+    </p:Address>
+    <p:ProgramStatus Name="Bovine Tuberculosis" Value="Free" ValueOther=""/>
+    <p:Person>
+      <p:Name>p:Name</p:Name>
+    </p:Person>
+  </p:Origin>
+  <p:Destination>
+    <p:PremId>p:PremId</p:PremId>
+    <p:PremName>p:PremName</p:PremName>
+    <p:Address>
+      <p:Line1>p:Line1</p:Line1>
+      <p:Town>p:Town</p:Town>
+      <p:State>AA</p:State>
+      <p:ZIP>p:ZIP</p:ZIP>
+    </p:Address>
+    <p:ProgramStatus Name="Bovine Tuberculosis" Value="Free" ValueOther=""/>
+    <p:Person>
+      <p:Name>p:Name</p:Name>
+    </p:Person>
+  </p:Destination>
+  <p:Consignor>
+    <p:PremId>p:PremId</p:PremId>
+    <p:PremName>p:PremName</p:PremName>
+    <p:Address>
+      <p:Line1>p:Line1</p:Line1>
+      <p:Town>p:Town</p:Town>
+      <p:State>AA</p:State>
+      <p:ZIP>p:ZIP</p:ZIP>
+    </p:Address>
+    <p:Person>
+      <p:Name>p:Name</p:Name>
+    </p:Person>
+  </p:Consignor>
+  <p:Consignee>
+    <p:PremId>p:PremId</p:PremId>
+    <p:PremName>p:PremName</p:PremName>
+    <p:Address>
+      <p:Line1>p:Line1</p:Line1>
+      <p:Town>p:Town</p:Town>
+      <p:State>AA</p:State>
+      <p:ZIP>p:ZIP</p:ZIP>
+    </p:Address>
+    <p:Person>
+      <p:Name>p:Name</p:Name>
+    </p:Person>
+  </p:Consignee>
+  <p:Accessions>
+    <p:Accession InfieldTest="true" id="idvalue0">
+      <p:Laboratory AccessionDate="2001-01-01" AccessionNumber=""/>
+    </p:Accession>
+  </p:Accessions>
+  <p:Animal Age="" Breed="" InspectionDate="2001-01-01" Sex="Female" SexDetail="">
+    <p:AnimalTag BrandImage="MA==" Number="" Type="UN"/>
+    <p:Test TestCode="" idref="idvalue0">
+      <p:Result ResultName="RESULT"/>
+    </p:Test>
+  </p:Animal>
+  <p:GroupLot Age="" Breed="" Description="" Quantity="0.0" Sex="Female" SexDetail="" Species="UNK" Unit="Number"/>
+  <p:Attachment Comment="" DocType="Scanned Paper CVI" Filename="" MimeType="">
+    <p:Payload>MA==</p:Payload>
+  </p:Attachment>
+</p:eCVI>
