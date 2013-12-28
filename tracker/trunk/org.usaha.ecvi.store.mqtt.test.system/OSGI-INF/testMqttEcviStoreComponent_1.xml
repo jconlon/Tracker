@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="org.usaha.ecvi.store.mqtt.test.system">
+   <implementation 
+    class="org.usaha.ecvi.store.mqtt.test.system.Test_MqttEcviStoreComponent_1"/>
+    <reference bind="setSubscriber" cardinality="1..1" interface="com.verticon.mqtt.test.utilities.ISubscriberPublisher" name="ISubscriberPublisher" policy="static" unbind="unsetSubscriber"/>
+    <reference bind="setEcviStore" cardinality="1..1" interface="org.usaha.ecvi.store.IEcviStore" name="IEcviStore" policy="static" unbind="unsetEcviStore"/>
+    
+</scr:component>
