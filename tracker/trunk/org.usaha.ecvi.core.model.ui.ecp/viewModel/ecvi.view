@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="ASCII"?>
+<org.eclipse.emf.ecp.view.model:View xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:org.eclipse.emf.ecp.view.model="http://org/eclipse/emf/ecp/view/model" xmlns:org.eclipse.emf.ecp.view.table.model="http://org/eclipse/emf/ecp/view/table/model" name="Premises View">
+  <rootEClass href="http://www.usaha.org/xmlns/ecvi#//Premises"/>
+  <children xsi:type="org.eclipse.emf.ecp.view.table.model:TableControl">
+    <domainModelReference xsi:type="org.eclipse.emf.ecp.view.table.model:TableDomainModelReference">
+      <domainModelEFeature xsi:type="ecore:EReference" href="http://www.usaha.org/xmlns/ecvi#//Premises/person"/>
+    </domainModelReference>
+    <columns>
+      <attribute href="http://www.usaha.org/xmlns/ecvi#//Person/name"/>
+    </columns>
+  </children>
+</org.eclipse.emf.ecp.view.model:View>
