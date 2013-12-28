@@ -21,6 +21,22 @@
       </wizard>
    </extension>
 
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated ecvi -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.usaha.ecvi.presentation.EcviModelWizardID"
+            name="%_UI_EcviModelWizard_label"
+            class="org.usaha.ecvi.presentation.EcviModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/EcviModelFile.gif">
+         <description>%_UI_EcviModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
    <extension point="org.eclipse.ui.editors">
       <!-- @generated ecvi -->
       <editor
@@ -31,6 +47,36 @@
             class="org.usaha.ecvi.presentation.EcviEditor"
             contributorClass="org.usaha.ecvi.presentation.EcviActionBarContributor">
       </editor>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.commands">
+      <category
+            description="%_UI_commands_category_description"
+            id="org.usaha.ecvi.editor.commands.Ecvi.category"
+            name="%category.name">
+      </category>
+      
+      <!-- Place Holder in Popups Command -->
+      <command
+             id="org.usaha.ecvi.core.model.editor.menus.popupany"
+             
+             categoryId="org.usaha.ecvi.editor.commands.Ecvi.category"
+             description="Ecvi menu place holder"
+             name="EcviPlaceHolder">
+      </command>
+    </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+         
+          <!--Ecvi Actions Popups-->
+      <menuContribution
+            locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+         <menu
+               commandId="org.usaha.ecvi.core.model.editor.menus.popupany"
+               label="%menu.label.0">
+         </menu>
+      </menuContribution>  
    </extension>
 
 </plugin>

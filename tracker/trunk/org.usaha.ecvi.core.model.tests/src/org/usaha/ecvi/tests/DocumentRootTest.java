@@ -17,7 +17,6 @@ import org.usaha.ecvi.EcviFactory;
  * The following features are tested:
  * <ul>
  *   <li>{@link org.usaha.ecvi.DocumentRoot#getECVI() <em>ECVI</em>}</li>
- *   <li>{@link org.usaha.ecvi.DocumentRoot#getProgramStatusType() <em>Program Status Type</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -114,32 +113,6 @@ public class DocumentRootTest extends TestCase {
 	 * @generated
 	 */
 	public void testSetECVI() {
-		// TODO: implement this feature setter test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
-	}
-
-	/**
-	 * Tests the '{@link org.usaha.ecvi.DocumentRoot#getProgramStatusType() <em>Program Status Type</em>}' feature getter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.usaha.ecvi.DocumentRoot#getProgramStatusType()
-	 * @generated
-	 */
-	public void testGetProgramStatusType() {
-		// TODO: implement this feature getter test method
-		// Ensure that you remove @generated or mark it @generated NOT
-		fail();
-	}
-
-	/**
-	 * Tests the '{@link org.usaha.ecvi.DocumentRoot#setProgramStatusType(org.usaha.ecvi.ProgramStatus) <em>Program Status Type</em>}' feature setter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.usaha.ecvi.DocumentRoot#setProgramStatusType(org.usaha.ecvi.ProgramStatus)
-	 * @generated
-	 */
-	public void testSetProgramStatusType() {
 		// TODO: implement this feature setter test method
 		// Ensure that you remove @generated or mark it @generated NOT
 		fail();
