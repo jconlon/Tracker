@@ -10,30 +10,20 @@
   <para>
     The Tracker products are a suite of information management tools and network service solutions for 
     <emphasis>Animal Agriculture producers</emphasis>, 
-  	<emphasis>Infrastructure providers</emphasis> and <emphasis>Process control auditors</emphasis>. Tracker
-  	product solutions are used to 
+  	<emphasis>Infrastructure providers</emphasis> and <emphasis>Process control auditors</emphasis>. 
  	<itemizedlist mark='opencircle'>
 			<listitem>
-				<para>Document;</para>
+				<para>Desktop and Laptop based Project management workbench and Business Intelligence toolkit;</para>
 			</listitem>
 			<listitem >
-				<para>Manage;</para>
+				<para>Machine to Machine (M2M) infrastructure for integrating data, sensors, systems and machines to create
+				Agriculture Premises Internet of Things (Iot);</para>
 			</listitem>
 			<listitem>
-				<para>Analyze;</para>
+				<para>Business to Business (B2B) network service for communicating market inventory, transactions and events 
+				between livestock business associates;</para>
 			</listitem>
-			<listitem>
-				<para>Report;</para>
-			</listitem>
-			<listitem>
-				<para>Archive;</para>
-			</listitem>
-			<listitem>
-				<para>Query;</para>
-			</listitem>
-			<listitem>
-				<para>and Inter-exchange information between livestock business associates.</para>
-			</listitem>
+			
 	</itemizedlist>
     </para>
  
@@ -43,20 +33,23 @@
   	Tracker Products:
  	<itemizedlist mark='opencircle'>
 			<listitem>
-				<para><olink targetdoc="trackerPro">Tracker Professional</olink> is a business intelligence toolkit
-				for Data Acquisition, Analysis, Reporting and Integration;</para>
+				<para><olink targetdoc="trackerPro">Tracker Workbench</olink> is a project management workbench and 
+				business intelligence toolkit for premises and livestock Data Acquisition, Analysis, Reporting and 
+				Integration;</para>
 			</listitem>
+			<listitem>
+				<para><olink targetdoc="iRouter">iRouter</olink> is a configurable network event processor and M2M infrastructure for 
+				the integration of sensors and actuators and the building of Premises based Internet of Things (IoT).</para>
+			</listitem>
+			<listitem>
+				<para><olink targetdoc="trackerCloud">Tracker Cloud</olink> is a B2B network collaboration service for notification,
+				archival, retrieval and query of premises, livestock, and certificate of veterinarian inspections;</para>
+			</listitem>
+			
 			<listitem >
 				<para><olink targetdoc="trackerLite">Tracker Lite</olink> is an easy to use smart phone application for
 				acquisition and retrieval of Livestock premises and animal information;</para>
 			</listitem>
-			<listitem>
-				<para><olink targetdoc="trackerCloud">Tracker Cloud</olink> is a network service for archival, retrieval and query of livestock premises documents;</para>
-			</listitem>
-			<listitem>
-				<para><olink targetdoc="iRouter">iRouter appliance</olink> is a configurable network event processor for the integration of sensors and actuators.</para>
-			</listitem>
-
 	</itemizedlist>
     </para>
     </section>
