@@ -13,12 +13,59 @@
 			Herd management
 		</keywords>
 	</head>
+	<section id="tracker">
+		<title>Tracker Full-Spectrum Solution for Animal Agriculture</title>
 	<para>
-			Tracker is an <ulink url="http://www.eclipse.org/">Eclipse</ulink>
-			based <ulink url="http://en.wikipedia.org/wiki/Business_intelligence">Business Intelligence</ulink> 
-			Toolkit and suite of product solutions for animal agriculture professionals.
-			<olink targetdoc="docs">Learn More</olink>
+	Verticon’s Tracker is a full-spectrum solution of <ulink url="http://en.wikipedia.org/wiki/Business_intelligence">business intelligence</ulink> products and services 
+	that offers a more efficient way for animal husbandry, livestock producers, infrastructure providers 
+	and market regulators to manage, integrate and network multi-species animal life data, animal movements, 
+	animal event history, Electronic Certificate of Veterinarian Inspections (eCVI), and  premises information. 
 	</para>
+	<variablelist>
+			<varlistentry>
+				<term>Manage</term>
+				<listitem>
+					<para>
+					    Tracker <olink targetdoc="trackerPro">
+						Workbench</olink> is a desktop solution that provides project management tools, editors and business 
+					    intelligence utilities for documenting, managing, analyzing and reporting livestock and premises information.
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Integrate</term>
+				<listitem>
+					<para>
+						Tracker <olink targetdoc="iRouter">
+						<acronym>iRouter</acronym></olink> reduces complexity by “integrating” sensors, actuators, and RFID readers creating a non-intrusive, 
+						easily deployed, adaptive solution for building the Agri-premises based Internet of Things (IoT) . 
+					</para>
+				</listitem>
+			</varlistentry>
+			<varlistentry>
+				<term>Network</term>
+				<listitem>
+					<para>
+						Tracker <olink targetdoc="trackerCloud">
+						Cloud</olink> offers dynamic B2B bidirectional exchange of product value information enabling 
+						the creation of Agri-Business Ecosystems which lead to increased market sales, higher product margins, 
+						better traceability and inventory control, and improved product quality.
+					</para>
+				</listitem>
+			</varlistentry>
+			
+		</variablelist>
+	<para>
+			Tracker as Open source free software built on the Open System standards <ulink url="http://www.eclipse.org/">Eclipse</ulink>
+			and <ulink url="http://www.osgi.org/">OSGi</ulink> allows thousands of off the shelf solutions to be 
+			added and customization to be easily achieved by adding new industry standard components.  Tracker runs on 
+			multiple platforms and operating systems, including  desktops, laptops, appliances and servers.  
+	</para>
+	<para>
+	Serving government agencies, resellers, animal producers, infrastructure providers, managers, processors, and certification 
+	agencies, Tracker also offers a low cost entry to small farmers to document best practices  to certify product value.
+	</para>
+	</section>
 	<section id="keyfeatures">
 		<title>Key Benefits</title>
 		<para>
