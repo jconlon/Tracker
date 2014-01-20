@@ -31,9 +31,9 @@
   
   <tocentry page="products/products.xml" dir="products" filename="index.html">
    		<tocentry page="products/trackerPro.xml" filename="trackerPro.html"/>
-   		<tocentry page="products/trackerLite.xml" filename="trackerLite.html"/>
-   		<tocentry page="products/trackerCloud.xml" filename="trackerCloud.html"/>
    		<tocentry page="products/iRouter.xml" filename="iRouter.html"/>
+   		<tocentry page="products/trackerCloud.xml" filename="trackerCloud.html"/>
+   		<tocentry page="products/trackerLite.xml" filename="trackerLite.html"/>
   </tocentry>
   
   <tocentry page="downloads/downloads.xml" dir="downloads" filename="index.html"/>
