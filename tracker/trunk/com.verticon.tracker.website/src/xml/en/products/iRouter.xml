@@ -4,7 +4,7 @@
     <title>iRouter - M2M Integration Infrastructure</title>
     <summary>
 	iRouter reduces complexity by “integrating” sensors, actuators, and RFID readers creating a non-intrusive, 
-	easily deployed, adaptive solution for building the Agri-premises based Internet of Things (IoT) . 
+	easily deployed, adaptive solution for building the Agri-premises based Internet of Things (IoT). 
     </summary>
     <keywords>Tracker, iRouter, M2M, IoT, Eclipse, OSGi</keywords>
   </head>

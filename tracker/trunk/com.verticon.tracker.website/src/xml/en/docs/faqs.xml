@@ -6,7 +6,7 @@
 		<summary>Tracker FAQs
 		</summary>
 		<keywords>livestock, open source, NAIS, XML, Eclipse, RFID,
-			herd management faq
+			herd management, B2B, IoT,M2M, faq
 		</keywords>
 	</head>
 
@@ -17,7 +17,8 @@
 					<para>Q: What is the status of the Project?</para>
 				</question>
 				<answer>
-				    <para>A: The project is in beta testing stage (milestone 0.5.0) at this time.</para>
+				    <para>A: The project is in beta testing stage at this time. See the <ulink url="http://tracker-project.verticon.com/verticon_Tracker/roadmap">
+				Tracker Project Management RaodMap</ulink> for details.</para>
 				</answer>
 			</qandaentry>
 			<qandaentry>
@@ -40,7 +41,7 @@
 					<para>Q: What OS platforms are supported?</para>
 				</question>
 				<answer>
-					<para>A: Currently versions for Windows and Linux are supported.</para>
+					<para>A: Currently Tracker supports 32bit and 64bit versions for Windows and Linux.</para>
 				</answer>
 			</qandaentry>
 			
@@ -49,7 +50,9 @@
 					<para>Q: Is an Apple version of the software planned?</para>
 				</question>
 				<answer>
-					<para>A: Yes, but it is not deployed to the download sites at this time.</para>
+					<para>A: Yes, but it is not deployed to the download sites at this time. Send an email <userinput><email>support@verticon.com</email>
+					with the subject
+					<command>[Tracker] Apple</command> </userinput> to request a build for Apple.</para>
 				</answer>
 			</qandaentry>
 	</qandadiv>
