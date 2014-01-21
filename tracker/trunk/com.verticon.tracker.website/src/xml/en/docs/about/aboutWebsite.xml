@@ -1,5 +1,5 @@
 <webpage id="aboutWebsite">
-  <config param="rcsdate" value="$Date: 2009-08-18 23:37:34 -0500 (Tue, 18 Aug 2009) $"/>
+  <config param="rcsdate" value="$Date$"/>
   <head>
     <title>About the Website</title>
     <summary>
