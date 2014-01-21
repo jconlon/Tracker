@@ -1,5 +1,5 @@
 <webpage id="license">
-  <config param="rcsdate" value="$Date: 2009-03-17 18:59:39 -0500 (Tue, 17 Mar 2009) $"/>
+  <config param="rcsdate" value="$Date$"/>
   <head>
     <title>Licensing</title>
     <summary>GNU Public License 2</summary>
