@@ -18,7 +18,7 @@
 				</question>
 				<answer>
 				    <para>A: The project is in beta testing stage at this time. See the <ulink url="http://tracker-project.verticon.com/verticon_Tracker/roadmap">
-				Tracker Project Management RaodMap</ulink> for details.</para>
+				Tracker Project Management road map</ulink> for details.</para>
 				</answer>
 			</qandaentry>
 			<qandaentry>
@@ -96,15 +96,16 @@
 	<qandadiv><title>iRouter</title>
 			<qandaentry>
 				<question>
-					<para>Q: What is the relationship between the Tracker BI Toolkit and the iRouter?</para>
+					<para>Q: What is the relationship between the Tracker Workbench and the Tracker iRouter?</para>
 				</question>
 				
 				<answer>
-					<para>A: Tracker BI Toolkit is a container for tool features.  When it is first installed it is empty.
-					For the Tracker BI Toolkit to be useful the user must select and install the tool features they require. 
-					The iRouter is one of the many Tracker tool features that can be installed. The end user can select and 
-					install iRouter features by itself or with a combination of any of the other 
-					Tracker livestock information management tool features.
+					<para>A: Tracker Workbench is a project management workbench that can be provisioned with livestock information
+					management document editors, tools and utilities as well as hundreds of Business Intelligence tool features.  
+					When Tracker Workbench is first installed it has some but not all features installed.
+					For the Tracker Workbench to be most useful the user must select and install the solution features they require. 
+					The iRouter is one of the many Tracker solution features that can be installed. The end user can elect to 
+					install iRouter features by themselves or with a combination of any of the other Tracker livestock or third party features.
 					</para>
 				</answer>
 			</qandaentry>
