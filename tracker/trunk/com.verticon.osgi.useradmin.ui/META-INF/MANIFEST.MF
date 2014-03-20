@@ -5,7 +5,7 @@ Bundle-SymbolicName: com.verticon.osgi.useradmin.ui; singleton:=true
 Bundle-Version: 2.2.1.qualifier
 Bundle-Activator: com.verticon.osgi.useradmin.ui.internal.Activator
 Bundle-Vendor: Verticon, Inc
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Export-Package: com.verticon.osgi.useradmin.ui
 Import-Package: com.google.common.base;version="10.0.1",
