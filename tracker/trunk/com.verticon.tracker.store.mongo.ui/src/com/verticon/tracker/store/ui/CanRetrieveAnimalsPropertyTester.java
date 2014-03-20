@@ -12,6 +12,15 @@ package com.verticon.tracker.store.ui;
 
 import org.eclipse.core.expressions.PropertyTester;
 
+/**
+ * To retrieve animals the following must be true:
+ * <ul>
+ * <li>user is authorized (signed in)</li>
+ * </ul>
+ * 
+ * @author jconlon
+ * 
+ */
 public class CanRetrieveAnimalsPropertyTester extends PropertyTester {
 
 	/**

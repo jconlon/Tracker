@@ -19,7 +19,8 @@ h3. CanLoadAdminPropertyTester
  
 h3. CanPublishAnimalsPropertyTester
 
-* Obtains the uri from a Premises and tests to see if there is a registered ITrackerLoader service associated with it.
+* Obtains the uri from a Premises and compares it to the role of the signed in user 
+* tests if there is an ITrackerLoader service available
 
 h3. CanRegisterLocationsPropertyTester
 

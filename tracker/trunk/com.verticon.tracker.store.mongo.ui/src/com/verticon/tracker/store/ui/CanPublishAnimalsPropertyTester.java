@@ -17,14 +17,25 @@ import org.eclipse.core.expressions.PropertyTester;
 import com.google.common.base.Strings;
 import com.verticon.tracker.Premises;
 
+/**
+ * To record animals and events the following must be true:
+ * <ul>
+ * <li>An ITrackerLoader service is available</li>
+ * <li>and the signed in User has a role associated with the uri of the premises
+ * in the active editor.</li>
+ * </ul>
+ * 
+ * @author jconlon
+ * 
+ */
 public class CanPublishAnimalsPropertyTester extends PropertyTester {
 
 	private static final String CAN_PUBLISH_ANIMALS = "canPublishAnimals";
 
 	/**
 	 * 
-	 * Tests a Premises to see if there is a ITrackerLoader service available
-	 * for it.
+	 * Gets the active Premises uri compares it to the role of the signed in
+	 * user and tests if there is an ITrackerLoader service available.
 	 * 
 	 * Executes the property test determined by the parameter
 	 * <code>property</code>.
@@ -61,8 +72,8 @@ public class CanPublishAnimalsPropertyTester extends PropertyTester {
 			String uri = premises.getUri();
 			if (!Strings.isNullOrEmpty(uri)) {
 
-				// Tracker Store service with this uri and a member of the
-				// premises
+				// Tracker Store service and a role associated with the uri of
+				// the premises
 				result = Activator.getDefault().hasTrackerStoreService()
 						&& Activator.getDefault().hasRole(uri);
 				result = result
