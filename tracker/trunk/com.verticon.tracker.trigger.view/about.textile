@@ -8,6 +8,10 @@ h2. Introduction
 
 Triggers are messages that interact with external programs or devices. Triggers can take the form of files or text sent to TCP ports.
 
+Tracker Trigger View is an administrator and an operator interface for managing multiple trigger files.
+
+Trigger files are files written to a directory that cause (or Trigger) an external action.  External applications can watch for these trigger files and invoke a specified action on there detection.
+
 h3. Trigger Files
 
 Trigger files are files written to a directory that cause (or Trigger) an external action, process or service.  External applications can monitor a directory for these trigger files and to invoke an action on their detection.  

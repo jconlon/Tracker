@@ -6,7 +6,7 @@ com.verticon.tracker.irouter.measurement.trigger.file Version 1.0.0
 
 h2. Introduction
 
-The Measurement Trigger iRouter component is a user configurable business domain gateway. It acts as a wireAdmin consumer of Measurement products and external applications that process files containing measurement values.
+The Measurement Trigger File iRouter component is a user configurable business domain gateway. It acts as a wireAdmin consumer of Measurement products and external applications that process files containing measurement values.
 
 h2. Consumer Scopes
 
