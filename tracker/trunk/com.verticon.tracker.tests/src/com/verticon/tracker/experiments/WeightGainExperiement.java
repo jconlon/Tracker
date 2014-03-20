@@ -10,9 +10,9 @@
  *******************************************************************************/
 package com.verticon.tracker.experiments;
 
-import java.util.Scanner;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Scanner;
 
 /**
  * To test common Java arithmetic problems
@@ -70,6 +70,7 @@ public class WeightGainExperiement {
 			choice = sc.next();
 			System.out.println();
 		}
+		sc.close();
 	}
 //	public static void main(String[] args) {
 //		// create a Scanner object and start while loop
