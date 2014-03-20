@@ -11,12 +11,12 @@
 	</target>
 
 	<target name="all.plugins" depends="init">
-		<ant antfile="build.xml" dir="../com.verticon.tracker.product.desktop.releng/buildDirectory/plugins/com.verticon.tracker.doc" target="${target}">
+		<ant antfile="build.xml" dir="../com.verticon.tracker.product.desktop.releng/buildDirectory/plugins/com.verticon.tracker.product.desktop.doc" target="${target}">
 			<property name="arch" value="x86"/>
 			<property name="ws" value="win32"/>
 			<property name="os" value="win32"/>
 		</ant>
-		<ant antfile="build.xml" dir="../com.verticon.tracker.product.desktop.releng/buildDirectory/plugins/com.verticon.tracker.product.desktop.doc" target="${target}">
+		<ant antfile="build.xml" dir="../com.verticon.tracker.product.desktop.releng/buildDirectory/plugins/com.verticon.tracker.doc" target="${target}">
 			<property name="arch" value="x86"/>
 			<property name="ws" value="win32"/>
 			<property name="os" value="win32"/>
@@ -59,7 +59,7 @@
 		<property name="feature.base" value="${feature.temp.folder}"/>
 		<delete dir="${feature.temp.folder}"/>
 		<mkdir dir="${feature.temp.folder}"/>
-		<mkdir dir="${feature.temp.folder}/features/com.verticon.tracker.product.desktop.doc_0.1.0.201310061851-13377359533F5JD5"/>
+		<mkdir dir="${feature.temp.folder}/features/com.verticon.tracker.product.desktop.doc_0.1.0.201403192043-1337735B395L73B9"/>
 		<antcall target="gather.bin.parts" inheritAll="false">
 			<param name="os" value="*"/>
 			<param name="feature.base" value="${feature.temp.folder}"/>
@@ -68,40 +68,40 @@
 			<param name="arch" value="*"/>
 			<param name="nl" value="*"/>
 		</antcall>
-		<jar destfile="${feature.destination}/com.verticon.tracker.product.desktop.doc_0.1.0.201310061851-13377359533F5JD5.jar" basedir="${feature.temp.folder}/features/com.verticon.tracker.product.desktop.doc_0.1.0.201310061851-13377359533F5JD5"/>
+		<jar destfile="${feature.destination}/com.verticon.tracker.product.desktop.doc_0.1.0.201403192043-1337735B395L73B9.jar" basedir="${feature.temp.folder}/features/com.verticon.tracker.product.desktop.doc_0.1.0.201403192043-1337735B395L73B9"/>
 		<delete dir="${feature.temp.folder}"/>
 	</target>
 
 	<target name="publish.bin.parts" depends="init" if="p2.publish.parts">
-		<mkdir dir="${feature.temp.folder}/features/com.verticon.tracker.product.desktop.doc_0.1.0.201310061851-13377359533F5JD5"/>
-		<copy todir="${feature.temp.folder}/features/com.verticon.tracker.product.desktop.doc_0.1.0.201310061851-13377359533F5JD5" failonerror="true" overwrite="true">
+		<mkdir dir="${feature.temp.folder}/features/com.verticon.tracker.product.desktop.doc_0.1.0.201403192043-1337735B395L73B9"/>
+		<copy todir="${feature.temp.folder}/features/com.verticon.tracker.product.desktop.doc_0.1.0.201403192043-1337735B395L73B9" failonerror="true" overwrite="true">
 			<fileset dir="${basedir}">
 				<include name="feature.xml"/>
 				<include name="feature.properties"/>
 			</fileset>
 		</copy>
-		<eclipse.idReplacer featureFilePath="${feature.temp.folder}/features/com.verticon.tracker.product.desktop.doc_0.1.0.201310061851-13377359533F5JD5/feature.xml"  selfVersion="0.1.0.201310061851-13377359533F5JD5" featureIds="" pluginIds="com.verticon.tracker.product.desktop.doc:0.0.0,0.1.4.201310061851,com.verticon.tracker.doc:0.0.0,0.3.0.201310061851,"/>
+		<eclipse.idReplacer featureFilePath="${feature.temp.folder}/features/com.verticon.tracker.product.desktop.doc_0.1.0.201403192043-1337735B395L73B9/feature.xml"  selfVersion="0.1.0.201403192043-1337735B395L73B9" featureIds="" pluginIds="com.verticon.tracker.product.desktop.doc:0.0.0,0.1.4.201403192043,com.verticon.tracker.doc:0.0.0,0.3.0.201403192043,"/>
 		<eclipse.gatherFeature 
 		   metadataRepository="${p2.build.repo}"
 		   artifactRepository="${p2.build.repo}"
-		   buildResultFolder="${feature.temp.folder}/features/com.verticon.tracker.product.desktop.doc_0.1.0.201310061851-13377359533F5JD5"
+		   buildResultFolder="${feature.temp.folder}/features/com.verticon.tracker.product.desktop.doc_0.1.0.201403192043-1337735B395L73B9"
 		   baseDirectory="${basedir}"
 		/>
 	</target>
 
 	<target name="gather.bin.parts" depends="init" if="feature.base">
-		<mkdir dir="${feature.base}/features/com.verticon.tracker.product.desktop.doc_0.1.0.201310061851-13377359533F5JD5"/>
+		<mkdir dir="${feature.base}/features/com.verticon.tracker.product.desktop.doc_0.1.0.201403192043-1337735B395L73B9"/>
 		<antcall target="children">
 			<param name="target" value="gather.bin.parts"/>
 			<param name="destination.temp.folder" value="${feature.base}/plugins"/>
 		</antcall>
-		<copy todir="${feature.base}/features/com.verticon.tracker.product.desktop.doc_0.1.0.201310061851-13377359533F5JD5" failonerror="true" overwrite="false">
+		<copy todir="${feature.base}/features/com.verticon.tracker.product.desktop.doc_0.1.0.201403192043-1337735B395L73B9" failonerror="true" overwrite="false">
 			<fileset dir="${basedir}">
 				<include name="feature.xml"/>
 				<include name="feature.properties"/>
 			</fileset>
 		</copy>
-		<eclipse.idReplacer featureFilePath="${feature.base}/features/com.verticon.tracker.product.desktop.doc_0.1.0.201310061851-13377359533F5JD5/feature.xml"  selfVersion="0.1.0.201310061851-13377359533F5JD5" featureIds="" pluginIds="com.verticon.tracker.product.desktop.doc:0.0.0,0.1.4.201310061851,com.verticon.tracker.doc:0.0.0,0.3.0.201310061851,"/>
+		<eclipse.idReplacer featureFilePath="${feature.base}/features/com.verticon.tracker.product.desktop.doc_0.1.0.201403192043-1337735B395L73B9/feature.xml"  selfVersion="0.1.0.201403192043-1337735B395L73B9" featureIds="" pluginIds="com.verticon.tracker.product.desktop.doc:0.0.0,0.1.4.201403192043,com.verticon.tracker.doc:0.0.0,0.3.0.201403192043,"/>
 		<antcall target="rootFiles">
 			<param name="rootTarget" value="rootFiles${os}_${ws}_${arch}"/>
 		</antcall>
@@ -136,7 +136,7 @@
 			<param name="nl" value="*"/>
 			<param name="include.children" value="true"/>
 		</antcall>
-		<zip destfile="${feature.destination}/com.verticon.tracker.product.desktop.doc_0.1.0.201310061851-13377359533F5JD5.bin.dist.zip" basedir="${feature.temp.folder}" filesonly="false" whenempty="skip" update="false"/>
+		<zip destfile="${feature.destination}/com.verticon.tracker.product.desktop.doc_0.1.0.201403192043-1337735B395L73B9.bin.dist.zip" basedir="${feature.temp.folder}" filesonly="false" whenempty="skip" update="false"/>
 		<delete dir="${feature.temp.folder}"/>
 	</target>
 
@@ -145,10 +145,10 @@
 		<mkdir dir="${feature.temp.folder}"/>
 		<antcall target="all.children">
 			<param name="target" value="gather.sources"/>
-			<param name="destination.temp.folder" value="${feature.temp.folder}/plugins/com.verticon.tracker.product.desktop.doc.source_0.1.0.201310061851-13377359533F5JD5/src"/>
+			<param name="destination.temp.folder" value="${feature.temp.folder}/plugins/com.verticon.tracker.product.desktop.doc.source_0.1.0.201403192043-1337735B395L73B9/src"/>
 			<param name="include.children" value="true"/>
 		</antcall>
-		<zip destfile="${feature.destination}/com.verticon.tracker.product.desktop.doc_0.1.0.201310061851-13377359533F5JD5.src.zip" basedir="${feature.temp.folder}" filesonly="true" whenempty="skip" update="false"/>
+		<zip destfile="${feature.destination}/com.verticon.tracker.product.desktop.doc_0.1.0.201403192043-1337735B395L73B9.src.zip" basedir="${feature.temp.folder}" filesonly="true" whenempty="skip" update="false"/>
 		<delete dir="${feature.temp.folder}"/>
 	</target>
 
@@ -161,18 +161,18 @@
 		<antcall target="all.children" inheritAll="false">
 			<param name="target" value="gather.logs"/>
 			<param name="destination.temp.folder" value="${feature.temp.folder}/plugins"/>
-			<param name="include.children" value="true"/>
 			<param name="${logExtension.param}" value="${logExtension}"/>
+			<param name="include.children" value="true"/>
 		</antcall>
-		<zip destfile="${feature.destination}/com.verticon.tracker.product.desktop.doc_0.1.0.201310061851-13377359533F5JD5.log.zip" basedir="${feature.temp.folder}" filesonly="true" whenempty="skip" update="false"/>
+		<zip destfile="${feature.destination}/com.verticon.tracker.product.desktop.doc_0.1.0.201403192043-1337735B395L73B9.log.zip" basedir="${feature.temp.folder}" filesonly="true" whenempty="skip" update="false"/>
 		<delete dir="${feature.temp.folder}"/>
 	</target>
 
 	<target name="clean" depends="init" description="Clean the feature: com.verticon.tracker.product.desktop.doc of all the zips, jars and logs created.">
-		<delete file="${feature.destination}/com.verticon.tracker.product.desktop.doc_0.1.0.201310061851-13377359533F5JD5.jar"/>
-		<delete file="${feature.destination}/com.verticon.tracker.product.desktop.doc_0.1.0.201310061851-13377359533F5JD5.bin.dist.zip"/>
-		<delete file="${feature.destination}/com.verticon.tracker.product.desktop.doc_0.1.0.201310061851-13377359533F5JD5.log.zip"/>
-		<delete file="${feature.destination}/com.verticon.tracker.product.desktop.doc_0.1.0.201310061851-13377359533F5JD5.src.zip"/>
+		<delete file="${feature.destination}/com.verticon.tracker.product.desktop.doc_0.1.0.201403192043-1337735B395L73B9.jar"/>
+		<delete file="${feature.destination}/com.verticon.tracker.product.desktop.doc_0.1.0.201403192043-1337735B395L73B9.bin.dist.zip"/>
+		<delete file="${feature.destination}/com.verticon.tracker.product.desktop.doc_0.1.0.201403192043-1337735B395L73B9.log.zip"/>
+		<delete file="${feature.destination}/com.verticon.tracker.product.desktop.doc_0.1.0.201403192043-1337735B395L73B9.src.zip"/>
 		<delete dir="${feature.temp.folder}"/>
 		<antcall target="all.children">
 			<param name="target" value="clean"/>
@@ -189,7 +189,7 @@
 	<target name="gather.sources">
 		<antcall target="children">
 			<param name="target" value="gather.sources"/>
-			<param name="destination.temp.folder" value="${feature.temp.folder}/plugins/com.verticon.tracker.product.desktop.doc.source_0.1.0.201310061851-13377359533F5JD5/src"/>
+			<param name="destination.temp.folder" value="${feature.temp.folder}/plugins/com.verticon.tracker.product.desktop.doc.source_0.1.0.201403192043-1337735B395L73B9/src"/>
 		</antcall>
 	</target>
 

@@ -4,7 +4,7 @@ Bundle-Name: iRouter Measurement logger System Test
 Bundle-SymbolicName: com.verticon.tracker.irouter.measurement.logger.test.system
 Bundle-Version: 0.1.0.qualifier
 Bundle-Vendor: Verticon, Inc.
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Service-Component: OSGI-INF/*.xml
 Import-Package: com.verticon.tracker.irouter.common,
  junit.framework;version="4.8.1",

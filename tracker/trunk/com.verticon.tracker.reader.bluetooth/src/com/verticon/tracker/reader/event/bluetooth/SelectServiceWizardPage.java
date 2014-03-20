@@ -11,6 +11,8 @@
 package com.verticon.tracker.reader.event.bluetooth;
 
 
+import static com.verticon.tracker.reader.event.bluetooth.Constants.bundleMarker;
+
 import java.lang.reflect.InvocationTargetException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -19,7 +21,6 @@ import java.util.List;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.CyclicBarrier;
-import static com.verticon.tracker.reader.event.bluetooth.Constants.bundleMarker;
 
 import javax.bluetooth.BluetoothStateException;
 import javax.bluetooth.DataElement;
@@ -170,6 +171,7 @@ public class SelectServiceWizardPage extends WizardPage implements
 	 * 
 	 * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NULL);
 		final GridLayout gridLayout = new GridLayout();
@@ -192,6 +194,7 @@ public class SelectServiceWizardPage extends WizardPage implements
 	/**
 	 * User selected a device.
 	 */
+	@Override
 	public void selectionChanged(SelectionChangedEvent event) {
 		this.selectedServiceRecord = null;
 		ISelection selection = event.getSelection();
@@ -219,10 +222,12 @@ public class SelectServiceWizardPage extends WizardPage implements
 	/**
 	 * Called by the discovery task thread.
 	 */
+	@Override
 	public void deviceDiscovered(RemoteDevice arg0, DeviceClass arg1) {
 
 	}
 
+	@Override
 	public void servicesDiscovered(int transactionID, ServiceRecord[] records) {
 		for (ServiceRecord serviceRecord : records) {
 
@@ -287,16 +292,19 @@ public class SelectServiceWizardPage extends WizardPage implements
 		// });
 		tableViewer.setContentProvider(new IStructuredContentProvider() {
 
+			@Override
 			public Object[] getElements(Object inputElement) {
 				ServiceRecord[] names = new ServiceRecord[] {};
 				names = deviceServices.toArray(names);
 				return names;
 			}
 
+			@Override
 			public void dispose() {
 
 			}
 
+			@Override
 			public void inputChanged(Viewer viewer, Object oldInput,
 					Object newInput) {
 
@@ -309,7 +317,7 @@ public class SelectServiceWizardPage extends WizardPage implements
 	 * @param de
 	 * @param attributeID
 	 */
-	@SuppressWarnings({ "unused", "unchecked" })
+	@SuppressWarnings({ "unused" })
 	private void processDataElement(DataElement de, int attributeID) {
 		switch (de.getDataType()) {
 		case DataElement.STRING:
@@ -355,6 +363,7 @@ public class SelectServiceWizardPage extends WizardPage implements
 		}
 	}
 
+	@Override
 	public void serviceSearchCompleted(int transactionID, int responseCode) {
 
 		switch (responseCode) {
@@ -381,6 +390,7 @@ public class SelectServiceWizardPage extends WizardPage implements
 
 		getContainer().getShell().getDisplay().asyncExec(new Runnable() {
 
+			@Override
 			public void run() {
 				tableViewer.refresh();
 
@@ -408,6 +418,7 @@ public class SelectServiceWizardPage extends WizardPage implements
 	/**
 	 * Called by the discovery task thread.
 	 */
+	@Override
 	public void inquiryCompleted(int arg0) {
 		switch (arg0) {
 		case DiscoveryListener.INQUIRY_COMPLETED:
@@ -427,6 +438,7 @@ public class SelectServiceWizardPage extends WizardPage implements
 		}
 		getContainer().getShell().getDisplay().asyncExec(new Runnable() {
 
+			@Override
 			public void run() {
 				tableViewer.refresh();
 
@@ -482,6 +494,7 @@ public class SelectServiceWizardPage extends WizardPage implements
 		setMessage("Discovering Bluetooth services available on device: "
 				+ device.getBluetoothAddress() + ", please wait...");
 		IRunnableWithProgress op = new IRunnableWithProgress() {
+			@Override
 			public void run(IProgressMonitor progress) {
 				barrier = new CyclicBarrier(2);
 				progress.beginTask("Performing operation ",
@@ -557,10 +570,12 @@ public class SelectServiceWizardPage extends WizardPage implements
 	class ServiceRecordTableLabelProvider extends LabelProvider implements
 			ITableLabelProvider {
 
+		@Override
 		public Image getColumnImage(Object element, int columnIndex) {
 			return null;
 		}
 
+		@Override
 		public String getColumnText(Object element, int columnIndex) {
 			switch (columnIndex) {
 			case 0:
