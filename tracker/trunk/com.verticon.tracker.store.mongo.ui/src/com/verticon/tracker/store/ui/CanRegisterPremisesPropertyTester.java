@@ -14,14 +14,24 @@ import static com.verticon.osgi.useradmin.authenticator.Authenticator.TRACKER_ST
 
 import org.eclipse.core.expressions.PropertyTester;
 
+/**
+ * To register premesis the following must be true:
+ * <ul>
+ * <li>An ITrackerLoader service is available</li>
+ * <li>and the signed in User is a member of the group TrackerStore_Registrant</li>
+ * </ul>
+ * 
+ * @author jconlon
+ * 
+ */
 public class CanRegisterPremisesPropertyTester extends PropertyTester {
 
 	private static final String CAN_REGISTER_PREMISES = "canRegisterPremises";
 
 	/**
 	 * 
-	 * Tests to see if there is a ITrackerStore and a the user has authorization
-	 * to register premises.
+	 * Tests to see if there is a ITrackerStore and a the user has is a member
+	 * of the group: TrackerStore_Registrant
 	 * 
 	 * Executes the property test determined by the parameter
 	 * <code>property</code>.
