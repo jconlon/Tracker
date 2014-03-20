@@ -126,6 +126,12 @@
 			<replacefilter 
 				token="@release.lin.size@" 
 				value="${release.lin.size}"/>
+			<replacefilter 
+				token="@release.win64.size@" 
+				value="${release.win64.size}"/>
+			<replacefilter 
+				token="@release.lin64.size@" 
+				value="${release.lin64.size}"/>
 		</replace>
     </target>
 

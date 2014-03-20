@@ -39,7 +39,7 @@ release.lin.size=50.2M
 							</ulink>
 						</entry>
 						<entry>@release.win.size@</entry>
-						<entry>WIN</entry>
+						<entry>WIN 32bit</entry>
 					</row>
 					<row>
 						<entry>
@@ -49,7 +49,7 @@ release.lin.size=50.2M
 							</ulink>
 						</entry>
 						<entry>@release.win64.size@</entry>
-						<entry>WIN</entry>
+						<entry>WIN 64bit</entry>
 					</row>
 					<row>
 						<entry>
@@ -59,7 +59,7 @@ release.lin.size=50.2M
 							</ulink>
 						</entry>
 						<entry>@release.lin.size@</entry>
-						<entry>Linux</entry>
+						<entry>Linux 32bit</entry>
 					</row>
 					<row>
 						<entry>
@@ -69,7 +69,7 @@ release.lin.size=50.2M
 							</ulink>
 						</entry>
 						<entry>@release.lin64.size@</entry>
-						<entry>Linux</entry>
+						<entry>Linux 64bit</entry>
 					</row>
 				</tbody>
 			</tgroup>
