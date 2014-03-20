@@ -3006,18 +3006,6 @@
     <element xmi:type="ecore:EClass" href="tracker.ecore#//Position"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Y316cgSZEeC5yOs0w41ecw" x="1236" y="864"/>
   </children>
-  <children xmi:type="notation:Shape" xmi:id="_YkNNcCF-EeKSqrzM8m4iqw" type="Note" fontName="Sans" description="EReference to OCD in Metatype Model" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
-    <children xmi:type="notation:BasicDecorationNode" xmi:id="_YkNNcSF-EeKSqrzM8m4iqw" type="DiagramName">
-      <element xsi:nil="true"/>
-    </children>
-    <children xmi:type="notation:BasicDecorationNode" xmi:id="_YkNNciF-EeKSqrzM8m4iqw" type="Description">
-      <element xsi:nil="true"/>
-    </children>
-    <styles xmi:type="notation:TextStyle" xmi:id="_YkNNcyF-EeKSqrzM8m4iqw"/>
-    <styles xmi:type="notation:LineTypeStyle" xmi:id="_YkNNdCF-EeKSqrzM8m4iqw"/>
-    <element xsi:nil="true"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_YkNNdSF-EeKSqrzM8m4iqw" x="2458" y="550"/>
-  </children>
   <children xmi:type="notation:Shape" xmi:id="_ejKfMCF-EeKSqrzM8m4iqw" type="Note" fontName="Sans" description="EReference to Location in Location" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
     <children xmi:type="notation:BasicDecorationNode" xmi:id="_ejLGQCF-EeKSqrzM8m4iqw" type="DiagramName">
       <element xsi:nil="true"/>
