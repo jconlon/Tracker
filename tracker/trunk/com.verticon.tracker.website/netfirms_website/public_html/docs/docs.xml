@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <webpage id="docs">
-	<config param="rcsdate" value="$Date: 2011-05-24 16:40:55 -0500 (Tue, 24 May 2011) $" />
+	<config param="rcsdate" value="$Date: 2013-10-20 12:32:14 -0500 (Sun, 20 Oct 2013) $" />
 	<head>
 		<title>Documentation</title>
 		<summary>FAQ, User Guide and Data Models
@@ -56,6 +56,16 @@
 						</entry>
 						<entry>Device Simulator Reference</entry>
 						<entry>Overview with focus on installation and configuration</entry>
+					</row>
+					<row>
+						<entry>
+							<ulink
+								url="http://tracker.verticon.com/Tracker/documentation/TrackerCloud_datasheet.pdf">
+								TrackerCloud_datasheet.pdf
+							</ulink>
+						</entry>
+						<entry>Tracker Cloud DataSheet</entry>
+						<entry>Tracker Cloud Product DataSheet - Goals, Benefits and Features</entry>
 					</row>
 				</tbody>
 			</tgroup>

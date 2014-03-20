@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 
 <webpage id="downloads">
-	<config param="rcsdate" value="$Date: 2011-12-24 13:35:57 -0600 (Sat, 24 Dec 2011) $" />
+	<config param="rcsdate" value="$Date: 2013-10-20 12:32:14 -0500 (Sun, 20 Oct 2013) $" />
 	<head>
 		<title>Downloads</title>
 		<summary>Software Distribution and Update Sites</summary>
@@ -43,9 +43,29 @@ release.lin.size=50.2M
 					</row>
 					<row>
 						<entry>
+							<ulink 
+								url="http://tracker.verticon.com/Tracker/downloads/Tracker-win32.win32.x86_64-@release.version@.zip">
+								Tracker-win32.win32.x86_64-@release.version@.zip
+							</ulink>
+						</entry>
+						<entry>@release.win.size@</entry>
+						<entry>WIN</entry>
+					</row>
+					<row>
+						<entry>
 							<ulink
 								url="http://tracker.verticon.com/Tracker/downloads/Tracker-linux.gtk.x86-@release.version@.tar">
 								Tracker-linux.gtk.x86-@release.version@.tar
+							</ulink>
+						</entry>
+						<entry>@release.lin.size@</entry>
+						<entry>Linux</entry>
+					</row>
+					<row>
+						<entry>
+							<ulink
+								url="http://tracker.verticon.com/Tracker/downloads/Tracker-linux.gtk.x86_64-@release.version@.tar">
+								Tracker-linux.gtk.x86_64-@release.version@.tar
 							</ulink>
 						</entry>
 						<entry>@release.lin.size@</entry>

@@ -1,17 +1,22 @@
 <webpage id="iRouter">
   <config param="rcsdate" value="$Date: 2009-08-19 20:26:08 -0500 (Wed, 19 Aug 2009) $"/>
   <head>
-    <title>iRouter - Information Router Appliance</title>
+    <title>iRouter - M2M Integration Infrastructure</title>
     <summary>
-    Integration, Data Acquisition and Control Appliance.
+	iRouter reduces complexity by “integrating” sensors, actuators, and RFID readers creating a non-intrusive, 
+	easily deployed, adaptive solution for building the Agri-premises based Internet of Things (IoT) . 
     </summary>
-    <keywords>Tracker, iRouter, Eclipse, OSGi</keywords>
+    <keywords>Tracker, iRouter, M2M, IoT, Eclipse, OSGi</keywords>
   </head>
   <para>
-    The iRouter (Information Router) is an content event processor and integration solution for acquiring, transforming 
-    and exchanging information between network connected sensors and actuators.  The iRouter - a Just-In-Time 
-    integration solution for multiple input devices, sensors and actuators.</para>
-  
+    Tracker <acronym>iRouter</acronym> (Information Router) is an content event processor and Machine to Machine (M2M) 
+    integration solution for acquiring, transforming, exchanging and loading information between network connected sensors, 
+    actuators and systems.  
+   </para>
+   <para>
+	Tracker <acronym>iRouter</acronym> reduces complexity by “integrating” sensors, actuators, and RFID readers creating a non-intrusive, 
+	easily deployed, adaptive Just-In-Time solution for building the Agri-premises based Internet of Things (IoT).  
+	</para>
   <section id="businessIntelligenceFeatures">
     <title>iRouter Standards</title>
     <para>
@@ -22,7 +27,7 @@
 				</footnote>;</para>
 			</listitem>
 			<listitem >
-				<para>integrated with the <olink targetdoc="trackerPro">Tracker Professional</olink>;</para>
+				<para>integrated with the <olink targetdoc="trackerPro">Tracker Workbench</olink>;</para>
 			</listitem>
 			<listitem>
 				<para>or provisioned within a full Eclipse application.</para>

@@ -1,13 +1,13 @@
 <webpage id="contact">
-  <config param="rcsdate" value="$Date: 2009-03-17 18:59:39 -0500 (Tue, 17 Mar 2009) $"/>
+  <config param="rcsdate" value="$Date: 2014-01-20 20:40:20 -0600 (Mon, 20 Jan 2014) $"/>
   <head>
     <title>Contact Us</title>
     <summary>How to reach us</summary>
     <keywords>Verticon, Inc. Contact information</keywords>
   </head>
   <para>
-    We really value your feedback about Tracker. If your interested in using
-    the Tracker and participating in the Beta program or if your a developer and wish
+    We really value your feedback about Tracker. If your interested in using the Tracker and 
+    participating in the Beta program or if your a developer and wish
     to contribute, please send us an email or give us a call.
   </para>
 
@@ -20,7 +20,7 @@
       <city>Viroqua</city>
       <state>WI</state>
       <country>USA</country>
-      <phone>608 606 1292</phone>
+      <phone>608-620-4938</phone>
       <email>info-at-verticon.com</email>
     </address>
   </sidebar>
