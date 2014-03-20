@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+# HOW TO Change LOGBack configuration at program launch,
+#
+# in linux:
+# ./tracker -vmargs -Dlogback.configurationFile=file:/home/jconlon/Desktop/tracker/logback-test.xml 
+# or in windows with:
+# "C:\Program Files\tracker\tracker.exe" -vmargs "-Dlogback.configurationFile=file:C:/Downloads/tracker/logback-test.xml"
+#
+#
+# This file is the default logback configuration file for Tracker.
+
+<configuration debug="true" scan="true">
+-->
+<configuration scan="true" debug="false">
+  
+ <appender name="STDOUT"
+    class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%-4relative %-5level %logger{35} - %msg %n</pattern>
+    </encoder>
+  </appender>
+
+  <logger name="com.verticon.tracker">
+    <level value="WARN"/>
+  </logger>
+  
+  <root>
+   <level value="WARN"/>
+   <appender-ref ref="STDOUT"/>
+  </root>
+  
+ 	
+ 
+</configuration>

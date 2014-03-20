@@ -5,10 +5,6 @@
 instructions.configure = \
     addRepository(location:http${#58}//tracker.verticon.com/Tracker/updates,type:0,name:Tracker Release,enabled:true);\
     addRepository(location:http${#58}//tracker.verticon.com/Tracker/updates,type:1,name:Tracker Release,enabled:true);\
-    addRepository(location:http${#58}//rxtx.qbang.org/eclipse,type:0,name:RXTX,enabled:true);\
-    addRepository(location:http${#58}//rxtx.qbang.org/eclipse,type:1,name:RXTX,enabled:true);\
-    addRepository(location:http${#58}//www.rxtx.org/eclipse,type:0,name:RXTX Deprecated,enabled:false);\
-    addRepository(location:http${#58}//www.rxtx.org/eclipse,type:1,name:RXTX Deprecated,enabled:false);\
     addRepository(location:http${#58}//download.eclipse.org/datatools/updates,type:0,name:Eclipse Datatools,enabled:true);\
     addRepository(location:http${#58}//download.eclipse.org/datatools/updates,type:1,name:Eclipse Datatools,enabled:true);\
     addRepository(location:http${#58}//download.eclipse.org/releases/kepler,type:0,name:Eclipse Kepler Release,enabled:true);\
