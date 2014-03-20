@@ -4,7 +4,7 @@
   <properties size='1'>
     <property name='p2.timestamp' value='1270076671956'/>
   </properties>
-  <children size='31'>
+  <children size='33'>
     <child location='product-desktop.beta.01'/>
     <child location='features-desktop.beta.01'/>
     <child location='features-desktop.beta.01.v20100409'/>
@@ -35,6 +35,8 @@
     <child location='features-desktop.e4.migration'/>
     <child location='features-desktop.ecvi.beta.0.1'/>
     <child location='features-desktop.ecvi.beta.0.2'/>
+    <child location='features-desktop.beta.12'/>
+    <child location='product-desktop.0.9.0'/>
     <child location='categories'/>
   </children>
 </repository>

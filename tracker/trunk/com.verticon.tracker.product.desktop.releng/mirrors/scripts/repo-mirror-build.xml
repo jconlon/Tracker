@@ -71,7 +71,7 @@
 	
 	<target name="create-mirror-datatools">
 	   	    
-			<p2.mirror source="http://download.eclipse.org/datatools/updates" destination="${mirrors.dir}datatools">
+			<p2.mirror source="http://download.eclipse.org/datatools/updates" destination="${mirrors.dir}datatools-kepler-SR2">
 				<iu id="org.eclipse.datatools.sdk.feature.feature.group"/>
 			</p2.mirror>
 	</target>
@@ -340,7 +340,7 @@
 	
 	<!-- Used for EMF Client-->
 		<target name="create-mirror-emf-client">
-					<p2.mirror source="http://download.eclipse.org/emfclient/releases/102" destination="${mirrors.dir}emf-client">
+					<p2.mirror source="http://download.eclipse.org/ecp/releases/releases_12" destination="${mirrors.dir}emf-client">
 						<!--iu id="org.eclipse.emf.ecp.sdk.feature.feature.group"/-->
 						<iu id="org.eclipse.emf.ecp.feature.feature.group" />
 						<iu id="org.eclipse.emf.ecp.e3.feature.feature.group" />
@@ -358,6 +358,13 @@
 								<iu id="org.eclipse.rcp.sdk.id" />
 							</p2.mirror>
 	</target>
+	
+	<!-- Keplar -->
+		<target name= "create-mirror-keplar-pde-SR2">
+			<p2.mirror source="http://download.eclipse.org/eclipse/updates/4.3" destination="${mirrors.dir}kepler-pde-sr2">
+									<iu id="org.eclipse.rcp.sdk.id" />
+								</p2.mirror>
+		</target>
 			
 	
 	<!-- Default but Currently not used -->

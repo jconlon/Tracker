@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target name="eclipse4-64_rcp" sequenceNumber="84">
+<locations>
+<location path="/opt/Junit3" type="Directory"/>
+<location path="/opt/Eclipse/xtext-unittesting/eclipse" type="Directory"/>
+<location path="/opt/logback-1.0.11" type="Directory"/>
+<location path="/opt/mongo-2.11.1" type="Directory"/>
+<location path="/opt/Eclipse/apache-commons" type="Directory"/>
+<location path="/opt/Eclipse/google-guava-11.01" type="Directory"/>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.validation.ocl.source.feature.group" version="1.7.0.201306111341"/>
+<unit id="org.eclipse.emf.validation.master.feature.group" version="1.7.0.201306111341"/>
+<unit id="org.eclipse.emf.validation.source.feature.group" version="1.7.0.201306111341"/>
+<unit id="org.eclipse.emf.validation.doc.feature.group" version="1.7.0.201306111341"/>
+<unit id="org.eclipse.emf.validation.examples.feature.group" version="1.7.0.201306111341"/>
+<unit id="org.eclipse.emf.validation.feature.group" version="1.7.0.201306111341"/>
+<unit id="org.eclipse.emf.validation.tests.feature.group" version="1.7.0.201306111341"/>
+<unit id="org.eclipse.emf.validation.examples.source.feature.group" version="1.7.0.201306111341"/>
+<unit id="org.eclipse.emf.validation.ocl.feature.group" version="1.7.0.201306111341"/>
+<unit id="org.eclipse.emf.validation.sdk.feature.group" version="1.7.0.201306111341"/>
+<repository location="jar:file:/opt/Eclipse/emf-validation-Update-1.7.0/emf-validation-Update-1.7.0.zip!/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.transaction.examples.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.workspace.source.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.workspace.examples.source.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.transaction.tests.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.workspace.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.transaction.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.transaction.master.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.transaction.doc.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.transaction.examples.source.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.transaction.source.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.workspace.examples.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.workspace.doc.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.transaction.sdk.feature.group" version="1.7.0.201306111400"/>
+<repository location="jar:file:/opt/Eclipse/emf-transaction-Updte-1.7.0/emf-transaction-Update-1.7.0.zip!/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.ocl.all.sdk.feature.group" version="4.2.0.v20130921-0708"/>
+<unit id="org.eclipse.ocl.master.feature.group" version="4.2.0.v20130922-2057"/>
+<unit id="org.eclipse.ocl.examples.feature.group" version="3.4.0.v20130922-2057"/>
+<unit id="org.eclipse.ocl.core.sdk.feature.group" version="4.2.0.v20130921-0708"/>
+<repository location="jar:file:/opt/Eclipse/mdt-ocl-Update-core-4.2.0/mdt-ocl-Update-S201309241718.zip!/"/>
+</location>
+<location path="/opt/Eclipse/swtbot/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/mongoemf-0.7.0/eclipse" type="Directory"/>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.equinox.p2.sdk.feature.group" version="3.8.0.v20130604-2046"/>
+<unit id="org.eclipse.equinox.compendium.sdk.feature.group" version="3.8.0.v20130515-2026"/>
+<unit id="org.eclipse.equinox.p2.rcp.feature.feature.group" version="1.2.0.v20130604-2046"/>
+<unit id="org.eclipse.equinox.core.sdk.feature.group" version="3.8.0.v20130529-1710"/>
+<repository location="jar:file:/opt/Eclipse/equinox-SDK-Kepler-Update/equinox-SDK-Kepler.zip!/"/>
+</location>
+<location path="/opt/Eclipse/monitoradmin" type="Directory"/>
+<location path="/opt/slf4j-1.7.5" type="Directory"/>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="gnu.io.rxtx.sdk.feature.group" version="2.1.7.4_v20071016-417C7DP1Bh_eEaQJBrHBHg"/>
+<unit id="gnu.io.rxtx.feature.group" version="2.1.7.4_v20071016-7B57e7UAXMAAqGAGf"/>
+<repository location="file:/opt/Eclipse/mirrors/rxtx/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.common.feature.group" version="2.9.0.v20130528-0742"/>
+<unit id="org.eclipse.emf.codegen.source.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.mapping.source.feature.group" version="2.7.0.v20130610-0406"/>
+<unit id="org.eclipse.xsd.ecore.converter.source.feature.group" version="2.8.0.v20130610-0406"/>
+<unit id="org.eclipse.xsd.sdk.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.xsd.doc.feature.group" version="2.8.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.codegen.ecore.source.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.mapping.ui.feature.group" version="2.7.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.databinding.feature.group" version="1.3.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.oda.source.feature.group" version="1.2.0.v20130610-0406"/>
+<unit id="org.eclipse.xsd.editor.feature.group" version="2.7.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.ecore.edit.feature.group" version="2.8.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.ecore.edit.source.feature.group" version="2.8.0.v20130610-0406"/>
+<unit id="org.eclipse.xsd.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.mapping.ecore.feature.group" version="2.7.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.converter.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.oda.ecore.feature.group" version="1.2.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.doc.source.feature.group" version="2.8.0.v20130610-0406"/>
+<unit id="org.eclipse.xsd.editor.source.feature.group" version="2.7.0.v20130610-0406"/>
+<unit id="org.eclipse.xsd.mapping.feature.group" version="2.7.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.edit.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.ecore.editor.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.doc.feature.group" version="2.8.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.codegen.ui.source.feature.group" version="2.7.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.databinding.edit.source.feature.group" version="1.3.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.oda.ecore.source.feature.group" version="1.2.0.v20130610-0406"/>
+<unit id="org.eclipse.xsd.mapping.source.feature.group" version="2.7.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.codegen.ecore.ui.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.edit.ui.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.oda.ecore.ui.source.feature.group" version="1.1.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.oda.ecore.ui.feature.group" version="1.1.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.oda.feature.group" version="1.2.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.mapping.ecore.editor.feature.group" version="2.8.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.edit.source.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.ecore.feature.group" version="2.9.0.v20130528-0742"/>
+<unit id="org.eclipse.emf.oda.sdk.feature.group" version="1.2.0.v20130610-0406"/>
+<unit id="org.eclipse.xsd.mapping.editor.feature.group" version="2.8.0.v20130610-0406"/>
+<unit id="org.eclipse.xsd.source.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.xsd.ecore.converter.feature.group" version="2.8.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.common.ui.feature.group" version="2.8.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.codegen.ecore.ui.source.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.source.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.databinding.source.feature.group" version="1.3.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.mapping.ecore.editor.source.feature.group" version="2.8.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.edit.ui.source.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.xsd.edit.feature.group" version="2.7.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.mapping.ecore.source.feature.group" version="2.7.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.common.ui.source.feature.group" version="2.8.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.mapping.ui.source.feature.group" version="2.7.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.converter.source.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.xsd.edit.source.feature.group" version="2.7.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.mapping.feature.group" version="2.7.0.v20130610-0406"/>
+<unit id="org.eclipse.xsd.mapping.editor.source.feature.group" version="2.8.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.codegen.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.databinding.edit.feature.group" version="1.3.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.codegen.ecore.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.ecore.editor.source.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.codegen.ui.feature.group" version="2.7.0.v20130610-0406"/>
+<repository location="file:/opt/Eclipse/mirrors/kepler-emf-xsd/"/>
+</location>
+<location path="/opt/Eclipse/metrics/eclipse" type="Directory"/>
+<location path="/opt/hamcrest-1.3.0/plugins" type="Directory"/>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.birt.chart.integration.wtp.feature.group" version="4.3.1.v20130917-1035-5207w31241A2802146"/>
+<unit id="org.eclipse.birt.chart.cshelp.feature.group" version="4.3.1.v201308301349-5207w31241941245A"/>
+<unit id="org.eclipse.birt.chart.feature.group" version="4.3.1.v201308301349-828v7EFQCnvKm71SELRN7"/>
+<unit id="org.eclipse.birt.source.feature.group" version="4.3.1.v201308301349-DTDN8fGjtEqcbZz0BQWLW07D_cfT"/>
+<unit id="org.eclipse.birt.doc.isv.feature.group" version="4.3.1.v201308301349-5207w31241A132729"/>
+<unit id="org.eclipse.birt.chart.doc.isv.feature.group" version="4.3.1.v201308301349-5207w31241941245A"/>
+<unit id="org.eclipse.birt.cshelp.feature.group" version="4.3.1.v201308301349-5207w31241A242569"/>
+<unit id="org.eclipse.birt.report.designer.editor.xml.wtp.feature.group" version="4.3.1.v201308301349-8F8y7OFT0z0-U-CZbeSSZC"/>
+<unit id="org.eclipse.birt.chart.osgi.runtime.sdk.feature.group" version="4.3.1.v201308301349-795185HCXDNQdhQHsHT71b8UA1Zf"/>
+<unit id="org.eclipse.birt.example.feature.group" version="4.3.1.v201308301349-7T7K6DZRDKYE5WKKVdA"/>
+<unit id="org.eclipse.birt.chart.osgi.runtime.source.feature.group" version="4.3.1.v201308301349-8C9T7KFYeMBl5QxoPeJol"/>
+<unit id="org.eclipse.birt.feature.group" version="4.3.1.v201308301349-DTDN8fGjtEqcbZz0BQWLW07D_cfT"/>
+<unit id="org.eclipse.birt.integration.wtp.feature.group" version="4.3.1.v20130917-1035-5207w31241A2802146"/>
+<unit id="org.eclipse.birt.chart.source.feature.group" version="4.3.1.v201308301349-828v7EFQCnvKm71SELRN7"/>
+<unit id="org.eclipse.birt.osgi.runtime.source.feature.group" version="4.3.1.v201308301349-BTC489GHd2hB17i_V1-Of6"/>
+<unit id="org.eclipse.birt.osgi.runtime.feature.group" version="4.3.1.v201308301349-BTC489GHd2hB17i_V1-Of6"/>
+<unit id="org.eclipse.birt.chart.integration.wtp.source.feature.group" version="4.3.1.v20130917-1035-5207w31241A2802146"/>
+<unit id="org.eclipse.birt.integration.wtp.source.feature.group" version="4.3.1.v20130917-1035-5207w31241A2802146"/>
+<unit id="org.eclipse.birt.doc.feature.group" version="4.3.1.v201308301349-5207w31241A242569"/>
+<unit id="org.eclipse.birt.chart.osgi.runtime.feature.group" version="4.3.1.v201308301349-8C9T7KFYeMBl5QxoPeJol"/>
+<unit id="org.eclipse.birt.osgi.runtime.sdk.feature.group" version="4.3.1.v201308301349-795188YF8ECRNg6nID9x3j8A_yQe"/>
+<repository location="file:/opt/Eclipse/mirrors/birt-4_3/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.platform.sdk" version="4.3.0.I20130605-2000"/>
+<unit id="org.eclipse.net4j.util.feature.group" version="4.2.0.v20130601-1611"/>
+<repository location="http://download.eclipse.org/releases/kepler/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.net4j.ui.feature.group" version="4.2.0.v20130601-1611"/>
+<unit id="org.eclipse.net4j.defs.feature.group" version="4.2.1.v20130806-0658"/>
+<unit id="org.eclipse.net4j.examples.feature.group" version="4.2.0.v20130601-0759"/>
+<unit id="org.eclipse.net4j.util.ui.feature.group" version="4.2.0.v20130730-0902"/>
+<unit id="org.eclipse.net4j.doc.feature.group" version="4.2.0.v20130612-0849"/>
+<unit id="org.eclipse.net4j.db.feature.group" version="4.2.1.v20130730-0902"/>
+<unit id="org.eclipse.net4j.feature.group" version="4.2.1.v20130806-0658"/>
+<unit id="org.eclipse.net4j.util.feature.group" version="4.2.0.v20130601-1611"/>
+<unit id="org.eclipse.net4j.tests.feature.group" version="4.2.0.v20130503-1908"/>
+<unit id="org.eclipse.net4j.sdk.feature.group" version="4.2.1.v20130806-0658"/>
+<repository location="jar:file:/opt/Eclipse/mirrors/cdo/emf-cdo-R20130918-0029-Site.zip!/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.common.feature.group" version="2.9.0.v20130528-0742"/>
+<unit id="org.eclipse.rcp.sdk.id" version="4.3.0.I20130605-2000"/>
+<unit id="org.eclipse.rcp.source.feature.group" version="4.3.0.v20130605-2000"/>
+<unit id="org.eclipse.emf.ecore.feature.group" version="2.9.0.v20130528-0742"/>
+<unit id="org.eclipse.e4.rcp.source.feature.group" version="1.2.0.v20130605-1738"/>
+<repository location="file:/opt/Eclipse/mirrors/kepler-pde/"/>
+</location>
+<location path="/opt/Eclipse/eclipse-4.3-delta-pack/eclipse" type="Directory"/>
+<location path="/opt/Eclipse/apache/eclipse" type="Directory"/>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.compare.ide.ui.feature.group" version="2.1.1.201309031318"/>
+<unit id="org.eclipse.emf.compare.diagram.gmf.feature.group" version="2.1.1.201309031318"/>
+<unit id="org.eclipse.emf.compare.diagram.ecoretools.feature.group" version="2.1.1.201309031318"/>
+<unit id="org.eclipse.emf.compare.diagram.papyrus.feature.group" version="2.1.1.201309031318"/>
+<unit id="org.eclipse.emf.compare.ide.ui.source.feature.group" version="2.1.1.201309031318"/>
+<unit id="org.eclipse.emf.compare.rcp.ui.feature.group" version="2.1.1.201309031318"/>
+<unit id="org.eclipse.emf.compare.feature.group" version="2.1.1.201309031318"/>
+<unit id="org.eclipse.emf.compare.uml2.feature.group" version="2.1.1.201309031318"/>
+<unit id="org.eclipse.emf.compare.source.feature.group" version="2.1.1.201309031318"/>
+<unit id="org.eclipse.emf.compare.rcp.ui.source.feature.group" version="2.1.1.201309031318"/>
+<repository location="jar:file:/opt/Eclipse/emf-compare-update-2.1.1/emf-compare-update-2.1.1.zip!/"/>
+</location>
+<location path="/opt/orbit-org.slf4j-1.5.11" type="Directory"/>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.datatools.connectivity.oda.feature.feature.group" version="1.11.0.v201302211047-7H7D7WCcNBHRCfIfDfUc"/>
+<unit id="org.eclipse.datatools.connectivity.oda.designer.core.feature.source.feature.group" version="1.11.0.v201302211047-7B7C7UCcNBGWEXDhDbYg"/>
+<unit id="org.eclipse.datatools.connectivity.oda.designer.feature.feature.group" version="1.11.0.v201302211047-4137w312412222241"/>
+<unit id="org.eclipse.datatools.enablement.oda.feature.source.feature.group" version="1.11.0.v201302211047-7A7T7FDZRDKKEeFlGbIQ"/>
+<unit id="org.eclipse.datatools.enablement.oda.designer.feature.feature.group" version="1.11.0.v201302211047-337A8s73593D7E43B5"/>
+<unit id="org.eclipse.datatools.connectivity.feature.feature.group" version="1.11.0.v201302211047-7C7k98Et1byqRCfljSoSHcUXJ3K"/>
+<unit id="org.eclipse.datatools.connectivity.oda.feature.source.feature.group" version="1.11.0.v201302211047-7H7D7WCcNBHRCfIfDfUc"/>
+<unit id="org.eclipse.datatools.enablement.sdk.feature.feature.group" version="1.11.0.v201302211047-7I9v-FE9JgQGiXyVBMyG1XWskAK0"/>
+<unit id="org.eclipse.datatools.connectivity.oda.designer.core.feature.feature.group" version="1.11.0.v201302211047-7B7C7UCcNBGWEXDhDbYg"/>
+<unit id="org.eclipse.datatools.enablement.jdt.feature.feature.group" version="1.11.0.v201302211047-2-07w312218332612"/>
+<unit id="org.eclipse.datatools.enablement.oda.designer.feature.source.feature.group" version="1.11.0.v201302211047-337A8s73593D7E43B5"/>
+<unit id="org.eclipse.datatools.connectivity.oda.designer.feature.source.feature.group" version="1.11.0.v201302211047-4137w312412222241"/>
+<unit id="org.eclipse.datatools.enablement.jdt.feature.source.feature.group" version="1.11.0.v201302211047-2-07w312218332612"/>
+<unit id="org.eclipse.datatools.connectivity.doc.user.feature.group" version="1.11.0.v201302211047-37D-7733L3D753L7BBF"/>
+<unit id="org.eclipse.datatools.intro.feature.group" version="1.11.0.v201302211047-26-7w312116392911"/>
+<unit id="org.eclipse.datatools.connectivity.feature.source.feature.group" version="1.11.0.v201302211047-7C7k98Et1byqRCfljSoSHcUXJ3K"/>
+<unit id="org.eclipse.datatools.enablement.feature.feature.group" version="1.11.0.v201302211047-7J9e0BWxjQqR0kgQ1jnlpGyTAuTm"/>
+<unit id="org.eclipse.datatools.enablement.oda.feature.feature.group" version="1.11.0.v201302211047-7A7T7FDZRDKKEeFlGbIQ"/>
+<unit id="org.eclipse.datatools.sdk.feature.feature.group" version="1.11.0.v201302211047-7PAi1FEpPZFKYstHw29WUuTdipv3"/>
+<unit id="org.eclipse.datatools.enablement.feature.source.feature.group" version="1.11.0.v201302211047-7J9e0BWxjQqR0kgQ1jnlpGyTAuTm"/>
+<repository location="file:/opt/Eclipse/mirrors/kepler-datatools/"/>
+</location>
+<location path="/opt/easymock" type="Directory"/>
+<location path="/opt/Eclipse/google-inject" type="Directory"/>
+<location path="/opt/ekkesCornerLogging/eclipse-target" type="Directory"/>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.ecp.view.separator.feature.feature.group" version="1.1.1.20131114-1613"/>
+<unit id="org.eclipse.emf.ecp.view.horizontal.feature.feature.group" version="1.1.1.20131114-1613"/>
+<unit id="org.eclipse.emf.ecp.view.vertical.feature.feature.group" version="1.1.1.20131114-1613"/>
+<unit id="org.eclipse.emf.ecp.view.label.feature.feature.group" version="1.1.1.20131114-1613"/>
+<unit id="org.eclipse.emf.ecp.validation.feature.feature.group" version="1.1.1.20131114-1613"/>
+<unit id="org.eclipse.emf.ecp.view.validation.feature.feature.group" version="1.1.1.20131114-1613"/>
+<unit id="org.eclipse.emf.ecp.feature.feature.group" version="1.1.1.20131114-1613"/>
+<unit id="org.eclipse.emf.ecp.view.group.feature.feature.group" version="1.1.1.20131114-1613"/>
+<unit id="org.eclipse.emf.ecp.e3.feature.feature.group" version="1.1.1.20131114-1613"/>
+<unit id="org.eclipse.emf.ecp.view.groupedgrid.feature.feature.group" version="1.1.1.20131114-1613"/>
+<unit id="org.eclipse.emf.ecp.view.model.ide.feature.feature.group" version="1.1.1.20131114-1613"/>
+<unit id="org.eclipse.emf.ecp.workspace.feature.feature.group" version="1.1.1.20131114-1613"/>
+<unit id="org.eclipse.emf.ecp.view.custom.feature.feature.group" version="1.1.1.20131114-1613"/>
+<unit id="org.eclipse.emf.ecp.view.rule.feature.feature.group" version="1.1.1.20131114-1613"/>
+<unit id="org.eclipse.emf.ecp.viewmodel.feature.feature.group" version="1.1.1.20131114-1613"/>
+<unit id="org.eclipse.emf.ecp.view.table.feature.feature.group" version="1.1.1.20131114-1613"/>
+<repository location="file:/opt/Eclipse/mirrors/emf-client-111/eclipse/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.gef.all.feature.group" version="3.9.0.201305060205"/>
+<repository location="file:/opt/Eclipse/mirrors/gef-kepler/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.query.examples.feature.group" version="1.7.0.201306111332"/>
+<unit id="org.eclipse.emf.query.source.feature.group" version="1.7.0.201306111332"/>
+<unit id="org.eclipse.emf.query.tests.feature.group" version="1.7.0.201306111332"/>
+<unit id="org.eclipse.emf.query.master.feature.group" version="1.7.0.201306111332"/>
+<unit id="org.eclipse.emf.query.examples.source.feature.group" version="1.7.0.201306111332"/>
+<unit id="org.eclipse.emf.query.ocl.source.feature.group" version="1.7.0.201306111332"/>
+<unit id="org.eclipse.emf.query.doc.feature.group" version="1.7.0.201306111332"/>
+<unit id="org.eclipse.emf.query.feature.group" version="1.7.0.201306111332"/>
+<unit id="org.eclipse.emf.query.ocl.feature.group" version="1.7.0.201306111332"/>
+<unit id="org.eclipse.emf.query.sdk.feature.group" version="1.7.0.201306111332"/>
+<repository location="jar:file:/opt/Eclipse/emf-query-Update-1.7.0/emf-query-Update-1.7.0.zip!/"/>
+</location>
+</locations>
+</target>
