@@ -71,6 +71,7 @@ public class SelectDeviceWizardPage extends WizardPage implements
 	 * 
 	 * @see org.eclipse.jface.dialogs.IDialogPage#createControl(org.eclipse.swt.widgets.Composite)
 	 */
+	@Override
 	public void createControl(Composite parent) {
 		Composite container = new Composite(parent, SWT.NULL);
 		final GridLayout gridLayout = new GridLayout();
@@ -87,16 +88,19 @@ public class SelectDeviceWizardPage extends WizardPage implements
 
 		listViewer.setContentProvider(new IStructuredContentProvider() {
 
+			@Override
 			public Object[] getElements(Object inputElement) {
 				RemoteDevice[] names = new RemoteDevice[] {};
 				names = remoteDevices.toArray(names);
 				return names;
 			}
 
+			@Override
 			public void dispose() {
 
 			}
 
+			@Override
 			public void inputChanged(Viewer viewer, Object oldInput,
 					Object newInput) {
 
@@ -119,6 +123,7 @@ public class SelectDeviceWizardPage extends WizardPage implements
 	/**
 	 * User selected a device.
 	 */
+	@Override
 	public void selectionChanged(SelectionChangedEvent event) {
 		this.selectedDevice = null;
 		ISelection selection = event.getSelection();
@@ -146,6 +151,7 @@ public class SelectDeviceWizardPage extends WizardPage implements
 	/**
 	 * Called by the discovery task thread.
 	 */
+	@Override
 	public void deviceDiscovered(RemoteDevice arg0, DeviceClass arg1) {
 		logger.debug(bundleMarker,"Adding device {} to list of discovered devices.", arg0);
 		remoteDevices.add(arg0);
@@ -154,6 +160,7 @@ public class SelectDeviceWizardPage extends WizardPage implements
 	/**
 	 * Called by the discovery task thread.
 	 */
+	@Override
 	public void inquiryCompleted(int arg0) {
 		switch (arg0) {
 		case DiscoveryListener.INQUIRY_COMPLETED:
@@ -173,6 +180,7 @@ public class SelectDeviceWizardPage extends WizardPage implements
 		}
 		getContainer().getShell().getDisplay().asyncExec(new Runnable() {
 
+			@Override
 			public void run() {
 				listViewer.refresh();
 
@@ -198,10 +206,12 @@ public class SelectDeviceWizardPage extends WizardPage implements
 
 	}
 
+	@Override
 	public void serviceSearchCompleted(int arg0, int arg1) {
 		// ignore
 	}
 
+	@Override
 	public void servicesDiscovered(int arg0, ServiceRecord[] arg1) {
 		// ignore
 	}
@@ -221,35 +231,13 @@ public class SelectDeviceWizardPage extends WizardPage implements
 		setErrorMessage(null);
 		remoteDevices.clear();
 		setMessage("Discovering Bluetooth devices please wait...");
-		IRunnableWithProgress op = new IRunnableWithProgress() {
-			public void run(IProgressMonitor progress) {
-				barrier = new CyclicBarrier(2);
-				progress.beginTask("Performing operation ",
-						IProgressMonitor.UNKNOWN);
-				DiscoveryAgent agent = null;
-				try {
-					agent = LocalDevice.getLocalDevice().getDiscoveryAgent();
-					agent.startInquiry(DiscoveryAgent.GIAC,
-							SelectDeviceWizardPage.this);
-					barrier.await();
-				} catch (BluetoothStateException e) {
-					SelectDeviceWizardPage.this
-							.setErrorMessage("Failed to get a discovery agent. "
-									+ e);
-					return;
-				} catch (InterruptedException e) {
-					// interrupted at the barrier, reset the interrupt status
-					// and fall through
-					Thread.currentThread().interrupt();
-				} catch (BrokenBarrierException e) {
-					logger
-							.error("Should not have broken through this barrier.");
-				}
-				progress.done();
-			}
-		};
+
 		try {
+			DiscoverDevice op = new DiscoverDevice();
 			getContainer().run(true, true, op);
+			if (op.ex != null) {
+				setErrorMessage(op.ex.getLocalizedMessage());
+			}
 		} catch (InvocationTargetException e) {
 			return;
 		} catch (InterruptedException e) {
@@ -257,6 +245,8 @@ public class SelectDeviceWizardPage extends WizardPage implements
 			// through
 			Thread.currentThread().interrupt();
 			return;
+		} catch (IllegalStateException e) {
+			setErrorMessage("Failed to get a discovery agent. " + e);
 		}
 
 		return;
@@ -282,4 +272,37 @@ public class SelectDeviceWizardPage extends WizardPage implements
 
 	}
 
+	class DiscoverDevice implements IRunnableWithProgress {
+		Exception ex = null;
+
+		@Override
+		public void run(IProgressMonitor progress) {
+			barrier = new CyclicBarrier(2);
+
+			DiscoveryAgent agent = null;
+			try {
+				progress.beginTask("Performing operation ",
+						IProgressMonitor.UNKNOWN);
+				logger.debug(bundleMarker, "Accessing bluetooth stack.");
+				LocalDevice localDevice = LocalDevice.getLocalDevice();
+				agent = localDevice.getDiscoveryAgent();
+				agent.startInquiry(DiscoveryAgent.GIAC,
+						SelectDeviceWizardPage.this);
+				barrier.await();// wait for the completion
+			} catch (BluetoothStateException e) {
+				logger.error("Failed to find a bluetooth discovery agent.", e);
+				ex = e;
+			} catch (InterruptedException e) {
+				// interrupted at the barrier, reset the interrupt status
+				// and fall through
+				Thread.currentThread().interrupt();
+			} catch (BrokenBarrierException e) {
+				logger.error("Should not have broken through this barrier.");
+			} finally {
+				progress.done();
+			}
+
+		}
+
+	}
 }
