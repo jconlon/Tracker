@@ -294,6 +294,7 @@ used with other Eclipse (4.3) based offerings.
       <feature id="org.eclipse.emf.ecp.e3.feature"/>
       <feature id="org.eclipse.net4j.util"/>
       <feature id="org.usaha.ecvi"/>
+      <feature id="com.verticon.tracker.irouter.mqtt"/>
    </features>
 
    <configurations>

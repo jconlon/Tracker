@@ -3,30 +3,23 @@
 	<loadproperties srcFile="buildProduct.properties"/>
 
 	<property name="repo" location="${basedir}/repository"/>
-	<property name="base" location="${repo}/product-desktop.beta.11"/>
-	<property name="child" location="${repo}/features-desktop.beta.12"/>
-	<property name="categories" location="${repo}/categories"/>
-	
+	<property name="base" location="${repo}/${productRepoName}"/>
+											
 	<target name="main">
 
-		<!-- Check for base target platform co-located with eclipse -->
+		<!-- Check for base target platform  -->
 		<property name="baseLocation" location="${base}/eclipse"/>
 		<available property="haveBase" file="${baseLocation}"/>
 		<fail unless="haveBase" message="The base of the target platform is required to build this product.  Please edit buildProduct.xml or set the &quot;base&quot; property or check ${baseLocation}" />
 		<echoproperties/>
-		<!-- Check for deltapack co-located with eclipse -->
+		<!-- Check for deltapack  -->
 		<available property="haveDeltaPack" file="${deltapack}"/>
 		<fail unless="haveDeltaPack" message="The deltapack is required to build this product.  Please edit buildProduct.xml or set the &quot;deltapack&quot; property." />
-
-		<!-- Check that we have a miscTargetPlatform -->
-		<available property="haveMiscTargetPlatform" file="${miscTargetPlatform}"/>
-		<fail unless="haveMiscTargetPlatform" message="The misc target platform is required to build this product.  Please edit buildProduct.xml or set the &quot;miscTargetPlatform&quot; property." />
-
+	
 		<property name="builder" value="${basedir}" />
 		<property name="buildDirectory" value="${basedir}/buildDirectory"/>
 
-		<!--property name="pluginPath" value="${basedir}/..${path.separator}${deltapack}${path.separator}${miscTargetPlatform}" /-->
-		<property name="pluginPath" value="${basedir}/.." />
+		<property name="pluginPath" value="${basedir}/..${path.separator}${deltapack}${path.separator}${base}" />
 
 		<property name="buildTempFolder" value="${buildDirectory}" />
 
@@ -76,22 +69,6 @@
 		<sync todir="${repo.dir.for.syncing}">
 		  <fileset dir="${product.repo.dir}"/>
 		</sync>
-
-
-		<!-- Deprecated 
-		sync features repo to syncing dir location 
-		<property name="updatesite.project" value="com.verticon.tracker.updatesite"/>
-
-		<property name="features.repo.dir" location="${basedir}/../${updatesite.project}"/>			
-		<available property="haveFeaturesSyncDir" file="${features.repo.dir}"/>
-		<fail unless="haveFeaturesSyncDir" message="The Features Repository directory location is required to build this product.  Please edit buildProduct.xml or set the &quot;features.repo.dir&quot; property or check ${features.repo.dir}." />
-
-		<sync todir="${features.repo.dir.for.syncing}">
-				  <fileset dir="${features.repo.dir}">
-				  	<exclude name=".project"/>
-				  </fileset>
-		</sync>
-		-->
 		
 		
 		<exec executable="${s3cmd.exec}" failonerror="false" timeout="9000000">
@@ -106,27 +83,6 @@
 		</exec>
 		
 	</target>
-	
-	
-	
-	
-	<!-- ================================= 
-          target: add.composite.repositories              
-         
-    <target name="add.composite.repositories" description="Add childeren to the repository">
-    	<available property="haveRepoDir" file="${repo}"/>
-    	<fail unless="haveRepoDir" message="The synchronizing directory location is required to build this product.  Please edit buildProduct.xml or set the &quot;downloads.dir.for.syncing&quot; property or check ${downloads.dir.for.syncing}." />
-    	
-    	<p2.composite.repository >
-    	  <repository compressed="false" location="file:${repo}" name="Tracker Repository" />
-    	  <add>
-    	    <repository location="file:${base}"  />
-    	  	<repository location="file:${child}"  />
-    	  	<repository location="file:${categories}"  />
-    	  </add>
-    	</p2.composite.repository>
-    </target>
-    	================================= -->
     
 	<!-- ================================= 
           target: findEquinox   - Not used at this time             
@@ -161,21 +117,4 @@
 
     </target>
 
-
-	<!-- ================================= 
-	NOT USED AT THIS TIME BUT this if the format for running a equinox.launcher.jar based application
-          target: catagoriesPublisher              
-         
-    <target name="catagoriesPublisher" depends="findEquinox" description="description">
-    	
-    	 <java fork="true" jar="${equinox.launcher.jar.location}">
-    	
-    	<arg line="-console -consolelog -application org.eclipse.equinox.p2.publisher.CategoryPublisher"/>
-    	<arg line="-metadataRepository file:${categories}"/>
-		<arg line="-categoryDefinition file:${basedir}/category.xml"/>
-    	<arg line="-categoryQualifier -compress"/>
-    	</java>
-
-    </target>
-	================================= -->
 </project>
