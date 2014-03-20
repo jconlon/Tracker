@@ -1,29 +1,32 @@
 <webpage id="trackerPro">
   <config param="rcsdate" value="$Date: 2009-08-19 20:26:08 -0500 (Wed, 19 Aug 2009) $"/>
   <head>
-    <title>Tracker Pro - Business Intelligence Toolkit</title>
+    <title>Tracker Workbench and Business Intelligence Toolkit</title>
     <summary>
-    Tracker Business Intelligence Toolkit for the professional livestock business analyst.
+    Tracker Workbench is a desktop solution that provides project management tools, editors and business 
+	intelligence utilities for documenting, managing, analyzing and reporting livestock and premises information.
     </summary>
-    <keywords>Tracker, Business Intelligence, Eclipse, OSGi</keywords>
+    <keywords>Tracker, Project Management, Workbench, Business Intelligence, Eclipse, OSGi</keywords>
   </head>
   <para>
-    Tracker Professional is a 
-    <ulink url="http://en.wikipedia.org/wiki/Business_intelligence">Business Intelligence</ulink> 
-    (<acronym>BI</acronym>) Toolkit and suite of BI feature
-    solutions for animal agriculture professionals. These <acronym>BI</acronym> features
-    provide historical, current, and predictive views of animal agriculture business operations.
+    Tracker Workbench is a desktop solution that provides project management tools, editors and 
+    <ulink url="http://en.wikipedia.org/wiki/Business_intelligence">business intelligence</ulink> utilities for 
+    documenting, managing, analyzing and reporting livestock and premises information.
+    Tracker Workbench features provide historical, current, and predictive views of animal agriculture business operations.
   </para>
 
  
-  <section id="businessIntelligenceToolkit">
-    <title>Tracker Business Intelligence Toolkit</title>
+  <section id="eclipseWorkbench">
+    <title>Project Management Workbench</title>
     <para>
-	Tracker <acronym>BI</acronym> Toolkit is an 
+	Tracker Workbench is a project management oriented desktop solution that is an
 	<ulink url="http://www.eclipse.org/">Eclipse</ulink> based <emphasis>network aware rich client 
-	platform</emphasis> that can be installed with one or more <acronym>BI</acronym> features.
+	platform</emphasis> that can be installed with one or more livestock specific <acronym>BI</acronym> features 
+	or any of the many off the shelf solutions available on Eclipse and Industry component repositories. Tracker Workbench 
+	runs on any Desktop or Laptop platform running Microsoft, Apple or Linux operating systems.  
 	</para>
-  </section>  
+  </section> 
+  
   
   <section id="businessIntelligenceFeatures">
     <title>Tracker Business Intelligence Features</title>
