@@ -184,8 +184,8 @@
     <level value="WARN"/>
   </logger>
   
-  <logger name="com.verticon.tracker.reader.bluetooth">
-    <level value="WARN"/>
+  <logger name="com.verticon.tracker.reader.event.bluetooth">
+    <level value="DEBUG"/>
   </logger>
   
   <logger name="com.verticon.tracker.irouter.dev">
@@ -309,19 +309,19 @@
   </logger>
   
   <logger name="com.verticon.tracker.store.mongodb.internal.UpdateAndFind">
-    <level value="DEBUG"/>
+    <level value="INFO"/>
   </logger>
   
   <logger name="com.verticon.osgi.useradmin.view.internal">
-  <level value="DEBUG"/>
+  <level value="INFO"/>
   </logger>
   
   <logger name="com.verticon.birt.report.loader">
-   <level value="DEBUG"/>
+   <level value="INFO"/>
   </logger>
   
   <logger name="org.usaha.ecvi.store">
-  <level value="DEBUG"/>
+  <level value="INFO"/>
   </logger>
   
   <logger name="aggregated" level="INFO">
@@ -342,6 +342,6 @@
     -->
   </root>
   
-  <consolePlugin /> 
+   <consolePlugin /> 
  
 </configuration>
