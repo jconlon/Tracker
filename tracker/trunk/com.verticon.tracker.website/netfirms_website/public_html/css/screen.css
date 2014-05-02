@@ -132,3 +132,16 @@ ul {
   margin: 1em 0;
   font-size: .9em;
 }
+#rightcol {
+float: left;
+width: 50%;
+}
+#leftcol {
+float: left;
+width:50%;
+}
+
+
+#naics img {
+float:right; padding-right:25em; padding-top:1em;
+}
