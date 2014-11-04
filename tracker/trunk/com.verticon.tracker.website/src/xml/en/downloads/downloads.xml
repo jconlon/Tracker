@@ -204,8 +204,18 @@ release.lin.size=50.2M
 								Simulator.win32.win32.x86.zip
 							</ulink>
 						</entry>
-						<entry>3.0 MB</entry>
-						<entry>WIN</entry>
+						<entry>6.1 MB</entry>
+						<entry>WIN 32 bit</entry>
+					</row>
+					<row>
+						<entry>
+							<ulink 
+								url="http://tracker.verticon.com/Tracker/downloads/Simulator.win32.win32.x86_64.zip">
+								Simulator.win32.win32.x86_64.zip
+							</ulink>
+						</entry>
+						<entry>3.8 MB</entry>
+						<entry>WIN 64 bit</entry>
 					</row>
 					<row>
 						<entry>
@@ -214,8 +224,18 @@ release.lin.size=50.2M
 								Simulator.linux.gtk.x86.zip
 							</ulink>
 						</entry>
-						<entry>3.4 MB</entry>
-						<entry>Linux</entry>
+						<entry>6.5 MB</entry>
+						<entry>Linux 32 bit</entry>
+					</row>
+					<row>
+						<entry>
+							<ulink
+								url="http://tracker.verticon.com/Tracker/downloads/Simulator.linux.gtk.x86_64.zip">
+								Simulator.linux.gtk.x86_64.zip
+							</ulink>
+						</entry>
+						<entry>3.8 MB</entry>
+						<entry>Linux 64 bit</entry>
 					</row>
 				</tbody>
 			</tgroup>
