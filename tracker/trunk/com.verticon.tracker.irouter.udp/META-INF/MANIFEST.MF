@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: iRouter UDP Gateway
+Bundle-SymbolicName: com.verticon.tracker.irouter.udp
+Bundle-Version: 1.2.1.qualifier
+Bundle-Vendor: Verticon, Inc.
+Service-Component: OSGI-INF/*.xml
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Import-Package: com.google.common.base;version="11.0.2",
+ com.google.common.io;version="11.0.2",
+ com.verticon.messaging,
+ org.osgi.service.monitor;version="1.0.0",
+ org.osgi.service.wireadmin;version="1.0.1",
+ org.slf4j;version="1.5.6"
+Bundle-ActivationPolicy: lazy
