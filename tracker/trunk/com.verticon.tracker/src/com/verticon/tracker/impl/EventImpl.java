@@ -491,7 +491,7 @@ public abstract class EventImpl extends MinimalEObjectImpl.Container implements 
 	 * @generated
 	 */
 	@Override
-	public Event dateEvent(EventType type, String name) {
+	public Event dateEvent(final EventType type, final String name) {
 		Event result = null;
 				if(!dateEvents().isEmpty() && type!=null){
 					CollectionFilter<Event> eventsProducer = new CollectionFilter<Event>();

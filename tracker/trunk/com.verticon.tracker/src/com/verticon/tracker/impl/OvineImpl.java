@@ -51,7 +51,7 @@ public class OvineImpl extends AnimalImpl implements Ovine {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final SheepBreed SHEEP_BREED_EDEFAULT = SheepBreed.CD_LITERAL;
+	protected static final SheepBreed SHEEP_BREED_EDEFAULT = SheepBreed.UNSPECIFIED_LITERAL;
 
 	/**
 	 * The cached value of the '{@link #getSheepBreed() <em>Sheep Breed</em>}' attribute.

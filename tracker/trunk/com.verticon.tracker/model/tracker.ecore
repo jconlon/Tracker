@@ -83,7 +83,7 @@
         changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Sex">
-    <eLiterals name="Unspecified" literal=""/>
+    <eLiterals name="Unspecified" literal="Unspecified"/>
     <eLiterals name="F" value="1" literal="Female"/>
     <eLiterals name="M" value="2" literal="Male"/>
     <eLiterals name="C" value="3" literal="Neutered/castrated male"/>
@@ -207,6 +207,8 @@
         derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="location" eType="ecore:EClass ../../com.verticon.location.core.model/model/location.ecore#//Location"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stations" upperBound="-1"
+        eType="#//Station" containment="true" eOpposite="#//Station/premises"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="PremisesIdNumber" instanceClassName="java.lang.String">
     <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
@@ -220,7 +222,7 @@
   <eClassifiers xsi:type="ecore:EEnum" name="BisonBreed">
     <eLiterals name="WO" literal="WOOD BISON"/>
     <eLiterals name="PB" value="1" literal="PLAINS BISON"/>
-    <eLiterals name="Unspecified" value="2" literal=""/>
+    <eLiterals name="Unspecified" value="2" literal="Unspecified"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="SheepBreed">
     <eLiterals name="CD" literal="ARCOTT - Canadian"/>
@@ -276,7 +278,7 @@
     <eLiterals name="XL" value="50" literal="CROSSBRED - Large"/>
     <eLiterals name="XM" value="51" literal="CROSSBRED - Medium"/>
     <eLiterals name="ZS" value="52" literal="CROSSBRED - Small"/>
-    <eLiterals name="Unspecified" value="53" literal=""/>
+    <eLiterals name="Unspecified" value="53" literal="Unspecified"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BovineBeef" eSuperTypes="#//Bovine">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="beefBreed" eType="#//BeefBreed"
@@ -410,7 +412,7 @@
     <eLiterals name="WF" value="119" literal="WEST FLEMISH RED"/>
     <eLiterals name="WP" value="120" literal="WHITE PARK"/>
     <eLiterals name="YA" value="121" literal="YAK"/>
-    <eLiterals name="Unspecified" value="122" literal=""/>
+    <eLiterals name="Unspecified" value="122" literal="Unspecified"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="DairyBreed">
     <eLiterals name="LD" literal="AMERICAN LINEBACK"/>
@@ -423,7 +425,7 @@
     <eLiterals name="WW" value="7" literal="RED HOLSTEIN"/>
     <eLiterals name="FM" value="8" literal="ROUGE FLAMAND"/>
     <eLiterals name="MS" value="9" literal="SHORTHORN"/>
-    <eLiterals name="Unspecified" value="10" literal=""/>
+    <eLiterals name="Unspecified" value="10" literal="Unspecified"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BovineBison" eSuperTypes="#//Bovine">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="buffaloBreed" eType="#//BisonBreed"
@@ -507,7 +509,7 @@
     <eLiterals name="TM" value="12" literal="TAMWORTH"/>
     <eLiterals name="WS" value="13" literal="WESSEX SADDLEBACK"/>
     <eLiterals name="YO" value="14" literal="YORKSHIRE"/>
-    <eLiterals name="Unspecified" value="15" literal=""/>
+    <eLiterals name="Unspecified" value="15" literal="Unspecified"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Swine" eSuperTypes="#//Animal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="swineBreed" eType="#//SwineBreed"
@@ -582,7 +584,7 @@
     <eLiterals name="WE" value="63" literal="WELSH"/>
     <eLiterals name="WF" value="64" literal="WESTFALEN"/>
     <eLiterals name="WU" value="65" literal="WURTTEMBERG"/>
-    <eLiterals name="Unspecified" value="66" literal=""/>
+    <eLiterals name="Unspecified" value="66" literal="Unspecified"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Equine" eSuperTypes="#//Animal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="horseBreed" eType="#//HorseBreed"
@@ -625,7 +627,7 @@
     <eLiterals name="Prevention" value="4"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="TreatmentMethod">
-    <eLiterals name="Unspecified" literal=""/>
+    <eLiterals name="Unspecified" literal="Unspecified"/>
     <eLiterals name="Intramuscular" value="1"/>
     <eLiterals name="Nasal" value="2"/>
     <eLiterals name="Salve" value="3"/>
@@ -636,7 +638,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="difficulty" eType="#//OneToTen"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="OneToTen">
-    <eLiterals name="Unspecified" literal=""/>
+    <eLiterals name="Unspecified" literal="Unspecified"/>
     <eLiterals name="One" value="1"/>
     <eLiterals name="Two" value="2" literal="Two"/>
     <eLiterals name="Three" value="3"/>
@@ -718,7 +720,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="AnimalType">
-    <eLiterals name="Unspecified" literal=""/>
+    <eLiterals name="Unspecified" literal="Unspecified"/>
     <eLiterals name="Swine" value="2"/>
     <eLiterals name="Equine" value="3"/>
     <eLiterals name="Caprine" value="4"/>
@@ -846,5 +848,74 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="locationName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         changeable="false" volatile="true" transient="true" defaultValueLiteral=""
         derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Station">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="premises" lowerBound="1"
+        eType="#//Premises" eOpposite="#//Premises/stations"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="locationName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="coordinates" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
+        eType="#//SensorEvent" containment="true" eOpposite="#//SensorEvent/station"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Wind" eSuperTypes="#//SensorEvent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="m_s" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mph" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="r" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="degrees" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" changeable="false"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
+        volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SensorEvent" abstract="true" interface="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="station" lowerBound="1"
+        eType="#//Station" eOpposite="#//Station/events"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDoubleObject"
+        changeable="false" volatile="true" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="measurement" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sensorId" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StationLocation" eSuperTypes="#//SensorEvent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="coordinates" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="locationName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" changeable="false"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lat" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="long" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Air" eSuperTypes="#//SensorEvent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="k" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="farenheit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="celsius" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" changeable="false"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pa" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="incheOfMercury" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble" changeable="false"
+        volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rh" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Light" eSuperTypes="#//SensorEvent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Lux" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Orientation" eSuperTypes="#//SensorEvent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="az" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pitch" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="roll" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
   </eClassifiers>
 </ecore:EPackage>

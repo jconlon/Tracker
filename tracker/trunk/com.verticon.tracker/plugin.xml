@@ -34,5 +34,21 @@
     </parser>
   </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated tracker -->
+      <package
+            uri="http://www.osgi.org/xmlns/metatype/v1.1.0"
+            class="com.verticon.osgi.metatype.MetatypePackage"
+            genModel="model/tracker.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated tracker -->
+      <package
+            uri="http://www.verticon.com/location/1.0/loc"
+            class="com.verticon.location.LocationPackage"
+            genModel="model/tracker.genmodel"/>
+   </extension>
+
 </plugin>
 

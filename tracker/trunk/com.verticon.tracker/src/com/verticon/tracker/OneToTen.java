@@ -34,7 +34,7 @@ public enum OneToTen implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	UNSPECIFIED(0, "Unspecified", ""),
+	UNSPECIFIED(0, "Unspecified", "Unspecified"),
 
 	/**
 	 * The '<em><b>One</b></em>' literal object.
@@ -152,7 +152,7 @@ public enum OneToTen implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #UNSPECIFIED
-	 * @model name="Unspecified" literal=""
+	 * @model name="Unspecified"
 	 * @generated
 	 * @ordered
 	 */

@@ -277,6 +277,20 @@ public class TrackerValidator extends EObjectValidator {
 				return validateGenericEventInclusion((GenericEventInclusion)value, diagnostics, context);
 			case TrackerPackage.POSITION:
 				return validatePosition((Position)value, diagnostics, context);
+			case TrackerPackage.STATION:
+				return validateStation((Station)value, diagnostics, context);
+			case TrackerPackage.WIND:
+				return validateWind((Wind)value, diagnostics, context);
+			case TrackerPackage.SENSOR_EVENT:
+				return validateSensorEvent((SensorEvent)value, diagnostics, context);
+			case TrackerPackage.STATION_LOCATION:
+				return validateStationLocation((StationLocation)value, diagnostics, context);
+			case TrackerPackage.AIR:
+				return validateAir((Air)value, diagnostics, context);
+			case TrackerPackage.LIGHT:
+				return validateLight((Light)value, diagnostics, context);
+			case TrackerPackage.ORIENTATION:
+				return validateOrientation((Orientation)value, diagnostics, context);
 			case TrackerPackage.SEX:
 				return validateSex((Sex)value, diagnostics, context);
 			case TrackerPackage.BISON_BREED:
@@ -673,6 +687,69 @@ public class TrackerValidator extends EObjectValidator {
 	 */
 	public boolean validatePosition(Position position, DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return validate_EveryDefaultConstraint(position, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateStation(Station station, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(station, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateWind(Wind wind, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(wind, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateSensorEvent(SensorEvent sensorEvent, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(sensorEvent, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateStationLocation(StationLocation stationLocation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(stationLocation, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateAir(Air air, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(air, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateLight(Light light, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(light, diagnostics, context);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean validateOrientation(Orientation orientation, DiagnosticChain diagnostics, Map<Object, Object> context) {
+		return validate_EveryDefaultConstraint(orientation, diagnostics, context);
 	}
 
 	/**

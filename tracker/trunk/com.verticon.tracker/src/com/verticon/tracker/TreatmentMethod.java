@@ -34,7 +34,7 @@ public enum TreatmentMethod implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	UNSPECIFIED(0, "Unspecified", ""), /**
+	UNSPECIFIED(0, "Unspecified", "Unspecified"), /**
 	 * The '<em><b>Intramuscular</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,7 +78,7 @@ public enum TreatmentMethod implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #UNSPECIFIED
-	 * @model name="Unspecified" literal=""
+	 * @model name="Unspecified"
 	 * @generated
 	 * @ordered
 	 */

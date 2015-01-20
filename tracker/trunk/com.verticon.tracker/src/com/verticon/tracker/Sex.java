@@ -35,7 +35,7 @@ public enum Sex implements Enumerator
 	 * @generated
 	 * @ordered
 	 */
-	UNSPECIFIED_LITERAL(0, "Unspecified", ""), /**
+	UNSPECIFIED_LITERAL(0, "Unspecified", "Unspecified"), /**
 	 * The '<em><b>F</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -87,7 +87,7 @@ public enum Sex implements Enumerator
 	 * @SuppressWarnings("ucd")
 	 * <!-- end-user-doc -->
 	 * @see #UNSPECIFIED_LITERAL
-	 * @model name="Unspecified" literal=""
+	 * @model name="Unspecified"
 	 * @generated
 	 * @ordered
 	 */

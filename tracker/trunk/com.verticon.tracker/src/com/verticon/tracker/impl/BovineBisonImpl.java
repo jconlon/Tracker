@@ -48,7 +48,7 @@ public class BovineBisonImpl extends BovineImpl implements BovineBison {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BisonBreed BUFFALO_BREED_EDEFAULT = BisonBreed.WO_LITERAL;
+	protected static final BisonBreed BUFFALO_BREED_EDEFAULT = BisonBreed.UNSPECIFIED_LITERAL;
 
 	/**
 	 * The cached value of the '{@link #getBuffaloBreed() <em>Buffalo Breed</em>}' attribute.

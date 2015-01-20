@@ -709,6 +709,144 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Station} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StationItemProvider stationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.Station}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStationAdapter() {
+		if (stationItemProvider == null) {
+			stationItemProvider = new StationItemProvider(this);
+		}
+
+		return stationItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Wind} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected WindItemProvider windItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.Wind}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createWindAdapter() {
+		if (windItemProvider == null) {
+			windItemProvider = new WindItemProvider(this);
+		}
+
+		return windItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.StationLocation} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StationLocationItemProvider stationLocationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.StationLocation}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStationLocationAdapter() {
+		if (stationLocationItemProvider == null) {
+			stationLocationItemProvider = new StationLocationItemProvider(this);
+		}
+
+		return stationLocationItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Air} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected AirItemProvider airItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.Air}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createAirAdapter() {
+		if (airItemProvider == null) {
+			airItemProvider = new AirItemProvider(this);
+		}
+
+		return airItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Light} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected LightItemProvider lightItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.Light}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createLightAdapter() {
+		if (lightItemProvider == null) {
+			lightItemProvider = new LightItemProvider(this);
+		}
+
+		return lightItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Orientation} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected OrientationItemProvider orientationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link com.verticon.tracker.Orientation}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createOrientationAdapter() {
+		if (orientationItemProvider == null) {
+			orientationItemProvider = new OrientationItemProvider(this);
+		}
+
+		return orientationItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link com.verticon.tracker.Premises} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1170,6 +1308,12 @@ public class TrackerItemProviderAdapterFactory extends TrackerAdapterFactory imp
 		if (eventInclusionItemProvider != null) eventInclusionItemProvider.dispose();
 		if (genericEventInclusionItemProvider != null) genericEventInclusionItemProvider.dispose();
 		if (positionItemProvider != null) positionItemProvider.dispose();
+		if (stationItemProvider != null) stationItemProvider.dispose();
+		if (windItemProvider != null) windItemProvider.dispose();
+		if (stationLocationItemProvider != null) stationLocationItemProvider.dispose();
+		if (airItemProvider != null) airItemProvider.dispose();
+		if (lightItemProvider != null) lightItemProvider.dispose();
+		if (orientationItemProvider != null) orientationItemProvider.dispose();
 	}
 
 }

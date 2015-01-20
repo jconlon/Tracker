@@ -182,7 +182,7 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AttributeDefinition findAttributeDefinition(Map.Entry<String, String> eventAttribute) {
+	public AttributeDefinition findAttributeDefinition(final Map.Entry<String, String> eventAttribute) {
 		if(getOcd() ==null ){
 			return null;
 		}
@@ -211,7 +211,7 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Object value(String key) {
+	public Object value(final String key) {
 		for (Map.Entry<String, String> eventAttribute : getEventAttributes().entrySet()) {
 					if(eventAttribute.getKey().equals(key)){
 						String value = eventAttribute.getValue();
@@ -248,7 +248,7 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean hasRequiredAttributes(DiagnosticChain diagnostics, Map context) {
+	public boolean hasRequiredAttributes(final DiagnosticChain diagnostics, final Map context) {
 		// -> specify the condition that violates the invariant
 		// All attributes defined in the OCD are required to be present in the document but
 		//  not all attributes NEED to be set this validates if all requiredAttributes are not null
@@ -293,7 +293,7 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean hasValidAttributes(DiagnosticChain diagnostics, Map context) {
+	public boolean hasValidAttributes(final DiagnosticChain diagnostics, final Map context) {
 		// -> specify the condition that violates the invariant
 		boolean doesNotHavaAllValidAttributes;
 		OCD ocd = getOcd();
@@ -344,7 +344,7 @@ public class GenericEventImpl extends EventImpl implements GenericEvent {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean hasAllAttributes(DiagnosticChain diagnostics, Map context) {
+	public boolean hasAllAttributes(final DiagnosticChain diagnostics, final Map context) {
 		// -> specify the condition that violates the invariant
 		// All attributes defined in the OCD are required to be present in the document but
 		//  not all attributes NEED to be set this validates if all attributes are present

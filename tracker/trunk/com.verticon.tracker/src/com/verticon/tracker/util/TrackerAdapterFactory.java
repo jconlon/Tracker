@@ -303,6 +303,34 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 				return createPositionAdapter();
 			}
 			@Override
+			public Adapter caseStation(Station object) {
+				return createStationAdapter();
+			}
+			@Override
+			public Adapter caseWind(Wind object) {
+				return createWindAdapter();
+			}
+			@Override
+			public Adapter caseSensorEvent(SensorEvent object) {
+				return createSensorEventAdapter();
+			}
+			@Override
+			public Adapter caseStationLocation(StationLocation object) {
+				return createStationLocationAdapter();
+			}
+			@Override
+			public Adapter caseAir(Air object) {
+				return createAirAdapter();
+			}
+			@Override
+			public Adapter caseLight(Light object) {
+				return createLightAdapter();
+			}
+			@Override
+			public Adapter caseOrientation(Orientation object) {
+				return createOrientationAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -739,6 +767,104 @@ public class TrackerAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPositionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.Station <em>Station</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.Station
+	 * @generated
+	 */
+	public Adapter createStationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.Wind <em>Wind</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.Wind
+	 * @generated
+	 */
+	public Adapter createWindAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.SensorEvent <em>Sensor Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.SensorEvent
+	 * @generated
+	 */
+	public Adapter createSensorEventAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.StationLocation <em>Station Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.StationLocation
+	 * @generated
+	 */
+	public Adapter createStationLocationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.Air <em>Air</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.Air
+	 * @generated
+	 */
+	public Adapter createAirAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.Light <em>Light</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.Light
+	 * @generated
+	 */
+	public Adapter createLightAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link com.verticon.tracker.Orientation <em>Orientation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see com.verticon.tracker.Orientation
+	 * @generated
+	 */
+	public Adapter createOrientationAdapter() {
 		return null;
 	}
 

@@ -902,13 +902,22 @@ public interface TrackerPackage extends EPackage {
 	int PREMISES__LOCATION = 11;
 
 	/**
+	 * The feature id for the '<em><b>Stations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREMISES__STATIONS = 12;
+
+	/**
 	 * The number of structural features of the '<em>Premises</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PREMISES_FEATURE_COUNT = 12;
+	int PREMISES_FEATURE_COUNT = 13;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.impl.BovineBeefImpl <em>Bovine Beef</em>}' class.
@@ -6084,6 +6093,643 @@ public interface TrackerPackage extends EPackage {
 	int POSITION_FEATURE_COUNT = EVENT_FEATURE_COUNT + 4;
 
 	/**
+	 * The meta object id for the '{@link com.verticon.tracker.impl.StationImpl <em>Station</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.impl.StationImpl
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getStation()
+	 * @generated
+	 */
+	int STATION = 44;
+
+	/**
+	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATION__ID = 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATION__NAME = 1;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATION__DESCRIPTION = 2;
+
+	/**
+	 * The feature id for the '<em><b>Premises</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATION__PREMISES = 3;
+
+	/**
+	 * The feature id for the '<em><b>Location Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATION__LOCATION_NAME = 4;
+
+	/**
+	 * The feature id for the '<em><b>Coordinates</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATION__COORDINATES = 5;
+
+	/**
+	 * The feature id for the '<em><b>Events</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATION__EVENTS = 6;
+
+	/**
+	 * The number of structural features of the '<em>Station</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATION_FEATURE_COUNT = 7;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.SensorEvent <em>Sensor Event</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.SensorEvent
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSensorEvent()
+	 * @generated
+	 */
+	int SENSOR_EVENT = 46;
+
+	/**
+	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENSOR_EVENT__DATE_TIME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Station</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENSOR_EVENT__STATION = 1;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENSOR_EVENT__VALUES = 2;
+
+	/**
+	 * The feature id for the '<em><b>Measurement</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENSOR_EVENT__MEASUREMENT = 3;
+
+	/**
+	 * The feature id for the '<em><b>Sensor Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENSOR_EVENT__SENSOR_ID = 4;
+
+	/**
+	 * The number of structural features of the '<em>Sensor Event</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SENSOR_EVENT_FEATURE_COUNT = 5;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.impl.WindImpl <em>Wind</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.impl.WindImpl
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getWind()
+	 * @generated
+	 */
+	int WIND = 45;
+
+	/**
+	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIND__DATE_TIME = SENSOR_EVENT__DATE_TIME;
+
+	/**
+	 * The feature id for the '<em><b>Station</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIND__STATION = SENSOR_EVENT__STATION;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIND__VALUES = SENSOR_EVENT__VALUES;
+
+	/**
+	 * The feature id for the '<em><b>Measurement</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIND__MEASUREMENT = SENSOR_EVENT__MEASUREMENT;
+
+	/**
+	 * The feature id for the '<em><b>Sensor Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIND__SENSOR_ID = SENSOR_EVENT__SENSOR_ID;
+
+	/**
+	 * The feature id for the '<em><b>Ms</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIND__MS = SENSOR_EVENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Mph</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIND__MPH = SENSOR_EVENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>R</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIND__R = SENSOR_EVENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Degrees</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIND__DEGREES = SENSOR_EVENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Direction</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIND__DIRECTION = SENSOR_EVENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>Wind</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int WIND_FEATURE_COUNT = SENSOR_EVENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.impl.StationLocationImpl <em>Station Location</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.impl.StationLocationImpl
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getStationLocation()
+	 * @generated
+	 */
+	int STATION_LOCATION = 47;
+
+	/**
+	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATION_LOCATION__DATE_TIME = SENSOR_EVENT__DATE_TIME;
+
+	/**
+	 * The feature id for the '<em><b>Station</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATION_LOCATION__STATION = SENSOR_EVENT__STATION;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATION_LOCATION__VALUES = SENSOR_EVENT__VALUES;
+
+	/**
+	 * The feature id for the '<em><b>Measurement</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATION_LOCATION__MEASUREMENT = SENSOR_EVENT__MEASUREMENT;
+
+	/**
+	 * The feature id for the '<em><b>Sensor Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATION_LOCATION__SENSOR_ID = SENSOR_EVENT__SENSOR_ID;
+
+	/**
+	 * The feature id for the '<em><b>Coordinates</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATION_LOCATION__COORDINATES = SENSOR_EVENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Location Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATION_LOCATION__LOCATION_NAME = SENSOR_EVENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Lat</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATION_LOCATION__LAT = SENSOR_EVENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Long</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATION_LOCATION__LONG = SENSOR_EVENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Station Location</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATION_LOCATION_FEATURE_COUNT = SENSOR_EVENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.impl.AirImpl <em>Air</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.impl.AirImpl
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAir()
+	 * @generated
+	 */
+	int AIR = 48;
+
+	/**
+	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AIR__DATE_TIME = SENSOR_EVENT__DATE_TIME;
+
+	/**
+	 * The feature id for the '<em><b>Station</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AIR__STATION = SENSOR_EVENT__STATION;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AIR__VALUES = SENSOR_EVENT__VALUES;
+
+	/**
+	 * The feature id for the '<em><b>Measurement</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AIR__MEASUREMENT = SENSOR_EVENT__MEASUREMENT;
+
+	/**
+	 * The feature id for the '<em><b>Sensor Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AIR__SENSOR_ID = SENSOR_EVENT__SENSOR_ID;
+
+	/**
+	 * The feature id for the '<em><b>K</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AIR__K = SENSOR_EVENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Farenheit</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AIR__FARENHEIT = SENSOR_EVENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Celsius</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AIR__CELSIUS = SENSOR_EVENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Pa</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AIR__PA = SENSOR_EVENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Inche Of Mercury</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AIR__INCHE_OF_MERCURY = SENSOR_EVENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Rh</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AIR__RH = SENSOR_EVENT_FEATURE_COUNT + 5;
+
+	/**
+	 * The number of structural features of the '<em>Air</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AIR_FEATURE_COUNT = SENSOR_EVENT_FEATURE_COUNT + 6;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.impl.LightImpl <em>Light</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.impl.LightImpl
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getLight()
+	 * @generated
+	 */
+	int LIGHT = 49;
+
+	/**
+	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIGHT__DATE_TIME = SENSOR_EVENT__DATE_TIME;
+
+	/**
+	 * The feature id for the '<em><b>Station</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIGHT__STATION = SENSOR_EVENT__STATION;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIGHT__VALUES = SENSOR_EVENT__VALUES;
+
+	/**
+	 * The feature id for the '<em><b>Measurement</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIGHT__MEASUREMENT = SENSOR_EVENT__MEASUREMENT;
+
+	/**
+	 * The feature id for the '<em><b>Sensor Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIGHT__SENSOR_ID = SENSOR_EVENT__SENSOR_ID;
+
+	/**
+	 * The feature id for the '<em><b>Lux</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIGHT__LUX = SENSOR_EVENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Light</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LIGHT_FEATURE_COUNT = SENSOR_EVENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link com.verticon.tracker.impl.OrientationImpl <em>Orientation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.impl.OrientationImpl
+	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getOrientation()
+	 * @generated
+	 */
+	int ORIENTATION = 50;
+
+	/**
+	 * The feature id for the '<em><b>Date Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORIENTATION__DATE_TIME = SENSOR_EVENT__DATE_TIME;
+
+	/**
+	 * The feature id for the '<em><b>Station</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORIENTATION__STATION = SENSOR_EVENT__STATION;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORIENTATION__VALUES = SENSOR_EVENT__VALUES;
+
+	/**
+	 * The feature id for the '<em><b>Measurement</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORIENTATION__MEASUREMENT = SENSOR_EVENT__MEASUREMENT;
+
+	/**
+	 * The feature id for the '<em><b>Sensor Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORIENTATION__SENSOR_ID = SENSOR_EVENT__SENSOR_ID;
+
+	/**
+	 * The feature id for the '<em><b>Az</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORIENTATION__AZ = SENSOR_EVENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Pitch</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORIENTATION__PITCH = SENSOR_EVENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Roll</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORIENTATION__ROLL = SENSOR_EVENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Orientation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ORIENTATION_FEATURE_COUNT = SENSOR_EVENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Sex <em>Sex</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6091,7 +6737,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSex()
 	 * @generated
 	 */
-	int SEX = 44;
+	int SEX = 51;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BisonBreed <em>Bison Breed</em>}' enum.
@@ -6101,7 +6747,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBisonBreed()
 	 * @generated
 	 */
-	int BISON_BREED = 45;
+	int BISON_BREED = 52;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SheepBreed <em>Sheep Breed</em>}' enum.
@@ -6111,7 +6757,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSheepBreed()
 	 * @generated
 	 */
-	int SHEEP_BREED = 46;
+	int SHEEP_BREED = 53;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.BeefBreed <em>Beef Breed</em>}' enum.
@@ -6121,7 +6767,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getBeefBreed()
 	 * @generated
 	 */
-	int BEEF_BREED = 47;
+	int BEEF_BREED = 54;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.DairyBreed <em>Dairy Breed</em>}' enum.
@@ -6131,7 +6777,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getDairyBreed()
 	 * @generated
 	 */
-	int DAIRY_BREED = 48;
+	int DAIRY_BREED = 55;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.SwineBreed <em>Swine Breed</em>}' enum.
@@ -6141,7 +6787,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSwineBreed()
 	 * @generated
 	 */
-	int SWINE_BREED = 49;
+	int SWINE_BREED = 56;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.HorseBreed <em>Horse Breed</em>}' enum.
@@ -6151,7 +6797,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getHorseBreed()
 	 * @generated
 	 */
-	int HORSE_BREED = 50;
+	int HORSE_BREED = 57;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.GoatBreed <em>Goat Breed</em>}' enum.
@@ -6161,7 +6807,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getGoatBreed()
 	 * @generated
 	 */
-	int GOAT_BREED = 51;
+	int GOAT_BREED = 58;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Treatment <em>Treatment</em>}' enum.
@@ -6171,7 +6817,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTreatment()
 	 * @generated
 	 */
-	int TREATMENT = 52;
+	int TREATMENT = 59;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.TreatmentMethod <em>Treatment Method</em>}' enum.
@@ -6181,7 +6827,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getTreatmentMethod()
 	 * @generated
 	 */
-	int TREATMENT_METHOD = 53;
+	int TREATMENT_METHOD = 60;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.OneToTen <em>One To Ten</em>}' enum.
@@ -6191,7 +6837,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getOneToTen()
 	 * @generated
 	 */
-	int ONE_TO_TEN = 54;
+	int ONE_TO_TEN = 61;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.AnimalType <em>Animal Type</em>}' enum.
@@ -6201,7 +6847,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAnimalType()
 	 * @generated
 	 */
-	int ANIMAL_TYPE = 55;
+	int ANIMAL_TYPE = 62;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.EventDataType <em>Event Data Type</em>}' enum.
@@ -6211,7 +6857,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventDataType()
 	 * @generated
 	 */
-	int EVENT_DATA_TYPE = 56;
+	int EVENT_DATA_TYPE = 63;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.USQualityGrade <em>US Quality Grade</em>}' enum.
@@ -6221,7 +6867,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSQualityGrade()
 	 * @generated
 	 */
-	int US_QUALITY_GRADE = 57;
+	int US_QUALITY_GRADE = 64;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.USBeefYieldGrade <em>US Beef Yield Grade</em>}' enum.
@@ -6231,7 +6877,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSBeefYieldGrade()
 	 * @generated
 	 */
-	int US_BEEF_YIELD_GRADE = 58;
+	int US_BEEF_YIELD_GRADE = 65;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.Level <em>Level</em>}' enum.
@@ -6241,7 +6887,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getLevel()
 	 * @generated
 	 */
-	int LEVEL = 59;
+	int LEVEL = 66;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.USSwineQualityGrade <em>US Swine Quality Grade</em>}' enum.
@@ -6251,7 +6897,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSSwineQualityGrade()
 	 * @generated
 	 */
-	int US_SWINE_QUALITY_GRADE = 60;
+	int US_SWINE_QUALITY_GRADE = 67;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.WeightMeasurementUnit <em>Weight Measurement Unit</em>}' enum.
@@ -6261,7 +6907,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getWeightMeasurementUnit()
 	 * @generated
 	 */
-	int WEIGHT_MEASUREMENT_UNIT = 61;
+	int WEIGHT_MEASUREMENT_UNIT = 68;
 
 	/**
 	 * The meta object id for the '{@link com.verticon.tracker.EventType <em>Event Type</em>}' enum.
@@ -6271,7 +6917,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEventType()
 	 * @generated
 	 */
-	int EVENT_TYPE = 62;
+	int EVENT_TYPE = 69;
 
 	/**
 	 * The meta object id for the '<em>Premises Id Number</em>' data type.
@@ -6281,7 +6927,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getPremisesIdNumber()
 	 * @generated
 	 */
-	int PREMISES_ID_NUMBER = 63;
+	int PREMISES_ID_NUMBER = 70;
 
 	/**
 	 * The meta object id for the '<em>Email</em>' data type.
@@ -6291,7 +6937,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getEmail()
 	 * @generated
 	 */
-	int EMAIL = 64;
+	int EMAIL = 71;
 
 
 	/**
@@ -6302,7 +6948,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAge()
 	 * @generated
 	 */
-	int AGE = 65;
+	int AGE = 72;
 
 
 	/**
@@ -6313,7 +6959,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getUSPhoneNumber()
 	 * @generated
 	 */
-	int US_PHONE_NUMBER = 66;
+	int US_PHONE_NUMBER = 73;
 
 
 	/**
@@ -6324,7 +6970,7 @@ public interface TrackerPackage extends EPackage {
 	 * @see com.verticon.tracker.impl.TrackerPackageImpl#getURI()
 	 * @generated
 	 */
-	int URI = 67;
+	int URI = 74;
 
 
 	/**
@@ -7565,6 +8211,417 @@ public interface TrackerPackage extends EPackage {
 	EAttribute getPosition_LocationName();
 
 	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.Station <em>Station</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Station</em>'.
+	 * @see com.verticon.tracker.Station
+	 * @generated
+	 */
+	EClass getStation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Station#getId <em>Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Id</em>'.
+	 * @see com.verticon.tracker.Station#getId()
+	 * @see #getStation()
+	 * @generated
+	 */
+	EAttribute getStation_Id();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Station#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see com.verticon.tracker.Station#getName()
+	 * @see #getStation()
+	 * @generated
+	 */
+	EAttribute getStation_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Station#getDescription <em>Description</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Description</em>'.
+	 * @see com.verticon.tracker.Station#getDescription()
+	 * @see #getStation()
+	 * @generated
+	 */
+	EAttribute getStation_Description();
+
+	/**
+	 * Returns the meta object for the container reference '{@link com.verticon.tracker.Station#getPremises <em>Premises</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Premises</em>'.
+	 * @see com.verticon.tracker.Station#getPremises()
+	 * @see #getStation()
+	 * @generated
+	 */
+	EReference getStation_Premises();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Station#getLocationName <em>Location Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Location Name</em>'.
+	 * @see com.verticon.tracker.Station#getLocationName()
+	 * @see #getStation()
+	 * @generated
+	 */
+	EAttribute getStation_LocationName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Station#getCoordinates <em>Coordinates</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Coordinates</em>'.
+	 * @see com.verticon.tracker.Station#getCoordinates()
+	 * @see #getStation()
+	 * @generated
+	 */
+	EAttribute getStation_Coordinates();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.Station#getEvents <em>Events</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Events</em>'.
+	 * @see com.verticon.tracker.Station#getEvents()
+	 * @see #getStation()
+	 * @generated
+	 */
+	EReference getStation_Events();
+
+	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.Wind <em>Wind</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Wind</em>'.
+	 * @see com.verticon.tracker.Wind
+	 * @generated
+	 */
+	EClass getWind();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Wind#getM_s <em>Ms</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Ms</em>'.
+	 * @see com.verticon.tracker.Wind#getM_s()
+	 * @see #getWind()
+	 * @generated
+	 */
+	EAttribute getWind_M_s();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Wind#getMph <em>Mph</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Mph</em>'.
+	 * @see com.verticon.tracker.Wind#getMph()
+	 * @see #getWind()
+	 * @generated
+	 */
+	EAttribute getWind_Mph();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Wind#getR <em>R</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>R</em>'.
+	 * @see com.verticon.tracker.Wind#getR()
+	 * @see #getWind()
+	 * @generated
+	 */
+	EAttribute getWind_R();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Wind#getDegrees <em>Degrees</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Degrees</em>'.
+	 * @see com.verticon.tracker.Wind#getDegrees()
+	 * @see #getWind()
+	 * @generated
+	 */
+	EAttribute getWind_Degrees();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Wind#getDirection <em>Direction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Direction</em>'.
+	 * @see com.verticon.tracker.Wind#getDirection()
+	 * @see #getWind()
+	 * @generated
+	 */
+	EAttribute getWind_Direction();
+
+	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.SensorEvent <em>Sensor Event</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Sensor Event</em>'.
+	 * @see com.verticon.tracker.SensorEvent
+	 * @generated
+	 */
+	EClass getSensorEvent();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.SensorEvent#getDateTime <em>Date Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Date Time</em>'.
+	 * @see com.verticon.tracker.SensorEvent#getDateTime()
+	 * @see #getSensorEvent()
+	 * @generated
+	 */
+	EAttribute getSensorEvent_DateTime();
+
+	/**
+	 * Returns the meta object for the container reference '{@link com.verticon.tracker.SensorEvent#getStation <em>Station</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Station</em>'.
+	 * @see com.verticon.tracker.SensorEvent#getStation()
+	 * @see #getSensorEvent()
+	 * @generated
+	 */
+	EReference getSensorEvent_Station();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link com.verticon.tracker.SensorEvent#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Values</em>'.
+	 * @see com.verticon.tracker.SensorEvent#getValues()
+	 * @see #getSensorEvent()
+	 * @generated
+	 */
+	EAttribute getSensorEvent_Values();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.SensorEvent#getMeasurement <em>Measurement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Measurement</em>'.
+	 * @see com.verticon.tracker.SensorEvent#getMeasurement()
+	 * @see #getSensorEvent()
+	 * @generated
+	 */
+	EAttribute getSensorEvent_Measurement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.SensorEvent#getSensorId <em>Sensor Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sensor Id</em>'.
+	 * @see com.verticon.tracker.SensorEvent#getSensorId()
+	 * @see #getSensorEvent()
+	 * @generated
+	 */
+	EAttribute getSensorEvent_SensorId();
+
+	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.StationLocation <em>Station Location</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Station Location</em>'.
+	 * @see com.verticon.tracker.StationLocation
+	 * @generated
+	 */
+	EClass getStationLocation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.StationLocation#getCoordinates <em>Coordinates</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Coordinates</em>'.
+	 * @see com.verticon.tracker.StationLocation#getCoordinates()
+	 * @see #getStationLocation()
+	 * @generated
+	 */
+	EAttribute getStationLocation_Coordinates();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.StationLocation#getLocationName <em>Location Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Location Name</em>'.
+	 * @see com.verticon.tracker.StationLocation#getLocationName()
+	 * @see #getStationLocation()
+	 * @generated
+	 */
+	EAttribute getStationLocation_LocationName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.StationLocation#getLat <em>Lat</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Lat</em>'.
+	 * @see com.verticon.tracker.StationLocation#getLat()
+	 * @see #getStationLocation()
+	 * @generated
+	 */
+	EAttribute getStationLocation_Lat();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.StationLocation#getLong <em>Long</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Long</em>'.
+	 * @see com.verticon.tracker.StationLocation#getLong()
+	 * @see #getStationLocation()
+	 * @generated
+	 */
+	EAttribute getStationLocation_Long();
+
+	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.Air <em>Air</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Air</em>'.
+	 * @see com.verticon.tracker.Air
+	 * @generated
+	 */
+	EClass getAir();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Air#getK <em>K</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>K</em>'.
+	 * @see com.verticon.tracker.Air#getK()
+	 * @see #getAir()
+	 * @generated
+	 */
+	EAttribute getAir_K();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Air#getFarenheit <em>Farenheit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Farenheit</em>'.
+	 * @see com.verticon.tracker.Air#getFarenheit()
+	 * @see #getAir()
+	 * @generated
+	 */
+	EAttribute getAir_Farenheit();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Air#getCelsius <em>Celsius</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Celsius</em>'.
+	 * @see com.verticon.tracker.Air#getCelsius()
+	 * @see #getAir()
+	 * @generated
+	 */
+	EAttribute getAir_Celsius();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Air#getPa <em>Pa</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Pa</em>'.
+	 * @see com.verticon.tracker.Air#getPa()
+	 * @see #getAir()
+	 * @generated
+	 */
+	EAttribute getAir_Pa();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Air#getIncheOfMercury <em>Inche Of Mercury</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Inche Of Mercury</em>'.
+	 * @see com.verticon.tracker.Air#getIncheOfMercury()
+	 * @see #getAir()
+	 * @generated
+	 */
+	EAttribute getAir_IncheOfMercury();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Air#getRh <em>Rh</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Rh</em>'.
+	 * @see com.verticon.tracker.Air#getRh()
+	 * @see #getAir()
+	 * @generated
+	 */
+	EAttribute getAir_Rh();
+
+	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.Light <em>Light</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Light</em>'.
+	 * @see com.verticon.tracker.Light
+	 * @generated
+	 */
+	EClass getLight();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Light#getLux <em>Lux</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Lux</em>'.
+	 * @see com.verticon.tracker.Light#getLux()
+	 * @see #getLight()
+	 * @generated
+	 */
+	EAttribute getLight_Lux();
+
+	/**
+	 * Returns the meta object for class '{@link com.verticon.tracker.Orientation <em>Orientation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Orientation</em>'.
+	 * @see com.verticon.tracker.Orientation
+	 * @generated
+	 */
+	EClass getOrientation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Orientation#getAz <em>Az</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Az</em>'.
+	 * @see com.verticon.tracker.Orientation#getAz()
+	 * @see #getOrientation()
+	 * @generated
+	 */
+	EAttribute getOrientation_Az();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Orientation#getPitch <em>Pitch</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Pitch</em>'.
+	 * @see com.verticon.tracker.Orientation#getPitch()
+	 * @see #getOrientation()
+	 * @generated
+	 */
+	EAttribute getOrientation_Pitch();
+
+	/**
+	 * Returns the meta object for the attribute '{@link com.verticon.tracker.Orientation#getRoll <em>Roll</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Roll</em>'.
+	 * @see com.verticon.tracker.Orientation#getRoll()
+	 * @see #getOrientation()
+	 * @generated
+	 */
+	EAttribute getOrientation_Roll();
+
+	/**
 	 * Returns the meta object for class '{@link com.verticon.tracker.Premises <em>Premises</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7683,6 +8740,17 @@ public interface TrackerPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPremises_Location();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link com.verticon.tracker.Premises#getStations <em>Stations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Stations</em>'.
+	 * @see com.verticon.tracker.Premises#getStations()
+	 * @see #getPremises()
+	 * @generated
+	 */
+	EReference getPremises_Stations();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link com.verticon.tracker.Premises#getPolicy <em>Policy</em>}'.
@@ -9250,6 +10318,324 @@ public interface TrackerPackage extends EPackage {
 		EAttribute POSITION__LOCATION_NAME = eINSTANCE.getPosition_LocationName();
 
 		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.impl.StationImpl <em>Station</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.impl.StationImpl
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getStation()
+		 * @generated
+		 */
+		EClass STATION = eINSTANCE.getStation();
+
+		/**
+		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATION__ID = eINSTANCE.getStation_Id();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATION__NAME = eINSTANCE.getStation_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATION__DESCRIPTION = eINSTANCE.getStation_Description();
+
+		/**
+		 * The meta object literal for the '<em><b>Premises</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATION__PREMISES = eINSTANCE.getStation_Premises();
+
+		/**
+		 * The meta object literal for the '<em><b>Location Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATION__LOCATION_NAME = eINSTANCE.getStation_LocationName();
+
+		/**
+		 * The meta object literal for the '<em><b>Coordinates</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATION__COORDINATES = eINSTANCE.getStation_Coordinates();
+
+		/**
+		 * The meta object literal for the '<em><b>Events</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATION__EVENTS = eINSTANCE.getStation_Events();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.impl.WindImpl <em>Wind</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.impl.WindImpl
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getWind()
+		 * @generated
+		 */
+		EClass WIND = eINSTANCE.getWind();
+
+		/**
+		 * The meta object literal for the '<em><b>Ms</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WIND__MS = eINSTANCE.getWind_M_s();
+
+		/**
+		 * The meta object literal for the '<em><b>Mph</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WIND__MPH = eINSTANCE.getWind_Mph();
+
+		/**
+		 * The meta object literal for the '<em><b>R</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WIND__R = eINSTANCE.getWind_R();
+
+		/**
+		 * The meta object literal for the '<em><b>Degrees</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WIND__DEGREES = eINSTANCE.getWind_Degrees();
+
+		/**
+		 * The meta object literal for the '<em><b>Direction</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute WIND__DIRECTION = eINSTANCE.getWind_Direction();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.SensorEvent <em>Sensor Event</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.SensorEvent
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getSensorEvent()
+		 * @generated
+		 */
+		EClass SENSOR_EVENT = eINSTANCE.getSensorEvent();
+
+		/**
+		 * The meta object literal for the '<em><b>Date Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SENSOR_EVENT__DATE_TIME = eINSTANCE.getSensorEvent_DateTime();
+
+		/**
+		 * The meta object literal for the '<em><b>Station</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SENSOR_EVENT__STATION = eINSTANCE.getSensorEvent_Station();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SENSOR_EVENT__VALUES = eINSTANCE.getSensorEvent_Values();
+
+		/**
+		 * The meta object literal for the '<em><b>Measurement</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SENSOR_EVENT__MEASUREMENT = eINSTANCE.getSensorEvent_Measurement();
+
+		/**
+		 * The meta object literal for the '<em><b>Sensor Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SENSOR_EVENT__SENSOR_ID = eINSTANCE.getSensorEvent_SensorId();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.impl.StationLocationImpl <em>Station Location</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.impl.StationLocationImpl
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getStationLocation()
+		 * @generated
+		 */
+		EClass STATION_LOCATION = eINSTANCE.getStationLocation();
+
+		/**
+		 * The meta object literal for the '<em><b>Coordinates</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATION_LOCATION__COORDINATES = eINSTANCE.getStationLocation_Coordinates();
+
+		/**
+		 * The meta object literal for the '<em><b>Location Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATION_LOCATION__LOCATION_NAME = eINSTANCE.getStationLocation_LocationName();
+
+		/**
+		 * The meta object literal for the '<em><b>Lat</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATION_LOCATION__LAT = eINSTANCE.getStationLocation_Lat();
+
+		/**
+		 * The meta object literal for the '<em><b>Long</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATION_LOCATION__LONG = eINSTANCE.getStationLocation_Long();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.impl.AirImpl <em>Air</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.impl.AirImpl
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getAir()
+		 * @generated
+		 */
+		EClass AIR = eINSTANCE.getAir();
+
+		/**
+		 * The meta object literal for the '<em><b>K</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AIR__K = eINSTANCE.getAir_K();
+
+		/**
+		 * The meta object literal for the '<em><b>Farenheit</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AIR__FARENHEIT = eINSTANCE.getAir_Farenheit();
+
+		/**
+		 * The meta object literal for the '<em><b>Celsius</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AIR__CELSIUS = eINSTANCE.getAir_Celsius();
+
+		/**
+		 * The meta object literal for the '<em><b>Pa</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AIR__PA = eINSTANCE.getAir_Pa();
+
+		/**
+		 * The meta object literal for the '<em><b>Inche Of Mercury</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AIR__INCHE_OF_MERCURY = eINSTANCE.getAir_IncheOfMercury();
+
+		/**
+		 * The meta object literal for the '<em><b>Rh</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute AIR__RH = eINSTANCE.getAir_Rh();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.impl.LightImpl <em>Light</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.impl.LightImpl
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getLight()
+		 * @generated
+		 */
+		EClass LIGHT = eINSTANCE.getLight();
+
+		/**
+		 * The meta object literal for the '<em><b>Lux</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute LIGHT__LUX = eINSTANCE.getLight_Lux();
+
+		/**
+		 * The meta object literal for the '{@link com.verticon.tracker.impl.OrientationImpl <em>Orientation</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see com.verticon.tracker.impl.OrientationImpl
+		 * @see com.verticon.tracker.impl.TrackerPackageImpl#getOrientation()
+		 * @generated
+		 */
+		EClass ORIENTATION = eINSTANCE.getOrientation();
+
+		/**
+		 * The meta object literal for the '<em><b>Az</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ORIENTATION__AZ = eINSTANCE.getOrientation_Az();
+
+		/**
+		 * The meta object literal for the '<em><b>Pitch</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ORIENTATION__PITCH = eINSTANCE.getOrientation_Pitch();
+
+		/**
+		 * The meta object literal for the '<em><b>Roll</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ORIENTATION__ROLL = eINSTANCE.getOrientation_Roll();
+
+		/**
 		 * The meta object literal for the '{@link com.verticon.tracker.impl.PremisesImpl <em>Premises</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9338,6 +10724,14 @@ public interface TrackerPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PREMISES__LOCATION = eINSTANCE.getPremises_Location();
+
+		/**
+		 * The meta object literal for the '<em><b>Stations</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PREMISES__STATIONS = eINSTANCE.getPremises_Stations();
 
 		/**
 		 * The meta object literal for the '<em><b>Policy</b></em>' containment reference feature.

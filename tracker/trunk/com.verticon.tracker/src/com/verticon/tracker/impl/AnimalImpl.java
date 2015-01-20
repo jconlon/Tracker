@@ -491,7 +491,7 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean canContain(EventType eventType, String ocdId) {
+	public boolean canContain(final EventType eventType, final String ocdId) {
 		if(eContainer instanceof Premises){
 			return ((Premises)eContainer).canContain(
 					eventType, ocdId, getType());
@@ -504,7 +504,7 @@ public abstract class AnimalImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Event lastEvent(EventType type, String name) {
+	public Event lastEvent(final EventType type, final String name) {
 		Event result = null;
 				if(!eventHistory().isEmpty() && type!=null){
 					CollectionFilter<Event> eventsProducer = new CollectionFilter<Event>();

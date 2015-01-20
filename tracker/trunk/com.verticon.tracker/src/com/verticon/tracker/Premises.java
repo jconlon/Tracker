@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link com.verticon.tracker.Premises#getPhoneNumber <em>Phone Number</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getAddress <em>Address</em>}</li>
  *   <li>{@link com.verticon.tracker.Premises#getLocation <em>Location</em>}</li>
+ *   <li>{@link com.verticon.tracker.Premises#getStations <em>Stations</em>}</li>
  * </ul>
  * </p>
  *
@@ -279,6 +280,24 @@ public interface Premises extends EObject {
 	 * @generated
 	 */
 	void setLocation(Location value);
+
+	/**
+	 * Returns the value of the '<em><b>Stations</b></em>' containment reference list.
+	 * The list contents are of type {@link com.verticon.tracker.Station}.
+	 * It is bidirectional and its opposite is '{@link com.verticon.tracker.Station#getPremises <em>Premises</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Stations</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Stations</em>' containment reference list.
+	 * @see com.verticon.tracker.TrackerPackage#getPremises_Stations()
+	 * @see com.verticon.tracker.Station#getPremises
+	 * @model opposite="premises" containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	EList<Station> getStations();
 
 	/**
 	 * Returns the value of the '<em><b>Policy</b></em>' containment reference.
