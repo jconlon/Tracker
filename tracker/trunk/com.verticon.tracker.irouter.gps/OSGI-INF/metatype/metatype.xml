@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
 
-  <OCD name="GPS Proxy" id="com.verticon.tracker.irouter.gps"
-       description="Manages connections to a gps device and produces a Position for every GPS fix received." 
+  <OCD name="NMEA Proxy" id="com.verticon.tracker.irouter.gps"
+       description="Manages connections to a NMEA 0183 device and produces a Position for every GPS fix received. May also produce a composite Weather or Orientation object if these are sent by the NMEA device." 
        >
    
     <AD name="Connection uri" id="connection.uri" 
@@ -27,8 +27,14 @@
     	required="true" 
     	type="Long" 
     	default="1"
-    	description="Seconds to wait between Position productions."/>
+    	description="Seconds to wait between sending Position, Weather or Orientation products."/>
     	
+    <AD name="Consolidate sentences in message" id="product.output.consolidate" 
+        required="false" 
+        type="Boolean" 
+        default="false"
+        description="If true all NMEA sentences will be consolidated in a single message."/>
+  
     <AD name="Latitude measurement error radians" id="latitude.error"
     	required="true" 
     	type="Double" 
@@ -46,6 +52,46 @@
     	type="Double" 
     	default="3"
     	description="Altitude accuracy in meters. Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. "/>
+	
+	<AD name="Pitch measurement error radians" id="pitch.error"
+    	required="true" 
+    	type="Double" 
+    	default="3"
+    	description="Pitch accuracy in radians. Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. "/>
+	
+	<AD name="Roll measurement error radians" id="roll.error"
+    	required="true" 
+    	type="Double" 
+    	default="3"
+    	description="Roll accuracy in radians. Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. "/>
+	
+	<AD name="Barometric measurement error in percent" id="barometric.error"
+    	required="true" 
+    	type="Double" 
+    	default="1"
+    	description="Relative humidity accuracy in percent in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. "/>
+	
+	
+	<AD name="Air Temperature measurement error degrees Kelvin" id="airtemp.error"
+    	required="true" 
+    	type="Double" 
+    	default="1"
+    	description="Air Temperature accuracy in degrees Kelvin Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. "/>
+	
+	
+	<AD name="Wind speed measurement error meters per second" id="windSpeed.error"
+    	required="true" 
+    	type="Double" 
+    	default="1"
+    	description="Wind speed accuracy in meters per second. Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. "/>
+	
+	
+	<AD name="Wind Direction measurement error radians" id="windDirection.error"
+    	required="true" 
+    	type="Double" 
+    	default="3"
+    	description="Wind direction accuracy in radians. Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. "/>
+	
 	
     <AD name="Producer scope" id="wireadmin.producer.scope" 
 		type="String"
