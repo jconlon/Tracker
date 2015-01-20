@@ -1,0 +1,30 @@
+#Deployment Plugin Project File
+#Thu Jan 15 15:50:34 CST 2015
+build.ant.name=<.>/shadehaven_build.xml
+build.dp.file=<.>/shadehaven.dp
+build.location=
+bundles.0.bundle_path=<.>/resources/org.apache.felix.deployment.rp.autoconf-0.1.5.jar
+bundles.0.customizer=true
+bundles.0.headers.count=0
+bundles.0.missing=false
+bundles.0.name=bundles/org.apache.felix.deployment.rp.autoconf-0.1.5.jar
+bundles.0.symbolic_name=org.apache.felix.deployment.rp.autoconf
+bundles.0.version=0.1.5
+bundles.count=1
+certificates.count=0
+general.signbundles=false
+headers.contact.address=mailto\:jconlon@verticon.com
+headers.copyright=Verticon, Inc. 2015
+headers.description=Shadehaven configuration
+headers.license=Eclipse Public License  EPL1.0
+headers.other.headers=DeploymentPackage-Name\:Shadehaven configuration
+headers.symbolic.name=com.verticon.tracker.irouter.shadehaven.dppackage
+headers.vendor=Verticon, Inc.
+headers.version=2.0.0
+resources.0.headers.count=0
+resources.0.missing=false
+resources.0.name=resources/z_autoconf.xml
+resources.0.path=<.>/z_autoconf.xml
+resources.0.processor=org.osgi.deployment.rp.autoconf
+resources.count=1
+

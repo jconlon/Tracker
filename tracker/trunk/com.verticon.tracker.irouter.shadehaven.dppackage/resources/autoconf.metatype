@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+  <OCD description="A MongoDB client provider." id="com.verticon.mongo" name="MongoDB Client Provider">
+    <AD default="No wires" description="This optional attribute has no functionality other than to visualize and document this service in the iRouter Monitor." id="tracker.wiring.group.name" name="Wiring group name" required="false"/>
+    <AD default="MongoDB on Local Host" description="Phsical Location of the MongoDB Server." id="external.location" name="Location" required="false"/>
+    <AD default="Description of device or service." description="Description of the MongoDB Service." id="external.description" name="Description" required="false"/>
+    <AD default="localhost:27017" description="Semicolon separated list of MongoDB Server names and ports. Example tuna:27001;tuna:27002;tuna:27003" id="external.connection.uri" name="MongoDB Server" required="true"/>
+    <AD default="tracker" description="Name of the MongoDB database to use." id="dbname" name="MongoDB Database Name" required="true"/>
+    <AD description="Optional name of the MongoDB User." id="username" name="MongoDB User Name" required="false"/>
+    <AD description="Password for the MongoDB user." id="password" name="MongoDB User Password" required="false"/>
+    <AD default="gateway" description="The type of external device or service. This optional attribute has no functionality other than to visualize and document this service in the iRouter Monitor." id="external.service.type" name="Type" required="true">
+      <Option label="Gateway Service" value="gateway"/>
+    </AD>
+    <AD default="MongoDB" description="Name to label the node in the iRouter Monitor View graphics. This optional attribute has no functionality other than to visualize and document this service in the iRouter Monitor." id="tracker.monitor.label" name="Component container label"/>
+  </OCD>
+  <OCD description="Gateway for producing a list of animal life data records extracted from a specified Premises model. Fields within each record can be ordered, values can be transformed, and static values can be added." id="com.verticon.tracker.irouter.animal.data" name="Animal Life Data Gateway">
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD default="event://com/verticon/tracker/reader" description="Identifier to associate this service with a premises data model." id="connection.uri" name="Connection uri" required="true"/>
+    <AD cardinality="15" description="Selected attributes of the animal premises model to include as record fields. If none are configured, all attributes will be extraced." id="animal.life.data.fields" name="Animal life data fields" required="false">
+      <Option label="Electronic ID tag" value="id"/>
+      <Option label="Sex" value="sex"/>
+      <Option label="Sex Code" value="sexCode"/>
+      <Option label="Species" value="species"/>
+      <Option label="Species Code" value="speciesCode"/>
+      <Option label="Visual ID tag" value="visualID"/>
+      <Option label="Type of animal" value="type"/>
+      <Option label="Alternate ID" value="alternativeID"/>
+      <Option label="Breed" value="breed"/>
+      <Option label="Last recorded weight" value="weight"/>
+      <Option label="Last calculated weight gain" value="weightGainPerDay"/>
+      <Option label="Time of last recorded event" value="lastEventDateTime"/>
+      <Option label="Date of Birth" value="birthDate"/>
+      <Option label="Current age in days" value="ageInDays"/>
+      <Option label="Comments" value="comments"/>
+    </AD>
+    <AD cardinality="100" description="Optional transformer of animal attribute values to output field valus. Each entry contains an attribute name, a value to map, and an output value each separated by a | character. To add static values to each record use the attribute name STATIC, a integer position, and the static value. For example STATIC|3|HelloWorld will add the text HelloWorld to position 3 in the record. " id="animal.life.data.mapping" name="Data value transformer" required="false"/>
+    <AD cardinality="1" description="The scope to send the extracted animal life data records. (Use full scope names)" id="wireadmin.producer.scope" name="Producer scope"/>
+    <AD default="60" description="Time to wait in seconds before retrieving new data from the premises model." id="refresh.seconds" name="Refresh timer" required="false" type="Integer"/>
+    <AD default="Animal Data Gateway" description="Name to label node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Monitor node label" required="false"/>
+  </OCD>
+  <OCD description="Business logic controller for integrating TruTest scales and Mettler balances for measuring animal blood weights as a percentage of total animal weight." id="com.verticon.tracker.irouter.bwcontrol" name="Blood Weight Controller">
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD default="1" description="Unit of measurement for blood weights." id="trutest.field.units" name="Units for displaying blood weights" type="Integer">
+      <Option label="grams" value="0"/>
+      <Option label="kilograms" value="1"/>
+    </AD>
+    <AD default="{SABP500}%13%" description="TruTest command to use for turn on the audible alarm. The integer in the command determines the time duration of the audible." id="trutest.beepCommand" name="Alarm command" required="false"/>
+    <AD default="5" description="Time in seconds between audible alarms." id="abbott.bwalarm.period" name="Alarm interval in seconds" required="false" type="Long"/>
+    <AD default=".01" description="Ratio of actual animal weight to calculated blood weight." id="abbott.bwmult" name="BW multiplier" required="false" type="Double"/>
+    <AD default=".75" description="Ratio of actual blood weight to calculated blood weight that triggers alarming." id="abbott.bwalarm.trigger" name="Animal to BW percent trigger for alarm" required="false" type="Double"/>
+    <AD default="5" description="The weight of animal in kilograms that will trigger the calculating of blood weights.    This value prevents negative scale weights from display erroneous values." id="abbott.calbw.threashold" name="Animal weight calculation threashold" required="false" type="Long"/>
+    <AD default="{SXD19}%13%%10%{SXC16}%13%" description="TruTest command that identifies the field for displaying Actual BW" id="trutest.actbw.field" name="Actual BW field" required="false"/>
+    <AD default="{SXD18}%13%%10%{SXC16}%13%" description="TruTest command that identifies the field for displaying Calc BW" id="trutest.calbw.field" name="Calc BW field" required="false"/>
+    <AD default="true" description="If true a record key press will stop the production of ActBW and CalcBW.  Calculation will resume at zeroing of animal weight." id="abbott.stop.production.after.record" name="Stop production after Record" required="false" type="Boolean"/>
+    <AD cardinality="3" default="animal.weight,mettler.weight,transaction.state" description="The consumable scopes carrying the animal weight, blood weight, and transaction state. (Use full scope names)" id="wireadmin.consumer.scope" name="Consumable scope" required="true"/>
+    <AD default="animal.weight" description="The consumable scopes (from the list of consumable scopes) carrying the animal weight. (Use full scope names)" id="animal.weight" name="Animal Weight scope" required="true"/>
+    <AD default="mettler.weight" description="The consumable scope (from the list of consumable scopes) carrying the blood weight. (Use full scope names)" id="blood.weight" name="Blood Weight scope" required="true"/>
+    <AD cardinality="1" default="trutest.commands" description="The producer scope to send the adapted TruTest commands. (Use full scope names)" id="wireadmin.producer.scope" name="Producer scope" required="true"/>
+    <AD default="BWControl" description="Name to label node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Monitor node label" required="false"/>
+  </OCD>
+  <OCD description="Gateway between Tracker Premises RFID readers and iRouter. Picks up tag id reads from configured readers and produces iRouter animal ids." id="com.verticon.tracker.irouter.eid.event" name="Premises EID Reader Gateway">
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD default="com/verticon/tracker/reader" description="Default event topics. Do not change." id="event.topics" name="Event Topics"/>
+    <AD default="(com.verticon.tracker.reader.name=*)" description="Event filter to restrict reception of reads from certain Tracker RFID readers. Example: (com.verticon.tracker.reader.name=*:My Reader Name)" id="event.filter" name="Reader Filter" required="true"/>
+    <AD cardinality="1" default="reader.eid" description="The produced scope containing the animal EIDs. (Use full scope names)" id="wireadmin.producer.scope" name="Producer scope" required="true"/>
+    <AD default="event://com/verticon/tracker/reader" description="Identifier to associate this service with an external node in the monitor view." id="connection.uri" name="Connection uri" required="true"/>
+    <AD default="EID Gateway" description="Name to label node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Monitor node label" required="false"/>
+  </OCD>
+  <OCD description="Gateway between OSGi EventAdmin messaage bus and iRouter. Initally only forwards String products." id="com.verticon.tracker.irouter.eventadmin.gateway" name="EventAdmin Gateway">
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD default="com/verticon/tracker/irouter" description="Default event topics. Do not change." id="event.topics" name="Event Topics"/>
+    <AD cardinality="1" default="event.admin.gateway" description="The produced scope containing the products. (Use full scope names)" id="wireadmin.producer.scope" name="Producer scope" required="true"/>
+    <AD default="EventAdmin Gateway" description="Name to label node in the iRouter Monitor View graphics and other user interface components." id="tracker.monitor.label" name="Component container label" required="false"/>
+  </OCD>
+  <OCD description="Controls passing or blocking of objects based on the detection of a specific State. Only non-State objects are passed." id="com.verticon.tracker.irouter.flow.terminator" name="Flow Terminator">
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD cardinality="5" description="Names of the consumed scopes containing information and triggering State objects.  Only the information (non State traffic) will be passed through when flow is unterminated. (Use full scope names)" id="wireadmin.consumer.scope" name="Consumed Information and Control scopes"/>
+    <AD description="The name of the state that terminates information flow." id="terminator.state.name" name="Flow Terminator State Name" required="true"/>
+    <AD description="The value of the state that terminates information flow." id="terminator.state.value" name="Flow Terminator State Value" required="true" type="Integer"/>
+    <AD cardinality="4" description="Name of the produced scopes containing information passed through from the information consumbable scopes. (Use full scope names)" id="wireadmin.producer.scope" name="Information Producer scope" required="true"/>
+    <AD cardinality="4" description="Consumer scope to producer scope map. Use full scope names with a colon as the delimiter between the scopes.  Example in.scope:out.scope" id="terminator.scope.map" name="Scope Map"/>
+    <AD default="Terminator" description="Name to label node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Component container label"/>
+  </OCD>
+  <OCD description="Compares two measurements. Produces a state with a negative one, zero, or a positive one if the first measurement is less than, equal to, or greater than the second measurement." id="com.verticon.tracker.irouter.measurement.comparator" name="Measurement Comparator">
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD cardinality="2" description="The two input measurements to compare. (Use full scope names)" id="wireadmin.consumer.scope" name="Consumable scopes" required="true"/>
+    <AD cardinality="1" description="The result product output state. (Use full scope name)" id="wireadmin.producer.scope" name="Producer scope" required="true"/>
+    <AD default="Comparator" description="Name to label node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Component container label"/>
+  </OCD>
+  <OCD description="Converts input measurements based on a mathmatical operation." id="com.verticon.tracker.irouter.measurement.converter" name="Measurement Converter">
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD cardinality="1" description="The input measurement scope to transform. (Use full scope names)" id="wireadmin.consumer.scope" name="Consumable scope" required="true"/>
+    <AD cardinality="1" description="The transformed product output measurement scope. (Use full scope names)" id="wireadmin.producer.scope" name="Producer scope" required="true"/>
+    <AD default="add" id="operation.type" name="Operation on measurement">
+      <Option label="add" value="add"/>
+      <Option label="subtract" value="subtract"/>
+      <Option label="multiply" value="multiply"/>
+      <Option label="divide" value="divide"/>
+    </AD>
+    <AD id="operation.value" name="Value to use for operation" required="true" type="Double"/>
+    <AD default="Converter" description="Name to label node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Component container label" required="false"/>
+  </OCD>
+  <OCD description="Gateway for sending measurements, positions and animal tag ids to Tracker transaction editors as animal history events." id="com.verticon.tracker.irouter.measurement.event" name="Premises Measurement Event Gateway">
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD cardinality="5" default="animal.weight,animal.eid,transaction.state" description="Comma delimited list of the consumed scopes. Required scopes: measurement and the transaction ending triggering state. A scope for animal tag id is optional and used for information that has not previously been associated with an identification. (Use full scope names)." id="wireadmin.consumer.scope" name="Consumable scopes" required="true"/>
+    <AD default="false" description="If True sends all cached measurements or positions when an eid is received. All received states are ignored when true. When false use the state information for triggering." id="triggeron.eid" name="Trigger on EID" required="true" type="Boolean"/>
+    <AD default="false" description="If True sends only the last cached measurement or position recieved. When false all cached positions and measurements are sent." id="onlysend.last.envelope" name="Send only the last value" required="true" type="Boolean"/>
+    <AD default="transaction.state" description="The name of the state indicating that measurement and the animal id should be forwarded as an animal history event." id="consumer.transaction.state" name="Name of the Triggering State" required="true"/>
+    <AD default="1" description="The value of the state indicating that measurement and the animal id should be forwarded as an animal history event." id="consumer.transaction.state.value" name="Value of the Triggering State" required="true" type="Integer"/>
+    <AD default="event://com/verticon/tracker/reader" description="Identifier to associate this service with an external node in the monitor view." id="connection.uri" name="Connection uri" required="true"/>
+    <AD default="Premises Measurement" description="Name to label node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Monitor node label" required="false"/>
+  </OCD>
+  <OCD description="Gateway for caching consumed measurements and aniamal tag ids, and saving them at triggered transaction boundries as log entries identified with animal IDs." id="com.verticon.tracker.irouter.measurement.logger" name="Measurement Log Gateway">
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD cardinality="5" default="animal.weight,animal.eid,transaction.state" description="Comma delimited list of the scopes for measurements, animal tag ids, and trigger states. (Use full scope names)" id="wireadmin.consumer.scope" name="Consumable scopes" required="true"/>
+    <AD default="transaction.state" description="The name of the state indicating that transaction should be logged." id="consumer.transaction.state" name="Name of the Control State" required="true"/>
+    <AD default="1" description="The value of the state indicating that transaction should be logged." id="consumer.transaction.state.value" name="Value of the Control State" required="true" type="Integer"/>
+    <AD default="0" description="Kind of log entry to save the cached transaction. Normalized log entries are comma delimited and include all measurements. Aggregated log entries are separate log entries per measurement." id="logger.type" name="Type of logger" required="true" type="Integer">
+      <Option label="Normalized" value="0"/>
+      <Option label="Aggegated" value="1"/>
+    </AD>
+    <AD default="transaction" description="Name of the file to send logs." id="logger.name" name="Logger name" required="false"/>
+    <AD default="Logger" description="Name to label node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Monitor node label" required="false"/>
+    <AD default="file:///~/transaction.log" description="Identifier to associate this service with an external node in the monitor view." id="connection.uri" name="Connection uri" required="false"/>
+  </OCD>
+  <OCD description="Inspect measurements for conditions and produce a state with a value of 2, if the conditions are met." id="com.verticon.tracker.irouter.measurement.trigger" name="Measurement Trigger">
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD cardinality="1" description="Names of the measurement scope to inspect. (Use full scope names)" id="wireadmin.consumer.scope" name="Consumable scope" required="true"/>
+    <AD description="Value of the low measurement threashold." id="value.low" name="Low Measurement Threshold" required="true" type="Double"/>
+    <AD description="Value of the high measurement threshold." id="value.high" name="High Measurement Threshold" required="true" type="Double"/>
+    <AD default="raising" description="Type of threashold that will fire the trigger." id="operation.type" name="Operation on measurement">
+      <Option label="Trigger on raising threshold" value="rising"/>
+      <Option label="Trigger on falling threshold" value="falling"/>
+    </AD>
+    <AD cardinality="1" description="The scope containing triggered states. (Use full scope names)" id="wireadmin.producer.scope" name="Producer scope" required="true"/>
+    <AD default="Measurement Trigger" description="Name to label node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Component container label"/>
+  </OCD>
+  <OCD description="Gateway for consumming measurements and saving them as values in files." id="com.verticon.tracker.irouter.measurement.trigger.file" name="Measurement Trigger File">
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD cardinality="5" default="ohaus.weight,event.admin.gateway" description="Comma delimited list of the scopes for measurements and strings. Only a measurement scope is required. A string will be used to reconfigure this component." id="wireadmin.consumer.scope" name="Consumable scopes" required="true"/>
+    <AD default="measurement-***.txt" description="Name of file to use for output. Asterixs will be replaced by a timestamp." id="file.name.pattern" name="File Name Pattern" required="true"/>
+    <AD default="POUNDS" description="Unit of measurement for outputing weights. (All other measurements types will be output without conversion.)" id="weight.measurement.units" name="Units for outputing weight measurement values.">
+      <Option label="Pounds" value="POUNDS"/>
+      <Option label="Ounces" value="OUNCES"/>
+      <Option label="Kilograms" value="KILOGRAMS"/>
+      <Option label="Grams" value="GRAMS"/>
+    </AD>
+    <AD default="%tc,%s,%s,%5.4f" description="String format to use for outputing the measurement value in the file.  Variable ordering is: dateTime, unit, value, error. A consumed string product will use to reset this to a new value." id="measurement.value.format" name="Measurement Value Format" required="true"/>
+    <AD default="file:///tmp" description="Identifier referencing the output destination for measurement files.  This will also associate this service with an external node in the monitor view." id="connection.uri" name="Connection uri" required="true"/>
+    <AD default="Measurement Trigger File" description="Name to label node in the iRouter Monitor View graphics and other user interface components." id="tracker.monitor.label" name="Component container label" required="false"/>
+  </OCD>
+  <OCD description="Provides proxy connection and data transfer of measurements from Mettler laboratory weight balances." id="com.verticon.tracker.irouter.mettler.balancefactory" name="Mettler Proxy">
+    <AD default="socket://localhost:2345" description="URI to connect to the balance. Example socket://192.168.0.116:2345" id="connection.uri" name="Connection uri" required="true"/>
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD default=".002" description="Value of mesurement error to use for weights reported by the balance as stable" id="stable.weight.error" name="Stable weight measurement error" required="true" type="Double"/>
+    <AD default=".01" description="Value of mesurement error to use for weights reported by the balance as unstable." id="unstable.weight.error" name="Unstable weight measurement error" required="true" type="Double"/>
+    <AD default="100" description="Number of milliseconds between queries of the balance for new data." id="poll.milliseconds.delay" name="Poll interval milliseconds" required="true" type="Long"/>
+    <AD default="" description="Command to request information from the balance. If empty then there will be no queries of the balance. The balance will have to be setup to automatically send data. Example SI%13%%10%" id="request.command" name="Request command" required="false"/>
+    <AD default="^S (D|S)((\s*)(.*))\sg$" description="Regular Expression to use to parse return response from the balance." id="response.pattern" name="Response pattern" required="true"/>
+    <AD default="5" description="Seconds to wait before retrying to establish a connection to the balance." id="connection.retry.seconds" name="Connection retry interval seconds" required="true" type="Long"/>
+    <AD default="mettler.weight" description="Name of the product created by this wire producer and sent to wire consumers." id="producer.weight.measurement.name" name="Producer Scope for the weight measurement" required="true"/>
+    <AD default="Mettler Proxy" description="Name to label node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Component container label" required="false"/>
+  </OCD>
+  <OCD description="An external device or service." id="com.verticon.tracker.irouter.monitor.external" name="External Service">
+    <AD default="Unknown Service" description="Name of the external service or physical device." id="external.name" name="Name" required="true"/>
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD default="Unknown Location" description="Location of the external service or physical device." id="external.location" name="Location" required="true"/>
+    <AD default="Description of device or service." description="Description of the external service or physical device." id="external.description" name="Description" required="true"/>
+    <AD default="file:///~/transaction.log" description="Universal Resouce Identifier for connecting to the physical device or service." id="external.connection.uri" name="Connection URI" required="true"/>
+    <AD default="actuator" description="The type of external device or service." id="external.service.type" name="Type">
+      <Option label="Physical Sensor Device" value="sensor"/>
+      <Option label="Physical Actuator Device" value="actuator"/>
+      <Option label="Gateway Service" value="gateway"/>
+    </AD>
+    <AD default="Log File" description="Name to label node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Component container label"/>
+  </OCD>
+  <OCD description="A bridge that routes messages between a MQTT server and the iRouter." id="com.verticon.tracker.irouter.mqtt" name="iRouter MQTT Bridge">
+    <AD default="tcp://m2m.eclipse.org:1883" description="Protocol, server name and port for the MQTT server." id="connection.uri" name="MQTT URI" required="true"/>
+    <AD description="MQTT Client Identification." id="mqtt.clientid" name="MQTT ClientID" required="true"/>
+    <AD description="Optional name of the MQTT User." id="username" name="MQTT User Name" required="false"/>
+    <AD description="Password for the MQTT user." id="password" name="MQTT User Password" required="false"/>
+    <AD default="none" description="Name of the group of iRouter components that will be wired together. (If no iRouter functionality is required this value is ignored.)" id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD cardinality="5" default="Agriculture/Premises/+/Query,Agriculture/Premises/+/Events/EMF,Agriculture/Premises/+/Register/EMF" description="Comma delimited list of scope names for products. These scope names will be mapped from subscriber names." id="mqtt.subscriber.topics" name="MQTT subscriber topics" required="true"/>
+    <AD cardinality="5" default="agriculture.premises.query,agriculture.premises.events.emf,agriculture.premises.register.emf" description="Comma delimited list of scope names for products. These scope names will be mapped from subscriber topic names." id="wireadmin.producer.scope" name="Producer scopes" required="true"/>
+    <AD cardinality="3" default="agriculture.premises.response" description="The consumable scopes carrying payloads for publishing to MQTT. Scope identification determines publishing topic. (Use full scope names)" id="wireadmin.consumer.scope" name="Consumable scope" required="true"/>
+    <AD default="MQTT iRouter Bridge" description="Name to label the node in the iRouter Monitor View graphics. This optional attribute has no functionality other than to visualize and document this service in the iRouter Monitor." id="tracker.monitor.label" name="Component container label"/>
+  </OCD>
+  <OCD description="Provides proxy connection and data transfer of measurements from Ohaus Corporation Series 3000 Weigh indicators" id="com.verticon.tracker.irouter.ohaus" name="Ohaus Proxy">
+    <AD default="socket://localhost:2345" description="URI to connect to the balance. Example socket://192.168.0.116:2345" id="connection.uri" name="Connection uri" required="true"/>
+    <AD default="one" description="Name of the group of iRouter components that will be wired together. (If no iRouter functionality is required this value is ignored.)" id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD default="5" description="Seconds to wait before retrying to establish a connection to the balance." id="connection.retry.seconds" name="Connection retry interval seconds" required="true" type="Long"/>
+    <AD default="50" description="If no data was received from the scale the milliSeconds to wait before checking again." id="response.delay.millis" name="Response delay interval in milliseconds" required="true" type="Long"/>
+    <AD default="10" description="Number of times to listen for a scale response before aborting the connection." id="response.retries" name="Response retries before abort" required="true" type="Integer"/>
+    <AD cardinality="1" default="ohaus.weight" description="Name of the product created by this wire producer and sent to wire consumers." id="wireadmin.producer.scope" name="Producer Scope" required="true"/>
+    <AD default=".03" description="Value of the minimum weight before a mesurement product is produced. The unit of measurement is the one configured in the indicator." id="minimum.weight.threshold" name="Minimum Weight Threshold" required="true" type="Double"/>
+    <AD default="Ohaus Proxy" description="Name to label node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Component container label" required="false"/>
+    <AD default="0" description="When set to a positive number this is the delay in milliseconds between processing a response from the scale and requesting another response. If set to a non positive number the scale will be set to print every 1 second and this proxy will passively listen." id="poll.delay.millis" name="Polling delay interval in milliseconds" required="true" type="Long"/>
+    <AD description="The description for Ohaus proxy instance created with these options. This is used in various places like logging." id="description" name="Description"/>
+  </OCD>
+  <OCD description="Triggered production of a default animal product from an Animal template document with events timestamped at production time." id="com.verticon.tracker.irouter.premises.animal" name="Premises Animal Producer">
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD cardinality="3" default="animal.eid,transaction.state" description="Comma delimited list of the consumed scopes. Required scopes: animal and the transaction ending triggering state. (Use full scope names)." id="wireadmin.consumer.scope" name="Consumable scopes" required="true"/>
+    <AD cardinality="1" default="premises.animal" description="The envelope will contain an animal and this will be the output scope. (Use full scope names)" id="wireadmin.producer.scope" name="Producer scope" required="true"/>
+    <AD cardinality="1" description="URI of the animal template document. Examples: " id="animal.template.uri" name="Animal Template URI" required="true"/>
+    <AD default="false" description="If True sends all cached measurements or positions when an eid is received. All received states are ignored when true. When false use the state information for triggering." id="triggeron.eid" name="Trigger on EID" required="true" type="Boolean"/>
+    <AD default="transaction.state" description="The name of the state indicating that the animal should be produced." id="consumer.transaction.state" name="Name of the Triggering State" required="true"/>
+    <AD default="1" description="The value of the state indicating that the animal id should be produced." id="consumer.transaction.state.value" name="Value of the Triggering State" required="true" type="Integer"/>
+    <AD default="Premises Animal" description="Name to label the node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Monitor node label" required="false"/>
+  </OCD>
+  <OCD description="Consumes measurements, positions,  animal eids and optional trigger states to produce measurements and positions that are identified with animal eids." id="com.verticon.tracker.irouter.premises.event" name="Premises Event Producer">
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD cardinality="7" default="raw.animal.weight,animal.eid,transaction.state" description="Comma delimited list of the scopes that contain the raw measurements, positions, animal tag eids and trigger states. If the positions and/or measurements are identified with a Animal eid, then only one measurement or one postion  and one trigger state must be specified. A scope for animal tag id is optional and used for information that has not previously been associated with an identification. (Use full scope names)." id="wireadmin.consumer.scope" name="Consumable scopes" required="true"/>
+    <AD cardinality="5" default="animal.weight" description="The product output scope names for the identified measurement and position products. The output scopes will use the same names as the consumer scopes minus the starting 'raw.' prefix. (Use full scope names)" id="wireadmin.producer.scope" name="Producer scope" required="true"/>
+    <AD default="false" description="If true sends all cached measurements or positions when an eid is received and any consumed state products are ignored. When false use the state information for forwarding identified measurements and positions." id="triggeron.eid" name="Trigger on EID" required="true" type="Boolean"/>
+    <AD default="false" description="If True sends only the last cached measurement or position recieved. When false all cached positions and measurements are sent." id="onlysend.last.envelope" name="Send only the last value" required="true" type="Boolean"/>
+    <AD default="transaction.state" description="The name of the state indicating that measurement and the animal id should be forwarded as an animal history event." id="consumer.transaction.state" name="Name of the Triggering State" required="true"/>
+    <AD default="1" description="The value of the state indicating that measurement and the animal id should be forwarded (produced) as an identified measurement or position event." id="consumer.transaction.state.value" name="Value of the Triggering State" required="true" type="Integer"/>
+    <AD default="Premises Event" description="Name to label the node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Monitor node label" required="false"/>
+  </OCD>
+  <OCD description="Provides proxy connection and data transfer to and from TruTest livestock scale head indicators." id="com.verticon.tracker.irouter.trutest.indicatorfactory" name="TruTest Proxy">
+    <AD default="socket://localhost:2344" description="URI to connect to the TruTest Indicator. Example socket://192.168.0.118:3001" id="connection.uri" name="Connection uri" required="true"/>
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD default=".01" description="Value of mesurement error to use for weights reported by the indicator as stable." id="stable.weight.error" name="Stable weight measurement error" required="true" type="Double"/>
+    <AD default=".1" description="Value of mesurement error to use for weights reported by the indicator as unstable." id="unstable.weight.error" name="Unstable weight measurement error" required="true" type="Double"/>
+    <AD default="200" description="Number of milliseconds between queries of the indicator for new data." id="poll.milliseconds.delay" name="Poll interval milliseconds" required="true" type="Long"/>
+    <AD default="{RP}%13%" description="Command to use to request information from the scale." id="request.command" name="Request command" required="true"/>
+    <AD default="^\[(.+)\]$" description="Regex pattern for parsing information responses from the scale." id="response.pattern" name="Response pattern" required="true"/>
+    <AD default="5" description="Seconds to wait between reconnection attempts." id="connection.retry.seconds" name="Connection retry interval seconds" required="true" type="Long"/>
+    <AD default="100" description="MilliSeconds to wait between attempts to consume commands sent on wires from other components." id="consumer.command.delay" name="Command consumption delay milliseconds" required="true" type="Integer"/>
+    <AD default="true" description="Should unstable weights be sent to components?" id="send.unstable.weights" name="Send unstable weights" required="true" type="Boolean"/>
+    <AD default="^[0-9]{15,15},[0-9]{4,4},[0-3]{1,1},\d.\d\d$" description="Pattern to use for uploading life data. Watch out for the slashes!" id="upload.record.pattern" name="Animal Life Data upload record pattern" required="true"/>
+    <AD default="" description="Directory to use for uploading and downloading animal life data records." id="data.synchronization.directory" name="Data Synchronization Directory" required="false"/>
+    <AD default="5" description="Time to wait for an animal life data file to be created by an other component so it can be uploaded." id="data.synchronization.timeout.seconds" name="Data Synchronization timeout" required="false" type="Integer"/>
+    <AD default="trutest.upload.ready" description="Consumer scope used in intialization for indication that a data file is ready for uploading." id="data.synchronization.scope" name="Initial Consumer Scope for Data Synchronization" required="false"/>
+    <AD default="trutest.commands" description="Consumer scope for TruTest commands." id="consumer.scope.commands" name="Consumer Scope for Commands" required="true"/>
+    <AD default="animal.weight" description="Producer scope for send out the Animal Weight Measurement." id="producer.scope.weight" name="Producer Scope for Animal Weight" required="true"/>
+    <AD default="animal.eid" description="Producer scope for sending out the Animal ID number." id="producer.scope.eid" name="Producer Scope for Animal EID" required="false"/>
+    <AD default="transaction.state" description="Producer scope for sending out a state indicating that enter key was pressed." id="producer.scope.enter" name="Producer Scope for Enter Key" required="true"/>
+    <AD default="transaction.state" description="The name of the state indicating that enter key was pressed." id="producer.enter.press.state" name="State Name for Enter Key Press" required="true"/>
+    <AD default="TruTest Proxy" description="Name to label node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Component container label" required="false"/>
+  </OCD>
+  <OCD description="Adapts input states into the commands necessary to trigger the alarm on TruTest Indicators." id="com.verticon.tracker.irouter.trutest.alarm.adapter" name="TruTest Alarm Adapter">
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD cardinality="1" default="alarm" description="The consumable scope that carries the state to adapt. (Use full scope names)" id="wireadmin.consumer.scope" name="Consumable scope" required="true"/>
+    <AD cardinality="1" default="trutest.commands" description="The producer scope to send the adapted TruTest commands. (Use full scope names)" id="wireadmin.producer.scope" name="Producer scope" required="true"/>
+    <AD default="500" description="The time duration of the audible tone. In milliseconds." id="alarm.duration" name="Alarm duration" required="true" type="Integer"/>
+    <AD default="5" description="Time in seconds between audible alarms." id="alarm.interval" name="Alarm interval in seconds" required="true" type="Long"/>
+    <AD default="alarm" description="The name of the state that turns on the alarm." id="alarm.state.name" name="Alarm State Name" required="true"/>
+    <AD default="1" description="The value of the state that turns on an alarm." id="alarm.state.value" name="Alarm State Value" required="true" type="Integer"/>
+    <AD default="TruTest Alarm Adapter" description="Name to label node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Component container label" required="false"/>
+  </OCD>
+  <OCD description="Adapts animal ids for input as electronic ids on TruTest Indicators." id="com.verticon.tracker.irouter.trutest.eid.adapter" name="TruTest EID Adapter">
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD cardinality="1" default="eid" description="The consumable scope that carries the animal id to adapt. (Use full scope names)" id="wireadmin.consumer.scope" name="Consumable scope" required="true"/>
+    <AD cardinality="1" default="trutest.commands" description="The producer scope to send the adapted TruTest commands. (Use full scope names)" id="wireadmin.producer.scope" name="Producer scope" required="true"/>
+    <AD default="8" description="The destination field in the TruTest indicator." id="destination.field" name="Destination Field" type="Integer">
+      <Option label="Life Data One" value="0"/>
+      <Option label="Life Data Two" value="1"/>
+      <Option label="Life Data Three" value="2"/>
+      <Option label="Life Data Four" value="3"/>
+      <Option label="Life Data Five" value="4"/>
+      <Option label="Life Data Six" value="5"/>
+      <Option label="Life Data Seven" value="6"/>
+      <Option label="Life Data Eight" value="7"/>
+    </AD>
+    <AD default="1" description="TruTest Serial port that connects it to the iRouter." id="destination.port" name="Destination Port" type="Integer">
+      <Option label="Con1" value="1"/>
+      <Option label="Con2" value="2"/>
+    </AD>
+    <AD default="TruTest EID Adapter" description="Name to label node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Component container label" required="false"/>
+  </OCD>
+  <OCD description="Adapts input measurements for display on TruTest Indicators." id="com.verticon.tracker.irouter.trutest.measurement.adapter" name="TruTest Measurement Adapter">
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD cardinality="1" default="eid" description="The consumable scope that carries the measurement to adapt. (Use full scope names)" id="wireadmin.consumer.scope" name="Consumable scope" required="true"/>
+    <AD cardinality="1" default="trutest.commands" description="The producer scope to send the adapted TruTest commands. (Use full scope names)" id="wireadmin.producer.scope" name="Producer scope" required="true"/>
+    <AD default="8" description="The destination field in the TruTest indicator." id="destination.field" name="Destination Field" type="Integer">
+      <Option label="File Data One" value="8"/>
+      <Option label="File Data Two" value="9"/>
+      <Option label="Life Data One" value="0"/>
+      <Option label="Life Data Two" value="1"/>
+      <Option label="Life Data Three" value="2"/>
+      <Option label="Life Data Four" value="3"/>
+      <Option label="Life Data Five" value="4"/>
+      <Option label="Life Data Six" value="5"/>
+      <Option label="Life Data Seven" value="6"/>
+      <Option label="Life Data Eight" value="7"/>
+    </AD>
+    <AD default="6" description="Minimuim characters needed to display the measurement. Includes the decimal point." id="minimuim.characters" name="Minimuim Characters" type="Integer">
+      <Option label="One" value="0"/>
+      <Option label="Two" value="1"/>
+      <Option label="Three" value="2"/>
+      <Option label="Four" value="3"/>
+      <Option label="Five" value="4"/>
+      <Option label="Six" value="5"/>
+      <Option label="Seven" value="6"/>
+      <Option label="Eight" value="7"/>
+    </AD>
+    <AD default="1" description="TruTest Serial port that connects it to the iRouter." id="destination.port" name="Destination Port" type="Integer">
+      <Option label="Con1" value="1"/>
+      <Option label="Con2" value="2"/>
+    </AD>
+    <AD default="4" description="Number of decimal places to display." id="decimal.places" name="Decimal Places" type="Integer">
+      <Option label="None" value="0"/>
+      <Option label="One" value="1"/>
+      <Option label="Two" value="2"/>
+      <Option label="Three" value="3"/>
+      <Option label="Four" value="4"/>
+      <Option label="Five" value="5"/>
+      <Option label="Six" value="6"/>
+      <Option label="Seven" value="7"/>
+      <Option label="Eight" value="8"/>
+    </AD>
+    <AD default="none" description="Convert native SI units to compatible non standard units for presentation." id="presentation.units" name="Presentation Units">
+      <Option label="native (no conversion)" value="NATIVE"/>
+      <Option label="convert weight to grams" value="GRAMS"/>
+      <Option label="convert weight to ounces" value="OUNCES"/>
+      <Option label="convert weight to pounds" value="POUNDS"/>
+      <Option label="convert length to inches" value="INCHES"/>
+      <Option label="convert length to millimeters" value="MILLIMETERS"/>
+      <Option label="convert length to feet" value="FEET"/>
+      <Option label="convert length to yards" value="YARDS"/>
+    </AD>
+    <AD default="TruTest Measurement Adapter" description="Name to label node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Component container label" required="false"/>
+  </OCD>
+  <OCD description="A MongoDB client provider." id="com.verticon.tracker.store.mongodb" name="MongoDB Tracker Store">
+    <AD default="localhost:27017" description="Semicolon separated list of MongoDB Server names and ports. Example tuna:27001;tuna:27002;tuna:27003" id="connection.uri" name="MongoDB Server" required="true"/>
+    <AD default="tracker" description="Name of the MongoDB database to use." id="dbname" name="MongoDB Database Name" required="true"/>
+    <AD description="Optional name of the MongoDB User." id="username" name="MongoDB User Name" required="false"/>
+    <AD description="Password for the MongoDB user." id="password" name="MongoDB User Password" required="false"/>
+    <AD default="none" description="Name of the group of iRouter components that will be wired together. (If no iRouter functionality is required this value is ignored.)" id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD cardinality="5" default="premises.animal,animal.weight,agriculture.premises.query,agriculture.premises.register.emf,agriculture.premises.events.emf" description="Comma delimited list of scope names for consumed animal, measurement, and position products. (If no iRouter functionality is required this value is ignored.)" id="wireadmin.consumer.scope" name="Consumable scopes" required="true"/>
+    <AD cardinality="1" default="agriculture.premises.response" description="The producer scope to send the query response. (Use full scope names)" id="wireadmin.producer.scope" name="Producer scope" required="true"/>
+    <AD description="Universal Resource Identifier(URI) of the Tracker Premises.  This is the Premises URI that will be used for saving consumed iRouter Animal, Tag and Event products." id="tracker.premises.uri" name="Premises URI" required="true"/>
+    <AD default="6" description="The default type of animal to add as a new animal, for saving consumed iRouter event products where there is not already a prexisting animal." id="premises.animal.default" name="Type" type="Integer">
+      <Option label="BOVINE_BEEF" value="6"/>
+      <Option label="BOVINE_BISON" value="8"/>
+      <Option label="BOVINE_DAIRY" value="9"/>
+      <Option label="CAPRINE" value="26"/>
+      <Option label="EQUINE" value="25"/>
+      <Option label="OVINE" value="7"/>
+      <Option label="SWINE" value="24"/>
+    </AD>
+    <AD default="MongoDB" description="Name to label the node in the iRouter Monitor View graphics. This optional attribute has no functionality other than to visualize and document this service in the iRouter Monitor." id="tracker.monitor.label" name="Component container label"/>
+  </OCD>
+  <OCD description="A TrackerStore implemented on the Message Queue Telemetry Transport." id="com.verticon.tracker.store.mqtt" name="MQTT Tracker Store">
+    <AD default="tcp://m2m.eclipse.org:1883" description="Protocol, server name and port for the MQTT server." id="connection.uri" name="MQTT URI" required="true"/>
+    <AD description="Optional name of the MQTT User." id="username" name="MQTT User Name" required="false"/>
+    <AD description="Password for the MQTT user." id="password" name="MQTT User Password" required="false"/>
+    <AD default="none" description="Name of the group of iRouter components that will be wired together. (If no iRouter functionality is required this value is ignored.)" id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD cardinality="5" default="premises.animal,animal.weight" description="Comma delimited list of scope names for consumed animal, measurement, and position products. (If no iRouter functionality is required this value is ignored.)" id="wireadmin.consumer.scope" name="Consumable scopes" required="true"/>
+    <AD description="Universal Resource Identifier(URI) of the Tracker Premises.  This is the Premises URI that will be used for saving consumed iRouter Animal, Tag and Event products." id="tracker.premises.uri" name="Premises URI" required="true"/>
+    <AD default="6" description="The default type of animal to add as a new animal, for saving consumed iRouter event products where there is not already a prexisting animal." id="premises.animal.default" name="Type" type="Integer">
+      <Option label="BOVINE_BEEF" value="6"/>
+      <Option label="BOVINE_BISON" value="8"/>
+      <Option label="BOVINE_DAIRY" value="9"/>
+      <Option label="CAPRINE" value="26"/>
+      <Option label="EQUINE" value="25"/>
+      <Option label="OVINE" value="7"/>
+      <Option label="SWINE" value="24"/>
+    </AD>
+    <AD default="MQTT" description="Name to label the node in the iRouter Monitor View graphics. This optional attribute has no functionality other than to visualize and document this service in the iRouter Monitor." id="tracker.monitor.label" name="Component container label"/>
+  </OCD>
+  <OCD description="A MongoDB backend storage solution for ECVI documents." id="org.usaha.ecvi.store.mongodb.irouter" name="MongoDB Ecvi Store">
+    <AD default="none" description="Name of the group of iRouter components that will be wired together. (If no iRouter functionality is required this value is ignored.)" id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD cardinality="5" default="agriculture.ecvi" description="Comma delimited list of scope names for consumed animal, measurement, and position products. (If no iRouter functionality is required this value is ignored.)" id="wireadmin.consumer.scope" name="Consumable scopes" required="true"/>
+    <AD cardinality="1" default="agriculture.ecvi.response" description="The producer scope to send the query response. (Use full scope names)" id="wireadmin.producer.scope" name="Producer scope" required="true"/>
+    <AD description="Universal Resource Identifier(URI) of the Mongo Provider.  This is the URI that will be used to specify which Mongo Provider of the IEcviStore service to use." id="mongo.provider.uri" name="Mongo Provider URI" required="true"/>
+    <AD default="MongoDB" description="Name to label the node in the iRouter Monitor View graphics. This optional attribute has no functionality other than to visualize and document this service in the iRouter Monitor." id="tracker.monitor.label" name="Component container label"/>
+  </OCD>
+  <OCD description="A EcviStore implemented on the Message Queue Telemetry Transport." id="org.usaha.ecvi.store.mqtt" name="MQTT ECVI Store">
+    <AD default="tcp://m2m.eclipse.org:1883" description="Protocol, server name and port for the MQTT server." id="connection.uri" name="MQTT URI" required="true"/>
+    <AD description="Optional name of the MQTT User." id="username" name="MQTT User Name" required="false"/>
+    <AD description="Password for the MQTT user." id="password" name="MQTT User Password" required="false"/>
+    <AD default="none" description="Name of the group of iRouter components that will be wired together. (If no iRouter functionality is required this value is ignored.)" id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD cardinality="5" default="ecvi" description="Comma delimited list of scope names for consumed ecvi products. (If no iRouter functionality is required this value is ignored.)" id="wireadmin.consumer.scope" name="Consumable scopes" required="true"/>
+    <AD description="Universal Resource Identifier(URI) of the Tracker Premises.  This is the Premises URI that will be used for saving consumed iRouter Ecvi products. Only the Premises creating a Ecvi (Source Premises) can save it on a MQTT EcviStore." id="tracker.premises.uri" name="Premises URI" required="true"/>
+    <AD default="Ecvi MQTT" description="Name to label the node in the iRouter Monitor View graphics. This optional attribute has no functionality other than to visualize and document this service in the iRouter Monitor." id="tracker.monitor.label" name="Component container label"/>
+  </OCD>
+  <OCD description="Consumes NMEA position, weather and orientation sending them to UDP Servers." id="com.verticon.tracker.irouter.udp" name="NMEA UDP Gateway">
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD cardinality="5" default="gps.position,gps.weather,gps.orientation" description="Comma delimited list of the consumed scopes. (Use full scope names)." id="wireadmin.consumer.scope" name="Consumable scopes" required="true"/>
+    <AD default="cik=fff51d1a260b4b258fefffd9a9313c433e419fff" description="The prefix to use when building a message. The default is an example of a UDP service that requires a customer id value." id="udp.message.prefix" name="Prefix to send in the message" required="true"/>
+    <AD default="," description="The delimiter to use to seperate values in a message. Can be an empty string." id="udp.message.delimiter" name="Delimiter" required="true"/>
+    <AD default="m2.exosite.com:18494" description="Host name and port of the UDP Service." id="connection.uri" name="Connection uri" required="true"/>
+    <AD default="NMEA UDP Gateway" description="Name to label node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Monitor node label" required="false"/>
+  </OCD>
+  <OCD description="Manages connections to a NMEA 0183 device and produces a Position for every GPS fix received. May also produce a composite Weather or Orientation object if these are sent by the NMEA device." id="com.verticon.tracker.irouter.gps" name="NMEA Proxy">
+    <AD default="" description="URI to connect to the gps device. Examples socket://192.168.0.116:2345 or btspp://001C881333D6:1;authenticate=false;encrypt=false;master=false" id="connection.uri" name="Connection uri" required="true"/>
+    <AD default="one" description="Name of the group of components that will be wired together." id="tracker.wiring.group.name" name="Wiring group name" required="true"/>
+    <AD default="5" description="Seconds to wait before retrying to establish a connection to the device." id="connection.retry.seconds" name="Connection retry interval seconds" required="true" type="Long"/>
+    <AD default="1" description="Seconds to wait between sending Position, Weather or Orientation products." id="product.output.rate" name="Production output rate governer" required="true" type="Long"/>
+    <AD default="3" description="Latitude accuracy in radians. Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. " id="latitude.error" name="Latitude measurement error radians" required="true" type="Double"/>
+    <AD default="3" description="Longitude accuracy in radians. Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. " id="longitude.error" name="Longitude measurement error radians" required="true" type="Double"/>
+    <AD default="3" description="Altitude accuracy in meters. Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. " id="altitude.error" name="Altitude measurement error meters" required="true" type="Double"/>
+    <AD default="3" description="Pitch accuracy in radians. Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. " id="pitch.error" name="Pitch measurement error radians" required="true" type="Double"/>
+    <AD default="3" description="Roll accuracy in radians. Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. " id="roll.error" name="Roll measurement error radians" required="true" type="Double"/>
+    <AD default="1" description="Relative humidity accuracy in percent in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. " id="barometric.error" name="Barometric measurement error in percent" required="true" type="Double"/>
+    <AD default="1" description="Air Temperature accuracy in degrees Kelvin Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. " id="airtemp.error" name="Air Temperature measurement error degrees Kelvin" required="true" type="Double"/>
+    <AD default="1" description="Wind speed accuracy in meters per second. Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. " id="windSpeed.error" name="Wind speed measurement error meters per second" required="true" type="Double"/>
+    <AD default="3" description="Wind direction accuracy in radians. Errors in measurement use the P95 rule. Actual values must fall in the range value +/- error 95% or more of the time. " id="windDirection.error" name="Wind Direction measurement error radians" required="true" type="Double"/>
+    <AD cardinality="1" default="gps.position" description="The scope containing Position product. (Use full scope names)" id="wireadmin.producer.scope" name="Producer scope" required="true"/>
+    <AD default="GPS Proxy" description="Name to label node in the iRouter Monitor View graphics." id="tracker.monitor.label" name="Component container label" required="false"/>
+  </OCD>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.mongo/]" pid="com.verticon.mongo">
+    <Object ocdref="com.verticon.mongo"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.animal.data/]" pid="com.verticon.tracker.irouter.animal.data">
+    <Object ocdref="com.verticon.tracker.irouter.animal.data"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.bwcontrol/]" pid="com.verticon.tracker.irouter.bwcontrol">
+    <Object ocdref="com.verticon.tracker.irouter.bwcontrol"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.eid.event/]" pid="com.verticon.tracker.irouter.eid.event">
+    <Object ocdref="com.verticon.tracker.irouter.eid.event"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.eventadmin.gateway/]" pid="com.verticon.tracker.irouter.eventadmin.gateway">
+    <Object ocdref="com.verticon.tracker.irouter.eventadmin.gateway"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.flow.terminator/]" pid="com.verticon.tracker.irouter.flow.terminator">
+    <Object ocdref="com.verticon.tracker.irouter.flow.terminator"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.measurement.comparator/]" pid="com.verticon.tracker.irouter.measurement.comparator">
+    <Object ocdref="com.verticon.tracker.irouter.measurement.comparator"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.measurement.converter/]" pid="com.verticon.tracker.irouter.measurement.converter">
+    <Object ocdref="com.verticon.tracker.irouter.measurement.converter"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.measurement.event/]" pid="com.verticon.tracker.irouter.measurement.event">
+    <Object ocdref="com.verticon.tracker.irouter.measurement.event"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.measurement.logger/]" pid="com.verticon.tracker.irouter.measurement.logger">
+    <Object ocdref="com.verticon.tracker.irouter.measurement.logger"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.measurement.trigger/]" pid="com.verticon.tracker.irouter.measurement.trigger">
+    <Object ocdref="com.verticon.tracker.irouter.measurement.trigger"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.measurement.trigger.file/]" pid="com.verticon.tracker.irouter.measurement.trigger.file">
+    <Object ocdref="com.verticon.tracker.irouter.measurement.trigger.file"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.mettler/]" pid="com.verticon.tracker.irouter.mettler.balancefactory">
+    <Object ocdref="com.verticon.tracker.irouter.mettler.balancefactory"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.monitor.external/]" pid="com.verticon.tracker.irouter.monitor.external">
+    <Object ocdref="com.verticon.tracker.irouter.monitor.external"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.mqtt/]" pid="com.verticon.tracker.irouter.mqtt">
+    <Object ocdref="com.verticon.tracker.irouter.mqtt"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.ohaus/]" pid="com.verticon.tracker.irouter.ohaus">
+    <Object ocdref="com.verticon.tracker.irouter.ohaus"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.premises.animal/]" pid="com.verticon.tracker.irouter.premises.animal">
+    <Object ocdref="com.verticon.tracker.irouter.premises.animal"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.premises.event/]" pid="com.verticon.tracker.irouter.premises.event">
+    <Object ocdref="com.verticon.tracker.irouter.premises.event"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.trutest/]" pid="com.verticon.tracker.irouter.trutest.indicatorfactory">
+    <Object ocdref="com.verticon.tracker.irouter.trutest.indicatorfactory"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.trutest.alarm.adapter/]" pid="com.verticon.tracker.irouter.trutest.alarm.adapter">
+    <Object ocdref="com.verticon.tracker.irouter.trutest.alarm.adapter"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.trutest.eid.adapter/]" pid="com.verticon.tracker.irouter.trutest.eid.adapter">
+    <Object ocdref="com.verticon.tracker.irouter.trutest.eid.adapter"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.trutest.measurement.adapter/]" pid="com.verticon.tracker.irouter.trutest.measurement.adapter">
+    <Object ocdref="com.verticon.tracker.irouter.trutest.measurement.adapter"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.store.mongodb/]" pid="com.verticon.tracker.store.mongodb">
+    <Object ocdref="com.verticon.tracker.store.mongodb"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.store.mqtt/]" pid="com.verticon.tracker.store.mqtt">
+    <Object ocdref="com.verticon.tracker.store.mqtt"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/org.usaha.ecvi.store.mongodb/]" pid="org.usaha.ecvi.store.mongodb.irouter">
+    <Object ocdref="org.usaha.ecvi.store.mongodb.irouter"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/org.usaha.ecvi.store.mqtt/]" pid="org.usaha.ecvi.store.mqtt">
+    <Object ocdref="org.usaha.ecvi.store.mqtt"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.udp/]" pid="com.verticon.tracker.irouter.udp">
+    <Object ocdref="com.verticon.tracker.irouter.udp"/>
+  </Designate>
+  <Designate bundle="[reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.gps/]" pid="com.verticon.tracker.irouter.gps">
+    <Object ocdref="com.verticon.tracker.irouter.gps"/>
+  </Designate>
+  <Designate bundle="reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.udp/" factoryPid="com.verticon.tracker.irouter.udp" pid="com.verticon.tracker.irouter.udp-1417307656951-0">
+    <Object ocdref="com.verticon.tracker.irouter.udp">
+      <Attribute adref="tracker.wiring.group.name">
+        <Value>one</Value>
+      </Attribute>
+      <Attribute adref="wireadmin.consumer.scope">
+        <Value>gps.position</Value>
+        <Value>gps.weather</Value>
+        <Value>gps.orientation</Value>
+      </Attribute>
+      <Attribute adref="udp.message.prefix">
+        <Value>cik=66412b8f24bca8e4ee47735acc0cffdd12ebe660</Value>
+      </Attribute>
+      <Attribute adref="udp.message.delimiter">
+        <Value>&amp;</Value>
+      </Attribute>
+      <Attribute adref="connection.uri">
+        <Value>m2.exosite.com:18494</Value>
+      </Attribute>
+      <Attribute adref="tracker.monitor.label">
+        <Value>NMEA UDP Gateway</Value>
+      </Attribute>
+    </Object>
+  </Designate>
+  <Designate bundle="reference:file:/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.gps/" factoryPid="com.verticon.tracker.irouter.gps" pid="com.verticon.tracker.irouter.gps-1417313687434-0">
+    <Object ocdref="com.verticon.tracker.irouter.gps">
+      <Attribute adref="connection.uri">
+        <Value>comm:/dev/ttyS0;baudrate=4800</Value>
+      </Attribute>
+      <Attribute adref="tracker.wiring.group.name">
+        <Value>one</Value>
+      </Attribute>
+      <Attribute adref="connection.retry.seconds">
+        <Value>5</Value>
+      </Attribute>
+      <Attribute adref="product.output.rate">
+        <Value>120</Value>
+      </Attribute>
+      <Attribute adref="latitude.error">
+        <Value>3</Value>
+      </Attribute>
+      <Attribute adref="longitude.error">
+        <Value>3</Value>
+      </Attribute>
+      <Attribute adref="altitude.error">
+        <Value>3</Value>
+      </Attribute>
+      <Attribute adref="pitch.error">
+        <Value>3</Value>
+      </Attribute>
+      <Attribute adref="roll.error">
+        <Value>3</Value>
+      </Attribute>
+      <Attribute adref="barometric.error">
+        <Value>1</Value>
+      </Attribute>
+      <Attribute adref="airtemp.error">
+        <Value>1</Value>
+      </Attribute>
+      <Attribute adref="windSpeed.error">
+        <Value>1</Value>
+      </Attribute>
+      <Attribute adref="windDirection.error">
+        <Value>3</Value>
+      </Attribute>
+      <Attribute adref="wireadmin.producer.scope">
+        <Value>gps.position</Value>
+      </Attribute>
+      <Attribute adref="tracker.monitor.label">
+        <Value>GPS Proxy</Value>
+      </Attribute>
+    </Object>
+  </Designate>
+</metatype:MetaData>

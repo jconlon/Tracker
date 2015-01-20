@@ -1,0 +1,32 @@
+#Deployment Plugin Project File
+#Thu Jan 15 15:46:58 CST 2015
+build.ant.name=<.>/nmea_build.xml
+build.dp.file=<.>/nmea.dp
+build.location=
+bundles.0.bundle_path=/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.gps/.project
+bundles.0.customizer=false
+bundles.0.headers.count=0
+bundles.0.missing=false
+bundles.0.name=bundles/com.verticon.tracker.irouter.gps.jar
+bundles.0.symbolic_name=com.verticon.tracker.irouter.gps
+bundles.0.version=1.3.0.qualifier
+bundles.1.bundle_path=/home/jconlon/Workspaces/tracker_dev-01/com.verticon.tracker.irouter.udp/.project
+bundles.1.customizer=false
+bundles.1.headers.count=0
+bundles.1.missing=false
+bundles.1.name=bundles/com.verticon.tracker.irouter.udp.jar
+bundles.1.symbolic_name=com.verticon.tracker.irouter.udp
+bundles.1.version=1.2.0.qualifier
+bundles.count=2
+certificates.count=0
+general.signbundles=false
+headers.contact.address=mailto\:jconlon@verticon.com
+headers.copyright=Verticon, Inc. 2015
+headers.description=NMEA Proxy and Producer and UDP forwarder for GPS, Heading, Composite Weather and Orientation Services.
+headers.license=Eclipse Public License  EPL1.0
+headers.other.headers=DeploymentPackage-Name\:NMEA Services and UDP Forwarder
+headers.symbolic.name=com.verticon.tracker.irouter.nmea.dppackage
+headers.vendor=Verticon, Inc.
+headers.version=4.1.0
+resources.count=0
+
