@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" 
+    activate="startup" name="com.verticon.tracker.irouter.udp.test.system">
+   <implementation 
+    class="com.verticon.tracker.irouter.udp.test.system.internal.UDPSystemTest"/>
+   <reference bind="setConfigAdmin" cardinality="1..1" interface="org.osgi.service.cm.ConfigurationAdmin" 
+      name="ConfigurationAdmin" policy="static"/>
+    <reference bind="setListener" cardinality="1..1" interface="com.verticon.tracker.irouter.dev.IDeviceListener" name="IListener" policy="static" target="(service.pid=gps.fake.dev)"/>
+</scr:component>
