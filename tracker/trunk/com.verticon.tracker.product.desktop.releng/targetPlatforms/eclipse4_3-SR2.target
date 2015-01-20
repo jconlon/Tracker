@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="eclipse4_3-SR2" sequenceNumber="173">
+<?pde version="3.8"?><target name="eclipse4_3-SR2" sequenceNumber="180">
 <locations>
-<location path="/opt/Junit3" type="Directory"/>
+<location id="org.eclipse.emf.ecore.xcore.ui.source" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
 <location path="/opt/mongo-2.11.1" type="Directory"/>
 <location path="/opt/logback-1.0.11" type="Directory"/>
 <location path="/opt/Eclipse/xtext-unittesting/eclipse" type="Directory"/>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.gef.all.feature.group" version="3.9.0.201305060205"/>
-<repository location="file:/opt/Eclipse/mirrors/gef-kepler/"/>
+<unit id="gnu.io.rxtx.sdk.feature.group" version="2.1.7.4_v20071016-417C7DP1Bh_eEaQJBrHBHg"/>
+<unit id="gnu.io.rxtx.feature.group" version="2.1.7.4_v20071016-7B57e7UAXMAAqGAGf"/>
+<repository location="file:/opt/Eclipse/mirrors/rxtx/"/>
 </location>
-<location path="/opt/Eclipse/apache-commons" type="Directory"/>
-<location path="/opt/Eclipse/google-guava-11.01" type="Directory"/>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.ocl.examples.feature.group" version="3.3.2.v20140210-1137"/>
-<unit id="org.eclipse.ocl.master.feature.group" version="4.1.2.v20140210-1137"/>
-<unit id="org.eclipse.ocl.all.sdk.feature.group" version="4.1.1.v20140210-1137"/>
-<repository location="jar:file:/opt/Eclipse/mdt-ocl-Update-tools/mdt-ocl-Update-tools-4.1.2.zip!/"/>
-</location>
+<location path="/opt/Eclipse/rxjava-core" type="Directory"/>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.equinox.p2.rcp.feature.feature.group" version="1.2.0.v20140221-1852"/>
 <unit id="org.eclipse.equinox.compendium.sdk.feature.group" version="3.8.0.v20130813-1853"/>
@@ -30,15 +24,55 @@
 <unit id="org.eclipse.equinox.core.feature.feature.group" version="1.1.0.v20140110-1610"/>
 <repository location="jar:file:/opt/Eclipse/equinox-SDK/equinox-SDK-KeplerSR2.zip!/"/>
 </location>
-<location path="/opt/Eclipse/swtbot/eclipse" type="Directory"/>
-<location path="/opt/Eclipse/mongoemf-0.7.0/eclipse" type="Directory"/>
+<location id="org.eclipse.equinox.p2.extras.feature.source" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
+<location id="org.eclipse.emf.ecore.xcore.source" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
+<location path="/opt/Eclipse/apache-commons" type="Directory"/>
+<location path="/home/jconlon/.m2/repository/org/kevoree/extra/org.kevoree.extra.osgi.rxtx/2.2.0" type="Directory"/>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="gnu.io.rxtx.sdk.feature.group" version="2.1.7.4_v20071016-417C7DP1Bh_eEaQJBrHBHg"/>
-<unit id="gnu.io.rxtx.feature.group" version="2.1.7.4_v20071016-7B57e7UAXMAAqGAGf"/>
-<repository location="file:/opt/Eclipse/mirrors/rxtx/"/>
+<unit id="org.eclipse.xtext.xbase.feature.group" version="2.5.3.v201402240820"/>
+<unit id="org.eclipse.xtext.examples.feature.group" version="2.5.3.v201402240820"/>
+<unit id="org.eclipse.xtext.redist.feature.group" version="2.5.3.v201402240820"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.5.3.v201402240820"/>
+<unit id="org.eclipse.xtext.runtime.feature.group" version="2.5.3.v201402240820"/>
+<unit id="org.eclipse.xtext.ui.feature.group" version="2.5.3.v201402240820"/>
+<unit id="org.eclipse.xtext.docs.feature.group" version="2.5.3.v201402240820"/>
+<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"/>
 </location>
-<location path="/opt/slf4j-1.7.5" type="Directory"/>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.emfstore.sdk.feature.feature.group" version="1.1.0.v20131205-1626"/>
+<repository location="http://download.eclipse.org/emf-store/releases_11"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.transaction.examples.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.workspace.source.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.workspace.examples.source.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.transaction.tests.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.workspace.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.transaction.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.transaction.master.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.transaction.doc.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.transaction.examples.source.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.transaction.source.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.workspace.examples.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.transaction.sdk.feature.group" version="1.7.0.201306111400"/>
+<unit id="org.eclipse.emf.workspace.doc.feature.group" version="1.7.0.201306111400"/>
+<repository location="jar:file:/opt/Eclipse/emf-transaction-Updte-1.7.0/emf-transaction-Update-1.7.0.zip!/"/>
+</location>
+<location path="/opt/Eclipse/swtbot/eclipse" type="Directory"/>
+<location id="org.eclipse.equinox.p2.discovery.feature" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.nebula.widgets.nattable.core.feature.feature.group" version="1.0.1.201307031725"/>
+<unit id="org.eclipse.nebula.widgets.nattable.extension.poi.feature.feature.group" version="1.0.1.201307031725"/>
+<unit id="org.eclipse.nebula.widgets.nattable.core.source.feature.feature.group" version="1.0.1.201307031725"/>
+<unit id="org.eclipse.nebula.widgets.nattable.extension.poi.source.feature.feature.group" version="1.0.1.201307031725"/>
+<repository location="file:/opt/Eclipse/nattable/"/>
+</location>
 <location path="/opt/Eclipse/monitoradmin" type="Directory"/>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.net4j.feature.group" version="4.2.1.v20130806-0658"/>
+<repository location="jar:file:/opt/Eclipse/mirrors/cdo/emf-cdo-R20130918-0029-Site.zip!/"/>
+</location>
+<location path="/opt/Eclipse/metrics/eclipse" type="Directory"/>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.query.examples.feature.group" version="1.7.0.201306111332"/>
 <unit id="org.eclipse.emf.query.source.feature.group" version="1.7.0.201306111332"/>
@@ -52,27 +86,42 @@
 <unit id="org.eclipse.emf.query.sdk.feature.group" version="1.7.0.201306111332"/>
 <repository location="jar:file:/opt/Eclipse/emf-query-Update-1.7.0/emf-query-Update-1.7.0.zip!/"/>
 </location>
-<location path="/opt/Eclipse/metrics/eclipse" type="Directory"/>
 <location path="/opt/hamcrest-1.3.0/plugins" type="Directory"/>
+<location id="org.eclipse.equinox.p2.rcp.feature" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
 <location path="/opt/Eclipse/eclipse-4.3.2-delta-pack/eclipse" type="Directory"/>
+<location id="org.eclipse.platform.source" path="${eclipse_home}" type="Feature"/>
+<location id="org.eclipse.equinox.p2.extras.feature" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
+<location id="org.eclipse.equinox.p2.user.ui.source" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
+<location id="org.eclipse.equinox.p2.rcp.feature.source" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.validation.source.feature.group" version="1.7.0.201306111341"/>
-<unit id="org.eclipse.emf.validation.doc.feature.group" version="1.7.0.201306111341"/>
-<unit id="org.eclipse.emf.validation.tests.feature.group" version="1.7.0.201306111341"/>
-<unit id="org.eclipse.emf.validation.examples.source.feature.group" version="1.7.0.201306111341"/>
-<unit id="org.eclipse.emf.validation.feature.group" version="1.7.0.201306111341"/>
-<unit id="org.eclipse.emf.validation.ocl.feature.group" version="1.7.0.201306111341"/>
-<unit id="org.eclipse.emf.validation.sdk.feature.group" version="1.7.0.201306111341"/>
-<unit id="org.eclipse.emf.validation.ocl.source.feature.group" version="1.7.0.201306111341"/>
-<unit id="org.eclipse.emf.validation.master.feature.group" version="1.7.0.201306111341"/>
-<unit id="org.eclipse.emf.validation.examples.feature.group" version="1.7.0.201306111341"/>
-<repository location="jar:file:/opt/Eclipse/emf-validation-Update-1.7.0/emf-validation-Update-1.7.0.zip!/"/>
+<unit id="org.eclipse.birt.feature.group" version="4.3.2.v20140211-1400-DPDKA5GixAoaudOsMil4K3C7KNz0"/>
+<unit id="org.eclipse.birt.source.feature.group" version="4.3.2.v20140211-1400-DPDKA5GixAoaudOsMil4K3C7KNz0"/>
+<repository location="jar:file:/opt/Eclipse/birt/birt-updatesite-4_3_2.zip!/"/>
 </location>
-<location path="/opt/Eclipse/apache/eclipse" type="Directory"/>
-<location path="/opt/orbit-org.slf4j-1.5.11" type="Directory"/>
-<location path="/opt/easymock" type="Directory"/>
-<location path="/opt/ekkesCornerLogging/eclipse-target" type="Directory"/>
-<location path="/opt/Eclipse/google-inject" type="Directory"/>
+<location id="org.eclipse.emf.ecore.xcore" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
+<location path="/opt/Eclipse/jackson-jr" type="Directory"/>
+<location path="/opt/Eclipse/misc" type="Directory"/>
+<location id="org.eclipse.help" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
+<location path="/opt/Junit3" type="Directory"/>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.compare.source.feature.group" version="2.1.2.201310031412"/>
+<repository location="jar:file:/opt/Eclipse/emf-compare/emf-compare-update-2.1.2.zip!/"/>
+</location>
+<location id="org.eclipse.equinox.p2.core.feature.source" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
+<location id="org.eclipse.emf.ecore.xcore.lib.source" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.common.feature.group" version="2.9.2.v20131212-0545"/>
+<unit id="org.eclipse.rcp.configuration.feature.group" version="1.0.0.v20140117-0610"/>
+<unit id="org.eclipse.emf.ecore.feature.group" version="2.9.2.v20131212-0545"/>
+<unit id="org.eclipse.rcp.sdk.id" version="4.3.2.M20140221-1700"/>
+<unit id="org.eclipse.rcp.source.feature.group" version="4.3.2.v20140221-1700"/>
+<unit id="org.eclipse.e4.rcp.source.feature.group" version="1.2.2.v20140206-1358"/>
+<unit id="org.eclipse.rcp.feature.group" version="4.3.2.v20140221-1700"/>
+<unit id="org.eclipse.e4.rcp.feature.group" version="1.2.2.v20140206-1358"/>
+<repository location="file:/opt/Eclipse/mirrors/kepler-pde-sr2/"/>
+</location>
+<location id="org.eclipse.equinox.p2.user.ui" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
+<location path="/opt/Eclipse/google-guava-11.01" type="Directory"/>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.oda.sdk.feature.group" version="1.2.0.v20140203-1126"/>
 <unit id="org.eclipse.xsd.feature.group" version="2.9.1.v20140203-1126"/>
@@ -112,49 +161,50 @@
 <repository location="jar:file:/opt/Eclipse/emf-xsd/emf-xsd-Update-2.9.2.zip!/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.transaction.examples.feature.group" version="1.7.0.201306111400"/>
-<unit id="org.eclipse.emf.workspace.source.feature.group" version="1.7.0.201306111400"/>
-<unit id="org.eclipse.emf.workspace.examples.source.feature.group" version="1.7.0.201306111400"/>
-<unit id="org.eclipse.emf.transaction.tests.feature.group" version="1.7.0.201306111400"/>
-<unit id="org.eclipse.emf.workspace.feature.group" version="1.7.0.201306111400"/>
-<unit id="org.eclipse.emf.transaction.feature.group" version="1.7.0.201306111400"/>
-<unit id="org.eclipse.emf.transaction.master.feature.group" version="1.7.0.201306111400"/>
-<unit id="org.eclipse.emf.transaction.doc.feature.group" version="1.7.0.201306111400"/>
-<unit id="org.eclipse.emf.transaction.examples.source.feature.group" version="1.7.0.201306111400"/>
-<unit id="org.eclipse.emf.transaction.source.feature.group" version="1.7.0.201306111400"/>
-<unit id="org.eclipse.emf.workspace.examples.feature.group" version="1.7.0.201306111400"/>
-<unit id="org.eclipse.emf.transaction.sdk.feature.group" version="1.7.0.201306111400"/>
-<unit id="org.eclipse.emf.workspace.doc.feature.group" version="1.7.0.201306111400"/>
-<repository location="jar:file:/opt/Eclipse/emf-transaction-Updte-1.7.0/emf-transaction-Update-1.7.0.zip!/"/>
+<unit id="org.eclipse.ocl.examples.feature.group" version="3.3.2.v20140210-1137"/>
+<unit id="org.eclipse.ocl.master.feature.group" version="4.1.2.v20140210-1137"/>
+<unit id="org.eclipse.ocl.all.sdk.feature.group" version="4.1.1.v20140210-1137"/>
+<repository location="jar:file:/opt/Eclipse/mdt-ocl-Update-tools/mdt-ocl-Update-tools-4.1.2.zip!/"/>
 </location>
+<location id="org.eclipse.equinox.p2.sdk" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
+<location path="/opt/Eclipse/mongoemf-0.7.0/eclipse" type="Directory"/>
+<location path="/opt/slf4j-1.7.5" type="Directory"/>
+<location id="org.eclipse.help.source" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.gef.all.feature.group" version="3.9.0.201305060205"/>
+<repository location="file:/opt/Eclipse/mirrors/gef-kepler/"/>
+</location>
+<location id="org.eclipse.platform" path="${eclipse_home}" type="Feature"/>
+<location id="org.eclipse.emf.ecore.xcore.sdk" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
+<location path="/opt/Eclipse/joda-time/joda-time-2.3" type="Directory"/>
+<location id="org.eclipse.equinox.p2.core.feature" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
+<location path="/opt/Eclipse/apache/eclipse" type="Directory"/>
+<location id="org.eclipse.emf.ecore.xcore.lib" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.uml2.sdk.feature.group" version="4.1.2.v20140202-2055"/>
 <repository location="jar:file:/opt/Eclipse/mdt-uml2/mdt-uml2-Update-4.1.2.zip!/"/>
 </location>
+<location id="org.eclipse.emf.ecore.xcore.ui" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
+<location path="/opt/orbit-org.slf4j-1.5.11" type="Directory"/>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.xtext.xbase.feature.group" version="2.5.3.v201402240820"/>
-<unit id="org.eclipse.xtext.examples.feature.group" version="2.5.3.v201402240820"/>
-<unit id="org.eclipse.xtext.redist.feature.group" version="2.5.3.v201402240820"/>
-<unit id="org.eclipse.xtext.sdk.feature.group" version="2.5.3.v201402240820"/>
-<unit id="org.eclipse.xtext.runtime.feature.group" version="2.5.3.v201402240820"/>
-<unit id="org.eclipse.xtext.ui.feature.group" version="2.5.3.v201402240820"/>
-<unit id="org.eclipse.xtext.docs.feature.group" version="2.5.3.v201402240820"/>
-<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/"/>
+<unit id="org.eclipse.emf.validation.source.feature.group" version="1.7.0.201306111341"/>
+<unit id="org.eclipse.emf.validation.doc.feature.group" version="1.7.0.201306111341"/>
+<unit id="org.eclipse.emf.validation.tests.feature.group" version="1.7.0.201306111341"/>
+<unit id="org.eclipse.emf.validation.examples.source.feature.group" version="1.7.0.201306111341"/>
+<unit id="org.eclipse.emf.validation.feature.group" version="1.7.0.201306111341"/>
+<unit id="org.eclipse.emf.validation.ocl.feature.group" version="1.7.0.201306111341"/>
+<unit id="org.eclipse.emf.validation.sdk.feature.group" version="1.7.0.201306111341"/>
+<unit id="org.eclipse.emf.validation.ocl.source.feature.group" version="1.7.0.201306111341"/>
+<unit id="org.eclipse.emf.validation.master.feature.group" version="1.7.0.201306111341"/>
+<unit id="org.eclipse.emf.validation.examples.feature.group" version="1.7.0.201306111341"/>
+<repository location="jar:file:/opt/Eclipse/emf-validation-Update-1.7.0/emf-validation-Update-1.7.0.zip!/"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.datatools.connectivity.oda.feature.source.feature.group" version="1.11.2.v201309171554-7H7D7dCcNBHTESGlDZXh"/>
 <unit id="org.eclipse.datatools.connectivity.oda.feature.feature.group" version="1.11.2.v201309171554-7H7D7dCcNBHTESGlDZXh"/>
 <repository location="jar:file:/opt/Eclipse/datatools/dtp-p2repo_1.11.2.zip!/"/>
 </location>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.compare.source.feature.group" version="2.1.2.201310031412"/>
-<repository location="jar:file:/opt/Eclipse/emf-compare/emf-compare-update-2.1.2.zip!/"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.birt.feature.group" version="4.3.2.v20140211-1400-DPDKA5GixAoaudOsMil4K3C7KNz0"/>
-<unit id="org.eclipse.birt.source.feature.group" version="4.3.2.v20140211-1400-DPDKA5GixAoaudOsMil4K3C7KNz0"/>
-<repository location="jar:file:/opt/Eclipse/birt/birt-updatesite-4_3_2.zip!/"/>
-</location>
+<location path="/opt/easymock" type="Directory"/>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.emf.ecp.view.categorization.feature.feature.group" version="1.2.1.20140311-1143"/>
 <unit id="org.eclipse.emf.ecp.view.treemasterdetail.feature.feature.group" version="1.2.1.20140311-1143"/>
@@ -186,55 +236,8 @@
 <unit id="org.eclipse.emf.ecp.demo.e4.feature.feature.group" version="1.2.1.20140311-1143"/>
 <repository location="file:/opt/Eclipse/emf-client/121/"/>
 </location>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.net4j.feature.group" version="4.2.1.v20130806-0658"/>
-<repository location="jar:file:/opt/Eclipse/mirrors/cdo/emf-cdo-R20130918-0029-Site.zip!/"/>
-</location>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.emfstore.sdk.feature.feature.group" version="1.1.0.v20131205-1626"/>
-<repository location="http://download.eclipse.org/emf-store/releases_11"/>
-</location>
-<location id="org.eclipse.platform.source" path="${eclipse_home}" type="Feature"/>
-<location id="org.eclipse.platform" path="${eclipse_home}" type="Feature"/>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.emf.common.feature.group" version="2.9.2.v20131212-0545"/>
-<unit id="org.eclipse.rcp.configuration.feature.group" version="1.0.0.v20140117-0610"/>
-<unit id="org.eclipse.emf.ecore.feature.group" version="2.9.2.v20131212-0545"/>
-<unit id="org.eclipse.rcp.sdk.id" version="4.3.2.M20140221-1700"/>
-<unit id="org.eclipse.rcp.source.feature.group" version="4.3.2.v20140221-1700"/>
-<unit id="org.eclipse.e4.rcp.source.feature.group" version="1.2.2.v20140206-1358"/>
-<unit id="org.eclipse.rcp.feature.group" version="4.3.2.v20140221-1700"/>
-<unit id="org.eclipse.e4.rcp.feature.group" version="1.2.2.v20140206-1358"/>
-<repository location="file:/opt/Eclipse/mirrors/kepler-pde-sr2/"/>
-</location>
-<location id="org.eclipse.equinox.p2.core.feature.source" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location id="org.eclipse.equinox.p2.core.feature" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location id="org.eclipse.equinox.p2.discovery.feature" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location id="org.eclipse.equinox.p2.extras.feature.source" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location id="org.eclipse.equinox.p2.extras.feature" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location id="org.eclipse.equinox.p2.rcp.feature.source" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location id="org.eclipse.equinox.p2.rcp.feature" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location id="org.eclipse.equinox.p2.sdk" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location id="org.eclipse.equinox.p2.user.ui.source" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location id="org.eclipse.equinox.p2.user.ui" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location id="org.eclipse.help.source" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location id="org.eclipse.help" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location path="/opt/Eclipse/joda-time/joda-time-2.3" type="Directory"/>
-<location id="org.eclipse.emf.ecore.xcore.sdk" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location id="org.eclipse.emf.ecore.xcore.lib.source" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location id="org.eclipse.emf.ecore.xcore.lib" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location id="org.eclipse.emf.ecore.xcore.sdk" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location id="org.eclipse.emf.ecore.xcore.source" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location id="org.eclipse.emf.ecore.xcore.ui.source" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location id="org.eclipse.emf.ecore.xcore.ui" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location id="org.eclipse.emf.ecore.xcore" path="/opt/Eclipse/eclipse-modeling-kepler-SR2/eclipse" type="Feature"/>
-<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.nebula.widgets.nattable.core.feature.feature.group" version="1.0.1.201307031725"/>
-<unit id="org.eclipse.nebula.widgets.nattable.extension.poi.feature.feature.group" version="1.0.1.201307031725"/>
-<unit id="org.eclipse.nebula.widgets.nattable.core.source.feature.feature.group" version="1.0.1.201307031725"/>
-<unit id="org.eclipse.nebula.widgets.nattable.extension.poi.source.feature.feature.group" version="1.0.1.201307031725"/>
-<repository location="file:/opt/Eclipse/nattable/"/>
-</location>
+<location path="/opt/Eclipse/google-inject" type="Directory"/>
+<location path="/opt/ekkesCornerLogging/eclipse-target" type="Directory"/>
 </locations>
 <targetJRE path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-7-openjdk-amd64"/>
 </target>
