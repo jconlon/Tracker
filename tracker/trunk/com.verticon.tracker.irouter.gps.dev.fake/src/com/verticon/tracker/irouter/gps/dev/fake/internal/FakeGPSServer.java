@@ -65,7 +65,7 @@ public class FakeGPSServer implements IDeviceListener {
 	private final Logger logger = LoggerFactory.getLogger(FakeGPSServer.class);
 
 
-	private static final String FILE_OF_SENTENCES = "/com.verticon.tracker.irouter.gps.dev.fake/src/test.txt";
+	private static final String FILE_OF_SENTENCES = "/com.verticon.tracker.irouter.gps.dev.fake/src/capture.txt";
 	private static final String DEFAULT_SOCKET = "2343";
 	private static final String MY_PREFIX = "gps.fake.";
 	private static List<String> lines = null;
@@ -193,6 +193,7 @@ public class FakeGPSServer implements IDeviceListener {
 				output = line + "\r\n";
 				out.write(output.getBytes());
 				out.flush();
+
 			}
 		}
 

@@ -25,6 +25,10 @@ import org.osgi.util.position.Position;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.verticon.nmea.AirMarPitchRoll;
+import com.verticon.nmea.HeadingAndGroundSpeed;
+import com.verticon.nmea.WeatherComposite;
+
 /**
  * Mock consumer of Commands.
  * 
@@ -39,9 +43,14 @@ public class MockConsumer implements Consumer {
 	 */
 	private final Logger logger = LoggerFactory.getLogger(MockConsumer.class);
 
-	List<Position> receivedObjects = new ArrayList<Position>();
+	List<Position> receivedPositions = new ArrayList<Position>();
+	List<WeatherComposite> receivedWeathers = new ArrayList<WeatherComposite>();
+	List<AirMarPitchRoll> receivedOrientations = new ArrayList<AirMarPitchRoll>();
+	List<HeadingAndGroundSpeed> receivedHeadings = new ArrayList<HeadingAndGroundSpeed>();
+	int receivedMessages = 0;
 
 	CountDownLatch latch = new CountDownLatch(1);
+
 
 	/*
 	 * (non-Javadoc)
@@ -61,14 +70,38 @@ public class MockConsumer implements Consumer {
 	public void updated(Wire wire, Object value) {
 		if(value instanceof Envelope){
 			Envelope env = (Envelope) value;
-			logger.info(bundleMarker, "{} received envelope={} with contents={}", new Object[]{this, env, env.getValue()});
+			receivedMessages++;
+			// logger.info(bundleMarker,
+			// "{} received envelope={} with contents={}", new Object[]{this,
+			// env, env.getValue()});
 			if(env.getValue() instanceof Position){
 				Position p = (Position)env.getValue();
-				receivedObjects.add(p);
+				receivedPositions.add(p);
+				logger.info(bundleMarker,
+						"{} received Position lat={} long={}", this, p
+								.getLatitude().getValue(), p.getLongitude()
+								.getValue());
+				latch.countDown();
+			} else if (env.getValue() instanceof WeatherComposite) {
+				WeatherComposite p = (WeatherComposite) env.getValue();
+				receivedWeathers.add(p);
 				logger.info(bundleMarker, "{} received {}", this, p);
 				latch.countDown();
+			} else if (env.getValue() instanceof AirMarPitchRoll) {
+				AirMarPitchRoll p = (AirMarPitchRoll) env.getValue();
+				receivedOrientations.add(p);
+				logger.info(bundleMarker, "{} received {}", this, p);
+				latch.countDown();
+			} else if (env.getValue() instanceof HeadingAndGroundSpeed) {
+				HeadingAndGroundSpeed p = (HeadingAndGroundSpeed) env
+						.getValue();
+				receivedHeadings.add(p);
+				logger.info(bundleMarker, "{} received {}", this, p);
+				latch.countDown();
+
 			}else{
-				logger.error(bundleMarker, "{} received {} instead of a Position", this, env.getValue());
+				logger.error(bundleMarker, "{} received unknown product: {}",
+						this, env.getValue());
 			}
 		}else{
 			logger.error(bundleMarker, "{} received {} instead of an Envelope", this, value);
@@ -84,7 +117,9 @@ public class MockConsumer implements Consumer {
 					this);
 		}else{
 			for (Wire wire : wires) {
-				logger.info(bundleMarker, "{} connected to {}",
+				logger.debug(
+						bundleMarker,
+						"{} connected to {}",
 						this,wire.getProperties().get(WireConstants.WIREADMIN_PRODUCER_PID));
 			}
 		}
@@ -109,6 +144,12 @@ public class MockConsumer implements Consumer {
 		}
 		logger.debug(bundleMarker, "{}: Activated.", this);
 		
+	}
+
+	void deactivate() {
+		receivedOrientations.clear();
+		receivedPositions.clear();
+		receivedWeathers.clear();
 	}
 
 }
