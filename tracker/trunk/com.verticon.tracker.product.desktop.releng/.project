@@ -8,4 +8,11 @@
 	</buildSpec>
 	<natures>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>osgi-console-commands</name>
+			<type>1</type>
+			<location>/home/jconlon/Workspaces/runtime-Tracker/Administration_Tools/osgi-console-commands</location>
+		</link>
+	</linkedResources>
 </projectDescription>
