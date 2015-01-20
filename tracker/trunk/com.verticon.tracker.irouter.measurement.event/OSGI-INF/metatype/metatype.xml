@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metatype:MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
 
-  <OCD name="Premises Measurement Event Gateway" id="com.verticon.tracker.irouter.measurement.event"
-  		description="Gateway for sending measurements, positions and animal tag ids to Tracker transaction editors as animal history events.">
+  <OCD name="NMEA UDP Gateway" id="com.verticon.tracker.irouter.udp"
+  		description="Consumes NMEA position, weather and orientation sending them to UDP Servers.">
     
     <AD name="Wiring group name"  id="tracker.wiring.group.name" 
     	required="true" 
@@ -10,56 +10,41 @@
     	default="one"
         description="Name of the group of components that will be wired together."/>
        
-    <!-- Note that the identification of information is based on the value of the Envelope identification 
-    	attribute. If this attribute is zero than the id from the eid will be used.
-     -->
  	<AD name="Consumable scopes" id="wireadmin.consumer.scope" 
  		type="String"
  		required="true" 
- 		default="animal.weight,animal.eid,transaction.state"
+ 		default="gps.position,gps.weather,gps.orientation"
 		cardinality="5" 
-		description="Comma delimited list of the consumed scopes. Required scopes: measurement and the transaction ending triggering state. A scope for animal tag id is optional and used for information that has not previously been associated with an identification. (Use full scope names)." />
+		description="Comma delimited list of the consumed scopes. (Use full scope names)." />
  
-    <AD name="Trigger on EID" id="triggeron.eid" 
-    	type="Boolean"
-    	required="true" 
-		default="false" 
-    	description="If True sends all cached measurements or positions when an eid is received. All received states are ignored when true. When false use the state information for triggering."/>
-    
-     <AD name="Send only the last value" id="onlysend.last.envelope" 
-    	type="Boolean"
-    	required="true" 
-		default="false" 
-    	description="If True sends only the last cached measurement or position recieved. When false all cached positions and measurements are sent."/>
-    
-    <AD name="Name of the Triggering State" id="consumer.transaction.state" 
+    <AD name="Prefix to send in the message" id="udp.message.prefix" 
     	type="String"
     	required="true" 
-		default="transaction.state" 
-    	description="The name of the state indicating that measurement and the animal id should be forwarded as an animal history event."/>
+		default="cik=fff51d1a260b4b258fefffd9a9313c433e419fff" 
+    	description="The prefix to use when building a message. The default is an example of a UDP service that requires a customer id value."/>
     	
-    <AD name="Value of the Triggering State" id="consumer.transaction.state.value" 
-    	type="Integer"
+    <AD name="Delimiter" id="udp.message.delimiter" 
+    	type="String"
     	required="true" 
-		default="1" 
-    	description="The value of the state indicating that measurement and the animal id should be forwarded as an animal history event."/>
-    
+		default="," 
+    	description="The delimiter to use to seperate values in a message. Can be an empty string."/>
+    	
     <AD name="Connection uri" id="connection.uri" 
      	type="String" 
      	required="true" 
-        default="event://com/verticon/tracker/reader" 
-        description="Identifier to associate this service with an external node in the monitor view."/> 
+        default="m2.exosite.com:18494" 
+        description="Host name and port of the UDP Service."/> 
     
     <AD name="Monitor node label" id="tracker.monitor.label" 
     	type="String"
     	required="false" 
         description="Name to label node in the iRouter Monitor View graphics."
-        default="Premises Measurement"/> 
+        default="NMEA UDP Gateway"/> 
  
   </OCD>
   
-  <Designate pid="com.verticon.tracker.irouter.measurement.event" bundle="*">
-		<Object ocdref="com.verticon.tracker.irouter.measurement.event"/>
+  <Designate pid="com.verticon.tracker.irouter.udp" bundle="*">
+		<Object ocdref="com.verticon.tracker.irouter.udp"/>
   </Designate>
   
   
