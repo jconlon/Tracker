@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MetaData xmlns:metatype="http://www.osgi.org/xmlns/metatype/v1.1.0">
+   <!-- 
+   Notes for creating a resource for Deployment packages:  
+   Element name MetaData not metatype:MetaData
+   OCD must not have description attribute. 
+   ADs must not name or default attribute; must have type attribute; 
+   	cardinality description and required attributes are optional. 
+   -->
+   
+  <!-- ============================= UDP ========================================== -->
+	
+ 
+  <OCD id="com.verticon.tracker.irouter.udp" name="NMEA UDP Gateway"  >
+    <AD id="tracker.wiring.group.name" type="STRING" cardinality="0"/>
+    <AD id="wireadmin.consumer.scope" type="STRING" cardinality="3"/>
+    <AD id="udp.message.prefix" type="STRING" cardinality="0"/>
+    <AD id="udp.message.delimiter" type="STRING" cardinality="0"/>
+    <AD id="connection.uri" type="STRING" cardinality="0"/>
+    <AD id="tracker.monitor.label" type="STRING" cardinality="0"/>
+  </OCD>
+  
+  <Designate factoryPid="com.verticon.tracker.irouter.udp" pid="irouterUDP">
+    <Object ocdref="com.verticon.tracker.irouter.udp">
+      <Attribute adref="tracker.wiring.group.name">
+        <Value>one</Value>
+      </Attribute>
+      <Attribute adref="wireadmin.consumer.scope">
+        <Value>gps.position</Value>
+        <Value>gps.weather</Value>
+        <Value>gps.orientation</Value>
+      </Attribute>
+      <Attribute adref="udp.message.prefix">
+        <Value>cik=66412b8f24bca8e4ee47735acc0cffdd12ebe660</Value>
+      </Attribute>
+      <Attribute adref="udp.message.delimiter">
+        <Value><![CDATA[&]]></Value>
+      </Attribute>
+      <Attribute adref="connection.uri">
+        <Value>m2.exosite.com:18494</Value>
+      </Attribute>
+      <Attribute adref="tracker.monitor.label">
+        <Value>NMEA UDP Gateway</Value>
+      </Attribute>
+    </Object>
+  </Designate>
+  
+ <!-- ============================= GPS ========================================== -->
+  <OCD id="com.verticon.tracker.irouter.gps" name="NMEA Proxy">
+    <AD  id="connection.uri" cardinality="0"  type="STRING" description="URI to connect to the gps device. Examples socket://192.168.0.116:2345 or btspp://001C881333D6:1;authenticate=false;encrypt=false;master=false"/>
+    <AD id="tracker.wiring.group.name"  cardinality="0" type="STRING"/>
+    <AD  id="connection.retry.seconds" cardinality="0"  type="Long"/>
+    <AD  id="product.output.rate" cardinality="0"  type="Long" description="Seconds to wait between sending Position, Weather or Orientation products."/>
+    <AD  id="product.output.consolidate" type="Boolean" description="If true all NMEA sentences will be consolidated in a single message."/>
+    <AD  id="latitude.error" cardinality="0"  type="Double"/>
+    <AD  id="longitude.error" cardinality="0"  type="Double"/>
+    <AD  id="altitude.error" cardinality="0" type="Double"/>
+    <AD  id="pitch.error" cardinality="0" type="Double"/>
+    <AD  id="roll.error" cardinality="0"  type="Double"/>
+    <AD  id="barometric.error" cardinality="0"  type="Double"/>
+    <AD  id="airtemp.error" cardinality="0" type="Double"/>
+    <AD  id="windSpeed.error" cardinality="0" type="Double"/>
+    <AD  id="windDirection.error" cardinality="0"  type="Double"/>
+    <AD  id="wireadmin.producer.scope" cardinality="1" type="STRING" />
+     <AD id="tracker.monitor.label" type="STRING" description="Name to label node in the iRouter Monitor View graphics." required="false" />
+  </OCD>
+   
+  
+  
+  <Designate factoryPid="com.verticon.tracker.irouter.gps" pid="irouterGps">
+    <Object ocdref="com.verticon.tracker.irouter.gps">
+      <Attribute adref="connection.uri">
+        <Value>comm:/dev/ttyUSB0;baudrate=4800</Value>
+      </Attribute>
+      <Attribute adref="tracker.wiring.group.name">
+        <Value>one</Value>
+      </Attribute>
+      <Attribute adref="connection.retry.seconds">
+        <Value>5</Value>
+      </Attribute>
+      <Attribute adref="product.output.rate">
+         <!-- 60 = 1 mins; 3600 = 1 hour;-->
+        <Value>300</Value>
+      </Attribute>
+       <Attribute adref="product.output.consolidate">
+        <Value>true</Value>
+      </Attribute>
+      <Attribute adref="latitude.error">
+        <Value>3</Value>
+      </Attribute>
+      <Attribute adref="longitude.error">
+        <Value>3</Value>
+      </Attribute>
+      <Attribute adref="altitude.error">
+        <Value>3</Value>
+      </Attribute>
+      <Attribute adref="pitch.error">
+        <Value>3</Value>
+      </Attribute>
+      <Attribute adref="roll.error">
+        <Value>3</Value>
+      </Attribute>
+      <Attribute adref="barometric.error">
+        <Value>1</Value>
+      </Attribute>
+      <Attribute adref="airtemp.error">
+        <Value>1</Value>
+      </Attribute>
+      <Attribute adref="windSpeed.error">
+        <Value>1</Value>
+      </Attribute>
+      <Attribute adref="windDirection.error">
+        <Value>3</Value>
+      </Attribute>
+      <Attribute adref="wireadmin.producer.scope">
+        <Value>gps.position</Value>
+      </Attribute>
+      <Attribute adref="tracker.monitor.label">
+        <Value>GPS Proxy</Value>
+      </Attribute>
+    </Object>
+  </Designate>
+</MetaData>
