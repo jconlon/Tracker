@@ -48,7 +48,7 @@ public class BovineBeefImpl extends BovineImpl implements BovineBeef {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BeefBreed BEEF_BREED_EDEFAULT = BeefBreed.AN_LITERAL;
+	protected static final BeefBreed BEEF_BREED_EDEFAULT = BeefBreed.UNSPECIFIED_LITERAL;
 
 	/**
 	 * The cached value of the '{@link #getBeefBreed() <em>Beef Breed</em>}' attribute.

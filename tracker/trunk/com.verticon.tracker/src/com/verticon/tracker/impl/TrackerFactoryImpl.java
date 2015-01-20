@@ -194,6 +194,12 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 			case TrackerPackage.EVENT_INCLUSION: return createEventInclusion();
 			case TrackerPackage.GENERIC_EVENT_INCLUSION: return createGenericEventInclusion();
 			case TrackerPackage.POSITION: return createPosition();
+			case TrackerPackage.STATION: return createStation();
+			case TrackerPackage.WIND: return createWind();
+			case TrackerPackage.STATION_LOCATION: return createStationLocation();
+			case TrackerPackage.AIR: return createAir();
+			case TrackerPackage.LIGHT: return createLight();
+			case TrackerPackage.ORIENTATION: return createOrientation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -589,6 +595,66 @@ public class TrackerFactoryImpl extends EFactoryImpl implements TrackerFactory {
 	public Position createPosition() {
 		PositionImpl position = new PositionImpl();
 		return position;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Station createStation() {
+		StationImpl station = new StationImpl();
+		return station;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Wind createWind() {
+		WindImpl wind = new WindImpl();
+		return wind;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StationLocation createStationLocation() {
+		StationLocationImpl stationLocation = new StationLocationImpl();
+		return stationLocation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Air createAir() {
+		AirImpl air = new AirImpl();
+		return air;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Light createLight() {
+		LightImpl light = new LightImpl();
+		return light;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Orientation createOrientation() {
+		OrientationImpl orientation = new OrientationImpl();
+		return orientation;
 	}
 
 	/**

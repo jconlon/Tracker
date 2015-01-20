@@ -223,7 +223,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean canContain(EventType eventType, String ocdId) {
+	public boolean canContain(final EventType eventType, final String ocdId) {
 		if(eContainer instanceof Animal){
 			return ((Animal)eContainer).canContain(eventType, ocdId);
 		}else if (eContainer instanceof Premises){
@@ -239,7 +239,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OCD findOCD(String ocdId) {
+	public OCD findOCD(final String ocdId) {
 		for (OCD ocd : findOCDs()) {
 			if(ocd.getID().equals(ocdId)){
 				return ocd;
@@ -251,7 +251,7 @@ public class TagImpl extends MinimalEObjectImpl.Container implements Tag {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	public EList<OCD> findOCDs() {
 		final EList<OCD> results = new BasicEList<OCD>();

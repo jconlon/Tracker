@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.xml.type.XMLTypePackage;
 
 import com.verticon.osgi.metatype.MetatypePackage;
 import com.verticon.osgi.metatype.impl.MetatypePackageImpl;
+import com.verticon.tracker.Air;
 import com.verticon.tracker.Animal;
 import com.verticon.tracker.AnimalMissing;
 import com.verticon.tracker.AnimalType;
@@ -56,6 +57,7 @@ import com.verticon.tracker.HerdTest;
 import com.verticon.tracker.HorseBreed;
 import com.verticon.tracker.Imported;
 import com.verticon.tracker.Level;
+import com.verticon.tracker.Light;
 import com.verticon.tracker.LostTag;
 import com.verticon.tracker.Mastitis;
 import com.verticon.tracker.MedicalCondition;
@@ -64,15 +66,19 @@ import com.verticon.tracker.MilkTest;
 import com.verticon.tracker.MovedIn;
 import com.verticon.tracker.MovedOut;
 import com.verticon.tracker.OneToTen;
+import com.verticon.tracker.Orientation;
 import com.verticon.tracker.Ovine;
 import com.verticon.tracker.Policy;
 import com.verticon.tracker.Position;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.ReplacedTag;
+import com.verticon.tracker.SensorEvent;
 import com.verticon.tracker.Sex;
 import com.verticon.tracker.SheepBreed;
 import com.verticon.tracker.Sighting;
 import com.verticon.tracker.Slaughtered;
+import com.verticon.tracker.Station;
+import com.verticon.tracker.StationLocation;
 import com.verticon.tracker.Swine;
 import com.verticon.tracker.SwineBreed;
 import com.verticon.tracker.Tag;
@@ -91,6 +97,7 @@ import com.verticon.tracker.USSwineGrading;
 import com.verticon.tracker.USSwineQualityGrade;
 import com.verticon.tracker.WeighIn;
 import com.verticon.tracker.WeightMeasurementUnit;
+import com.verticon.tracker.Wind;
 import com.verticon.tracker.util.Age;
 import com.verticon.tracker.util.TrackerValidator;
 
@@ -317,6 +324,55 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * @generated
 	 */
 	private EClass positionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass stationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass windEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass sensorEventEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass stationLocationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass airEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass lightEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass orientationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1705,6 +1761,348 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getStation() {
+		return stationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStation_Id() {
+		return (EAttribute)stationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStation_Name() {
+		return (EAttribute)stationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStation_Description() {
+		return (EAttribute)stationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStation_Premises() {
+		return (EReference)stationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStation_LocationName() {
+		return (EAttribute)stationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStation_Coordinates() {
+		return (EAttribute)stationEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStation_Events() {
+		return (EReference)stationEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getWind() {
+		return windEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getWind_M_s() {
+		return (EAttribute)windEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getWind_Mph() {
+		return (EAttribute)windEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getWind_R() {
+		return (EAttribute)windEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getWind_Degrees() {
+		return (EAttribute)windEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getWind_Direction() {
+		return (EAttribute)windEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getSensorEvent() {
+		return sensorEventEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSensorEvent_DateTime() {
+		return (EAttribute)sensorEventEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSensorEvent_Station() {
+		return (EReference)sensorEventEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSensorEvent_Values() {
+		return (EAttribute)sensorEventEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSensorEvent_Measurement() {
+		return (EAttribute)sensorEventEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSensorEvent_SensorId() {
+		return (EAttribute)sensorEventEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStationLocation() {
+		return stationLocationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStationLocation_Coordinates() {
+		return (EAttribute)stationLocationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStationLocation_LocationName() {
+		return (EAttribute)stationLocationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStationLocation_Lat() {
+		return (EAttribute)stationLocationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStationLocation_Long() {
+		return (EAttribute)stationLocationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getAir() {
+		return airEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAir_K() {
+		return (EAttribute)airEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAir_Farenheit() {
+		return (EAttribute)airEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAir_Celsius() {
+		return (EAttribute)airEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAir_Pa() {
+		return (EAttribute)airEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAir_IncheOfMercury() {
+		return (EAttribute)airEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getAir_Rh() {
+		return (EAttribute)airEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getLight() {
+		return lightEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getLight_Lux() {
+		return (EAttribute)lightEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getOrientation() {
+		return orientationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOrientation_Az() {
+		return (EAttribute)orientationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOrientation_Pitch() {
+		return (EAttribute)orientationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getOrientation_Roll() {
+		return (EAttribute)orientationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getPremises() {
 		return premisesEClass;
 	}
@@ -1797,6 +2195,15 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 	 */
 	public EReference getPremises_Location() {
 		return (EReference)premisesEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPremises_Stations() {
+		return (EReference)premisesEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -2370,6 +2777,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(premisesEClass, PREMISES__PHONE_NUMBER);
 		createEAttribute(premisesEClass, PREMISES__ADDRESS);
 		createEReference(premisesEClass, PREMISES__LOCATION);
+		createEReference(premisesEClass, PREMISES__STATIONS);
 
 		bovineBeefEClass = createEClass(BOVINE_BEEF);
 		createEAttribute(bovineBeefEClass, BOVINE_BEEF__BEEF_BREED);
@@ -2513,6 +2921,51 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		createEAttribute(positionEClass, POSITION__COORDINATES);
 		createEAttribute(positionEClass, POSITION__LOCATION_NAME);
 
+		stationEClass = createEClass(STATION);
+		createEAttribute(stationEClass, STATION__ID);
+		createEAttribute(stationEClass, STATION__NAME);
+		createEAttribute(stationEClass, STATION__DESCRIPTION);
+		createEReference(stationEClass, STATION__PREMISES);
+		createEAttribute(stationEClass, STATION__LOCATION_NAME);
+		createEAttribute(stationEClass, STATION__COORDINATES);
+		createEReference(stationEClass, STATION__EVENTS);
+
+		windEClass = createEClass(WIND);
+		createEAttribute(windEClass, WIND__MS);
+		createEAttribute(windEClass, WIND__MPH);
+		createEAttribute(windEClass, WIND__R);
+		createEAttribute(windEClass, WIND__DEGREES);
+		createEAttribute(windEClass, WIND__DIRECTION);
+
+		sensorEventEClass = createEClass(SENSOR_EVENT);
+		createEAttribute(sensorEventEClass, SENSOR_EVENT__DATE_TIME);
+		createEReference(sensorEventEClass, SENSOR_EVENT__STATION);
+		createEAttribute(sensorEventEClass, SENSOR_EVENT__VALUES);
+		createEAttribute(sensorEventEClass, SENSOR_EVENT__MEASUREMENT);
+		createEAttribute(sensorEventEClass, SENSOR_EVENT__SENSOR_ID);
+
+		stationLocationEClass = createEClass(STATION_LOCATION);
+		createEAttribute(stationLocationEClass, STATION_LOCATION__COORDINATES);
+		createEAttribute(stationLocationEClass, STATION_LOCATION__LOCATION_NAME);
+		createEAttribute(stationLocationEClass, STATION_LOCATION__LAT);
+		createEAttribute(stationLocationEClass, STATION_LOCATION__LONG);
+
+		airEClass = createEClass(AIR);
+		createEAttribute(airEClass, AIR__K);
+		createEAttribute(airEClass, AIR__FARENHEIT);
+		createEAttribute(airEClass, AIR__CELSIUS);
+		createEAttribute(airEClass, AIR__PA);
+		createEAttribute(airEClass, AIR__INCHE_OF_MERCURY);
+		createEAttribute(airEClass, AIR__RH);
+
+		lightEClass = createEClass(LIGHT);
+		createEAttribute(lightEClass, LIGHT__LUX);
+
+		orientationEClass = createEClass(ORIENTATION);
+		createEAttribute(orientationEClass, ORIENTATION__AZ);
+		createEAttribute(orientationEClass, ORIENTATION__PITCH);
+		createEAttribute(orientationEClass, ORIENTATION__ROLL);
+
 		// Create enums
 		sexEEnum = createEEnum(SEX);
 		bisonBreedEEnum = createEEnum(BISON_BREED);
@@ -2611,6 +3064,11 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		usOvineGradingEClass.getESuperTypes().add(this.getEvent());
 		usSwineGradingEClass.getESuperTypes().add(this.getEvent());
 		positionEClass.getESuperTypes().add(this.getEvent());
+		windEClass.getESuperTypes().add(this.getSensorEvent());
+		stationLocationEClass.getESuperTypes().add(this.getSensorEvent());
+		airEClass.getESuperTypes().add(this.getSensorEvent());
+		lightEClass.getESuperTypes().add(this.getSensorEvent());
+		orientationEClass.getESuperTypes().add(this.getSensorEvent());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(animalEClass, Animal.class, "Animal", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2719,6 +3177,7 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getPremises_PhoneNumber(), this.getUSPhoneNumber(), "phoneNumber", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getPremises_Address(), ecorePackage.getEString(), "address", "", 0, 1, Premises.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getPremises_Location(), theLocationPackage.getLocation(), null, "location", null, 0, 1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPremises_Stations(), this.getStation(), this.getStation_Premises(), "stations", null, 0, -1, Premises.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(premisesEClass, this.getEvent(), "eventHistory", 0, -1, IS_UNIQUE, IS_ORDERED);
 
@@ -2911,6 +3370,51 @@ public class TrackerPackageImpl extends EPackageImpl implements TrackerPackage {
 		initEAttribute(getPosition_LocationName(), ecorePackage.getEString(), "locationName", "", 0, 1, Position.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		addEOperation(positionEClass, ecorePackage.getEString(), "findLocationName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(stationEClass, Station.class, "Station", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStation_Id(), ecorePackage.getEString(), "id", null, 1, 1, Station.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStation_Name(), ecorePackage.getEString(), "name", null, 1, 1, Station.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStation_Description(), ecorePackage.getEString(), "description", null, 0, 1, Station.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStation_Premises(), this.getPremises(), this.getPremises_Stations(), "premises", null, 1, 1, Station.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStation_LocationName(), ecorePackage.getEString(), "locationName", null, 0, 1, Station.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStation_Coordinates(), ecorePackage.getEString(), "coordinates", null, 0, 1, Station.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getStation_Events(), this.getSensorEvent(), this.getSensorEvent_Station(), "events", null, 0, -1, Station.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(windEClass, Wind.class, "Wind", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getWind_M_s(), ecorePackage.getEDouble(), "m_s", null, 1, 1, Wind.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getWind_Mph(), ecorePackage.getEDouble(), "mph", null, 0, 1, Wind.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getWind_R(), ecorePackage.getEDouble(), "r", null, 0, 1, Wind.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getWind_Degrees(), ecorePackage.getEDouble(), "degrees", null, 1, 1, Wind.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getWind_Direction(), ecorePackage.getEString(), "direction", null, 1, 1, Wind.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		initEClass(sensorEventEClass, SensorEvent.class, "SensorEvent", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSensorEvent_DateTime(), ecorePackage.getEDate(), "dateTime", null, 0, 1, SensorEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSensorEvent_Station(), this.getStation(), this.getStation_Events(), "station", null, 1, 1, SensorEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSensorEvent_Values(), ecorePackage.getEDoubleObject(), "values", null, 1, -1, SensorEvent.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSensorEvent_Measurement(), ecorePackage.getEString(), "measurement", null, 1, 1, SensorEvent.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSensorEvent_SensorId(), ecorePackage.getEString(), "sensorId", null, 1, 1, SensorEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(stationLocationEClass, StationLocation.class, "StationLocation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStationLocation_Coordinates(), ecorePackage.getEString(), "coordinates", null, 1, 1, StationLocation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStationLocation_LocationName(), ecorePackage.getEString(), "locationName", null, 1, 1, StationLocation.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStationLocation_Lat(), ecorePackage.getEDouble(), "lat", null, 1, 1, StationLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStationLocation_Long(), ecorePackage.getEDouble(), "long", null, 1, 1, StationLocation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(airEClass, Air.class, "Air", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAir_K(), ecorePackage.getEDouble(), "k", null, 1, 1, Air.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAir_Farenheit(), ecorePackage.getEDouble(), "farenheit", null, 0, 1, Air.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAir_Celsius(), ecorePackage.getEDouble(), "celsius", null, 1, 1, Air.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAir_Pa(), ecorePackage.getEDouble(), "pa", null, 1, 1, Air.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAir_IncheOfMercury(), ecorePackage.getEDouble(), "incheOfMercury", null, 1, 1, Air.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAir_Rh(), ecorePackage.getEDouble(), "rh", null, 0, 1, Air.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(lightEClass, Light.class, "Light", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getLight_Lux(), ecorePackage.getEDouble(), "Lux", null, 1, 1, Light.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(orientationEClass, Orientation.class, "Orientation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getOrientation_Az(), ecorePackage.getEDouble(), "az", null, 1, 1, Orientation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOrientation_Pitch(), ecorePackage.getEDouble(), "pitch", null, 1, 1, Orientation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getOrientation_Roll(), ecorePackage.getEDouble(), "roll", null, 1, 1, Orientation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(sexEEnum, Sex.class, "Sex");

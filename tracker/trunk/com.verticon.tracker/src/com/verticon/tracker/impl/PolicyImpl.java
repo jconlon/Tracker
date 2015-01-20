@@ -185,7 +185,7 @@ public class PolicyImpl extends MinimalEObjectImpl.Container implements Policy {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean canContain(EventType eventType, String ocdId, AnimalType animalType) {
+	public boolean canContain(final EventType eventType, final String ocdId, final AnimalType animalType) {
 		//Filter species if there are some in the list.  If not pass all species to the next filter.
 		if(!getIncludedSpecies().isEmpty()){
 			//Filter out species that are not included 

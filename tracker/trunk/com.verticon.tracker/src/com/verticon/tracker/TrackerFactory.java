@@ -271,6 +271,60 @@ public interface TrackerFactory extends EFactory {
 	Position createPosition();
 
 	/**
+	 * Returns a new object of class '<em>Station</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Station</em>'.
+	 * @generated
+	 */
+	Station createStation();
+
+	/**
+	 * Returns a new object of class '<em>Wind</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Wind</em>'.
+	 * @generated
+	 */
+	Wind createWind();
+
+	/**
+	 * Returns a new object of class '<em>Station Location</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Station Location</em>'.
+	 * @generated
+	 */
+	StationLocation createStationLocation();
+
+	/**
+	 * Returns a new object of class '<em>Air</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Air</em>'.
+	 * @generated
+	 */
+	Air createAir();
+
+	/**
+	 * Returns a new object of class '<em>Light</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Light</em>'.
+	 * @generated
+	 */
+	Light createLight();
+
+	/**
+	 * Returns a new object of class '<em>Orientation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Orientation</em>'.
+	 * @generated
+	 */
+	Orientation createOrientation();
+
+	/**
 	 * Returns a new object of class '<em>Premises</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

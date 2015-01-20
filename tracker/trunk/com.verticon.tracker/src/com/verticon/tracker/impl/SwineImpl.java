@@ -51,7 +51,7 @@ public class SwineImpl extends AnimalImpl implements Swine {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final SwineBreed SWINE_BREED_EDEFAULT = SwineBreed.BK_LITERAL;
+	protected static final SwineBreed SWINE_BREED_EDEFAULT = SwineBreed.UNSPECIFIED_LITERAL;
 
 	/**
 	 * The cached value of the '{@link #getSwineBreed() <em>Swine Breed</em>}' attribute.

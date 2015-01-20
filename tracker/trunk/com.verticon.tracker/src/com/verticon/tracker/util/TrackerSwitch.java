@@ -431,6 +431,53 @@ public class TrackerSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case TrackerPackage.STATION: {
+				Station station = (Station)theEObject;
+				T result = caseStation(station);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TrackerPackage.WIND: {
+				Wind wind = (Wind)theEObject;
+				T result = caseWind(wind);
+				if (result == null) result = caseSensorEvent(wind);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TrackerPackage.SENSOR_EVENT: {
+				SensorEvent sensorEvent = (SensorEvent)theEObject;
+				T result = caseSensorEvent(sensorEvent);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TrackerPackage.STATION_LOCATION: {
+				StationLocation stationLocation = (StationLocation)theEObject;
+				T result = caseStationLocation(stationLocation);
+				if (result == null) result = caseSensorEvent(stationLocation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TrackerPackage.AIR: {
+				Air air = (Air)theEObject;
+				T result = caseAir(air);
+				if (result == null) result = caseSensorEvent(air);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TrackerPackage.LIGHT: {
+				Light light = (Light)theEObject;
+				T result = caseLight(light);
+				if (result == null) result = caseSensorEvent(light);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TrackerPackage.ORIENTATION: {
+				Orientation orientation = (Orientation)theEObject;
+				T result = caseOrientation(orientation);
+				if (result == null) result = caseSensorEvent(orientation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -882,6 +929,111 @@ public class TrackerSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePosition(Position object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Station</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Station</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStation(Station object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Wind</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Wind</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseWind(Wind object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Sensor Event</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Sensor Event</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSensorEvent(SensorEvent object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Station Location</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Station Location</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStationLocation(StationLocation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Air</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Air</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAir(Air object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Light</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Light</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLight(Light object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Orientation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Orientation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOrientation(Orientation object) {
 		return null;
 	}
 

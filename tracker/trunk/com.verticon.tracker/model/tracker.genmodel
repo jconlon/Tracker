@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright 2007 Verticon, Inc. All Rights Reserved."
     modelDirectory="/com.verticon.tracker/src" editDirectory="/com.verticon.tracker.edit/src"
     editorDirectory="/com.verticon.tracker.editor/src" modelPluginID="com.verticon.tracker"
@@ -580,6 +579,7 @@
           propertyDescription="Street address of the premises." ecoreFeature="ecore:EAttribute tracker.ecore#//Premises/address"/>
       <genFeatures property="None" children="true" createChild="true" propertyCategory=""
           propertyDescription="" ecoreFeature="ecore:EReference tracker.ecore#//Premises/location"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Premises/stations"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/eventHistory"/>
       <genOperations ecoreOperation="tracker.ecore#//Premises/findAnimal">
         <genParameters ecoreParameter="tracker.ecore#//Premises/findAnimal/id"/>
@@ -806,6 +806,80 @@
           ecoreFeature="ecore:EAttribute tracker.ecore#//Position/locationName"/>
       <genOperations ecoreOperation="tracker.ecore#//Position/findLocationName"/>
     </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Station">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Station/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Station/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Station/description"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tracker.ecore#//Station/premises"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Station/locationName"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tracker.ecore#//Station/coordinates"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tracker.ecore#//Station/events"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Wind">
+      <genFeatures createChild="false" propertyCategory="Wind Speed" propertyDescription="Meters per Second"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Wind/m_s"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Wind Speed"
+          propertyDescription="Miles per Hour" ecoreFeature="ecore:EAttribute tracker.ecore#//Wind/mph"/>
+      <genFeatures createChild="false" propertyCategory="Wind Direction" propertyDescription="In Radians"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Wind/r"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Wind Direction"
+          propertyDescription="In Degrees" ecoreFeature="ecore:EAttribute tracker.ecore#//Wind/degrees"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Wind Direction"
+          propertyDescription="Abreviated compass direction" ecoreFeature="ecore:EAttribute tracker.ecore#//Wind/direction"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="tracker.ecore#//SensorEvent">
+      <genFeatures createChild="false" propertyCategory="Event" propertyDescription=""
+          ecoreFeature="ecore:EAttribute tracker.ecore#//SensorEvent/dateTime"/>
+      <genFeatures property="None" notify="false" createChild="false" propertyCategory="Event"
+          ecoreFeature="ecore:EReference tracker.ecore#//SensorEvent/station"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Event"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//SensorEvent/values">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Event"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//SensorEvent/measurement">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures createChild="false" propertyCategory="Event" propertyDescription="Id of the sensor that generated the event"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//SensorEvent/sensorId"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//StationLocation">
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Location"
+          propertyDescription="Coordinates of the Station" ecoreFeature="ecore:EAttribute tracker.ecore#//StationLocation/coordinates"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Location Service"
+          propertyDescription="Resolved Name of the Location" ecoreFeature="ecore:EAttribute tracker.ecore#//StationLocation/locationName"/>
+      <genFeatures createChild="false" propertyCategory="Location" propertyDescription="Latitude of the station."
+          ecoreFeature="ecore:EAttribute tracker.ecore#//StationLocation/lat"/>
+      <genFeatures createChild="false" propertyCategory="Location" propertyDescription="Longitude of the station."
+          ecoreFeature="ecore:EAttribute tracker.ecore#//StationLocation/long"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Air">
+      <genFeatures createChild="false" propertyCategory="Temperature" propertyDescription="Temperature in Kelvin"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Air/k"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Temperature"
+          propertyDescription="Temperature in degrees farenheit." ecoreFeature="ecore:EAttribute tracker.ecore#//Air/farenheit"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Temperature"
+          propertyDescription="Temperature in degrees Celsius" ecoreFeature="ecore:EAttribute tracker.ecore#//Air/celsius"/>
+      <genFeatures createChild="false" propertyCategory="Barometric Pressure" propertyDescription="Barometric Pressure in Pascal units"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Air/pa"/>
+      <genFeatures property="Readonly" createChild="false" propertyCategory="Barometric Pressure"
+          propertyDescription="Barometric Pressure in Inch of Mercury (0 degrees Celsius)"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Air/incheOfMercury"/>
+      <genFeatures createChild="false" propertyCategory="Humidity" propertyDescription="Relative Humidity"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Air/rh"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Light">
+      <genFeatures createChild="false" propertyCategory="Illuminance" propertyDescription="Illuminance in Lux"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Light/Lux"/>
+    </genClasses>
+    <genClasses ecoreClass="tracker.ecore#//Orientation">
+      <genFeatures createChild="false" propertyCategory="Orientation" propertyDescription="Azimuth angle in degrees from North"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Orientation/az"/>
+      <genFeatures createChild="false" propertyCategory="Orientation" propertyDescription="Pitch is the angle nose up or down from the level"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Orientation/pitch"/>
+      <genFeatures createChild="false" propertyCategory="Orientation" propertyDescription="Roll is the angle side to side from the level"
+          ecoreFeature="ecore:EAttribute tracker.ecore#//Orientation/roll"/>
+    </genClasses>
   </genPackages>
   <genPackages prefix="Metatype" basePackage="com.verticon.osgi" ecorePackage="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="../../com.verticon.osgi.metatype.core.model/model/metatype.ecore#//Scalar">
@@ -924,6 +998,7 @@
       <genEnumLiterals ecoreEnumLiteral="../../com.verticon.location.core.model/model/location.ecore#//AltitudeMode/relativeToGround"/>
     </genEnums>
     <genDataTypes ecoreDataType="../../com.verticon.location.core.model/model/location.ecore#//PointFormatException"/>
+    <genDataTypes ecoreDataType="../../com.verticon.location.core.model/model/location.ecore#//Polygon"/>
     <genClasses ecoreClass="../../com.verticon.location.core.model/model/location.ecore#//Location">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Location/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Location/description"/>
@@ -950,7 +1025,7 @@
     </genClasses>
     <genClasses ecoreClass="../../com.verticon.location.core.model/model/location.ecore#//Area">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Area/name"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Area/boundry"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Area/boundary"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ../../com.verticon.location.core.model/model/location.ecore#//Area/comments"/>
       <genOperations ecoreOperation="../../com.verticon.location.core.model/model/location.ecore#//Area/getAreaMeasurement"/>
       <genOperations ecoreOperation="../../com.verticon.location.core.model/model/location.ecore#//Area/containsPoint">

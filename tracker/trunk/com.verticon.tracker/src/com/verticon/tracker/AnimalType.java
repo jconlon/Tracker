@@ -34,7 +34,7 @@ public enum AnimalType implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	UNSPECIFIED(0, "Unspecified", ""),
+	UNSPECIFIED(0, "Unspecified", "Unspecified"),
 
 	/**
 	 * The '<em><b>Swine</b></em>' literal object.
@@ -122,7 +122,7 @@ public enum AnimalType implements Enumerator {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #UNSPECIFIED
-	 * @model name="Unspecified" literal=""
+	 * @model name="Unspecified"
 	 * @generated
 	 * @ordered
 	 */

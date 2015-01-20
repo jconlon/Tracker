@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -31,6 +32,7 @@ import com.verticon.tracker.EventHistory;
 import com.verticon.tracker.EventType;
 import com.verticon.tracker.Policy;
 import com.verticon.tracker.Premises;
+import com.verticon.tracker.Station;
 import com.verticon.tracker.Tag;
 import com.verticon.tracker.TrackerPackage;
 import com.verticon.tracker.util.EventHistoryAdapterFactory;
@@ -54,6 +56,7 @@ import com.verticon.tracker.util.EventHistoryAdapterFactory;
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getPhoneNumber <em>Phone Number</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getAddress <em>Address</em>}</li>
  *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getLocation <em>Location</em>}</li>
+ *   <li>{@link com.verticon.tracker.impl.PremisesImpl#getStations <em>Stations</em>}</li>
  * </ul>
  * </p>
  *
@@ -268,6 +271,16 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 	 * @ordered
 	 */
 	protected Location location;
+
+	/**
+	 * The cached value of the '{@link #getStations() <em>Stations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Station> stations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -520,6 +533,18 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Station> getStations() {
+		if (stations == null) {
+			stations = new EObjectContainmentWithInverseEList.Resolving<Station>(Station.class, this, TrackerPackage.PREMISES__STATIONS, TrackerPackage.STATION__PREMISES);
+		}
+		return stations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public Policy getPolicy() {
 		if (policy != null && policy.eIsProxy()) {
 			InternalEObject oldPolicy = (InternalEObject)policy;
@@ -718,11 +743,26 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean canContain(EventType eventType, String ocdId, AnimalType animalType) {
+	public boolean canContain(final EventType eventType, final String ocdId, final AnimalType animalType) {
 		if(getPolicy()!=null){
 			return getPolicy().canContain( eventType,  ocdId,  animalType);
 		}
 		return Boolean.TRUE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TrackerPackage.PREMISES__STATIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getStations()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -741,6 +781,8 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 				return basicSetPolicy(null, msgs);
 			case TrackerPackage.PREMISES__LOCATION:
 				return basicSetLocation(null, msgs);
+			case TrackerPackage.PREMISES__STATIONS:
+				return ((InternalEList<?>)getStations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -779,6 +821,8 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 			case TrackerPackage.PREMISES__LOCATION:
 				if (resolve) return getLocation();
 				return basicGetLocation();
+			case TrackerPackage.PREMISES__STATIONS:
+				return getStations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -827,6 +871,10 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 			case TrackerPackage.PREMISES__LOCATION:
 				setLocation((Location)newValue);
 				return;
+			case TrackerPackage.PREMISES__STATIONS:
+				getStations().clear();
+				getStations().addAll((Collection<? extends Station>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -872,6 +920,9 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 			case TrackerPackage.PREMISES__LOCATION:
 				setLocation((Location)null);
 				return;
+			case TrackerPackage.PREMISES__STATIONS:
+				getStations().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -908,6 +959,8 @@ public class PremisesImpl extends MinimalEObjectImpl.Container implements Premis
 				return ADDRESS_EDEFAULT == null ? getAddress() != null : !ADDRESS_EDEFAULT.equals(getAddress());
 			case TrackerPackage.PREMISES__LOCATION:
 				return location != null;
+			case TrackerPackage.PREMISES__STATIONS:
+				return stations != null && !stations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

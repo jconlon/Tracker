@@ -48,7 +48,7 @@ public class BovineDairyImpl extends BovineImpl implements BovineDairy {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final DairyBreed DAIRY_BREED_EDEFAULT = DairyBreed.LD_LITERAL;
+	protected static final DairyBreed DAIRY_BREED_EDEFAULT = DairyBreed.UNSPECIFIED_LITERAL;
 
 	/**
 	 * The cached value of the '{@link #getDairyBreed() <em>Dairy Breed</em>}' attribute.

@@ -170,7 +170,7 @@ public enum SwineBreed implements Enumerator
 	 * @generated
 	 * @ordered
 	 */
-	UNSPECIFIED_LITERAL(15, "Unspecified", "");
+	UNSPECIFIED_LITERAL(15, "Unspecified", "Unspecified");
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -412,7 +412,7 @@ public enum SwineBreed implements Enumerator
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @see #UNSPECIFIED_LITERAL
-	 * @model name="Unspecified" literal=""
+	 * @model name="Unspecified"
 	 * @generated
 	 * @ordered
 	 */

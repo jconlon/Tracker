@@ -11,7 +11,6 @@
 package com.verticon.tracker.edit.provider;
 
 
-import com.verticon.location.LocationFactory;
 import java.util.Collection;
 import java.util.List;
 
@@ -30,6 +29,7 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import com.verticon.location.LocationFactory;
 import com.verticon.tracker.AnimalType;
 import com.verticon.tracker.Premises;
 import com.verticon.tracker.TrackerFactory;
@@ -283,6 +283,7 @@ public class PremisesItemProvider
 			childrenFeatures.add(TrackerPackage.Literals.PREMISES__UN_APPLIED_TAGS);
 			childrenFeatures.add(TrackerPackage.Literals.PREMISES__POLICY);
 			childrenFeatures.add(TrackerPackage.Literals.PREMISES__LOCATION);
+			childrenFeatures.add(TrackerPackage.Literals.PREMISES__STATIONS);
 		}
 		return childrenFeatures;
 	}
@@ -351,6 +352,7 @@ public class PremisesItemProvider
 			case TrackerPackage.PREMISES__UN_APPLIED_TAGS:
 			case TrackerPackage.PREMISES__POLICY:
 			case TrackerPackage.PREMISES__LOCATION:
+			case TrackerPackage.PREMISES__STATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -431,6 +433,10 @@ public class PremisesItemProvider
 		(createChildParameter
 			(TrackerPackage.Literals.PREMISES__LOCATION,
 				LocationFactory.eINSTANCE.createLocation()));
+
+		newChildDescriptors.add(createChildParameter(
+				TrackerPackage.Literals.PREMISES__STATIONS,
+				TrackerFactory.eINSTANCE.createStation()));
 	}
 
 	/**

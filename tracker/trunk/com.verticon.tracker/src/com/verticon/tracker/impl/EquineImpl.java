@@ -49,7 +49,7 @@ public class EquineImpl extends AnimalImpl implements Equine {
 	 * @generated
 	 * @ordered
 	 */
-	protected static final HorseBreed HORSE_BREED_EDEFAULT = HorseBreed.AC;
+	protected static final HorseBreed HORSE_BREED_EDEFAULT = HorseBreed.UNSPECIFIED;
 
 	/**
 	 * The cached value of the '{@link #getHorseBreed() <em>Horse Breed</em>}' attribute.
