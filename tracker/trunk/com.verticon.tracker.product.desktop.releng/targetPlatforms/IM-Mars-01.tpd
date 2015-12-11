@@ -1,0 +1,240 @@
+target "IM Mars 01 Target Platform" with source allEnvironments
+
+location "file:/opt/Eclipse/emf-xsd/emf-xsd-Update-2.11.0/" {
+	
+	org.eclipse.emf.common.ui.feature.group 
+	org.eclipse.emf.feature.group 
+	org.eclipse.emf.ecore.editor.feature.group 
+	org.eclipse.emf.converter.feature.group 
+	org.eclipse.emf.rap.sdk.feature.group 
+	org.eclipse.emf.common.feature.group 
+	org.eclipse.emf.mapping.ecore.feature.group
+	org.eclipse.emf.gwt.edit.ui.feature.group 
+	org.eclipse.emf.databinding.edit.feature.group 
+	org.eclipse.emf.rap.edit.ui.feature.group 
+	org.eclipse.xsd.feature.group 
+	org.eclipse.emf.gwt.feature.group 
+	org.eclipse.emf.edit.ui.feature.group 
+	org.eclipse.xsd.mapping.feature.group
+	org.eclipse.emf.oda.sdk.feature.group 
+	org.eclipse.xsd.edit.feature.group 
+	org.eclipse.emf.gwt.common.feature.group 
+	org.eclipse.emf.codegen.ui.feature.group 
+	org.eclipse.emf.gwt.sdk.feature.group
+	org.eclipse.emf.all.feature.group 
+	org.eclipse.xsd.editor.feature.group 
+	org.eclipse.xsd.sdk.feature.group 
+	org.eclipse.emf.gwt.edit.feature.group
+	org.eclipse.emf.doc.feature.group 
+	org.eclipse.emf.codegen.feature.group
+	org.eclipse.emf.oda.feature.group 
+	org.eclipse.emf.databinding.feature.group 
+	org.eclipse.xsd.ecore.converter.feature.group 
+	org.eclipse.emf.rap.common.ui.feature.group 
+	org.eclipse.emf.oda.ecore.feature.group 
+	org.eclipse.emf.ecore.feature.group 
+	org.eclipse.emf.mapping.ecore.editor.feature.group
+	org.eclipse.emf.codegen.ecore.feature.group 
+	org.eclipse.emf.codegen.ecore.ui.feature.group 
+	org.eclipse.xsd.mapping.editor.feature.group 
+	org.eclipse.emf.examples.feature.group 
+	org.eclipse.emf.edit.feature.group 
+	org.eclipse.emf.gwt.ecore.edit.feature.group
+	org.eclipse.emf.oda.ecore.ui.feature.group
+	org.eclipse.xsd.doc.feature.group 
+	org.eclipse.emf.mapping.feature.group 
+	org.eclipse.emf.rap.feature.group 
+	org.eclipse.emf.ecore.edit.feature.group
+	org.eclipse.emf.mapping.ui.feature.group
+	org.eclipse.emf.gwt.ecore.feature.group 
+	org.eclipse.emf.sdk.feature.group 
+	
+}
+
+location "http://download.eclipse.org/eclipse/updates/4.5/"{
+	org.eclipse.equinox.executable.feature.group [3.6.200,4.0.0)
+	org.eclipse.e4.rcp.feature.group [1.4.0,2.0.0)
+	org.eclipse.e4.rcp.source.feature.group [1.4.0,2.0.0)
+	org.eclipse.rcp.feature.group [4.5.0,5.0.0)
+	org.eclipse.rcp.source.feature.group [4.5.0,5.0.0)
+}
+
+location "http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/" {
+	org.eclipse.xtend.gwt.feature.group [2.8.3,3.0.0)
+	org.eclipse.xtend.sdk.feature.group [2.8.3,3.0.0)
+	org.eclipse.emf.ecore.xcore.feature.group [1.2.2,2.0.0)
+	org.eclipse.emf.mwe2.language.sdk.feature.group [2.8.0,3.0.0)
+	org.eclipse.emf.ecore.xcore.ui.feature.group [1.2.1,2.0.0)
+	org.eclipse.emf.ecore.xcore.sdk.feature.group [1.2.2,2.0.0)
+	org.eclipse.xtext.sdk.feature.group [2.8.3,3.0.0)
+    
+}
+
+location "http://download.eclipse.org/tools/orbit/downloads/drops/R20150519210750/repository/"{
+	com.google.guava [15.0.0,16.0.0)
+	com.google.inject [3.0.0,4.0.0)
+	
+}
+
+
+
+location "http://download.eclipse.org/releases/mars" {
+	org.eclipse.pde.core
+	org.eclipse.equinox.p2.sdk.feature.group
+	org.eclipse.core.runtime.feature.feature.group
+	org.eclipse.sdk.feature.group
+	org.eclipse.equinox.concurrent
+	com.ibm.icu 
+	javax.annotation
+	javax.inject
+	javax.xml
+	org.eclipse.core.net
+	org.apache.ant
+	org.apache.commons.logging
+	org.apache.felix.gogo.command
+	org.apache.felix.gogo.runtime
+	org.apache.felix.gogo.shell
+	org.apache.poi [3.9.0,3.10.0)
+	org.eclipse.ant.core
+	org.eclipse.ant.ui
+	org.junit
+}
+
+location "http://download.eclipse.org/rt/ecf/3.10.0/site.p2/" {
+	org.eclipse.ecf.filetransfer.feature.feature.group [3.10.0,4.0.0)
+	org.eclipse.ecf.filetransfer.ssl.feature.feature.group [1.0.0,2.0.0)
+	org.eclipse.ecf.core.feature.feature.group [1.1.0,2.0.0)
+	org.eclipse.ecf.filetransfer.httpclient4.feature.feature.group [3.10.0,4.0.0)
+	org.eclipse.ecf.filetransfer.httpclient4.ssl.feature.feature.group [1.0.0,2.0.0)
+	org.eclipse.ecf.core.ssl.feature.feature.group [1.0.0,2.0.0)
+	
+}
+
+location "file:/opt/Eclipse/cdo/emf-cdo-R20150610-1526/" {
+	org.eclipse.net4j.sdk.feature.group [4.4.0,5.0.0)
+	org.eclipse.net4j.sdk.source.feature.group [4.4.0,5.0.0)
+	org.eclipse.emf.cdo.sdk.feature.group [4.4.0,5.0.0)
+	org.eclipse.emf.cdo.sdk.source.feature.group [4.4.0,5.0.0)
+	org.eclipse.emf.cdo.dawn.sdk.feature.group [2.1.100,3.0.0)
+	org.eclipse.emf.cdo.dawn.sdk.source.feature.group [2.1.100,3.0.0)
+	
+}
+
+location "http://download.eclipse.org/modeling/emf/compare/updates/releases/3.1/R201506080833/" {
+	org.eclipse.emf.compare.feature.group [3.1.0,4.0.0)
+	org.eclipse.emf.compare.rcp.ui.feature.group [3.1.0,4.0.0)
+	org.eclipse.emf.compare.source.feature.group [3.1.0,4.0.0)
+	org.eclipse.emf.compare.ide.ui.feature.group [3.1.0,4.0.0)
+	org.eclipse.emf.compare.rcp.ui.source.feature.group [3.1.0,4.0.0)
+	org.eclipse.emf.compare.ide.ui.source.feature.group [3.1.0,4.0.0)
+	
+}
+
+location "file:/opt/Eclipse/emf-transaction/emf-transaction-Update-1.8.0/" {
+	org.eclipse.emf.transaction.examples.source.feature.group 1.8.0
+	org.eclipse.emf.transaction.tests.feature.group 1.8.0
+	org.eclipse.emf.transaction.source.feature.group 1.8.0
+	org.eclipse.emf.transaction.doc.feature.group 1.8.0
+	org.eclipse.emf.transaction.examples.feature.group 1.8.0
+	org.eclipse.emf.workspace.feature.group 1.8.0
+	org.eclipse.emf.transaction.feature.group 1.8.0
+	org.eclipse.emf.workspace.doc.feature.group 1.8.0
+	org.eclipse.emf.workspace.examples.source.feature.group 1.8.0
+	org.eclipse.emf.workspace.examples.feature.group 1.8.0
+	org.eclipse.emf.workspace.source.feature.group 1.8.0
+	org.eclipse.emf.transaction.sdk.feature.group 1.8.0
+	org.eclipse.emf.transaction.master.feature.group 1.8.0
+}
+
+location "file:/opt/Eclipse/emf-validation/emf-validation-Update-1.9.0/" {
+	org.eclipse.emf.validation.master.feature.group
+	org.eclipse.emf.validation.examples.feature.group 
+	org.eclipse.emf.validation.doc.feature.group
+	org.eclipse.emf.validation.examples.source.feature.group 
+	org.eclipse.emf.validation.ocl.source.feature.group 
+	org.eclipse.emf.validation.sdk.feature.group 
+	org.eclipse.emf.validation.feature.group
+	org.eclipse.emf.validation.tests.feature.group 
+	org.eclipse.emf.validation.ocl.feature.group 
+	org.eclipse.emf.validation.source.feature.group 
+}
+
+location "https://www.eclipse.org/modeling/updates/" {
+	org.eclipse.ocl.examples.classic.feature.group [5.1.0,6.0.0)
+	org.eclipse.ocl.examples.unified.feature.group [4.0.0,5.0.0)
+	org.eclipse.ocl.master.feature.group [6.0.0,7.0.0)
+	org.eclipse.ocl.examples.feature.group [6.0.0,7.0.0)
+	
+	org.eclipse.uml2.common.feature.group [2.1.0,3.0.0)
+	org.eclipse.uml2.uml.resources [5.1.0,6.0.0)
+	org.eclipse.uml2 [5.0.0,6.0.0)
+	org.eclipse.uml2.common.edit.feature.group [2.1.0,3.0.0)
+	org.eclipse.uml2.codegen.ecore.ui.feature.group [2.1.0,3.0.0)
+	org.eclipse.uml2.doc [5.0.0,6.0.0)
+	org.eclipse.uml2.uml.feature.group [5.1.0,6.0.0)
+	org.eclipse.uml2.doc.feature.group [5.0.0,6.0.0)
+	org.eclipse.uml2.feature.group [5.1.0,6.0.0)
+	
+}
+
+
+
+location "http://download.eclipse.org/emf-parsley/updates/" {
+	org.eclipse.emf.parsley.feature.feature.group [0.4.0,1.0.0)
+	org.eclipse.emf.parsley.cdo.feature.feature.group [0.4.0,1.0.0)
+	org.eclipse.emf.parsley.cdo.feature.source.feature.group [0.4.0,1.0.0)
+	org.eclipse.emf.parsley.feature.source.feature.group [0.4.0,1.0.0)
+	org.eclipse.emf.parsley.dsl.feature.feature.group [0.4.0,1.0.0)
+	org.eclipse.emf.parsley.dsl.feature.source.feature.group [0.4.0,1.0.0)
+	org.eclipse.emf.parsley.sdk.feature.group [0.4.0,1.0.0)
+	org.eclipse.emf.parsley.sdk.source.feature.group [0.4.0,1.0.0)
+}
+
+//location "http://download.eclipse.org/emf-parsley/rt/" {
+//	com.google.guava [15.0.0,15.0.1)
+//	com.google.inject [3.0.0,4.0.0)
+//}
+
+location "file:/opt/Eclipse/emf-query-Update/emf-query-Update-1.9.0/" {
+	org.eclipse.emf.query.doc.feature.group [1.8.0,2.0.0)
+	org.eclipse.emf.query.feature.group
+	org.eclipse.emf.query.examples.ocl
+	org.eclipse.emf.query.master.feature.group
+	org.eclipse.emf.query.ocl.feature.group
+	org.eclipse.emf.query.sdk.feature.group
+	org.eclipse.emf.query.examples.ocl.source
+	org.eclipse.emf.query.ocl.source.feature.group
+}
+
+location "file:/opt/Eclipse/nattable/1.3.0/eclipse/"{
+	org.eclipse.nebula.widgets.nattable.core.feature.feature.group
+	org.eclipse.nebula.widgets.nattable.core.source.feature.feature.group
+	org.eclipse.nebula.widgets.nattable.extension.poi.feature.feature.group
+	org.eclipse.nebula.widgets.nattable.extension.poi.source.feature.feature.group 
+}
+
+location "http://download.eclipse.org/ecp/releases/releases_target_16/"{
+	org.eclipse.emf.ecp.cdo.feature.feature.group [1.6.1,2.0.0)
+	org.eclipse.emf.ecp.feature.feature.group [1.6.1,2.0.0)
+	org.eclipse.emf.ecp.sdk.feature.feature.group [1.6.1,2.0.0)
+	org.eclipse.emf.ecp.ecore.feature.feature.group [1.6.1,2.0.0)
+}
+
+
+location "file:/opt/slf4j-bridges/1.7.12"{
+	slf4j.api [1.7.12,1.8.0)
+	
+	ch.qos.logback.classic [1.1.3,1.2.0)
+	ch.qos.logback.core [1.1.3,1.2.0)
+	
+	jcl.over.slf4j [1.7.12,1.8.0)
+	log4j.over.slf4j [1.7.12,1.8.0)
+	org.slf4j.osgi-over-slf4j [1.7.12,1.8.0)
+	jul.to.slf4j [1.7.12,2.0.0)
+	
+	me.moocar.logback-gelf [0.2.0,1.0.0)
+	me.moocar.socket-encoder-appender [0.0.0,1.0.0)
+	
+	com.google.gson [2.3.1,3.0.0)
+	
+}

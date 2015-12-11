@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="Tracker Livestock Business Intelligence Toolkit" uid="tracker_desktop.product" id="com.verticon.tracker.product.desktop.application" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="true" includeLaunchers="true">
+
+   <aboutInfo>
+      <image path="/com.verticon.tracker.product.desktop/icons/cattle_lg.gif"/>
+      <text>
+         Tracker Livestock Business Intelligence Toolkit
+Version: {0}
+Build id: {1}
+
+(c) Copyright Verticon, Inc. 2015.  All rights reserved. 
+
+Visit http://tracker.verticon.com/index.html
+
+Tracker is powered by Eclipse technology and includes Eclipse plugins that can be installed and
+used with other Eclipse (4.5) based offerings.
+      </text>
+   </aboutInfo>
+
+   <configIni use="default">
+      <linux>/com.verticon.tracker.product.desktop/config.ini</linux>
+      <macosx>/com.verticon.tracker.product.desktop/config.ini</macosx>
+      <solaris>/com.verticon.tracker.product.desktop/config.ini</solaris>
+      <win32>/com.verticon.tracker.product.desktop/config.ini</win32>
+   </configIni>
+
+   <launcherArgs>
+      <programArgs>-console
+      </programArgs>
+      <vmArgs>-Dlogback.configurationFile=file:${workspace_loc}/com.verticon.tracker.tests/logback-test.xml
+-Dlogback.application=TrackerWithFeaturesProduct
+      </vmArgs>
+      <vmArgsLin>-Xms256m
+-Xmx512m
+-XX:MaxPermSize=256m
+      </vmArgsLin>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
+      </vmArgsMac>
+      <vmArgsWin>-Xms256m
+-Xmx512m
+-XX:MaxPermSize=256m
+      </vmArgsWin>
+   </launcherArgs>
+
+   <windowImages i16="/com.verticon.tracker.product.desktop/icons/cow_16.png" i32="/com.verticon.tracker.product.desktop/icons/cow_32.png" i48="/com.verticon.tracker.product.desktop/icons/cow_48.png"/>
+
+   <splash
+      location="com.verticon.tracker.product.desktop"
+      startupProgressRect="62,400,515,15"
+      startupMessageRect="7,225,441,20"
+      startupForegroundColor="ADD8E6" />
+   <launcher name="tracker">
+      <linux icon="/com.verticon.tracker.product.desktop/icons/cow.xpm"/>
+      <solaris/>
+      <win useIco="false">
+         <bmp
+            winSmallHigh="/com.verticon.tracker.product.desktop/icons/cow_16_32.bmp"
+            winMediumHigh="/com.verticon.tracker.product.desktop/icons/cow_32_32.bmp"
+            winLargeHigh="/com.verticon.tracker.product.desktop/icons/cow_48_32.bmp"/>
+      </win>
+   </launcher>
+
+   <intro introId="org.eclipse.ui.intro.universal"/>
+
+   <vm>
+   </vm>
+
+   <plugins>
+   </plugins>
+
+   <features>
+      <feature id="com.verticon.tracker.product.desktop"/>
+      <feature id="com.verticon.tracker.base.dep"/>
+      <feature id="com.verticon.tracker.product.desktop.doc"/>
+      <feature id="org.eclipse.platform"/>
+      <feature id="org.eclipse.ecf.filetransfer.httpclient4.feature"/>
+      <feature id="org.eclipse.ecf.core.ssl.feature"/>
+      <feature id="org.eclipse.ecf.filetransfer.httpclient4.ssl.feature"/>
+      <feature id="org.eclipse.ecf.filetransfer.ssl.feature"/>
+      <feature id="org.eclipse.equinox.p2.extras.feature"/>
+      <feature id="org.eclipse.equinox.p2.core.feature"/>
+      <feature id="org.eclipse.ecf.core.feature"/>
+      <feature id="org.eclipse.equinox.p2.rcp.feature"/>
+      <feature id="org.eclipse.ecf.filetransfer.feature"/>
+      <feature id="org.eclipse.emf.ecore"/>
+      <feature id="org.eclipse.rcp"/>
+      <feature id="org.eclipse.emf.common"/>
+      <feature id="org.eclipse.equinox.p2.user.ui"/>
+      <feature id="org.eclipse.e4.rcp"/>
+      <feature id="org.eclipse.help"/>
+      <feature id="com.verticon.agriculture.editor" version="1.0.0.qualifier"/>
+      <feature id="com.verticon.geography.editor" version="0.1.5.qualifier"/>
+      <feature id="com.verticon.location.core.model" version="0.1.0.qualifier"/>
+      <feature id="com.verticon.location.service" version="0.3.0.qualifier"/>
+      <feature id="com.verticon.osgi.metatype.core.model.editor" version="0.2.3.qualifier"/>
+      <feature id="com.verticon.osgi.useradmin.ui" version="2.2.1.qualifier"/>
+      <feature id="com.verticon.tracker.connector" version="1.0.2.qualifier"/>
+      <feature id="com.verticon.tracker.editor" version="1.0.0.qualifier"/>
+      <feature id="com.verticon.tracker.export.wlic" version="0.3.2.qualifier"/>
+      <feature id="com.verticon.tracker.fair.editor" version="0.3.5.qualifier"/>
+      <feature id="com.verticon.tracker.fair.poi" version="0.2.3.qualifier"/>
+      <feature id="com.verticon.tracker.irouter" version="0.3.0.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.bwcontrol" version="0.2.2.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.eventadmin.gateway" version="1.0.2.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.gps" version="1.3.0.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.gps.ui" version="1.0.0.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.measurement.trigger.file" version="2.0.1.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.mettler" version="0.1.3.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.mqtt" version="1.0.0.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.ohaus" version="1.1.2.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.premises.common" version="0.2.0.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.premises.gateway" version="0.1.6.qualifier"/>
+      <feature id="com.verticon.tracker.irouter.trutest" version="1.0.1.qualifier"/>
+      <feature id="com.verticon.tracker.logging.logback" version="0.4.0.qualifier"/>
+      <feature id="com.verticon.tracker.ocl.query" version="0.4.2.qualifier"/>
+      <feature id="com.verticon.tracker.reader" version="1.1.0.qualifier"/>
+      <feature id="com.verticon.tracker.trigger.view" version="1.1.2.qualifier"/>
+      <feature id="com.verticon.ui" version="0.1.0.qualifier"/>
+      <feature id="org.eclipse.ocl.unified.core.source"/>
+      <feature id="org.eclipse.gef"/>
+      <feature id="org.eclipse.emf.codegen.ui"/>
+      <feature id="org.eclipse.ocl.ui.source"/>
+      <feature id="org.eclipse.ocl.uml.source"/>
+      <feature id="org.eclipse.emf.converter"/>
+      <feature id="org.eclipse.emf.edit.ui"/>
+      <feature id="org.eclipse.ocl.all"/>
+      <feature id="org.eclipse.emf.validation.ocl"/>
+      <feature id="org.eclipse.emf.mapping"/>
+      <feature id="org.eclipse.ocl.uml"/>
+      <feature id="org.eclipse.emf.mapping.ecore.editor"/>
+      <feature id="gnu.io.rxtx"/>
+      <feature id="org.eclipse.emf.ecore.edit"/>
+      <feature id="org.eclipse.emf.mapping.ecore"/>
+      <feature id="org.eclipse.emf.codegen"/>
+      <feature id="org.eclipse.emf"/>
+      <feature id="org.eclipse.ocl.unified.ui"/>
+      <feature id="org.eclipse.ocl.examples.unified"/>
+      <feature id="org.eclipse.draw2d"/>
+      <feature id="org.eclipse.ocl.doc"/>
+      <feature id="org.eclipse.emf.edit"/>
+      <feature id="org.eclipse.emf.databinding.edit"/>
+      <feature id="org.apache.poi"/>
+      <feature id="org.eclipse.emf.codegen.ecore"/>
+      <feature id="org.eclipse.pde"/>
+      <feature id="org.eclipse.ocl.edit.source"/>
+      <feature id="org.eclipse.emf.common.ui"/>
+      <feature id="org.eclipse.emf.mapping.ui"/>
+      <feature id="org.eclipse.ocl.edit"/>
+      <feature id="org.eclipse.ocl.core.sdk"/>
+      <feature id="com.google.support.runtime"/>
+      <feature id="org.eclipse.ocl"/>
+      <feature id="org.eclipse.ocl.ui"/>
+      <feature id="org.eclipse.emf.codegen.ecore.ui"/>
+      <feature id="org.eclipse.emf.ecore.editor"/>
+      <feature id="org.eclipse.ocl.unified.core"/>
+      <feature id="org.eclipse.emf.databinding"/>
+      <feature id="org.eclipse.jdt"/>
+      <feature id="org.eclipse.emf.validation.doc"/>
+      <feature id="org.eclipse.core.runtime.feature"/>
+      <feature id="org.eclipse.emf.validation"/>
+      <feature id="org.eclipse.equinox.core.feature"/>
+      <feature id="org.eclipse.zest" version="1.6.0.201506010206"/>
+      <feature id="org.eclipse.xtext.runtime" version="2.8.3.v201506010551"/>
+      <feature id="org.eclipse.emf.query.ocl" version="1.9.0.201505312221"/>
+      <feature id="org.eclipse.emf.query" version="1.9.0.201505312221"/>
+      <feature id="org.eclipse.uml2" version="5.1.0.v20150601-0733"/>
+      <feature id="org.eclipse.uml2.codegen.ecore.ui"/>
+      <feature id="org.eclipse.uml2.uml.edit"/>
+      <feature id="org.eclipse.uml2.common.edit"/>
+      <feature id="org.eclipse.uml2.common"/>
+      <feature id="org.eclipse.uml2.uml"/>
+      <feature id="org.eclipse.xtext.xbase" version="2.8.3.v201506010551"/>
+      <feature id="org.eclipse.xtext.xbase.lib" version="2.8.3.v201506010551"/>
+      <feature id="org.eclipse.xtend" version="2.1.0.v201505260349"/>
+      <feature id="org.eclipse.xtend.typesystem.emf"/>
+      <feature id="org.eclipse.xtend.dependencies"/>
+      <feature id="org.eclipse.emf.mwe.core" version="1.3.10.v201505260335"/>
+      <feature id="org.eclipse.emf.transaction"/>
+      <feature id="org.eclipse.emf.mwe.core.source" version="1.3.10.v201505260335"/>
+      <feature id="org.eclipse.emf.workspace" version="1.8.0.201405281451"/>
+   </features>
+
+
+   <repositories>
+      <repository location="http://download.eclipse.org/releases/mars/" enabled="true" />
+      <repository location="http://tracker.verticon.com/Tracker/updates" enabled="true" />
+   </repositories>
+
+   <preferencesInfo>
+      <targetfile overwrite="false"/>
+   </preferencesInfo>
+
+   <cssInfo>
+   </cssInfo>
+
+</product>
