@@ -3,9 +3,9 @@ This project is a releng builder for the com.verticon.tracker.product.desktop pr
 =======================================
 Notes
 
-1) Most recent build used Kepler 4.3.2
+1) Most recent build used Mars 4.5
 
-2) This build requires the deltapack.  Set the "deltapack" property for the buildProduct.xml ant script which is set
+2) This build NO LONGER (in theory) requires the deltapack.  Set the "deltapack" property for the buildProduct.xml ant script which is set
    in the buildProduct.properties file. The version of the deltapack used should match the version of the eclipse that is running.
 
 3) Due to bug 268867, if the buildDirectory/buildRepo is deleted/cleaned, then the repo must also be removed from 
@@ -24,7 +24,7 @@ Build Instructions
 For releases:
 1. Old repos can be removed or left in place.  If left in place artifacts of the same 
 version overwrite the preexisting ones.  
-2. Product build: 
+2. Product build: Deprecated - Just export the product from PDE
 	a. Edit the compositeArtifacts.xml and compositeContent.xml to add a new directory for the product.
 	b. Add and set delta pack for release in the buildProduct.properties file.
 	c. Create or update the target platform  and export it to a directory

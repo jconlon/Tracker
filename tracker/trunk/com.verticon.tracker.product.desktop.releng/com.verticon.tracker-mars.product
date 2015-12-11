@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="Tracker Livestock Business Intelligence Toolkit" uid="tracker_desktop.product" id="com.verticon.tracker.product.desktop.application" application="org.eclipse.ui.ide.workbench" version="1.0.0.qualifier" useFeatures="true" includeLaunchers="true">
+
+   <aboutInfo>
+      <image path="/com.verticon.tracker.product.desktop/icons/cattle_lg.gif"/>
+      <text>
+         Tracker Livestock Business Intelligence Toolkit
+Version: {0}
+Build id: {1}
+
+(c) Copyright Verticon, Inc. 2015.  All rights reserved. 
+
+Visit http://tracker.verticon.com/index.html
+
+Tracker is powered by Eclipse technology and includes Eclipse plugins that can be installed and
+used with other Eclipse (4.5) based offerings.
+      </text>
+   </aboutInfo>
+
+   <configIni use="default">
+      <macosx>/com.verticon.tracker.product.desktop/config.ini</macosx>
+      <solaris>/com.verticon.tracker.product.desktop/config.ini</solaris>
+      <win32>/com.verticon.tracker.product.desktop/config.ini</win32>
+   </configIni>
+
+   <launcherArgs>
+      <vmArgs>-Dlogback.configurationFile=file:logback.xml
+-Dlogback.application=TrackerProduct
+      </vmArgs>
+      <vmArgsLin>-Xms256m
+-Xmx512m
+      </vmArgsLin>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
+      </vmArgsMac>
+      <vmArgsWin>-Xms256m
+-Xmx512m
+      </vmArgsWin>
+   </launcherArgs>
+
+   <windowImages i16="/com.verticon.tracker.product.desktop/icons/cow_16.png" i32="/com.verticon.tracker.product.desktop/icons/cow_32.png" i48="/com.verticon.tracker.product.desktop/icons/cow_48.png"/>
+
+   <splash
+      location="com.verticon.tracker.product.desktop"
+      startupProgressRect="62,400,515,15"
+      startupMessageRect="7,225,441,20"
+      startupForegroundColor="ADD8E6" />
+   <launcher name="tracker">
+      <linux icon="/com.verticon.tracker.product.desktop/icons/cow.xpm"/>
+      <solaris/>
+      <win useIco="false">
+         <bmp
+            winSmallHigh="/com.verticon.tracker.product.desktop/icons/cow_16_32.bmp"
+            winMediumHigh="/com.verticon.tracker.product.desktop/icons/cow_32_32.bmp"
+            winLargeHigh="/com.verticon.tracker.product.desktop/icons/cow_48_32.bmp"/>
+      </win>
+   </launcher>
+
+   <intro introId="org.eclipse.ui.intro.universal"/>
+
+   <vm>
+   </vm>
+
+   <plugins>
+   </plugins>
+
+   <features>
+      <feature id="com.verticon.tracker.product.desktop"/>
+      <feature id="com.verticon.tracker.base.dep"/>
+      <feature id="org.eclipse.platform"/>
+      <feature id="org.eclipse.equinox.p2.core.feature"/>
+      <feature id="org.eclipse.equinox.p2.rcp.feature"/>
+      <feature id="org.eclipse.equinox.p2.extras.feature"/>
+      <feature id="org.eclipse.equinox.p2.user.ui"/>
+      <feature id="com.verticon.tracker.product.desktop.doc"/>
+      <feature id="org.eclipse.ecf.filetransfer.httpclient4.feature"/>
+      <feature id="org.eclipse.ecf.core.ssl.feature"/>
+      <feature id="org.eclipse.ecf.filetransfer.httpclient4.ssl.feature"/>
+      <feature id="org.eclipse.ecf.filetransfer.ssl.feature"/>
+      <feature id="org.eclipse.ecf.filetransfer.feature"/>
+      <feature id="org.eclipse.ecf.core.feature"/>
+      <feature id="org.eclipse.emf.ecore"/>
+      <feature id="org.eclipse.rcp"/>
+      <feature id="org.eclipse.emf.common"/>
+      <feature id="org.eclipse.e4.rcp"/>
+      <feature id="org.eclipse.help"/>
+   </features>
+
+   <configurations>
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.io" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.p2.reconciler.dropins" autoStart="true" startLevel="0" />
+      <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
+      <property name="launcher.GTK_version" value="2" os="linux" />
+   </configurations>
+
+   <repositories>
+      <repository location="http://download.eclipse.org/releases/mars/" enabled="true" />
+      <repository location="http://tracker.verticon.com/Tracker/updates" enabled="true" />
+      <repository location="http://download.eclipse.org/eclipse/updates/4.5/" enabled="true" />
+      <repository location="http://download.eclipse.org/birt/update-site/4.5/" enabled="true" />
+   </repositories>
+
+   <preferencesInfo>
+      <targetfile overwrite="false"/>
+   </preferencesInfo>
+
+   <cssInfo>
+   </cssInfo>
+
+</product>

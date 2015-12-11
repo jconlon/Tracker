@@ -1,0 +1,224 @@
+target "Eclipse 4.3 SR2"
+
+with allEnvironments, source
+
+location "http://download.eclipse.org/releases/kepler/" {
+	ch.qos.logback.slf4j
+	com.google.guava
+	com.google.inject
+	com.ibm.icu
+	javax.annotation
+	javax.inject
+	javax.xml
+	org.eclipse.core.net
+	org.apache.ant
+	org.apache.commons.logging
+	org.apache.felix.gogo.command
+	org.apache.felix.gogo.runtime
+	org.apache.felix.gogo.shell
+	org.apache.poi [3.9.0,3.10.0)
+	org.eclipse.ant.core
+	org.eclipse.ant.ui
+	org.eclipse.rcp.feature.group
+	org.eclipse.emf.sdk.feature.group
+	org.eclipse.birt.doc.feature.group
+	org.eclipse.birt.feature.group
+	org.eclipse.birt.cshelp.feature.group
+	org.eclipse.birt.example.feature.group
+	org.eclipse.birt.osgi.runtime.sdk.feature.group
+	org.eclipse.xtext.sdk.feature.group
+	org.eclipse.emf.compare.feature.group
+	org.eclipse.emf.compare
+	org.eclipse.emf.databinding.feature.group
+	org.eclipse.emf.databinding.edit.feature.group
+	org.eclipse.emf.ecore.xcore.feature.group
+	org.eclipse.emf.ecore.xcore.ui.feature.group
+	org.eclipse.emf.transaction.doc.feature.group
+	org.eclipse.emf.transaction.sdk.feature.group
+	org.eclipse.emf.validation.sdk.feature.group
+	org.eclipse.emf.query.sdk.feature.group
+	org.eclipse.equinox.compendium.sdk.feature.group
+	org.eclipse.equinox.core.feature.feature.group
+	org.eclipse.datatools.common.doc.user.feature.group
+	org.eclipse.datatools.sdk.feature.feature.group
+	org.eclipse.ocl.all.sdk.feature.group
+	org.eclipse.ocl.examples.feature.group
+	org.eclipse.ui.workbench
+	org.eclipse.ui.views
+	org.eclipse.ui.cheatsheets
+	org.eclipse.ui.browser
+	org.eclipse.ui.console
+	org.eclipse.ui.editors
+	org.eclipse.ui.externaltools
+	org.eclipse.ui.forms
+	org.eclipse.ui.ide
+	org.eclipse.ui.ide.application
+	org.eclipse.ui.intro
+	org.eclipse.ui.navigator
+	org.eclipse.ui.navigator.resources
+	org.eclipse.ui.intro.universal
+	org.eclipse.ui.net
+	org.eclipse.ui.views.log
+	org.eclipse.ui.views.properties.tabbed
+	org.eclipse.ui.workbench.texteditor
+	org.eclipse.pde.feature.group
+	org.eclipse.jface
+	org.eclipse.jface.databinding
+	org.eclipse.jface.text
+	org.eclipse.uml2.sdk.feature.group
+	org.eclipse.xsd.sdk.feature.group
+	org.eclipse.equinox.p2.sdk.feature.group
+	org.eclipse.equinox.p2.user.ui.feature.group
+	org.eclipse.help.feature.group
+	org.eclipse.core.resources
+	org.eclipse.core.filesystem
+	org.eclipse.core.runtime.feature.feature.group
+	org.eclipse.emf.mwe.sdk.feature.group
+	org.junit  [4.11.0.v201303080030,4.11.0.v201303080030]
+	org.eclipse.xtend.feature.group
+	org.eclipse.xtext.runtime.feature.group
+	org.eclipse.xtext.ui.feature.group
+}
+
+location "file:/opt/Eclipse/emf-client/121/" {
+	org.eclipse.emf.ecp.cdo.feature.feature.group
+	org.eclipse.emf.ecp.emfstore.feature.feature.group
+	org.eclipse.emf.ecp.sdk.feature.feature.group
+}
+
+location "file:/opt/Eclipse/mirrors/gef-kepler/" {
+	org.eclipse.gef.all.feature.group
+}
+
+location "file:/opt/Eclipse/mirrors/rxtx/" {
+	gnu.io.rxtx.sdk.feature.group
+}
+
+location "file:/opt/Eclipse/equinox-SDK/LunaSR1/" {
+	org.eclipse.osgi.util
+	org.eclipse.equinox.wireadmin
+}
+
+location "file:/opt/Eclipse/nattable/" {
+	org.eclipse.nebula.widgets.nattable.core.feature.feature.group
+}
+
+location "http://download.eclipse.org/emf-store/releases_11/" {
+	org.eclipse.emf.emfstore.client.feature.feature.group
+	
+}
+
+location "file:/opt/Eclipse/nebula/repository/"{
+	org.eclipse.nebula.cwt
+	org.eclipse.nebula.widgets.cdatetime
+}
+
+location "file:/opt/Eclipse/miscBundleRepository/" {
+	com.fasterxml.jackson.core.jackson-core
+	com.fasterxml.jackson.jr.jackson-jr-objects
+	com.netflix.rxjava.core
+	com.yammer.metrics.core
+	jcl.over.slf4j
+	joda-time
+	jul.to.slf4j
+	log4j.over.slf4j
+	org.apache.commons.cli
+	org.apache.commons.codec
+	org.apache.commons.el
+	org.apache.commons.httpclient
+	org.apache.commons.lang
+	org.apache.felix.dependencymanager
+	org.apache.felix.deploymentadmin
+	org.apache.log4j
+	org.easymock
+	org.eclipse.equinox.http
+	org.eclipse.equinox.servletbridge.extensionbundle
+	org.eclipselabs.emf.query.simple
+	org.eclipselabs.mongo
+	org.eclipselabs.mongo.emf
+	org.eclipselabs.mongo.emf.builders
+	org.eclipselabs.mongo.emf.converter
+	org.eclipselabs.mongo.emf.ext
+	org.eclipselabs.mongo.emf.freemarker
+	org.eclipselabs.mongo.emf.log
+	org.eclipselabs.mongo.emf.query.simple
+	org.eclipselabs.mongo.emf.streams
+	org.eclipse.swtbot.eclipse.feature.group
+	org.ekkescorner.logging.core
+	org.ekkescorner.logging.lilith.multiplexer.fragment
+	org.ekkescorner.logging.logback.util.fragment
+	org.hamcrest
+	org.hamcrest.core
+	org.hamcrest.integration
+	org.hamcrest.library
+	org.hamcrest.text
+	org.junit
+	org.mongodb.mongo-java-driver
+	org.osgilab.bundles.monitoradmin
+	org.rxtx
+	slf4j.api
+	slf4j.ext
+	slf4j.nop
+	slf4j.simple
+	ch.qos.logback.classic
+	ch.qos.logback.core
+	
+}
+
+location "file:/opt/Eclipse/eclipse-delta-pack/deltaPackBundleRepository/" {
+	org.eclipse.compare.win32
+	org.eclipse.core.filesystem.aix.ppc
+	org.eclipse.core.filesystem.aix.ppc64
+	org.eclipse.core.filesystem.hpux.ia64
+	org.eclipse.core.filesystem.linux.ppc
+	org.eclipse.core.filesystem.linux.ppc64
+	org.eclipse.core.filesystem.linux.x86
+	org.eclipse.core.filesystem.linux.x86_64
+	org.eclipse.core.filesystem.macosx
+	org.eclipse.core.filesystem.solaris.sparc
+	org.eclipse.core.filesystem.win32.x86
+	org.eclipse.core.filesystem.win32.x86_64
+	org.eclipse.core.net.linux.x86
+	org.eclipse.core.net.linux.x86_64
+	org.eclipse.core.net.win32.x86
+	org.eclipse.core.net.win32.x86_64
+	org.eclipse.core.resources.win32.x86
+	org.eclipse.core.resources.win32.x86_64
+	org.eclipse.e4.ui.workbench.renderers.swt.cocoa
+	org.eclipse.equinox.launcher.cocoa.macosx
+	org.eclipse.equinox.launcher.cocoa.macosx.x86_64
+	org.eclipse.equinox.launcher.gtk.aix.ppc
+	org.eclipse.equinox.launcher.gtk.aix.ppc64
+	org.eclipse.equinox.launcher.gtk.hpux.ia64
+	org.eclipse.equinox.launcher.gtk.linux.ppc
+	org.eclipse.equinox.launcher.gtk.linux.ppc64
+	org.eclipse.equinox.launcher.gtk.linux.s390
+	org.eclipse.equinox.launcher.gtk.linux.s390x
+	org.eclipse.equinox.launcher.gtk.linux.x86
+	org.eclipse.equinox.launcher.gtk.linux.x86_64
+	org.eclipse.equinox.launcher.gtk.solaris.sparc
+	org.eclipse.equinox.launcher.gtk.solaris.x86
+	org.eclipse.equinox.launcher.win32.win32.x86
+	org.eclipse.equinox.launcher.win32.win32.x86_64
+	org.eclipse.equinox.security.macosx
+	org.eclipse.equinox.security.win32.x86
+	org.eclipse.equinox.security.win32.x86_64
+	org.eclipse.jdt.launching.macosx
+	org.eclipse.jdt.launching.ui.macosx
+	org.eclipse.swt.cocoa.macosx
+	org.eclipse.swt.cocoa.macosx.x86_64
+	org.eclipse.swt.gtk.aix.ppc
+	org.eclipse.swt.gtk.aix.ppc64
+	org.eclipse.swt.gtk.hpux.ia64
+	org.eclipse.swt.gtk.linux.ppc
+	org.eclipse.swt.gtk.linux.ppc64
+	org.eclipse.swt.gtk.linux.s390
+	org.eclipse.swt.gtk.linux.s390x
+	org.eclipse.swt.gtk.linux.x86
+	org.eclipse.swt.gtk.linux.x86_64
+	org.eclipse.swt.gtk.solaris.sparc
+	org.eclipse.swt.gtk.solaris.x86
+	org.eclipse.swt.win32.win32.x86
+	org.eclipse.swt.win32.win32.x86_64
+	org.eclipse.ui.win32
+}
