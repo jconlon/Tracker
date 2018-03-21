@@ -1,8 +1,0 @@
-To:support@verticon.com
-From: [required-email]
-Subject: TRENDexplorer Support Form Response [required-subject]
-                                        
-Name:	[required-name]
-E-mail address:	[required-email]
-Subject:	[required-subject]
-Problem:	[required-problem]
