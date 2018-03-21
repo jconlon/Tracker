@@ -1,4 +1,0 @@
-AuthType Basic
-AuthName "downloads"
-AuthUserFile /home/users/web/b2429/nf.verticon1/public_html/downloads/.htpasswd
-require valid-user

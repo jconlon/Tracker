@@ -1,9 +1,0 @@
-To:support@verticon.com
-From: [required-email]
-Subject: TRENDexplorer Register Form Response [required-lastname]
-                                        
-First Name:	 [required-firstname]
-Last Name:	[required-lastname]
-Company:	[required-company]
-E-mail address:	[required-email]
-Telephone:	[required-phone]
