@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.birt.report.loader"
       label="%featureName"
-      version="0.3.1.qualifier"
+      version="0.3.2.qualifier"
       provider-name="%providerName"
       plugin="com.verticon.birt.report.loader">
 
@@ -23,7 +23,13 @@
    </url>
 
    <requires>
-      <import feature="org.eclipse.ocl.examples" version="3.2.1.v20120919-0602"/>
+      <import plugin="org.eclipse.core.runtime" version="3.8.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.birt.report.viewer" version="3.7.2" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui" version="3.8.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="slf4j.api"/>
+      <import plugin="org.eclipse.core.resources" version="3.8.1" match="greaterOrEqual"/>
+      <import feature="org.eclipse.birt.report.designer.editor.xml.wtp" version="4.5.0.v201506092134"/>
    </requires>
 
    <plugin
