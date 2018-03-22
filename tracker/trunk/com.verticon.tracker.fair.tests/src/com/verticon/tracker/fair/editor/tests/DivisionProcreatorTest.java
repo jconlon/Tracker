@@ -530,7 +530,7 @@ public class DivisionProcreatorTest extends TestCase {
 			}
 		}
 		
-		procreator.execute();
+		procreator.execute(editingDomain);
 	}
 
 	private HSSFSheet getWorkSheet(File f) throws Exception {
