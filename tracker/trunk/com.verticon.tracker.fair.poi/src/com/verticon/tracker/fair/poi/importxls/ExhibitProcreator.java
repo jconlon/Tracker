@@ -71,6 +71,7 @@ class ExhibitProcreator implements ExecutableProcreator {
 		this.child = child;
 	}
 
+	@Override
 	public void prepare(Fair fair, HSSFRow row,
 			List<ColumnMapper> listColumnMapper, EObject parent,
 			boolean newParent, EditingDomain editingDomain) throws MissingCriticalDataException {
@@ -88,6 +89,7 @@ class ExhibitProcreator implements ExecutableProcreator {
 		}
 	}
 
+	@Override
 	public void process(Fair fair, HSSFRow row,
 			List<ColumnMapper> listColumnMapper, EObject parent,
 			boolean parentWasCreated, EditingDomain editingDomain, CompoundCommand commoundCommand) throws MissingCriticalDataException {
@@ -144,25 +146,28 @@ class ExhibitProcreator implements ExecutableProcreator {
 	 * Execute the prepared Command on the editing Domain.
 	 * @throws IllegalStateException if this method was called before the {@link #prepare(Fair, HSSFRow, List, EObject, boolean, EditingDomain)}
 	 */
-	public void execute() {
+	@Override
+	public void execute(EditingDomain ed) {
 		if(localCompoundCommand==null){
 			throw new IllegalStateException("process method must be called first.");
 		}
-		
-		localCompoundCommand.execute();
+		ed.getCommandStack().execute(localCompoundCommand);
 	}
 
+	@Override
 	public String getStatus() {
 		 return exception!=null? exception.getMessage():
 			 totalChildrenAdded + " exhibits, " + child.getStatus();
 	}
 
+	@Override
 	public void dispose() {
 		logger.debug(bundleMarker,"Disposing");
 		childrenAddedToFairParents.clear();
 		child.dispose();
 	}
 
+	@Override
 	public Exception getError() {
 		return exception;
 	}
