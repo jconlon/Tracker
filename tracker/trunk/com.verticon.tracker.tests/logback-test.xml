@@ -16,12 +16,9 @@
   
   <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <File>${user.home}/tracker.log</File>
-    <ImmediateFlush>true</ImmediateFlush>
-    <layout class="ch.qos.logback.classic.PatternLayout">
-      <!--pattern>%d{HH:mm:ss.SSS} %-10level [%bundle] [%thread] %logger{25} %message %n</pattern-->
-      <pattern>%date %-10level [%marker] [%thread] [%logger{25}] -  %message %ex %n</pattern>
-      <!--pattern>[%d{ISO8601}]%5p%6.6r[%t]%bundle - %C.%M(%F:%L) - %m%n</pattern-->
-    </layout>
+    <encoder>
+      <pattern>%date{ISO8601}, [%thread]  %marker, %level, %logger, %m%n</pattern>
+    </encoder>
     
     <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
       <FileNamePattern>tracker.%i.log</FileNamePattern>
@@ -60,9 +57,9 @@
   
  <appender name="STDOUT"
     class="ch.qos.logback.core.ConsoleAppender">
-    <layout class="ch.qos.logback.classic.PatternLayout">
-      <Pattern>%-4relative %-5level %logger{35} - %msg %n</Pattern>
-    </layout>
+    <encoder>
+      <pattern>%date{ISO8601}, [%thread]  %marker, %level, %logger, %m%n</pattern>
+    </encoder>
   </appender>
 
  <!--Standard Logback socketAppender
@@ -86,7 +83,6 @@
 	<IncludeCallerData>true</IncludeCallerData>
 	<RemoteHosts>localhost</RemoteHosts>
 	<ApplicationIdentifier>${logback.application}</ApplicationIdentifier>
-	<encoding>UTF-8</encoding>
  </appender>
 
  
@@ -180,11 +176,30 @@
     <level value="WARN"/>
   </logger>
   
-   <logger name="com.verticon.tracker.irouter.gps">
+   <logger name="com.verticon.tracker.irouter.udp.test.system.internal.UDPSystemTest">
     <level value="WARN"/>
   </logger>
   
-  <logger name="com.verticon.tracker.reader.event.bluetooth">
+   <logger name="com.verticon.tracker.irouter.udp.test.system.internal.UDPServer">
+    <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.irouter.gps.test.system.internal">
+    <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.irouter.udp.internal.UDPSender">
+    <level value="WARN"/>
+   </logger>
+   
+  <logger name="com.verticon.tracker.irouter.gps.internal.GPSProducer">
+    <level value="WARN"/>
+  </logger>
+   <logger name="com.verticon.tracker.irouter.gps.internal.GPSProxy">
+    <level value="INFO"/>
+  </logger>
+                
+  <logger name="com.verticon.tracker.reader.event">
     <level value="DEBUG"/>
   </logger>
   
@@ -324,6 +339,10 @@
   <level value="INFO"/>
   </logger>
   
+  <logger name="com.verticon.tracker.irouter.bluegiga">
+  <level value="DEBUG"/>
+  </logger>
+  
   <logger name="aggregated" level="INFO">
     <appender-ref ref="AGGREGATED"/>
   </logger>
@@ -335,9 +354,10 @@
   <root>
     <level value="WARN"/>
    <appender-ref ref="multiplex"/>
+   <appender-ref ref="STDOUT"/>
     <!--  
      
-     <appender-ref ref="STDOUT"/>
+     
      <appender-ref ref="RollingFile"/>
     -->
   </root>
