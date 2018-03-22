@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"  
+	name="TrackerEditorOCLEnablement">
+	<implementation class="com.verticon.tracker.editor.ocl.enablement.Component"/>
+ <service>
+    <provide interface="com.verticon.emf.ui.api.IOclQuerySpecLoader"/>
+    <provide interface="com.verticon.emf.ui.api.IOclQueryWizardPrompts"/>
+ </service>
+ 
+ </scr:component>
+
