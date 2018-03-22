@@ -23,7 +23,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 
-import com.verticon.tracker.editor.util.IViewerFilters;
+import com.verticon.emf.ui.api.IViewerFilters;
 
 /**
  * @author jconlon
