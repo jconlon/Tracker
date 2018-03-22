@@ -1,0 +1,47 @@
+osgi> start 137
+
+osgi> cm help
+
+osgi> Usage:
+ cm help                  print this help message
+ cm list                  list all known configurations
+ cm get <pid>             show configuration for service <pid>
+ cm getv <pid>            verbose get (shows value types also)
+ cm put <pid> key value   set string value for service <pid>
+ cm puts <pid> key value  set "simple" value for service <pid>: value is "true", "false",
+                          a char in single quotes, an int, or a number, with appended: 
+                          i (Integer), l (Long), f (Float), d (Double), b (Byte), s (Short)
+ cm del <pid>             deletes configuration for service <pid>
+ cm create <pid> [<loc>]  creates configuration for service <pid> (with optional bundle location)
+cm list
+Configuration list:
+   (none)
+
+osgi> cm getv com.verticon.tracker.configuration.test.controllerfactory
+no configuration for pid 'com.verticon.tracker.configuration.test.controllerfactory' (use 'create' to create one)
+
+osgi> cm getv com.verticon.tracker.configuration.txxxx
+no configuration for pid 'com.verticon.tracker.configuration.txxxx' (use 'create' to create one)
+
+osgi> cm create com.verticon.tracker.configuration.test.controllerfactory
+
+osgi> cm list
+Configuration list:
+com.verticon.tracker.configuration.test.controllerfactory
+
+osgi> cm put com.verticon.tracker.configuration.test.controllerfactory tracker.wiring.group.name fritz
+
+osgi> services "(objectclass=org.osgi.service.wireadmin.Consumer)"
+
+osgi> services "(objectclass=org.osgi.service.event.EventHandler)"
+
+osgi> services "(tracker.monitor.label=TruTest Proxy)"
+
+osgi> services "(objectclass=org.osgi.service.io.ConnectorService)"
+
+Finding all unNamed (default) IApplicationProviders 
+osgi>  services "(&(objectclass=org.eclipselabs.restlet.IApplicationProvider) (!(restlet.component.name=*)))"
+
+
+
+For RFID Demo turn on org.eclipse.equinox.io
