@@ -223,6 +223,7 @@ public class ImportFairExhibitDataWizard extends Wizard  {
 	private IRunnableWithProgress getRunnable(){
 		return new IRunnableWithProgress() {
 
+			@Override
 			public void run(IProgressMonitor monitor)
 					throws InvocationTargetException, InterruptedException {
 				monitor.beginTask("Processing worksheet...", workSheet.getLastRowNum()+10);
@@ -361,7 +362,7 @@ public class ImportFairExhibitDataWizard extends Wizard  {
 		}
 		//Add all newly imported Divisions, Departments, Classes, and Lots
 		logger.debug(bundleMarker,"Loading worksheet data.");
-		procreator.execute();
+		procreator.execute(editingDomain);
 		monitor.worked(10);
 		return count;
 	}
