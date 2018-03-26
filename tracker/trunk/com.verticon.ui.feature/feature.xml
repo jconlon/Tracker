@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.ui"
       label="Common User Interfaces"
-      version="0.1.0.qualifier"
+      version="1.1.0.qualifier"
       provider-name="Verticon, Inc."
       plugin="com.verticon.ui">
 
@@ -18,7 +18,7 @@
       %license
    </license>
 
-    <url>
+   <url>
       <update label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
@@ -39,6 +39,13 @@
 
    <plugin
          id="org.eclipse.nebula.widgets.cdatetime"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.verticon.emf.ui.api"
          download-size="0"
          install-size="0"
          version="0.0.0"
