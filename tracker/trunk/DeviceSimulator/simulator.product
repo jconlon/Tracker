@@ -34,7 +34,6 @@
    <plugins>
       <plugin id="ch.qos.logback.classic"/>
       <plugin id="ch.qos.logback.core"/>
-      <plugin id="ch.qos.logback.slf4j" fragment="true"/>
       <plugin id="com.verticon.tracker.irouter.dev"/>
       <plugin id="com.verticon.tracker.irouter.gps.dev.sim"/>
       <plugin id="com.verticon.tracker.irouter.mettler.dev.sim"/>
@@ -42,7 +41,7 @@
       <plugin id="com.verticon.tracker.irouter.trutest.dev.sim"/>
       <plugin id="com.verticon.tracker.logging.logback.config" fragment="true"/>
       <plugin id="gnu.io.rxtx"/>
-      <plugin id="gnu.io.rxtx.linux.x86" fragment="true"/>
+      <plugin id="gnu.io.rxtx.linux.x86_64" fragment="true"/>
       <plugin id="javax.servlet"/>
       <plugin id="org.eclipse.core.jobs"/>
       <plugin id="org.eclipse.equinox.common"/>
