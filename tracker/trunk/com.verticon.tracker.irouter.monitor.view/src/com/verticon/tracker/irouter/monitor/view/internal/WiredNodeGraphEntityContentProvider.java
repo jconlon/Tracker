@@ -52,7 +52,7 @@ import com.google.common.collect.Collections2;
 import com.google.common.collect.Sets;
 
 public class WiredNodeGraphEntityContentProvider implements
-		IGraphEntityContentProvider, WireAdminListener, ISetChangeListener,INestedContentProvider  {
+ IGraphEntityContentProvider, WireAdminListener, ISetChangeListener, INestedContentProvider {
 
 	
 	private final Logger logger = LoggerFactory
@@ -280,7 +280,8 @@ public class WiredNodeGraphEntityContentProvider implements
         private ConnectionURIPredicate(final String connectionURI) {
         	this.connectionURI = checkNotNull(connectionURI);
         }
-        public boolean apply(final IExternalNode s) {
+        @Override
+		public boolean apply(final IExternalNode s) {
             return equal(connectionURI, s.getConnectionURI());//Use a google equal which will handle nulls
         }
     }
@@ -311,6 +312,7 @@ public class WiredNodeGraphEntityContentProvider implements
 			logger.debug(bundleMarker, "Wire connected, refreshing  {}",
 					effectedProducer);
 			display.syncExec(new Runnable() {
+				@Override
 				public void run() {
 					viewer.refresh(effectedProducer, false);
 
@@ -329,6 +331,7 @@ public class WiredNodeGraphEntityContentProvider implements
 			logger.debug(bundleMarker, "Wire deleted, refreshing {}",
 					effectedProducer2);
 			display.syncExec(new Runnable() {
+				@Override
 				public void run() {
 					viewer.refresh(effectedProducer2, false);
 					logger.debug(bundleMarker, "Wire deleted, refreshed  {}",
@@ -387,40 +390,46 @@ public class WiredNodeGraphEntityContentProvider implements
 		// Handle additions and removals of WiredNode nodes on the viewer
 		add(dif.getAdditions());
 		remove(dif.getRemovals());
+		asyncRefreshViewerWorkaround();
 	}
 
 	/**
 	 * This should also remove any pages
+	 * 
 	 * @param nodes
 	 */
 	private void remove(final Set<INode> nodes) {
-		if (nodes == null|| display==null ||  display.isDisposed()) {
+		if (nodes == null || display == null || display.isDisposed()) {
 			return;
 		}
 		display.syncExec(new Runnable() {
+			@Override
 			public void run() {
 				for (INode node : nodes) {
 					try {
-						
+
 						GraphItem n = ((GraphViewer) viewer).findGraphItem(node);
-						//Workaround for bug 314710 218148 - doesnt (always?) seem to work 
+						// Workaround for bug 314710 218148 - doesnt (always?)
+						// seem to work
 						((GraphViewer) viewer).getGraphControl().setSelection(null);
 						n.dispose();
-						if(node instanceof WiredNode){
-							masterDetail.removePage((WiredNode)node);
+						if (node instanceof WiredNode) {
+							masterDetail.removePage(node);
 						}
 						logger.debug(bundleMarker, "Removed {}", node);
-						
-						//Commented code shows that connections are removed when the node is
-//						List c = ((GraphViewer) viewer).getGraphControl().getConnections();
-//						System.out.println("Removed "+node);
-//						for (Object connection : c) {
-//							System.out.println("\t "+connection);
+
+						// Commented code shows that connections are removed
+						// when the node is
+						// List c = ((GraphViewer)
+						// viewer).getGraphControl().getConnections();
+						// System.out.println("Removed "+node);
+						// for (Object connection : c) {
+						// System.out.println("\t "+connection);
 //						}
-						
+
 					} catch (SWTException e) {
-						logger.error(bundleMarker,"Failed to remove "+node,e);
-//						throw e; dont throw this up the stack handle it 
+						logger.error(bundleMarker, "Failed to remove " + node, e);
+						// throw e; dont throw this up the stack handle it
 						asyncRefreshViewerWorkaround();
 					}
 				}
@@ -436,6 +445,7 @@ public class WiredNodeGraphEntityContentProvider implements
 	 */
 	private void asyncRefreshViewerWorkaround(){
 		display.asyncExec(new Runnable() {
+			@Override
 			public void run() {
 				((GraphViewer) viewer).refresh();
 			}
@@ -472,36 +482,39 @@ public class WiredNodeGraphEntityContentProvider implements
 
 	
 	private void add(final Set<INode> nodes) {
-		if (nodes == null || display==null || display.isDisposed()) {
+		if (nodes == null || display == null || display.isDisposed()) {
 			return;
 		}
 
 		display.syncExec(new Runnable() {
+			@Override
 			public void run() {
-				
+
 				for (INode node : nodes) {
 					try {
 						((GraphViewer) viewer).getGraphControl().setSelection(null);
-						((GraphViewer) viewer).addNode(node);
-						viewer.refresh(node,false);
+						// ((GraphViewer) viewer).addNode(node);
+						viewer.refresh(node, false);
 						logger.debug(bundleMarker, "Added {}", node);
-						//An externalNode may have a connection to proxy or gateway
-						if(node instanceof IExternalNode){
-							findNodeConnectingTo((IExternalNode)node);
+						// An externalNode may have a connection to proxy or
+						// gateway
+						if (node instanceof IExternalNode) {
+							findNodeConnectingTo((IExternalNode) node);
 						}
 					} catch (SWTException e) {
-						// Seeing exceptions thrown if nodes are removed and then added back
-						//if services come, go, and come back. 
-						//see bug 314710 218148
-						logger.warn(bundleMarker,"Failed to add "+node,e);
+						// Seeing exceptions thrown if nodes are removed and
+						// then added back
+						// if services come, go, and come back.
+						// see bug 314710 218148
+						logger.warn(bundleMarker, "Failed to add " + node, e);
 						asyncRefreshViewerWorkaround();
 					}
-					
+
 				}
 				((GraphViewer) viewer).applyLayout();
 			}
-			
-					});
+
+		});
 
 	}
 
