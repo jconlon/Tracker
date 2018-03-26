@@ -2,9 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tracker Views
 Bundle-SymbolicName: com.verticon.tracker.views;singleton:=true
-Bundle-Version: 0.3.0.qualifier
+Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Verticon, Inc.
 Import-Package: at.bestsolution.dataforms.util.viewers,
+ com.verticon.emf.ui.api,
  com.verticon.tracker;version="[1.0.0,2.0.0)",
  com.verticon.tracker.edit.provider;version="[1.0.0,2.0.0)",
  com.verticon.tracker.editor.actions;version="[1.0.0,2.0.0)",

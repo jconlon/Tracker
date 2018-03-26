@@ -25,7 +25,7 @@ import org.osgi.framework.ServiceReference;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
 
-import com.verticon.tracker.editor.util.IViewerFilters;
+import com.verticon.emf.ui.api.IViewerFilters;
 
 /**
  * @author jconlon
