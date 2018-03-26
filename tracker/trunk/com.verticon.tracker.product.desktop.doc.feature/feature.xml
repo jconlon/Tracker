@@ -23,6 +23,11 @@
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
 
+   <requires>
+      <import plugin="org.eclipse.ui" version="3.5.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.core.runtime" version="3.5.0" match="greaterOrEqual"/>
+   </requires>
+
    <plugin
          id="com.verticon.tracker.product.desktop.doc"
          download-size="0"

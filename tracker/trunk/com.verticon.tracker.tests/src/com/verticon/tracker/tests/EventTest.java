@@ -36,6 +36,7 @@ import com.verticon.tracker.util.TrackerConstants;
  *   <li>{@link com.verticon.tracker.Event#getId() <em>Id</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#getDate() <em>Date</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#getDateKey() <em>Date Key</em>}</li>
+ *   <li>{@link com.verticon.tracker.Event#getPublisherName() <em>Publisher Name</em>}</li>
  * </ul>
  * </p>
  * <p>
@@ -44,6 +45,7 @@ import com.verticon.tracker.util.TrackerConstants;
  *   <li>{@link com.verticon.tracker.Event#dateEvent(com.verticon.tracker.EventType, java.lang.String) <em>Date Event</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#dateEvents() <em>Date Events</em>}</li>
  *   <li>{@link com.verticon.tracker.Event#values() <em>Values</em>}</li>
+ *   <li>{@link com.verticon.tracker.Event#findPublisherName() <em>Find Publisher Name</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -171,6 +173,19 @@ public abstract class EventTest extends TestCase {
 	}
 
 	/**
+	 * Tests the '{@link com.verticon.tracker.Event#getPublisherName() <em>Publisher Name</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Event#getPublisherName()
+	 * @generated
+	 */
+	public void testGetPublisherName() {
+		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
 	 * Tests the '{@link com.verticon.tracker.Event#dateEvent(com.verticon.tracker.EventType, java.lang.String) <em>Date Event</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * Finds the most recent event that matches a type (and a name if it is a genericEvent)
@@ -288,6 +303,19 @@ public abstract class EventTest extends TestCase {
 	 */
 	public void testValues() {
 		assertNull( getFixture().values());
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Event#findPublisherName() <em>Find Publisher Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Event#findPublisherName()
+	 * @generated
+	 */
+	public void testFindPublisherName() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
 	}
 
 	public void testDateType(){

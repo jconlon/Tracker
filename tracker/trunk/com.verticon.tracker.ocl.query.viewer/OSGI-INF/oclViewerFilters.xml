@@ -3,8 +3,7 @@
 	name="OclViewerFilters">
 	<implementation class="com.verticon.tracker.ocl.query.viewer.OCLViewerFilters"/>
  <service>
-    <provide interface="com.verticon.tracker.editor.util.IViewerFilters"/>
+    <provide interface="com.verticon.emf.ui.api.IViewerFilters"/>
  </service>
  
  </scr:component>
-

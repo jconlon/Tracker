@@ -82,6 +82,12 @@ public class TrackerTests extends TestSuite {
 		suite.addTestSuite(USSwineGradingTest.class);
 		suite.addTestSuite(PolicyTest.class);
 		suite.addTestSuite(PositionTest.class);
+		suite.addTestSuite(StationTest.class);
+		suite.addTestSuite(WindTest.class);
+		suite.addTestSuite(StationLocationTest.class);
+		suite.addTestSuite(AirTest.class);
+		suite.addTestSuite(LightTest.class);
+		suite.addTestSuite(OrientationTest.class);
 		return suite;
 	}
 

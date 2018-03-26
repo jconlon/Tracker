@@ -19,6 +19,18 @@ import com.verticon.tracker.TrackerFactory;
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>Moved In</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are tested:
+ * <ul>
+ *   <li>{@link com.verticon.tracker.MovedIn#getSourceName() <em>Source Name</em>}</li>
+ * </ul>
+ * </p>
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link com.verticon.tracker.MovedIn#findSourceName() <em>Find Source Name</em>}</li>
+ * </ul>
+ * </p>
  * @generated
  */
 public class MovedInTest extends EventTest {
@@ -79,6 +91,32 @@ public class MovedInTest extends EventTest {
 	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.MovedIn#getSourceName() <em>Source Name</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.MovedIn#getSourceName()
+	 * @generated
+	 */
+	public void testGetSourceName() {
+		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.MovedIn#findSourceName() <em>Find Source Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.MovedIn#findSourceName()
+	 * @generated
+	 */
+	public void testFindSourceName() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
 	}
 
 	@Override

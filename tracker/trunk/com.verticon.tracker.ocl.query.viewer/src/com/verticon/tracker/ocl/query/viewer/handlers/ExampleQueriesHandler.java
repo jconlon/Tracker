@@ -22,6 +22,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.verticon.tracker.ocl.query.viewer.IOclQuery;
 import com.verticon.tracker.ocl.query.viewer.OclQueryViewModel;
+import com.verticon.tracker.ocl.query.viewer.OclQueryViewerPlugin;
 import com.verticon.tracker.ocl.query.viewer.views.OclQueryViewPart;
 import com.verticon.tracker.ocl.query.viewer.views.OclQueryViewer;
 
@@ -29,7 +30,7 @@ import com.verticon.tracker.ocl.query.viewer.views.OclQueryViewer;
  * @see org.eclipse.core.commands.IHandler
  * @see org.eclipse.core.commands.AbstractHandler
  */
-public class DefaultPremisesQueriesHandler extends AbstractHandler {
+public class ExampleQueriesHandler extends AbstractHandler {
 
 	/**
 	 * Subclasses can override this to load different queries
@@ -37,11 +38,11 @@ public class DefaultPremisesQueriesHandler extends AbstractHandler {
 	private final Collection<IOclQuery> queries;
 	
 	
-	public DefaultPremisesQueriesHandler() {
-		this(DefaultPremisesQuery.getQueries());
+	public ExampleQueriesHandler() {
+		this(OclQueryViewerPlugin.getExampleQueries());
 	}
 
-	protected DefaultPremisesQueriesHandler(Collection<IOclQuery> queries) {
+	protected ExampleQueriesHandler(Collection<IOclQuery> queries) {
 		this.queries= queries;
 	}
 	
@@ -49,6 +50,7 @@ public class DefaultPremisesQueriesHandler extends AbstractHandler {
 	 * the command has been executed, so extract extract the needed information
 	 * from the application context.
 	 */
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
 		
@@ -69,7 +71,15 @@ public class DefaultPremisesQueriesHandler extends AbstractHandler {
 		return null;
 	}
 	
-	
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.eclipse.core.commands.AbstractHandler#isEnabled()
+	 */
+	@Override
+	public boolean isEnabled() {
+		return !queries.isEmpty();
+	}
 
 
 

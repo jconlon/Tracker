@@ -73,6 +73,7 @@ import com.verticon.tracker.util.Age;
  *   <li>{@link com.verticon.tracker.Animal#getAge() <em>Get Age</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#canContain(com.verticon.tracker.EventType, java.lang.String) <em>Can Contain</em>}</li>
  *   <li>{@link com.verticon.tracker.Animal#lastEvent(com.verticon.tracker.EventType, java.lang.String) <em>Last Event</em>}</li>
+ *   <li>{@link com.verticon.tracker.Animal#findLocationName() <em>Find Location Name</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -228,6 +229,19 @@ public abstract class AnimalTest extends TestCase {
 		getFixture().activeTag().getEvents().add(event1);
 		assertNotNull(getFixture().lastEvent(EventType.TAG_APPLIED, null));
 		assertEquals(event1,getFixture().lastEvent(EventType.TAG_APPLIED, null));
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Animal#findLocationName() <em>Find Location Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Animal#findLocationName()
+	 * @generated
+	 */
+	public void testFindLocationName() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
 	}
 
 	/**
@@ -564,7 +578,7 @@ public abstract class AnimalTest extends TestCase {
 	public void testGetLocation() {
 		// TODO: implement this feature getter test method
 		// Ensure that you remove @generated or mark it @generated NOT
-//		fail();
+		fail();
 	}
 
 	/**

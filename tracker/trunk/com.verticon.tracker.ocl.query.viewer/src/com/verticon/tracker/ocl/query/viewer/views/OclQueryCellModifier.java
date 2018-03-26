@@ -10,7 +10,7 @@
  *******************************************************************************/
 package com.verticon.tracker.ocl.query.viewer.views;
 
-import static com.verticon.tracker.ocl.query.viewer.OclQueryViewerPlugin.bundleMarker;
+import static com.verticon.tracker.ocl.query.viewer.OclQueryViewerPlugin.uiState;
 
 import org.eclipse.jface.viewers.ICellModifier;
 import org.eclipse.swt.widgets.TableItem;
@@ -48,6 +48,7 @@ class OclQueryCellModifier implements ICellModifier {
 	 * @see org.eclipse.jface.viewers.ICellModifier#canModify(java.lang.Object,
 	 *      java.lang.String)
 	 */
+	@Override
 	public boolean canModify(Object element, String property) {
 		
 		return element !=null;
@@ -58,6 +59,7 @@ class OclQueryCellModifier implements ICellModifier {
 	 * @see org.eclipse.jface.viewers.ICellModifier#getValue(java.lang.Object,
 	 *      java.lang.String)
 	 */
+	@Override
 	public Object getValue(Object element, String property) {
 
 		// Find the index of the column
@@ -95,6 +97,7 @@ class OclQueryCellModifier implements ICellModifier {
 	 * @see org.eclipse.jface.viewers.ICellModifier#modify(java.lang.Object,
 	 *      java.lang.String, java.lang.Object)
 	 */
+	@Override
 	public void modify(Object element, String property, Object value) {
 
 		// Find the index of the column
@@ -102,7 +105,7 @@ class OclQueryCellModifier implements ICellModifier {
 
 		TableItem item = (TableItem) element;
 		if(item ==null){
-			logger.error(bundleMarker, "Failed to find an element for the OclViewer model.");
+			logger.error(uiState, "Failed to find an element for the OclViewer model.");
 			return;
 		}
 		IOclQuery query = (IOclQuery) item.getData();

@@ -150,7 +150,7 @@ public class PremisesTest extends TestCase {
 	public void testGetAddress() {
 		// TODO: implement this feature getter test method
 		// Ensure that you remove @generated or mark it @generated NOT
-//		fail();
+		fail();
 	}
 
 	/**

@@ -9,7 +9,7 @@
  *    Verticon, Inc. - initial API and implementation
  *******************************************************************************/
 package com.verticon.tracker.ocl.query.viewer;
-import static com.verticon.tracker.ocl.query.viewer.OclQueryViewerPlugin.bundleMarker;
+import static com.verticon.tracker.ocl.query.viewer.OclQueryViewerPlugin.uiState;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -170,13 +170,13 @@ public class OclQueryViewModel {
 			// Ignored... no items exist yet.
 		} catch (Exception e) {
 			// Log the exception and move on.
-			logger.error(bundleMarker,"Failed to load the queries",e);
+			logger.error(uiState,"Failed to load the queries",e);
 		} finally {
 			try {
 				if (reader != null)
 					reader.close();
 			} catch (IOException e) {
-				logger.error(bundleMarker,"Failed to close the FileReader",e);
+				logger.error(uiState,"Failed to close the FileReader",e);
 			}
 		}
 	}
@@ -211,14 +211,14 @@ public class OclQueryViewModel {
 			writer = new FileWriter(getQueriesFile());
 			memento.save(writer);
 		} catch (IOException e) {
-			logger.error(bundleMarker,"Failed to save the queries",e);
+			logger.error(uiState,"Failed to save the queries",e);
 									// launched
 		} finally {
 			try {
 				if (writer != null)
 					writer.close();
 			} catch (IOException e) {
-				logger.error(bundleMarker,"Failed to close the fileWriter",e);
+				logger.error(uiState,"Failed to close the fileWriter",e);
 			}
 		}
 	}
