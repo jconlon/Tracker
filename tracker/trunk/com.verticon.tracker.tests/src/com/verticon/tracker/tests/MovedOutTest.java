@@ -19,6 +19,18 @@ import com.verticon.tracker.TrackerFactory;
  * <!-- begin-user-doc -->
  * A test case for the model object '<em><b>Moved Out</b></em>'.
  * <!-- end-user-doc -->
+ * <p>
+ * The following features are tested:
+ * <ul>
+ *   <li>{@link com.verticon.tracker.MovedOut#getDestinationName() <em>Destination Name</em>}</li>
+ * </ul>
+ * </p>
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link com.verticon.tracker.MovedOut#findDestinationName() <em>Find Destination Name</em>}</li>
+ * </ul>
+ * </p>
  * @generated
  */
 public class MovedOutTest extends EventTest {
@@ -79,6 +91,32 @@ public class MovedOutTest extends EventTest {
 	@Override
 	protected void tearDown() throws Exception {
 		setFixture(null);
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.MovedOut#getDestinationName() <em>Destination Name</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.MovedOut#getDestinationName()
+	 * @generated
+	 */
+	public void testGetDestinationName() {
+		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.MovedOut#findDestinationName() <em>Find Destination Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.MovedOut#findDestinationName()
+	 * @generated
+	 */
+	public void testFindDestinationName() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
 	}
 
 	@Override

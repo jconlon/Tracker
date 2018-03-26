@@ -10,12 +10,21 @@
  *******************************************************************************/
 package com.verticon.tracker.ocl.query.viewer;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.InvalidSyntaxException;
+import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
+
+import com.verticon.emf.ui.api.IOclQuerySpec;
+import com.verticon.emf.ui.api.IOclQuerySpecLoader;
+import com.verticon.tracker.ocl.query.viewer.views.OclQueryViewer;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -28,21 +37,34 @@ public class OclQueryViewerPlugin extends AbstractUIPlugin {
 	// The shared instance
 	private static OclQueryViewerPlugin plugin;
 
+
 	/**
 	 * slf4j Logger
 	 */
 	private final static Logger logger = LoggerFactory.getLogger(OclQueryViewerPlugin.class);
 
+	private final Marker serviceResponseState = MarkerFactory.getMarker("Service Response " + PLUGIN_ID);
+	public final static Marker uiState = MarkerFactory.getMarker("UI " + PLUGIN_ID);
+
+	private BundleContext bundleContext;
+
+	private OclQueryViewer viewer;
+
 	/**
-	 * slf4j Marker to keep track of bundle
+	 * @return the viewer
 	 */
-	public static final Marker bundleMarker = createBundleMarker();
-	private static final Marker createBundleMarker() {
-		Marker bundleMarker = MarkerFactory.getMarker(PLUGIN_ID);
-		bundleMarker.add(MarkerFactory.getMarker("IS_BUNDLE"));
-		return bundleMarker;
+	public OclQueryViewer getViewer() {
+		return viewer;
 	}
-	
+
+	/**
+	 * @param viewer
+	 *            the viewer to set
+	 */
+	public void setViewer(OclQueryViewer viewer) {
+		this.viewer = viewer;
+	}
+
 	/**
 	 * The constructor
 	 */
@@ -52,25 +74,27 @@ public class OclQueryViewerPlugin extends AbstractUIPlugin {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
+	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.
+	 * BundleContext)
 	 */
 	@Override
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
+		this.bundleContext = context;
 		plugin = this;
-		logger.debug(bundleMarker, "Started Bundle");
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
+	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.
+	 * BundleContext)
 	 */
 	@Override
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
-		logger.debug(bundleMarker, "Stopped Bundle");
+		this.bundleContext = null;
 	}
 
 	/**
@@ -78,9 +102,42 @@ public class OclQueryViewerPlugin extends AbstractUIPlugin {
 	 * 
 	 * @return the shared instance
 	 */
-	protected static OclQueryViewerPlugin getDefault() {
+	public static OclQueryViewerPlugin getDefault() {
 		return plugin;
 	}
 
-	
+	/**
+	 * Other components may offer default queries for the OCLViewer.
+	 * 
+	 * @return all default ocl queries offered by other components.
+	 */
+	private Collection<IOclQuery> getQueries() {
+		ArrayList<IOclQuery> result = new ArrayList<IOclQuery>();
+		if (bundleContext != null) {
+			try {
+				ServiceReference<?>[] references = bundleContext
+						.getAllServiceReferences(IOclQuerySpecLoader.class.getName(), null);
+				if (references != null) {
+					ArrayList<IOclQuerySpec> specs = new ArrayList<IOclQuerySpec>();
+					for (ServiceReference<?> serviceReference : references) {
+						IOclQuerySpecLoader service = (IOclQuerySpecLoader) bundleContext.getService(serviceReference);
+						specs.addAll(service.getQuerySpecs());
+						bundleContext.ungetService(serviceReference);
+					}
+
+					for (IOclQuerySpec iOclQuerySpec : specs) {
+						result.add(new OclQuery(iOclQuerySpec));
+					}
+				}
+			} catch (InvalidSyntaxException e) {
+				logger.error(serviceResponseState, "Failed to reference to IDefaultQueryLoader", e);
+			}
+
+		}
+		return result;
+	}
+
+	public static Collection<IOclQuery> getExampleQueries() {
+		return plugin.getQueries();
+	}
 }

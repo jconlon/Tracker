@@ -27,6 +27,7 @@ import org.eclipse.ui.part.ViewPart;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 import com.verticon.tracker.ocl.query.viewer.IOclQuery;
+import com.verticon.tracker.ocl.query.viewer.OclQueryViewerPlugin;
 
 /**
  * Encapsulates a OclQueryViewer so it can be run in a plugin.
@@ -49,19 +50,25 @@ public class OclQueryViewPart extends ViewPart {
 		super();
 	}
 
+	@Override
 	public void createPartControl(Composite parent) {
 		viewer = new OclQueryViewer(parent);
 		
 		createActions();
 		
 		createToolbarButtons();
-		
+
 		hookGlobalActions();
+
+		OclQueryViewerPlugin.getDefault().setViewer(viewer);
 	}
+
+
 
 	/**
 	 * Passing the focus request to the viewer's control.
 	 */
+	@Override
 	public void setFocus() {
 		viewer.getControl().setFocus();
 	}
@@ -80,7 +87,8 @@ public class OclQueryViewPart extends ViewPart {
 	      
 	      if(listener==null){
 	    	  listener = new ISelectionChangedListener() {
-	    	        public void selectionChanged(SelectionChangedEvent event) {
+	    	        @Override
+					public void selectionChanged(SelectionChangedEvent event) {
 	    	           boolean isNotEmpty = !event.getSelection().isEmpty();
 	    	           removeReaderAction.setEnabled(isNotEmpty);
 	    	           executeQueryAction.setEnabled(canExecuteQuery(event));

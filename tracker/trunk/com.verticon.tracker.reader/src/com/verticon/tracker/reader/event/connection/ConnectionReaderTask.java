@@ -59,6 +59,7 @@ public class ConnectionReaderTask implements Callable<RefreshableReader> {
 	 * Call that reads tagIds from the target connection. Can be canceled
 	 * with a thread interruption.
 	 */
+	@Override
 	public RefreshableReader call() throws Exception {
 		logger.debug(bundleMarker,"{} opening background connection to {}",reader,target);
 		ConnectorService cs = getConnectorService();
@@ -148,21 +149,33 @@ public class ConnectionReaderTask implements Callable<RefreshableReader> {
 	}
 	
 	private void process(int count, byte[] data){
-//		System.out.print("Processing buffer ");
-//		System.out.write(data, 0, count);
-//		System.out.println("");
+		logger.debug(bundleMarker, "Processing {} reader input {}", reader, toAscii(new String(data, 0, count)));
+
 		char c ;
 		for (int i = 0; i < count; i++) {
 			c = (char)data[i];
-//			System.out.println("Processing char {" +c+'}');
 			if(c=='\r'| c=='\n'){
-				if(builder.length()==15){
-					sendTag(builder.toString());
+				// System.out.println(toAscii("Dataforwarding char detected {" +
+				// c + '}'));
+				if (builder.length() > 14) {
+					String input = builder.toString();
+					if (builder.length() > 15) {
+						input = input.substring(5, 20);
+					}
+					logger.debug(bundleMarker, "Forwarding data buffer <{}> from reader {}", input,
+							reader);
+					sendTag(input);
+					builder.delete(0, builder.length() + 1);
+				} else {
+					logger.warn(bundleMarker, "Redundent forwarding character received at character position {} .",
+							count);
+					builder.delete(0, builder.length() + 1);
 				}
-				builder.delete(0, 15);
+
 			}else{
 				builder.append(c);
-//				System.out.println("Appending {"+c+'}');
+				// System.out.println(toAscii("Processing and appended char {" +
+				// c + '}'));
 			}
 			
 		}
@@ -184,4 +197,40 @@ public class ConnectionReaderTask implements Callable<RefreshableReader> {
 
 	}
 
+	/**
+	 * Convert a String to visualize nonvisible characters
+	 * 
+	 * @param value
+	 * @return an Ascii representation
+	 */
+	public static String toAscii(String value) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append('<');
+		for (int i = 0; i < value.length(); ++i) {
+
+			char c = value.charAt(i);
+			replaceNonCharacters(c, buffer);
+		}
+		buffer.append('>');
+		return buffer.toString();
+	}
+
+	/**
+	 * Replace non characters with a %int% value to represent there ascii
+	 * decimal id.
+	 * 
+	 * @param ch
+	 * @param buffer
+	 */
+	public static void replaceNonCharacters(char ch, StringBuffer buffer) {
+		if (Character.isISOControl(ch)) {
+			buffer.append('%');
+			int j = ch;
+			buffer.append(j);
+			buffer.append('%');
+		} else {
+			buffer.append(ch);
+		}
+
+	}
 }

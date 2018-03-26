@@ -16,6 +16,13 @@ import junit.textui.TestRunner;
  * The following features are tested:
  * <ul>
  *   <li>{@link com.verticon.tracker.Position#getCoordinates() <em>Coordinates</em>}</li>
+ *   <li>{@link com.verticon.tracker.Position#getLocationName() <em>Location Name</em>}</li>
+ * </ul>
+ * </p>
+ * <p>
+ * The following operations are tested:
+ * <ul>
+ *   <li>{@link com.verticon.tracker.Position#findLocationName() <em>Find Location Name</em>}</li>
  * </ul>
  * </p>
  * @generated
@@ -99,6 +106,32 @@ public class PositionTest extends EventTest {
 		getFixture().setLatitude(LAT);
 		String result = getFixture().getCoordinates();
 		assertEquals(result,COORDINATES,result);
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Position#getLocationName() <em>Location Name</em>}' feature getter.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Position#getLocationName()
+	 * @generated
+	 */
+	public void testGetLocationName() {
+		// TODO: implement this feature getter test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
+	}
+
+	/**
+	 * Tests the '{@link com.verticon.tracker.Position#findLocationName() <em>Find Location Name</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see com.verticon.tracker.Position#findLocationName()
+	 * @generated
+	 */
+	public void testFindLocationName() {
+		// TODO: implement this operation test method
+		// Ensure that you remove @generated or mark it @generated NOT
+		fail();
 	}
 
 	@Override

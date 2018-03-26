@@ -89,6 +89,7 @@ final public class ReaderCompletionService {
 	
 
 	private final Runnable runner = new Runnable() {
+		@Override
 		public void run() {
 			logger.info(bundleMarker,"Background task completion service started.");
 			try {
@@ -113,7 +114,7 @@ final public class ReaderCompletionService {
 			Throwable cause = e.getCause();
 			logger.error(
 				"Background reader task failed. "+
-				cause.getClass().getSimpleName()+' '+cause.getMessage());
+ cause.getClass().getSimpleName() + ' ' + cause.getMessage(), e);
 			showErrorDialog(cause);
 		} catch (CancellationException e){
 			logger.debug(
@@ -126,6 +127,7 @@ final public class ReaderCompletionService {
 		final IStatus status = new Status(Status.ERROR,
 				"com.verticon.tracker.reader", cause.getClass().getSimpleName(), cause);
 		Display.getDefault().asyncExec(new Runnable() {
+			@Override
 			public void run() {
 				// Display the dialog
 				ErrorDialog.openError(Display.getCurrent().getActiveShell(),
@@ -140,6 +142,7 @@ final public class ReaderCompletionService {
 
 	private final void refresh(final RefreshableReader pub) {
 		Display.getDefault().asyncExec(new Runnable() {
+			@Override
 			public void run() {
 				pub.refresh();
 

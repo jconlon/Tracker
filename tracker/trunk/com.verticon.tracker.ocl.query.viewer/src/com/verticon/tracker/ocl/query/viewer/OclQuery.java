@@ -36,6 +36,7 @@ import org.eclipse.ocl.ecore.OCL;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PlatformUI;
 
+import com.verticon.emf.ui.api.IOclQuerySpec;
 import com.verticon.tracker.ocl.query.actions.AbstractQueryDelegate;
 
 /**
@@ -78,9 +79,17 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery, Clonea
 		this.name = name;
 	}
 
+	public OclQuery(IOclQuerySpec spec) {
+		super();
+		this.name = spec.getName();
+		this.type = spec.getType();
+		this.query = spec.getQuery();
+	}
+
 	/* (non-Javadoc)
 	 * @see com.verticon.tracker.ocl.query.viewer.IOclQuery#getContext()
 	 */
+	@Override
 	public String getType() {
 		return type;
 	}
@@ -88,6 +97,7 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery, Clonea
 	/* (non-Javadoc)
 	 * @see com.verticon.tracker.ocl.query.viewer.IOclQuery#getDescription()
 	 */
+	@Override
 	public String getErrorSyntax() {
 		return syntaxErrors;
 	}
@@ -95,6 +105,7 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery, Clonea
 	/* (non-Javadoc)
 	 * @see com.verticon.tracker.ocl.query.viewer.IOclQuery#getName()
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -102,6 +113,7 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery, Clonea
 	/* (non-Javadoc)
 	 * @see com.verticon.tracker.ocl.query.viewer.IOclQuery#getQuery()
 	 */
+	@Override
 	public String getQuery() {
 		return query;
 	}
@@ -109,6 +121,7 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery, Clonea
 	/* (non-Javadoc)
 	 * @see com.verticon.tracker.ocl.query.viewer.IOclQuery#setContext(java.lang.String)
 	 */
+	@Override
 	public void setType(String type) {
 		this.type=type;
 
@@ -117,6 +130,7 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery, Clonea
 	/* (non-Javadoc)
 	 * @see com.verticon.tracker.ocl.query.viewer.IOclQuery#setDescription(java.lang.String)
 	 */
+	@Override
 	public void setErrorSyntax(String syntaxErrors) {
 		this.syntaxErrors=syntaxErrors;
 	}
@@ -124,6 +138,7 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery, Clonea
 	/* (non-Javadoc)
 	 * @see com.verticon.tracker.ocl.query.viewer.IOclQuery#setName(java.lang.String)
 	 */
+	@Override
 	public void setName(String name) {
 		this.name=name;
 	}
@@ -151,6 +166,7 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery, Clonea
 	/* (non-Javadoc)
 	 * @see com.verticon.tracker.ocl.query.viewer.IOclQuery#setQuery(java.lang.String)
 	 */
+	@Override
 	public void setQuery(String query) {
 		this.query=query;
 		validateQuery();
@@ -159,6 +175,7 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery, Clonea
 	/**
 	 * Runs the query.
 	 */
+	@Override
 	public void run() {
 		IEditorPart editor = PlatformUI.getWorkbench()
 		.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
@@ -219,6 +236,7 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery, Clonea
 		return statement.execute();
 	}
 	
+	@Override
 	public boolean conditionIsSatisfied(EObject eObject){
 		if(condition==null){
 		  if(!validateQuery()){
@@ -255,6 +273,7 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery, Clonea
 	 * 
 	 * @return <code>true</code> if I can finish; <code>false</code>, otherwise
 	 */
+	@Override
 	public boolean validateQuery() {
 		boolean result = true;
 		
@@ -297,6 +316,7 @@ public class OclQuery extends AbstractQueryDelegate implements IOclQuery, Clonea
 	 * Find a registered packages to resolve the type to an EClass
 	 * @return the EClass for the type
 	 */
+	@Override
 	public EClass getContextClass(){
 		EPackage.Registry registry = EPackage.Registry.INSTANCE;	
 

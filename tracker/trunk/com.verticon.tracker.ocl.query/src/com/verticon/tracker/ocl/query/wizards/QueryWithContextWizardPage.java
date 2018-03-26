@@ -40,6 +40,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import com.verticon.tracker.ocl.query.OCLPlugin;
+import com.verticon.tracker.ocl.query.OCLPlugin.PromptBean;
 import com.verticon.tracker.ocl.query.internal.l10n.QueryOCLMessages;
 
 
@@ -71,6 +73,7 @@ class QueryWithContextWizardPage
 		this.pkgURIs=pkgURIs.split(" ");
 	}
 
+	@Override
 	public void createControl(Composite parent) {
 		setMessage(QueryOCLMessages.oclQuery_message_wizard);
 		
@@ -85,6 +88,7 @@ class QueryWithContextWizardPage
 		contextCombo.getControl().setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		fillContextCombo();
 		contextCombo.addSelectionChangedListener(new ISelectionChangedListener() {
+			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				setPageComplete(validatePage());
 			}});
@@ -111,6 +115,7 @@ class QueryWithContextWizardPage
 		setConditionText();
 		
 		conditionText.addModifyListener(new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent e) {
 				setPageComplete(validatePage());
 			}});
@@ -125,7 +130,13 @@ class QueryWithContextWizardPage
 	 * 
 	 */
 	private void setConditionText() {
-		setConditionText(CONDITION_DEFAULT);
+		PromptBean promptBean = OCLPlugin.getDefault().getPrompts();
+		if (promptBean.hasOclQueryPrompt()) {
+			setConditionText(promptBean.getOCLQueryPrompt());
+		} else {
+			setConditionText(CONDITION_DEFAULT);
+		}
+
 	}
 
 	private void setConditionText(String text) {
@@ -230,6 +241,7 @@ class QueryWithContextWizardPage
 		return result;
 	}
 	
+	@Override
 	public BooleanOCLCondition<EClassifier, EClass, EObject> getCondition() {
 		return condition;
 	}

@@ -74,8 +74,8 @@ public class SelectServiceWizardPage extends WizardPage implements
 	private CyclicBarrier barrier;// To turn the non-blocking search into a
 	// blocking one
 
-	private final static UUID RFCOMM = new UUID(0x0003);
-	private final static UUID[] searchList = new UUID[] { RFCOMM };
+	private final static UUID SSP = new UUID(0x1101);
+	private final static UUID[] searchList = new UUID[] { SSP };
 
 	public final static int SERVICE_NAME = 0X0100;
 	public final static int SERVICE_RECORD_HANDLE = 0X0000;

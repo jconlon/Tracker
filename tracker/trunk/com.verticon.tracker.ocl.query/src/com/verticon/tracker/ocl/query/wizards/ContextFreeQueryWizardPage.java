@@ -14,7 +14,6 @@ package com.verticon.tracker.ocl.query.wizards;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import com.verticon.tracker.ocl.query.internal.l10n.QueryOCLMessages;
 import org.eclipse.emf.query.ocl.conditions.BooleanOCLCondition;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.ocl.ecore.OCL;
@@ -27,6 +26,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+import com.verticon.tracker.ocl.query.OCLPlugin;
+import com.verticon.tracker.ocl.query.OCLPlugin.PromptBean;
+import com.verticon.tracker.ocl.query.internal.l10n.QueryOCLMessages;
 
 /**
  * A wizard the prompts the user for a context-free OCL constraint condition
@@ -50,6 +52,7 @@ class ContextFreeQueryWizardPage
 		super("main", TITLE, null); //$NON-NLS-1$
 	}
 
+	@Override
 	public void createControl(Composite parent) {
 		setMessage(QueryOCLMessages.oclQuery_message_wizard);
 		
@@ -63,9 +66,15 @@ class ContextFreeQueryWizardPage
 		//   orientation because the OCL language is based on English
 		conditionText = new Text(page, SWT.BORDER | SWT.MULTI | SWT.LEFT_TO_RIGHT);
 		conditionText.setLayoutData(new GridData(GridData.FILL_BOTH));
-		conditionText.setText(CONDITION_DEFAULT);
+		PromptBean promptBean = OCLPlugin.getDefault().getPrompts();
+		if (promptBean.hasContextFreePrompt()) {
+			conditionText.setText(promptBean.getContextFreePrompt());
+		} else {
+			conditionText.setText(CONDITION_DEFAULT);
+		}
 		
 		conditionText.addModifyListener(new ModifyListener() {
+			@Override
 			public void modifyText(ModifyEvent e) {
 				setPageComplete(validatePage());
 			}});
@@ -102,6 +111,7 @@ class ContextFreeQueryWizardPage
 		return result;
 	}
 	
+	@Override
 	public BooleanOCLCondition<EClassifier, EClass, EObject> getCondition() {
 		return condition;
 	}
@@ -109,6 +119,7 @@ class ContextFreeQueryWizardPage
 	/* (non-Javadoc)
 	 * Redefines/Implements/Extends the inherited method.
 	 */
+	@Override
 	public void dispose() {
 		super.dispose();
 	}

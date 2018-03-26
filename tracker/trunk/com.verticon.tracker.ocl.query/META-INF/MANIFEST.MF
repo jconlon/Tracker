@@ -6,16 +6,15 @@ Bundle-Version: 0.1.5.qualifier
 Bundle-Activator: com.verticon.tracker.ocl.query.OCLPlugin
 Bundle-Vendor: %Plugin.providerName
 Bundle-Localization: plugin
-Export-Package: com.verticon.tracker.ocl.query;version="1.0.0",
- com.verticon.tracker.ocl.query.actions;version="1.0.0",
+Export-Package: com.verticon.tracker.ocl.query.actions;version="1.0.0",
  com.verticon.tracker.ocl.query.handlers;version="1.0.0",
- com.verticon.tracker.ocl.query.internal.l10n;version="1.0.0";x-internal:=true,
  com.verticon.tracker.ocl.query.wizards;version="1.0.0"
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.8.0",
  org.eclipse.ui;bundle-version="3.8.0",
  org.eclipse.ocl.ecore;bundle-version="3.2.0",
  org.eclipse.emf.query.ocl;bundle-version="2.0.0"
 Bundle-ActivationPolicy: lazy
-Import-Package: org.eclipse.emf.common.ui.viewer,
+Import-Package: com.verticon.emf.ui.api,
+ org.eclipse.emf.common.ui.viewer,
  org.eclipse.emf.edit.domain
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+# HOW TO Change LOGBack configuration at program launch,
+#
+# in linux:
+# ./tracker -vmargs -Dlogback.configurationFile=file:/home/jconlon/Desktop/tracker/logback-test.xml 
+# or in windows with:
+# "C:\Program Files\tracker\tracker.exe" -vmargs "-Dlogback.configurationFile=file:C:/Downloads/tracker/logback-test.xml"
+#
+#
+# This file is the primary logback configuration file for Tracker dev and the deployed mudshark tracker.
+
+<configuration debug="true" scan="true">
+-->
+<configuration scan="true" debug="false">
+  
+  <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <File>${user.home}/tracker.log</File>
+    <ImmediateFlush>true</ImmediateFlush>
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <!--pattern>%d{HH:mm:ss.SSS} %-10level [%bundle] [%thread] %logger{25} %message %n</pattern-->
+      <pattern>%date %-10level [%marker] [%thread] [%logger{25}] -  %message %ex %n</pattern>
+      <!--pattern>[%d{ISO8601}]%5p%6.6r[%t]%bundle - %C.%M(%F:%L) - %m%n</pattern-->
+    </layout>
+    
+    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+      <FileNamePattern>tracker.%i.log</FileNamePattern>
+      <minIndex>1</minIndex>
+      <maxIndex>2</maxIndex>
+    </rollingPolicy>
+    
+    <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+      <MaxFileSize>100KB</MaxFileSize>
+    </triggeringPolicy>
+  </appender>
+  
+   <appender name="AGGREGATED" class="ch.qos.logback.core.FileAppender">
+    <file>${user.home}/aggregated.log</file>
+    <append>true</append>
+    <encoder>
+      <pattern>%m%n</pattern>
+    </encoder>
+  </appender>
+  
+  <appender name="TRANSACTION" class="ch.qos.logback.core.FileAppender">
+    <append>true</append>
+    <file>${user.home}/transaction.log</file>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss},%m%n</pattern>
+    </encoder>
+  </appender>
+  
+   <appender name="METRICS" class="ch.qos.logback.core.FileAppender">
+    <append>true</append>
+    <file>${user.home}/performance_report.csv</file>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss},%m%n</pattern>
+    </encoder>
+  </appender>
+  
+ <appender name="STDOUT"
+    class="ch.qos.logback.core.ConsoleAppender">
+    <layout class="ch.qos.logback.classic.PatternLayout">
+      <Pattern>%-4relative %-5level %logger{35} - %msg %n</Pattern>
+    </layout>
+  </appender>
+
+ <!--Standard Logback socketAppender
+ 		superceded by the multiplex appender.
+ <appender name="SOCKET" class="ch.qos.logback.classic.net.SocketAppender">
+    <RemoteHost>localhost</RemoteHost>
+    <Port>4560</Port>
+    <ReconnectionDelay>10000</ReconnectionDelay>
+    <IncludeCallerData>false</IncludeCallerData>
+  </appender>
+-->
+
+<!--Custom socketAppender for Lilith, supercedes the Logback SocketAppender
+	RemoteHost can be set as ${host} refers per ex. to -Dhost=localhost
+	you can use more then one hosts: localhost, 10.42.42.42 -->
+ <appender name="multiplex"
+	class="de.huxhorn.lilith.logback.appender.ClassicMultiplexSocketAppender">
+	<Compressing>true</Compressing>
+	<!-- will automatically use correct default port -->
+	<ReconnectionDelay>10000</ReconnectionDelay>
+	<IncludeCallerData>true</IncludeCallerData>
+	<RemoteHosts>localhost</RemoteHosts>
+	<ApplicationIdentifier>${logback.application}</ApplicationIdentifier>
+	<encoding>UTF-8</encoding>
+ </appender>
+
+ 
+  <logger name="com.verticon.tracker">
+    <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.birt">
+    <level value="INFO"/>
+  </logger>
+  
+   <logger name="com.verticon.tracker.store.mongodb">
+    <level value="DEBUG"/>
+  </logger> 
+  
+  <logger name="com.verticon.tracker.store.mongodb.test.system">
+    <level value="DEBUG"/>
+  </logger>
+      
+   <logger name="com.verticon.tracker.store.mongo.internal.MongoStatusMonitor">
+    <level value="INFO"/>
+  </logger>   
+   <logger name="com.verticon.tracker.irouter.premises.event">
+    <level value="WARN"/>
+  </logger> 
+  
+  <logger name="com.verticon.tracker.connector.comm">
+    <level value="WARN"/>
+  </logger>
+  
+   <logger name="com.verticon.tracker.irouter.premises.animal">
+    <level value="WARN"/>
+  </logger> 
+                 
+   <logger name="com.verticon.agriculture.location.internal">
+    <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.location.service.internal.Component">
+    <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.agriculture">
+    <level value="WARN"/>
+  </logger>
+  
+   <logger name="com.verticon.osgi">
+    <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.impl.AnimalEventHistoryAdapter">
+    <level value="WARN"/>
+  </logger>
+  <logger name="com.verticon.tracker.editor.util.UpdateStrategies">
+     <level value="WARN"/>
+  </logger>
+  
+   <logger name="com.verticon.tracker.editor.util.SingleValueEAttributeChoiceControlBuilder">
+  	<level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.editor.util.DefaultPropertiesFormProvider">
+  	<level value="WARN"/>
+  </logger>
+  
+   <logger name="com.verticon.tracker.editor.util.SingleValueEAttributeControlBuilder">
+  	<level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.editor.util.ControlBuilderFactory">
+  	<level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.birt">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.editor.presentation.SelectionViewerFilter">
+    <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.editor.presentation.ImportAnimalLifeDataWizard">
+    <level value="INFO"/>
+  </logger>
+  
+   <logger name="com.verticon.tracker.configuration.internal">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.irouter.bwcontrol">
+    <level value="WARN"/>
+  </logger>
+  
+   <logger name="com.verticon.tracker.irouter.udp.test.system.internal.UDPSystemTest">
+    <level value="WARN"/>
+  </logger>
+  
+   <logger name="com.verticon.tracker.irouter.udp.test.system.internal.UDPServer">
+    <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.irouter.gps.test.system.internal">
+    <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.irouter.udp.internal.UDPSender">
+    <level value="WARN"/>
+   </logger>
+   
+  <logger name="com.verticon.tracker.irouter.gps.internal.GPSProducer">
+    <level value="WARN"/>
+  </logger>
+   <logger name="com.verticon.tracker.irouter.gps.internal.GPSProxy">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.reader.event.bluetooth">
+    <level value="DEBUG"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.irouter.dev">
+    <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.irouter.mettler">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.irouter.monitor">
+    <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.osgi.metatype.core.model.editor.internal.forms">
+    <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.transaction.editor.event">
+    <level value="WARN"/>
+  </logger>
+  
+   <logger name="com.verticon.tracker.irouter">
+    <level value="ERROR"/>
+  </logger>
+  
+ <logger name="com.verticon.tracker.itrouter.common.TaskMonitoringServiceTest">
+    <level value="ERROR"/>
+ </logger>
+
+  <logger name="com.verticon.tracker.irouter.animal.data">
+    <level value="WARN"/>
+  </logger>
+ 
+  <logger name="com.verticon.tracker.irouter.measurement">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.irouter.wireadmin">
+    <level value="WARN"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.irouter.gateway">
+    <level value="WARN"/>
+  </logger>
+   
+  <logger name="com.verticon.mongo">
+    <level value="WARN"/>
+  </logger>
+  
+   <logger name="com.verticon.mongo.emf.json.query">
+    <level value="INFO"/>
+  </logger>
+  
+   <logger name="com.verticon.tracker.irouter.ohaus">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.irouter.eventadmin.gateway">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.irouter.measurement.trigger">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="org.eclipse.xtext">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.osgi.useradmin">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.mongo.emf.test.system">
+    <level value="DEBUG"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.update.mongo.test.system">
+    <level value="DEBUG"/>
+  </logger>
+  
+  <logger name="com.verticon.mongo">
+    <level value="INFO"/>
+  </logger>
+  
+  
+  <logger name="com.verticon.mongo.emf.transform.internal">
+    <level value="INFO"/>
+  </logger>
+  
+ 
+  <logger name="com.verticon.tracker.store.mongodb.internal.OCDFind">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.store.mongodb">
+    <level value="DEBUG"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.irouter.mqtt">
+    <level value="DEBUG"/>
+  </logger>
+    
+  <logger name="com.verticon.tracker.store.mqtt">
+    <level value="DEBUG"/>
+  </logger>
+  
+  <logger name="com.verticon.osgi.useradmin.mongo.internal.UserAdminImpl">
+    <level value="INFO"/>
+  </logger>
+  
+  <!-- Logger for metrics reporting -->
+  <logger name="com.verticon.tracker.store.mongodb.test.system.Metrics">
+    <level value="WARN"/>
+    <appender-ref ref="METRICS"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.store.mongodb.test.system.Configurator">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.store.mongodb.internal.UpdateAndFind">
+    <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.osgi.useradmin.view.internal">
+  <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.birt.report.loader">
+   <level value="INFO"/>
+  </logger>
+  
+  <logger name="org.usaha.ecvi.store">
+  <level value="INFO"/>
+  </logger>
+  
+  <logger name="com.verticon.tracker.irouter.bluegiga">
+  <level value="DEBUG"/>
+  </logger>
+  
+  <logger name="aggregated" level="INFO">
+    <appender-ref ref="AGGREGATED"/>
+  </logger>
+  
+  <logger name="transaction" level="INFO">
+    <appender-ref ref="TRANSACTION"/>
+  </logger>
+  
+  <root>
+    <level value="WARN"/>
+   <appender-ref ref="multiplex"/>
+    <!--  
+     
+     <appender-ref ref="STDOUT"/>
+     <appender-ref ref="RollingFile"/>
+    -->
+  </root>
+  
+   <consolePlugin /> 
+ 
+</configuration>

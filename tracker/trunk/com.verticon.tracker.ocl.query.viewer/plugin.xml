@@ -52,18 +52,11 @@
        <separator
              name="com.verticon.tracker.ocl.query.viewer.separator1">
        </separator>
-       <command
-               commandId="com.verticon.tracker.ocl.query.viewer.commands.addDefaultPremisesQueries"
+        <command
+               commandId="com.verticon.tracker.ocl.query.viewer.commands.addExampleQueries"
                icon="icons/search_src.gif"
-               label="Add Default Premises Queries"
-               mnemonic="A"
-               style="pulldown">
-       </command>
-       <command
-               commandId="com.verticon.tracker.ocl.query.viewer.commands.addDefaultFairQueries"
-               icon="icons/search_src.gif"
-               label="Add Default Fair Queries"
-               mnemonic="F"
+               label="Add Example OCL Queries"
+               mnemonic="E"
                style="pulldown">
         </command>
     </menuContribution>
@@ -77,13 +70,9 @@
     </category>
     <command
           categoryId="com.verticon.tracker.ocl.query.viewer.commands.category"
-          id="com.verticon.tracker.ocl.query.viewer.commands.addDefaultPremisesQueries"
-          name="Add Default Premises Queries">
-    </command>
-    <command
-          categoryId="com.verticon.tracker.ocl.query.viewer.commands.category"
-          id="com.verticon.tracker.ocl.query.viewer.commands.addDefaultFairQueries"
-          name="Add Default Fair Queries">
+          description="Adds any example OCL queries to the viewer"
+          id="com.verticon.tracker.ocl.query.viewer.commands.addExampleQueries"
+          name="Add Example OCL Queries">
     </command>
  </extension>
  
@@ -92,27 +81,17 @@
  <extension
        point="org.eclipse.ui.handlers">
     <handler
-          class="com.verticon.tracker.ocl.query.viewer.handlers.DefaultPremisesQueriesHandler"
-          commandId="com.verticon.tracker.ocl.query.viewer.commands.addDefaultPremisesQueries">
-    </handler>
-     <handler
-          class="com.verticon.tracker.ocl.query.viewer.handlers.DefaultFairQueriesHandler"
-          commandId="com.verticon.tracker.ocl.query.viewer.commands.addDefaultFairQueries">
+          class="com.verticon.tracker.ocl.query.viewer.handlers.ExampleQueriesHandler"
+          commandId="com.verticon.tracker.ocl.query.viewer.commands.addExampleQueries">
     </handler>
  </extension>
  <extension
        point="org.eclipse.ui.bindings">
-    <key
-          commandId="com.verticon.tracker.ocl.query.viewer.commands.addDefaultPremisesQueries"
+     <key
+          commandId="com.verticon.tracker.ocl.query.viewer.commands.addExampleQueries"
           contextId="org.eclipse.ui.contexts.window"
           schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-          sequence="M1+7">
-    </key>
-    <key
-          commandId="com.verticon.tracker.ocl.query.viewer.commands.addDefaultFairQueries"
-          contextId="org.eclipse.ui.contexts.window"
-          schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-          sequence="M1+8">
+          sequence="M1+9">
     </key>
  </extension>
 

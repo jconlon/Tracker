@@ -2,7 +2,7 @@
 <feature
       id="com.verticon.tracker.ocl.query"
       label="%featureName"
-      version="0.4.2.qualifier"
+      version="1.1.2.qualifier"
       provider-name="%providerName"
       plugin="com.verticon.tracker.ocl.query">
 
@@ -22,6 +22,25 @@
       <update label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
       <discovery label="%TrackerUpdateSiteName" url="http://tracker.verticon.com/Tracker/updates/"/>
    </url>
+
+   <requires>
+      <import plugin="org.eclipse.core.runtime" version="3.8.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ui" version="3.8.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.ocl.examples.interpreter" version="1.1.1" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.ocl.ecore" version="3.2.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.query.ocl" version="2.0.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.emf.common.ui"/>
+      <import plugin="org.eclipse.emf.edit"/>
+      <import plugin="com.verticon.emf.ui.api"/>
+      <import plugin="slf4j.api"/>
+      <import plugin="org.eclipse.ui" version="3.2.0" match="compatible"/>
+      <import plugin="org.eclipse.ui.console" version="3.1.0" match="compatible"/>
+      <import plugin="org.eclipse.jface.text" version="3.2.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.ecore.edit" version="2.3.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.ecore.xmi" version="2.3.0" match="compatible"/>
+      <import plugin="org.eclipse.emf.edit.ui" version="2.3.0" match="compatible"/>
+      <import plugin="org.eclipse.ocl"/>
+   </requires>
 
    <plugin
          id="com.verticon.tracker.ocl.interpreter"
